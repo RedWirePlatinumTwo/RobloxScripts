@@ -699,9 +699,9 @@ function SCRIPT_PGEF84_FAKESCRIPT() -- PokemonHaxlol.LocalScript
 	end
 	if #t == 1 then
 	button.Text = t[1]
-	button.TextEditable = false
+	button.Visible = false
 	wait()
-	button.TextEditable = true
+	button.Visible = true
 	end
 	end
 	end)
