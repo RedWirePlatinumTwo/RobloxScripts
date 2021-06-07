@@ -23,6 +23,11 @@ local autodetectplayers = Instance.new("TextButton")
 local message = Instance.new("TextBox")
 local hide = Instance.new("TextButton")
 local postmessage = Instance.new("TextButton")
+local plrlist = Instance.new("ScrollingFrame")
+local UIListLayout = Instance.new("UIListLayout")
+local UISizeConstraint = Instance.new("UISizeConstraint")
+local TextButton = Instance.new("TextButton")
+local uihide = Instance.new("TextButton")
 local Stat = Instance.new("Frame")
 local Line = Instance.new("Frame")
 local PP = Instance.new("TextBox")
@@ -66,6 +71,7 @@ Title.Text = "Different game, same terrible anti-cheat lmao"
 Title.TextColor3 = Color3.new(1, 1, 1)
 Title.TextScaled = true
 Title.TextSize = 14
+Title.TextStrokeTransparency = 0
 Title.TextWrapped = true
 
 ChatTroll.Name = "ChatTroll"
@@ -79,6 +85,7 @@ ChatTroll.Text = "Chat Troll UI"
 ChatTroll.TextColor3 = Color3.new(1, 1, 1)
 ChatTroll.TextScaled = true
 ChatTroll.TextSize = 14
+ChatTroll.TextStrokeTransparency = 0
 ChatTroll.TextWrapped = true
 
 StatChanger.Name = "StatChanger"
@@ -92,6 +99,7 @@ StatChanger.Text = "Pokemon & Move Stat Changer"
 StatChanger.TextColor3 = Color3.new(1, 1, 1)
 StatChanger.TextScaled = true
 StatChanger.TextSize = 14
+StatChanger.TextStrokeTransparency = 0
 StatChanger.TextWrapped = true
 
 Pokeballhack.Name = "Pokeballhack"
@@ -105,6 +113,7 @@ Pokeballhack.Text = "Make Pokeballs act like Masterballs lol"
 Pokeballhack.TextColor3 = Color3.new(1, 1, 1)
 Pokeballhack.TextScaled = true
 Pokeballhack.TextSize = 14
+Pokeballhack.TextStrokeTransparency = 0
 Pokeballhack.TextWrapped = true
 
 ChatEXPHaxx.Name = "ChatEXPHaxx"
@@ -119,6 +128,7 @@ ChatEXPHaxx.Text = "Insta-Lvl Chat Hack"
 ChatEXPHaxx.TextColor3 = Color3.new(1, 1, 1)
 ChatEXPHaxx.TextScaled = true
 ChatEXPHaxx.TextSize = 14
+ChatEXPHaxx.TextStrokeTransparency = 0
 ChatEXPHaxx.TextWrapped = true
 
 RemoveSaveCooldown.Name = "RemoveSaveCooldown"
@@ -132,6 +142,7 @@ RemoveSaveCooldown.Text = "Remove Save Cooldown"
 RemoveSaveCooldown.TextColor3 = Color3.new(1, 1, 1)
 RemoveSaveCooldown.TextScaled = true
 RemoveSaveCooldown.TextSize = 14
+RemoveSaveCooldown.TextStrokeTransparency = 0
 RemoveSaveCooldown.TextWrapped = true
 
 Fillpokedex.Name = "Fillpokedex"
@@ -145,6 +156,7 @@ Fillpokedex.Text = "Fill Pokedex"
 Fillpokedex.TextColor3 = Color3.new(1, 1, 1)
 Fillpokedex.TextScaled = true
 Fillpokedex.TextSize = 14
+Fillpokedex.TextStrokeTransparency = 0
 Fillpokedex.TextWrapped = true
 
 X.Name = "X"
@@ -178,6 +190,7 @@ Title_2.Text = "Chat Hack UI"
 Title_2.TextColor3 = Color3.new(1, 1, 1)
 Title_2.TextScaled = true
 Title_2.TextSize = 14
+Title_2.TextStrokeTransparency = 0
 Title_2.TextWrapped = true
 
 chatcolor.Name = "chatcolor"
@@ -191,6 +204,7 @@ chatcolor.Text = "Edit Chat Color:"
 chatcolor.TextColor3 = Color3.new(1, 1, 1)
 chatcolor.TextScaled = true
 chatcolor.TextSize = 14
+chatcolor.TextStrokeTransparency = 0
 chatcolor.TextWrapped = true
 
 Red.Name = "Red"
@@ -206,6 +220,7 @@ Red.Text = ""
 Red.TextColor3 = Color3.new(1, 1, 1)
 Red.TextScaled = true
 Red.TextSize = 14
+Red.TextStrokeTransparency = 0
 Red.TextWrapped = true
 
 Green.Name = "Green"
@@ -221,6 +236,7 @@ Green.Text = ""
 Green.TextColor3 = Color3.new(1, 1, 1)
 Green.TextScaled = true
 Green.TextSize = 14
+Green.TextStrokeTransparency = 0
 Green.TextWrapped = true
 
 Blue.Name = "Blue"
@@ -236,6 +252,7 @@ Blue.Text = ""
 Blue.TextColor3 = Color3.new(1, 1, 1)
 Blue.TextScaled = true
 Blue.TextSize = 14
+Blue.TextStrokeTransparency = 0
 Blue.TextWrapped = true
 
 chatprefix.Name = "chatprefix"
@@ -249,6 +266,7 @@ chatprefix.Text = "Chat Prefix:"
 chatprefix.TextColor3 = Color3.new(1, 1, 1)
 chatprefix.TextScaled = true
 chatprefix.TextSize = 14
+chatprefix.TextStrokeTransparency = 0
 chatprefix.TextWrapped = true
 
 prefix.Name = "prefix"
@@ -264,6 +282,7 @@ prefix.Text = ""
 prefix.TextColor3 = Color3.new(1, 1, 1)
 prefix.TextScaled = true
 prefix.TextSize = 14
+prefix.TextStrokeTransparency = 0
 prefix.TextWrapped = true
 
 autodetectplayers.Name = "autodetectplayers"
@@ -277,6 +296,7 @@ autodetectplayers.Text = "Auto-detect player names:"
 autodetectplayers.TextColor3 = Color3.new(1, 1, 1)
 autodetectplayers.TextScaled = true
 autodetectplayers.TextSize = 14
+autodetectplayers.TextStrokeTransparency = 0
 autodetectplayers.TextWrapped = true
 
 message.Name = "message"
@@ -293,6 +313,7 @@ message.Text = ""
 message.TextColor3 = Color3.new(1, 1, 1)
 message.TextScaled = true
 message.TextSize = 14
+message.TextStrokeTransparency = 0
 message.TextWrapped = true
 message.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -307,6 +328,7 @@ hide.Text = "Hide UI"
 hide.TextColor3 = Color3.new(1, 1, 1)
 hide.TextScaled = true
 hide.TextSize = 14
+hide.TextStrokeTransparency = 0
 hide.TextWrapped = true
 
 postmessage.Name = "postmessage"
@@ -320,7 +342,46 @@ postmessage.Text = "Post Message"
 postmessage.TextColor3 = Color3.new(1, 1, 1)
 postmessage.TextScaled = true
 postmessage.TextSize = 14
+postmessage.TextStrokeTransparency = 0
 postmessage.TextWrapped = true
+
+plrlist.Name = "plrlist"
+plrlist.Parent = ChatHackFrame
+plrlist.Active = true
+plrlist.BackgroundColor3 = Color3.new(0.235294, 0.235294, 0.235294)
+plrlist.Position = UDim2.new(0.181818187, 0, 0.482315063, 0)
+plrlist.Size = UDim2.new(0, 199, 0, 161)
+plrlist.Visible = false
+plrlist.CanvasSize = UDim2.new(0, 0, 1, 0)
+
+UIListLayout.Parent = plrlist
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+UISizeConstraint.Parent = plrlist
+UISizeConstraint.MaxSize = Vector2.new(199, INF)
+
+TextButton.Parent = plrlist
+TextButton.BackgroundColor3 = Color3.new(0.313726, 0.313726, 0.313726)
+TextButton.Size = UDim2.new(0, 185, 0, 30)
+TextButton.Font = Enum.Font.Code
+TextButton.Text = "RedWirePlatinum"
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.TextScaled = true
+TextButton.TextSize = 14
+TextButton.TextStrokeTransparency = 0
+TextButton.TextWrapped = true
+
+uihide.Name = "uihide"
+uihide.Parent = plrlist
+uihide.BackgroundColor3 = Color3.new(0.313726, 0.313726, 0.313726)
+uihide.Size = UDim2.new(0, 185, 0, 30)
+uihide.Font = Enum.Font.Code
+uihide.Text = "Hide player list"
+uihide.TextColor3 = Color3.new(1, 1, 1)
+uihide.TextScaled = true
+uihide.TextSize = 14
+uihide.TextStrokeTransparency = 0
+uihide.TextWrapped = true
 
 Stat.Name = "Stat"
 Stat.Parent = PokemonHaxlol
@@ -349,6 +410,7 @@ PP.Text = ""
 PP.TextColor3 = Color3.new(1, 1, 1)
 PP.TextScaled = true
 PP.TextSize = 14
+PP.TextStrokeTransparency = 0
 PP.TextWrapped = true
 
 Accuracy.Name = "Accuracy"
@@ -364,6 +426,7 @@ Accuracy.Text = ""
 Accuracy.TextColor3 = Color3.new(1, 1, 1)
 Accuracy.TextScaled = true
 Accuracy.TextSize = 14
+Accuracy.TextStrokeTransparency = 0
 Accuracy.TextWrapped = true
 
 Power.Name = "Power"
@@ -379,6 +442,7 @@ Power.Text = ""
 Power.TextColor3 = Color3.new(1, 1, 1)
 Power.TextScaled = true
 Power.TextSize = 14
+Power.TextStrokeTransparency = 0
 Power.TextWrapped = true
 
 CritChance.Name = "CritChance"
@@ -394,6 +458,7 @@ CritChance.Text = ""
 CritChance.TextColor3 = Color3.new(1, 1, 1)
 CritChance.TextScaled = true
 CritChance.TextSize = 14
+CritChance.TextStrokeTransparency = 0
 CritChance.TextWrapped = true
 
 MoveName.Name = "MoveName"
@@ -409,6 +474,7 @@ MoveName.Text = ""
 MoveName.TextColor3 = Color3.new(1, 1, 1)
 MoveName.TextScaled = true
 MoveName.TextSize = 14
+MoveName.TextStrokeTransparency = 0
 MoveName.TextWrapped = true
 
 PokemonName.Name = "PokemonName"
@@ -424,6 +490,7 @@ PokemonName.Text = ""
 PokemonName.TextColor3 = Color3.new(1, 1, 1)
 PokemonName.TextScaled = true
 PokemonName.TextSize = 14
+PokemonName.TextStrokeTransparency = 0
 PokemonName.TextWrapped = true
 
 Atk.Name = "Atk"
@@ -439,6 +506,7 @@ Atk.Text = ""
 Atk.TextColor3 = Color3.new(1, 1, 1)
 Atk.TextScaled = true
 Atk.TextSize = 14
+Atk.TextStrokeTransparency = 0
 Atk.TextWrapped = true
 
 Def.Name = "Def"
@@ -454,6 +522,7 @@ Def.Text = ""
 Def.TextColor3 = Color3.new(1, 1, 1)
 Def.TextScaled = true
 Def.TextSize = 14
+Def.TextStrokeTransparency = 0
 Def.TextWrapped = true
 
 HP.Name = "HP"
@@ -469,6 +538,7 @@ HP.Text = ""
 HP.TextColor3 = Color3.new(1, 1, 1)
 HP.TextScaled = true
 HP.TextSize = 14
+HP.TextStrokeTransparency = 0
 HP.TextWrapped = true
 
 Speed.Name = "Speed"
@@ -484,6 +554,7 @@ Speed.Text = ""
 Speed.TextColor3 = Color3.new(1, 1, 1)
 Speed.TextScaled = true
 Speed.TextSize = 14
+Speed.TextStrokeTransparency = 0
 Speed.TextWrapped = true
 
 SpA.Name = "SpA"
@@ -499,6 +570,7 @@ SpA.Text = ""
 SpA.TextColor3 = Color3.new(1, 1, 1)
 SpA.TextScaled = true
 SpA.TextSize = 14
+SpA.TextStrokeTransparency = 0
 SpA.TextWrapped = true
 
 SpD.Name = "SpD"
@@ -514,6 +586,7 @@ SpD.Text = ""
 SpD.TextColor3 = Color3.new(1, 1, 1)
 SpD.TextScaled = true
 SpD.TextSize = 14
+SpD.TextStrokeTransparency = 0
 SpD.TextWrapped = true
 
 ChangeMove.Name = "ChangeMove"
@@ -527,6 +600,7 @@ ChangeMove.Text = "Change Move Stats"
 ChangeMove.TextColor3 = Color3.new(1, 1, 1)
 ChangeMove.TextScaled = true
 ChangeMove.TextSize = 14
+ChangeMove.TextStrokeTransparency = 0
 ChangeMove.TextWrapped = true
 
 ChangePokemon.Name = "ChangePokemon"
@@ -540,6 +614,7 @@ ChangePokemon.Text = "Change Pokemon Stats"
 ChangePokemon.TextColor3 = Color3.new(1, 1, 1)
 ChangePokemon.TextScaled = true
 ChangePokemon.TextSize = 14
+ChangePokemon.TextStrokeTransparency = 0
 ChangePokemon.TextWrapped = true
 
 Hide.Name = "Hide"
@@ -553,6 +628,7 @@ Hide.Text = "Hide UI"
 Hide.TextColor3 = Color3.new(1, 1, 1)
 Hide.TextScaled = true
 Hide.TextSize = 14
+Hide.TextStrokeTransparency = 0
 Hide.TextWrapped = true
 
 WarningFrame.Name = "WarningFrame"
@@ -574,6 +650,7 @@ txt.Text = "Warning: This GUI may not fully work with this game. Would you like 
 txt.TextColor3 = Color3.new(1, 1, 1)
 txt.TextScaled = true
 txt.TextSize = 14
+txt.TextStrokeTransparency = 0
 txt.TextWrapped = true
 
 yes.Name = "yes"
@@ -587,6 +664,7 @@ yes.Text = "Yes"
 yes.TextColor3 = Color3.new(1, 1, 1)
 yes.TextScaled = true
 yes.TextSize = 14
+yes.TextStrokeTransparency = 0
 yes.TextWrapped = true
 
 no.Name = "no"
@@ -600,9 +678,10 @@ no.Text = "No"
 no.TextColor3 = Color3.new(1, 1, 1)
 no.TextScaled = true
 no.TextSize = 14
+no.TextStrokeTransparency = 0
 no.TextWrapped = true
 -- Scripts:
-function SCRIPT_PGEF84_FAKESCRIPT() -- PokemonHaxlol.LocalScript 
+function SCRIPT_DYTA83_FAKESCRIPT() -- PokemonHaxlol.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = PokemonHaxlol
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -612,9 +691,12 @@ function SCRIPT_PGEF84_FAKESCRIPT() -- PokemonHaxlol.LocalScript
 	end
 	end
 	local chatui = script.Parent.ChatHackFrame
+	chatui.plrlist.UISizeConstraint.MaxSize = Vector2.new(199, math.huge)
 	local StatChangerUI = script.Parent.Stat
 	local MainFrame = script.Parent.MainFrame
 	local warningframe = script.Parent.WarningFrame
+	local buttonbase = chatui.plrlist.TextButton
+	buttonbase.Visible = false
 	local autodetect = false
 	local exphackenabled = false
 	local lplr = game.Players.LocalPlayer
@@ -689,27 +771,46 @@ function SCRIPT_PGEF84_FAKESCRIPT() -- PokemonHaxlol.LocalScript
 	end
 	chatui.autodetectplayers.Text = buttontext..tostring(autodetect)
 	end)
+	chatui.prefix.MouseEnter:connect(function()
+	if autodetect then
+	chatui.plrlist.Visible = true
+	end
+	end)
+	chatui.plrlist.uihide.MouseButton1Click:connect(function()
+	chatui.plrlist.Visible = false
+	end)
 	Changed(chatui.prefix, "Text", function(txt,prev,button)
 	if autodetect then
 	local t = {}
 	for i,v in pairs(game.Players:GetPlayers()) do
-	if v.DisplayName:lower():sub(1, txt:len()) == txt:lower() then
-	table.insert(t, v.DisplayName)
+	if v.Name:lower():sub(1, txt:len()) == txt:lower() then
+	table.insert(t, v.Name)
 	end
 	end
-	if #t == 1 then
-	button.Text = t[1]
-	button.Visible = false
-	wait()
-	button.Visible = true
+	for i,v in pairs(t) do
+	local bclone = buttonbase:Clone()
+	bclone.Parent = chatui.plrlist
+	bclone.Text = v
+	bclone.Visible = true
+	bclone.MouseButton1Click:connect(function()
+	button.Text = bclone.Text
+	chatui.plrlist.Visible = false
+	end)
+	coroutine.resume(coroutine.create(function()
+	repeat wait() until button.Text ~= txt
+	bclone:Destroy()
+	end))
 	end
 	end
 	end)
+	function Saymsg(msg, color)
+	game.ReplicatedStorage.REvents.Internal.wouoz:FireServer("has beaten\n\n"..msg, color)
+	end
 	chatui.postmessage.MouseButton1Click:connect(function()
 	if chatui.prefix.Text ~= "" then
-	game.ReplicatedStorage.REvents.Internal.wouoz:FireServer("["..chatui.prefix.Text.."]: "..chatui.message.Text, chatColor)
+	Saymsg("["..chatui.prefix.Text.."]: "..chatui.message.Text, chatColor)
 	else
-	game.ReplicatedStorage.REvents.Internal.wouoz:FireServer(chatui.message.Text, chatColor)
+	Saymsg(chatui.message.Text, chatColor)
 	end
 	end)
 	StatChangerUI.ChangePokemon.MouseButton1Click:connect(function()
@@ -735,7 +836,7 @@ function SCRIPT_PGEF84_FAKESCRIPT() -- PokemonHaxlol.LocalScript
 	MainFrame.ChatEXPHaxx.MouseButton1Click:connect(function()
 	if not exphackenabled then
 	exphackenabled = true
-	game.ReplicatedStorage.REvents.Internal.wouoz:FireServer("Attention: A very sexc exploiter is here and is granting you access to insta LVL up your pokemon. To do so you say '!lvl hack [pokemon name]' WITHOUT brackets or quotes in chat. (For all pokemon, do !lvl hack all)\nOnce you do that, kill another pokemon and let the magic begin.\nALSO: This cannot be undone + This supports shortened names ('pikachu' can be written as 'pika').", Color3.new(1,1,1))
+	Saymsg("Attention: A very sexc exploiter is here and is granting you access to insta LVL up your pokemon. To do so you say '!lvl hack [pokemon name]' WITHOUT brackets or quotes in chat. (For all pokemon, do !lvl hack all)\nOnce you do that, kill another pokemon and let the magic begin.\nALSO: This cannot be undone + This supports shortened names ('pikachu' can be written as 'pika').", Color3.new(1,1,1))
 	local function haxpokemon(plr)
 	plr.Chatted:connect(function(msg)
 	if msg:lower():find("!lvl hack") and not msg:lower() ~= "!lvl hack all" then
@@ -776,6 +877,11 @@ function SCRIPT_PGEF84_FAKESCRIPT() -- PokemonHaxlol.LocalScript
 	MainFrame.X.MouseButton1Click:connect(function()
 	MainFrame.Parent:Destroy()
 	end)
+	game.StarterGui:SetCore("SendNotification", {
+	Title = "Chat trolling";
+	Text = "I have to automatically include 'has beaten' in ur bypassed chats just so it appears on the chat log, sorry lmao";
+	Duration = 10;
+	})
 
 end
-coroutine.resume(coroutine.create(SCRIPT_PGEF84_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_DYTA83_FAKESCRIPT))
