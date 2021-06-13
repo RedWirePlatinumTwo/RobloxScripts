@@ -13,7 +13,6 @@ local FirstPerson = Instance.new("TextButton")
 local ChosenPlayer = Instance.new("TextLabel")
 local raycasting = Instance.new("TextButton")
 local WhitelistUI = Instance.new("Frame")
-local Title_2 = Instance.new("TextLabel")
 local WhitelistedInstances = Instance.new("ScrollingFrame")
 local whitelistownteam = Instance.new("Frame")
 local TextLabel = Instance.new("TextLabel")
@@ -27,6 +26,8 @@ local about = Instance.new("TextButton")
 local AboutUI = Instance.new("Frame")
 local Info = Instance.new("TextLabel")
 local Close = Instance.new("TextButton")
+local searchbar = Instance.new("TextBox")
+local Title_2 = Instance.new("TextLabel")
 --Properties:
 Aimbot.Name = "Aimbot"
 Aimbot.Parent = game.CoreGui
@@ -163,29 +164,18 @@ WhitelistUI.Parent = Aimbot
 WhitelistUI.BackgroundColor3 = Color3.new(0, 0, 0)
 WhitelistUI.BorderColor3 = Color3.new(0, 0.666667, 0)
 WhitelistUI.BorderSizePixel = 2
-WhitelistUI.Position = UDim2.new(0.428989738, 0, 0.0729166642, 0)
+WhitelistUI.Position = UDim2.new(0.390190303, 0, 0.110677078, 0)
 WhitelistUI.Size = UDim2.new(0, 324, 0, 269)
 WhitelistUI.Visible = false
-
-Title_2.Name = "Title"
-Title_2.Parent = WhitelistUI
-Title_2.BackgroundColor3 = Color3.new(0, 0, 0)
-Title_2.BorderColor3 = Color3.new(0, 0.666667, 0)
-Title_2.Size = UDim2.new(0, 195, 0, 30)
-Title_2.Font = Enum.Font.Highway
-Title_2.Text = "Whitelisting UI"
-Title_2.TextColor3 = Color3.new(0, 0.666667, 0)
-Title_2.TextScaled = true
-Title_2.TextSize = 14
-Title_2.TextWrapped = true
 
 WhitelistedInstances.Name = "WhitelistedInstances"
 WhitelistedInstances.Parent = WhitelistUI
 WhitelistedInstances.Active = true
 WhitelistedInstances.BackgroundColor3 = Color3.new(0, 0, 0)
 WhitelistedInstances.BorderColor3 = Color3.new(0, 0.666667, 0)
-WhitelistedInstances.Position = UDim2.new(0, 0, 0.114136703, 0)
-WhitelistedInstances.Size = UDim2.new(0, 324, 0, 238)
+WhitelistedInstances.Position = UDim2.new(0, 0, 0.278215498, 0)
+WhitelistedInstances.Size = UDim2.new(0, 324, 0, 193)
+WhitelistedInstances.CanvasSize = UDim2.new(0, 0, 1.20000005, 0)
 
 whitelistownteam.Name = "whitelistownteam"
 whitelistownteam.Parent = WhitelistedInstances
@@ -268,8 +258,8 @@ about.Name = "about"
 about.Parent = WhitelistUI
 about.BackgroundColor3 = Color3.new(0, 0, 0)
 about.BorderColor3 = Color3.new(0, 0.666667, 0)
-about.Position = UDim2.new(0.601851881, 0, 0, 0)
-about.Size = UDim2.new(0, 39, 0, 30)
+about.Position = UDim2.new(0.89637363, 0, 0.111524165, 0)
+about.Size = UDim2.new(0, 33, 0, 33)
 about.Font = Enum.Font.Highway
 about.Text = "ⓘ"
 about.TextColor3 = Color3.new(0, 0.333333, 1)
@@ -314,8 +304,35 @@ Close.TextColor3 = Color3.new(1, 0, 0)
 Close.TextScaled = true
 Close.TextSize = 14
 Close.TextWrapped = true
+
+searchbar.Name = "searchbar"
+searchbar.Parent = WhitelistUI
+searchbar.BackgroundColor3 = Color3.new(0, 0, 0)
+searchbar.BorderColor3 = Color3.new(0, 0.666667, 0)
+searchbar.Position = UDim2.new(0, 0, 0.111524165, 0)
+searchbar.Size = UDim2.new(0, 290, 0, 33)
+searchbar.Font = Enum.Font.Highway
+searchbar.PlaceholderColor3 = Color3.new(0, 0.666667, 0)
+searchbar.PlaceholderText = "Filter Scrolling Frame results"
+searchbar.Text = ""
+searchbar.TextColor3 = Color3.new(0, 0.666667, 0)
+searchbar.TextScaled = true
+searchbar.TextSize = 14
+searchbar.TextWrapped = true
+
+Title_2.Name = "Title"
+Title_2.Parent = WhitelistUI
+Title_2.BackgroundColor3 = Color3.new(0, 0, 0)
+Title_2.BorderColor3 = Color3.new(0, 0.666667, 0)
+Title_2.Size = UDim2.new(0, 236, 0, 29)
+Title_2.Font = Enum.Font.Highway
+Title_2.Text = "Whitelisting UI"
+Title_2.TextColor3 = Color3.new(0, 0.666667, 0)
+Title_2.TextScaled = true
+Title_2.TextSize = 14
+Title_2.TextWrapped = true
 -- Scripts:
-function SCRIPT_RTWR71_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_MUUF68_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	if not _G.RedsAimbot then
@@ -724,6 +741,17 @@ function SCRIPT_RTWR71_FAKESCRIPT() -- Aimbot.Scripts
 	plrs.PlayerAdded:connect(function(plr)
 	AddtoList(plr)
 	end)
+	Changed(wlui.searchbar, "Text", function(txt)
+	for i,v in pairs(wlui.WhitelistedInstances:GetChildren()) do
+	if v.ClassName == "Frame" and v ~= wlframe and v ~= wlui.WhitelistedInstances.whitelistownteam then
+	if v.TextLabel.Text:lower():match(txt) then
+	v.Visible = true
+	else
+	v.Visible = false
+	end
+	end
+	end
+	end)
 	else
 	game.StarterGui:SetCore("SendNotification", {
 	Title = "Aimbot";
@@ -735,4 +763,4 @@ function SCRIPT_RTWR71_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_RTWR71_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_MUUF68_FAKESCRIPT))
