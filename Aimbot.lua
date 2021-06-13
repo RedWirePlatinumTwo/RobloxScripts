@@ -744,7 +744,7 @@ function SCRIPT_MUUF68_FAKESCRIPT() -- Aimbot.Scripts
 	Changed(wlui.searchbar, "Text", function(txt)
 	for i,v in pairs(wlui.WhitelistedInstances:GetChildren()) do
 	if v.ClassName == "Frame" and v ~= wlframe and v ~= wlui.WhitelistedInstances.whitelistownteam then
-	if v.TextLabel.Text:lower():match(txt) then
+	if v.TextLabel.Text:lower():match(txt:lower()) then
 	v.Visible = true
 	else
 	v.Visible = false
