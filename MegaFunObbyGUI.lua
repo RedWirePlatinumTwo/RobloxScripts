@@ -166,7 +166,7 @@ X.TextScaled = true
 X.TextSize = 14
 X.TextWrapped = true
 -- Scripts:
-function SCRIPT_FLGB84_FAKESCRIPT() -- Megafunobby.LocalScript 
+function SCRIPT_DKLD67_FAKESCRIPT() -- Megafunobby.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = Megafunobby
 	local frame = script.Parent.MainFrame
@@ -214,12 +214,15 @@ function SCRIPT_FLGB84_FAKESCRIPT() -- Megafunobby.LocalScript
 			frame.Endstage.Textbox.Text = string.match(namestring,"%d+")
 		end
 	frame.stageskip.MouseButton1Click:connect(function()
-	local start = tonumber(frame.Currentstage.Textbox.Text) + 1
+	local start = tonumber(frame.Currentstage.Textbox.Text)
 	local End = tonumber(frame.Endstage.Textbox.Text)
+	if start ~= End then
+	start = start + 1
 			for i = start, End do
-				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.stages[i].CFrame
-				wait(0.2)
+				lplr.Character.HumanoidRootPart.CFrame = game.Workspace.stages[i].CFrame
+				repeat wait() until lplr.leaderstats.Stage.Value == i
 			end
+	end
 	end)
 	local stage = game.Players.LocalPlayer.leaderstats.Stage
 	frame.Currentstage.Textbox.Text = tostring(stage.Value)
@@ -231,4 +234,4 @@ function SCRIPT_FLGB84_FAKESCRIPT() -- Megafunobby.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_FLGB84_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_DKLD67_FAKESCRIPT))
