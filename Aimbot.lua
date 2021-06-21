@@ -332,7 +332,7 @@ Title_2.TextScaled = true
 Title_2.TextSize = 14
 Title_2.TextWrapped = true
 -- Scripts:
-function SCRIPT_MUUF68_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_OFVO65_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	if not _G.RedsAimbot then
@@ -373,6 +373,13 @@ function SCRIPT_MUUF68_FAKESCRIPT() -- Aimbot.Scripts
 	AimbotStats.IsOn = true
 	end
 	end))
+	end
+	function CheckDN(plr)
+	if plr.DisplayName == plr.Name then
+	return plr.Name
+	else
+	return plr.Name.." (DisplayName: "..plr.DisplayName..")"
+	end
 	end
 	function IsNotWhitelisted(plr)
 	if AimbotStats.OwnTeamWhitelisted then
@@ -566,12 +573,9 @@ function SCRIPT_MUUF68_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end)
 	game.StarterGui:SetCore("SendNotification", {
-	Title = "Aimbot";
-	Text = "To see how the aimbot works, check the developer log.";})
-	game.StarterGui:SetCore("SendNotification", {
 	Title = "Aimbot Update:";
 	Duration = 10;
-	Text = "Updated whitelisting system to make it (hopefully) more efficient.";})
+	Text = "player DisplayNames won't show in parenthesis if their DisplayName is the same as their Username.";})
 	
 	function Died(player)
 	if not player.Character then player.CharacterAdded:Wait() end
@@ -627,7 +631,7 @@ function SCRIPT_MUUF68_FAKESCRIPT() -- Aimbot.Scripts
 	if v ~= "" then
 	MainFrame.ChosenPlayer.Visible = true
 	local player = game.Players:GetPlayerFromCharacter(v)
-	MainFrame.ChosenPlayer.Text = "Chosen "..player.Name.." (DisplayName: "..player.DisplayName..")"
+	MainFrame.ChosenPlayer.Text = "Chosen ".. CheckDN(player)
 	else
 	MainFrame.ChosenPlayer.Visible = false
 	end
@@ -714,7 +718,7 @@ function SCRIPT_MUUF68_FAKESCRIPT() -- Aimbot.Scripts
 	clone.TextLabel.Text = "Whitelist the "..ins.Name.." team?"
 	togglefunc(WhitelistedTeams)
 	else
-	clone.TextLabel.Text = "Whitelist "..ins.Name.."? (DisplayName: "..ins.DisplayName..")"
+	clone.TextLabel.Text = "Whitelist ".. CheckDN(ins) .."?"
 	togglefunc(WhitelistedPlrs)
 	coroutine.resume(coroutine.create(function()
 	repeat wait() until not game.Players:FindFirstChild(ins.Name)
@@ -763,4 +767,4 @@ function SCRIPT_MUUF68_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_MUUF68_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_OFVO65_FAKESCRIPT))
