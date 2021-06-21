@@ -47,7 +47,7 @@ WhitelistUIOpener.BorderColor3 = Color3.new(0, 0.666667, 0)
 WhitelistUIOpener.Position = UDim2.new(0, 0, 0.652204633, 0)
 WhitelistUIOpener.Size = UDim2.new(0, 94, 0, 50)
 WhitelistUIOpener.Font = Enum.Font.Highway
-WhitelistUIOpener.Text = "Click to open the whitelisting UI"
+WhitelistUIOpener.Text = "Whitelister UI"
 WhitelistUIOpener.TextColor3 = Color3.new(0, 0.666667, 0)
 WhitelistUIOpener.TextScaled = true
 WhitelistUIOpener.TextSize = 14
@@ -190,8 +190,7 @@ TextLabel.Size = UDim2.new(0, 264, 0, 37)
 TextLabel.Font = Enum.Font.Highway
 TextLabel.Text = "Whitelist own team?"
 TextLabel.TextColor3 = Color3.new(0, 0.666667, 0)
-TextLabel.TextScaled = true
-TextLabel.TextSize = 14
+TextLabel.TextSize = 22
 TextLabel.TextWrapped = true
 
 Toggle.Name = "Toggle"
@@ -203,8 +202,7 @@ Toggle.Size = UDim2.new(0, 48, 0, 37)
 Toggle.Font = Enum.Font.Highway
 Toggle.Text = "Yes"
 Toggle.TextColor3 = Color3.new(0, 1, 0)
-Toggle.TextScaled = true
-Toggle.TextSize = 14
+Toggle.TextSize = 22
 Toggle.TextWrapped = true
 
 whitelistframe.Name = "whitelistframe"
@@ -221,8 +219,7 @@ TextLabel_2.Size = UDim2.new(0, 264, 0, 37)
 TextLabel_2.Font = Enum.Font.Highway
 TextLabel_2.Text = "sample text lmao"
 TextLabel_2.TextColor3 = Color3.new(0, 0.666667, 0)
-TextLabel_2.TextScaled = true
-TextLabel_2.TextSize = 14
+TextLabel_2.TextSize = 22
 TextLabel_2.TextWrapped = true
 
 Toggle_2.Name = "Toggle"
@@ -234,8 +231,7 @@ Toggle_2.Size = UDim2.new(0, 48, 0, 37)
 Toggle_2.Font = Enum.Font.Highway
 Toggle_2.Text = "No"
 Toggle_2.TextColor3 = Color3.new(1, 0, 0)
-Toggle_2.TextScaled = true
-Toggle_2.TextSize = 14
+Toggle_2.TextSize = 22
 Toggle_2.TextWrapped = true
 
 UIListLayout.Parent = WhitelistedInstances
@@ -332,7 +328,7 @@ Title_2.TextScaled = true
 Title_2.TextSize = 14
 Title_2.TextWrapped = true
 -- Scripts:
-function SCRIPT_OFVO65_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_JHNW84_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	if not _G.RedsAimbot then
@@ -767,4 +763,4 @@ function SCRIPT_OFVO65_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_OFVO65_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_JHNW84_FAKESCRIPT))
