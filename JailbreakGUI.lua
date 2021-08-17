@@ -154,7 +154,7 @@ GravToggle.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 GravToggle.Position = UDim2.new(0.339373887, 0, 0.631499946, 0)
 GravToggle.Size = UDim2.new(0, 106, 0, 52)
 GravToggle.Font = Enum.Font.SourceSansBold
-GravToggle.Text = "Gravity Toggle / Current: 196.2"
+GravToggle.Text = "Gravity Toggle / Current: 196"
 GravToggle.TextColor3 = Color3.new(1, 1, 1)
 GravToggle.TextSize = 18
 GravToggle.TextWrapped = true
@@ -622,7 +622,7 @@ X_2.TextScaled = true
 X_2.TextSize = 14
 X_2.TextWrapped = true
 -- Scripts:
-function SCRIPT_OZWC68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
+function SCRIPT_TJWU68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -630,6 +630,13 @@ function SCRIPT_OZWC68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 			v.Active = true
 			v.Draggable = true
 		end
+	end
+	local function makeattachment(obj)
+	if not obj:FindFirstChild("Attachment") then
+	Instance.new("Attachment", obj)
+	obj:WaitForChild("Attachment")
+	end
+	return obj.Attachment
 	end
 	local Changed = function(part, PropertyName, func)
 	    local current = part[PropertyName]
@@ -682,7 +689,7 @@ function SCRIPT_OZWC68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	game.StarterGui:SetCore("ChatMakeSystemMessage", {
 	Text = "RedWire's Jailbreak GUI | "..msg;})
 	end
-	SysMessage("Ctrl destroy clicking can no longer destroy body parts + grav toggler can now only switch from 196 and 0.")
+	SysMessage("Added Tomb to Robbery Notifier + .")
 	local minimap = lplr.PlayerGui.SidebarGui.Container.ContainerMinimap.Minimap.Container.Players
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -698,14 +705,12 @@ function SCRIPT_OZWC68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	for i,part in pairs(workspace.TouchTrigger:GetChildren()) do
 	if part:IsA("BasePart") then
 		part.Size = Vector3.new(1,1,1)
-		print("The "..part.Name.." is secured.")
 		backupparts[part.Name] = part
 	end
 	end
 		workspace.TouchTrigger.ChildRemoved:connect(function(child)
 				local d2 = backupparts[child.Name]:Clone()
 				d2.Parent = workspace.TouchTrigger
-				print("The "..child.Name.." has been r e b o r n.")
 		end)
 	function walcc()
 	lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(function()
@@ -749,7 +754,7 @@ function SCRIPT_OZWC68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	cooldown = true
 	end
 	end)
-	mainframe.GravToggle.Text = "Gravity Toggle / Current: "..tostring(workspace.Gravity)
+	mainframe.GravToggle.Text = "Gravity Toggle / Current: "..tostring(math.floor(workspace.Gravity))
 	Changed(workspace, "Gravity", function(grav)
 	mainframe.GravToggle.Text = "Gravity Toggle / Current: "..tostring(grav)
 	end)
@@ -1065,7 +1070,7 @@ function SCRIPT_OZWC68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	frame2.RobberyNotifier.MouseButton1Click:connect(function()
 		if not RobberyNotifier then
 		RobberyNotifier = true
-		function notify(txt)
+		local function notify(txt)
 			game.StarterGui:SetCore("SendNotification", {
 			Title = "RedWire's Robbery Notifier";
 			Text = txt;})
@@ -1076,7 +1081,7 @@ function SCRIPT_OZWC68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	wait(1)
 	s:Destroy()
 		end
-	local IconIds = {["bank truck"] = "6133383545",["gas station"] = "4643750797",["donut shop"] = "4643750660", ["museum"] = "4643749917"}
+	local IconIds = {["bank truck"] = "6133383545",["gas station"] = "4643750797",["donut shop"] = "4643750660", ["museum"] = "4643749917", ["tomb"] = "6896911415"}
 	for i,v in pairs(plrgui.WorldMarkersGui:GetChildren()) do
 	for i2, v2 in pairs(v:GetChildren()) do
 	for name, id in pairs(IconIds) do
@@ -1141,15 +1146,9 @@ function SCRIPT_OZWC68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	if plr then
 	local hrp = lplr.Character.HumanoidRootPart
 	local hrp2 = plr.Character.HumanoidRootPart
-	if not hrp:FindFirstChild("Attachment") then
-	local attach1 = Instance.new("Attachment", hrp)
-	end
-	if not hrp2:FindFirstChild("Attachment") then
-	local attach2 = Instance.new("Attachment", hrp2)
-	end
 	ap.MaxVelocity = 150
-	ap.Attachment0 = hrp.Attachment
-	ap.Attachment1 = hrp2.Attachment
+	ap.Attachment0 = makeattachment(hrp)
+	ap.Attachment1 = makeattachment(hrp2)
 	local qPressed = function()
 	local v = true
 	    coroutine.resume(coroutine.create(function()
@@ -1297,4 +1296,4 @@ function SCRIPT_OZWC68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_OZWC68_FAKESCRIPT)) 
+coroutine.resume(coroutine.create(SCRIPT_TJWU68_FAKESCRIPT))
