@@ -680,6 +680,7 @@ function SCRIPT_GBIB66_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end
 	local notiframe = script.Parent.NotifSFrame
 	notiframe.ScrollBarImageTransparency = 1
+	notiframe.CanvasPosition = Vector2.new(0, 134.6)
 	local function notify(title, text, duration)
 	if not duration then duration = 5 end
 	local notif = notiframe.exframe:Clone()
