@@ -623,7 +623,6 @@ NotifSFrame.BorderSizePixel = 0
 NotifSFrame.Position = UDim2.new(0.774524152, 0, 0.59765625, 0)
 NotifSFrame.Size = UDim2.new(0, 308, 0, 211)
 NotifSFrame.Visible = false
-NotifSFrame.CanvasPosition = Vector2.new(0, 134.599976)
 NotifSFrame.CanvasSize = UDim2.new(0, 0, 0.449999988, 0)
 NotifSFrame.ScrollingEnabled = false
 
@@ -664,7 +663,7 @@ text.TextWrapped = true
 text.TextXAlignment = Enum.TextXAlignment.Left
 text.TextYAlignment = Enum.TextYAlignment.Top
 -- Scripts:
-function SCRIPT_IPXU69_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
+function SCRIPT_VUPN85_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -989,7 +988,11 @@ function SCRIPT_IPXU69_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	for i,v in pairs(floor:GetChildren()) do
 	for a,p in pairs(v:GetChildren()) do
 	if p.Name == "Lasers" or p.Name == "Laser" then
-	remove(p)
+	for c,x in pairs(p:GetDescendants()) do
+	if x:IsA("BasePart") then
+	remove(x)
+	end
+	end
 	end
 	end
 	end
@@ -1326,4 +1329,4 @@ function SCRIPT_IPXU69_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_IPXU69_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_VUPN85_FAKESCRIPT))
