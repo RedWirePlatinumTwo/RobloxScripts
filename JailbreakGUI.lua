@@ -1176,7 +1176,7 @@ function SCRIPT_IPXU69_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	if plr then
 	local hrp = lplr.Character.HumanoidRootPart
 	local hrp2 = plr.Character.HumanoidRootPart
-	ap.MaxVelocity = 150
+	ap.MaxVelocity = 100
 	ap.Attachment0 = makeattachment(hrp)
 	ap.Attachment1 = makeattachment(hrp2)
 	local qPressed = function()
