@@ -624,7 +624,6 @@ NotifSFrame.Position = UDim2.new(0.774524152, 0, 0.59765625, 0)
 NotifSFrame.Size = UDim2.new(0, 308, 0, 211)
 NotifSFrame.Visible = false
 NotifSFrame.CanvasSize = UDim2.new(0, 0, 0.449999988, 0)
-NotifSFrame.ScrollingEnabled = false
 
 UIListLayout.Parent = NotifSFrame
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
@@ -663,7 +662,7 @@ text.TextWrapped = true
 text.TextXAlignment = Enum.TextXAlignment.Left
 text.TextYAlignment = Enum.TextYAlignment.Top
 -- Scripts:
-function SCRIPT_VUPN85_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
+function SCRIPT_GBIB66_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -1329,4 +1328,4 @@ function SCRIPT_VUPN85_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_VUPN85_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_GBIB66_FAKESCRIPT))
