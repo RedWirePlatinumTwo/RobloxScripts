@@ -7,7 +7,6 @@ local speed = Instance.new("TextButton")
 local aimbot = Instance.new("TextButton")
 local hacklasers = Instance.new("TextButton")
 local holdebypass = Instance.new("TextButton")
-local ctrldestroy = Instance.new("TextButton")
 local gunmod = Instance.new("TextButton")
 local briefcase = Instance.new("TextButton")
 local GravToggle = Instance.new("TextButton")
@@ -16,7 +15,6 @@ local more = Instance.new("TextButton")
 local Title = Instance.new("TextLabel")
 local Speednum = Instance.new("TextBox")
 local otherFrame = Instance.new("Frame")
-local removeragdoll = Instance.new("TextButton")
 local switch = Instance.new("TextButton")
 local RobberyNotifier = Instance.new("TextButton")
 local plrname = Instance.new("TextBox")
@@ -25,6 +23,7 @@ local gunshoptpbutton = Instance.new("TextButton")
 local ESpam = Instance.new("TextButton")
 local infiniteyeet = Instance.new("TextButton")
 local healguibutton = Instance.new("TextButton")
+local removeragdoll = Instance.new("TextButton")
 local Confirmation = Instance.new("Frame")
 local Warning = Instance.new("TextLabel")
 local Yes = Instance.new("TextButton")
@@ -49,6 +48,11 @@ local noreload = Instance.new("TextButton")
 local TextLabel = Instance.new("TextLabel")
 local chaos = Instance.new("TextButton")
 local X_2 = Instance.new("TextButton")
+local NotifSFrame = Instance.new("ScrollingFrame")
+local UIListLayout = Instance.new("UIListLayout")
+local exframe = Instance.new("Frame")
+local title = Instance.new("TextLabel")
+local text = Instance.new("TextLabel")
 --Properties:
 JailbreakGUI.Name = "JailbreakGUI"
 JailbreakGUI.Parent = game.CoreGui
@@ -65,8 +69,8 @@ speed.Name = "speed"
 speed.Parent = MainFrame
 speed.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 speed.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-speed.Position = UDim2.new(0.00314465398, 0, 0.631499946, 0)
-speed.Size = UDim2.new(0, 106, 0, 52)
+speed.Position = UDim2.new(0, 0, 0.631499946, 0)
+speed.Size = UDim2.new(0, 160, 0, 52)
 speed.ZIndex = 33
 speed.Font = Enum.Font.SourceSansBold
 speed.Text = "Speedhack"
@@ -110,18 +114,6 @@ holdebypass.TextColor3 = Color3.new(1, 1, 1)
 holdebypass.TextSize = 18
 holdebypass.TextWrapped = true
 
-ctrldestroy.Name = "ctrldestroy"
-ctrldestroy.Parent = MainFrame
-ctrldestroy.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-ctrldestroy.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-ctrldestroy.Position = UDim2.new(0.675091028, 0, 0.418811411, 0)
-ctrldestroy.Size = UDim2.new(0, 103, 0, 52)
-ctrldestroy.Font = Enum.Font.SourceSansBold
-ctrldestroy.Text = "Ctrl + Left Click Destroy"
-ctrldestroy.TextColor3 = Color3.new(1, 1, 1)
-ctrldestroy.TextSize = 18
-ctrldestroy.TextWrapped = true
-
 gunmod.Name = "gunmod"
 gunmod.Parent = MainFrame
 gunmod.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
@@ -151,8 +143,8 @@ GravToggle.Name = "GravToggle"
 GravToggle.Parent = MainFrame
 GravToggle.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 GravToggle.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-GravToggle.Position = UDim2.new(0.339373887, 0, 0.631499946, 0)
-GravToggle.Size = UDim2.new(0, 106, 0, 52)
+GravToggle.Position = UDim2.new(0.675091028, 0, 0.414833337, 0)
+GravToggle.Size = UDim2.new(0, 103, 0, 52)
 GravToggle.Font = Enum.Font.SourceSansBold
 GravToggle.Text = "Gravity Toggle / Current: 196"
 GravToggle.TextColor3 = Color3.new(1, 1, 1)
@@ -177,8 +169,8 @@ more.Name = "more"
 more.Parent = MainFrame
 more.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 more.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-more.Position = UDim2.new(0.675091028, 0, 0.631499946, 0)
-more.Size = UDim2.new(0, 103, 0, 52)
+more.Position = UDim2.new(0.503144681, 0, 0.631499946, 0)
+more.Size = UDim2.new(0, 158, 0, 52)
 more.Font = Enum.Font.SourceSansBold
 more.Text = "More Options"
 more.TextColor3 = Color3.new(1, 1, 1)
@@ -205,8 +197,8 @@ Speednum.Name = "Speednum"
 Speednum.Parent = MainFrame
 Speednum.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 Speednum.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Speednum.Position = UDim2.new(0.00300000003, 0, 0.630999982, 0)
-Speednum.Size = UDim2.new(0, 106, 0, 52)
+Speednum.Position = UDim2.new(0, 0, 0.630999982, 0)
+Speednum.Size = UDim2.new(0, 160, 0, 52)
 Speednum.Font = Enum.Font.SourceSansBold
 Speednum.PlaceholderColor3 = Color3.new(1, 1, 1)
 Speednum.PlaceholderText = "Speed Number goes here"
@@ -222,18 +214,6 @@ otherFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 otherFrame.Position = UDim2.new(0.466536611, 0, 0.343577027, 0)
 otherFrame.Size = UDim2.new(0, 324, 0, 183)
 otherFrame.Visible = false
-
-removeragdoll.Name = "removeragdoll"
-removeragdoll.Parent = otherFrame
-removeragdoll.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-removeragdoll.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-removeragdoll.Position = UDim2.new(-0.00151853205, 0, 0, 0)
-removeragdoll.Size = UDim2.new(0, 81, 0, 48)
-removeragdoll.Font = Enum.Font.SourceSansBold
-removeragdoll.Text = "Remove Ragdoll"
-removeragdoll.TextColor3 = Color3.new(1, 1, 1)
-removeragdoll.TextSize = 16
-removeragdoll.TextWrapped = true
 
 switch.Name = "switch"
 switch.Parent = otherFrame
@@ -332,6 +312,18 @@ healguibutton.Text = "Emergency Healing GUI"
 healguibutton.TextColor3 = Color3.new(1, 1, 1)
 healguibutton.TextSize = 16
 healguibutton.TextWrapped = true
+
+removeragdoll.Name = "removeragdoll"
+removeragdoll.Parent = otherFrame
+removeragdoll.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+removeragdoll.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+removeragdoll.Position = UDim2.new(-0.00151853205, 0, 0, 0)
+removeragdoll.Size = UDim2.new(0, 81, 0, 48)
+removeragdoll.Font = Enum.Font.SourceSansBold
+removeragdoll.Text = "Remove Ragdoll"
+removeragdoll.TextColor3 = Color3.new(1, 1, 1)
+removeragdoll.TextSize = 16
+removeragdoll.TextWrapped = true
 
 Confirmation.Name = "Confirmation"
 Confirmation.Parent = JailbreakGUI
@@ -621,8 +613,58 @@ X_2.TextColor3 = Color3.new(1, 0, 0)
 X_2.TextScaled = true
 X_2.TextSize = 14
 X_2.TextWrapped = true
+
+NotifSFrame.Name = "NotifSFrame"
+NotifSFrame.Parent = JailbreakGUI
+NotifSFrame.Active = true
+NotifSFrame.BackgroundColor3 = Color3.new(1, 1, 1)
+NotifSFrame.BackgroundTransparency = 1
+NotifSFrame.BorderSizePixel = 0
+NotifSFrame.Position = UDim2.new(0.774524152, 0, 0.59765625, 0)
+NotifSFrame.Size = UDim2.new(0, 308, 0, 211)
+NotifSFrame.Visible = false
+NotifSFrame.CanvasPosition = Vector2.new(0, 134.599976)
+NotifSFrame.CanvasSize = UDim2.new(0, 0, 0.449999988, 0)
+NotifSFrame.ScrollingEnabled = false
+
+UIListLayout.Parent = NotifSFrame
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
+
+exframe.Name = "exframe"
+exframe.Parent = NotifSFrame
+exframe.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+exframe.BackgroundTransparency = 0.30000001192093
+exframe.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+exframe.Size = UDim2.new(0, 296, 0, 64)
+exframe.Visible = false
+
+title.Name = "title"
+title.Parent = exframe
+title.BackgroundColor3 = Color3.new(1, 1, 1)
+title.BackgroundTransparency = 1
+title.Size = UDim2.new(0, 296, 0, 18)
+title.Font = Enum.Font.SourceSansBold
+title.Text = "Notification Title"
+title.TextColor3 = Color3.new(1, 1, 1)
+title.TextSize = 18
+title.TextWrapped = true
+
+text.Name = "text"
+text.Parent = exframe
+text.BackgroundColor3 = Color3.new(1, 1, 1)
+text.BackgroundTransparency = 1
+text.Position = UDim2.new(0, 0, 0.28125, 0)
+text.Size = UDim2.new(0, 296, 0, 46)
+text.Font = Enum.Font.SourceSansBold
+text.Text = "Notification Text"
+text.TextColor3 = Color3.new(1, 1, 1)
+text.TextSize = 18
+text.TextWrapped = true
+text.TextXAlignment = Enum.TextXAlignment.Left
+text.TextYAlignment = Enum.TextYAlignment.Top
 -- Scripts:
-function SCRIPT_TJWU68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
+function SCRIPT_IPXU69_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -638,6 +680,34 @@ function SCRIPT_TJWU68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end
 	return obj.Attachment
 	end
+	local notiframe = script.Parent.NotifSFrame
+	notiframe.ScrollBarImageTransparency = 1
+	local function notify(title, text, duration)
+	if not duration then duration = 5 end
+	local notif = notiframe.exframe:Clone()
+	notif.Name = "Notification"
+	notif.Visible = true
+	notif.Parent = notiframe
+	notif.title.Text = title
+	notif.text.Text = text
+	coroutine.resume(coroutine.create(function()
+	wait(duration)
+	notif:Destroy()
+	end))
+	local s = Instance.new("Sound", workspace)
+	s.SoundId = "rbxassetid://700153902"
+	s:Play()
+	wait(1)
+	s:Destroy()
+	end
+	notiframe.ChildAdded:connect(function(c)
+	notiframe.Visible = true
+	end)
+	notiframe.ChildRemoved:connect(function()
+	if #notiframe:GetChildren() == 2 then
+	notiframe.Visible = false
+	end
+	end)
 	local Changed = function(part, PropertyName, func)
 	    local current = part[PropertyName]
 	    coroutine.resume(coroutine.create(function()
@@ -685,11 +755,7 @@ function SCRIPT_TJWU68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 		EncryptedName = EncryptedName..char
 	end
 	script.Parent.Name = EncryptedName
-	local SysMessage = function(msg)
-	game.StarterGui:SetCore("ChatMakeSystemMessage", {
-	Text = "RedWire's Jailbreak GUI | "..msg;})
-	end
-	SysMessage("Added Tomb to Robbery Notifier + .")
+	notify("Changelog", "rip ctrl destroy script + improved jewelry laser hack + added custom notifications", 10)
 	local minimap = lplr.PlayerGui.SidebarGui.Container.ContainerMinimap.Minimap.Container.Players
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -826,27 +892,6 @@ function SCRIPT_TJWU68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	workspace.ChildAdded:connect(gui)
 	end
 	end)
-	mainframe.ctrldestroy.MouseButton1Click:connect(function()
-	if not _G.CtrlDestroy then
-	_G.CtrlDestroy = true
-	local function notChr(ins)
-	local ischr = false
-	for i,v in pairs(GetFamily(ins)) do
-	if game.Players:GetPlayerFromCharacter(v) then
-	ischr = true
-	end
-	end
-	return not ischr
-	end
-	mouse.Button1Down:connect(function()
-	if not game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then return end
-	if not mouse.Target then return end
-	if mouse.Target ~= workspace.Terrain and notChr(mouse.Target) then
-	mouse.Target:Destroy()
-	end
-	end)
-	end
-	end)
 	local barbedwireshacked = false
 	local gunbackup = {}
 	local itemconfig = game.ReplicatedStorage.Game.ItemConfig
@@ -940,14 +985,11 @@ function SCRIPT_TJWU68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	part.Size = Vector3.new(1,1,1)
 	part.CFrame = CFrame.new()
 	end
-	for i,v in pairs(jewel.Floors:GetDescendants()) do
-	if v.Name:lower():match("laser") and not v.ClassName == "Model" then
-	remove(v)
-	elseif v.ClassName == "Model" then
-	for a, p in pairs(v:GetDescendants()) do
-	if p:IsA("BasePart") then
+	local floor = jewel.Floors:FindFirstChildOfClass("Model")
+	for i,v in pairs(floor:GetChildren()) do
+	for a,p in pairs(v:GetChildren()) do
+	if p.Name == "Lasers" or p.Name == "Laser" then
 	remove(p)
-	end
 	end
 	end
 	end
@@ -970,7 +1012,7 @@ function SCRIPT_TJWU68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	mainframe.holdebypass.MouseButton1Click:connect(function()
 	if not HoldEBypass then
 	HoldEBypass = true
-	SysMessage("Hold E Bypass enabled. Script by Interpreter on V3rmillion, inf looped by me.")
+	notify("Hold E Bypass", "Hold E Bypass enabled. Script by Interpreter on V3rmillion, inf looped by me.")
 	end
 	end)
 	mainframe.more.MouseButton1Click:connect(function()
@@ -981,7 +1023,7 @@ function SCRIPT_TJWU68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	mainframe.speed.MouseButton1Click:Connect(function()
 	mainframe.speed.Visible = false
 	mainframe.Speednum.Visible = true
-	function speedhack()
+	local function speedhack()
 	lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(function()
 	if lplr.Character.Humanoid.WalkSpeed ~= ws then
 	    lplr.Character.Humanoid.WalkSpeed = ws.number
@@ -998,9 +1040,7 @@ function SCRIPT_TJWU68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	chr:WaitForChild("Humanoid")
 	speedhack()
 	end)
-	game.StarterGui:SetCore("SendNotification", {
-	Title = "Speedhack";
-	Text = "To edit your walkspeed, scroll up/down on the number in the textbox (max 150).";})
+	notify("Speedhack", "To edit your walkspeed, scroll up/down on the number in the textbox (max 150).", 8)
 	end
 	mainframe.Speednum.MouseWheelForward:connect(function()
 	ws.number = ws.number + 5
@@ -1067,20 +1107,10 @@ function SCRIPT_TJWU68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 	local frame2 = script.Parent.otherFrame
 	local RobberyNotifier = false
+	local robtitle = "RedWire's Robbery Notifier"
 	frame2.RobberyNotifier.MouseButton1Click:connect(function()
 		if not RobberyNotifier then
 		RobberyNotifier = true
-		local function notify(txt)
-			game.StarterGui:SetCore("SendNotification", {
-			Title = "RedWire's Robbery Notifier";
-			Text = txt;})
-			local s = Instance.new("Sound", workspace)
-			s.SoundId = "rbxassetid://700153902"
-			s.Volume = 0.25
-	s:Play()
-	wait(1)
-	s:Destroy()
-		end
 	local IconIds = {["bank truck"] = "6133383545",["gas station"] = "4643750797",["donut shop"] = "4643750660", ["museum"] = "4643749917", ["tomb"] = "6896911415"}
 	for i,v in pairs(plrgui.WorldMarkersGui:GetChildren()) do
 	for i2, v2 in pairs(v:GetChildren()) do
@@ -1088,7 +1118,7 @@ function SCRIPT_TJWU68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	if v2.ImageLabel.Image == "rbxassetid://"..id then
 	Changed(v2, "ImageColor3", function(color)
 	if color == Color3.new(0,1,0) then
-	notify("The "..name.." is open for robbery.")
+	notify(robtitle, "The "..name.." is open for robbery.")
 	end
 	end)
 	end
@@ -1097,29 +1127,29 @@ function SCRIPT_TJWU68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end
 		local smoke = workspace.PowerPlant.Smoke.smoke
 		jewel.Floors.ChildAdded:connect(function()
-			notify("The jewelry is open for robbery.")
+			notify(robtitle, "The jewelry is open for robbery.")
 		end)
 		bank.Layout.ChildAdded:connect(function()
-			notify("The bank is open for robbery.")
+			notify(robtitle, "The bank is open for robbery.")
 		end)
 		smoke:GetPropertyChangedSignal("Enabled"):connect(function()
 			if smoke.Enabled == true then
-				notify("The powerplant is open for robbery.")
+				notify(robtitle, "The powerplant is open for robbery.")
 			end
 		end)
 		workspace.Trains.ChildAdded:connect(function(child)
 		if child.Name == "PassengerArmor" then
-			notify("A passenger train has entered the map.")
+			notify(robtitle, "A passenger train has entered the map.")
 		elseif child.Name == "LocomotiveFront" then
-			notify("A cargo train has entered the map.")
+			notify(robtitle, "A cargo train has entered the map.")
 		end
 		end)
 		workspace.ChildAdded:connect(function(c)
 			if c.Name == "Plane" then
-				notify("The cargo plane is inbound!")
+				notify(robtitle, "The cargo plane is inbound!")
 			end
 			if c.Name == "CargoShip" then
-				notify("The cargo ship is coming!")
+				notify(robtitle, "The cargo ship is coming!")
 			end
 			end)
 	end
@@ -1167,7 +1197,7 @@ function SCRIPT_TJWU68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	qPressed()
 		if not plrnotified then
 		plrnotified = true
-		SysMessage("Inf Yield is needed when using this. Also you have to press Q to stop flying to the player.")
+		notify("plr goto button thing lol", "To stop flying to a player, press Q. Also you need Infinite Yield noclip for this.", 10)
 		end
 	end
 	end)
@@ -1179,7 +1209,7 @@ function SCRIPT_TJWU68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	if not ragdollremoved then
 	ragdollremoved = true
 	require(game.ReplicatedStorage.Module.AlexRagdoll).Ragdoll = nil
-	SysMessage("Ragdoll is no more.")
+	notify("Ragdoll removal", "Ragdoll is no more.")
 	end
 	end)
 	frame2.switch.MouseButton1Down:connect(function()
@@ -1296,4 +1326,4 @@ function SCRIPT_TJWU68_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_TJWU68_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_IPXU69_FAKESCRIPT))
