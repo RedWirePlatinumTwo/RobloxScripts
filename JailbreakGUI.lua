@@ -620,14 +620,13 @@ NotifSFrame.Active = true
 NotifSFrame.BackgroundColor3 = Color3.new(1, 1, 1)
 NotifSFrame.BackgroundTransparency = 1
 NotifSFrame.BorderSizePixel = 0
-NotifSFrame.Position = UDim2.new(0.774524152, 0, 0.59765625, 0)
+NotifSFrame.Position = UDim2.new(0.774524152, 0, 0.64453125, 0)
 NotifSFrame.Size = UDim2.new(0, 308, 0, 211)
 NotifSFrame.Visible = false
-NotifSFrame.CanvasSize = UDim2.new(0, 0, 0.449999988, 0)
+NotifSFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 UIListLayout.Parent = NotifSFrame
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
 
 exframe.Name = "exframe"
 exframe.Parent = NotifSFrame
@@ -662,7 +661,7 @@ text.TextWrapped = true
 text.TextXAlignment = Enum.TextXAlignment.Left
 text.TextYAlignment = Enum.TextYAlignment.Top
 -- Scripts:
-function SCRIPT_GBIB66_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
+function SCRIPT_MJDO86_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -680,7 +679,6 @@ function SCRIPT_GBIB66_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end
 	local notiframe = script.Parent.NotifSFrame
 	notiframe.ScrollBarImageTransparency = 1
-	notiframe.CanvasPosition = Vector2.new(0, 134.6)
 	local function notify(title, text, duration)
 	if not duration then duration = 5 end
 	local notif = notiframe.exframe:Clone()
@@ -699,10 +697,15 @@ function SCRIPT_GBIB66_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	wait(1)
 	s:Destroy()
 	end
+	local canvasy = 0
 	notiframe.ChildAdded:connect(function(c)
 	notiframe.Visible = true
+	canvasy = canvasy + 0.09
+	notiframe.CanvasSize = UDim2.new(0,0,0,canvasy)
 	end)
 	notiframe.ChildRemoved:connect(function()
+	canvasy = canvasy - 0.09
+	notiframe.CanvasSize = UDim2.new(0,0,0,canvasy)
 	if #notiframe:GetChildren() == 2 then
 	notiframe.Visible = false
 	end
@@ -1329,4 +1332,4 @@ function SCRIPT_GBIB66_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_GBIB66_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_MJDO86_FAKESCRIPT))
