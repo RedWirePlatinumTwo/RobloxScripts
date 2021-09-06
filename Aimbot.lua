@@ -175,7 +175,7 @@ WhitelistedInstances.BackgroundColor3 = Color3.new(0, 0, 0)
 WhitelistedInstances.BorderColor3 = Color3.new(0, 0.666667, 0)
 WhitelistedInstances.Position = UDim2.new(0, 0, 0.278215498, 0)
 WhitelistedInstances.Size = UDim2.new(0, 324, 0, 193)
-WhitelistedInstances.CanvasSize = UDim2.new(0, 0, 1.20000005, 0)
+WhitelistedInstances.CanvasSize = UDim2.new(0, 0, 0.140000001, 0)
 
 whitelistownteam.Name = "whitelistownteam"
 whitelistownteam.Parent = WhitelistedInstances
@@ -328,7 +328,7 @@ Title_2.TextScaled = true
 Title_2.TextSize = 14
 Title_2.TextWrapped = true
 -- Scripts:
-function SCRIPT_ANTA65_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_FBTJ74_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	if not _G.RedsAimbot then
@@ -571,7 +571,7 @@ function SCRIPT_ANTA65_FAKESCRIPT() -- Aimbot.Scripts
 	game.StarterGui:SetCore("SendNotification", {
 	Title = "Aimbot Update:";
 	Duration = 10;
-	Text = "player DisplayNames won't show in parenthesis if their DisplayName is the same as their Username.";})
+	Text = "Adjusted Whitelisting UI canvas size.";})
 	
 	function Died(player)
 	if not player.Character then player.CharacterAdded:Wait() end
@@ -723,12 +723,12 @@ function SCRIPT_ANTA65_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end
 	wlui.WhitelistedInstances.ChildAdded:connect(function()
-	local yval = wlui.WhitelistedInstances.CanvasSize.Y.Scale
-	wlui.WhitelistedInstances.CanvasSize = UDim2.new(0,0,yval + 0.2, 0)
+	local yval = wlui.WhitelistedInstances.CanvasSize.Y.Scale + 0.14
+	wlui.WhitelistedInstances.CanvasSize = UDim2.new(0,0,yval, 0)
 	end)
 	wlui.WhitelistedInstances.ChildRemoved:connect(function()
-	local yval = wlui.WhitelistedInstances.CanvasSize.Y.Scale
-	wlui.WhitelistedInstances.CanvasSize = UDim2.new(0,0,yval - 0.2, 0)
+	local yval = wlui.WhitelistedInstances.CanvasSize.Y.Scale - 0.14
+	wlui.WhitelistedInstances.CanvasSize = UDim2.new(0,0,yval, 0)
 	end)
 	for i, team in pairs(game.Teams:GetTeams()) do
 	AddtoList(team, true)
@@ -763,4 +763,4 @@ function SCRIPT_ANTA65_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_ANTA65_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_FBTJ74_FAKESCRIPT))
