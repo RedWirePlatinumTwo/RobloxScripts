@@ -56,6 +56,7 @@ local text = Instance.new("TextLabel")
 --Properties:
 JailbreakGUI.Name = "JailbreakGUI"
 JailbreakGUI.Parent = game.CoreGui
+JailbreakGUI.Enabled = false
 JailbreakGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
@@ -661,7 +662,7 @@ text.TextWrapped = true
 text.TextXAlignment = Enum.TextXAlignment.Left
 text.TextYAlignment = Enum.TextYAlignment.Top
 -- Scripts:
-function SCRIPT_MJDO86_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
+function SCRIPT_JXBR72_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -701,11 +702,11 @@ function SCRIPT_MJDO86_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	notiframe.ChildAdded:connect(function(c)
 	notiframe.Visible = true
 	canvasy = canvasy + 0.09
-	notiframe.CanvasSize = UDim2.new(0,0,0,canvasy)
+	notiframe.CanvasSize = UDim2.new(0,0,canvasy,0)
 	end)
 	notiframe.ChildRemoved:connect(function()
 	canvasy = canvasy - 0.09
-	notiframe.CanvasSize = UDim2.new(0,0,0,canvasy)
+	notiframe.CanvasSize = UDim2.new(0,0,canvasy,0)
 	if #notiframe:GetChildren() == 2 then
 	notiframe.Visible = false
 	end
@@ -1332,4 +1333,4 @@ function SCRIPT_MJDO86_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_MJDO86_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_JXBR72_FAKESCRIPT))
