@@ -56,7 +56,6 @@ local text = Instance.new("TextLabel")
 --Properties:
 JailbreakGUI.Name = "JailbreakGUI"
 JailbreakGUI.Parent = game.CoreGui
-JailbreakGUI.Enabled = false
 JailbreakGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
@@ -160,7 +159,7 @@ X.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 X.Position = UDim2.new(0.868968844, 0, 0.0250000004, 0)
 X.Size = UDim2.new(0, 37, 0, 38)
 X.Font = Enum.Font.SourceSansBold
-X.Text = "X"
+X.Text = "×"
 X.TextColor3 = Color3.new(1, 0, 0)
 X.TextScaled = true
 X.TextSize = 14
@@ -609,7 +608,7 @@ X_2.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 X_2.Position = UDim2.new(0.906097531, 0, 0.00237556547, 0)
 X_2.Size = UDim2.new(0, 37, 0, 38)
 X_2.Font = Enum.Font.SourceSansBold
-X_2.Text = "X"
+X_2.Text = "×"
 X_2.TextColor3 = Color3.new(1, 0, 0)
 X_2.TextScaled = true
 X_2.TextSize = 14
@@ -662,7 +661,7 @@ text.TextWrapped = true
 text.TextXAlignment = Enum.TextXAlignment.Left
 text.TextYAlignment = Enum.TextYAlignment.Top
 -- Scripts:
-function SCRIPT_JXBR72_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
+function SCRIPT_KAIA90_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -806,9 +805,6 @@ function SCRIPT_JXBR72_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	local gunshoptp = false
 	local SpamE = false
 	local cooldown = true
-	local xunicode = game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/UnicodeChrs/main/x"):sub(1,2)
-	mainframe.X.Text = xunicode
-	gunmodframe.X.Text = xunicode
 	game.RunService.RenderStepped:connect(function()
 		for i,a in pairs(require(game.ReplicatedStorage.Module.UI).CircleAction.Specs) do
 		if a.Duration ~= false and HoldEBypass then
@@ -1333,4 +1329,4 @@ function SCRIPT_JXBR72_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_JXBR72_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_KAIA90_FAKESCRIPT))
