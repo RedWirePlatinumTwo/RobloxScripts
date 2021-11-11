@@ -76,7 +76,7 @@ local tp = true
 if lplr.Backpack:FindFirstChild("Axe") then
 	lplr.Backpack.Axe.Parent = chr
 end
-game.RunService.RenderStepped:connect(function()
+game.RunService.Heartbeat:connect(function()
 if tp then
 if chr:FindFirstChild("Axe") then
 chr.Axe.RemoteEvent:FireServer(o)
@@ -140,7 +140,7 @@ local atk = true
 if not chr:FindFirstChild("Sword") then
 lplr.Backpack.Sword.Parent = chr
 end
-game.RunService.RenderStepped:connect(function()
+game.RunService.Heartbeat:connect(function()
 if pchr:FindFirstChild("HumanoidRootPart") and atk and pchr.HumanoidRootPart.CFrame.Y > 0 then
 motor.Part0 = pchr.HumanoidRootPart
 if chr:FindFirstChild("Sword") and motor.Part1 ~= nil then
