@@ -1,6 +1,7 @@
 if not _G.SkywarsAdmin then
 _G.SkywarsAdmin = true
-function ores(ore)
+local lplr = game.Players.LocalPlayer
+function highlightOre(ore)
 	local bha = Instance.new("BoxHandleAdornment", ore)
 	bha.Adornee = ore
 	bha.Size = ore.Size
@@ -23,28 +24,30 @@ end
 local part = Instance.new("Part", workspace)
 part.Name = "AntiFallPart"
 part.Anchored = true
-part.Material = Enum.Material.SmoothPlastic
-part.Color = Color3.fromRGB(0, 143, 156)
-part.Size = Vector3.new(310, 1, 325)
-part.Position = Vector3.new(25, 145, -8)
+part.Size = Vector3.new(9, 1, 9)
 local antifall = true
-game.Players.LocalPlayer:GetMouse().KeyDown:connect(function(key)
+game.RunService.RenderStepped:connect(function()
+if antifall and lplr.Character then 
+part.Position = (lplr.Character.HumanoidRootPart.Position * Vector3.new(1,0,1)) + Vector3.new(0,147,0)
+end
+end)
+lplr:GetMouse().KeyDown:connect(function(key)
 if key == "q" then
 if antifall then
 antifall = false
 part.Transparency = 1
 part.CanCollide = false
 local h = Instance.new("Hint", workspace)
-h.Text = "AntiFall turned off!"
+h.Text = "Anti-falling disabled!"
 wait(2)
 h:Destroy()
 else
 antifall = true
 part.Transparency = 0
 part.CanCollide = true
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = part.CFrame + Vector3.new(0, 20, 0)
+lplr.Character.HumanoidRootPart.CFrame = part.CFrame + Vector3.new(0, 5, 0)
 local h = Instance.new("Hint", workspace)
-h.Text = "AntiFall turned on!"
+h.Text = "Anti-falling enabled!"
 wait(2)
 h:Destroy()
 end
@@ -58,14 +61,13 @@ end
 if m then
 for i, ore in ipairs(m.Map.Ores:GetChildren()) do
 	if not ore:FindFirstChild("BoxHandleAdornment") then
-	ores(ore)
+	highlightOre(ore)
 	end
 end
 end
 if game.UserInputService:IsKeyDown(Enum.KeyCode.Z) then
 function answer(t)
 if t == "Yes" then
-local lplr = game.Players.LocalPlayer
 local chr = lplr.Character
 local cframe = chr.HumanoidRootPart.CFrame
 function farm(o)
@@ -73,14 +75,13 @@ function check(b)
 return b.Name == "Broken"
 end
 local tp = true
-if lplr.Backpack:FindFirstChild("Axe") then
-	lplr.Backpack.Axe.Parent = chr
-end
 game.RunService.Heartbeat:connect(function()
 if tp then
 if chr:FindFirstChild("Axe") then
 chr.Axe.RemoteEvent:FireServer(o)
 chr.HumanoidRootPart.CFrame = o.CFrame
+else
+lplr.Backpack.Axe.Parent = chr
 end
 end
 end)
@@ -105,7 +106,7 @@ end
 local invoke = Instance.new("BindableFunction")
 invoke.OnInvoke = answer
 game.StarterGui:SetCore("SendNotification", {
-	Title = "Automine";
+	Title = "Auto-mining";
 	Text = "Mine all ores?";
 	Callback = invoke;
 	Button1 = "Yes";
@@ -130,7 +131,6 @@ local kpart = workspace.KillFolder.Part
 kpart.Size = Vector3.new(1, 1, 1)
 kpart.CanCollide = false
 motor.C0 = CFrame.new() + Vector3.new(0, 0, 4)
-local lplr = game.Players.LocalPlayer
 function kill(plr)
 motor.Part1 = kpart
 local chr = lplr.Character
@@ -173,9 +173,9 @@ end
 end
 end
 local _ = true
-game.RunService.RenderStepped:connect(function()
+game.RunService.Heartbeat:connect(function()
 if _ then
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Lobby["Middle Room"].Floor.Base.Union.CFrame + Vector3.new(0, 20, 0)
+lplr.Character.HumanoidRootPart.CFrame = workspace.Lobby["Middle Room"].Floor.Base.Union.CFrame + Vector3.new(0, 20, 0)
 end
 end)
 wait(1)
@@ -185,8 +185,8 @@ end
 local invoke = Instance.new("BindableFunction")
 invoke.OnInvoke = answer
 game.StarterGui:SetCore("SendNotification", {
-	Title = "Autokill";
-	Text = "Kill everyone on map?";
+	Title = "Kill others";
+	Text = "Attempt to kill everyone on the map?";
 	Callback = invoke;
 	Button1 = "Yes";
 	Button2 = "No";
@@ -209,11 +209,11 @@ game.StarterGui:SetCore("SendNotification", {
 })
 end
 end)
-local extra = game.Players.LocalPlayer.PlayerGui.Extra
+local extra = lplr.PlayerGui.Extra
 workspace.Lobby.KillPlates:Destroy()
 workspace.Borders.InvisibleBorder:Destroy()
 extra:Destroy()
-game.Players.LocalPlayer.PlayerGui.ChildAdded:connect(function(b)
+lplr.PlayerGui.ChildAdded:connect(function(b)
 if b.Name == "Extra" then
 	wait(0.5)
     b:Destroy()
@@ -221,13 +221,13 @@ end
 end)
 game.RunService.RenderStepped:connect(function()
 if not game.UserInputService:IsKeyDown(Enum.KeyCode.Z) then return end
-if game.Players.LocalPlayer.Character:FindFirstChild("Axe") then
-game.Players.LocalPlayer.Character.Axe.RemoteEvent:FireServer(game.Players.LocalPlayer:GetMouse().Target)
+if lplr.Character:FindFirstChild("Axe") then
+lplr.Character.Axe.RemoteEvent:FireServer(lplr:GetMouse().Target)
 end
 end)
 local enter = workspace.Lobby["Mega VIP Room"].Teleport.Enter
 enter["Teleporter B"].Touched:connect(function(h)
-if game.Players:GetPlayerFromCharacter(h.Parent) and game.Players:GetPlayerFromCharacter(h.Parent).Name == game.Players.LocalPlayer.Name then
+if game.Players:GetPlayerFromCharacter(h.Parent) and game.Players:GetPlayerFromCharacter(h.Parent).Name == lplr.Name then
 	h.Parent:MoveTo(enter["Teleporter A"].Position)
 end
 end)
