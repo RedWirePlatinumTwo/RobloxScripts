@@ -31,6 +31,7 @@ local Title_2 = Instance.new("TextLabel")
 --Properties:
 Aimbot.Name = "Aimbot"
 Aimbot.Parent = game.CoreGui
+Aimbot.Enabled = false
 Aimbot.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MFrame.Name = "MFrame"
@@ -328,7 +329,7 @@ Title_2.TextScaled = true
 Title_2.TextSize = 14
 Title_2.TextWrapped = true
 -- Scripts:
-function SCRIPT_FBTJ74_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_DTMW90_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	if not _G.RedsAimbot then
@@ -533,8 +534,7 @@ function SCRIPT_FBTJ74_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end
 	end)
-	game.RunService.RenderStepped:connect(function()
-	if not _G.AimbotGUIClosed then
+	local AimbotFunction = game.RunService.RenderStepped:connect(function()
 	if AimbotStats.Character ~= "" and AimbotStats.Character:FindFirstChild(AimbotStats.Target) then
 	local v, _ = workspace.Camera:WorldToScreenPoint(AimbotStats.Character[AimbotStats.Target].Position)
 	if _ then
@@ -566,12 +566,11 @@ function SCRIPT_FBTJ74_FAKESCRIPT() -- Aimbot.Scripts
 	else
 	plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
 	end
-	end
 	end)
 	game.StarterGui:SetCore("SendNotification", {
 	Title = "Aimbot Update:";
 	Duration = 10;
-	Text = "Adjusted Whitelisting UI canvas size.";})
+	Text = "This aimbot now can be executed more than once, but there cannot be multiple of this GUI open at once.";})
 	
 	function Died(player)
 	if not player.Character then player.CharacterAdded:Wait() end
@@ -600,7 +599,8 @@ function SCRIPT_FBTJ74_FAKESCRIPT() -- Aimbot.Scripts
 	end)
 	local MainFrame = script.Parent.MFrame
 	MainFrame.X.MouseButton1Click:connect(function()
-	_G.AimbotGUIClosed = true
+	AimbotFunction:disconnect()
+	_G.RedsAimbot = false
 	MainFrame.Parent:Destroy()
 	end)
 	local raytext = MainFrame.raycasting.Text.." "
@@ -755,7 +755,7 @@ function SCRIPT_FBTJ74_FAKESCRIPT() -- Aimbot.Scripts
 	else
 	game.StarterGui:SetCore("SendNotification", {
 	Title = "Aimbot";
-	Text = "Attempting to execute this twice will mess up the aiming function";
+	Text = "Seems like you've already executed this. Deleting clone GUI.";
 	})
 	wait(0.2)
 	script.Parent:Destroy()
@@ -763,4 +763,4 @@ function SCRIPT_FBTJ74_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_FBTJ74_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_DTMW90_FAKESCRIPT))
