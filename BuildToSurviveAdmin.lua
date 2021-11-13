@@ -1,108 +1,4 @@
 if not _G.B2SAdmin then
-local FeedbackUI = Instance.new("ScreenGui")
-local frame = Instance.new("Frame")
-local Header = Instance.new("TextLabel")
-local Note = Instance.new("TextLabel")
-local Feedbackbox = Instance.new("TextBox")
-local Submit = Instance.new("TextButton")
-local Hide = Instance.new("TextButton")
---Properties:
-FeedbackUI.Name = "FeedbackUI"
-FeedbackUI.Parent = game.CoreGui
-FeedbackUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-frame.Name = "frame"
-frame.Parent = FeedbackUI
-frame.BackgroundColor3 = Color3.new(1, 1, 1)
-frame.Position = UDim2.new(0.416467011, 0, 0.12109375, 0)
-frame.Size = UDim2.new(0, 350, 0, 244)
-
-Header.Name = "Header"
-Header.Parent = frame
-Header.BackgroundColor3 = Color3.new(1, 1, 1)
-Header.Size = UDim2.new(0, 350, 0, 30)
-Header.Font = Enum.Font.Cartoon
-Header.Text = "Issues? Suggestions? Write 'em here."
-Header.TextColor3 = Color3.new(0, 0, 0)
-Header.TextScaled = true
-Header.TextSize = 14
-Header.TextWrapped = true
-
-Note.Name = "Note"
-Note.Parent = frame
-Note.BackgroundColor3 = Color3.new(1, 1, 1)
-Note.Position = UDim2.new(0, 0, 0.122432038, 0)
-Note.Size = UDim2.new(0, 350, 0, 62)
-Note.Font = Enum.Font.Cartoon
-Note.Text = "Note: This admin script only goes off of deleting and creating things that already exist in the game. This means that something like changing another players walkspeed or teleporting players to you will NOT work."
-Note.TextColor3 = Color3.new(0.729412, 0, 0.0117647)
-Note.TextScaled = true
-Note.TextSize = 14
-Note.TextWrapped = true
-
-Feedbackbox.Name = "Feedbackbox"
-Feedbackbox.Parent = frame
-Feedbackbox.BackgroundColor3 = Color3.new(1, 1, 1)
-Feedbackbox.Position = UDim2.new(0.0399999991, 0, 0.379999995, 0)
-Feedbackbox.Size = UDim2.new(0, 322, 0, 131)
-Feedbackbox.Font = Enum.Font.Cartoon
-Feedbackbox.MultiLine = true
-Feedbackbox.PlaceholderColor3 = Color3.new(0, 0, 0)
-Feedbackbox.PlaceholderText = "Your feedback goes here."
-Feedbackbox.Text = ""
-Feedbackbox.TextColor3 = Color3.new(0, 0, 0)
-Feedbackbox.TextSize = 14
-Feedbackbox.TextWrapped = true
-
-Submit.Name = "Submit"
-Submit.Parent = frame
-Submit.BackgroundColor3 = Color3.new(1, 1, 1)
-Submit.Position = UDim2.new(0.0399999991, 0, 0.916885257, 0)
-Submit.Size = UDim2.new(0, 172, 0, 19)
-Submit.Font = Enum.Font.Cartoon
-Submit.Text = "Submit"
-Submit.TextColor3 = Color3.new(0, 0, 0)
-Submit.TextScaled = true
-Submit.TextSize = 14
-Submit.TextWrapped = true
-
-Hide.Name = "Hide"
-Hide.Parent = frame
-Hide.BackgroundColor3 = Color3.new(1, 1, 1)
-Hide.Position = UDim2.new(0.531428576, 0, 0.916885257, 0)
-Hide.Size = UDim2.new(0, 150, 0, 19)
-Hide.Font = Enum.Font.Cartoon
-Hide.Text = "Hide UI"
-Hide.TextColor3 = Color3.new(0, 0, 0)
-Hide.TextScaled = true
-Hide.TextSize = 14
-Hide.TextWrapped = true
--- Scripts:
-function SCRIPT_JGUF71_FAKESCRIPT() -- FeedbackUI.LocalScript 
-	local script = Instance.new('LocalScript')
-	script.Parent = FeedbackUI
-	local frame = script.Parent.frame
-	frame.Submit.MouseButton1Click:connect(function()
-	local lplr = game.Players.LocalPlayer
-	if frame.Submit.Text ~= "Thank you :]" then
-	local response = syn.request({
-	Url = "https://discord.com/api/webhooks/792959815524941827/xVwl0s95NZnfsG1ZZB_fZQCBEaM8Ll4FT_Fde46bwK7unXqhBHMenudu64BGHgVAIHbu",  -- This website helps debug HTTP requests
-	Method = "POST",
-	Headers = {
-	["Content-Type"] = "application/json"},
-	Body = game:GetService("HttpService"):JSONEncode({["content"] = "Build to Survive Admin: Reponse from "..lplr.Name.. " ("..lplr.UserId.."): \n".. frame.Feedbackbox.Text})})
-	frame.Submit.Text = "Thank you :]"
-	wait(1)
-	frame.Submit.Text = "Submit"
-	end
-	end) 
-	frame.Hide.MouseButton1Click:connect(function()
-	frame.Visible = false
-	end)
-	frame.Visible = false
-
-end
-coroutine.resume(coroutine.create(SCRIPT_JGUF71_FAKESCRIPT))
 _G.B2SAdmin = true
 local delet
 local ooftime = 0.1
@@ -955,7 +851,6 @@ unwhitelist [plr]
 copybase [plr]
 stealbase [plr]
 changeblock (changes the block used in the spawner tool and blockspam)
-feedback (Opens a feedback UI, Synapse only (uses syn.request))
 permban (The list of perm-banned players is in your exploit's workspace folder, named "PermBannedPlayers.B2S". If you accidentally ban yourself, open the file, search for your UserId, and remove it as well as any unnecessary commas so the table doesn't break. Deleting the file will reset the table, un-banning everyone.)
 unpermban
 savebase
@@ -1153,9 +1048,6 @@ Text = "The target you chose is invalid";
 Font = Enum.Font.Cartoon;})
 end
 end
-if msg == Prefix:lower().."feedback" then
-frame.Visible = true
-end
 if msg == Prefix:lower().."thanossnap" then
 for i = 1, math.ceil(#all()/2) do
 plrcommands.kick("random")
@@ -1264,7 +1156,7 @@ end)
 getcmds()
 game.StarterGui:SetCore("SendNotification", {
 Title = title;
-Text = "Renamed end server to shutdown and added support for display names";
+Text = "Removed feedback as I also removed the discord bot.";
 Duration = 10;
 })
 end
