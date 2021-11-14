@@ -68,7 +68,7 @@ end
 if game.UserInputService:IsKeyDown(Enum.KeyCode.Z) then
 function answer(t)
 if t == "Yes" then
-if lplr.Backpack:FindFirstChild("Axe") then
+if lplr.Backpack:FindFirstChild("Axe") or lplr.Character:FindFirstChild("Axe") then
 local chr = lplr.Character
 local cframe = chr.HumanoidRootPart.CFrame
 function farm(o)
@@ -118,7 +118,7 @@ end
 elseif key == "k" then
 function answer(t)
 if t == "Yes" then
-if lplr.Backpack:FindFirstChild("Sword") then
+if lplr.Backpack:FindFirstChild("Sword") or lplr.Character:FindFirstChild("Sword") then
 if not workspace:FindFirstChild("KillFolder") then
 local kf = Instance.new("Folder", workspace)
 kf.Name = "KillFolder"
