@@ -68,10 +68,11 @@ end
 if game.UserInputService:IsKeyDown(Enum.KeyCode.Z) then
 function answer(t)
 if t == "Yes" then
+if lplr.Backpack:FindFirstChild("Axe")
 local chr = lplr.Character
 local cframe = chr.HumanoidRootPart.CFrame
 function farm(o)
-function check(b)
+function isBroken(b)
 return b.Name == "Broken"
 end
 local tp = true
@@ -85,7 +86,7 @@ lplr.Backpack.Axe.Parent = chr
 end
 end
 end)
-repeat wait() until check(o)
+repeat wait() until isBroken(o)
 tp = false
 end
 local m
@@ -103,6 +104,7 @@ chr.HumanoidRootPart.CFrame = cframe
 end
 end
 end
+end
 local invoke = Instance.new("BindableFunction")
 invoke.OnInvoke = answer
 game.StarterGui:SetCore("SendNotification", {
@@ -116,6 +118,7 @@ end
 elseif key == "k" then
 function answer(t)
 if t == "Yes" then
+if lplr.Backpack:FindFirstChild("Sword")
 if not workspace:FindFirstChild("KillFolder") then
 local kf = Instance.new("Folder", workspace)
 kf.Name = "KillFolder"
@@ -180,6 +183,7 @@ end
 end)
 wait(1)
 _ = false
+end
 end
 end
 local invoke = Instance.new("BindableFunction")
