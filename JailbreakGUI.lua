@@ -532,7 +532,7 @@ text.TextWrapped = true
 text.TextXAlignment = Enum.TextXAlignment.Left
 text.TextYAlignment = Enum.TextYAlignment.Top
 -- Scripts:
-function SCRIPT_AQLM90_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
+function SCRIPT_GARQ76_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -763,6 +763,9 @@ function SCRIPT_AQLM90_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	function changegunstats(Table)
 	for i,v in pairs(itemconfig:GetChildren()) do
 	local gun = require(v)
+	if v.Name == "Shotgun" then
+	gun.BulletSpread = 0.02
+	end
 	for prefix, value in pairs(Table) do
 	gun[prefix] = value
 	end
@@ -1084,4 +1087,4 @@ function SCRIPT_AQLM90_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_AQLM90_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_GARQ76_FAKESCRIPT))
