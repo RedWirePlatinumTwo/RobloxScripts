@@ -17,8 +17,6 @@ local Speednum = Instance.new("TextBox")
 local otherFrame = Instance.new("Frame")
 local switch = Instance.new("TextButton")
 local RobberyNotifier = Instance.new("TextButton")
-local plrname = Instance.new("TextBox")
-local gotoplr = Instance.new("TextButton")
 local gunshoptpbutton = Instance.new("TextButton")
 local ESpam = Instance.new("TextButton")
 local infiniteyeet = Instance.new("TextButton")
@@ -238,32 +236,6 @@ RobberyNotifier.Text = "Robbery Notifier"
 RobberyNotifier.TextColor3 = Color3.new(1, 1, 1)
 RobberyNotifier.TextSize = 16
 RobberyNotifier.TextWrapped = true
-
-plrname.Name = "plrname"
-plrname.Parent = otherFrame
-plrname.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-plrname.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-plrname.Position = UDim2.new(0, 0, 0.513999879, 0)
-plrname.Size = UDim2.new(0, 242, 0, 38)
-plrname.Font = Enum.Font.SourceSansBold
-plrname.PlaceholderColor3 = Color3.new(1, 1, 1)
-plrname.PlaceholderText = "Enter name to 'fly' to them (Supports shortened names)"
-plrname.Text = ""
-plrname.TextColor3 = Color3.new(1, 1, 1)
-plrname.TextSize = 18
-plrname.TextWrapped = true
-
-gotoplr.Name = "gotoplr"
-gotoplr.Parent = otherFrame
-gotoplr.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-gotoplr.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-gotoplr.Position = UDim2.new(0.749279082, 0, 0.513999879, 0)
-gotoplr.Size = UDim2.new(0, 81, 0, 38)
-gotoplr.Font = Enum.Font.SourceSansBold
-gotoplr.Text = "Go to player"
-gotoplr.TextColor3 = Color3.new(1, 1, 1)
-gotoplr.TextSize = 18
-gotoplr.TextWrapped = true
 
 gunshoptpbutton.Name = "gunshoptpbutton"
 gunshoptpbutton.Parent = otherFrame
@@ -661,7 +633,7 @@ text.TextWrapped = true
 text.TextXAlignment = Enum.TextXAlignment.Left
 text.TextYAlignment = Enum.TextYAlignment.Top
 -- Scripts:
-function SCRIPT_KAIA90_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
+function SCRIPT_DJZJ73_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -758,7 +730,7 @@ function SCRIPT_KAIA90_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end
 	script.Parent.Name = EncryptedName
 	notify("Changelog", "rip ctrl destroy script + improved jewelry laser hack + added custom notifications", 10)
-	local minimap = game.Players.LocalPlayer.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
+	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
 	if plr.Visible == false then
@@ -1166,44 +1138,6 @@ function SCRIPT_KAIA90_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	frame2.ESpam.Text = "E Key spam: on"
 	end
 	end)
-	local plrnotified = false
-	local ap = Instance.new("AlignPosition", workspace)
-	frame2.gotoplr.MouseButton1Click:connect(function()
-	local playername = frame2.plrname
-	local plr
-	for i, p in ipairs(plrs:GetPlayers()) do
-	if p.DisplayName:lower():sub(1, playername.Text:len()) == playername.Text:lower() and playername.Text ~= "" then
-	plr = p
-	end
-	end
-	if plr then
-	local hrp = lplr.Character.HumanoidRootPart
-	local hrp2 = plr.Character.HumanoidRootPart
-	ap.MaxVelocity = 100
-	ap.Attachment0 = makeattachment(hrp)
-	ap.Attachment1 = makeattachment(hrp2)
-	local qPressed = function()
-	local v = true
-	    coroutine.resume(coroutine.create(function()
-	        while v do
-	            local key = lplr:GetMouse().KeyDown:Wait()
-				v = false
-	            if key == "q" then
-	            ap.Attachment0 = nil
-				ap.Attachment1 = nil
-	        else
-			v = true
-			end
-			end
-	    end))
-	end  
-	qPressed()
-		if not plrnotified then
-		plrnotified = true
-		notify("plr goto button thing lol", "To stop flying to a player, press Q. Also you need Infinite Yield noclip for this.", 10)
-		end
-	end
-	end)
 	frame2.infiniteyeet.MouseButton1Click:connect(function()
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 	end)
@@ -1329,4 +1263,4 @@ function SCRIPT_KAIA90_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_KAIA90_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_DJZJ73_FAKESCRIPT))
