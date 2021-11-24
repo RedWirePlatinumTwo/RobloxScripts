@@ -729,7 +729,7 @@ function SCRIPT_DJZJ73_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 		EncryptedName = EncryptedName..char
 	end
 	script.Parent.Name = EncryptedName
-	notify("Changelog", "rip ctrl destroy script + improved jewelry laser hack + added custom notifications", 10)
+	notify("Changelog", "Removed the goto-player script since that also has unfortunately been patched as well as destroying parts to noclip.", 10)
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
