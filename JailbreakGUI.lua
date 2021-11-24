@@ -38,14 +38,6 @@ local Option1 = Instance.new("TextButton")
 local Option2 = Instance.new("TextButton")
 local Activatehealer = Instance.new("TextButton")
 local HideGui = Instance.new("TextButton")
-local GunModFrame = Instance.new("Frame")
-local Unmod = Instance.new("TextButton")
-local norecoil = Instance.new("TextButton")
-local bulletmod = Instance.new("TextButton")
-local noreload = Instance.new("TextButton")
-local TextLabel = Instance.new("TextLabel")
-local chaos = Instance.new("TextButton")
-local X_2 = Instance.new("TextButton")
 local NotifSFrame = Instance.new("ScrollingFrame")
 local UIListLayout = Instance.new("UIListLayout")
 local exframe = Instance.new("Frame")
@@ -119,7 +111,7 @@ gunmod.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 gunmod.Position = UDim2.new(0.339373887, 0, 0.418811411, 0)
 gunmod.Size = UDim2.new(0, 106, 0, 52)
 gunmod.Font = Enum.Font.SourceSansBold
-gunmod.Text = "Weapon Mod"
+gunmod.Text = "Auto-firing guns + no recoil"
 gunmod.TextColor3 = Color3.new(1, 1, 1)
 gunmod.TextSize = 18
 gunmod.TextWrapped = true
@@ -493,99 +485,6 @@ HideGui.TextColor3 = Color3.new(1, 1, 1)
 HideGui.TextSize = 18
 HideGui.TextWrapped = true
 
-GunModFrame.Name = "GunModFrame"
-GunModFrame.Parent = JailbreakGUI
-GunModFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-GunModFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-GunModFrame.Position = UDim2.new(0.531478763, 0, 0.286369383, 0)
-GunModFrame.Size = UDim2.new(0, 404, 0, 221)
-GunModFrame.Visible = false
-
-Unmod.Name = "Unmod"
-Unmod.Parent = GunModFrame
-Unmod.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-Unmod.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Unmod.Position = UDim2.new(0.136403605, 0, 0.0494355075, 0)
-Unmod.Size = UDim2.new(0, 293, 0, 26)
-Unmod.Font = Enum.Font.SourceSansBold
-Unmod.Text = "Un-mod guns"
-Unmod.TextColor3 = Color3.new(1, 1, 1)
-Unmod.TextSize = 22
-Unmod.TextWrapped = true
-
-norecoil.Name = "norecoil"
-norecoil.Parent = GunModFrame
-norecoil.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-norecoil.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-norecoil.Position = UDim2.new(0.136403605, 0, 0.20328173, 0)
-norecoil.Size = UDim2.new(0, 293, 0, 26)
-norecoil.Font = Enum.Font.SourceSansBold
-norecoil.Text = "Remove Camera shaking / recoil"
-norecoil.TextColor3 = Color3.new(1, 1, 1)
-norecoil.TextSize = 22
-norecoil.TextWrapped = true
-
-bulletmod.Name = "bulletmod"
-bulletmod.Parent = GunModFrame
-bulletmod.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-bulletmod.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-bulletmod.Position = UDim2.new(0.136403605, 0, 0.366177648, 0)
-bulletmod.Size = UDim2.new(0, 293, 0, 26)
-bulletmod.Font = Enum.Font.SourceSansBold
-bulletmod.Text = "All guns have auto firing"
-bulletmod.TextColor3 = Color3.new(1, 1, 1)
-bulletmod.TextSize = 22
-bulletmod.TextWrapped = true
-
-noreload.Name = "noreload"
-noreload.Parent = GunModFrame
-noreload.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-noreload.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-noreload.Position = UDim2.new(0.136403605, 0, 0.515498936, 0)
-noreload.Size = UDim2.new(0, 293, 0, 26)
-noreload.Font = Enum.Font.SourceSansBold
-noreload.Text = "Remove reload time + Inf ammo"
-noreload.TextColor3 = Color3.new(1, 1, 1)
-noreload.TextSize = 22
-noreload.TextWrapped = true
-
-TextLabel.Parent = GunModFrame
-TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
-TextLabel.BackgroundTransparency = 1
-TextLabel.Position = UDim2.new(0, 0, 0.782467127, 0)
-TextLabel.Size = UDim2.new(0, 404, 0, 48)
-TextLabel.Font = Enum.Font.SourceSansBold
-TextLabel.Text = "(All mod options reduce shotgun bullet spread to increase accuracy)"
-TextLabel.TextColor3 = Color3.new(1, 1, 1)
-TextLabel.TextSize = 22
-TextLabel.TextWrapped = true
-
-chaos.Name = "chaos"
-chaos.Parent = GunModFrame
-chaos.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-chaos.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-chaos.Position = UDim2.new(0.136403605, 0, 0.660295308, 0)
-chaos.Size = UDim2.new(0, 293, 0, 26)
-chaos.Font = Enum.Font.SourceSansBold
-chaos.Text = "Pure Chaos"
-chaos.TextColor3 = Color3.new(1, 1, 1)
-chaos.TextSize = 22
-chaos.TextWrapped = true
-
-X_2.Name = "X"
-X_2.Parent = GunModFrame
-X_2.BackgroundColor3 = Color3.new(1, 1, 1)
-X_2.BackgroundTransparency = 1
-X_2.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-X_2.Position = UDim2.new(0.906097531, 0, 0.00237556547, 0)
-X_2.Size = UDim2.new(0, 37, 0, 38)
-X_2.Font = Enum.Font.SourceSansBold
-X_2.Text = "×"
-X_2.TextColor3 = Color3.new(1, 0, 0)
-X_2.TextScaled = true
-X_2.TextSize = 14
-X_2.TextWrapped = true
-
 NotifSFrame.Name = "NotifSFrame"
 NotifSFrame.Parent = JailbreakGUI
 NotifSFrame.Active = true
@@ -633,7 +532,7 @@ text.TextWrapped = true
 text.TextXAlignment = Enum.TextXAlignment.Left
 text.TextYAlignment = Enum.TextYAlignment.Top
 -- Scripts:
-function SCRIPT_DJZJ73_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
+function SCRIPT_AQLM90_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -722,14 +621,13 @@ function SCRIPT_DJZJ73_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	local mouse = lplr:GetMouse()
 	local jewel = workspace.Jewelrys:FindFirstChildOfClass("Model")
 	local bank = workspace.Banks:FindFirstChildOfClass("Model")
-	local gunmodframe = script.Parent.GunModFrame
 	local EncryptedName = ""
 	for i = 1, 15 do
 		local char = string.char(math.random(1, 255))
 		EncryptedName = EncryptedName..char
 	end
 	script.Parent.Name = EncryptedName
-	notify("Changelog", "Removed the goto-player script since that also has unfortunately been patched as well as destroying parts to noclip.", 10)
+	notify("Changelog", "Removed the goto-player script b/c it was patched and most gun modding options.", 10)
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -805,9 +703,6 @@ function SCRIPT_DJZJ73_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	mainframe.X.MouseButton1Click:connect(function()
 	mainframe.Parent:Destroy()
 	end)
-	gunmodframe.X.MouseButton1Click:connect(function()
-	gunmodframe.Visible = false
-	end)
 	mainframe.aimbot.MouseButton1Click:connect(function()
 	mainframe.Parent.Confirmation.Visible = true
 	end)
@@ -864,7 +759,6 @@ function SCRIPT_DJZJ73_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end
 	end)
 	local barbedwireshacked = false
-	local gunbackup = {}
 	local itemconfig = game.ReplicatedStorage.Game.ItemConfig
 	function changegunstats(Table)
 	for i,v in pairs(itemconfig:GetChildren()) do
@@ -874,81 +768,8 @@ function SCRIPT_DJZJ73_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end
 	end
 	end
-	for i,v in pairs(itemconfig:GetChildren()) do
-	if type(require(v)) == "table" then
-	local backupstats = {}
-	for i,v in pairs(require(v)) do
-	backupstats[i] = v
-	end
-	table.insert(gunbackup, {["Module"] = v, ["Stats"] = backupstats})
-	end
-	end
-	coroutine.resume(coroutine.create(function()
-	for i,v in pairs(gunmodframe:GetChildren()) do
-	if v.Name ~= "Unmod" then
-	v.MouseButton1Click:connect(function()
-	local shotgun = require(itemconfig.Shotgun)
-	shotgun.BulletSpread = 0.02
-	end)
-	end
-	end
-	end))
 	mainframe.gunmod.MouseButton1Click:connect(function()
-	gunmodframe.Visible = true
-	end)
-	function unmodguns()
-	for i,v in pairs(gunbackup) do
-	for prefix, value in pairs(v.Stats) do
-	require(v.Module)[prefix] = value
-	end
-	end
-	end
-	gunmodframe.Unmod.MouseButton1Click:connect(function()
-	unmodguns()
-	end)
-	gunmodframe.norecoil.MouseButton1Click:connect(function()
-	changegunstats({["CamShakeMagnitude"] = 0})
-	end)
-	gunmodframe.bulletmod.MouseButton1Click:connect(function()
-	changegunstats({["FireAuto"] = true})
-	end)
-	gunmodframe.noreload.MouseButton1Click:connect(function()
-	changegunstats({["ReloadTime"] = 0, ["MagSize"] = math.huge})
-	end)
-	gunmodframe.chaos.MouseButton1Click:connect(function()
-	unmodguns()
-	for i, d in pairs(itemconfig:GetChildren()) do
-	    if d.Name ~= "Grenade" and not d.Name:match("Rocket") and d.Name ~= "PlasmaPistol" and d.Name ~= "Flintlock" then
-	    local b = require(d)
-	    b.ReloadTime = 0
-		b.FireFreq = 5000
-	    b.CamShakeMagnitude = 0
-	    b.FireAuto = true
-		b.MagSize = math.huge
-		end
-	end
-	local grenade = require(itemconfig.Grenade)
-	grenade.FuseTime = 1
-	grenade.ReloadTime = 0
-	grenade.MagSize = 69
-	local rlauncher = require(itemconfig.RocketLauncher)
-	rlauncher.ReloadTime = 0
-	rlauncher.MagSize = 69
-	rlauncher.RocketSpeed = 5000
-	rlauncher.FireFreq = 5000
-	local ppistol = require(itemconfig.PlasmaPistol)
-	ppistol.ReloadTime = 0
-	ppistol.MagSize = math.huge
-	ppistol.CamShakeMagnitude = 0
-	ppistol.FireFreq = 100
-	local flintlock = require(itemconfig.Flintlock)
-	flintlock.FireAuto = true
-	flintlock.MagSize = math.huge
-	flintlock.CamShakeMagnitude = 0
-	flintlock.ReloadTime = 0
-	flintlock.FireFreq = 8
-	local shotgun = require(itemconfig.Shotgun)
-	shotgun.BulletSpread = 0.02
+	changegunstats({["CamShakeMagnitude"] = 0,["FireAuto"] = true})
 	end)
 	mainframe.hacklasers.MouseButton1Click:connect(function()
 	local lights = workspace.Museum.Lights
@@ -1263,4 +1084,4 @@ function SCRIPT_DJZJ73_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_DJZJ73_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_AQLM90_FAKESCRIPT))
