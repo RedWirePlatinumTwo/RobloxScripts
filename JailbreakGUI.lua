@@ -758,7 +758,7 @@ function SCRIPT_KAIA90_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end
 	script.Parent.Name = EncryptedName
 	notify("Changelog", "rip ctrl destroy script + improved jewelry laser hack + added custom notifications", 10)
-	local minimap = lplr.PlayerGui.SidebarGui.Container.ContainerMinimap.Minimap.Container.Players
+	local minimap = game.Players.LocalPlayer.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
 	if plr.Visible == false then
