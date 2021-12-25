@@ -328,7 +328,7 @@ Title_2.TextScaled = true
 Title_2.TextSize = 14
 Title_2.TextWrapped = true
 -- Scripts:
-function SCRIPT_DTMW90_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_DRVQ65_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	if not _G.RedsAimbot then
@@ -339,14 +339,11 @@ function SCRIPT_DTMW90_FAKESCRIPT() -- Aimbot.Scripts
 	v.Active = true
 	end
 	end
-	local EncryptedName = ""
 	local wlui = script.Parent.WhitelistUI
 	wlui.WhitelistedInstances.ScrollBarImageColor3 = Color3.new(0,1,0)
-	for i = 1, 15 do
-	local char = string.char(math.random(1, 255))
-	EncryptedName = EncryptedName..char
+	if syn.protect_gui then
+	syn.protect_gui(script.Parent)
 	end
-	script.Parent.Name = EncryptedName
 	local WhitelistedTeams = {}
 	local WhitelistedPlrs = {}
 	local plrs = game.Players
@@ -762,4 +759,4 @@ function SCRIPT_DTMW90_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_DTMW90_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_DRVQ65_FAKESCRIPT))
