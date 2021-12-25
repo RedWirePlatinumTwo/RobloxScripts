@@ -203,6 +203,7 @@ otherFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 otherFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 otherFrame.Position = UDim2.new(0.514061332, 0, 0.551395953, 0)
 otherFrame.Size = UDim2.new(0, 324, 0, 183)
+otherFrame.Visible = false
 
 switch.Name = "switch"
 switch.Parent = otherFrame
