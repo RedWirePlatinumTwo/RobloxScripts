@@ -203,7 +203,6 @@ otherFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 otherFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 otherFrame.Position = UDim2.new(0.514061332, 0, 0.551395953, 0)
 otherFrame.Size = UDim2.new(0, 324, 0, 183)
-otherFrame.Visible = false
 
 switch.Name = "switch"
 switch.Parent = otherFrame
@@ -233,7 +232,7 @@ gunshoptpbutton.Name = "gunshoptpbutton"
 gunshoptpbutton.Parent = otherFrame
 gunshoptpbutton.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 gunshoptpbutton.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-gunshoptpbutton.Position = UDim2.new(-0.00491257664, 0, 0.263706565, 0)
+gunshoptpbutton.Position = UDim2.new(0.00126026291, 0, 0.263706565, 0)
 gunshoptpbutton.Size = UDim2.new(0, 162, 0, 45)
 gunshoptpbutton.Font = Enum.Font.SourceSansBold
 gunshoptpbutton.Text = "Gunshop TP Enabled:"
@@ -520,7 +519,7 @@ text.TextWrapped = true
 text.TextXAlignment = Enum.TextXAlignment.Left
 text.TextYAlignment = Enum.TextYAlignment.Top
 -- Scripts:
-function SCRIPT_YTWT89_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
+function SCRIPT_ODMZ73_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -1054,4 +1053,4 @@ function SCRIPT_YTWT89_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_YTWT89_FAKESCRIPT)) 
+coroutine.resume(coroutine.create(SCRIPT_ODMZ73_FAKESCRIPT))
