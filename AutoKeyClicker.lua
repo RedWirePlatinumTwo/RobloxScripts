@@ -148,7 +148,7 @@ function SCRIPT_BHJU90_FAKESCRIPT() -- AutoKeyClicker.LocalScript
 	local frame = script.Parent.Mainframe
 	local clickspersecond = 0.1
 	function doclickwait()
-	if clickspersecond > 0.003 then
+	if clickspersecond > 0.03 then
 	wait(clickspersecond)
 	else
 	game.RunService.RenderStepped:Wait()
