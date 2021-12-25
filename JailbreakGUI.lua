@@ -18,7 +18,6 @@ local otherFrame = Instance.new("Frame")
 local switch = Instance.new("TextButton")
 local RobberyNotifier = Instance.new("TextButton")
 local gunshoptpbutton = Instance.new("TextButton")
-local ESpam = Instance.new("TextButton")
 local infiniteyeet = Instance.new("TextButton")
 local healguibutton = Instance.new("TextButton")
 local removeragdoll = Instance.new("TextButton")
@@ -52,15 +51,15 @@ MainFrame.Name = "MainFrame"
 MainFrame.Parent = JailbreakGUI
 MainFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 MainFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-MainFrame.Position = UDim2.new(0.889367938, -384, 0.00965745933, 10)
+MainFrame.Position = UDim2.new(0.887387753, -384, 0.0240607522, 10)
 MainFrame.Size = UDim2.new(0, 318, 0, 240)
 
 speed.Name = "speed"
 speed.Parent = MainFrame
 speed.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 speed.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-speed.Position = UDim2.new(0, 0, 0.631499946, 0)
-speed.Size = UDim2.new(0, 160, 0, 52)
+speed.Position = UDim2.new(0.00314465398, 0, 0.631499946, 0)
+speed.Size = UDim2.new(0, 159, 0, 52)
 speed.ZIndex = 33
 speed.Font = Enum.Font.SourceSansBold
 speed.Text = "Speedhack"
@@ -72,8 +71,8 @@ aimbot.Name = "aimbot"
 aimbot.Parent = MainFrame
 aimbot.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 aimbot.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-aimbot.Position = UDim2.new(0.675091028, 0, 0.202144742, 0)
-aimbot.Size = UDim2.new(0, 103, 0, 52)
+aimbot.Position = UDim2.new(0.668801665, 0, 0.189644754, 0)
+aimbot.Size = UDim2.new(0, 106, 0, 52)
 aimbot.Font = Enum.Font.SourceSansBold
 aimbot.Text = "Aimbot"
 aimbot.TextColor3 = Color3.new(1, 1, 1)
@@ -84,7 +83,7 @@ hacklasers.Name = "hacklasers"
 hacklasers.Parent = MainFrame
 hacklasers.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 hacklasers.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-hacklasers.Position = UDim2.new(0.00314462185, 0, 0.200000226, 0)
+hacklasers.Position = UDim2.new(-3.16649675e-08, 0, 0.191666901, 0)
 hacklasers.Size = UDim2.new(0, 106, 0, 52)
 hacklasers.Font = Enum.Font.SourceSansBold
 hacklasers.Text = "Hack Lasers"
@@ -96,7 +95,7 @@ holdebypass.Name = "holdebypass"
 holdebypass.Parent = MainFrame
 holdebypass.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 holdebypass.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-holdebypass.Position = UDim2.new(0.339373887, 0, 0.202144742, 0)
+holdebypass.Position = UDim2.new(0.329939932, 0, 0.189644739, 0)
 holdebypass.Size = UDim2.new(0, 106, 0, 52)
 holdebypass.Font = Enum.Font.SourceSansBold
 holdebypass.Text = "Hold E Bypass"
@@ -108,7 +107,7 @@ gunmod.Name = "gunmod"
 gunmod.Parent = MainFrame
 gunmod.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 gunmod.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-gunmod.Position = UDim2.new(0.339373887, 0, 0.418811411, 0)
+gunmod.Position = UDim2.new(0.329939932, 0, 0.418811411, 0)
 gunmod.Size = UDim2.new(0, 106, 0, 52)
 gunmod.Font = Enum.Font.SourceSansBold
 gunmod.Text = "Auto-firing guns + no recoil"
@@ -120,7 +119,7 @@ briefcase.Name = "briefcase"
 briefcase.Parent = MainFrame
 briefcase.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 briefcase.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-briefcase.Position = UDim2.new(0.00213507889, 0, 0.418811411, 0)
+briefcase.Position = UDim2.new(0.00213507935, 0, 0.418811411, 0)
 briefcase.Size = UDim2.new(0, 106, 0, 52)
 briefcase.Font = Enum.Font.SourceSansBold
 briefcase.Text = "Briefcase ESP"
@@ -133,8 +132,8 @@ GravToggle.Name = "GravToggle"
 GravToggle.Parent = MainFrame
 GravToggle.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 GravToggle.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-GravToggle.Position = UDim2.new(0.675091028, 0, 0.414833337, 0)
-GravToggle.Size = UDim2.new(0, 103, 0, 52)
+GravToggle.Position = UDim2.new(0.668801725, 0, 0.414833337, 0)
+GravToggle.Size = UDim2.new(0, 106, 0, 52)
 GravToggle.Font = Enum.Font.SourceSansBold
 GravToggle.Text = "Gravity Toggle / Current: 196"
 GravToggle.TextColor3 = Color3.new(1, 1, 1)
@@ -160,7 +159,7 @@ more.Parent = MainFrame
 more.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 more.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 more.Position = UDim2.new(0.503144681, 0, 0.631499946, 0)
-more.Size = UDim2.new(0, 158, 0, 52)
+more.Size = UDim2.new(0, 159, 0, 52)
 more.Font = Enum.Font.SourceSansBold
 more.Text = "More Options"
 more.TextColor3 = Color3.new(1, 1, 1)
@@ -201,7 +200,7 @@ otherFrame.Name = "otherFrame"
 otherFrame.Parent = JailbreakGUI
 otherFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 otherFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-otherFrame.Position = UDim2.new(0.466536611, 0, 0.343577027, 0)
+otherFrame.Position = UDim2.new(0.514061332, 0, 0.551395953, 0)
 otherFrame.Size = UDim2.new(0, 324, 0, 183)
 otherFrame.Visible = false
 
@@ -221,8 +220,8 @@ RobberyNotifier.Name = "RobberyNotifier"
 RobberyNotifier.Parent = otherFrame
 RobberyNotifier.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 RobberyNotifier.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-RobberyNotifier.Position = UDim2.new(0.496895313, 0, 0, 0)
-RobberyNotifier.Size = UDim2.new(0, 81, 0, 48)
+RobberyNotifier.Position = UDim2.new(0.327883303, 0, 0, 0)
+RobberyNotifier.Size = UDim2.new(0, 108, 0, 47)
 RobberyNotifier.Font = Enum.Font.SourceSansBold
 RobberyNotifier.Text = "Robbery Notifier"
 RobberyNotifier.TextColor3 = Color3.new(1, 1, 1)
@@ -241,24 +240,12 @@ gunshoptpbutton.TextColor3 = Color3.new(1, 1, 1)
 gunshoptpbutton.TextSize = 16
 gunshoptpbutton.TextWrapped = true
 
-ESpam.Name = "ESpam"
-ESpam.Parent = otherFrame
-ESpam.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-ESpam.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-ESpam.Position = UDim2.new(0.24771212, 0, 0, 0)
-ESpam.Size = UDim2.new(0, 81, 0, 48)
-ESpam.Font = Enum.Font.SourceSansBold
-ESpam.Text = "E Key spam: off"
-ESpam.TextColor3 = Color3.new(1, 1, 1)
-ESpam.TextSize = 16
-ESpam.TextWrapped = true
-
 infiniteyeet.Name = "infiniteyeet"
 infiniteyeet.Parent = otherFrame
 infiniteyeet.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 infiniteyeet.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-infiniteyeet.Position = UDim2.new(0.749279082, 0, 0, 0)
-infiniteyeet.Size = UDim2.new(0, 81, 0, 48)
+infiniteyeet.Position = UDim2.new(0.663520157, 0, 0, 0)
+infiniteyeet.Size = UDim2.new(0, 108, 0, 47)
 infiniteyeet.Font = Enum.Font.SourceSansBold
 infiniteyeet.Text = "Inf Yield"
 infiniteyeet.TextColor3 = Color3.new(1, 1, 1)
@@ -281,8 +268,8 @@ removeragdoll.Name = "removeragdoll"
 removeragdoll.Parent = otherFrame
 removeragdoll.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 removeragdoll.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-removeragdoll.Position = UDim2.new(-0.00151853205, 0, 0, 0)
-removeragdoll.Size = UDim2.new(0, 81, 0, 48)
+removeragdoll.Position = UDim2.new(0.00156788772, 0, 0, 0)
+removeragdoll.Size = UDim2.new(0, 108, 0, 47)
 removeragdoll.Font = Enum.Font.SourceSansBold
 removeragdoll.Text = "Remove Ragdoll"
 removeragdoll.TextColor3 = Color3.new(1, 1, 1)
@@ -532,7 +519,7 @@ text.TextWrapped = true
 text.TextXAlignment = Enum.TextXAlignment.Left
 text.TextYAlignment = Enum.TextYAlignment.Top
 -- Scripts:
-function SCRIPT_GARQ76_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
+function SCRIPT_USRP74_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -621,13 +608,10 @@ function SCRIPT_GARQ76_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	local mouse = lplr:GetMouse()
 	local jewel = workspace.Jewelrys:FindFirstChildOfClass("Model")
 	local bank = workspace.Banks:FindFirstChildOfClass("Model")
-	local EncryptedName = ""
-	for i = 1, 15 do
-		local char = string.char(math.random(1, 255))
-		EncryptedName = EncryptedName..char
+	if syn.protect_gui then
+	syn.protect_gui(script.Parent)
 	end
-	script.Parent.Name = EncryptedName
-	notify("Changelog", "Removed the goto-player script b/c it was patched and most gun modding options.", 10)
+	notify("Changelog", "Removed the E spam button b/c my Auto Key Clicker is a thing now.", 10)
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -673,21 +657,12 @@ function SCRIPT_GARQ76_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	local mainframe = script.Parent.MainFrame
 	local HoldEBypass = false
 	local gunshoptp = false
-	local SpamE = false
-	local cooldown = true
 	game.RunService.RenderStepped:connect(function()
 		for i,a in pairs(require(game.ReplicatedStorage.Module.UI).CircleAction.Specs) do
 		if a.Duration ~= false and HoldEBypass then
 		   a.Timed = false;
 		end
 		end
-	if SpamE and cooldown then
-	cooldown = false
-	keypress(0x45)
-	keyrelease(0x45)
-	game.RunService.RenderStepped:Wait()
-	cooldown = true
-	end
 	end)
 	mainframe.GravToggle.Text = "Gravity Toggle / Current: "..tostring(math.floor(workspace.Gravity))
 	Changed(workspace, "Gravity", function(grav)
@@ -953,15 +928,6 @@ function SCRIPT_GARQ76_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 			end)
 	end
 	end)
-	frame2.ESpam.MouseButton1Click:connect(function()
-	if SpamE then
-	SpamE = false
-	frame2.ESpam.Text = "E Key spam: off"
-	else
-	SpamE = true
-	frame2.ESpam.Text = "E Key spam: on"
-	end
-	end)
 	frame2.infiniteyeet.MouseButton1Click:connect(function()
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 	end)
@@ -1087,4 +1053,4 @@ function SCRIPT_GARQ76_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_GARQ76_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_USRP74_FAKESCRIPT))
