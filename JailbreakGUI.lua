@@ -83,7 +83,7 @@ hacklasers.Name = "hacklasers"
 hacklasers.Parent = MainFrame
 hacklasers.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 hacklasers.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-hacklasers.Position = UDim2.new(-3.16649675e-08, 0, 0.191666901, 0)
+hacklasers.Position = UDim2.new(-3.16649675e-08, 0, 0.187500238, 0)
 hacklasers.Size = UDim2.new(0, 106, 0, 52)
 hacklasers.Font = Enum.Font.SourceSansBold
 hacklasers.Text = "Hack Lasers"
@@ -107,8 +107,9 @@ gunmod.Name = "gunmod"
 gunmod.Parent = MainFrame
 gunmod.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 gunmod.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-gunmod.Position = UDim2.new(0.329939932, 0, 0.418811411, 0)
+gunmod.Position = UDim2.new(0.329939932, 0, 0.410478085, 0)
 gunmod.Size = UDim2.new(0, 106, 0, 52)
+gunmod.ZIndex = 2
 gunmod.Font = Enum.Font.SourceSansBold
 gunmod.Text = "Auto-firing guns + no recoil"
 gunmod.TextColor3 = Color3.new(1, 1, 1)
@@ -119,7 +120,7 @@ briefcase.Name = "briefcase"
 briefcase.Parent = MainFrame
 briefcase.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 briefcase.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-briefcase.Position = UDim2.new(0.00213507935, 0, 0.418811411, 0)
+briefcase.Position = UDim2.new(-0.00100957463, 0, 0.414644718, 0)
 briefcase.Size = UDim2.new(0, 106, 0, 52)
 briefcase.Font = Enum.Font.SourceSansBold
 briefcase.Text = "Briefcase ESP"
@@ -132,7 +133,7 @@ GravToggle.Name = "GravToggle"
 GravToggle.Parent = MainFrame
 GravToggle.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 GravToggle.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-GravToggle.Position = UDim2.new(0.668801725, 0, 0.414833337, 0)
+GravToggle.Position = UDim2.new(0.668801725, 0, 0.410666645, 0)
 GravToggle.Size = UDim2.new(0, 106, 0, 52)
 GravToggle.Font = Enum.Font.SourceSansBold
 GravToggle.Text = "Gravity Toggle / Current: 196"
@@ -519,7 +520,7 @@ text.TextWrapped = true
 text.TextXAlignment = Enum.TextXAlignment.Left
 text.TextYAlignment = Enum.TextYAlignment.Top
 -- Scripts:
-function SCRIPT_USRP74_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
+function SCRIPT_YTWT89_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -1053,4 +1054,4 @@ function SCRIPT_USRP74_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_USRP74_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_YTWT89_FAKESCRIPT)) 
