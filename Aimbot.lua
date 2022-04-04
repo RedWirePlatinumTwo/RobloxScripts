@@ -534,7 +534,7 @@ function SCRIPT_DRVQ65_FAKESCRIPT() -- Aimbot.Scripts
 	if AimbotStats.Character ~= "" and AimbotStats.Character:FindFirstChild(AimbotStats.Target) then
 	local v, _ = workspace.Camera:WorldToScreenPoint(AimbotStats.Character[AimbotStats.Target].Position)
 	if _ then
-	local StabilizeNum = 0.45
+	local StabilizeNum = 0.2
 	local x, y = (v.X - m.X)*StabilizeNum, (v.Y - m.Y)*StabilizeNum
 	if AimbotStats.IsOn then
 	mousemoverel(x, y)
@@ -566,7 +566,7 @@ function SCRIPT_DRVQ65_FAKESCRIPT() -- Aimbot.Scripts
 	game.StarterGui:SetCore("SendNotification", {
 	Title = "Aimbot Update:";
 	Duration = 10;
-	Text = "This aimbot now can be executed more than once, but there cannot be multiple of this GUI open at once.";})
+	Text = "Made the aimbot thing more usable on 1920x1080 displays.";})
 	
 	function Died(player)
 	if not player.Character then player.CharacterAdded:Wait() end
