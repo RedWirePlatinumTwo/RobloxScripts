@@ -566,7 +566,7 @@ function SCRIPT_CHMP85_FAKESCRIPT() -- Aimbot.Scripts
 	game.StarterGui:SetCore("SendNotification", {
 	Title = "Aimbot Update:";
 	Duration = 10;
-	Text = "The aimbot should now work for any screen/monitor size :)";})
+	Text = "The aimbot should now work for any screen/monitor size + generally less shaky :)";})
 	
 	function Died(player)
 	if not player.Character then player.CharacterAdded:Wait() end
