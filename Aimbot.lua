@@ -328,7 +328,7 @@ Title_2.TextScaled = true
 Title_2.TextSize = 14
 Title_2.TextWrapped = true
 -- Scripts:
-function SCRIPT_CHMP85_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_FSAW67_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	if not _G.RedsAimbot then
@@ -409,8 +409,8 @@ function SCRIPT_CHMP85_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end
 	end
+	local studs = 750
 	GetNearestPlayer = function()
-	local studs = 500
 	local table1 = {}
 	local table2 = {}
 	for i,v in pairs(plrs:GetPlayers()) do
@@ -437,7 +437,7 @@ function SCRIPT_CHMP85_FAKESCRIPT() -- Aimbot.Scripts
 	Aimbot keybinds:
 	Left alt - turns Aimbot on/off
 	(Turning it on will attempt to find a player wherever your cursor hovers, if a player is found, your cursor will "forcefully" stay on the set targeted part.)
-	Right alt - targets the nearest opponent within 500 studs (aimbot has to be on, obviously)
+	Right alt - targets the nearest opponent within ]]..studs..[[ studs (aimbot has to be on, obviously)
 	Left click + X - Changes the targeted part (This is set to head by default)
 	Auto-Targeting - Basically spams the GetNearestPlayer function
 	First Person mode: Toggles whether or not you want to auto-enter first person mode once you targeted someone.
@@ -566,7 +566,7 @@ function SCRIPT_CHMP85_FAKESCRIPT() -- Aimbot.Scripts
 	game.StarterGui:SetCore("SendNotification", {
 	Title = "Aimbot Update:";
 	Duration = 10;
-	Text = "The aimbot should now work for any screen/monitor size + be generally less shaky :)";})
+	Text = "Increased auto-target max stud disance from 500 -> 750.";})
 	
 	function Died(player)
 	if not player.Character then player.CharacterAdded:Wait() end
@@ -759,4 +759,4 @@ function SCRIPT_CHMP85_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_CHMP85_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_FSAW67_FAKESCRIPT))
