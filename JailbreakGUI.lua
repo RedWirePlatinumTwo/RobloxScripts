@@ -38,10 +38,10 @@ local Option2 = Instance.new("TextButton")
 local Activatehealer = Instance.new("TextButton")
 local HideGui = Instance.new("TextButton")
 local NotifSFrame = Instance.new("ScrollingFrame")
-local UIListLayout = Instance.new("UIListLayout")
 local exframe = Instance.new("Frame")
 local title = Instance.new("TextLabel")
 local text = Instance.new("TextLabel")
+local UIListLayout = Instance.new("UIListLayout")
 --Properties:
 JailbreakGUI.Name = "JailbreakGUI"
 JailbreakGUI.Parent = game.CoreGui
@@ -86,7 +86,7 @@ hacklasers.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 hacklasers.Position = UDim2.new(-3.16649675e-08, 0, 0.187500238, 0)
 hacklasers.Size = UDim2.new(0, 106, 0, 52)
 hacklasers.Font = Enum.Font.SourceSansBold
-hacklasers.Text = "Hack Lasers"
+hacklasers.Text = "Remove (most) Lasers"
 hacklasers.TextColor3 = Color3.new(1, 1, 1)
 hacklasers.TextSize = 18
 hacklasers.TextWrapped = true
@@ -111,7 +111,7 @@ gunmod.Position = UDim2.new(0.329939932, 0, 0.410478085, 0)
 gunmod.Size = UDim2.new(0, 106, 0, 52)
 gunmod.ZIndex = 2
 gunmod.Font = Enum.Font.SourceSansBold
-gunmod.Text = "Auto-firing guns + no recoil"
+gunmod.Text = "Mod guns"
 gunmod.TextColor3 = Color3.new(1, 1, 1)
 gunmod.TextSize = 18
 gunmod.TextWrapped = true
@@ -479,21 +479,16 @@ NotifSFrame.Active = true
 NotifSFrame.BackgroundColor3 = Color3.new(1, 1, 1)
 NotifSFrame.BackgroundTransparency = 1
 NotifSFrame.BorderSizePixel = 0
-NotifSFrame.Position = UDim2.new(0.774524152, 0, 0.64453125, 0)
+NotifSFrame.Position = UDim2.new(0.800000012, 0, 0.800000012, 0)
 NotifSFrame.Size = UDim2.new(0, 308, 0, 211)
-NotifSFrame.Visible = false
 NotifSFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
-
-UIListLayout.Parent = NotifSFrame
-UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
 exframe.Name = "exframe"
 exframe.Parent = NotifSFrame
 exframe.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-exframe.BackgroundTransparency = 0.30000001192093
+exframe.BackgroundTransparency = 0.30000001192092896
 exframe.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 exframe.Size = UDim2.new(0, 296, 0, 64)
-exframe.Visible = false
 
 title.Name = "title"
 title.Parent = exframe
@@ -519,8 +514,11 @@ text.TextSize = 18
 text.TextWrapped = true
 text.TextXAlignment = Enum.TextXAlignment.Left
 text.TextYAlignment = Enum.TextYAlignment.Top
+
+UIListLayout.Parent = NotifSFrame
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 -- Scripts:
-function SCRIPT_ODMZ73_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
+function SCRIPT_ELDF84_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -612,7 +610,7 @@ function SCRIPT_ODMZ73_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Changelog", "Removed the E spam button b/c my Auto Key Clicker is a thing now.", 10)
+	notify("Update", "Gun modifying once again makes guns shoot fast + changed button texts.", 10)
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -748,7 +746,7 @@ function SCRIPT_ODMZ73_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end
 	end
 	mainframe.gunmod.MouseButton1Click:connect(function()
-	changegunstats({["CamShakeMagnitude"] = 0,["FireAuto"] = true})
+	changegunstats({["CamShakeMagnitude"] = 0,["FireAuto"] = true,["FireFreq"] = 100})
 	end)
 	mainframe.hacklasers.MouseButton1Click:connect(function()
 	local lights = workspace.Museum.Lights
@@ -1054,4 +1052,4 @@ function SCRIPT_ODMZ73_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_ODMZ73_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_ELDF84_FAKESCRIPT))
