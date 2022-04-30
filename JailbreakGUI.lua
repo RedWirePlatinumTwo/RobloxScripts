@@ -468,7 +468,7 @@ HideGui.TextColor3 = Color3.new(1, 1, 1)
 HideGui.TextSize = 18
 HideGui.TextWrapped = true
 -- Scripts:
-function SCRIPT_RSSP86_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
+function SCRIPT_MPUR89_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -485,7 +485,7 @@ function SCRIPT_RSSP86_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	return obj.Attachment
 	end
 	local function notify(text, duration)
-	if not duration then duration = 2 end
+	if not duration then duration = 4 end
 	local n = require(game:GetService("ReplicatedStorage").Game.Notification)
 	n.new({["Text"] = text,["Duration"] = duration})
 	end
@@ -532,7 +532,7 @@ function SCRIPT_RSSP86_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Gun modifying once again makes guns shoot fast; changed button texts; removed GUI notification frame, replacing it with the in-game notifications.", 5)
+	notify("Changed button texts + removed GUI notification frame, replacing it with the in-game notifications.", 7)
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -668,7 +668,7 @@ function SCRIPT_RSSP86_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end
 	end
 	mainframe.gunmod.MouseButton1Click:connect(function()
-	changegunstats({["CamShakeMagnitude"] = 0,["FireAuto"] = true,["FireFreq"] = 100})
+	changegunstats({["CamShakeMagnitude"] = 0,["FireAuto"] = true})
 	end)
 	mainframe.hacklasers.MouseButton1Click:connect(function()
 	local lights = workspace.Museum.Lights
@@ -974,4 +974,4 @@ function SCRIPT_RSSP86_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_RSSP86_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_MPUR89_FAKESCRIPT))
