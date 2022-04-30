@@ -468,7 +468,7 @@ HideGui.TextColor3 = Color3.new(1, 1, 1)
 HideGui.TextSize = 18
 HideGui.TextWrapped = true
 -- Scripts:
-function SCRIPT_MPUR89_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
+function SCRIPT_POBG86_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -532,7 +532,7 @@ function SCRIPT_MPUR89_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Changed button texts + removed GUI notification frame, replacing it with the in-game notifications.", 7)
+	notify("Gun mod now makes grenades OP + Changed button texts + removed GUI notification frame, replacing it with the in-game notifications.", 7)
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -669,6 +669,9 @@ function SCRIPT_MPUR89_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end
 	mainframe.gunmod.MouseButton1Click:connect(function()
 	changegunstats({["CamShakeMagnitude"] = 0,["FireAuto"] = true})
+	local g = require(game.ReplicatedStorage.Game.ItemConfig.Grenade)
+	g.ReloadTime = 0
+	g.FuseTime = 0.8
 	end)
 	mainframe.hacklasers.MouseButton1Click:connect(function()
 	local lights = workspace.Museum.Lights
@@ -974,4 +977,4 @@ function SCRIPT_MPUR89_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_MPUR89_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_POBG86_FAKESCRIPT))
