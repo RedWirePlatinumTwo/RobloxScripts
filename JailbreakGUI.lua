@@ -37,11 +37,6 @@ local Option1 = Instance.new("TextButton")
 local Option2 = Instance.new("TextButton")
 local Activatehealer = Instance.new("TextButton")
 local HideGui = Instance.new("TextButton")
-local NotifSFrame = Instance.new("ScrollingFrame")
-local exframe = Instance.new("Frame")
-local title = Instance.new("TextLabel")
-local text = Instance.new("TextLabel")
-local UIListLayout = Instance.new("UIListLayout")
 --Properties:
 JailbreakGUI.Name = "JailbreakGUI"
 JailbreakGUI.Parent = game.CoreGui
@@ -472,53 +467,8 @@ HideGui.Text = "Hide GUI"
 HideGui.TextColor3 = Color3.new(1, 1, 1)
 HideGui.TextSize = 18
 HideGui.TextWrapped = true
-
-NotifSFrame.Name = "NotifSFrame"
-NotifSFrame.Parent = JailbreakGUI
-NotifSFrame.Active = true
-NotifSFrame.BackgroundColor3 = Color3.new(1, 1, 1)
-NotifSFrame.BackgroundTransparency = 1
-NotifSFrame.BorderSizePixel = 0
-NotifSFrame.Position = UDim2.new(0.800000012, 0, 0.800000012, 0)
-NotifSFrame.Size = UDim2.new(0, 308, 0, 211)
-NotifSFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
-
-exframe.Name = "exframe"
-exframe.Parent = NotifSFrame
-exframe.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-exframe.BackgroundTransparency = 0.30000001192092896
-exframe.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-exframe.Size = UDim2.new(0, 296, 0, 64)
-
-title.Name = "title"
-title.Parent = exframe
-title.BackgroundColor3 = Color3.new(1, 1, 1)
-title.BackgroundTransparency = 1
-title.Size = UDim2.new(0, 296, 0, 18)
-title.Font = Enum.Font.SourceSansBold
-title.Text = "Notification Title"
-title.TextColor3 = Color3.new(1, 1, 1)
-title.TextSize = 18
-title.TextWrapped = true
-
-text.Name = "text"
-text.Parent = exframe
-text.BackgroundColor3 = Color3.new(1, 1, 1)
-text.BackgroundTransparency = 1
-text.Position = UDim2.new(0, 0, 0.28125, 0)
-text.Size = UDim2.new(0, 296, 0, 46)
-text.Font = Enum.Font.SourceSansBold
-text.Text = "Notification Text"
-text.TextColor3 = Color3.new(1, 1, 1)
-text.TextSize = 18
-text.TextWrapped = true
-text.TextXAlignment = Enum.TextXAlignment.Left
-text.TextYAlignment = Enum.TextYAlignment.Top
-
-UIListLayout.Parent = NotifSFrame
-UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 -- Scripts:
-function SCRIPT_ELDF84_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
+function SCRIPT_RSSP86_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -534,39 +484,11 @@ function SCRIPT_ELDF84_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end
 	return obj.Attachment
 	end
-	local notiframe = script.Parent.NotifSFrame
-	notiframe.ScrollBarImageTransparency = 1
-	local function notify(title, text, duration)
-	if not duration then duration = 5 end
-	local notif = notiframe.exframe:Clone()
-	notif.Name = "Notification"
-	notif.Visible = true
-	notif.Parent = notiframe
-	notif.title.Text = title
-	notif.text.Text = text
-	coroutine.resume(coroutine.create(function()
-	wait(duration)
-	notif:Destroy()
-	end))
-	local s = Instance.new("Sound", workspace)
-	s.SoundId = "rbxassetid://700153902"
-	s:Play()
-	wait(1)
-	s:Destroy()
+	local function notify(text, duration)
+	if not duration then duration = 2 end
+	local n = require(game:GetService("ReplicatedStorage").Game.Notification)
+	n.new({["Text"] = text,["Duration"] = duration})
 	end
-	local canvasy = 0
-	notiframe.ChildAdded:connect(function(c)
-	notiframe.Visible = true
-	canvasy = canvasy + 0.09
-	notiframe.CanvasSize = UDim2.new(0,0,canvasy,0)
-	end)
-	notiframe.ChildRemoved:connect(function()
-	canvasy = canvasy - 0.09
-	notiframe.CanvasSize = UDim2.new(0,0,canvasy,0)
-	if #notiframe:GetChildren() == 2 then
-	notiframe.Visible = false
-	end
-	end)
 	local Changed = function(part, PropertyName, func)
 	    local current = part[PropertyName]
 	    coroutine.resume(coroutine.create(function()
@@ -610,7 +532,7 @@ function SCRIPT_ELDF84_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Update", "Gun modifying once again makes guns shoot fast + changed button texts.", 10)
+	notify("Gun modifying once again makes guns shoot fast; changed button texts; removed GUI notification frame, replacing it with the in-game notifications.", 5)
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -785,7 +707,7 @@ function SCRIPT_ELDF84_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	mainframe.holdebypass.MouseButton1Click:connect(function()
 	if not HoldEBypass then
 	HoldEBypass = true
-	notify("Hold E Bypass", "Hold E Bypass enabled. Script by Interpreter on V3rmillion, inf looped by me.")
+	notify("Hold E Bypass enabled. Script by Interpreter on V3rmillion, inf looped by me.")
 	end
 	end)
 	mainframe.more.MouseButton1Click:connect(function()
@@ -813,7 +735,7 @@ function SCRIPT_ELDF84_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	chr:WaitForChild("Humanoid")
 	speedhack()
 	end)
-	notify("Speedhack", "To edit your walkspeed, scroll up/down on the number in the textbox (max 150).", 8)
+	notify("To edit your walkspeed, scroll up/down on the number in the textbox (max 150).", 8)
 	end
 	mainframe.Speednum.MouseWheelForward:connect(function()
 	ws.number = ws.number + 5
@@ -891,7 +813,7 @@ function SCRIPT_ELDF84_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	if v2.ImageLabel.Image == "rbxassetid://"..id then
 	Changed(v2, "ImageColor3", function(color)
 	if color == Color3.new(0,1,0) then
-	notify(robtitle, "The "..name.." is open for robbery.")
+	notify("The "..name.." is open for robbery.")
 	end
 	end)
 	end
@@ -900,29 +822,29 @@ function SCRIPT_ELDF84_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end
 		local smoke = workspace.PowerPlant.Smoke.smoke
 		jewel.Floors.ChildAdded:connect(function()
-			notify(robtitle, "The jewelry is open for robbery.")
+			notify("The jewelry is open for robbery.")
 		end)
 		bank.Layout.ChildAdded:connect(function()
-			notify(robtitle, "The bank is open for robbery.")
+			notify("The bank is open for robbery.")
 		end)
 		smoke:GetPropertyChangedSignal("Enabled"):connect(function()
 			if smoke.Enabled == true then
-				notify(robtitle, "The powerplant is open for robbery.")
+				notify("The powerplant is open for robbery.")
 			end
 		end)
 		workspace.Trains.ChildAdded:connect(function(child)
 		if child.Name == "PassengerArmor" then
-			notify(robtitle, "A passenger train has entered the map.")
+			notify("A passenger train has entered the map.")
 		elseif child.Name == "LocomotiveFront" then
-			notify(robtitle, "A cargo train has entered the map.")
+			notify("A cargo train has entered the map.")
 		end
 		end)
 		workspace.ChildAdded:connect(function(c)
 			if c.Name == "Plane" then
-				notify(robtitle, "The cargo plane is inbound!")
+				notify("The cargo plane is inbound!")
 			end
 			if c.Name == "CargoShip" then
-				notify(robtitle, "The cargo ship is coming!")
+				notify("The cargo ship is coming!")
 			end
 			end)
 	end
@@ -935,7 +857,7 @@ function SCRIPT_ELDF84_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	if not ragdollremoved then
 	ragdollremoved = true
 	require(game.ReplicatedStorage.Module.AlexRagdoll).Ragdoll = nil
-	notify("Ragdoll removal", "Ragdoll is no more.")
+	notify("Ragdoll is no more.")
 	end
 	end)
 	frame2.switch.MouseButton1Down:connect(function()
@@ -1052,4 +974,4 @@ function SCRIPT_ELDF84_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_ELDF84_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_RSSP86_FAKESCRIPT))
