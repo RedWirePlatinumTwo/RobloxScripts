@@ -468,7 +468,7 @@ HideGui.TextColor3 = Color3.new(1, 1, 1)
 HideGui.TextSize = 18
 HideGui.TextWrapped = true
 -- Scripts:
-function SCRIPT_POBG86_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
+function SCRIPT_MCVD81_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -485,9 +485,13 @@ function SCRIPT_POBG86_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	return obj.Attachment
 	end
 	local function notify(text, duration)
-	if not duration then duration = 4 end
+	if not duration then duration = 2 end
+	local notiftime = 0
+	for i = 1, text:len() do
+	notiftime = notiftime + 0.03
+	end
 	local n = require(game:GetService("ReplicatedStorage").Game.Notification)
-	n.new({["Text"] = text,["Duration"] = duration})
+	n.new({["Text"] = text,["Duration"] = notiftime + duration})
 	end
 	local Changed = function(part, PropertyName, func)
 	    local current = part[PropertyName]
@@ -532,7 +536,7 @@ function SCRIPT_POBG86_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Gun mod now makes grenades OP + Changed button texts + removed GUI notification frame, replacing it with the in-game notifications.", 7)
+	notify("Made certain notifications not take a long time to go away.", 3)
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -738,7 +742,7 @@ function SCRIPT_POBG86_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	chr:WaitForChild("Humanoid")
 	speedhack()
 	end)
-	notify("To edit your walkspeed, scroll up/down on the number in the textbox (max 150).", 8)
+	notify("To edit your walkspeed, scroll up/down on the number in the textbox (max 150).", 4)
 	end
 	mainframe.Speednum.MouseWheelForward:connect(function()
 	ws.number = ws.number + 5
@@ -977,4 +981,4 @@ function SCRIPT_POBG86_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_POBG86_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_MCVD81_FAKESCRIPT))
