@@ -534,7 +534,7 @@ function SCRIPT_FSAW67_FAKESCRIPT() -- Aimbot.Scripts
 	if AimbotStats.Character ~= "" and AimbotStats.Character:FindFirstChild(AimbotStats.Target) then
 	local v, _ = workspace.Camera:WorldToScreenPoint(AimbotStats.Character[AimbotStats.Target].Position)
 	if _ then
-	local StabilizeNum = 300/workspace.Camera.ViewportSize.Y
+	local StabilizeNum = 250/workspace.Camera.ViewportSize.Y
 	local x, y = (v.X - m.X)*StabilizeNum, (v.Y - m.Y)*StabilizeNum
 	if AimbotStats.IsOn then
 	mousemoverel(x, y)
