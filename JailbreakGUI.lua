@@ -548,7 +548,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_VXZQ75_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_FYPX78_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -610,7 +610,7 @@ function SCRIPT_VXZQ75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local briefframe = script.Parent.BriefcaseESPFrame
 	local ws = {}
 	ws.number = 30
-	mainframe.speednum.Text = tostring(ws.number)
+	mainframe.Speednum.Text = tostring(ws.number)
 	local plrs = game.Players
 	local lplr = plrs.LocalPlayer
 	local mouse = lplr:GetMouse()
@@ -1101,4 +1101,4 @@ function SCRIPT_VXZQ75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_VXZQ75_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_FYPX78_FAKESCRIPT))
