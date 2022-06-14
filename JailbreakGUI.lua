@@ -194,7 +194,7 @@ Speednum.Font = Enum.Font.SourceSansBold
 Speednum.PlaceholderColor3 = Color3.new(0.333333, 1, 0.498039)
 Speednum.PlaceholderText = "Speed Number goes here"
 Speednum.Text = ""
-Speednum.TextColor3 = Color3.new(1, 1, 1)
+Speednum.TextColor3 = Color3.new(0.333333, 1, 0.498039)
 Speednum.TextScaled = true
 Speednum.TextSize = 22
 Speednum.TextStrokeTransparency = 0
@@ -548,7 +548,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_MXMD85_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_VXZQ75_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -606,8 +606,11 @@ function SCRIPT_MXMD85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	_GetFamily(ins)
 	return Pathway
 	end
+	local mainframe = script.Parent.MainFrame
+	local briefframe = script.Parent.BriefcaseESPFrame
 	local ws = {}
 	ws.number = 30
+	mainframe.speednum.Text = tostring(ws.number)
 	local plrs = game.Players
 	local lplr = plrs.LocalPlayer
 	local mouse = lplr:GetMouse()
@@ -659,8 +662,6 @@ function SCRIPT_MXMD85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end
 		end
 	end)
-	local mainframe = script.Parent.MainFrame
-	local briefframe = script.Parent.BriefcaseESPFrame
 	local HoldEBypass = false
 	local gunshoptp = false
 	game.RunService.RenderStepped:connect(function()
@@ -1100,4 +1101,4 @@ function SCRIPT_MXMD85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_MXMD85_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_VXZQ75_FAKESCRIPT))
