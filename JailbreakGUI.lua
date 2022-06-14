@@ -7,20 +7,13 @@ local speed = Instance.new("TextButton")
 local aimbot = Instance.new("TextButton")
 local hacklasers = Instance.new("TextButton")
 local holdebypass = Instance.new("TextButton")
-local gunmod = Instance.new("TextButton")
 local briefcase = Instance.new("TextButton")
 local GravToggle = Instance.new("TextButton")
 local X = Instance.new("TextButton")
 local more = Instance.new("TextButton")
 local Title = Instance.new("TextLabel")
 local Speednum = Instance.new("TextBox")
-local otherFrame = Instance.new("Frame")
-local switch = Instance.new("TextButton")
-local RobberyNotifier = Instance.new("TextButton")
-local gunshoptpbutton = Instance.new("TextButton")
-local infiniteyeet = Instance.new("TextButton")
-local healguibutton = Instance.new("TextButton")
-local removeragdoll = Instance.new("TextButton")
+local gunmod = Instance.new("TextButton")
 local Confirmation = Instance.new("Frame")
 local Warning = Instance.new("TextLabel")
 local Yes = Instance.new("TextButton")
@@ -37,6 +30,17 @@ local Option1 = Instance.new("TextButton")
 local Option2 = Instance.new("TextButton")
 local Activatehealer = Instance.new("TextButton")
 local HideGui = Instance.new("TextButton")
+local otherFrame = Instance.new("Frame")
+local switch = Instance.new("TextButton")
+local RobberyNotifier = Instance.new("TextButton")
+local gunshoptpbutton = Instance.new("TextButton")
+local infiniteyeet = Instance.new("TextButton")
+local healguibutton = Instance.new("TextButton")
+local removeragdoll = Instance.new("TextButton")
+local BriefcaseESPFrame = Instance.new("Frame")
+local bguis = Instance.new("TextButton")
+local pointers = Instance.new("TextButton")
+local hide = Instance.new("TextButton")
 --Properties:
 JailbreakGUI.Name = "JailbreakGUI"
 JailbreakGUI.Parent = game.CoreGui
@@ -53,13 +57,15 @@ speed.Name = "speed"
 speed.Parent = MainFrame
 speed.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 speed.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-speed.Position = UDim2.new(0.00314465398, 0, 0.631499946, 0)
-speed.Size = UDim2.new(0, 159, 0, 52)
+speed.Position = UDim2.new(0, 0, 0.62316668, 0)
+speed.Size = UDim2.new(0, 104, 0, 52)
 speed.ZIndex = 33
 speed.Font = Enum.Font.SourceSansBold
 speed.Text = "Speedhack"
-speed.TextColor3 = Color3.new(1, 1, 1)
+speed.TextColor3 = Color3.new(0.333333, 1, 0.498039)
+speed.TextScaled = true
 speed.TextSize = 18
+speed.TextStrokeTransparency = 0
 speed.TextWrapped = true
 
 aimbot.Name = "aimbot"
@@ -70,20 +76,24 @@ aimbot.Position = UDim2.new(0.668801665, 0, 0.189644754, 0)
 aimbot.Size = UDim2.new(0, 106, 0, 52)
 aimbot.Font = Enum.Font.SourceSansBold
 aimbot.Text = "Aimbot"
-aimbot.TextColor3 = Color3.new(1, 1, 1)
+aimbot.TextColor3 = Color3.new(0, 1, 0)
+aimbot.TextScaled = true
 aimbot.TextSize = 18
+aimbot.TextStrokeTransparency = 0
 aimbot.TextWrapped = true
 
 hacklasers.Name = "hacklasers"
 hacklasers.Parent = MainFrame
 hacklasers.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 hacklasers.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-hacklasers.Position = UDim2.new(-3.16649675e-08, 0, 0.187500238, 0)
+hacklasers.Position = UDim2.new(0, 0, 0.189999998, 0)
 hacklasers.Size = UDim2.new(0, 106, 0, 52)
 hacklasers.Font = Enum.Font.SourceSansBold
 hacklasers.Text = "Remove (most) Lasers"
-hacklasers.TextColor3 = Color3.new(1, 1, 1)
+hacklasers.TextColor3 = Color3.new(0.333333, 0.666667, 1)
+hacklasers.TextScaled = true
 hacklasers.TextSize = 18
+hacklasers.TextStrokeTransparency = 0
 hacklasers.TextWrapped = true
 
 holdebypass.Name = "holdebypass"
@@ -94,46 +104,40 @@ holdebypass.Position = UDim2.new(0.329939932, 0, 0.189644739, 0)
 holdebypass.Size = UDim2.new(0, 106, 0, 52)
 holdebypass.Font = Enum.Font.SourceSansBold
 holdebypass.Text = "Hold E Bypass"
-holdebypass.TextColor3 = Color3.new(1, 1, 1)
+holdebypass.TextColor3 = Color3.new(0.666667, 0.666667, 0)
+holdebypass.TextScaled = true
 holdebypass.TextSize = 18
+holdebypass.TextStrokeTransparency = 0
 holdebypass.TextWrapped = true
-
-gunmod.Name = "gunmod"
-gunmod.Parent = MainFrame
-gunmod.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-gunmod.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-gunmod.Position = UDim2.new(0.329939932, 0, 0.410478085, 0)
-gunmod.Size = UDim2.new(0, 106, 0, 52)
-gunmod.ZIndex = 2
-gunmod.Font = Enum.Font.SourceSansBold
-gunmod.Text = "Mod guns"
-gunmod.TextColor3 = Color3.new(1, 1, 1)
-gunmod.TextSize = 18
-gunmod.TextWrapped = true
 
 briefcase.Name = "briefcase"
 briefcase.Parent = MainFrame
 briefcase.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 briefcase.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-briefcase.Position = UDim2.new(-0.00100957463, 0, 0.414644718, 0)
+briefcase.Position = UDim2.new(0, 0, 0.409999996, 0)
 briefcase.Size = UDim2.new(0, 106, 0, 52)
+briefcase.ZIndex = 0
 briefcase.Font = Enum.Font.SourceSansBold
 briefcase.Text = "Briefcase ESP"
-briefcase.TextColor3 = Color3.new(1, 1, 1)
+briefcase.TextColor3 = Color3.new(0.666667, 0.333333, 1)
+briefcase.TextScaled = true
 briefcase.TextSize = 18
-briefcase.TextStrokeColor3 = Color3.new(1, 0, 0)
+briefcase.TextStrokeTransparency = 0
 briefcase.TextWrapped = true
 
 GravToggle.Name = "GravToggle"
 GravToggle.Parent = MainFrame
 GravToggle.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 GravToggle.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-GravToggle.Position = UDim2.new(0.668801725, 0, 0.410666645, 0)
-GravToggle.Size = UDim2.new(0, 106, 0, 52)
+GravToggle.Position = UDim2.new(0.668999851, 0, 0.410000026, 0)
+GravToggle.Size = UDim2.new(0, 105, 0, 52)
+GravToggle.ZIndex = 0
 GravToggle.Font = Enum.Font.SourceSansBold
-GravToggle.Text = "Gravity Toggle / Current: 196"
+GravToggle.Text = "Gravity Toggle (196)"
 GravToggle.TextColor3 = Color3.new(1, 1, 1)
+GravToggle.TextScaled = true
 GravToggle.TextSize = 18
+GravToggle.TextStrokeTransparency = 0
 GravToggle.TextWrapped = true
 
 X.Name = "X"
@@ -154,12 +158,14 @@ more.Name = "more"
 more.Parent = MainFrame
 more.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 more.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-more.Position = UDim2.new(0.503144681, 0, 0.631499946, 0)
-more.Size = UDim2.new(0, 159, 0, 52)
+more.Position = UDim2.new(0.333333343, 0, 0.623166621, 0)
+more.Size = UDim2.new(0, 106, 0, 52)
 more.Font = Enum.Font.SourceSansBold
 more.Text = "More Options"
-more.TextColor3 = Color3.new(1, 1, 1)
+more.TextColor3 = Color3.new(1, 0, 1)
+more.TextScaled = true
 more.TextSize = 18
+more.TextStrokeTransparency = 0
 more.TextWrapped = true
 
 Title.Name = "Title"
@@ -182,95 +188,32 @@ Speednum.Name = "Speednum"
 Speednum.Parent = MainFrame
 Speednum.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 Speednum.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Speednum.Position = UDim2.new(0, 0, 0.630999982, 0)
-Speednum.Size = UDim2.new(0, 160, 0, 52)
+Speednum.Position = UDim2.new(0, 0, 0.622978091, 0)
+Speednum.Size = UDim2.new(0, 104, 0, 52)
 Speednum.Font = Enum.Font.SourceSansBold
-Speednum.PlaceholderColor3 = Color3.new(1, 1, 1)
+Speednum.PlaceholderColor3 = Color3.new(0.333333, 1, 0.498039)
 Speednum.PlaceholderText = "Speed Number goes here"
-Speednum.Text = "30"
+Speednum.Text = ""
 Speednum.TextColor3 = Color3.new(1, 1, 1)
+Speednum.TextScaled = true
 Speednum.TextSize = 22
+Speednum.TextStrokeTransparency = 0
 Speednum.TextWrapped = true
 
-otherFrame.Name = "otherFrame"
-otherFrame.Parent = JailbreakGUI
-otherFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-otherFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-otherFrame.Position = UDim2.new(0.514061332, 0, 0.551395953, 0)
-otherFrame.Size = UDim2.new(0, 324, 0, 183)
-otherFrame.Visible = false
-
-switch.Name = "switch"
-switch.Parent = otherFrame
-switch.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-switch.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-switch.Position = UDim2.new(0.31862399, 0, 0.754811764, 0)
-switch.Size = UDim2.new(0, 107, 0, 44)
-switch.Font = Enum.Font.SourceSansBold
-switch.Text = "Switch back"
-switch.TextColor3 = Color3.new(1, 1, 1)
-switch.TextSize = 18
-switch.TextWrapped = true
-
-RobberyNotifier.Name = "RobberyNotifier"
-RobberyNotifier.Parent = otherFrame
-RobberyNotifier.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-RobberyNotifier.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-RobberyNotifier.Position = UDim2.new(0.327883303, 0, 0, 0)
-RobberyNotifier.Size = UDim2.new(0, 108, 0, 47)
-RobberyNotifier.Font = Enum.Font.SourceSansBold
-RobberyNotifier.Text = "Robbery Notifier"
-RobberyNotifier.TextColor3 = Color3.new(1, 1, 1)
-RobberyNotifier.TextSize = 16
-RobberyNotifier.TextWrapped = true
-
-gunshoptpbutton.Name = "gunshoptpbutton"
-gunshoptpbutton.Parent = otherFrame
-gunshoptpbutton.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-gunshoptpbutton.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-gunshoptpbutton.Position = UDim2.new(0.00126026291, 0, 0.263706565, 0)
-gunshoptpbutton.Size = UDim2.new(0, 162, 0, 45)
-gunshoptpbutton.Font = Enum.Font.SourceSansBold
-gunshoptpbutton.Text = "Gunshop TP Enabled:"
-gunshoptpbutton.TextColor3 = Color3.new(1, 1, 1)
-gunshoptpbutton.TextSize = 16
-gunshoptpbutton.TextWrapped = true
-
-infiniteyeet.Name = "infiniteyeet"
-infiniteyeet.Parent = otherFrame
-infiniteyeet.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-infiniteyeet.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-infiniteyeet.Position = UDim2.new(0.663520157, 0, 0, 0)
-infiniteyeet.Size = UDim2.new(0, 108, 0, 47)
-infiniteyeet.Font = Enum.Font.SourceSansBold
-infiniteyeet.Text = "Inf Yield"
-infiniteyeet.TextColor3 = Color3.new(1, 1, 1)
-infiniteyeet.TextSize = 16
-infiniteyeet.TextWrapped = true
-
-healguibutton.Name = "healguibutton"
-healguibutton.Parent = otherFrame
-healguibutton.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-healguibutton.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-healguibutton.Position = UDim2.new(0.497712135, 0, 0.263706565, 0)
-healguibutton.Size = UDim2.new(0, 162, 0, 45)
-healguibutton.Font = Enum.Font.SourceSansBold
-healguibutton.Text = "Emergency Healing GUI"
-healguibutton.TextColor3 = Color3.new(1, 1, 1)
-healguibutton.TextSize = 16
-healguibutton.TextWrapped = true
-
-removeragdoll.Name = "removeragdoll"
-removeragdoll.Parent = otherFrame
-removeragdoll.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-removeragdoll.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-removeragdoll.Position = UDim2.new(0.00156788772, 0, 0, 0)
-removeragdoll.Size = UDim2.new(0, 108, 0, 47)
-removeragdoll.Font = Enum.Font.SourceSansBold
-removeragdoll.Text = "Remove Ragdoll"
-removeragdoll.TextColor3 = Color3.new(1, 1, 1)
-removeragdoll.TextSize = 16
-removeragdoll.TextWrapped = true
+gunmod.Name = "gunmod"
+gunmod.Parent = MainFrame
+gunmod.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+gunmod.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+gunmod.Position = UDim2.new(0.329939932, 0, 0.410478085, 0)
+gunmod.Size = UDim2.new(0, 106, 0, 52)
+gunmod.ZIndex = 2
+gunmod.Font = Enum.Font.SourceSansBold
+gunmod.Text = "Mod guns"
+gunmod.TextColor3 = Color3.new(0.666667, 0, 0)
+gunmod.TextScaled = true
+gunmod.TextSize = 18
+gunmod.TextStrokeTransparency = 0
+gunmod.TextWrapped = true
 
 Confirmation.Name = "Confirmation"
 Confirmation.Parent = JailbreakGUI
@@ -355,7 +298,7 @@ Text1.Parent = EmergencyHealing
 Text1.BackgroundColor3 = Color3.new(1, 1, 1)
 Text1.BackgroundTransparency = 1
 Text1.Position = UDim2.new(0, 0, 0.208144799, 0)
-Text1.Size = UDim2.new(0, 269, 0, 36)
+Text1.Size = UDim2.new(0, 271, 0, 36)
 Text1.Font = Enum.Font.SourceSansBold
 Text1.Text = "You will begin the healing process when your health gets below:"
 Text1.TextColor3 = Color3.new(1, 1, 1)
@@ -467,8 +410,145 @@ HideGui.Text = "Hide GUI"
 HideGui.TextColor3 = Color3.new(1, 1, 1)
 HideGui.TextSize = 18
 HideGui.TextWrapped = true
+
+otherFrame.Name = "otherFrame"
+otherFrame.Parent = JailbreakGUI
+otherFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+otherFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+otherFrame.Position = UDim2.new(0.514061332, 0, 0.551395953, 0)
+otherFrame.Size = UDim2.new(0, 324, 0, 183)
+otherFrame.Visible = false
+
+switch.Name = "switch"
+switch.Parent = otherFrame
+switch.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+switch.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+switch.Position = UDim2.new(0.31862399, 0, 0.754811764, 0)
+switch.Size = UDim2.new(0, 107, 0, 44)
+switch.Font = Enum.Font.SourceSansBold
+switch.Text = "Switch back"
+switch.TextColor3 = Color3.new(1, 1, 1)
+switch.TextSize = 18
+switch.TextWrapped = true
+
+RobberyNotifier.Name = "RobberyNotifier"
+RobberyNotifier.Parent = otherFrame
+RobberyNotifier.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+RobberyNotifier.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+RobberyNotifier.Position = UDim2.new(0.327883303, 0, 0, 0)
+RobberyNotifier.Size = UDim2.new(0, 108, 0, 47)
+RobberyNotifier.Font = Enum.Font.SourceSansBold
+RobberyNotifier.Text = "Robbery Notifier"
+RobberyNotifier.TextColor3 = Color3.new(0, 0.666667, 0)
+RobberyNotifier.TextScaled = true
+RobberyNotifier.TextSize = 16
+RobberyNotifier.TextStrokeTransparency = 0
+RobberyNotifier.TextWrapped = true
+
+gunshoptpbutton.Name = "gunshoptpbutton"
+gunshoptpbutton.Parent = otherFrame
+gunshoptpbutton.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+gunshoptpbutton.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+gunshoptpbutton.Position = UDim2.new(0.00126026291, 0, 0.263706565, 0)
+gunshoptpbutton.Size = UDim2.new(0, 162, 0, 45)
+gunshoptpbutton.Font = Enum.Font.SourceSansBold
+gunshoptpbutton.Text = "Gunshop TP Enabled:"
+gunshoptpbutton.TextColor3 = Color3.new(1, 0.666667, 0)
+gunshoptpbutton.TextScaled = true
+gunshoptpbutton.TextSize = 16
+gunshoptpbutton.TextStrokeTransparency = 0
+gunshoptpbutton.TextWrapped = true
+
+infiniteyeet.Name = "infiniteyeet"
+infiniteyeet.Parent = otherFrame
+infiniteyeet.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+infiniteyeet.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+infiniteyeet.Position = UDim2.new(0.663520157, 0, 0, 0)
+infiniteyeet.Size = UDim2.new(0, 108, 0, 47)
+infiniteyeet.Font = Enum.Font.SourceSansBold
+infiniteyeet.Text = "Inf Yield"
+infiniteyeet.TextColor3 = Color3.new(0.333333, 0.333333, 0.498039)
+infiniteyeet.TextScaled = true
+infiniteyeet.TextSize = 16
+infiniteyeet.TextStrokeTransparency = 0
+infiniteyeet.TextWrapped = true
+
+healguibutton.Name = "healguibutton"
+healguibutton.Parent = otherFrame
+healguibutton.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+healguibutton.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+healguibutton.Position = UDim2.new(0.497712135, 0, 0.263706565, 0)
+healguibutton.Size = UDim2.new(0, 162, 0, 45)
+healguibutton.Font = Enum.Font.SourceSansBold
+healguibutton.Text = "Emergency Healing GUI"
+healguibutton.TextColor3 = Color3.new(1, 0.666667, 1)
+healguibutton.TextScaled = true
+healguibutton.TextSize = 16
+healguibutton.TextStrokeTransparency = 0
+healguibutton.TextWrapped = true
+
+removeragdoll.Name = "removeragdoll"
+removeragdoll.Parent = otherFrame
+removeragdoll.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+removeragdoll.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+removeragdoll.Position = UDim2.new(0.00156788772, 0, 0, 0)
+removeragdoll.Size = UDim2.new(0, 108, 0, 47)
+removeragdoll.Font = Enum.Font.SourceSansBold
+removeragdoll.Text = "Remove Ragdoll"
+removeragdoll.TextColor3 = Color3.new(1, 0.333333, 0.498039)
+removeragdoll.TextScaled = true
+removeragdoll.TextSize = 16
+removeragdoll.TextStrokeTransparency = 0
+removeragdoll.TextWrapped = true
+
+BriefcaseESPFrame.Name = "BriefcaseESPFrame"
+BriefcaseESPFrame.Parent = JailbreakGUI
+BriefcaseESPFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+BriefcaseESPFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+BriefcaseESPFrame.Position = UDim2.new(0.510416687, 0, 0.219444454, 0)
+BriefcaseESPFrame.Size = UDim2.new(0, 399, 0, 152)
+BriefcaseESPFrame.Visible = false
+
+bguis.Name = "bguis"
+bguis.Parent = BriefcaseESPFrame
+bguis.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+bguis.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+bguis.Position = UDim2.new(0.0836998522, 0, 0.0918822065, 0)
+bguis.Size = UDim2.new(0, 332, 0, 36)
+bguis.Font = Enum.Font.SourceSansBold
+bguis.Text = "Billboard GUIs: "
+bguis.TextColor3 = Color3.new(1, 1, 1)
+bguis.TextScaled = true
+bguis.TextSize = 14
+bguis.TextWrapped = true
+
+pointers.Name = "pointers"
+pointers.Parent = BriefcaseESPFrame
+pointers.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+pointers.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+pointers.Position = UDim2.new(0.0836998522, 0, 0.328724325, 0)
+pointers.Size = UDim2.new(0, 332, 0, 36)
+pointers.Font = Enum.Font.SourceSansBold
+pointers.Text = "Pointers: "
+pointers.TextColor3 = Color3.new(1, 1, 1)
+pointers.TextScaled = true
+pointers.TextSize = 14
+pointers.TextWrapped = true
+
+hide.Name = "hide"
+hide.Parent = BriefcaseESPFrame
+hide.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+hide.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+hide.Position = UDim2.new(0.29422617, 0, 0.762934864, 0)
+hide.Size = UDim2.new(0, 163, 0, 36)
+hide.Font = Enum.Font.SourceSansBold
+hide.Text = "Hide GUI"
+hide.TextColor3 = Color3.new(1, 1, 1)
+hide.TextScaled = true
+hide.TextSize = 14
+hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_MCVD81_FAKESCRIPT() -- JailbreakGUI.JBGUIScript 
+function SCRIPT_MXMD85_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -536,7 +616,7 @@ function SCRIPT_MCVD81_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Made certain notifications not take a long time to go away.", 3)
+	notify("Updated Briefcase ESP and brought back colored button texts because I can.", 3)
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -580,6 +660,7 @@ function SCRIPT_MCVD81_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 		end
 	end)
 	local mainframe = script.Parent.MainFrame
+	local briefframe = script.Parent.BriefcaseESPFrame
 	local HoldEBypass = false
 	local gunshoptp = false
 	game.RunService.RenderStepped:connect(function()
@@ -589,9 +670,9 @@ function SCRIPT_MCVD81_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 		end
 		end
 	end)
-	mainframe.GravToggle.Text = "Gravity Toggle / Current: "..tostring(math.floor(workspace.Gravity))
+	mainframe.GravToggle.Text = "Gravity Toggle ("..tostring(math.floor(workspace.Gravity))..")"
 	Changed(workspace, "Gravity", function(grav)
-	mainframe.GravToggle.Text = "Gravity Toggle / Current: "..tostring(grav)
+	mainframe.GravToggle.Text = "Gravity Toggle ("..tostring(grav)..")"
 	end)
 	mainframe.GravToggle.MouseButton1Click:connect(function()
 	if math.floor(workspace.Gravity) == 196 then
@@ -606,10 +687,78 @@ function SCRIPT_MCVD81_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	mainframe.aimbot.MouseButton1Click:connect(function()
 	mainframe.Parent.Confirmation.Visible = true
 	end)
-	local BriefcaseESP = false
-	mainframe.briefcase.MouseButton1Click:connect(function()
-		if not BriefcaseESP then
-		BriefcaseESP = true
+	props = {}
+	props.guitext = false
+	props.pointers = false
+	local bguistemplate = briefframe.bguis.Text
+	local pointerstemplate = briefframe.pointers.Text
+	briefframe.bguis.Text = bguistemplate..tostring(props.guitext)
+	briefframe.pointers.Text = pointerstemplate..tostring(props.pointers)
+	Changed(props, "guitext", function(val)
+	briefframe.bguis.Text = bguistemplate..tostring(val)
+	for i,v in pairs(workspace:GetChildren()) do
+	local success, returnval = pcall(function()
+	return v.Briefcase.BillboardGui.TextButton
+	end)
+	if success then
+	returnval.Visible = val
+	end
+	end
+	end)
+	Changed(props, "pointers", function(val)
+	briefframe.pointers.Text = pointerstemplate..tostring(val)
+	for i,v in pairs(workspace:GetChildren()) do
+	local success, returnval = pcall(function()
+	return v.Briefcase.RopeConstraint
+	end)
+	if success then
+	returnval.Visible = val
+	end
+	end
+	end)
+	briefframe.bguis.MouseButton1Click:connect(function()
+	props.guitext = not props.guitext
+	end)
+	briefframe.pointers.MouseButton1Click:connect(function()
+	props.pointers = not props.pointers
+	end)
+	briefframe.hide.MouseButton1Click:Connect(function()
+	briefframe.Visible = false
+	end)
+	local pointer = function(part)
+	local lplr = game.Players.LocalPlayer
+	local part1 = Instance.new("Part", workspace)
+	part1.Transparency = 1
+	part1.CanCollide = false
+	local part2 = Instance.new("Part", workspace)
+	part2.Transparency = 1
+	part2.CanCollide = false
+	function makeattachment(v)
+	    if not v:FindFirstChild("Attachment") then
+	        Instance.new("Attachment",v)
+	    end
+	    return v.Attachment
+	end
+	local rope = Instance.new("RopeConstraint", part)
+	rope.Attachment0 = makeattachment(part1)
+	rope.Attachment1 = makeattachment(part2)
+	rope.Visible = true
+	rope.Thickness = 0.25
+	rope.Color = BrickColor.new(mainframe.briefcase.TextColor3)
+	local pointfunction = game.RunService.Heartbeat:connect(function()
+	    local pos = (part.Position - game.Players.LocalPlayer.Character.Humanoid.RootPart.Position)
+	    rope.Length = pos.Magnitude
+	    part1.CFrame = lplr.Character.Humanoid.RootPart.CFrame
+	    part2.CFrame = part.CFrame
+	end)
+	coroutine.resume(coroutine.create(function()
+	repeat wait() until GetFamily(part)[1] ~= game
+	pointfunction:Disconnect()
+	part1:Destroy()
+	part2:Destroy()
+	rope:Destroy()
+	end))
+	end
 	local function gui(child)
 	if child.Name == "Drop" then
 	child:WaitForChild("Briefcase")
@@ -633,7 +782,9 @@ function SCRIPT_MCVD81_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	TextButton.TextColor3 = Color3.new(1, 1, 1)
 	TextButton.TextSize = 22
 	TextButton.TextStrokeTransparency = 0
-	game.RunService.RenderStepped:connect(function()
+	TextButton.Visible = props.guitext
+	pointer(child.Briefcase)
+	child.Briefcase.RopeConstraint.Visible = props.pointers
 	local FormatNumber = function(n)
 	local n2 = ""
 	for i = 1, tostring(n):len() do
@@ -650,13 +801,15 @@ function SCRIPT_MCVD81_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end
 	return n3
 	end
+	game.RunService.RenderStepped:connect(function()
 	TextButton.Text = "Briefcase | Distance: "..FormatNumber(math.floor(lplr:DistanceFromCharacter(briefcase.Position)))
 	end)
 	end
 	end
 	for i,v in pairs(workspace:GetChildren()) do gui(v) end
 	workspace.ChildAdded:connect(gui)
-	end
+	mainframe.briefcase.MouseButton1Click:connect(function()
+	briefframe.Visible = true
 	end)
 	local barbedwireshacked = false
 	local itemconfig = game.ReplicatedStorage.Game.ItemConfig
@@ -765,40 +918,6 @@ function SCRIPT_MCVD81_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end
 	end)
 	end)
-	local dests = {}
-	local DestinationNames = {}
-	local Prisonpart = Instance.new("Part")
-	Prisonpart.CFrame = CFrame.new() + Vector3.new(-1170.85, 18, -1388.4)
-	local Jetpackpart = Instance.new("Part")
-	Jetpackpart.CFrame = CFrame.new() + Vector3.new(1390.17, 170, 2600.83)
-	local DonutShop = Instance.new("Part")
-	DonutShop.CFrame = CFrame.new() + Vector3.new(96.2, 22,-1509.2)
-	local gunshop1 = Instance.new("Part")
-	local gunshop2 = Instance.new("Part")
-	gunshop1.CFrame = CFrame.new() + Vector3.new(379.7, 22, 530.6)
-	gunshop2.CFrame = CFrame.new() + Vector3.new(-5, 22, -1775.74)
-	local mbase = Instance.new("Part")
-	mbase.CFrame = CFrame.new() + Vector3.new(819, 22,-279)
-	local Destination = false
-	dests.pp = {workspace.PowerPlant.Spawns.Spawn, "powerplant"}
-	dests.jewel = {jewel.TeleportCriminals.Part, "jewelry store"}
-	dests.bank = {bank.TeleportCriminals.Part, "bank"}
-	dests.cplane = {workspace.AirportCrates.Talkie, "cargo plane"}
-	dests.msm = {workspace.Museum.Spawns.Spawn, "museum"}
-	dests.gas = {workspace.GasStations:GetChildren()[1].Region, "gas station"}
-	dests.prison = {Prisonpart, "prison"}
-	dests.base1 = {workspace.Collect.CollectBase1, "city criminal base"}
-	dests.base2 = {workspace.Collect.CollectBase2, "volcano criminal base"}
-	dests.jetpack = {Jetpackpart, "jetpack"}
-	dests.donut = {DonutShop, "donut shop"}
-	dests.briefcase = {game, "briefcase"}
-	dests.gunshop1 = {gunshop1, "city gun shop"}
-	dests.gunshop2 = {gunshop2, "other gun shop"}
-	dests.mbase = {mbase, "military base"}
-	for i,v in pairs(dests) do
-	table.insert(DestinationNames, i)
-	end
-	table.sort(DestinationNames)
 	local ConfGUI = script.Parent.Confirmation
 	ConfGUI.No.MouseButton1Click:connect(function()
 	ConfGUI.Parent.Confirmation.Visible = false
@@ -981,4 +1100,4 @@ function SCRIPT_MCVD81_FAKESCRIPT() -- JailbreakGUI.JBGUIScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_MCVD81_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_MXMD85_FAKESCRIPT))
