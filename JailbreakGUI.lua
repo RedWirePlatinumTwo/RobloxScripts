@@ -5,7 +5,7 @@ local JailbreakGUI = Instance.new("ScreenGui")
 local MainFrame = Instance.new("Frame")
 local speed = Instance.new("TextButton")
 local aimbot = Instance.new("TextButton")
-local hacklasers = Instance.new("TextButton")
+local removelasers = Instance.new("TextButton")
 local holdebypass = Instance.new("TextButton")
 local briefcase = Instance.new("TextButton")
 local GravToggle = Instance.new("TextButton")
@@ -43,7 +43,7 @@ local pointers = Instance.new("TextButton")
 local hide = Instance.new("TextButton")
 --Properties:
 JailbreakGUI.Name = "JailbreakGUI"
-JailbreakGUI.Parent = game.CoreGui
+JailbreakGUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 JailbreakGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
@@ -82,19 +82,19 @@ aimbot.TextSize = 18
 aimbot.TextStrokeTransparency = 0
 aimbot.TextWrapped = true
 
-hacklasers.Name = "hacklasers"
-hacklasers.Parent = MainFrame
-hacklasers.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-hacklasers.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-hacklasers.Position = UDim2.new(0, 0, 0.189999998, 0)
-hacklasers.Size = UDim2.new(0, 106, 0, 52)
-hacklasers.Font = Enum.Font.SourceSansBold
-hacklasers.Text = "Remove (most) Lasers"
-hacklasers.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-hacklasers.TextScaled = true
-hacklasers.TextSize = 18
-hacklasers.TextStrokeTransparency = 0
-hacklasers.TextWrapped = true
+removelasers.Name = "removelasers"
+removelasers.Parent = MainFrame
+removelasers.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+removelasers.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+removelasers.Position = UDim2.new(0, 0, 0.189999998, 0)
+removelasers.Size = UDim2.new(0, 106, 0, 52)
+removelasers.Font = Enum.Font.SourceSansBold
+removelasers.Text = "Remove (most) Lasers"
+removelasers.TextColor3 = Color3.new(0.333333, 0.666667, 1)
+removelasers.TextScaled = true
+removelasers.TextSize = 18
+removelasers.TextStrokeTransparency = 0
+removelasers.TextWrapped = true
 
 holdebypass.Name = "holdebypass"
 holdebypass.Parent = MainFrame
@@ -548,7 +548,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_FYPX78_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_VAJB65_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -619,7 +619,7 @@ function SCRIPT_FYPX78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Updated Briefcase ESP and brought back colored button texts because I can.", 3)
+	notify("Updated remove lasers script since it has been out of date for a while.", 3)
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -831,27 +831,24 @@ function SCRIPT_FYPX78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	g.ReloadTime = 0
 	g.FuseTime = 0.8
 	end)
-	mainframe.hacklasers.MouseButton1Click:connect(function()
+	mainframe.removelasers.MouseButton1Click:connect(function()
 	local lights = workspace.Museum.Lights
 	local function remove(part)
 	part.Size = Vector3.new(1,1,1)
 	part.CFrame = CFrame.new()
 	end
-	local floor = jewel.Floors:FindFirstChildOfClass("Model")
-	for i,v in pairs(floor:GetChildren()) do
-	for a,p in pairs(v:GetChildren()) do
-	if p.Name == "Lasers" or p.Name == "Laser" then
-	for c,x in pairs(p:GetDescendants()) do
-	if x:IsA("BasePart") then
-	remove(x)
+	for i,v in pairs(workspace:GetDescendants()) do
+	if v.Name:lower():match("laser") then
+	if v.ClassName == "Model" then
+	for a, p in pairs(v:GetDescendants()) do
+	if p:IsA("BasePart") then
+	remove(p)
 	end
 	end
+	else
+	remove(v)
 	end
 	end
-	end
-	local layout = bank.Layout:FindFirstChildOfClass("Model")
-	if layout:FindFirstChild("Lasers") then
-	layout.Lasers:Destroy()
 	end
 	for i,v in pairs(lights:GetChildren()) do
 	v.Light.Size = Vector3.new(1,1,1)
@@ -1101,4 +1098,4 @@ function SCRIPT_FYPX78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_FYPX78_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_VAJB65_FAKESCRIPT))
