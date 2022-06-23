@@ -43,7 +43,7 @@ local pointers = Instance.new("TextButton")
 local hide = Instance.new("TextButton")
 --Properties:
 JailbreakGUI.Name = "JailbreakGUI"
-JailbreakGUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+JailbreakGUI.Parent = game.CoreGui
 JailbreakGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
@@ -548,7 +548,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_VAJB65_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_TVLC80_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -846,7 +846,9 @@ function SCRIPT_VAJB65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	end
 	else
+	if v.CanCollide == false then
 	remove(v)
+	end
 	end
 	end
 	end
@@ -1098,4 +1100,4 @@ function SCRIPT_VAJB65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_VAJB65_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_TVLC80_FAKESCRIPT))
