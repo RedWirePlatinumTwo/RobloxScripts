@@ -150,7 +150,7 @@ raycasting.Name = "raycasting"
 raycasting.Parent = MFrame
 raycasting.BackgroundColor3 = Color3.new(0, 0, 0)
 raycasting.BorderColor3 = Color3.new(0, 0.666667, 0)
-raycasting.Position = UDim2.new(0.36153847, 0, 0.264705896, 0)
+raycasting.Position = UDim2.new(0.361999989, 0, 0.266000003, 0)
 raycasting.Size = UDim2.new(0, 83, 0, 57)
 raycasting.Font = Enum.Font.Highway
 raycasting.Text = "Enable Raycasting:"
@@ -329,7 +329,7 @@ typelabel.TextScaled = true
 typelabel.TextSize = 14
 typelabel.TextWrapped = true
 -- Scripts:
-function SCRIPT_ELSQ81_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_QHOX86_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	if not _G.RedsAimbot then
@@ -789,4 +789,4 @@ function SCRIPT_ELSQ81_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_ELSQ81_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_QHOX86_FAKESCRIPT))
