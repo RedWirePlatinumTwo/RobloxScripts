@@ -282,8 +282,7 @@ Title_2.Name = "Title"
 Title_2.Parent = AimbotManagerUI
 Title_2.BackgroundColor3 = Color3.new(0, 0, 0)
 Title_2.BorderColor3 = Color3.new(0, 0.666667, 0)
-Title_2.Position = UDim2.new(0, 0, 0.00569419423, 0)
-Title_2.Size = UDim2.new(0, 370, 0, 28)
+Title_2.Size = UDim2.new(0, 370, 0, 29)
 Title_2.Font = Enum.Font.Highway
 Title_2.Text = "Aimbot Manager"
 Title_2.TextColor3 = Color3.new(0, 0.666667, 0)
@@ -330,7 +329,7 @@ typelabel.TextScaled = true
 typelabel.TextSize = 14
 typelabel.TextWrapped = true
 -- Scripts:
-function SCRIPT_BGTR72_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_ELSQ81_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	if not _G.RedsAimbot then
@@ -790,4 +789,4 @@ function SCRIPT_BGTR72_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_BGTR72_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_ELSQ81_FAKESCRIPT))
