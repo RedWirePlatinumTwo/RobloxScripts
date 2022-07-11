@@ -330,7 +330,7 @@ typelabel.TextScaled = true
 typelabel.TextSize = 14
 typelabel.TextWrapped = true
 -- Scripts:
-function SCRIPT_IVQT88_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_XAIR70_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	if not _G.RedsAimbot then
@@ -727,6 +727,11 @@ function SCRIPT_IVQT88_FAKESCRIPT() -- Aimbot.Scripts
 	coroutine.resume(coroutine.create(function()
 	repeat wait() until not game.Teams:FindFirstChild(ins.Name)
 	clone:Destroy()
+	for i,v in pairs(AddedTeams) do
+	if ins.Name == v then
+	table.remove(AddedTeams, i)
+	end
+	end
 	end))
 	else
 	clone.TextLabel.Text = ins.ClassName..": "..CheckDN(ins)
@@ -783,4 +788,4 @@ function SCRIPT_IVQT88_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_IVQT88_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_XAIR70_FAKESCRIPT))
