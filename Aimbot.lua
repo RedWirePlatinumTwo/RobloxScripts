@@ -330,7 +330,7 @@ typelabel.TextScaled = true
 typelabel.TextSize = 14
 typelabel.TextWrapped = true
 -- Scripts:
-function SCRIPT_THYZ71_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_IVQT88_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	if not _G.RedsAimbot then
@@ -349,6 +349,7 @@ function SCRIPT_THYZ71_FAKESCRIPT() -- Aimbot.Scripts
 	local WhitelistedTeams = {}
 	local WhitelistedPlrs = {}
 	local PrioritizedPlrs = {}
+	local AddedTeams = {}
 	local plrs = game.Players
 	local lplr = plrs.LocalPlayer
 	local m = lplr:GetMouse()
@@ -720,14 +721,15 @@ function SCRIPT_THYZ71_FAKESCRIPT() -- Aimbot.Scripts
 	end)
 	end
 	if isTeam then
-	clone.TextLabel.Text = "Whitelist the "..ins.Name.." team?"
+	clone.TextLabel.Text = ins.ClassName..": "..ins.Name
 	togglefunc(WhitelistedTeams)
+	table.insert(AddedTeams, ins)
 	coroutine.resume(coroutine.create(function()
 	repeat wait() until not game.Teams:FindFirstChild(ins.Name)
 	clone:Destroy()
 	end))
 	else
-	clone.TextLabel.Text = "Whitelist ".. CheckDN(ins) .."?"
+	clone.TextLabel.Text = ins.ClassName..": "..CheckDN(ins)
 	togglefunc(WhitelistedPlrs)
 	wlframe.PriorityToggle.Visible = true
 	togglefunc(PrioritizedPlrs)
@@ -755,7 +757,7 @@ function SCRIPT_THYZ71_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	plrs.PlayerAdded:connect(AddtoList)
 	game.Teams.ChildAdded:connect(function(team)
-	if team.ClassName == "Team" then
+	if team.ClassName == "Team" and not table.find(AddedTeams, team) then
 	AddtoList(team, true)
 	end
 	end)
@@ -781,4 +783,4 @@ function SCRIPT_THYZ71_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_THYZ71_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_IVQT88_FAKESCRIPT))
