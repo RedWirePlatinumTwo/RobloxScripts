@@ -3,7 +3,7 @@
 -- Instances:
 local Aimbot = Instance.new("ScreenGui")
 local MFrame = Instance.new("Frame")
-local WhitelistUIOpener = Instance.new("TextButton")
+local ManagerUIOpener = Instance.new("TextButton")
 local IsAimbotOn = Instance.new("TextButton")
 local X = Instance.new("TextButton")
 local AutoTarget = Instance.new("TextButton")
@@ -12,22 +12,22 @@ local TargetedPart = Instance.new("TextButton")
 local FirstPerson = Instance.new("TextButton")
 local ChosenPlayer = Instance.new("TextLabel")
 local raycasting = Instance.new("TextButton")
-local WhitelistUI = Instance.new("Frame")
+local AimbotManagerUI = Instance.new("Frame")
 local WhitelistedInstances = Instance.new("ScrollingFrame")
 local whitelistownteam = Instance.new("Frame")
 local TextLabel = Instance.new("TextLabel")
-local Toggle = Instance.new("TextButton")
+local WhitelistToggle = Instance.new("TextButton")
 local whitelistframe = Instance.new("Frame")
 local TextLabel_2 = Instance.new("TextLabel")
-local Toggle_2 = Instance.new("TextButton")
+local WhitelistToggle_2 = Instance.new("TextButton")
+local PriorityToggle = Instance.new("TextButton")
 local UIListLayout = Instance.new("UIListLayout")
 local hide = Instance.new("TextButton")
-local about = Instance.new("TextButton")
-local AboutUI = Instance.new("Frame")
-local Info = Instance.new("TextLabel")
-local Close = Instance.new("TextButton")
 local searchbar = Instance.new("TextBox")
 local Title_2 = Instance.new("TextLabel")
+local whitelistlable = Instance.new("TextLabel")
+local prioritylable = Instance.new("TextLabel")
+local typelabel = Instance.new("TextLabel")
 --Properties:
 Aimbot.Name = "Aimbot"
 Aimbot.Parent = game.CoreGui
@@ -40,18 +40,18 @@ MFrame.BorderColor3 = Color3.new(0, 0.666667, 0)
 MFrame.Position = UDim2.new(0.66648978, 0, 0.112894237, 0)
 MFrame.Size = UDim2.new(0, 260, 0, 170)
 
-WhitelistUIOpener.Name = "WhitelistUIOpener"
-WhitelistUIOpener.Parent = MFrame
-WhitelistUIOpener.BackgroundColor3 = Color3.new(0, 0, 0)
-WhitelistUIOpener.BorderColor3 = Color3.new(0, 0.666667, 0)
-WhitelistUIOpener.Position = UDim2.new(0, 0, 0.652204633, 0)
-WhitelistUIOpener.Size = UDim2.new(0, 94, 0, 50)
-WhitelistUIOpener.Font = Enum.Font.Highway
-WhitelistUIOpener.Text = "Whitelister UI"
-WhitelistUIOpener.TextColor3 = Color3.new(0, 0.666667, 0)
-WhitelistUIOpener.TextScaled = true
-WhitelistUIOpener.TextSize = 14
-WhitelistUIOpener.TextWrapped = true
+ManagerUIOpener.Name = "ManagerUIOpener"
+ManagerUIOpener.Parent = MFrame
+ManagerUIOpener.BackgroundColor3 = Color3.new(0, 0, 0)
+ManagerUIOpener.BorderColor3 = Color3.new(0, 0.666667, 0)
+ManagerUIOpener.Position = UDim2.new(0, 0, 0.652204633, 0)
+ManagerUIOpener.Size = UDim2.new(0, 94, 0, 50)
+ManagerUIOpener.Font = Enum.Font.Highway
+ManagerUIOpener.Text = "Aimbot Manager"
+ManagerUIOpener.TextColor3 = Color3.new(0, 0.666667, 0)
+ManagerUIOpener.TextScaled = true
+ManagerUIOpener.TextSize = 14
+ManagerUIOpener.TextWrapped = true
 
 IsAimbotOn.Name = "IsAimbotOn"
 IsAimbotOn.Parent = MFrame
@@ -159,154 +159,116 @@ raycasting.TextScaled = true
 raycasting.TextSize = 14
 raycasting.TextWrapped = true
 
-WhitelistUI.Name = "WhitelistUI"
-WhitelistUI.Parent = Aimbot
-WhitelistUI.BackgroundColor3 = Color3.new(0, 0, 0)
-WhitelistUI.BorderColor3 = Color3.new(0, 0.666667, 0)
-WhitelistUI.BorderSizePixel = 2
-WhitelistUI.Position = UDim2.new(0.390190303, 0, 0.110677078, 0)
-WhitelistUI.Size = UDim2.new(0, 324, 0, 269)
-WhitelistUI.Visible = false
+AimbotManagerUI.Name = "AimbotManagerUI"
+AimbotManagerUI.Parent = Aimbot
+AimbotManagerUI.BackgroundColor3 = Color3.new(0, 0, 0)
+AimbotManagerUI.BorderColor3 = Color3.new(0, 0.666667, 0)
+AimbotManagerUI.BorderSizePixel = 2
+AimbotManagerUI.Position = UDim2.new(0.319356978, 0, 0.110677086, 0)
+AimbotManagerUI.Size = UDim2.new(0, 460, 0, 269)
+AimbotManagerUI.Visible = false
 
 WhitelistedInstances.Name = "WhitelistedInstances"
-WhitelistedInstances.Parent = WhitelistUI
+WhitelistedInstances.Parent = AimbotManagerUI
 WhitelistedInstances.Active = true
 WhitelistedInstances.BackgroundColor3 = Color3.new(0, 0, 0)
 WhitelistedInstances.BorderColor3 = Color3.new(0, 0.666667, 0)
-WhitelistedInstances.Position = UDim2.new(0, 0, 0.278215498, 0)
-WhitelistedInstances.Size = UDim2.new(0, 324, 0, 193)
+WhitelistedInstances.Position = UDim2.new(0, 0, 0.359999865, 0)
+WhitelistedInstances.Size = UDim2.new(0, 460, 0, 172)
 WhitelistedInstances.CanvasSize = UDim2.new(0, 0, 0.140000001, 0)
 
 whitelistownteam.Name = "whitelistownteam"
 whitelistownteam.Parent = WhitelistedInstances
 whitelistownteam.BackgroundColor3 = Color3.new(0, 0, 0)
 whitelistownteam.BorderColor3 = Color3.new(0, 0.666667, 0)
-whitelistownteam.Size = UDim2.new(0, 312, 0, 37)
+whitelistownteam.Size = UDim2.new(0, 445, 0, 37)
 
 TextLabel.Parent = whitelistownteam
 TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
 TextLabel.BackgroundTransparency = 1
 TextLabel.Size = UDim2.new(0, 264, 0, 37)
 TextLabel.Font = Enum.Font.Highway
-TextLabel.Text = "Whitelist own team?"
+TextLabel.Text = "Whitelist your own team?"
 TextLabel.TextColor3 = Color3.new(0, 0.666667, 0)
 TextLabel.TextSize = 18
 TextLabel.TextWrapped = true
 
-Toggle.Name = "Toggle"
-Toggle.Parent = whitelistownteam
-Toggle.BackgroundColor3 = Color3.new(1, 1, 1)
-Toggle.BackgroundTransparency = 1
-Toggle.Position = UDim2.new(0.846153855, 0, 0, 0)
-Toggle.Size = UDim2.new(0, 48, 0, 37)
-Toggle.Font = Enum.Font.Highway
-Toggle.Text = "Yes"
-Toggle.TextColor3 = Color3.new(0, 1, 0)
-Toggle.TextSize = 22
-Toggle.TextWrapped = true
+WhitelistToggle.Name = "WhitelistToggle"
+WhitelistToggle.Parent = whitelistownteam
+WhitelistToggle.BackgroundColor3 = Color3.new(1, 1, 1)
+WhitelistToggle.BackgroundTransparency = 1
+WhitelistToggle.Position = UDim2.new(0.844252408, 0, 0, 0)
+WhitelistToggle.Size = UDim2.new(0, 68, 0, 37)
+WhitelistToggle.Font = Enum.Font.Highway
+WhitelistToggle.Text = "Yes"
+WhitelistToggle.TextColor3 = Color3.new(0, 1, 0)
+WhitelistToggle.TextSize = 22
+WhitelistToggle.TextWrapped = true
 
 whitelistframe.Name = "whitelistframe"
 whitelistframe.Parent = WhitelistedInstances
 whitelistframe.BackgroundColor3 = Color3.new(0, 0, 0)
 whitelistframe.BorderColor3 = Color3.new(0, 0.666667, 0)
-whitelistframe.Size = UDim2.new(0, 312, 0, 37)
+whitelistframe.Size = UDim2.new(0, 445, 0, 37)
 whitelistframe.Visible = false
 
 TextLabel_2.Parent = whitelistframe
 TextLabel_2.BackgroundColor3 = Color3.new(1, 1, 1)
 TextLabel_2.BackgroundTransparency = 1
-TextLabel_2.Size = UDim2.new(0, 264, 0, 37)
+TextLabel_2.Size = UDim2.new(0, 235, 0, 37)
 TextLabel_2.Font = Enum.Font.Highway
 TextLabel_2.Text = "sample text lmao"
 TextLabel_2.TextColor3 = Color3.new(0, 0.666667, 0)
 TextLabel_2.TextSize = 18
 TextLabel_2.TextWrapped = true
 
-Toggle_2.Name = "Toggle"
-Toggle_2.Parent = whitelistframe
-Toggle_2.BackgroundColor3 = Color3.new(1, 1, 1)
-Toggle_2.BackgroundTransparency = 1
-Toggle_2.Position = UDim2.new(0.846153855, 0, 0, 0)
-Toggle_2.Size = UDim2.new(0, 48, 0, 37)
-Toggle_2.Font = Enum.Font.Highway
-Toggle_2.Text = "No"
-Toggle_2.TextColor3 = Color3.new(1, 0, 0)
-Toggle_2.TextSize = 22
-Toggle_2.TextWrapped = true
+WhitelistToggle_2.Name = "WhitelistToggle"
+WhitelistToggle_2.Parent = whitelistframe
+WhitelistToggle_2.BackgroundColor3 = Color3.new(1, 1, 1)
+WhitelistToggle_2.BackgroundTransparency = 1
+WhitelistToggle_2.Position = UDim2.new(0.846153855, 0, 0, 0)
+WhitelistToggle_2.Size = UDim2.new(0, 68, 0, 37)
+WhitelistToggle_2.Font = Enum.Font.Highway
+WhitelistToggle_2.Text = "No"
+WhitelistToggle_2.TextColor3 = Color3.new(1, 0, 0)
+WhitelistToggle_2.TextSize = 22
+WhitelistToggle_2.TextWrapped = true
+
+PriorityToggle.Name = "PriorityToggle"
+PriorityToggle.Parent = whitelistframe
+PriorityToggle.BackgroundColor3 = Color3.new(1, 1, 1)
+PriorityToggle.BackgroundTransparency = 1
+PriorityToggle.Position = UDim2.new(0.530669451, 0, 0, 0)
+PriorityToggle.Size = UDim2.new(0, 119, 0, 37)
+PriorityToggle.Visible = false
+PriorityToggle.Font = Enum.Font.Highway
+PriorityToggle.Text = "No"
+PriorityToggle.TextColor3 = Color3.new(1, 0, 0)
+PriorityToggle.TextSize = 22
+PriorityToggle.TextWrapped = true
 
 UIListLayout.Parent = WhitelistedInstances
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
 hide.Name = "hide"
-hide.Parent = WhitelistUI
+hide.Parent = AimbotManagerUI
 hide.BackgroundColor3 = Color3.new(0, 0, 0)
 hide.BorderColor3 = Color3.new(0, 0.666667, 0)
-hide.Position = UDim2.new(0.728395045, 0, 0, 0)
-hide.Size = UDim2.new(0, 89, 0, 30)
+hide.Position = UDim2.new(0.804481864, 0, 0, 0)
+hide.Size = UDim2.new(0, 89, 0, 29)
 hide.Font = Enum.Font.Highway
 hide.Text = "Hide UI"
-hide.TextColor3 = Color3.new(0, 0.333333, 1)
+hide.TextColor3 = Color3.new(1, 0, 0)
 hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 
-about.Name = "about"
-about.Parent = WhitelistUI
-about.BackgroundColor3 = Color3.new(0, 0, 0)
-about.BorderColor3 = Color3.new(0, 0.666667, 0)
-about.Position = UDim2.new(0.89637363, 0, 0.111524165, 0)
-about.Size = UDim2.new(0, 33, 0, 33)
-about.Font = Enum.Font.Highway
-about.Text = "ⓘ"
-about.TextColor3 = Color3.new(0, 0.333333, 1)
-about.TextScaled = true
-about.TextSize = 14
-about.TextStrokeColor3 = Color3.new(0, 0.333333, 1)
-about.TextStrokeTransparency = 0.6000000238418579
-about.TextWrapped = true
-
-AboutUI.Name = "AboutUI"
-AboutUI.Parent = WhitelistUI
-AboutUI.Active = true
-AboutUI.BackgroundColor3 = Color3.new(0, 0, 0)
-AboutUI.BorderColor3 = Color3.new(0, 0.666667, 0)
-AboutUI.Position = UDim2.new(-0.111111119, 0, 0.438661695, 0)
-AboutUI.Size = UDim2.new(0, 378, 0, 223)
-AboutUI.Visible = false
-
-Info.Name = "Info"
-Info.Parent = AboutUI
-Info.BackgroundColor3 = Color3.new(0, 0, 0)
-Info.BackgroundTransparency = 1
-Info.Size = UDim2.new(0, 378, 0, 196)
-Info.Font = Enum.Font.Highway
-Info.Text = "sample text"
-Info.TextColor3 = Color3.new(0, 0.666667, 0)
-Info.TextScaled = true
-Info.TextSize = 14
-Info.TextWrapped = true
-Info.TextXAlignment = Enum.TextXAlignment.Left
-Info.TextYAlignment = Enum.TextYAlignment.Top
-
-Close.Name = "Close"
-Close.Parent = AboutUI
-Close.BackgroundColor3 = Color3.new(0, 0, 0)
-Close.BorderColor3 = Color3.new(0, 0.666667, 0)
-Close.Position = UDim2.new(0.375661373, 0, 0.88340807, 0)
-Close.Size = UDim2.new(0, 96, 0, 26)
-Close.Font = Enum.Font.Highway
-Close.Text = "Close"
-Close.TextColor3 = Color3.new(1, 0, 0)
-Close.TextScaled = true
-Close.TextSize = 14
-Close.TextWrapped = true
-
 searchbar.Name = "searchbar"
-searchbar.Parent = WhitelistUI
+searchbar.Parent = AimbotManagerUI
 searchbar.BackgroundColor3 = Color3.new(0, 0, 0)
 searchbar.BorderColor3 = Color3.new(0, 0.666667, 0)
 searchbar.Position = UDim2.new(0, 0, 0.111524165, 0)
-searchbar.Size = UDim2.new(0, 290, 0, 33)
+searchbar.Size = UDim2.new(0, 459, 0, 33)
 searchbar.Font = Enum.Font.Highway
 searchbar.PlaceholderColor3 = Color3.new(0, 0.666667, 0)
 searchbar.PlaceholderText = "Filter Scrolling Frame results"
@@ -317,18 +279,58 @@ searchbar.TextSize = 14
 searchbar.TextWrapped = true
 
 Title_2.Name = "Title"
-Title_2.Parent = WhitelistUI
+Title_2.Parent = AimbotManagerUI
 Title_2.BackgroundColor3 = Color3.new(0, 0, 0)
 Title_2.BorderColor3 = Color3.new(0, 0.666667, 0)
-Title_2.Size = UDim2.new(0, 236, 0, 29)
+Title_2.Position = UDim2.new(0, 0, 0.00569419423, 0)
+Title_2.Size = UDim2.new(0, 370, 0, 28)
 Title_2.Font = Enum.Font.Highway
-Title_2.Text = "Whitelisting UI"
+Title_2.Text = "Aimbot Manager"
 Title_2.TextColor3 = Color3.new(0, 0.666667, 0)
 Title_2.TextScaled = true
 Title_2.TextSize = 14
 Title_2.TextWrapped = true
+
+whitelistlable.Name = "whitelistlable"
+whitelistlable.Parent = AimbotManagerUI
+whitelistlable.BackgroundColor3 = Color3.new(0, 0, 0)
+whitelistlable.BorderColor3 = Color3.new(0, 0.666667, 0)
+whitelistlable.Position = UDim2.new(0.746994019, 0, 0.241635695, 0)
+whitelistlable.Size = UDim2.new(0, 115, 0, 29)
+whitelistlable.Font = Enum.Font.Highway
+whitelistlable.Text = "Is Whitelisted"
+whitelistlable.TextColor3 = Color3.new(0, 0.666667, 0)
+whitelistlable.TextScaled = true
+whitelistlable.TextSize = 14
+whitelistlable.TextWrapped = true
+
+prioritylable.Name = "prioritylable"
+prioritylable.Parent = AimbotManagerUI
+prioritylable.BackgroundColor3 = Color3.new(0, 0, 0)
+prioritylable.BorderColor3 = Color3.new(0, 0.666667, 0)
+prioritylable.Position = UDim2.new(0.507863581, 0, 0.24163568, 0)
+prioritylable.Size = UDim2.new(0, 110, 0, 29)
+prioritylable.Font = Enum.Font.Highway
+prioritylable.Text = "Is Prioritized"
+prioritylable.TextColor3 = Color3.new(0, 0.666667, 0)
+prioritylable.TextScaled = true
+prioritylable.TextSize = 14
+prioritylable.TextWrapped = true
+
+typelabel.Name = "typelabel"
+typelabel.Parent = AimbotManagerUI
+typelabel.BackgroundColor3 = Color3.new(0, 0, 0)
+typelabel.BorderColor3 = Color3.new(0, 0.666667, 0)
+typelabel.Position = UDim2.new(0, 0, 0.241635695, 0)
+typelabel.Size = UDim2.new(0, 234, 0, 29)
+typelabel.Font = Enum.Font.Highway
+typelabel.Text = "Player/Team Name"
+typelabel.TextColor3 = Color3.new(0, 0.666667, 0)
+typelabel.TextScaled = true
+typelabel.TextSize = 14
+typelabel.TextWrapped = true
 -- Scripts:
-function SCRIPT_FSAW67_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_THYZ71_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	if not _G.RedsAimbot then
@@ -339,13 +341,14 @@ function SCRIPT_FSAW67_FAKESCRIPT() -- Aimbot.Scripts
 	v.Active = true
 	end
 	end
-	local wlui = script.Parent.WhitelistUI
+	local wlui = script.Parent.AimbotManagerUI
 	wlui.WhitelistedInstances.ScrollBarImageColor3 = Color3.new(0,1,0)
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
 	local WhitelistedTeams = {}
 	local WhitelistedPlrs = {}
+	local PrioritizedPlrs = {}
 	local plrs = game.Players
 	local lplr = plrs.LocalPlayer
 	local m = lplr:GetMouse()
@@ -397,15 +400,16 @@ function SCRIPT_FSAW67_FAKESCRIPT() -- Aimbot.Scripts
 	local humanoidvalid, humanoid = pcall(function()
 	return player.Character.Humanoid
 	end)
+	local function checkplr()
+	if usingraycast(player.Character) then
+	selectplr(player.Character)
+	end
+	end
 	if player.Name ~= lplr.Name and humanoidvalid then
 	if game.Teams:FindFirstChildOfClass("Team") and IsNotWhitelisted(player) and humanoid.Health ~= 0 then
-	if usingraycast(player.Character) then
-	selectplr(player.Character)
-	end
+	checkplr()
 	elseif not game.Teams:FindFirstChildOfClass("Team") and IsNotWhitelisted(player) then
-	if usingraycast(player.Character) then
-	selectplr(player.Character)
-	end
+	checkplr()
 	end
 	end
 	end
@@ -413,6 +417,7 @@ function SCRIPT_FSAW67_FAKESCRIPT() -- Aimbot.Scripts
 	GetNearestPlayer = function()
 	local table1 = {}
 	local table2 = {}
+	local PrioritizedPlrsOnScreen = {}
 	for i,v in pairs(plrs:GetPlayers()) do
 	local outcome = pcall(function()
 	 return v.Character.Humanoid and v.Character[AimbotStats.Target]
@@ -423,10 +428,24 @@ function SCRIPT_FSAW67_FAKESCRIPT() -- Aimbot.Scripts
 	if onscreen and usingraycast(v.Character) then
 	table1[pos] = v
 	table.insert(table2, pos)
+	if table.find(PrioritizedPlrs, v) then
+	table.insert(PrioritizedPlrsOnScreen, v)
 	end
+	end
+	end
+	end
+	if #PrioritizedPlrsOnScreen == 0 then
+	table.sort(table2)
+	else
+	for pos, plr in pairs(table1) do
+	if not table.find(PrioritizedPlrsOnScreen, plr) then
+	local num = table.find(table2,pos)
+	table.remove(table2, num)
+	table1[pos] = nil
 	end
 	end
 	table.sort(table2)
+	end
 	for position, player in pairs(table1) do
 	if table2[1] == position and position < studs then
 	GetPlayer(player)
@@ -566,7 +585,7 @@ function SCRIPT_FSAW67_FAKESCRIPT() -- Aimbot.Scripts
 	game.StarterGui:SetCore("SendNotification", {
 	Title = "Aimbot Update:";
 	Duration = 10;
-	Text = "Increased auto-target max stud disance from 500 -> 750.";})
+	Text = "Added Player Prioritizing!";})
 	
 	function Died(player)
 	if not player.Character then player.CharacterAdded:Wait() end
@@ -628,7 +647,7 @@ function SCRIPT_FSAW67_FAKESCRIPT() -- Aimbot.Scripts
 	MainFrame.ChosenPlayer.Visible = false
 	end
 	end)
-	MainFrame.WhitelistUIOpener.MouseButton1Click:connect(function()
+	MainFrame.ManagerUIOpener.MouseButton1Click:connect(function()
 	wlui.Visible = true
 	end)
 	local fptext = MainFrame.FirstPerson.Text.." "
@@ -658,22 +677,11 @@ function SCRIPT_FSAW67_FAKESCRIPT() -- Aimbot.Scripts
 	MainFrame.AutoTarget.MouseButton1Click:connect(function()
 	AimbotStats.AutoTarget = not AimbotStats.AutoTarget
 	end)
-	wlui.AboutUI.Draggable = true
-	wlui.about.MouseButton1Click:Connect(function()
-	wlui.AboutUI.Visible = true
-	end)
-	wlui.AboutUI.Close.MouseButton1Click:connect(function()
-	wlui.AboutUI.Visible = false
-	end)
 	wlui.hide.MouseButton1Click:connect(function()
 	wlui.Visible = false
 	end)
 	local wlframe = wlui.WhitelistedInstances.whitelistframe
-	local Abouttext = [[- Whitelisting teams/players will have the targeting system avoid targeting the specified player or any player within a team. 
-	- By default, your own team is whitelisted, this can be disabled/re-enabled by simply clicking the "Yes" text.
-	-To whitelist any team/player, simply click the yes/no button next to that player or team name.]]
-	wlui.AboutUI.Info.Text = Abouttext
-	local toggle = wlui.WhitelistedInstances.whitelistownteam.Toggle
+	local toggle = wlui.WhitelistedInstances.whitelistownteam.WhitelistToggle
 	toggle.MouseButton1Click:connect(function()
 	AimbotStats.OwnTeamWhitelisted = not AimbotStats.OwnTeamWhitelisted
 	if not AimbotStats.OwnTeamWhitelisted then
@@ -689,7 +697,12 @@ function SCRIPT_FSAW67_FAKESCRIPT() -- Aimbot.Scripts
 	clone.Visible = true
 	clone.Parent = wlframe.Parent
 	local function togglefunc(Table)
-	local button = clone.Toggle
+	local button
+	if Table == PrioritizedPlrs then
+	button = clone.PriorityToggle
+	else
+	button = clone.WhitelistToggle
+	end
 	button.MouseButton1Click:connect(function()
 	if button.Text == "No" then
 	button.TextColor3 = Color3.new(0,1,0)
@@ -709,9 +722,15 @@ function SCRIPT_FSAW67_FAKESCRIPT() -- Aimbot.Scripts
 	if isTeam then
 	clone.TextLabel.Text = "Whitelist the "..ins.Name.." team?"
 	togglefunc(WhitelistedTeams)
+	coroutine.resume(coroutine.create(function()
+	repeat wait() until not game.Teams:FindFirstChild(ins.Name)
+	clone:Destroy()
+	end))
 	else
 	clone.TextLabel.Text = "Whitelist ".. CheckDN(ins) .."?"
 	togglefunc(WhitelistedPlrs)
+	wlframe.PriorityToggle.Visible = true
+	togglefunc(PrioritizedPlrs)
 	coroutine.resume(coroutine.create(function()
 	repeat wait() until not game.Players:FindFirstChild(ins.Name)
 	clone:Destroy()
@@ -734,8 +753,11 @@ function SCRIPT_FSAW67_FAKESCRIPT() -- Aimbot.Scripts
 	AddtoList(plr)
 	end
 	end
-	plrs.PlayerAdded:connect(function(plr)
-	AddtoList(plr)
+	plrs.PlayerAdded:connect(AddtoList)
+	game.Teams.ChildAdded:connect(function(team)
+	if team.ClassName == "Team" then
+	AddtoList(team, true)
+	end
 	end)
 	Changed(wlui.searchbar, "Text", function(txt)
 	for i,v in pairs(wlui.WhitelistedInstances:GetChildren()) do
@@ -759,4 +781,4 @@ function SCRIPT_FSAW67_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_FSAW67_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_THYZ71_FAKESCRIPT))
