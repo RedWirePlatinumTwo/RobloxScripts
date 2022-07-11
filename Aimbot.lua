@@ -329,7 +329,7 @@ typelabel.TextScaled = true
 typelabel.TextSize = 14
 typelabel.TextWrapped = true
 -- Scripts:
-function SCRIPT_QHOX86_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_NBDF82_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	if not _G.RedsAimbot then
@@ -341,6 +341,9 @@ function SCRIPT_QHOX86_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end
 	local wlui = script.Parent.AimbotManagerUI
+	local scaleY = script.Parent.MFrame.FirstPerson.Position.Y.Scale
+	local raypos = script.Parent.MFrame.raycasting.Position
+	script.Parent.MFrame.raycasting.Position = UDim2.new(raypos.X.Scale, raypos.X.Offset, scaleY, raypos.Y.Offset)
 	wlui.WhitelistedInstances.ScrollBarImageColor3 = Color3.new(0,1,0)
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
@@ -425,7 +428,7 @@ function SCRIPT_QHOX86_FAKESCRIPT() -- Aimbot.Scripts
 	if outcome and v.Name ~= lplr.Name and v.Character.Humanoid.Health ~= 0 and IsNotWhitelisted(v) then
 	local pos = math.floor(lplr:DistanceFromCharacter(v.Character[AimbotStats.Target].Position))
 	local _, onscreen = workspace.Camera:WorldToScreenPoint(v.Character[AimbotStats.Target].Position)
-	if onscreen and usingraycast(v.Character) then
+	if onscreen and usingraycast(v.Character) and pos < studs then
 	table1[pos] = v
 	table.insert(table2, pos)
 	if table.find(PrioritizedPlrs, v) then
@@ -447,7 +450,7 @@ function SCRIPT_QHOX86_FAKESCRIPT() -- Aimbot.Scripts
 	table.sort(table2)
 	end
 	for position, player in pairs(table1) do
-	if table2[1] == position and position < studs then
+	if table2[1] == position then
 	GetPlayer(player)
 	end
 	end
@@ -789,4 +792,4 @@ function SCRIPT_QHOX86_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_QHOX86_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_NBDF82_FAKESCRIPT))
