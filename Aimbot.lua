@@ -723,7 +723,7 @@ function SCRIPT_IVQT88_FAKESCRIPT() -- Aimbot.Scripts
 	if isTeam then
 	clone.TextLabel.Text = ins.ClassName..": "..ins.Name
 	togglefunc(WhitelistedTeams)
-	table.insert(AddedTeams, ins)
+	table.insert(AddedTeams, ins.Name)
 	coroutine.resume(coroutine.create(function()
 	repeat wait() until not game.Teams:FindFirstChild(ins.Name)
 	clone:Destroy()
@@ -757,7 +757,7 @@ function SCRIPT_IVQT88_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	plrs.PlayerAdded:connect(AddtoList)
 	game.Teams.ChildAdded:connect(function(team)
-	if team.ClassName == "Team" and not table.find(AddedTeams, team) then
+	if team.ClassName == "Team" and not table.find(AddedTeams, team.Name) then
 	AddtoList(team, true)
 	end
 	end)
