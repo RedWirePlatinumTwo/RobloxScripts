@@ -330,7 +330,7 @@ typelabel.TextScaled = true
 typelabel.TextSize = 14
 typelabel.TextWrapped = true
 -- Scripts:
-function SCRIPT_XAIR70_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_BGTR72_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	if not _G.RedsAimbot then
@@ -753,7 +753,9 @@ function SCRIPT_XAIR70_FAKESCRIPT() -- Aimbot.Scripts
 	wlui.WhitelistedInstances.CanvasSize = UDim2.new(0,0,yval, 0)
 	end)
 	for i, team in pairs(game.Teams:GetTeams()) do
+	if not table.find(AddedTeams, team.Name) then
 	AddtoList(team, true)
+	end
 	end
 	for i,plr in pairs(plrs:GetPlayers()) do
 	if plr ~= lplr then
@@ -788,4 +790,4 @@ function SCRIPT_XAIR70_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_XAIR70_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_BGTR72_FAKESCRIPT))
