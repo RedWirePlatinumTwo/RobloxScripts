@@ -329,7 +329,7 @@ typelabel.TextScaled = true
 typelabel.TextSize = 14
 typelabel.TextWrapped = true
 -- Scripts:
-function SCRIPT_NBDF82_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_IVSR83_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	if not _G.RedsAimbot then
@@ -456,7 +456,7 @@ function SCRIPT_NBDF82_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end
 	local Keybinds = [[
-	Aimbot keybinds:
+	Aimbot info:
 	Left alt - turns Aimbot on/off
 	(Turning it on will attempt to find a player wherever your cursor hovers, if a player is found, your cursor will "forcefully" stay on the set targeted part.)
 	Right alt - targets the nearest opponent within ]]..studs..[[ studs (aimbot has to be on, obviously)
@@ -588,7 +588,7 @@ function SCRIPT_NBDF82_FAKESCRIPT() -- Aimbot.Scripts
 	game.StarterGui:SetCore("SendNotification", {
 	Title = "Aimbot Update:";
 	Duration = 10;
-	Text = "Added Player Prioritizing!";})
+	Text = "Players can no longer be prioritized and whitelisted at the same time.";})
 	
 	function Died(player)
 	if not player.Character then player.CharacterAdded:Wait() end
@@ -695,7 +695,7 @@ function SCRIPT_NBDF82_FAKESCRIPT() -- Aimbot.Scripts
 	toggle.Text = "Yes"
 	end
 	end)
-	function AddtoList(ins, isTeam)
+	function AddtoList(ins)
 	local clone = wlframe:Clone()
 	clone.Visible = true
 	clone.Parent = wlframe.Parent
@@ -711,29 +711,35 @@ function SCRIPT_NBDF82_FAKESCRIPT() -- Aimbot.Scripts
 	button.TextColor3 = Color3.new(0,1,0)
 	button.Text = "Yes"
 	table.insert(Table, ins)
+	if Table == PrioritizedPlrs and clone.WhitelistToggle.Text == "Yes" then
+	clone.WhitelistToggle.Text = "No"
+	clone.WhitelistToggle.TextColor3 = Color3.new(1,0,0)
+	local wlistplr = table.find(WhitelistedPlrs, ins)
+	table.remove(WhitelistedPlrs, wlistplr)
+	end
+	if Table == WhitelistedPlrs and clone.PriorityToggle.Text == "Yes" then
+	clone.PriorityToggle.Text = "No"
+	clone.PriorityToggle.TextColor3 = Color3.new(1,0,0)
+	local prioplr = table.find(PrioritizedPlrs, ins)
+	table.remove(PrioritizedPlrs, prioplr)
+	end
 	else
 	button.TextColor3 = Color3.new(1,0,0)
 	button.Text = "No"
-	for i,v in pairs(Table) do
-	if ins == v then
-	table.remove(Table,i)
-	end
-	end
+	local removeins = table.find(Table, ins)
+	table.remove(Table,removeins)
 	end
 	end)
 	end
-	if isTeam then
+	if ins.ClassName == "Team" then
 	clone.TextLabel.Text = ins.ClassName..": "..ins.Name
 	togglefunc(WhitelistedTeams)
 	table.insert(AddedTeams, ins.Name)
 	coroutine.resume(coroutine.create(function()
 	repeat wait() until not game.Teams:FindFirstChild(ins.Name)
 	clone:Destroy()
-	for i,v in pairs(AddedTeams) do
-	if ins.Name == v then
-	table.remove(AddedTeams, i)
-	end
-	end
+	local removename = table.find(AddedTeams, ins.Name)
+	table.remove(AddedTeams, removename)
 	end))
 	else
 	clone.TextLabel.Text = ins.ClassName..": "..CheckDN(ins)
@@ -756,7 +762,7 @@ function SCRIPT_NBDF82_FAKESCRIPT() -- Aimbot.Scripts
 	end)
 	for i, team in pairs(game.Teams:GetTeams()) do
 	if not table.find(AddedTeams, team.Name) then
-	AddtoList(team, true)
+	AddtoList(team)
 	end
 	end
 	for i,plr in pairs(plrs:GetPlayers()) do
@@ -767,7 +773,7 @@ function SCRIPT_NBDF82_FAKESCRIPT() -- Aimbot.Scripts
 	plrs.PlayerAdded:connect(AddtoList)
 	game.Teams.ChildAdded:connect(function(team)
 	if team.ClassName == "Team" and not table.find(AddedTeams, team.Name) then
-	AddtoList(team, true)
+	AddtoList(team)
 	end
 	end)
 	Changed(wlui.searchbar, "Text", function(txt)
@@ -792,4 +798,4 @@ function SCRIPT_NBDF82_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_NBDF82_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_IVSR83_FAKESCRIPT))
