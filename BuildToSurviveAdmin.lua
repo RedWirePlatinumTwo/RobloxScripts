@@ -1156,7 +1156,7 @@ end)
 getcmds()
 game.StarterGui:SetCore("SendNotification", {
 Title = title;
-Text = "Removed feedback as I also removed the discord bot.";
+Text = "dead script lmao";
 Duration = 10;
 })
 end
