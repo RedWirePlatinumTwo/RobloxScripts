@@ -744,7 +744,7 @@ function SCRIPT_IVSR83_FAKESCRIPT() -- Aimbot.Scripts
 	else
 	clone.TextLabel.Text = ins.ClassName..": "..CheckDN(ins)
 	togglefunc(WhitelistedPlrs)
-	wlframe.PriorityToggle.Visible = true
+	clone.PriorityToggle.Visible = true
 	togglefunc(PrioritizedPlrs)
 	coroutine.resume(coroutine.create(function()
 	repeat wait() until not game.Players:FindFirstChild(ins.Name)
