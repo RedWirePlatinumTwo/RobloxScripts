@@ -5,15 +5,16 @@ local JailbreakGUI = Instance.new("ScreenGui")
 local MainFrame = Instance.new("Frame")
 local speed = Instance.new("TextButton")
 local aimbot = Instance.new("TextButton")
-local removelasers = Instance.new("TextButton")
+local disablelasers = Instance.new("TextButton")
 local holdebypass = Instance.new("TextButton")
 local briefcase = Instance.new("TextButton")
-local GravToggle = Instance.new("TextButton")
+local forcedaytime = Instance.new("TextButton")
 local X = Instance.new("TextButton")
 local more = Instance.new("TextButton")
 local Title = Instance.new("TextLabel")
 local Speednum = Instance.new("TextBox")
 local gunmod = Instance.new("TextButton")
+local GravToggle = Instance.new("TextButton")
 local Confirmation = Instance.new("Frame")
 local Warning = Instance.new("TextLabel")
 local Yes = Instance.new("TextButton")
@@ -50,7 +51,7 @@ MainFrame.Name = "MainFrame"
 MainFrame.Parent = JailbreakGUI
 MainFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 MainFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-MainFrame.Position = UDim2.new(0.887387753, -384, 0.0240607522, 10)
+MainFrame.Position = UDim2.new(0.874887645, -384, 0.0564681552, 10)
 MainFrame.Size = UDim2.new(0, 318, 0, 240)
 
 speed.Name = "speed"
@@ -82,19 +83,19 @@ aimbot.TextSize = 18
 aimbot.TextStrokeTransparency = 0
 aimbot.TextWrapped = true
 
-removelasers.Name = "removelasers"
-removelasers.Parent = MainFrame
-removelasers.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-removelasers.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-removelasers.Position = UDim2.new(0, 0, 0.189999998, 0)
-removelasers.Size = UDim2.new(0, 106, 0, 52)
-removelasers.Font = Enum.Font.SourceSansBold
-removelasers.Text = "Remove (most) Lasers"
-removelasers.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-removelasers.TextScaled = true
-removelasers.TextSize = 18
-removelasers.TextStrokeTransparency = 0
-removelasers.TextWrapped = true
+disablelasers.Name = "disablelasers"
+disablelasers.Parent = MainFrame
+disablelasers.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+disablelasers.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+disablelasers.Position = UDim2.new(0, 0, 0.189999998, 0)
+disablelasers.Size = UDim2.new(0, 106, 0, 52)
+disablelasers.Font = Enum.Font.SourceSansBold
+disablelasers.Text = "Disable Lasers"
+disablelasers.TextColor3 = Color3.new(0.333333, 0.666667, 1)
+disablelasers.TextScaled = true
+disablelasers.TextSize = 18
+disablelasers.TextStrokeTransparency = 0
+disablelasers.TextWrapped = true
 
 holdebypass.Name = "holdebypass"
 holdebypass.Parent = MainFrame
@@ -125,20 +126,20 @@ briefcase.TextSize = 18
 briefcase.TextStrokeTransparency = 0
 briefcase.TextWrapped = true
 
-GravToggle.Name = "GravToggle"
-GravToggle.Parent = MainFrame
-GravToggle.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-GravToggle.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-GravToggle.Position = UDim2.new(0.668999851, 0, 0.410000026, 0)
-GravToggle.Size = UDim2.new(0, 105, 0, 52)
-GravToggle.ZIndex = 0
-GravToggle.Font = Enum.Font.SourceSansBold
-GravToggle.Text = "Gravity Toggle (196)"
-GravToggle.TextColor3 = Color3.new(1, 1, 1)
-GravToggle.TextScaled = true
-GravToggle.TextSize = 18
-GravToggle.TextStrokeTransparency = 0
-GravToggle.TextWrapped = true
+forcedaytime.Name = "forcedaytime"
+forcedaytime.Parent = MainFrame
+forcedaytime.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+forcedaytime.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+forcedaytime.Position = UDim2.new(0.333333343, 0, 0.623000026, 0)
+forcedaytime.Size = UDim2.new(0, 106, 0, 52)
+forcedaytime.ZIndex = 0
+forcedaytime.Font = Enum.Font.SourceSansBold
+forcedaytime.Text = "Force Daytime"
+forcedaytime.TextColor3 = Color3.new(1, 1, 0.498039)
+forcedaytime.TextScaled = true
+forcedaytime.TextSize = 18
+forcedaytime.TextStrokeTransparency = 0
+forcedaytime.TextWrapped = true
 
 X.Name = "X"
 X.Parent = MainFrame
@@ -158,8 +159,8 @@ more.Name = "more"
 more.Parent = MainFrame
 more.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 more.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-more.Position = UDim2.new(0.333333343, 0, 0.623166621, 0)
-more.Size = UDim2.new(0, 106, 0, 52)
+more.Position = UDim2.new(0.668999851, 0, 0.623166621, 0)
+more.Size = UDim2.new(0, 105, 0, 52)
 more.Font = Enum.Font.SourceSansBold
 more.Text = "More Options"
 more.TextColor3 = Color3.new(1, 0, 1)
@@ -214,6 +215,21 @@ gunmod.TextScaled = true
 gunmod.TextSize = 18
 gunmod.TextStrokeTransparency = 0
 gunmod.TextWrapped = true
+
+GravToggle.Name = "GravToggle"
+GravToggle.Parent = MainFrame
+GravToggle.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+GravToggle.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+GravToggle.Position = UDim2.new(0.668999851, 0, 0.410000026, 0)
+GravToggle.Size = UDim2.new(0, 105, 0, 52)
+GravToggle.ZIndex = 0
+GravToggle.Font = Enum.Font.SourceSansBold
+GravToggle.Text = "Gravity Toggle (196)"
+GravToggle.TextColor3 = Color3.new(1, 1, 1)
+GravToggle.TextScaled = true
+GravToggle.TextSize = 18
+GravToggle.TextStrokeTransparency = 0
+GravToggle.TextWrapped = true
 
 Confirmation.Name = "Confirmation"
 Confirmation.Parent = JailbreakGUI
@@ -548,7 +564,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_TVLC80_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_CQTY72_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -564,14 +580,13 @@ function SCRIPT_TVLC80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	return obj.Attachment
 	end
-	local function notify(text, duration)
-	if not duration then duration = 2 end
+	local function notify(text)
 	local notiftime = 0
 	for i = 1, text:len() do
-	notiftime = notiftime + 0.03
+	notiftime = notiftime + 0.04
 	end
 	local n = require(game:GetService("ReplicatedStorage").Game.Notification)
-	n.new({["Text"] = text,["Duration"] = notiftime + duration})
+	n.new({["Text"] = text,["Duration"] = notiftime})
 	end
 	local Changed = function(part, PropertyName, func)
 	    local current = part[PropertyName]
@@ -619,7 +634,7 @@ function SCRIPT_TVLC80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Updated remove lasers script since it has been out of date for a while.", 3)
+	notify("Improved Laser Disabling even *more* + made notifications shorter.")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -812,7 +827,6 @@ function SCRIPT_TVLC80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	mainframe.briefcase.MouseButton1Click:connect(function()
 	briefframe.Visible = true
 	end)
-	local barbedwireshacked = false
 	local itemconfig = game.ReplicatedStorage.Game.ItemConfig
 	function changegunstats(Table)
 	for i,v in pairs(itemconfig:GetChildren()) do
@@ -831,38 +845,39 @@ function SCRIPT_TVLC80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	g.ReloadTime = 0
 	g.FuseTime = 0.8
 	end)
-	mainframe.removelasers.MouseButton1Click:connect(function()
-	local lights = workspace.Museum.Lights
-	local function remove(part)
-	part.Size = Vector3.new(1,1,1)
-	part.CFrame = CFrame.new()
+	mainframe.disablelasers.MouseButton1Click:connect(function()
+	local function removeTI(part)
+	if part:IsA("BasePart") then
+	local laserdescendant = false
+	for i, fam in pairs(GetFamily(part)) do
+	if fam.Name:lower():match("laser") or fam.Name:lower():match("camera") and not fam.Parent.Name == "WindowEntry" and part:FindFirstChildOfClass("TouchTransmitter") then
+	laserdescendant = true
+	break
+	end
+	end
+	if laserdescendant or part.Name == "BarbedWire" then
+	for i,v in pairs(part:GetChildren()) do
+	if v.ClassName == "TouchTransmitter" then
+	v:Destroy()
+	end
+	end
+	part.Transparency = 0.7
+	end
+	end
 	end
 	for i,v in pairs(workspace:GetDescendants()) do
-	if v.Name:lower():match("laser") then
-	if v.ClassName == "Model" then
-	for a, p in pairs(v:GetDescendants()) do
-	if p:IsA("BasePart") then
-	remove(p)
+	removeTI(v)
 	end
-	end
-	else
-	if v.CanCollide == false then
-	remove(v)
-	end
-	end
-	end
-	end
-	for i,v in pairs(lights:GetChildren()) do
-	v.Light.Size = Vector3.new(1,1,1)
-		end
-		if not barbedwireshacked then
-			barbedwireshacked = true
-	for i,v in pairs(workspace:GetDescendants()) do
-	if v.Name == "BarbedWire" then
-					v.Size = Vector3.new(1,1,1)
-	end
-	end
-	end
+	workspace.DescendantAdded:connect(function(child)
+	repeat wait() until child:FindFirstChildOfClass("TouchTransmitter")
+	removeTI(child)
+	end)
+	end)
+	mainframe.forcedaytime.MouseButton1Click:connect(function()
+	game.Lighting.ClockTime = 12
+	game.Lighting:GetPropertyChangedSignal("ClockTime"):connect(function()
+	game.Lighting.ClockTime = 12
+	end)
 	end)
 	mainframe.holdebypass.MouseButton1Click:connect(function()
 	if not HoldEBypass then
@@ -895,7 +910,7 @@ function SCRIPT_TVLC80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	chr:WaitForChild("Humanoid")
 	speedhack()
 	end)
-	notify("To edit your walkspeed, scroll up/down on the number in the textbox (max 150).", 4)
+	notify("To edit your walkspeed, scroll up/down on the number in the textbox (max 150).")
 	end
 	mainframe.Speednum.MouseWheelForward:connect(function()
 	ws.number = ws.number + 5
@@ -1100,4 +1115,4 @@ function SCRIPT_TVLC80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_TVLC80_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_CQTY72_FAKESCRIPT))
