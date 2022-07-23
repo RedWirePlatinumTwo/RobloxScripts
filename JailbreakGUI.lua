@@ -564,7 +564,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_YYLW70_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_MDEG77_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -634,7 +634,7 @@ function SCRIPT_YYLW70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Slightly changed laser disabling in an attempt to reduce game lag.")
+	notify("Improved Laser Disabling for like the 3rd time lmao.")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -854,10 +854,10 @@ function SCRIPT_YYLW70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local laserdescendant = false
 	for i, fam in pairs(GetFamily(ti)) do
 	local idklmao, notnil = pcall(function()
-	return fam.Parent ~= nil and fam.Parent.Parent ~= nil
+	return fam.Parent ~= nil and fam.Parent.Parent ~= nil and fam.Parent.Parent.Parent ~= nil
 	end)
 	if notnil == true then
-	if fam.Parent.Name:lower():match("laser") or fam.Parent.Name:lower():match("camera") and not fam.Parent.Parent.Name == "WindowEntry" then
+	if fam.Parent.Name:lower():match("laser") or fam.Parent.Name:lower():match("camera") and not fam.Parent.Parent.Name == "WindowEntry" or fam.Parent.Parent.Parent.Name == "Floors" then
 	laserdescendant = true
 	break
 	end
@@ -1117,4 +1117,4 @@ function SCRIPT_YYLW70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_YYLW70_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_MDEG77_FAKESCRIPT))
