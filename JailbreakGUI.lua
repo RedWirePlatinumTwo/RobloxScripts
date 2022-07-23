@@ -564,7 +564,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_NBEG87_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_YYLW70_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -849,22 +849,23 @@ function SCRIPT_NBEG87_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	mainframe.disablelasers.MouseButton1Click:connect(function()
 	if lasersdisabled == false then
 	lasersdisabled = true
-	local function removeTI(part)
-	if part:IsA("BasePart") then
+	local function removeTI(ti)
+	if ti.ClassName == "TouchTransmitter" then
 	local laserdescendant = false
-	for i, fam in pairs(GetFamily(part)) do
-	if fam.Name:lower():match("laser") or fam.Name:lower():match("camera") and not fam.Parent.Name == "WindowEntry" and part:FindFirstChildOfClass("TouchTransmitter") then
+	for i, fam in pairs(GetFamily(ti)) do
+	local idklmao, notnil = pcall(function()
+	return fam.Parent ~= nil and fam.Parent.Parent ~= nil
+	end)
+	if notnil == true then
+	if fam.Parent.Name:lower():match("laser") or fam.Parent.Name:lower():match("camera") and not fam.Parent.Parent.Name == "WindowEntry" then
 	laserdescendant = true
 	break
 	end
 	end
-	if laserdescendant or part.Name == "BarbedWire" then
-	for i,v in pairs(part:GetChildren()) do
-	if v.ClassName == "TouchTransmitter" then
-	v:Destroy()
 	end
-	end
-	part.Transparency = 0.7
+	if laserdescendant or ti.Parent.Name == "BarbedWire" then
+	ti.Parent.Transparency = 0.7
+	ti:Destroy()
 	end
 	end
 	end
@@ -872,10 +873,7 @@ function SCRIPT_NBEG87_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	removeTI(v)
 	end
 	workspace.DescendantAdded:connect(function(child)
-	coroutine.resume(coroutine.create(function()
-	repeat wait() until child:FindFirstChildOfClass("TouchTransmitter")
 	removeTI(child)
-	end))
 	end)
 	end
 	end)
@@ -1121,4 +1119,4 @@ function SCRIPT_NBEG87_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_NBEG87_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_YYLW70_FAKESCRIPT))
