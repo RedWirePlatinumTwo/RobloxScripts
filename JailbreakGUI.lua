@@ -872,9 +872,7 @@ function SCRIPT_YYLW70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	for i,v in pairs(workspace:GetDescendants()) do
 	removeTI(v)
 	end
-	workspace.DescendantAdded:connect(function(child)
-	removeTI(child)
-	end)
+	workspace.DescendantAdded:connect(removeTI)
 	end
 	end)
 	mainframe.forcedaytime.MouseButton1Click:connect(function()
