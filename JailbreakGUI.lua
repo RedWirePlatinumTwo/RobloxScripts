@@ -564,7 +564,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_ZSRM81_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_NBEG87_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -845,7 +845,10 @@ function SCRIPT_ZSRM81_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	g.ReloadTime = 0
 	g.FuseTime = 0.8
 	end)
+	local lasersdisabled = false
 	mainframe.disablelasers.MouseButton1Click:connect(function()
+	if lasersdisabled == false then
+	lasersdisabled = true
 	local function removeTI(part)
 	if part:IsA("BasePart") then
 	local laserdescendant = false
@@ -874,6 +877,7 @@ function SCRIPT_ZSRM81_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	removeTI(child)
 	end))
 	end)
+	end
 	end)
 	mainframe.forcedaytime.MouseButton1Click:connect(function()
 	game.Lighting.ClockTime = 12
@@ -1117,4 +1121,4 @@ function SCRIPT_ZSRM81_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_ZSRM81_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_NBEG87_FAKESCRIPT))
