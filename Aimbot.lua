@@ -329,7 +329,7 @@ typelabel.TextScaled = true
 typelabel.TextSize = 14
 typelabel.TextWrapped = true
 -- Scripts:
-function SCRIPT_HYLT84_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_KZGZ77_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	if not _G.RedsAimbot then
@@ -349,6 +349,7 @@ function SCRIPT_HYLT84_FAKESCRIPT() -- Aimbot.Scripts
 	syn.protect_gui(script.Parent)
 	end
 	local WhitelistedTeams = {}
+	local AddedTeams = {}
 	local WhitelistedPlrs = {}
 	local PrioritizedPlrs = {}
 	local plrs = game.Players
@@ -587,7 +588,7 @@ function SCRIPT_HYLT84_FAKESCRIPT() -- Aimbot.Scripts
 	game.StarterGui:SetCore("SendNotification", {
 	Title = "Aimbot Update:";
 	Duration = 10;
-	Text = "Players can no longer be prioritized and whitelisted at the same time.";})
+	Text = "Made a *slight* change to team whitelisting.";})
 	
 	function Died(player)
 	if not player.Character then player.CharacterAdded:Wait() end
@@ -737,9 +738,12 @@ function SCRIPT_HYLT84_FAKESCRIPT() -- Aimbot.Scripts
 	if ins.ClassName == "Team" then
 	clone.TextLabel.Text = ins.ClassName..": "..ins.Name
 	togglefunc(WhitelistedTeams)
+	table.insert(AddedTeams, ins.Name)
 	coroutine.resume(coroutine.create(function()
 	repeat wait() until not game.Teams:FindFirstChild(ins.Name)
 	clone:Destroy()
+	local findname = table.find(AddedTeams, ins.Name)
+	table.remove(AddedTeams, findname)
 	end))
 	else
 	clone.TextLabel.Text = ins.ClassName..": "..CheckDN(ins)
@@ -761,7 +765,7 @@ function SCRIPT_HYLT84_FAKESCRIPT() -- Aimbot.Scripts
 	wlui.WhitelistedInstances.CanvasSize = UDim2.new(0,0,yval, 0)
 	end)
 	for i, team in pairs(game.Teams:GetTeams()) do
-	if not table.find(WhitelistedTeams, team.Name) then
+	if not table.find(AddedTeams, team.Name) then
 	AddtoList(team)
 	end
 	end
@@ -772,7 +776,7 @@ function SCRIPT_HYLT84_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	plrs.PlayerAdded:connect(AddtoList)
 	game.Teams.ChildAdded:connect(function(team)
-	if team.ClassName == "Team" and not table.find(WhitelistedTeams, team.Name) then
+	if team.ClassName == "Team" and not table.find(AddedTeams, team.Name) then
 	AddtoList(team)
 	end
 	end)
@@ -798,4 +802,4 @@ function SCRIPT_HYLT84_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_HYLT84_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_KZGZ77_FAKESCRIPT))
