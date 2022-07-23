@@ -564,7 +564,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_MDEG77_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_INLJ78_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -634,7 +634,7 @@ function SCRIPT_MDEG77_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Improved Laser Disabling for like the 3rd time lmao.")
+	notify("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -857,7 +857,7 @@ function SCRIPT_MDEG77_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	return fam.Parent ~= nil and fam.Parent.Parent ~= nil and fam.Parent.Parent.Parent ~= nil
 	end)
 	if notnil == true then
-	if fam.Parent.Name:lower():match("laser") or fam.Parent.Name:lower():match("camera") and not fam.Parent.Parent.Name == "WindowEntry" or fam.Parent.Parent.Parent.Name == "Floors" then
+	if fam.Parent.Name:lower():match("laser") or fam.Parent.Name:lower():match("camera") and not fam.Parent.Parent.Name == "WindowEntry" or fam.Parent.Parent.Parent.Name == "Floors" or fam.Parent.Name == "Light" then
 	laserdescendant = true
 	break
 	end
@@ -1117,4 +1117,4 @@ function SCRIPT_MDEG77_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_MDEG77_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_INLJ78_FAKESCRIPT))
