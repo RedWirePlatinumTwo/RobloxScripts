@@ -564,7 +564,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_CQTY72_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_ZSRM81_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -634,7 +634,7 @@ function SCRIPT_CQTY72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Improved Laser Disabling even *more* + made notifications shorter.")
+	notify("Slightly changed laser disabling in an attempt to reduce game lag.")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -869,8 +869,10 @@ function SCRIPT_CQTY72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	removeTI(v)
 	end
 	workspace.DescendantAdded:connect(function(child)
+	coroutine.resume(coroutine.create(function()
 	repeat wait() until child:FindFirstChildOfClass("TouchTransmitter")
 	removeTI(child)
+	end))
 	end)
 	end)
 	mainframe.forcedaytime.MouseButton1Click:connect(function()
@@ -1115,4 +1117,4 @@ function SCRIPT_CQTY72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_CQTY72_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_ZSRM81_FAKESCRIPT))
