@@ -564,7 +564,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_UVVX89_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_OPEV90_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -634,7 +634,7 @@ function SCRIPT_UVVX89_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Removed (very) old outdated code from this script.")
+	notify("Hold E Bypass no longer applies to gas station and donut shops to prevent it being unrobbable.")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -670,7 +670,7 @@ function SCRIPT_UVVX89_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local gunshoptp = false
 	game.RunService.RenderStepped:connect(function()
 		for i,a in pairs(require(game.ReplicatedStorage.Module.UI).CircleAction.Specs) do
-		if a.Duration ~= false and HoldEBypass then
+		if a.Duration ~= false and HoldEBypass and a.Name ~= "Rob" then
 		   a.Timed = false;
 		end
 		end
@@ -873,7 +873,7 @@ function SCRIPT_UVVX89_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	mainframe.holdebypass.MouseButton1Click:connect(function()
 	if not HoldEBypass then
 	HoldEBypass = true
-	notify("Hold E Bypass enabled. Script by Interpreter on V3rmillion, inf looped by me.")
+	notify("Hold E Bypass enabled. Sadly cannot be used with donut or gas station ;(")
 	end
 	end)
 	mainframe.more.MouseButton1Click:connect(function()
@@ -1106,4 +1106,4 @@ function SCRIPT_UVVX89_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_UVVX89_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_OPEV90_FAKESCRIPT))
