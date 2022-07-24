@@ -564,7 +564,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_INLJ78_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_UVVX89_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -634,7 +634,7 @@ function SCRIPT_INLJ78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+	notify("Removed (very) old outdated code from this script.")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -646,17 +646,6 @@ function SCRIPT_INLJ78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	for i, plr in pairs(minimap:GetChildren()) do makevisible(plr) end
 	minimap.ChildAdded:connect(makevisible)
 	local plrgui = lplr.PlayerGui
-	local backupparts = {}
-	for i,part in pairs(workspace.TouchTrigger:GetChildren()) do
-	if part:IsA("BasePart") then
-		part.Size = Vector3.new(1,1,1)
-		backupparts[part.Name] = part
-	end
-	end
-		workspace.TouchTrigger.ChildRemoved:connect(function(child)
-				local d2 = backupparts[child.Name]:Clone()
-				d2.Parent = workspace.TouchTrigger
-		end)
 	function walcc()
 	lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(function()
 	if lplr.Character.Humanoid.WalkSpeed == 0 then
@@ -1117,4 +1106,4 @@ function SCRIPT_INLJ78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_INLJ78_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_UVVX89_FAKESCRIPT))
