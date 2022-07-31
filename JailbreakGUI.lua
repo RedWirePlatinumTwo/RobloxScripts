@@ -20,23 +20,12 @@ local Warning = Instance.new("TextLabel")
 local Yes = Instance.new("TextButton")
 local No = Instance.new("TextButton")
 local WarningIcon = Instance.new("ImageLabel")
-local EmergencyHealing = Instance.new("Frame")
-local About = Instance.new("TextLabel")
-local Text1 = Instance.new("TextLabel")
-local LowHealth = Instance.new("TextBox")
-local Text2 = Instance.new("TextLabel")
-local HigherHealth = Instance.new("TextBox")
-local Thendo = Instance.new("TextLabel")
-local Option1 = Instance.new("TextButton")
-local Option2 = Instance.new("TextButton")
-local Activatehealer = Instance.new("TextButton")
-local HideGui = Instance.new("TextButton")
 local otherFrame = Instance.new("Frame")
 local switch = Instance.new("TextButton")
 local RobberyNotifier = Instance.new("TextButton")
 local gunshoptpbutton = Instance.new("TextButton")
 local infiniteyeet = Instance.new("TextButton")
-local healguibutton = Instance.new("TextButton")
+local flyhack = Instance.new("TextButton")
 local removeragdoll = Instance.new("TextButton")
 local BriefcaseESPFrame = Instance.new("Frame")
 local bguis = Instance.new("TextButton")
@@ -289,149 +278,11 @@ WarningIcon.Position = UDim2.new(0.42764321, 0, 0.00847457722, 0)
 WarningIcon.Size = UDim2.new(0, 45, 0, 45)
 WarningIcon.Image = "http://www.roblox.com/asset/?id=3369561948"
 
-EmergencyHealing.Name = "EmergencyHealing"
-EmergencyHealing.Parent = JailbreakGUI
-EmergencyHealing.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-EmergencyHealing.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-EmergencyHealing.Position = UDim2.new(0.416544646, 0, 0.16787979, 0)
-EmergencyHealing.Size = UDim2.new(0, 404, 0, 221)
-EmergencyHealing.Visible = false
-
-About.Name = "About"
-About.Parent = EmergencyHealing
-About.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-About.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-About.Size = UDim2.new(0, 404, 0, 46)
-About.Font = Enum.Font.SourceSansBold
-About.Text = "About to die? this GUI will let you teleport high up and let you heal yourself."
-About.TextColor3 = Color3.new(1, 1, 1)
-About.TextScaled = true
-About.TextSize = 14
-About.TextWrapped = true
-
-Text1.Name = "Text1"
-Text1.Parent = EmergencyHealing
-Text1.BackgroundColor3 = Color3.new(1, 1, 1)
-Text1.BackgroundTransparency = 1
-Text1.Position = UDim2.new(0, 0, 0.208144799, 0)
-Text1.Size = UDim2.new(0, 271, 0, 36)
-Text1.Font = Enum.Font.SourceSansBold
-Text1.Text = "You will begin the healing process when your health gets below:"
-Text1.TextColor3 = Color3.new(1, 1, 1)
-Text1.TextScaled = true
-Text1.TextSize = 17
-Text1.TextWrapped = true
-Text1.TextXAlignment = Enum.TextXAlignment.Left
-Text1.TextYAlignment = Enum.TextYAlignment.Bottom
-
-LowHealth.Name = "LowHealth"
-LowHealth.Parent = EmergencyHealing
-LowHealth.BackgroundColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-LowHealth.BorderSizePixel = 0
-LowHealth.Position = UDim2.new(0.672999978, 0, 0.211999997, 0)
-LowHealth.Size = UDim2.new(0, 132, 0, 36)
-LowHealth.Font = Enum.Font.SourceSansBold
-LowHealth.PlaceholderColor3 = Color3.new(0, 0, 0)
-LowHealth.PlaceholderText = "Low Health"
-LowHealth.Text = ""
-LowHealth.TextColor3 = Color3.new(0, 0, 0)
-LowHealth.TextSize = 22
-LowHealth.TextWrapped = true
-
-Text2.Name = "Text2"
-Text2.Parent = EmergencyHealing
-Text2.BackgroundColor3 = Color3.new(1, 1, 1)
-Text2.BackgroundTransparency = 1
-Text2.Position = UDim2.new(0, 0, 0.416289598, 0)
-Text2.Size = UDim2.new(0, 119, 0, 36)
-Text2.Font = Enum.Font.SourceSansBold
-Text2.Text = "Once your health regenerates to:"
-Text2.TextColor3 = Color3.new(1, 1, 1)
-Text2.TextScaled = true
-Text2.TextSize = 17
-Text2.TextWrapped = true
-Text2.TextXAlignment = Enum.TextXAlignment.Left
-Text2.TextYAlignment = Enum.TextYAlignment.Bottom
-
-HigherHealth.Name = "HigherHealth"
-HigherHealth.Parent = EmergencyHealing
-HigherHealth.BackgroundColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-HigherHealth.BorderSizePixel = 0
-HigherHealth.Position = UDim2.new(0.294554442, 0, 0.416289598, 0)
-HigherHealth.Size = UDim2.new(0, 166, 0, 36)
-HigherHealth.Font = Enum.Font.SourceSansBold
-HigherHealth.PlaceholderColor3 = Color3.new(0, 0, 0)
-HigherHealth.PlaceholderText = "Higher Health"
-HigherHealth.Text = ""
-HigherHealth.TextColor3 = Color3.new(0, 0, 0)
-HigherHealth.TextSize = 22
-HigherHealth.TextWrapped = true
-
-Thendo.Name = "Thendo"
-Thendo.Parent = EmergencyHealing
-Thendo.BackgroundColor3 = Color3.new(1, 1, 1)
-Thendo.BackgroundTransparency = 1
-Thendo.Position = UDim2.new(0.705445588, 0, 0.416289598, 0)
-Thendo.Size = UDim2.new(0, 119, 0, 36)
-Thendo.Font = Enum.Font.SourceSansBold
-Thendo.Text = "then"
-Thendo.TextColor3 = Color3.new(1, 1, 1)
-Thendo.TextSize = 22
-Thendo.TextWrapped = true
-
-Option1.Name = "Option1"
-Option1.Parent = EmergencyHealing
-Option1.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-Option1.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Option1.Position = UDim2.new(0, 0, 0.626630127, 0)
-Option1.Size = UDim2.new(0, 202, 0, 26)
-Option1.Font = Enum.Font.SourceSansBold
-Option1.Text = "Teleport me back to where I was: Y"
-Option1.TextColor3 = Color3.new(0, 1, 0)
-Option1.TextSize = 14
-Option1.TextWrapped = true
-
-Option2.Name = "Option2"
-Option2.Parent = EmergencyHealing
-Option2.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-Option2.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Option2.Position = UDim2.new(0.5, 0, 0.626630127, 0)
-Option2.Size = UDim2.new(0, 202, 0, 26)
-Option2.Font = Enum.Font.SourceSansBold
-Option2.Text = "Let me skydive to another location: N"
-Option2.TextColor3 = Color3.new(1, 0, 0)
-Option2.TextSize = 14
-Option2.TextWrapped = true
-
-Activatehealer.Name = "Activatehealer"
-Activatehealer.Parent = EmergencyHealing
-Activatehealer.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-Activatehealer.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Activatehealer.Position = UDim2.new(0.21534653, 0, 0.828054309, 0)
-Activatehealer.Size = UDim2.new(0, 115, 0, 38)
-Activatehealer.Font = Enum.Font.SourceSansBold
-Activatehealer.Text = "Set Values & Activate"
-Activatehealer.TextColor3 = Color3.new(1, 1, 1)
-Activatehealer.TextSize = 18
-Activatehealer.TextWrapped = true
-
-HideGui.Name = "HideGui"
-HideGui.Parent = EmergencyHealing
-HideGui.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-HideGui.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-HideGui.Position = UDim2.new(0.5, 0, 0.828054309, 0)
-HideGui.Size = UDim2.new(0, 115, 0, 38)
-HideGui.Font = Enum.Font.SourceSansBold
-HideGui.Text = "Hide GUI"
-HideGui.TextColor3 = Color3.new(1, 1, 1)
-HideGui.TextSize = 18
-HideGui.TextWrapped = true
-
 otherFrame.Name = "otherFrame"
 otherFrame.Parent = JailbreakGUI
 otherFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 otherFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-otherFrame.Position = UDim2.new(0.514061332, 0, 0.551395953, 0)
+otherFrame.Position = UDim2.new(0.442186326, 0, 0.298618168, 0)
 otherFrame.Size = UDim2.new(0, 324, 0, 183)
 otherFrame.Visible = false
 
@@ -465,8 +316,8 @@ gunshoptpbutton.Name = "gunshoptpbutton"
 gunshoptpbutton.Parent = otherFrame
 gunshoptpbutton.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 gunshoptpbutton.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-gunshoptpbutton.Position = UDim2.new(0.00126026291, 0, 0.263706565, 0)
-gunshoptpbutton.Size = UDim2.new(0, 162, 0, 45)
+gunshoptpbutton.Position = UDim2.new(0.00200003176, 0, 0.264000058, 0)
+gunshoptpbutton.Size = UDim2.new(0, 160, 0, 45)
 gunshoptpbutton.Font = Enum.Font.SourceSansBold
 gunshoptpbutton.Text = "Gunshop TP Enabled:"
 gunshoptpbutton.TextColor3 = Color3.new(1, 0.666667, 0)
@@ -489,19 +340,19 @@ infiniteyeet.TextSize = 16
 infiniteyeet.TextStrokeTransparency = 0
 infiniteyeet.TextWrapped = true
 
-healguibutton.Name = "healguibutton"
-healguibutton.Parent = otherFrame
-healguibutton.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-healguibutton.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-healguibutton.Position = UDim2.new(0.497712135, 0, 0.263706565, 0)
-healguibutton.Size = UDim2.new(0, 162, 0, 45)
-healguibutton.Font = Enum.Font.SourceSansBold
-healguibutton.Text = "Emergency Healing GUI"
-healguibutton.TextColor3 = Color3.new(1, 0.666667, 1)
-healguibutton.TextScaled = true
-healguibutton.TextSize = 16
-healguibutton.TextStrokeTransparency = 0
-healguibutton.TextWrapped = true
+flyhack.Name = "flyhack"
+flyhack.Parent = otherFrame
+flyhack.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+flyhack.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+flyhack.Position = UDim2.new(0.497712135, 0, 0.263706565, 0)
+flyhack.Size = UDim2.new(0, 162, 0, 45)
+flyhack.Font = Enum.Font.SourceSansBold
+flyhack.Text = "Fly hack (Left CTRL + F)"
+flyhack.TextColor3 = Color3.new(0.333333, 1, 1)
+flyhack.TextScaled = true
+flyhack.TextSize = 16
+flyhack.TextStrokeTransparency = 0
+flyhack.TextWrapped = true
 
 removeragdoll.Name = "removeragdoll"
 removeragdoll.Parent = otherFrame
@@ -564,7 +415,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_OPEV90_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_SFFC67_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -634,7 +485,7 @@ function SCRIPT_OPEV90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Hold E Bypass no longer applies to gas station and donut shops to prevent it being unrobbable.")
+	notify("Updated Disable Lasers for the 4th time and replaced emergency healing with a fly hack.")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -853,7 +704,7 @@ function SCRIPT_OPEV90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	end
 	if laserdescendant or ti.Parent.Name == "BarbedWire" then
-	ti.Parent.Transparency = 0.7
+	ti.Parent:Destroy()
 	ti:Destroy()
 	end
 	end
@@ -1014,96 +865,32 @@ function SCRIPT_OPEV90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	frame2.gunshoptpbutton.Text = "Gunshop TP enabled: "..tostring(gunshoptp)
 	end)
-	local healgui = script.Parent.EmergencyHealing
-	local TPBackEnabled = true
-	local SkydiveEnabled = false
-	local lowhealth
-	local higherhealth
-	local healscripton = false
-	function EmergencyHealingScript(chr)
-	coroutine.resume(coroutine.create(function()
-	local beginprocess = false
-	chr:WaitForChild("Humanoid")
-	chr:WaitForChild("HumanoidRootPart")
-	local CFrameY
-	Changed(chr.Humanoid, "Health", function(newhealth)
-	if newhealth <= lowhealth and not beginprocess then
-	beginprocess = true
-	CFrameY = chr.HumanoidRootPart.CFrame.Y
-	chr.HumanoidRootPart.CFrame = chr.HumanoidRootPart.CFrame + Vector3.new(0,1000,0)
-	local part = Instance.new("Part", workspace)
-	part.CFrame = chr.HumanoidRootPart.CFrame + Vector3.new(0,-5,0)
-	part.Size = Vector3.new(9,1,9)
-	part.Anchored = true
-	repeat wait() until chr.Humanoid.Health >= higherhealth
-	if SkydiveEnabled then
-	part:Destroy()
-	end
-	if TPBackEnabled then
-	part:Destroy()
-	chr.HumanoidRootPart.CFrame = CFrame.new(chr.HumanoidRootPart.CFrame.X, CFrameY, chr.HumanoidRootPart.CFrame.Z)
-	end
-	beginprocess = false
+	local enablefly = false
+	frame2.flyhack.MouseButton1Click:connect(function()
+	if not enablefly then
+	enablefly = true
+	local lplr = game.Players.LocalPlayer
+	local flying = false
+	local m = lplr:GetMouse()
+	game.RunService.Heartbeat:connect(function()
+	    if flying then
+	        if isrbxactive() then
+	    local pos = _G.GetVelocity(lplr.Character.HumanoidRootPart.Position, m.Hit.Position, ws.number)
+	    lplr.Character.HumanoidRootPart.Velocity = pos
+	    lplr.Character.HumanoidRootPart.CFrame = CFrame.new(lplr.Character.HumanoidRootPart.Position, m.Hit.Position)
+	        end
+	    end
+	end)
+	m.KeyDown:connect(function(key)
+	    if key == "f" and game.UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
+	        flying = not flying
+	    end
+	end)
+	notify("Fly hack enabled. Flying speed is based off your walkspeed (also disabling ragdoll is recommended when using this)")
+	notify("(Also sometimes you'll spaz out when flying depending on your cursor position)")
 	end
 	end)
-	end))
-	end
-	healgui.Activatehealer.MouseButton1Click:connect(function()
-	if not healscripton then
-	healscripton = true
-	lowhealth = tonumber(healgui.LowHealth.Text)
-	higherhealth = tonumber(healgui.HigherHealth.Text)
-	EmergencyHealingScript(lplr.Character)
-	lplr.CharacterAdded:connect(EmergencyHealingScript)
-	else
-	lowhealth = tonumber(healgui.LowHealth.Text)
-	higherhealth = tonumber(healgui.HigherHealth.Text)
-	end
-	end)
-	healgui.Option1.MouseButton1Click:connect(function()
-	local option1 = healgui.Option1
-	local option2 = healgui.Option2
-	if TPBackEnabled then
-	TPBackEnabled = false
-	SkydiveEnabled = true
-	option1.Text = "Teleport me back to where I was: N"
-	option1.TextColor3 = Color3.new(1,0,0)
-	option2.Text = "Let me skydive to another location: Y"
-	option2.TextColor3 = Color3.new(0,1,0)
-	else
-	TPBackEnabled = true
-	SkydiveEnabled = false
-	option1.Text = "Teleport me back to where I was: Y"
-	option1.TextColor3 = Color3.new(0,1,0)
-	option2.Text = "Let me skydive to another location: N"
-	option2.TextColor3 = Color3.new(1,0,0)
-	end
-	end)
-	healgui.Option2.MouseButton1Click:connect(function()
-	local option1 = healgui.Option1
-	local option2 = healgui.Option2
-	if not SkydiveEnabled then
-	TPBackEnabled = false
-	SkydiveEnabled = true
-	option1.Text = "Teleport me back to where I was: N"
-	option1.TextColor3 = Color3.new(1,0,0)
-	option2.Text = "Let me skydive to another location: Y"
-	option2.TextColor3 = Color3.new(0,1,0)
-	else
-	TPBackEnabled = true
-	SkydiveEnabled = false
-	option1.Text = "Teleport me back to where I was: Y"
-	option1.TextColor3 = Color3.new(0,1,0)
-	option2.Text = "Let me skydive to another location: N"
-	option2.TextColor3 = Color3.new(1,0,0)
-	end
-	end)
-	frame2.healguibutton.MouseButton1Click:connect(function()
-	healgui.Visible = true
-	end)
-	healgui.HideGui.MouseButton1Click:connect(function()
-	healgui.Visible = false
-	end)
+	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_OPEV90_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_SFFC67_FAKESCRIPT))
