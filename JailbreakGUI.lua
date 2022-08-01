@@ -415,7 +415,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_SYHB80_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_WMPW71_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -727,6 +727,7 @@ function SCRIPT_SYHB80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	notify("Hold E Bypass enabled. Sadly cannot be used with donut or gas station ;(")
 	end
 	end)
+	local SpeedBypass = false
 	mainframe.more.MouseButton1Click:connect(function()
 		local gui = mainframe.Parent
 		gui.MainFrame.Visible = false
@@ -745,8 +746,8 @@ function SCRIPT_SYHB80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	lplr.Character.Humanoid.WalkSpeed = ws.number
 	end)
 	end
-	if not _G.SpeedBypass then
-	_G.SpeedBypass = true
+	if not SpeedBypass then
+	SpeedBypass = true
 	speedhack()
 	lplr.CharacterAdded:connect(function(chr)
 	chr:WaitForChild("Humanoid")
@@ -764,8 +765,8 @@ function SCRIPT_SYHB80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if num > 150 then
 	ws.number = 150
 	end
-	if num < 0 then
-	ws.number = 0
+	if num < 5 then
+	ws.number = 5
 	end
 	mainframe.Speednum.Text = tostring(ws.number)
 	end)
@@ -866,6 +867,11 @@ function SCRIPT_SYHB80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	frame2.gunshoptpbutton.Text = "Gunshop TP enabled: "..tostring(gunshoptp)
 	end)
 	local enablefly = false
+	local GetVelocity = function(pos1,pos2,NewSPS)
+	local distance = (pos2 - pos1)
+	local mag = distance.Magnitude
+	return (distance/mag)*NewSPS
+	end
 	frame2.flyhack.MouseButton1Click:connect(function()
 	if not enablefly then
 	enablefly = true
@@ -876,7 +882,7 @@ function SCRIPT_SYHB80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	    if flying then
 	        if isrbxactive() then
 	m.TargetFilter = workspace
-	    local pos = _G.GetVelocity(lplr.Character.HumanoidRootPart.Position, m.Hit.Position, ws.number)
+	    local pos = GetVelocity(lplr.Character.HumanoidRootPart.Position, m.Hit.Position, ws.number)
 	    lplr.Character.HumanoidRootPart.Velocity = pos
 	    lplr.Character.HumanoidRootPart.CFrame = CFrame.new(lplr.Character.HumanoidRootPart.Position, m.Hit.Position)
 	        end
@@ -895,4 +901,4 @@ function SCRIPT_SYHB80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_SYHB80_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_WMPW71_FAKESCRIPT))
