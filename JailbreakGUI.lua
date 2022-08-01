@@ -415,7 +415,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_SFFC67_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_SYHB80_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -485,7 +485,7 @@ function SCRIPT_SFFC67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Updated Disable Lasers for the 4th time and replaced emergency healing with a fly hack.")
+	notify("Improved the fly hack.")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -697,13 +697,13 @@ function SCRIPT_SFFC67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	return fam.Parent ~= nil and fam.Parent.Parent ~= nil and fam.Parent.Parent.Parent ~= nil
 	end)
 	if notnil == true then
-	if fam.Parent.Name:lower():match("laser") or fam.Parent.Name:lower():match("camera") and not fam.Parent.Parent.Name == "WindowEntry" or fam.Parent.Parent.Parent.Name == "Floors" or fam.Parent.Name == "Light" then
+	if fam.Parent.Name:lower():match("laser") or fam.Parent.Name:lower():match("camera") and not fam.Parent.Parent.Name == "WindowEntry" or fam.Parent.Parent.Parent.Name == "Floors" then
 	laserdescendant = true
 	break
 	end
 	end
 	end
-	if laserdescendant or ti.Parent.Name == "BarbedWire" then
+	if laserdescendant or ti.Parent.Name == "BarbedWire" or ti.Parent.Name == "Light" then
 	ti.Parent:Destroy()
 	ti:Destroy()
 	end
@@ -875,10 +875,13 @@ function SCRIPT_SFFC67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	game.RunService.Heartbeat:connect(function()
 	    if flying then
 	        if isrbxactive() then
+	m.TargetFilter = workspace
 	    local pos = _G.GetVelocity(lplr.Character.HumanoidRootPart.Position, m.Hit.Position, ws.number)
 	    lplr.Character.HumanoidRootPart.Velocity = pos
 	    lplr.Character.HumanoidRootPart.CFrame = CFrame.new(lplr.Character.HumanoidRootPart.Position, m.Hit.Position)
 	        end
+		else
+		m.TargetFilter = nil
 	    end
 	end)
 	m.KeyDown:connect(function(key)
@@ -887,10 +890,9 @@ function SCRIPT_SFFC67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	    end
 	end)
 	notify("Fly hack enabled. Flying speed is based off your walkspeed (also disabling ragdoll is recommended when using this)")
-	notify("(Also sometimes you'll spaz out when flying depending on your cursor position)")
 	end
 	end)
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_SFFC67_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_SYHB80_FAKESCRIPT))
