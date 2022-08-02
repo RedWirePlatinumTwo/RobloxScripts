@@ -878,7 +878,6 @@ function SCRIPT_AJEY73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local lplr = game.Players.LocalPlayer
 	local flying = false
 	local idle = false
-	lplr.Character.HumanoidRootPart.Anchored = true
 	local m = lplr:GetMouse()
 	game.RunService.Heartbeat:connect(function()
 	    if flying then
