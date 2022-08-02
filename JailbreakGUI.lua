@@ -900,7 +900,7 @@ function SCRIPT_PFFL67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	        if not flying then
 	        idle = false
 	        end
-	    elseif key == "f" and not game.UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
+	    elseif key == "f" and not game.UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) and flying then
 	        idle = not idle
 	    end
 	end)
