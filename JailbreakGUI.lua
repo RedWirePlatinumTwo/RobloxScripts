@@ -881,7 +881,7 @@ function SCRIPT_PFFL67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local m = lplr:GetMouse()
 	game.RunService.Heartbeat:connect(function()
 	    if flying then
-	    local pos = GetVelocity(lplr.Character.HumanoidRootPart.Position, m.Hit.Position, 80)
+	    local pos = GetVelocity(lplr.Character.HumanoidRootPart.Position, m.Hit.Position, ws.number)
 	    lplr.Character.HumanoidRootPart.Velocity = pos
 	    lplr.Character.HumanoidRootPart.CFrame = CFrame.new(lplr.Character.HumanoidRootPart.Position, m.Hit.Position)
 		m.TargetFilter = workspace
