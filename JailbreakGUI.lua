@@ -415,7 +415,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_AJEY73_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_PFFL67_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -881,9 +881,10 @@ function SCRIPT_AJEY73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local m = lplr:GetMouse()
 	game.RunService.Heartbeat:connect(function()
 	    if flying then
-	    local pos = GetVelocity(lplr.Character.HumanoidRootPart.Position, m.Hit.Position, ws.number)
+	    local pos = GetVelocity(lplr.Character.HumanoidRootPart.Position, m.Hit.Position, 80)
 	    lplr.Character.HumanoidRootPart.Velocity = pos
 	    lplr.Character.HumanoidRootPart.CFrame = CFrame.new(lplr.Character.HumanoidRootPart.Position, m.Hit.Position)
+		m.TargetFilter = workspace
 		else
 		m.TargetFilter = nil
 	    end
@@ -907,7 +908,6 @@ function SCRIPT_AJEY73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	notify("(Pressing F without also pressing CTRL allows you to stay mid-air)")
 	end
 	end)
-	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_AJEY73_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_PFFL67_FAKESCRIPT))
