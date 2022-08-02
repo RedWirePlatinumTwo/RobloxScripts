@@ -867,10 +867,10 @@ function SCRIPT_AJEY73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	frame2.gunshoptpbutton.Text = "Gunshop TP enabled: "..tostring(gunshoptp)
 	end)
 	local enablefly = false
-	local GetVelocity = function(pos1,pos2,NewSPS)
+	local GetVelocity = function(pos1,pos2,StudsPerSecond)
 	local distance = (pos2 - pos1)
 	local mag = distance.Magnitude
-	return (distance/mag)*NewSPS
+	return (distance/mag)*StudsPerSecond
 	end
 	frame2.flyhack.MouseButton1Click:connect(function()
 	if not enablefly then
