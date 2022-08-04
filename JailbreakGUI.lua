@@ -415,7 +415,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_PFFL67_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_LGEW75_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -880,9 +880,14 @@ function SCRIPT_PFFL67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local idle = false
 	local m = lplr:GetMouse()
 	game.RunService.Heartbeat:connect(function()
+		pcall(function()
 	    if flying then
+		if not idle then
 	    local pos = GetVelocity(lplr.Character.HumanoidRootPart.Position, m.Hit.Position, ws.number)
 	    lplr.Character.HumanoidRootPart.Velocity = pos
+		else
+		lplr.Character.HumanoidRootPart.Velocity = Vector3.new(0,0,0)
+		end
 	    lplr.Character.HumanoidRootPart.CFrame = CFrame.new(lplr.Character.HumanoidRootPart.Position, m.Hit.Position)
 		m.TargetFilter = workspace
 		else
@@ -893,6 +898,7 @@ function SCRIPT_PFFL67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	    else
 	        lplr.Character.HumanoidRootPart.Anchored = false
 	    end
+		end)
 	end)
 	m.KeyDown:connect(function(key)
 	    if key == "f" and game.UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
@@ -910,4 +916,4 @@ function SCRIPT_PFFL67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_PFFL67_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_LGEW75_FAKESCRIPT))
