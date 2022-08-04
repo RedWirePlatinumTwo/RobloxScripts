@@ -329,7 +329,7 @@ typelabel.TextScaled = true
 typelabel.TextSize = 14
 typelabel.TextWrapped = true
 -- Scripts:
-function SCRIPT_KZGZ77_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_IWIF88_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	if not _G.RedsAimbot then
@@ -384,7 +384,14 @@ function SCRIPT_KZGZ77_FAKESCRIPT() -- Aimbot.Scripts
 	if AimbotStats.OwnTeamWhitelisted then
 	return plr.Team ~= lplr.Team and not table.find(WhitelistedPlrs, plr) and not table.find(WhitelistedTeams, plr.Team.Name)
 	else
-	return not table.find(WhitelistedPlrs, plr) and not table.find(WhitelistedTeams, plr.Team.Name)
+	local validteam, teamname = pcall(function()
+	return plr.Team.Name
+	end)
+	if validteam then
+	return not table.find(WhitelistedPlrs, plr) and not table.find(WhitelistedTeams, teamname)
+	else
+	return not table.find(WhitelistedPlrs, plr)
+	end
 	end
 	end
 	local function usingraycast(chr)
@@ -588,7 +595,7 @@ function SCRIPT_KZGZ77_FAKESCRIPT() -- Aimbot.Scripts
 	game.StarterGui:SetCore("SendNotification", {
 	Title = "Aimbot Update:";
 	Duration = 10;
-	Text = "Made a *slight* change to team whitelisting.";})
+	Text = "Fixed issue where games with no teams make it unable to target anyone.";})
 	
 	function Died(player)
 	if not player.Character then player.CharacterAdded:Wait() end
@@ -802,4 +809,4 @@ function SCRIPT_KZGZ77_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_KZGZ77_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_IWIF88_FAKESCRIPT))
