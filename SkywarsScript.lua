@@ -151,6 +151,7 @@ mouse1click()
 wait()
 mouse1release()
 hrp.CFrame = kpart.CFrame
+hrp.Velocity = Vector3.new()
 end
 elseif pchr:FindFirstChild("HumanoidRootPart") and pchr.HumanoidRootPart.CFrame.Y < 0 then
 pchr.Humanoid.Health = 0
@@ -175,14 +176,7 @@ repeat wait() until dead(plr)
 end
 end
 end
-local _ = true
-game.RunService.Heartbeat:connect(function()
-if _ then
 lplr.Character.HumanoidRootPart.CFrame = workspace.Lobby["Middle Room"].Floor.Base.Union.CFrame + Vector3.new(0, 20, 0)
-end
-end)
-wait(1)
-_ = false
 end
 end
 end
