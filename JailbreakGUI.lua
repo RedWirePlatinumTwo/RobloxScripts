@@ -886,7 +886,7 @@ function SCRIPT_LGEW75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	    local pos = GetVelocity(lplr.Character.HumanoidRootPart.Position, m.Hit.Position, ws.number)
 	    lplr.Character.HumanoidRootPart.Velocity = pos
 		else
-		lplr.Character.HumanoidRootPart.Velocity = Vector3.new(0,0,0)
+		lplr.Character.HumanoidRootPart.Velocity = Vector3.new()
 		end
 	    lplr.Character.HumanoidRootPart.CFrame = CFrame.new(lplr.Character.HumanoidRootPart.Position, m.Hit.Position)
 		m.TargetFilter = workspace
