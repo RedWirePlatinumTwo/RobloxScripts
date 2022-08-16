@@ -415,7 +415,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_LGEW75_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_LFDI83_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -519,8 +519,9 @@ function SCRIPT_LGEW75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 	local HoldEBypass = false
 	local gunshoptp = false
+	local moduleui = require(game.ReplicatedStorage.Module.UI)
 	game.RunService.RenderStepped:connect(function()
-		for i,a in pairs(require(game.ReplicatedStorage.Module.UI).CircleAction.Specs) do
+		for i,a in pairs(moduleui.CircleAction.Specs) do
 		if a.Duration ~= false and HoldEBypass and a.Name ~= "Rob" then
 		   a.Timed = false;
 		end
@@ -674,8 +675,8 @@ function SCRIPT_LGEW75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if v.Name == "Shotgun" then
 	gun.BulletSpread = 0.02
 	end
-	for prefix, value in pairs(Table) do
-	gun[prefix] = value
+	for index, value in pairs(Table) do
+	gun[index] = value
 	end
 	end
 	end
@@ -916,4 +917,4 @@ function SCRIPT_LGEW75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_LGEW75_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_LFDI83_FAKESCRIPT))
