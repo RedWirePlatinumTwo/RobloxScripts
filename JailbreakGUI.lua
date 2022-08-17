@@ -861,7 +861,7 @@ function SCRIPT_QJMU70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if not ragdollremoved then
 	ragdollremoved = true
 	require(game.ReplicatedStorage.Module.AlexRagdoll).Ragdoll = nil
-	notify("Ragdoll is no more.")
+	notify("Removed ragdolling. (WARNING: in some cases you will still take fall damage)")
 	end
 	end)
 	frame2.switch.MouseButton1Down:connect(function()
