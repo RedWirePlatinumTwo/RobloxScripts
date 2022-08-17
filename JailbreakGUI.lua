@@ -317,7 +317,7 @@ gunshoptpbutton.Name = "gunshoptpbutton"
 gunshoptpbutton.Parent = otherFrame
 gunshoptpbutton.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 gunshoptpbutton.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-gunshoptpbutton.Position = UDim2.new(0, 0, 0.252999991, 0)
+gunshoptpbutton.Position = UDim2.new(0, 0, 0.261999995, 0)
 gunshoptpbutton.Size = UDim2.new(0, 108, 0, 47)
 gunshoptpbutton.Font = Enum.Font.SourceSansBold
 gunshoptpbutton.Text = "Gunshop TP Enabled:"
@@ -331,7 +331,7 @@ infiniteyeet.Name = "infiniteyeet"
 infiniteyeet.Parent = otherFrame
 infiniteyeet.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 infiniteyeet.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-infiniteyeet.Position = UDim2.new(0.663520157, 0, 0, 0)
+infiniteyeet.Position = UDim2.new(0.666999996, 0, 0, 0)
 infiniteyeet.Size = UDim2.new(0, 108, 0, 47)
 infiniteyeet.Font = Enum.Font.SourceSansBold
 infiniteyeet.Text = "Inf Yield"
@@ -345,7 +345,7 @@ flyhack.Name = "flyhack"
 flyhack.Parent = otherFrame
 flyhack.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 flyhack.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-flyhack.Position = UDim2.new(0.663520336, 0, 0.263706565, 0)
+flyhack.Position = UDim2.new(0.666999996, 0, 0.261999995, 0)
 flyhack.Size = UDim2.new(0, 108, 0, 47)
 flyhack.Font = Enum.Font.SourceSansBold
 flyhack.Text = "Fly hack (Left CTRL + F)"
@@ -359,7 +359,6 @@ removeragdoll.Name = "removeragdoll"
 removeragdoll.Parent = otherFrame
 removeragdoll.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 removeragdoll.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-removeragdoll.Position = UDim2.new(0.00156788772, 0, 0, 0)
 removeragdoll.Size = UDim2.new(0, 108, 0, 47)
 removeragdoll.Font = Enum.Font.SourceSansBold
 removeragdoll.Text = "Remove Ragdoll"
@@ -373,8 +372,9 @@ keybypass.Name = "keybypass"
 keybypass.Parent = otherFrame
 keybypass.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 keybypass.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-keybypass.Position = UDim2.new(0.327883303, 0, 0.262295067, 0)
+keybypass.Position = UDim2.new(0.328000009, 0, 0.261999995, 0)
 keybypass.Size = UDim2.new(0, 108, 0, 47)
+keybypass.ZIndex = 0
 keybypass.Font = Enum.Font.SourceSansBold
 keybypass.Text = "Keycard Bypass"
 keybypass.TextColor3 = Color3.new(0, 0.666667, 1)
@@ -430,7 +430,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_MLAC67_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_KMBW87_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -944,4 +944,4 @@ function SCRIPT_MLAC67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_MLAC67_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_KMBW87_FAKESCRIPT))
