@@ -31,6 +31,7 @@ if antifall and lplr.Character then
 part.Position = (lplr.Character.HumanoidRootPart.Position * Vector3.new(1,0,1)) + Vector3.new(0,147,0)
 if lplr.Character.HumanoidRootPart.CFrame.Y < 147 then
 lplr.Character.HumanoidRootPart.CFrame = part.CFrame + Vector3.new(0, 3, 0)
+lplr.Character.HumanoidRootPart.Velocity = Vector3.new()
 end
 end
 end)
@@ -48,7 +49,6 @@ else
 antifall = true
 part.Transparency = 0
 part.CanCollide = true
-lplr.Character.HumanoidRootPart.Velocity = Vector3.new()
 local h = Instance.new("Hint", workspace)
 h.Text = "Anti-falling enabled!"
 wait(2)
