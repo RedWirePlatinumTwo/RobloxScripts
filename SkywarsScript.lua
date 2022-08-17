@@ -227,10 +227,16 @@ if b.Name == "Extra" then
     b:Destroy()
 end
 end)
+local blockcooldown2 = false
 game.RunService.RenderStepped:connect(function()
 if not game.UserInputService:IsKeyDown(Enum.KeyCode.Z) then return end
 if lplr.Character:FindFirstChild("Axe") then
+if not blockcooldown2 then
+blockcooldown2 = true
 lplr.Character.Axe.RemoteEvent:FireServer(lplr:GetMouse().Target)
+wait(0.1)
+blockcooldown2 = false
+end
 end
 end)
 local enter = workspace.Lobby["Mega VIP Room"].Teleport.Enter
