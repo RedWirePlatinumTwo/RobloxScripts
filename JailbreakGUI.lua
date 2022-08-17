@@ -27,6 +27,7 @@ local gunshoptpbutton = Instance.new("TextButton")
 local infiniteyeet = Instance.new("TextButton")
 local flyhack = Instance.new("TextButton")
 local removeragdoll = Instance.new("TextButton")
+local keybypass = Instance.new("TextButton")
 local BriefcaseESPFrame = Instance.new("Frame")
 local bguis = Instance.new("TextButton")
 local pointers = Instance.new("TextButton")
@@ -316,8 +317,8 @@ gunshoptpbutton.Name = "gunshoptpbutton"
 gunshoptpbutton.Parent = otherFrame
 gunshoptpbutton.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 gunshoptpbutton.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-gunshoptpbutton.Position = UDim2.new(0.00200003176, 0, 0.264000058, 0)
-gunshoptpbutton.Size = UDim2.new(0, 160, 0, 45)
+gunshoptpbutton.Position = UDim2.new(0, 0, 0.252999991, 0)
+gunshoptpbutton.Size = UDim2.new(0, 108, 0, 47)
 gunshoptpbutton.Font = Enum.Font.SourceSansBold
 gunshoptpbutton.Text = "Gunshop TP Enabled:"
 gunshoptpbutton.TextColor3 = Color3.new(1, 0.666667, 0)
@@ -344,8 +345,8 @@ flyhack.Name = "flyhack"
 flyhack.Parent = otherFrame
 flyhack.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 flyhack.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-flyhack.Position = UDim2.new(0.497712135, 0, 0.263706565, 0)
-flyhack.Size = UDim2.new(0, 162, 0, 45)
+flyhack.Position = UDim2.new(0.663520336, 0, 0.263706565, 0)
+flyhack.Size = UDim2.new(0, 108, 0, 47)
 flyhack.Font = Enum.Font.SourceSansBold
 flyhack.Text = "Fly hack (Left CTRL + F)"
 flyhack.TextColor3 = Color3.new(0.333333, 1, 1)
@@ -367,6 +368,20 @@ removeragdoll.TextScaled = true
 removeragdoll.TextSize = 16
 removeragdoll.TextStrokeTransparency = 0
 removeragdoll.TextWrapped = true
+
+keybypass.Name = "keybypass"
+keybypass.Parent = otherFrame
+keybypass.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+keybypass.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+keybypass.Position = UDim2.new(0.327883303, 0, 0.262295067, 0)
+keybypass.Size = UDim2.new(0, 108, 0, 47)
+keybypass.Font = Enum.Font.SourceSansBold
+keybypass.Text = "Keycard Bypass"
+keybypass.TextColor3 = Color3.new(0, 0.666667, 1)
+keybypass.TextScaled = true
+keybypass.TextSize = 16
+keybypass.TextStrokeTransparency = 0
+keybypass.TextWrapped = true
 
 BriefcaseESPFrame.Name = "BriefcaseESPFrame"
 BriefcaseESPFrame.Parent = JailbreakGUI
@@ -415,7 +430,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_AZHH72_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_MLAC67_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -485,7 +500,7 @@ function SCRIPT_AZHH72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("(Hopefully) Fixed a bug where disabling lasers would make it difficult to rob the jewelry store.")
+	notify("Fixed a bug where disabling lasers would make it difficult to rob the jewelry store + added a keycard bypass button.")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -704,9 +719,11 @@ function SCRIPT_AZHH72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	end
 	end
-	if laserdescendant or ti.Parent.Name == "BarbedWire" or ti.Parent.Name == "Light" and ti.Parent.Parent.Name ~= "WindowEntry" then
+	if laserdescendant or ti.Parent.Name == "BarbedWire" or ti.Parent.Name == "Light" then
+	if ti.Parent.Parent.Name ~= "WindowEntry" then
 	ti.Parent:Destroy()
 	ti:Destroy()
+	end
 	end
 	end
 	end
@@ -915,6 +932,16 @@ function SCRIPT_AZHH72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	notify("(Pressing F without also pressing CTRL allows you to stay mid-air)")
 	end
 	end)
+	local keybypass = false
+	frame2.keybypass.MouseButton1Click:connect(function()
+	if not keybypass then
+	keybypass = true
+	require(game.ReplicatedStorage.Game.PlayerUtils).hasKey = function()
+	return true
+	end
+	notify("Keycard bypass enabled.")
+	end
+	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_AZHH72_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_MLAC67_FAKESCRIPT))
