@@ -415,7 +415,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_LFDI83_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_AZHH72_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -485,7 +485,7 @@ function SCRIPT_LFDI83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Improved the fly hack (again).")
+	notify("(Hopefully) Fixed a bug where disabling lasers would make it difficult to rob the jewelry store.")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -698,13 +698,13 @@ function SCRIPT_LFDI83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	return fam.Parent ~= nil and fam.Parent.Parent ~= nil and fam.Parent.Parent.Parent ~= nil
 	end)
 	if notnil == true then
-	if fam.Parent.Name:lower():match("laser") or fam.Parent.Name:lower():match("camera") and not fam.Parent.Parent.Name == "WindowEntry" or fam.Parent.Parent.Parent.Name == "Floors" then
+	if fam.Parent.Name:lower():match("laser") or fam.Parent.Name:lower():match("camera") or fam.Parent.Parent.Parent.Name == "Floors" then
 	laserdescendant = true
 	break
 	end
 	end
 	end
-	if laserdescendant or ti.Parent.Name == "BarbedWire" or ti.Parent.Name == "Light" then
+	if laserdescendant or ti.Parent.Name == "BarbedWire" or ti.Parent.Name == "Light" and ti.Parent.Parent.Name ~= "WindowEntry" then
 	ti.Parent:Destroy()
 	ti:Destroy()
 	end
@@ -917,4 +917,4 @@ function SCRIPT_LFDI83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_LFDI83_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_AZHH72_FAKESCRIPT))
