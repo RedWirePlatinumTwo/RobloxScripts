@@ -430,7 +430,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_QJMU70_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_QFQR76_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -705,6 +705,7 @@ function SCRIPT_QJMU70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	mainframe.disablelasers.MouseButton1Click:connect(function()
 	if lasersdisabled == false then
 	lasersdisabled = true
+	require(game:GetService("ReplicatedStorage").Game.MilitaryIsland).StopSpin() -- If I don't include this then the dev log will be spammed with SetPrimaryPartCFrame errors
 	local function removeTI(ti)
 	if ti.ClassName == "TouchTransmitter" then
 	local laserdescendant = false
@@ -946,4 +947,4 @@ function SCRIPT_QJMU70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_QJMU70_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_QFQR76_FAKESCRIPT))
