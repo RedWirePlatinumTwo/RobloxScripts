@@ -56,13 +56,13 @@ h:Destroy()
 end
 elseif key == "x" then
 local m
-for i, b in ipairs(workspace:GetChildren()) do
+for i, b in pairs(workspace:GetChildren()) do
 	if b.Name:match("Map") then
 		m = b
 	end
 end
 if m then
-for i, ore in ipairs(m.Map.Ores:GetChildren()) do
+for i, ore in pairs(m.Map.Ores:GetChildren()) do
 	if not ore:FindFirstChild("BoxHandleAdornment") then
 	highlightOre(ore)
 	end
@@ -99,13 +99,13 @@ repeat wait() until isBroken(o)
 tp = false
 end
 local m
-for i, b in ipairs(workspace:GetChildren()) do
+for i, b in pairs(workspace:GetChildren()) do
 	if b.Name:match("Map") then
 		m = b
 	end
 end
 if m then
-for i, ore in ipairs(m.Map.Ores:GetChildren()) do
+for i, ore in pairs(m.Map.Ores:GetChildren()) do
 	farm(ore)
 end
 wait(0.1)
@@ -177,7 +177,7 @@ end
 function dead(plr)
 return plr.Character.Humanoid.Health == 0 or plr.Character.HumanoidRootPart.CFrame.Y < 0
 end
-for i, plr in ipairs(game.Players:GetPlayers()) do
+for i, plr in pairs(game.Players:GetPlayers()) do
 if plr.Name ~= lplr.Name and #plr.Backpack:GetChildren() ~= 0 then
 if plr.Character  and plr.Character:FindFirstChild("Humanoid") then
 kill(plr)
