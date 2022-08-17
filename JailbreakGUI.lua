@@ -430,7 +430,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_KMBW87_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_QJMU70_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -721,7 +721,9 @@ function SCRIPT_KMBW87_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	if laserdescendant or ti.Parent.Name == "BarbedWire" or ti.Parent.Name == "Light" then
 	if ti.Parent.Parent.Name ~= "WindowEntry" then
+	if ti.Parent.CanCollide == false then
 	ti.Parent:Destroy()
+	end
 	ti:Destroy()
 	end
 	end
@@ -944,4 +946,4 @@ function SCRIPT_KMBW87_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_KMBW87_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_QJMU70_FAKESCRIPT))
