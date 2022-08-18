@@ -142,7 +142,7 @@ antifalltoggle.TextStrokeColor3 = Color3.new(0, 0, 1)
 antifalltoggle.TextStrokeTransparency = 0
 antifalltoggle.TextWrapped = true
 -- Scripts:
-function SCRIPT_MHGO86_FAKESCRIPT() -- SkyWarsGUI.LocalScript 
+function SCRIPT_EKJA74_FAKESCRIPT() -- SkyWarsGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = SkyWarsGUI
 	local lplr = game.Players.LocalPlayer
@@ -354,6 +354,12 @@ function SCRIPT_MHGO86_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	part.CanCollide = true
 	end
 	end)
+	lplr.PlayerGui.Extra:Destroy()
+	lplr.PlayerGui.ChildAdded:connect(function(c)
+	    if c.Name == "Extra" then
+	        c:Destroy()
+	    end
+	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_MHGO86_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_EKJA74_FAKESCRIPT))
