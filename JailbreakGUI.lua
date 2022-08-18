@@ -430,7 +430,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_QFQR76_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_ADCP86_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -724,6 +724,9 @@ function SCRIPT_QFQR76_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if ti.Parent.Parent.Name ~= "WindowEntry" then
 	if ti.Parent.CanCollide == false then
 	ti.Parent:Destroy()
+	else
+	ti.Transparency = 0.8
+	ti.Color = Color3.new()
 	end
 	ti:Destroy()
 	end
@@ -947,4 +950,4 @@ function SCRIPT_QFQR76_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_QFQR76_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_ADCP86_FAKESCRIPT))
