@@ -327,6 +327,7 @@ function SCRIPT_EKJA74_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	end
 	wait(0.5)
 	lplr.Character.HumanoidRootPart.CFrame = workspace.Lobby["Middle Room"].Floor.Base.Union.CFrame + Vector3.new(0, 10, 0)
+	lplr.Character.HumanoidRootPart.Velocity = Vector3.new()
 	end
 	end)
 	local part = Instance.new("Part", workspace)
