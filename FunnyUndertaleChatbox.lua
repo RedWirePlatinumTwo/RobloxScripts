@@ -44,7 +44,7 @@ function SCRIPT_OTWB86_FAKESCRIPT() -- UTChatBox.Chatscript
 	script.Parent = UTChatBox
 	local gui = script.Parent
 	gui.Enabled = false
-	function PlayerChatted(plr)
+	local function PlayerChatted(plr)
 	plr.Chatted:connect(function(String)
 	local Chatgui = gui:Clone()
 	Chatgui.Parent = game.CoreGui
