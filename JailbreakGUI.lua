@@ -725,7 +725,7 @@ function SCRIPT_AVZX85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if ti.Parent.CanCollide == false then
 	ti.Parent:Destroy()
 	else
-	ti.Parent.Transparency = 0.8
+	ti.Parent.Transparency = 0.6
 	ti.Parent.Color = Color3.new()
 	end
 	ti:Destroy()
