@@ -189,8 +189,9 @@ function SCRIPT_EKJA74_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	if not blockcooldown then
 	blockcooldown = true
 	chr.Axe.RemoteEvent:FireServer(o)
-	wait(0.1)
+	delay(0.1, function()
 	blockcooldown = false
+	end)
 	end
 	chr.HumanoidRootPart.CFrame = o.CFrame
 	else
@@ -239,8 +240,9 @@ function SCRIPT_EKJA74_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	if not blockcooldown2 then
 	blockcooldown2 = true
 	lplr.Character.Axe.RemoteEvent:FireServer(lplr:GetMouse().Target)
-	wait(0.1)
+	delay(0.1, function()
 	blockcooldown2 = false
+	end)
 	end
 	end
 	end)
