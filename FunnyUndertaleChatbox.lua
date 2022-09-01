@@ -63,15 +63,15 @@ function SCRIPT_OTWB86_FAKESCRIPT() -- UTChatBox.Chatscript
 	coroutine.resume(coroutine.create(function()
 	local s = Instance.new("Sound", workspace)
 	s.SoundId = "rbxassetid://5416666166"
-	repeat wait() until s.TimeLength ~= 0
+	repeat task.wait() until s.TimeLength ~= 0
 	s:Play()
-	wait(s.TimeLength)
+	task.wait(s.TimeLength)
 	s:Destroy()
 	end))
 	Message.Text = "* "..String2:sub(1,i)
-	wait()
+	task.wait()
 	end
-	wait(2)
+	task.wait(2)
 	Chatgui:Destroy()
 	end)
 	end
