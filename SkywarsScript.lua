@@ -142,7 +142,7 @@ antifalltoggle.TextStrokeColor3 = Color3.new(0, 0, 1)
 antifalltoggle.TextStrokeTransparency = 0
 antifalltoggle.TextWrapped = true
 -- Scripts:
-function SCRIPT_EKJA74_FAKESCRIPT() -- SkyWarsGUI.LocalScript 
+function SCRIPT_VCHM67_FAKESCRIPT() -- SkyWarsGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = SkyWarsGUI
 	local lplr = game.Players.LocalPlayer
@@ -189,7 +189,7 @@ function SCRIPT_EKJA74_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	if not blockcooldown then
 	blockcooldown = true
 	chr.Axe.RemoteEvent:FireServer(o)
-	delay(0.1, function()
+	delay(0.1,function()
 	blockcooldown = false
 	end)
 	end
@@ -199,7 +199,7 @@ function SCRIPT_EKJA74_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	end
 	end
 	end)
-	repeat wait() until isBroken(o)
+	repeat task.wait() until isBroken(o)
 	tp = false
 	end
 	local m
@@ -240,7 +240,7 @@ function SCRIPT_EKJA74_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	if not blockcooldown2 then
 	blockcooldown2 = true
 	lplr.Character.Axe.RemoteEvent:FireServer(lplr:GetMouse().Target)
-	delay(0.1, function()
+	delay(0.1,function()
 	blockcooldown2 = false
 	end)
 	end
@@ -299,7 +299,7 @@ function SCRIPT_EKJA74_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	motor.Part0 = pchr.HumanoidRootPart
 	if chr:FindFirstChild("Sword") and motor.Part1 ~= nil then
 	mouse1click()
-	wait()
+	task.wait()
 	mouse1release()
 	hrp.CFrame = kpart.CFrame
 	hrp.Velocity = Vector3.new()
@@ -323,7 +323,7 @@ function SCRIPT_EKJA74_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	if plr ~= lplr and #plr.Backpack:GetChildren() ~= 0 then
 	if plr.Character  and plr.Character:FindFirstChild("Humanoid") then
 	kill(plr)
-	repeat wait() until dead(plr)
+	repeat task.wait() until dead(plr)
 	end
 	end
 	end
@@ -365,4 +365,4 @@ function SCRIPT_EKJA74_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_EKJA74_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_VCHM67_FAKESCRIPT))
