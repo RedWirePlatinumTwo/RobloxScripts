@@ -139,7 +139,7 @@ function SCRIPT_KHHX70_FAKESCRIPT() -- RedWiresNDSGUI.LocalScript
 		function nofalldmg(chr)
 		chr.ChildAdded:connect(function(c)
 		if c.Name == "FallDamageScript" or c.Name == "CharacterScript" then
-		wait(0.2)
+		task.wait(0.2)
 		c:Destroy()
 		end
 		end)
@@ -153,7 +153,7 @@ function SCRIPT_KHHX70_FAKESCRIPT() -- RedWiresNDSGUI.LocalScript
 		if tag then
 		local hint = Instance.new("Message", workspace)
 		hint.Text = tag.Value
-		wait(4)
+		task.wait(4)
 		hint:Destroy()
 		end
 		function prewarn(chr)
@@ -161,7 +161,7 @@ function SCRIPT_KHHX70_FAKESCRIPT() -- RedWiresNDSGUI.LocalScript
 		if c.Name == "SurvivalTag" then
 		local hint = Instance.new("Message", workspace)
 		hint.Text = "The disaster is: "..c.Value
-		wait(4)
+		task.wait(4)
 		hint:Destroy()
 		end
 		end)
