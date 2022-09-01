@@ -220,7 +220,7 @@ function SCRIPT_DKLD67_FAKESCRIPT() -- Megafunobby.LocalScript
 	start = start + 1
 			for i = start, End do
 				lplr.Character.HumanoidRootPart.CFrame = game.Workspace.stages[i].CFrame
-				repeat wait() until lplr.leaderstats.Stage.Value == i
+				repeat task.wait() until lplr.leaderstats.Stage.Value == i
 			end
 	end
 	end)
