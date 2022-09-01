@@ -458,7 +458,7 @@ function SCRIPT_AVZX85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	    local current = part[PropertyName]
 	    coroutine.resume(coroutine.create(function()
 	        while true do
-	            repeat game.RunService.RenderStepped:wait() until part[PropertyName] ~= current
+	            repeat task.wait() until part[PropertyName] ~= current
 				coroutine.resume(coroutine.create(function()
 	            func(part[PropertyName], current, part)
 				end))
@@ -624,7 +624,7 @@ function SCRIPT_AVZX85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	    part2.CFrame = part.CFrame
 	end)
 	coroutine.resume(coroutine.create(function()
-	repeat wait() until GetFamily(part)[1] ~= game
+	repeat task.wait() until GetFamily(part)[1] ~= game
 	pointfunction:Disconnect()
 	part1:Destroy()
 	part2:Destroy()
