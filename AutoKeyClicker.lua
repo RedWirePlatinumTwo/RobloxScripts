@@ -142,14 +142,14 @@ toggle.TextStrokeTransparency = 0
 toggle.TextWrapped = true
 toggle.TextXAlignment = Enum.TextXAlignment.Left
 -- Scripts:
-function SCRIPT_BHJU90_FAKESCRIPT() -- AutoKeyClicker.LocalScript 
+function SCRIPT_YPAP87_FAKESCRIPT() -- AutoKeyClicker.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = AutoKeyClicker
 	local frame = script.Parent.Mainframe
 	local clickspersecond = 0.1
 	function doclickwait()
 	if clickspersecond > 0.03 then
-	wait(clickspersecond)
+	task.wait(clickspersecond)
 	else
 	game.RunService.RenderStepped:Wait()
 	end
@@ -157,11 +157,9 @@ function SCRIPT_BHJU90_FAKESCRIPT() -- AutoKeyClicker.LocalScript
 	frame.Draggable = true
 	local Changed = function(part, PropertyName, func)
 		local current = part[PropertyName]
-		local eventType = "RenderStepped"
-		if part:IsA("BasePart") then eventType = "Heartbeat" end
 		coroutine.resume(coroutine.create(function()
 			while true do
-				repeat game.RunService[eventType]:wait() until part[PropertyName] ~= current
+				repeat task.wait() until part[PropertyName] ~= current
 				coroutine.resume(coroutine.create(function()
 					func(part[PropertyName], current, part)
 				end))
@@ -228,4 +226,4 @@ function SCRIPT_BHJU90_FAKESCRIPT() -- AutoKeyClicker.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_BHJU90_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_YPAP87_FAKESCRIPT))
