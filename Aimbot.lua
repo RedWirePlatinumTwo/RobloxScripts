@@ -329,7 +329,7 @@ typelabel.TextScaled = true
 typelabel.TextSize = 14
 typelabel.TextWrapped = true
 -- Scripts:
-function SCRIPT_IWIF88_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_WOTI72_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	if not _G.RedsAimbot then
@@ -368,7 +368,7 @@ function SCRIPT_IWIF88_FAKESCRIPT() -- Aimbot.Scripts
 	coroutine.resume(coroutine.create(function()
 	if AimbotStats.IsOn then
 	AimbotStats.IsOn = false
-	wait()
+	task.wait()
 	AimbotStats.IsOn = true
 	end
 	end))
@@ -476,7 +476,7 @@ function SCRIPT_IWIF88_FAKESCRIPT() -- Aimbot.Scripts
 	    local current = part[value]
 	    coroutine.resume(coroutine.create(function()
 	        while true do
-	            repeat game.RunService.RenderStepped:wait() until part[value] ~= current
+	            repeat task.wait() until part[value] ~= current
 	            func(part[value], current, part)
 	            current = part[value]
 	    end
@@ -548,7 +548,7 @@ function SCRIPT_IWIF88_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	if not lplr.Character then lplr.CharacterAdded:Wait() end
 	local chr = lplr.Character
-	repeat wait() until chr:FindFirstChild("Torso") or chr:FindFirstChild("UpperTorso")
+	repeat task.wait() until chr:FindFirstChild("Torso") or chr:FindFirstChild("UpperTorso")
 	local Torso = chr:FindFirstChild("Torso") or chr:FindFirstChild("UpperTorso")
 	m.Button1Down:connect(function()
 	if game.UserInputService:IsKeyDown(Enum.KeyCode.X) then
@@ -747,7 +747,7 @@ function SCRIPT_IWIF88_FAKESCRIPT() -- Aimbot.Scripts
 	togglefunc(WhitelistedTeams)
 	table.insert(AddedTeams, ins.Name)
 	coroutine.resume(coroutine.create(function()
-	repeat wait() until not game.Teams:FindFirstChild(ins.Name)
+	repeat task.wait() until not game.Teams:FindFirstChild(ins.Name)
 	clone:Destroy()
 	local findname = table.find(AddedTeams, ins.Name)
 	table.remove(AddedTeams, findname)
@@ -758,7 +758,7 @@ function SCRIPT_IWIF88_FAKESCRIPT() -- Aimbot.Scripts
 	clone.PriorityToggle.Visible = true
 	togglefunc(PrioritizedPlrs)
 	coroutine.resume(coroutine.create(function()
-	repeat wait() until not game.Players:FindFirstChild(ins.Name)
+	repeat task.wait() until not game.Players:FindFirstChild(ins.Name)
 	clone:Destroy()
 	end))
 	end
@@ -803,10 +803,10 @@ function SCRIPT_IWIF88_FAKESCRIPT() -- Aimbot.Scripts
 	Title = "Aimbot";
 	Text = "Seems like you've already executed this. Deleting clone GUI.";
 	})
-	wait(0.2)
+	task.wait(0.2)
 	script.Parent:Destroy()
 	end
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_IWIF88_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_WOTI72_FAKESCRIPT))
