@@ -212,7 +212,7 @@ function SCRIPT_VCHM67_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	for i, ore in pairs(m.Map.Ores:GetChildren()) do
 		farm(ore)
 	end
-	wait(0.1)
+	task.wait(0.1)
 	chr.HumanoidRootPart.CFrame = cframe
 	end
 	end
@@ -327,7 +327,7 @@ function SCRIPT_VCHM67_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	end
 	end
 	end
-	wait(0.5)
+	task.wait(0.5)
 	lplr.Character.HumanoidRootPart.CFrame = workspace.Lobby["Middle Room"].Floor.Base.Union.CFrame + Vector3.new(0, 10, 0)
 	lplr.Character.HumanoidRootPart.Velocity = Vector3.new()
 	end
