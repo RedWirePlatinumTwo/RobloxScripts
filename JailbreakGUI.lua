@@ -27,6 +27,7 @@ local gunshoptpbutton = Instance.new("TextButton")
 local infiniteyeet = Instance.new("TextButton")
 local flyhack = Instance.new("TextButton")
 local removeragdoll = Instance.new("TextButton")
+local casinocode = Instance.new("TextButton")
 local keybypass = Instance.new("TextButton")
 local BriefcaseESPFrame = Instance.new("Frame")
 local bguis = Instance.new("TextButton")
@@ -283,7 +284,7 @@ otherFrame.Name = "otherFrame"
 otherFrame.Parent = JailbreakGUI
 otherFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 otherFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-otherFrame.Position = UDim2.new(0.442186326, 0, 0.298618168, 0)
+otherFrame.Position = UDim2.new(0.423957169, 0, 0.299544096, 0)
 otherFrame.Size = UDim2.new(0, 324, 0, 183)
 otherFrame.Visible = false
 
@@ -368,6 +369,21 @@ removeragdoll.TextSize = 16
 removeragdoll.TextStrokeTransparency = 0
 removeragdoll.TextWrapped = true
 
+casinocode.Name = "casinocode"
+casinocode.Parent = otherFrame
+casinocode.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+casinocode.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+casinocode.Position = UDim2.new(0.16441986, 0, 0.518830538, 0)
+casinocode.Size = UDim2.new(0, 218, 0, 43)
+casinocode.ZIndex = 0
+casinocode.Font = Enum.Font.SourceSansBold
+casinocode.Text = "Click to (attempt) to get Casino code"
+casinocode.TextColor3 = Color3.new(0, 0.666667, 0.498039)
+casinocode.TextScaled = true
+casinocode.TextSize = 16
+casinocode.TextStrokeTransparency = 0
+casinocode.TextWrapped = true
+
 keybypass.Name = "keybypass"
 keybypass.Parent = otherFrame
 keybypass.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
@@ -430,7 +446,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_AVZX85_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_NWUE65_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -500,7 +516,7 @@ function SCRIPT_AVZX85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Fixed a bug where disabling lasers would make it difficult to rob the jewelry store + added a keycard bypass button.")
+	notify("Added casino notifying in the robbery notifier + added a casino code button.")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -808,13 +824,13 @@ function SCRIPT_AVZX85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	ConfGUI.Parent.Confirmation.Visible = false
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/Aimbot.lua"))()
 	end)
-	local frame2 = script.Parent.otherFrame
+	local otherframe = script.Parent.otherFrame
 	local RobberyNotifier = false
 	local robtitle = "RedWire's Robbery Notifier"
-	frame2.RobberyNotifier.MouseButton1Click:connect(function()
+	otherframe.RobberyNotifier.MouseButton1Click:connect(function()
 		if not RobberyNotifier then
 		RobberyNotifier = true
-	local IconIds = {["bank truck"] = "6133383545",["gas station"] = "4643750797",["donut shop"] = "4643750660", ["museum"] = "4643749917", ["tomb"] = "6896911415"}
+	local IconIds = {["bank truck"] = "6133383545",["gas station"] = "4643750797",["donut shop"] = "4643750660", ["museum"] = "4643749917", ["tomb"] = "6896911415",["casino"] = "9255252609"}
 	for i,v in pairs(plrgui.WorldMarkersGui:GetChildren()) do
 	for i2, v2 in pairs(v:GetChildren()) do
 	for name, id in pairs(IconIds) do
@@ -857,23 +873,23 @@ function SCRIPT_AVZX85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end)
 	end
 	end)
-	frame2.infiniteyeet.MouseButton1Click:connect(function()
+	otherframe.infiniteyeet.MouseButton1Click:connect(function()
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 	end)
 	local ragdollremoved = false
-	frame2.removeragdoll.MouseButton1Click:connect(function()
+	otherframe.removeragdoll.MouseButton1Click:connect(function()
 	if not ragdollremoved then
 	ragdollremoved = true
 	require(game.ReplicatedStorage.Module.AlexRagdoll).Ragdoll = nil
 	notify("Removed ragdolling. (WARNING: in some cases you will still take fall damage)")
 	end
 	end)
-	frame2.switch.MouseButton1Down:connect(function()
-	local gui = frame2.Parent
+	otherframe.switch.MouseButton1Down:connect(function()
+	local gui = otherframe.Parent
 	gui.otherFrame.Visible = false
 	gui.MainFrame.Visible = true
 	end)
-	frame2.gunshoptpbutton.Text = "Gunshop TP enabled: "..tostring(gunshoptp)
+	otherframe.gunshoptpbutton.Text = "Gunshop TP enabled: "..tostring(gunshoptp)
 	game.RunService.Heartbeat:connect(function()
 		local hrpvalid, hrp = pcall(function()
 		return lplr.Character.HumanoidRootPart
@@ -882,13 +898,13 @@ function SCRIPT_AVZX85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	hrp.CFrame = CFrame.new() + Vector3.new(418.439, 18, 520)
 	end
 	end)
-	frame2.gunshoptpbutton.MouseButton1Click:connect(function()
+	otherframe.gunshoptpbutton.MouseButton1Click:connect(function()
 	if gunshoptp then
 	gunshoptp = false
 	else
 	gunshoptp = true
 	end
-	frame2.gunshoptpbutton.Text = "Gunshop TP enabled: "..tostring(gunshoptp)
+	otherframe.gunshoptpbutton.Text = "Gunshop TP enabled: "..tostring(gunshoptp)
 	end)
 	local enablefly = false
 	local GetVelocity = function(pos1,pos2,StudsPerSecond)
@@ -896,7 +912,7 @@ function SCRIPT_AVZX85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local mag = distance.Magnitude
 	return (distance/mag)*StudsPerSecond
 	end
-	frame2.flyhack.MouseButton1Click:connect(function()
+	otherframe.flyhack.MouseButton1Click:connect(function()
 	if not enablefly then
 	enablefly = true
 	local lplr = game.Players.LocalPlayer
@@ -939,7 +955,7 @@ function SCRIPT_AVZX85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	end)
 	local keybypass = false
-	frame2.keybypass.MouseButton1Click:connect(function()
+	otherframe.keybypass.MouseButton1Click:connect(function()
 	if not keybypass then
 	keybypass = true
 	require(game.ReplicatedStorage.Game.PlayerUtils).hasKey = function()
@@ -948,6 +964,29 @@ function SCRIPT_AVZX85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	notify("Keycard bypass enabled.")
 	end
 	end)
+	local ctxt = otherframe.casinocode.Text
+	otherframe.casinocode.MouseButton1Down:connect(function()
+	local codes = workspace.Casino.RobberyDoor.Codes
+	local code
+	for i,v in pairs(codes:GetChildren()) do
+	if v:FindFirstChildOfClass("Part").SurfaceGui.TextLabel.Text ~= "" then
+	    code = v
+	    break
+	end
+	end
+	local txt = ""
+	if code then
+	for i,v in pairs(code:GetChildren()) do
+	    txt = txt..v.SurfaceGui.TextLabel.Text
+	end
+	otherframe.casinocode.Text = txt
+	else
+	otherframe.casinocode.Text = "code non-existent"
+	end
+	delay(5,function()
+	otherframe.casinocode.Text = ctxt
+	end)
+	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_AVZX85_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_NWUE65_FAKESCRIPT))
