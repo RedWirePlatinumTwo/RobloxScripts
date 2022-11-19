@@ -446,7 +446,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_NWUE65_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_CQTX70_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -586,7 +586,7 @@ function SCRIPT_NWUE65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	briefframe.bguis.Text = bguistemplate..tostring(val)
 	for i,v in pairs(workspace:GetChildren()) do
 	local success, returnval = pcall(function()
-	return v.Briefcase.BillboardGui.TextButton
+	return v.Root.BillboardGui.TextButton
 	end)
 	if success then
 	returnval.Visible = val
@@ -597,7 +597,7 @@ function SCRIPT_NWUE65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	briefframe.pointers.Text = pointerstemplate..tostring(val)
 	for i,v in pairs(workspace:GetChildren()) do
 	local success, returnval = pcall(function()
-	return v.Briefcase.RopeConstraint
+	return v.Root.RopeConstraint
 	end)
 	if success then
 	returnval.Visible = val
@@ -649,8 +649,7 @@ function SCRIPT_NWUE65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	local function gui(child)
 	if child.Name == "Drop" then
-	child:WaitForChild("Briefcase")
-	local briefcase = child.Briefcase
+	local briefcase = child:WaitForChild("Root")
 	local BillboardGui = Instance.new("BillboardGui")
 	local TextButton = Instance.new("TextButton")
 	--Properties:
@@ -671,8 +670,8 @@ function SCRIPT_NWUE65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	TextButton.TextSize = 22
 	TextButton.TextStrokeTransparency = 0
 	TextButton.Visible = props.guitext
-	pointer(child.Briefcase)
-	child.Briefcase.RopeConstraint.Visible = props.pointers
+	pointer(briefcase)
+	briefcase.RopeConstraint.Visible = props.pointers
 	local FormatNumber = function(n)
 	local n2 = ""
 	for i = 1, tostring(n):len() do
@@ -989,4 +988,4 @@ function SCRIPT_NWUE65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_NWUE65_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_CQTX70_FAKESCRIPT))
