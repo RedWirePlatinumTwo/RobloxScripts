@@ -204,5 +204,7 @@ return GetFullName(Self)
 else
 return meta(Self,...)
 end
+else
+return meta(Self,...)
 end
 end)
