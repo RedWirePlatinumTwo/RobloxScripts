@@ -196,11 +196,13 @@ end
 local meta 
 meta = hookmetamethod(game,"__namecall",function(Self,...)
 local method = getnamecallmethod()
+if getcallingscript() == nil then
 if method == "GetFamily" then
 return GetFamily(Self,...)
 elseif method == "GetFullName" then
 return GetFullName(Self)
 else
 return meta(Self,...)
+end
 end
 end)
