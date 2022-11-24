@@ -669,7 +669,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_PSYY82_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_KKOI79_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -689,6 +689,7 @@ function SCRIPT_PSYY82_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	local WhitelistedTeams = {}
 	local WhitelistedPlrs = {}
+	local AddedTeams = {}
 	local PrioritizedPlrs = {}
 	local plrs = game.Players
 	local lplr = plrs.LocalPlayer
@@ -1120,9 +1121,12 @@ function SCRIPT_PSYY82_FAKESCRIPT() -- Aimbot.Scripts
 	if ins.ClassName == "Team" then
 	clone.TextLabel.Text = ins.ClassName..": "..ins.Name
 	togglefunc(WhitelistedTeams)
+	table.insert(AddedTeams, ins.Name)
 	coroutine.resume(coroutine.create(function()
 	repeat task.wait() until not game.Teams:FindFirstChild(ins.Name)
 	clone:Destroy()
+	local team = table.find(AddedTeams,ins.Name)
+	table.remove(AddedTeams,team)
 	end))
 	else
 	clone.TextLabel.Text = ins.ClassName..": "..CheckDN(ins)
@@ -1144,7 +1148,7 @@ function SCRIPT_PSYY82_FAKESCRIPT() -- Aimbot.Scripts
 	wlui.WhitelistedInstances.CanvasSize = UDim2.new(0,0,yval, 0)
 	end)
 	for i, team in pairs(game.Teams:GetTeams()) do
-	if not table.find(WhitelistedTeams, team.Name) then
+	if not table.find(AddedTeams, team.Name) then
 	AddtoList(team)
 	end
 	end
@@ -1155,7 +1159,7 @@ function SCRIPT_PSYY82_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	plrs.PlayerAdded:connect(AddtoList)
 	game.Teams.ChildAdded:connect(function(team)
-	if team.ClassName == "Team" and not table.find(WhitelistedTeams, team.Name) then
+	if team.ClassName == "Team" and not table.find(AddedTeams, team.Name) then
 	AddtoList(team)
 	end
 	end)
@@ -1181,4 +1185,4 @@ function SCRIPT_PSYY82_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_PSYY82_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_KKOI79_FAKESCRIPT))
