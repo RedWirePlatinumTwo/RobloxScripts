@@ -930,7 +930,7 @@ function SCRIPT_KKOI79_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end)
 	Changed(AimbotStats,"Target",function(val)
-	settingsui.Target.Value.Text = val
+	settingsui.Target.value.Text = val
 	end)
 	Changed(settingsui.MaxStuds.value, "Text", function(n)
 	local num = tonumber(n)
