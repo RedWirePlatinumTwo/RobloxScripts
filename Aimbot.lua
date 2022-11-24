@@ -923,7 +923,7 @@ function SCRIPT_PSYY82_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	settingsui.Target.value.MouseButton1Click:connect(function()
 	if AimbotStats.Target == "Head" then
-	AimbotStats.Text = Torso.Name
+	AimbotStats.Target = Torso.Name
 	else
 	AimbotStats.Target = "Head"
 	end
