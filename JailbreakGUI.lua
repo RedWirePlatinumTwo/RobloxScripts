@@ -943,7 +943,7 @@ function SCRIPT_THZP89_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	        flying = not flying
 	    end
 	end)
-	notify("Fly hack enabled. Flying speed is based off your walkspeed (also disabling ragdoll is recommended when using this)")
+	notify("Fly hack enabled. Disabling ragdoll is highly recommended when using this.")
 	end
 	end)
 	local keybypass = false
