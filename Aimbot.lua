@@ -55,7 +55,6 @@ local SwitchToSettings = Instance.new("TextButton")
 --Properties:
 Aimbot.Name = "Aimbot"
 Aimbot.Parent = game.CoreGui
-Aimbot.Enabled = false
 Aimbot.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MFrame.Name = "MFrame"
