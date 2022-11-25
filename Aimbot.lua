@@ -55,6 +55,7 @@ local SwitchToSettings = Instance.new("TextButton")
 --Properties:
 Aimbot.Name = "Aimbot"
 Aimbot.Parent = game.CoreGui
+Aimbot.Enabled = false
 Aimbot.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MFrame.Name = "MFrame"
@@ -669,7 +670,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_KKOI79_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -689,7 +690,7 @@ function SCRIPT_KKOI79_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	local WhitelistedTeams = {}
 	local WhitelistedPlrs = {}
-	local AddedTeams = {}
+	local AddedTeams = {} --This is NOT the same as whitelistedteams so don't remove it again smh
 	local PrioritizedPlrs = {}
 	local plrs = game.Players
 	local lplr = plrs.LocalPlayer
@@ -1165,7 +1166,7 @@ function SCRIPT_KKOI79_FAKESCRIPT() -- Aimbot.Scripts
 	end)
 	Changed(wlui.searchbar, "Text", function(txt)
 	for i,v in pairs(wlui.WhitelistedInstances:GetChildren()) do
-	if v.ClassName == "Frame" and v ~= wlframe and v ~= wlui.WhitelistedInstances.whitelistownteam then
+	if v.ClassName == "Frame" and v ~= wlframe then
 	if v.TextLabel.Text:lower():match(txt:lower()) then
 	v.Visible = true
 	else
@@ -1185,4 +1186,4 @@ function SCRIPT_KKOI79_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_KKOI79_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_EJCV69_FAKESCRIPT))
