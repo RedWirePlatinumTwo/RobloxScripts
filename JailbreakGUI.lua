@@ -446,7 +446,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_CQTX70_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_THZP89_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -911,46 +911,39 @@ function SCRIPT_CQTX70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local mag = distance.Magnitude
 	return (distance/mag)*StudsPerSecond
 	end
+	local uiservice = game.UserInputService
 	otherframe.flyhack.MouseButton1Click:connect(function()
 	if not enablefly then
 	enablefly = true
-	local lplr = game.Players.LocalPlayer
 	local flying = false
-	local idle = false
-	local m = lplr:GetMouse()
+	local function keyactive(keystring)
+	local key = string.lower(keystring)
+	key = key:sub(1,1):upper()..key:sub(2)
+	return uiservice:IsKeyDown(Enum.KeyCode[key])
+	end
 	game.RunService.Heartbeat:connect(function()
 		pcall(function()
 	    if flying then
-		if not idle then
-	    local pos = GetVelocity(lplr.Character.HumanoidRootPart.Position, m.Hit.Position, ws.number)
+	    local pos = GetVelocity(lplr.Character.HumanoidRootPart.Position, mouse.Hit.Position, 80)
 	    lplr.Character.HumanoidRootPart.Velocity = pos
+	    lplr.Character.HumanoidRootPart.CFrame = CFrame.new(lplr.Character.HumanoidRootPart.Position, mouse.Hit.Position)
+		mouse.TargetFilter = workspace
 		else
-		lplr.Character.HumanoidRootPart.Velocity = Vector3.new()
-		end
-	    lplr.Character.HumanoidRootPart.CFrame = CFrame.new(lplr.Character.HumanoidRootPart.Position, m.Hit.Position)
-		m.TargetFilter = workspace
-		else
-		m.TargetFilter = nil
+		mouse.TargetFilter = nil
 	    end
-	    if flying and idle then
+	    if flying and not keyactive("w") and not keyactive("a") and not keyactive("s") and not keyactive("d") then
 	        lplr.Character.HumanoidRootPart.Anchored = true
 	    else
 	        lplr.Character.HumanoidRootPart.Anchored = false
 	    end
 		end)
 	end)
-	m.KeyDown:connect(function(key)
+	mouse.KeyDown:connect(function(key)
 	    if key == "f" and game.UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
 	        flying = not flying
-	        if not flying then
-	        idle = false
-	        end
-	    elseif key == "f" and not game.UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) and flying then
-	        idle = not idle
 	    end
 	end)
 	notify("Fly hack enabled. Flying speed is based off your walkspeed (also disabling ragdoll is recommended when using this)")
-	notify("(Pressing F without also pressing CTRL allows you to stay mid-air)")
 	end
 	end)
 	local keybypass = false
@@ -988,4 +981,4 @@ function SCRIPT_CQTX70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_CQTX70_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_THZP89_FAKESCRIPT))
