@@ -141,6 +141,7 @@ end
 getgenv().LogFunctions = true
 LoggedFunctions = {}
 getgenv().FunctionLogger = function(funcparent, funcname)
+if funcparent[funcname] == FunctionLogger then error("No.") end
 	local oldfunc = funcparent[funcname]
 	if typeof(oldfunc) ~= "function" then error("function expected, got "..typeof(oldfunc)) end
 	local newfunc = function(...)
