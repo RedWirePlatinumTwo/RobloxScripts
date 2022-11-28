@@ -29,6 +29,7 @@ local flyhack = Instance.new("TextButton")
 local removeragdoll = Instance.new("TextButton")
 local casinocode = Instance.new("TextButton")
 local keybypass = Instance.new("TextButton")
+local respawn = Instance.new("TextButton")
 local BriefcaseESPFrame = Instance.new("Frame")
 local bguis = Instance.new("TextButton")
 local pointers = Instance.new("TextButton")
@@ -284,7 +285,7 @@ otherFrame.Name = "otherFrame"
 otherFrame.Parent = JailbreakGUI
 otherFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 otherFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-otherFrame.Position = UDim2.new(0.423957169, 0, 0.299544096, 0)
+otherFrame.Position = UDim2.new(0.469269663, 0, 0.270840377, 0)
 otherFrame.Size = UDim2.new(0, 324, 0, 183)
 otherFrame.Visible = false
 
@@ -373,8 +374,8 @@ casinocode.Name = "casinocode"
 casinocode.Parent = otherFrame
 casinocode.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 casinocode.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-casinocode.Position = UDim2.new(0.16441986, 0, 0.518830538, 0)
-casinocode.Size = UDim2.new(0, 218, 0, 43)
+casinocode.Position = UDim2.new(-0.00224680966, 0, 0.518830538, 0)
+casinocode.Size = UDim2.new(0, 162, 0, 43)
 casinocode.ZIndex = 0
 casinocode.Font = Enum.Font.SourceSansBold
 casinocode.Text = "Click to (attempt) to get Casino code"
@@ -398,6 +399,21 @@ keybypass.TextScaled = true
 keybypass.TextSize = 16
 keybypass.TextStrokeTransparency = 0
 keybypass.TextWrapped = true
+
+respawn.Name = "respawn"
+respawn.Parent = otherFrame
+respawn.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+respawn.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+respawn.Position = UDim2.new(0.5, 0, 0.518999994, 0)
+respawn.Size = UDim2.new(0, 162, 0, 43)
+respawn.ZIndex = -1
+respawn.Font = Enum.Font.SourceSansBold
+respawn.Text = "Choose spawn point (makes u die)"
+respawn.TextColor3 = Color3.new(1, 0, 0)
+respawn.TextScaled = true
+respawn.TextSize = 16
+respawn.TextStrokeTransparency = 0
+respawn.TextWrapped = true
 
 BriefcaseESPFrame.Name = "BriefcaseESPFrame"
 BriefcaseESPFrame.Parent = JailbreakGUI
@@ -446,7 +462,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_THZP89_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_QSYL73_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -979,6 +995,9 @@ function SCRIPT_THZP89_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	otherframe.casinocode.Text = ctxt
 	end)
 	end)
+	otherframe.respawn.MouseButton1Click:connect(function()
+	lplr.Character.Humanoid.Health = 0
+	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_THZP89_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_QSYL73_FAKESCRIPT))
