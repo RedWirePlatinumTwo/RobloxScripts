@@ -479,7 +479,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_DTXJ87_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_ABBR66_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -988,10 +988,10 @@ function SCRIPT_DTXJ87_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position,speeds.flyspeed)
 	    end
 	    if keyactive("e") then
-	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*upoffset).Position,speeds.flyspeed)
+	        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position,speeds.flyspeed)
 	    end
 	    if keyactive("q") then
-	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*downoffset).Position,speeds.flyspeed)
+	        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position,speeds.flyspeed)
 	    end
 	    hrp.Velocity = velocity
 	    facecam()
@@ -1076,4 +1076,4 @@ function SCRIPT_DTXJ87_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_DTXJ87_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_ABBR66_FAKESCRIPT))
