@@ -31,6 +31,7 @@ local casinocode = Instance.new("TextButton")
 local keybypass = Instance.new("TextButton")
 local respawn = Instance.new("TextButton")
 local flyhacknum = Instance.new("TextBox")
+local deleteradio = Instance.new("TextButton")
 local BriefcaseESPFrame = Instance.new("Frame")
 local bguis = Instance.new("TextButton")
 local pointers = Instance.new("TextButton")
@@ -288,7 +289,6 @@ otherFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 otherFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 otherFrame.Position = UDim2.new(0.469269663, 0, 0.270840377, 0)
 otherFrame.Size = UDim2.new(0, 324, 0, 183)
-otherFrame.Visible = false
 
 switch.Name = "switch"
 switch.Parent = otherFrame
@@ -376,7 +376,7 @@ casinocode.Parent = otherFrame
 casinocode.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 casinocode.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 casinocode.Position = UDim2.new(-0.00224680966, 0, 0.518830538, 0)
-casinocode.Size = UDim2.new(0, 162, 0, 43)
+casinocode.Size = UDim2.new(0, 108, 0, 43)
 casinocode.ZIndex = 0
 casinocode.Font = Enum.Font.SourceSansBold
 casinocode.Text = "Click to (attempt) to get Casino code"
@@ -405,8 +405,8 @@ respawn.Name = "respawn"
 respawn.Parent = otherFrame
 respawn.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 respawn.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-respawn.Position = UDim2.new(0.5, 0, 0.518999994, 0)
-respawn.Size = UDim2.new(0, 162, 0, 43)
+respawn.Position = UDim2.new(0.667000115, 0, 0.518999934, 0)
+respawn.Size = UDim2.new(0, 107, 0, 43)
 respawn.ZIndex = -1
 respawn.Font = Enum.Font.SourceSansBold
 respawn.Text = "Choose spawn point (makes u die)"
@@ -431,6 +431,21 @@ flyhacknum.TextColor3 = Color3.new(0.333333, 1, 1)
 flyhacknum.TextScaled = true
 flyhacknum.TextSize = 14
 flyhacknum.TextWrapped = true
+
+deleteradio.Name = "deleteradio"
+deleteradio.Parent = otherFrame
+deleteradio.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+deleteradio.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+deleteradio.Position = UDim2.new(0.333333343, 0, 0.518999934, 0)
+deleteradio.Size = UDim2.new(0, 106, 0, 42)
+deleteradio.ZIndex = -1
+deleteradio.Font = Enum.Font.SourceSansBold
+deleteradio.Text = "Delete Radio Gui (its stupid)"
+deleteradio.TextColor3 = Color3.new(1, 0.666667, 1)
+deleteradio.TextScaled = true
+deleteradio.TextSize = 16
+deleteradio.TextStrokeTransparency = 0
+deleteradio.TextWrapped = true
 
 BriefcaseESPFrame.Name = "BriefcaseESPFrame"
 BriefcaseESPFrame.Parent = JailbreakGUI
@@ -479,9 +494,11 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_ABBR66_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_EGPR70_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
+	if not _G.RedsJBGUI then
+	_G.RedsJBGUI = true
 	for i,v in pairs(script.Parent:GetChildren()) do
 		if v.ClassName == "Frame" then
 			v.Active = true
@@ -668,10 +685,15 @@ function SCRIPT_ABBR66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	rope.Thickness = 0.25
 	rope.Color = BrickColor.new(mainframe.briefcase.TextColor3)
 	local pointfunction = game.RunService.Heartbeat:connect(function()
-	    local pos = (part.Position - game.Players.LocalPlayer.Character.Humanoid.RootPart.Position)
+		local s, rootpart = pcall(function()
+		return lplr.Character.Humanoid.RootPart
+		end)
+		if s and rootpart then
+	    local pos = (part.Position - rootpart.Position)
 	    rope.Length = pos.Magnitude
 	    part1.CFrame = lplr.Character.Humanoid.RootPart.CFrame
 	    part2.CFrame = part.CFrame
+		end
 	end)
 	coroutine.resume(coroutine.create(function()
 	repeat task.wait() until GetFamily(part)[1] ~= game
@@ -770,7 +792,7 @@ function SCRIPT_ABBR66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	end
 	if laserdescendant or ti.Parent.Name == "BarbedWire" or ti.Parent.Name == "Light" then
-	if ti.Parent.Parent.Name ~= "WindowEntry" then
+	if ti.Parent.Parent and ti.Parent.Parent.Name ~= "WindowEntry" then
 	if ti.Parent.CanCollide == false then
 	ti.Parent:Destroy()
 	else
@@ -1074,6 +1096,34 @@ function SCRIPT_ABBR66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	otherframe.respawn.MouseButton1Click:connect(function()
 	lplr.Character.Humanoid.Health = 0
 	end)
+	local delradio = false
+	otherframe.deleteradio.MouseButton1Click:connect(function()
+	if not delradio then
+	delradio = true
+	if lplr.PlayerGui:FindFirstChild("RadioGui") then
+	lplr.PlayerGui.RadioGui:Destroy()
+	end
+	lplr.PlayerGui.ChildAdded:connect(function(c)
+	if c.Name == "RadioGui" then
+	c:Destroy()
+	end
+	end)
+	notify("fuck this stupid gui")
+	end
+	end)
+	else
+	local function notify(text)
+	local notiftime = 0
+	for i = 1, text:len() do
+	notiftime = notiftime + 0.04
+	end
+	local n = require(game:GetService("ReplicatedStorage").Game.Notification)
+	n.new({["Text"] = text,["Duration"] = notiftime})
+	end
+	notify("Deleting clone gui")
+	wait(0.5)
+	script.Parent:Destroy()
+	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_ABBR66_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_EGPR70_FAKESCRIPT))
