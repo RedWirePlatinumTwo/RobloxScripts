@@ -289,6 +289,7 @@ otherFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 otherFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 otherFrame.Position = UDim2.new(0.469269663, 0, 0.270840377, 0)
 otherFrame.Size = UDim2.new(0, 324, 0, 183)
+otherFrame.Visible = false
 
 switch.Name = "switch"
 switch.Parent = otherFrame
@@ -494,7 +495,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_EGPR70_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_JOLK74_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	if not _G.RedsJBGUI then
@@ -567,7 +568,7 @@ function SCRIPT_EGPR70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Updated the fly hack button, making it work WAY better.")
+	notify("Added option to delete radio gui because I hate it.")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -1126,4 +1127,4 @@ function SCRIPT_EGPR70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_EGPR70_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_JOLK74_FAKESCRIPT))
