@@ -495,7 +495,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_WNXC86_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_IQUX73_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	if not _G.RedsJBGUI then
@@ -974,17 +974,17 @@ function SCRIPT_WNXC86_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local uiservice = game.UserInputService
 	local lplr = game.Players.LocalPlayer
 	local mouse = lplr:GetMouse()
-	local GetVelocity = function(pos1,pos2,StudsPerSecond)
+	local function GetVelocity(pos1,pos2,StudsPerSecond)
 	local distance = (pos2 - pos1)
 	local mag = distance.Magnitude
 	return (distance/mag)*StudsPerSecond
 	end
-	local w_active = false
-	local s_active = false
-	local a_active = false
-	local d_active = false
-	local q_active = false
-	local e_active = false
+	local function getkey(keycode)
+	local key = tostring(keycode):lower()
+	local findcode, a = key:find("keycode.")
+	return key:sub(a+1)
+	end
+	local keys = {}
 	game.RunService.Heartbeat:connect(function()
 		pcall(function()
 		local hrp = lplr.Character.Humanoid.RootPart
@@ -996,28 +996,28 @@ function SCRIPT_WNXC86_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		local downoffset = CFrame.new() + Vector3.new(0,-maxdistance,0)
 		local velocity = Vector3.new()
 	    if flying then
-	    if w_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position,speeds.flyspeed)
+	    if keys.w_active then
+	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position, speeds.flyspeed)
 	    end
-	    if s_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position,speeds.flyspeed)
+	    if keys.s_active then
+	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position, speeds.flyspeed)
 	    end
-	    if a_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position,speeds.flyspeed)
+	    if keys.a_active then
+	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position, speeds.flyspeed)
 	    end
-	    if d_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position,speeds.flyspeed)
+	    if keys.d_active then
+	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position, speeds.flyspeed)
 	    end
-	    if e_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position,speeds.flyspeed)
+	    if keys.e_active then
+	        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position, speeds.flyspeed)
 	    end
-	    if q_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position,speeds.flyspeed)
+	    if keys.q_active then
+	        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position, speeds.flyspeed)
 	    end
 	    hrp.Velocity = velocity
 	     hrp.CFrame = CFrame.new(hrp.Position, (workspace.Camera.CFrame*(CFrame.new()+Vector3.new(0,0,-maxdistance))).Position)
 	    end
-	    if flying and not w_active and not a_active and not s_active and not d_active and not q_active and not e_active then
+	    if flying and not keys.w_active and not keys.a_active and not keys.s_active and not keys.d_active and not keys.q_active and not keys.e_active then
 	        hrp.Anchored = true
 	    else
 	        hrp.Anchored = false
@@ -1036,44 +1036,10 @@ function SCRIPT_WNXC86_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	            lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
 	        end
 	    end
-	    if key.KeyCode == Enum.KeyCode.W then
-	    w_active = true
-	    end
-	    if key.KeyCode == Enum.KeyCode.S then
-	    s_active = true
-	    end
-	    if key.KeyCode == Enum.KeyCode.A then
-	    a_active = true
-	    end
-	    if key.KeyCode == Enum.KeyCode.D then
-	    d_active = true
-	    end
-	    if key.KeyCode == Enum.KeyCode.Q then
-	    q_active = true
-	    end
-	    if key.KeyCode == Enum.KeyCode.E then
-	    e_active = true
-	    end
+	    keys[getkey(key.KeyCode).."_active"] = true
 	end)
 	uiservice.InputEnded:connect(function(key)
-	    if key.KeyCode == Enum.KeyCode.W then
-	    w_active = false
-	    end
-	    if key.KeyCode == Enum.KeyCode.S then
-	    s_active = false
-	    end
-	    if key.KeyCode == Enum.KeyCode.A then
-	    a_active = false
-	    end
-	    if key.KeyCode == Enum.KeyCode.D then
-	    d_active = false
-	    end
-	    if key.KeyCode == Enum.KeyCode.Q then
-	    q_active = false
-	    end
-	    if key.KeyCode == Enum.KeyCode.E then
-	    e_active = false
-	    end
+	    keys[getkey(key.KeyCode).."_active"] = false
 	end)
 	Changed(speeds, "flyspeed", function(num)
 	if num > 150 then
@@ -1164,4 +1130,4 @@ function SCRIPT_WNXC86_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_WNXC86_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_IQUX73_FAKESCRIPT))
