@@ -986,7 +986,7 @@ function SCRIPT_PBSK65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	game.RunService.Heartbeat:connect(function()
 		pcall(function()
-		local hrp = lplr.Character.HumanoidRootPart
+		local hrp = lplr.Character.Humanoid.RootPart
 		local frontoffset = CFrame.new() + Vector3.new(0,0,-maxdistance)
 		local backoffset = CFrame.new() + Vector3.new(0,0,maxdistance)
 		local leftoffset = CFrame.new() + Vector3.new(-maxdistance,0,0)
