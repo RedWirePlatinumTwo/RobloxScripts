@@ -479,7 +479,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_YCHV89_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_YTZD89_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -550,7 +550,7 @@ function SCRIPT_YCHV89_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Changed fly hack thingy.")
+	notify("Updated the fly hack button, making it work WAY better.")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -940,11 +940,6 @@ function SCRIPT_YCHV89_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	otherframe.gunshoptpbutton.Text = "Gunshop TP enabled: "..tostring(gunshoptp)
 	end)
 	local enablefly = false
-	local GetVelocity = function(pos1,pos2,StudsPerSecond)
-	local distance = (pos2 - pos1)
-	local mag = distance.Magnitude
-	return (distance/mag)*StudsPerSecond
-	end
 	local uiservice = game.UserInputService
 	otherframe.flyhack.MouseButton1Click:connect(function()
 	otherframe.flyhacknum.Visible = true
@@ -952,31 +947,72 @@ function SCRIPT_YCHV89_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if not enablefly then
 	enablefly = true
 	local flying = false
+	local maxdistance = 100000000000000 --using math.huge makes this script wonky
+	local uiservice = game.UserInputService
+	local lplr = game.Players.LocalPlayer
+	local mouse = lplr:GetMouse()
+	local GetVelocity = function(pos1,pos2,StudsPerSecond)
+	local distance = (pos2 - pos1)
+	local mag = distance.Magnitude
+	return (distance/mag)*StudsPerSecond
+	end
 	local function keyactive(keystring)
 	local key = string.lower(keystring)
 	key = key:sub(1,1):upper()..key:sub(2)
 	return uiservice:IsKeyDown(Enum.KeyCode[key])
 	end
+	local function facecam()
+	lplr.Character.HumanoidRootPart.CFrame = CFrame.new(lplr.Character.HumanoidRootPart.Position, (workspace.Camera.CFrame*(CFrame.new()+Vector3.new(0,0,-100))).Position)
+	end
 	game.RunService.Heartbeat:connect(function()
 		pcall(function()
+		local hrp = lplr.Character.HumanoidRootPart
+		local frontoffset = CFrame.new() + Vector3.new(0,0,-maxdistance)
+		local backoffset = CFrame.new() + Vector3.new(0,0,maxdistance)
+		local leftoffset = CFrame.new() + Vector3.new(-maxdistance,0,0)
+		local rightoffset = CFrame.new() + Vector3.new(maxdistance,0,0)
+		local upoffset = CFrame.new() + Vector3.new(0,maxdistance,0)
+		local downoffset = CFrame.new() + Vector3.new(0,-maxdistance,0)
+		local velocity = Vector3.new()
 	    if flying then
-	    local pos = GetVelocity(lplr.Character.HumanoidRootPart.Position, mouse.Hit.Position, speeds.flyspeed)
-	    lplr.Character.HumanoidRootPart.Velocity = pos
-	    lplr.Character.HumanoidRootPart.CFrame = CFrame.new(lplr.Character.HumanoidRootPart.Position, mouse.Hit.Position)
-		mouse.TargetFilter = workspace
-		else
-		mouse.TargetFilter = nil
+	    if keyactive("w") then
+	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position,speeds.flyspeed)
 	    end
-	    if flying and not keyactive("w") and not keyactive("a") and not keyactive("s") and not keyactive("d") then
-	        lplr.Character.HumanoidRootPart.Anchored = true
+	    if keyactive("s") then
+	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position,speeds.flyspeed)
+	    end
+	    if keyactive("a") then
+	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position,speeds.flyspeed)
+	    end
+	    if keyactive("d") then
+	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position,speeds.flyspeed)
+	    end
+	    if keyactive("e") then
+	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*upoffset).Position,speeds.flyspeed)
+	    end
+	    if keyactive("q") then
+	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*downoffset).Position,speeds.flyspeed)
+	    end
+	    hrp.Velocity = velocity
+	    facecam()
+	    end
+	    if flying and not keyactive("w") and not keyactive("a") and not keyactive("s") and not keyactive("d") and not keyactive("q") and not keyactive("e") then
+	        hrp.Anchored = true
 	    else
-	        lplr.Character.HumanoidRootPart.Anchored = false
+	        hrp.Anchored = false
 	    end
 		end)
 	end)
 	mouse.KeyDown:connect(function(key)
 	    if key == "f" and game.UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
 	        flying = not flying
+	        if flying then
+	            uiservice.MouseBehavior = Enum.MouseBehavior.LockCenter
+	            lplr.Character.Humanoid.CameraOffset = Vector3.new(2,0,0)
+	        else
+	            uiservice.MouseBehavior = Enum.MouseBehavior.Default
+	            lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
+	        end
 	    end
 	end)
 	Changed(speeds, "flyspeed", function(num)
@@ -1040,4 +1076,4 @@ function SCRIPT_YCHV89_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_YCHV89_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_YTZD89_FAKESCRIPT))
