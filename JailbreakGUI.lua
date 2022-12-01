@@ -495,7 +495,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_PBSK65_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_WNXC86_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	if not _G.RedsJBGUI then
@@ -979,11 +979,12 @@ function SCRIPT_PBSK65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local mag = distance.Magnitude
 	return (distance/mag)*StudsPerSecond
 	end
-	local function keyactive(keystring)
-	local key = string.lower(keystring)
-	key = key:sub(1,1):upper()..key:sub(2)
-	return uiservice:IsKeyDown(Enum.KeyCode[key])
-	end
+	local w_active = false
+	local s_active = false
+	local a_active = false
+	local d_active = false
+	local q_active = false
+	local e_active = false
 	game.RunService.Heartbeat:connect(function()
 		pcall(function()
 		local hrp = lplr.Character.Humanoid.RootPart
@@ -995,36 +996,37 @@ function SCRIPT_PBSK65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		local downoffset = CFrame.new() + Vector3.new(0,-maxdistance,0)
 		local velocity = Vector3.new()
 	    if flying then
-	    if keyactive("w") then
+	    if w_active then
 	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position,speeds.flyspeed)
 	    end
-	    if keyactive("s") then
+	    if s_active then
 	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position,speeds.flyspeed)
 	    end
-	    if keyactive("a") then
+	    if a_active then
 	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position,speeds.flyspeed)
 	    end
-	    if keyactive("d") then
+	    if d_active then
 	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position,speeds.flyspeed)
 	    end
-	    if keyactive("e") then
+	    if e_active then
 	        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position,speeds.flyspeed)
 	    end
-	    if keyactive("q") then
+	    if q_active then
 	        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position,speeds.flyspeed)
 	    end
 	    hrp.Velocity = velocity
-	    hrp.CFrame = CFrame.new(hrp.Position, (workspace.Camera.CFrame*(CFrame.new()+Vector3.new(0,0,-maxdistance))).Position)
+	     hrp.CFrame = CFrame.new(hrp.Position, (workspace.Camera.CFrame*(CFrame.new()+Vector3.new(0,0,-maxdistance))).Position)
 	    end
-	    if flying and not keyactive("w") and not keyactive("a") and not keyactive("s") and not keyactive("d") and not keyactive("q") and not keyactive("e") then
+	    if flying and not w_active and not a_active and not s_active and not d_active and not q_active and not e_active then
 	        hrp.Anchored = true
 	    else
 	        hrp.Anchored = false
 	    end
 		end)
 	end)
-	mouse.KeyDown:connect(function(key)
-	    if key == "f" and game.UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
+	uiservice.InputBegan:connect(function(key,processed)
+	if processed then return end
+	    if key.KeyCode == Enum.KeyCode.F and game.UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
 	        flying = not flying
 	        if flying then
 	            uiservice.MouseBehavior = Enum.MouseBehavior.LockCenter
@@ -1033,6 +1035,44 @@ function SCRIPT_PBSK65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	            uiservice.MouseBehavior = Enum.MouseBehavior.Default
 	            lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
 	        end
+	    end
+	    if key.KeyCode == Enum.KeyCode.W then
+	    w_active = true
+	    end
+	    if key.KeyCode == Enum.KeyCode.S then
+	    s_active = true
+	    end
+	    if key.KeyCode == Enum.KeyCode.A then
+	    a_active = true
+	    end
+	    if key.KeyCode == Enum.KeyCode.D then
+	    d_active = true
+	    end
+	    if key.KeyCode == Enum.KeyCode.Q then
+	    q_active = true
+	    end
+	    if key.KeyCode == Enum.KeyCode.E then
+	    e_active = true
+	    end
+	end)
+	uiservice.InputEnded:connect(function(key)
+	    if key.KeyCode == Enum.KeyCode.W then
+	    w_active = false
+	    end
+	    if key.KeyCode == Enum.KeyCode.S then
+	    s_active = false
+	    end
+	    if key.KeyCode == Enum.KeyCode.A then
+	    a_active = false
+	    end
+	    if key.KeyCode == Enum.KeyCode.D then
+	    d_active = false
+	    end
+	    if key.KeyCode == Enum.KeyCode.Q then
+	    q_active = false
+	    end
+	    if key.KeyCode == Enum.KeyCode.E then
+	    e_active = false
 	    end
 	end)
 	Changed(speeds, "flyspeed", function(num)
@@ -1124,4 +1164,4 @@ function SCRIPT_PBSK65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_PBSK65_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_WNXC86_FAKESCRIPT))
