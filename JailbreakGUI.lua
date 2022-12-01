@@ -479,7 +479,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_BRYS90_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_YCHV89_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -988,6 +988,12 @@ function SCRIPT_BRYS90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	mainframe.Speednum.Text = tostring(speeds.walkspeed)
 	end)
+	otherframe.flyhacknum.MouseWheelForward:connect(function()
+	speeds.flyspeed = speeds.flyspeed + 5
+	end)
+	otherframe.flyhacknum.MouseWheelBackward:connect(function()
+	speeds.flyspeed = speeds.flyspeed - 5
+	end)
 	Changed(otherframe.flyhacknum, "Text", function(txt)
 	if tonumber(txt) then
 	speeds.flyspeed = tonumber(txt)
@@ -1034,4 +1040,4 @@ function SCRIPT_BRYS90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_BRYS90_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_YCHV89_FAKESCRIPT))
