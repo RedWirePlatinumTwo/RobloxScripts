@@ -962,7 +962,7 @@ function SCRIPT_DTXJ87_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	return uiservice:IsKeyDown(Enum.KeyCode[key])
 	end
 	local function facecam()
-	lplr.Character.HumanoidRootPart.CFrame = CFrame.new(lplr.Character.HumanoidRootPart.Position, (workspace.Camera.CFrame*(CFrame.new()+Vector3.new(0,0,-100))).Position)
+	lplr.Character.HumanoidRootPart.CFrame = CFrame.new(lplr.Character.HumanoidRootPart.Position, (workspace.Camera.CFrame*(CFrame.new()+Vector3.new(0,0,-maxdistance))).Position)
 	end
 	game.RunService.Heartbeat:connect(function()
 		pcall(function()
