@@ -495,7 +495,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_JOLK74_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_PBSK65_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	if not _G.RedsJBGUI then
@@ -984,9 +984,6 @@ function SCRIPT_JOLK74_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	key = key:sub(1,1):upper()..key:sub(2)
 	return uiservice:IsKeyDown(Enum.KeyCode[key])
 	end
-	local function facecam()
-	lplr.Character.HumanoidRootPart.CFrame = CFrame.new(lplr.Character.HumanoidRootPart.Position, (workspace.Camera.CFrame*(CFrame.new()+Vector3.new(0,0,-maxdistance))).Position)
-	end
 	game.RunService.Heartbeat:connect(function()
 		pcall(function()
 		local hrp = lplr.Character.HumanoidRootPart
@@ -1017,7 +1014,7 @@ function SCRIPT_JOLK74_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position,speeds.flyspeed)
 	    end
 	    hrp.Velocity = velocity
-	    facecam()
+	    hrp.CFrame = CFrame.new(hrp.Position, (workspace.Camera.CFrame*(CFrame.new()+Vector3.new(0,0,-maxdistance))).Position)
 	    end
 	    if flying and not keyactive("w") and not keyactive("a") and not keyactive("s") and not keyactive("d") and not keyactive("q") and not keyactive("e") then
 	        hrp.Anchored = true
@@ -1127,4 +1124,4 @@ function SCRIPT_JOLK74_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_JOLK74_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_PBSK65_FAKESCRIPT))
