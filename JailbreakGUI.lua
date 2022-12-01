@@ -30,6 +30,7 @@ local removeragdoll = Instance.new("TextButton")
 local casinocode = Instance.new("TextButton")
 local keybypass = Instance.new("TextButton")
 local respawn = Instance.new("TextButton")
+local flyhacknum = Instance.new("TextBox")
 local BriefcaseESPFrame = Instance.new("Frame")
 local bguis = Instance.new("TextButton")
 local pointers = Instance.new("TextButton")
@@ -185,7 +186,7 @@ Speednum.Position = UDim2.new(0, 0, 0.622978091, 0)
 Speednum.Size = UDim2.new(0, 104, 0, 52)
 Speednum.Font = Enum.Font.SourceSansBold
 Speednum.PlaceholderColor3 = Color3.new(0.333333, 1, 0.498039)
-Speednum.PlaceholderText = "Speed Number goes here"
+Speednum.PlaceholderText = "Walkspeed number"
 Speednum.Text = ""
 Speednum.TextColor3 = Color3.new(0.333333, 1, 0.498039)
 Speednum.TextScaled = true
@@ -415,6 +416,22 @@ respawn.TextSize = 16
 respawn.TextStrokeTransparency = 0
 respawn.TextWrapped = true
 
+flyhacknum.Name = "flyhacknum"
+flyhacknum.Parent = otherFrame
+flyhacknum.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+flyhacknum.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+flyhacknum.Position = UDim2.new(0.666999996, 0, 0.261999995, 0)
+flyhacknum.Size = UDim2.new(0, 108, 0, 47)
+flyhacknum.Visible = false
+flyhacknum.Font = Enum.Font.SourceSansBold
+flyhacknum.PlaceholderColor3 = Color3.new(0.333333, 1, 1)
+flyhacknum.PlaceholderText = "Fly Speed number"
+flyhacknum.Text = "50"
+flyhacknum.TextColor3 = Color3.new(0.333333, 1, 1)
+flyhacknum.TextScaled = true
+flyhacknum.TextSize = 14
+flyhacknum.TextWrapped = true
+
 BriefcaseESPFrame.Name = "BriefcaseESPFrame"
 BriefcaseESPFrame.Parent = JailbreakGUI
 BriefcaseESPFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
@@ -462,7 +479,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_QSYL73_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_BRYS90_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	for i,v in pairs(script.Parent:GetChildren()) do
@@ -521,9 +538,10 @@ function SCRIPT_QSYL73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	local mainframe = script.Parent.MainFrame
 	local briefframe = script.Parent.BriefcaseESPFrame
-	local ws = {}
-	ws.number = 30
-	mainframe.Speednum.Text = tostring(ws.number)
+	local speeds = {}
+	speeds.walkspeed = 30
+	speeds.flyspeed = 50
+	mainframe.Speednum.Text = tostring(speeds.walkspeed)
 	local plrs = game.Players
 	local lplr = plrs.LocalPlayer
 	local mouse = lplr:GetMouse()
@@ -532,7 +550,7 @@ function SCRIPT_QSYL73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Added casino notifying in the robbery notifier + added a casino code button.")
+	notify("Changed fly hack thingy.")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -547,7 +565,7 @@ function SCRIPT_QSYL73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	function walcc()
 	lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(function()
 	if lplr.Character.Humanoid.WalkSpeed == 0 then
-	    lplr.Character.Humanoid.WalkSpeed = ws.number
+	    lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
 	end
 	end)
 	end
@@ -793,12 +811,12 @@ function SCRIPT_QSYL73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	mainframe.Speednum.Visible = true
 	local function speedhack()
 	lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(function()
-	if lplr.Character.Humanoid.WalkSpeed ~= ws then
-	    lplr.Character.Humanoid.WalkSpeed = ws.number
+	if lplr.Character.Humanoid.WalkSpeed ~= speeds.walkspeed then
+	    lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
 	end
 	end)
 	lplr.Character.Humanoid.Running:connect(function()
-	lplr.Character.Humanoid.WalkSpeed = ws.number
+	lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
 	end)
 	end
 	if not SpeedBypass then
@@ -811,23 +829,23 @@ function SCRIPT_QSYL73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	notify("To edit your walkspeed, scroll up/down on the number in the textbox (max 150).")
 	end
 	mainframe.Speednum.MouseWheelForward:connect(function()
-	ws.number = ws.number + 5
+	speeds.walkspeed = speeds.walkspeed + 5
 	end)
 	mainframe.Speednum.MouseWheelBackward:connect(function()
-	ws.number = ws.number - 5
+	speeds.walkspeed = speeds.walkspeed - 5
 	end)
-	Changed(ws, "number", function(num)
+	Changed(speeds, "walkspeed", function(num)
 	if num > 150 then
-	ws.number = 150
+	speeds.walkspeed = 150
 	end
 	if num < 5 then
-	ws.number = 5
+	speeds.walkspeed = 5
 	end
-	mainframe.Speednum.Text = tostring(ws.number)
+	mainframe.Speednum.Text = tostring(speeds.walkspeed)
 	end)
 	Changed(mainframe.Speednum, "Text", function(txt)
 	if tonumber(txt) then
-	ws.number = tonumber(txt)
+	speeds.walkspeed = tonumber(txt)
 	end
 	end)
 	end)
@@ -929,6 +947,8 @@ function SCRIPT_QSYL73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	local uiservice = game.UserInputService
 	otherframe.flyhack.MouseButton1Click:connect(function()
+	otherframe.flyhacknum.Visible = true
+	otherframe.flyhack.Visible = false
 	if not enablefly then
 	enablefly = true
 	local flying = false
@@ -940,7 +960,7 @@ function SCRIPT_QSYL73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	game.RunService.Heartbeat:connect(function()
 		pcall(function()
 	    if flying then
-	    local pos = GetVelocity(lplr.Character.HumanoidRootPart.Position, mouse.Hit.Position, 80)
+	    local pos = GetVelocity(lplr.Character.HumanoidRootPart.Position, mouse.Hit.Position, speeds.flyspeed)
 	    lplr.Character.HumanoidRootPart.Velocity = pos
 	    lplr.Character.HumanoidRootPart.CFrame = CFrame.new(lplr.Character.HumanoidRootPart.Position, mouse.Hit.Position)
 		mouse.TargetFilter = workspace
@@ -958,6 +978,20 @@ function SCRIPT_QSYL73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	    if key == "f" and game.UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
 	        flying = not flying
 	    end
+	end)
+	Changed(speeds, "flyspeed", function(num)
+	if num > 150 then
+	speeds.flyspeed = 150
+	end
+	if num < 50 then
+	speeds.flyspeed = 50
+	end
+	mainframe.Speednum.Text = tostring(speeds.walkspeed)
+	end)
+	Changed(otherframe.flyhacknum, "Text", function(txt)
+	if tonumber(txt) then
+	speeds.flyspeed = tonumber(txt)
+	end
 	end)
 	notify("Fly hack enabled. Disabling ragdoll is highly recommended when using this.")
 	end
@@ -1000,4 +1034,4 @@ function SCRIPT_QSYL73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_QSYL73_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_BRYS90_FAKESCRIPT))
