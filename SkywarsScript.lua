@@ -160,18 +160,7 @@ function SCRIPT_RWFM84_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 		bha.ZIndex = 0
 		bha.AlwaysOnTop = true
 		bha.Transparency = 0.5
-		local coin = ore.CoinsValue.Value
-		if coin == 50 then
-		bha.Color = BrickColor.new("Lime green")
-		elseif coin == 35 then
-		bha.Color = BrickColor.new("Cyan")
-		elseif coin == 15 then
-		bha.Color = BrickColor.new("New Yeller")
-		elseif coin == 10 then
-		bha.Color = BrickColor.new("Medium stone grey")
-		elseif coin == 5 then
-		bha.Color = BrickColor.new("Really black")
-		end
+		bha.Color = ore.BrickColor
 	end
 	mainframe.mineores.MouseButton1Click:connect(function()
 	if lplr.Backpack:FindFirstChild("Axe") or lplr.Character:FindFirstChild("Axe") then
