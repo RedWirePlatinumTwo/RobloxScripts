@@ -623,6 +623,7 @@ function SCRIPT_IQUX73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 	mainframe.X.MouseButton1Click:connect(function()
 	mainframe.Parent:Destroy()
+	_G.RedsJBGUI = false
 	end)
 	mainframe.aimbot.MouseButton1Click:connect(function()
 	mainframe.Parent.Confirmation.Visible = true
