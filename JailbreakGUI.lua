@@ -1015,7 +1015,7 @@ function SCRIPT_IQUX73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position, speeds.flyspeed)
 	    end
 	    hrp.Velocity = velocity
-	     hrp.CFrame = CFrame.new(hrp.Position, (workspace.Camera.CFrame*(CFrame.new()+Vector3.new(0,0,-maxdistance))).Position)
+	     hrp.CFrame = CFrame.new(hrp.Position, (workspace.Camera.CFrame*frontoffset).Position)
 	    end
 	    if flying and not keys.w_active and not keys.a_active and not keys.s_active and not keys.d_active and not keys.q_active and not keys.e_active then
 	        hrp.Anchored = true
