@@ -30,7 +30,7 @@ Title.BackgroundTransparency = 1
 Title.Size = UDim2.new(0, 318, 0, 50)
 Title.Font = Enum.Font.ArialBold
 Title.Text = "RedWire's Skywars GUI"
-Title.TextColor3 = Color3.new(0, 0.666667, 1)
+Title.TextColor3 = Color3.new(1, 0.333333, 1)
 Title.TextScaled = true
 Title.TextSize = 14
 Title.TextStrokeColor3 = Color3.new(0, 0, 1)
@@ -39,13 +39,13 @@ Title.TextWrapped = true
 
 mineores.Name = "mineores"
 mineores.Parent = MainFrame
-mineores.BackgroundColor3 = Color3.new(0, 0.666667, 1)
+mineores.BackgroundColor3 = Color3.new(0, 0.333333, 1)
 mineores.BorderColor3 = Color3.new(0, 0, 1)
 mineores.Position = UDim2.new(0, 0, 0.181159422, 0)
 mineores.Size = UDim2.new(0, 159, 0, 50)
 mineores.Font = Enum.Font.ArialBold
 mineores.Text = "Mine all ores"
-mineores.TextColor3 = Color3.new(0, 1, 1)
+mineores.TextColor3 = Color3.new(1, 0.666667, 1)
 mineores.TextScaled = true
 mineores.TextSize = 14
 mineores.TextStrokeColor3 = Color3.new(0, 0, 1)
@@ -54,13 +54,13 @@ mineores.TextWrapped = true
 
 highlightores.Name = "highlightores"
 highlightores.Parent = MainFrame
-highlightores.BackgroundColor3 = Color3.new(0, 0.666667, 1)
+highlightores.BackgroundColor3 = Color3.new(0, 0.333333, 1)
 highlightores.BorderColor3 = Color3.new(0, 0, 1)
 highlightores.Position = UDim2.new(0.5, 0, 0.181159422, 0)
 highlightores.Size = UDim2.new(0, 159, 0, 50)
 highlightores.Font = Enum.Font.ArialBold
 highlightores.Text = "Highlight ores"
-highlightores.TextColor3 = Color3.new(0, 1, 1)
+highlightores.TextColor3 = Color3.new(1, 0.666667, 1)
 highlightores.TextScaled = true
 highlightores.TextSize = 14
 highlightores.TextStrokeColor3 = Color3.new(0, 0, 1)
@@ -69,13 +69,13 @@ highlightores.TextWrapped = true
 
 automine.Name = "automine"
 automine.Parent = MainFrame
-automine.BackgroundColor3 = Color3.new(0, 0.666667, 1)
+automine.BackgroundColor3 = Color3.new(0, 0.333333, 1)
 automine.BorderColor3 = Color3.new(0, 0, 1)
 automine.Position = UDim2.new(0, 0, 0.362318844, 0)
 automine.Size = UDim2.new(0, 159, 0, 50)
 automine.Font = Enum.Font.ArialBold
 automine.Text = "Auto-mining enabled: "
-automine.TextColor3 = Color3.new(0, 1, 1)
+automine.TextColor3 = Color3.new(1, 0.666667, 1)
 automine.TextScaled = true
 automine.TextSize = 14
 automine.TextStrokeColor3 = Color3.new(0, 0, 1)
@@ -84,13 +84,13 @@ automine.TextWrapped = true
 
 megavipenter.Name = "megavipenter"
 megavipenter.Parent = MainFrame
-megavipenter.BackgroundColor3 = Color3.new(0, 0.666667, 1)
+megavipenter.BackgroundColor3 = Color3.new(0, 0.333333, 1)
 megavipenter.BorderColor3 = Color3.new(0, 0, 1)
 megavipenter.Position = UDim2.new(0.5, 0, 0.362318844, 0)
 megavipenter.Size = UDim2.new(0, 159, 0, 50)
 megavipenter.Font = Enum.Font.ArialBold
 megavipenter.Text = "Mega VIP bypass: "
-megavipenter.TextColor3 = Color3.new(0, 1, 1)
+megavipenter.TextColor3 = Color3.new(1, 0.666667, 1)
 megavipenter.TextScaled = true
 megavipenter.TextSize = 14
 megavipenter.TextStrokeColor3 = Color3.new(0, 0, 1)
@@ -99,13 +99,13 @@ megavipenter.TextWrapped = true
 
 infyeet.Name = "infyeet"
 infyeet.Parent = MainFrame
-infyeet.BackgroundColor3 = Color3.new(0, 0.666667, 1)
+infyeet.BackgroundColor3 = Color3.new(0, 0.333333, 1)
 infyeet.BorderColor3 = Color3.new(0, 0, 1)
 infyeet.Position = UDim2.new(0, 0, 0.543478251, 0)
 infyeet.Size = UDim2.new(0, 159, 0, 50)
 infyeet.Font = Enum.Font.ArialBold
 infyeet.Text = "Load Infinite Yeet"
-infyeet.TextColor3 = Color3.new(0, 1, 1)
+infyeet.TextColor3 = Color3.new(1, 0.666667, 1)
 infyeet.TextScaled = true
 infyeet.TextSize = 14
 infyeet.TextStrokeColor3 = Color3.new(0, 0, 1)
@@ -114,13 +114,13 @@ infyeet.TextWrapped = true
 
 killothers.Name = "killothers"
 killothers.Parent = MainFrame
-killothers.BackgroundColor3 = Color3.new(0, 0.666667, 1)
+killothers.BackgroundColor3 = Color3.new(0, 0.333333, 1)
 killothers.BorderColor3 = Color3.new(0, 0, 1)
 killothers.Position = UDim2.new(0.5, 0, 0.543478251, 0)
 killothers.Size = UDim2.new(0, 159, 0, 50)
 killothers.Font = Enum.Font.ArialBold
 killothers.Text = "(Attempt to) Kill others"
-killothers.TextColor3 = Color3.new(0, 1, 1)
+killothers.TextColor3 = Color3.new(1, 0.666667, 1)
 killothers.TextScaled = true
 killothers.TextSize = 14
 killothers.TextStrokeColor3 = Color3.new(0, 0, 1)
@@ -129,20 +129,20 @@ killothers.TextWrapped = true
 
 antifalltoggle.Name = "antifalltoggle"
 antifalltoggle.Parent = MainFrame
-antifalltoggle.BackgroundColor3 = Color3.new(0, 0.666667, 1)
+antifalltoggle.BackgroundColor3 = Color3.new(0, 0.333333, 1)
 antifalltoggle.BorderColor3 = Color3.new(0, 0, 1)
 antifalltoggle.Position = UDim2.new(0, 0, 0.724637687, 0)
 antifalltoggle.Size = UDim2.new(0, 318, 0, 50)
 antifalltoggle.Font = Enum.Font.ArialBold
 antifalltoggle.Text = "Anti-falling part enabled: "
-antifalltoggle.TextColor3 = Color3.new(0, 1, 1)
+antifalltoggle.TextColor3 = Color3.new(1, 0.666667, 1)
 antifalltoggle.TextScaled = true
 antifalltoggle.TextSize = 14
 antifalltoggle.TextStrokeColor3 = Color3.new(0, 0, 1)
 antifalltoggle.TextStrokeTransparency = 0
 antifalltoggle.TextWrapped = true
 -- Scripts:
-function SCRIPT_VCHM67_FAKESCRIPT() -- SkyWarsGUI.LocalScript 
+function SCRIPT_RWFM84_FAKESCRIPT() -- SkyWarsGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = SkyWarsGUI
 	local lplr = game.Players.LocalPlayer
@@ -270,23 +270,8 @@ function SCRIPT_VCHM67_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	end)
 	mainframe.killothers.MouseButton1Click:connect(function()
 	if lplr.Backpack:FindFirstChild("Sword") or lplr.Character:FindFirstChild("Sword") then
-	if not workspace:FindFirstChild("KillFolder") then
-	local kf = Instance.new("Folder", workspace)
-	kf.Name = "KillFolder"
-	end
-	if not workspace.KillFolder:FindFirstChild("ManualWeld") then
-	local motor = Instance.new("ManualWeld", workspace.KillFolder)
-	end
-	local motor = workspace.KillFolder.ManualWeld
-	if not workspace.KillFolder:FindFirstChild("Part") then
-	local part = Instance.new("Part", workspace.KillFolder)
-	end
-	local kpart = workspace.KillFolder.Part
-	kpart.Size = Vector3.new(1, 1, 1)
-	kpart.CanCollide = false
-	motor.C0 = CFrame.new() + Vector3.new(0, 0, 4)
+	local frontoffset = CFrame.new() + Vector3.new(0, 0, 4)
 	local function kill(plr)
-	motor.Part1 = kpart
 	local chr = lplr.Character
 	local hrp = chr.HumanoidRootPart
 	local pchr = plr.Character
@@ -296,12 +281,11 @@ function SCRIPT_VCHM67_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	end
 	game.RunService.Heartbeat:connect(function()
 	if pchr:FindFirstChild("HumanoidRootPart") and atk and pchr.HumanoidRootPart.CFrame.Y > 0 then
-	motor.Part0 = pchr.HumanoidRootPart
-	if chr:FindFirstChild("Sword") and motor.Part1 ~= nil then
+	if chr:FindFirstChild("Sword") then
 	mouse1click()
 	task.wait()
 	mouse1release()
-	hrp.CFrame = kpart.CFrame
+	hrp.CFrame = pchr.HumanoidRootPart.CFrame * frontoffset
 	hrp.Velocity = Vector3.new()
 	end
 	elseif pchr:FindFirstChild("HumanoidRootPart") and pchr.HumanoidRootPart.CFrame.Y < 0 then
@@ -311,8 +295,6 @@ function SCRIPT_VCHM67_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	pchr.Humanoid:GetPropertyChangedSignal("Health"):connect(function()
 	if pchr.Humanoid.Health == 0 then
 	atk = false
-	motor.Part1 = nil
-	motor.Part0 = nil
 	end
 	end)
 	end
@@ -365,4 +347,4 @@ function SCRIPT_VCHM67_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_VCHM67_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_RWFM84_FAKESCRIPT))
