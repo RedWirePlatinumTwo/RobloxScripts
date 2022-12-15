@@ -988,8 +988,8 @@ function SCRIPT_GQZX75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	local keys = {}
 	game.RunService.Heartbeat:connect(function()
-	local hrp
 		pcall(function()
+		local hrp
 		for i,v in pairs(workspace.Vehicles:GetChildren()) do
 		    if pcall(function() return v.Engine and v.Seat.PlayerName end) then
 		        if v.Seat.PlayerName.Value == lplr.Name then
