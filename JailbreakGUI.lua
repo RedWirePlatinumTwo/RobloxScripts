@@ -495,7 +495,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_GQZX75_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_AVYY72_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	if not _G.RedsJBGUI then
@@ -987,6 +987,7 @@ function SCRIPT_GQZX75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	return key:sub(a+1)
 	end
 	local keys = {}
+	local pos = Vector3.new()
 	game.RunService.Heartbeat:connect(function()
 		pcall(function()
 		local hrp
@@ -1029,7 +1030,11 @@ function SCRIPT_GQZX75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	     hrp.CFrame = CFrame.new(hrp.Position, (workspace.Camera.CFrame*frontoffset).Position)
 	    end
 	    if flying and not keys.w_active and not keys.a_active and not keys.s_active and not keys.d_active then
-	        hrp.Velocity = Vector3.new(0,1.005,0)
+	        hrp.CFrame = CFrame.new(pos, (workspace.Camera.CFrame*frontoffset).Position)
+	        hrp.Velocity = Vector3.new()
+			hrp.RotVelocity = Vector3.new()
+	    else
+	        pos = hrp.Position
 	    end
 		end)
 	end)
@@ -1138,4 +1143,4 @@ function SCRIPT_GQZX75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_GQZX75_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_AVYY72_FAKESCRIPT))
