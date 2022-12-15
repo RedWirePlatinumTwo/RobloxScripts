@@ -352,7 +352,7 @@ flyhack.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 flyhack.Position = UDim2.new(0.666999996, 0, 0.261999995, 0)
 flyhack.Size = UDim2.new(0, 108, 0, 47)
 flyhack.Font = Enum.Font.SourceSansBold
-flyhack.Text = "Fly hack (Left CTRL + F)"
+flyhack.Text = "Vehicle fly hack (Left CTRL + F)"
 flyhack.TextColor3 = Color3.new(0.333333, 1, 1)
 flyhack.TextScaled = true
 flyhack.TextSize = 16
@@ -427,7 +427,7 @@ flyhacknum.Visible = false
 flyhacknum.Font = Enum.Font.SourceSansBold
 flyhacknum.PlaceholderColor3 = Color3.new(0.333333, 1, 1)
 flyhacknum.PlaceholderText = "Fly Speed number"
-flyhacknum.Text = "50"
+flyhacknum.Text = "150"
 flyhacknum.TextColor3 = Color3.new(0.333333, 1, 1)
 flyhacknum.TextScaled = true
 flyhacknum.TextSize = 14
@@ -495,7 +495,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_IQUX73_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_GQZX75_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	if not _G.RedsJBGUI then
@@ -558,7 +558,7 @@ function SCRIPT_IQUX73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local briefframe = script.Parent.BriefcaseESPFrame
 	local speeds = {}
 	speeds.walkspeed = 30
-	speeds.flyspeed = 50
+	speeds.flyspeed = 150
 	mainframe.Speednum.Text = tostring(speeds.walkspeed)
 	local plrs = game.Players
 	local lplr = plrs.LocalPlayer
@@ -568,7 +568,7 @@ function SCRIPT_IQUX73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Added option to delete radio gui because I hate it.")
+	notify("Replaced the flying hack with a vehicle fly hack!")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -970,6 +970,7 @@ function SCRIPT_IQUX73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	otherframe.flyhack.Visible = false
 	if not enablefly then
 	enablefly = true
+	-- actual fly script
 	local flying = false
 	local maxdistance = 100000000000000 --using math.huge makes this script wonky
 	local uiservice = game.UserInputService
@@ -987,41 +988,48 @@ function SCRIPT_IQUX73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	local keys = {}
 	game.RunService.Heartbeat:connect(function()
+	local hrp
 		pcall(function()
-		local hrp = lplr.Character.Humanoid.SeatPart or lplr.Character.Humanoid.RootPart
+		for i,v in pairs(workspace.Vehicles:GetChildren()) do
+		    if pcall(function() return v.Engine and v.Seat.PlayerName end) then
+		        if v.Seat.PlayerName.Value == lplr.Name then
+		            hrp = v.Engine
+		            break
+		       else
+		           hrp = nil
+		        end
+		    end
+		end
+		if not hrp then
+		flying = false
+	    lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
+		end
+	    if flying then
+	    local cam = workspace.Camera
+	    end
 		local frontoffset = CFrame.new() + Vector3.new(0,0,-maxdistance)
 		local backoffset = CFrame.new() + Vector3.new(0,0,maxdistance)
 		local leftoffset = CFrame.new() + Vector3.new(-maxdistance,0,0)
 		local rightoffset = CFrame.new() + Vector3.new(maxdistance,0,0)
-		local upoffset = CFrame.new() + Vector3.new(0,maxdistance,0)
-		local downoffset = CFrame.new() + Vector3.new(0,-maxdistance,0)
 		local velocity = Vector3.new()
 	    if flying then
 	    if keys.w_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position, speeds.flyspeed)
+	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position,speeds.flyspeed)
 	    end
 	    if keys.s_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position, speeds.flyspeed)
+	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position,speeds.flyspeed)
 	    end
 	    if keys.a_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position, speeds.flyspeed)
+	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position,speeds.flyspeed)
 	    end
 	    if keys.d_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position, speeds.flyspeed)
-	    end
-	    if keys.e_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position, speeds.flyspeed)
-	    end
-	    if keys.q_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position, speeds.flyspeed)
+	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position,speeds.flyspeed)
 	    end
 	    hrp.Velocity = velocity
 	     hrp.CFrame = CFrame.new(hrp.Position, (workspace.Camera.CFrame*frontoffset).Position)
 	    end
-	    if flying and not keys.w_active and not keys.a_active and not keys.s_active and not keys.d_active and not keys.q_active and not keys.e_active then
-	        hrp.Anchored = true
-	    else
-	        hrp.Anchored = false
+	    if flying and not keys.w_active and not keys.a_active and not keys.s_active and not keys.d_active then
+	        hrp.Velocity = Vector3.new(0,1.005,0)
 	    end
 		end)
 	end)
@@ -1030,10 +1038,8 @@ function SCRIPT_IQUX73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	    if key.KeyCode == Enum.KeyCode.F and game.UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
 	        flying = not flying
 	        if flying then
-	            uiservice.MouseBehavior = Enum.MouseBehavior.LockCenter
 	            lplr.Character.Humanoid.CameraOffset = Vector3.new(2,0,0)
 	        else
-	            uiservice.MouseBehavior = Enum.MouseBehavior.Default
 	            lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
 	        end
 	    end
@@ -1042,27 +1048,28 @@ function SCRIPT_IQUX73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	uiservice.InputEnded:connect(function(key)
 	    keys[getkey(key.KeyCode).."_active"] = false
 	end)
+	-- end of fly script
 	Changed(speeds, "flyspeed", function(num)
-	if num > 150 then
-	speeds.flyspeed = 150
+	if num > 500 then
+	speeds.flyspeed = 500
 	end
-	if num < 50 then
-	speeds.flyspeed = 50
+	if num < 100 then
+	speeds.flyspeed = 100
 	end
 	otherframe.flyhacknum.Text = tostring(speeds.flyspeed)
 	end)
 	otherframe.flyhacknum.MouseWheelForward:connect(function()
-	speeds.flyspeed = speeds.flyspeed + 5
+	speeds.flyspeed = speeds.flyspeed + 10
 	end)
 	otherframe.flyhacknum.MouseWheelBackward:connect(function()
-	speeds.flyspeed = speeds.flyspeed - 5
+	speeds.flyspeed = speeds.flyspeed - 10
 	end)
 	Changed(otherframe.flyhacknum, "Text", function(txt)
 	if tonumber(txt) then
 	speeds.flyspeed = tonumber(txt)
 	end
 	end)
-	notify("Fly hack enabled. Disabling ragdoll is highly recommended when using this.")
+	notify("Vehicle fly hack enabled!")
 	end
 	end)
 	local keybypass = false
@@ -1131,4 +1138,4 @@ function SCRIPT_IQUX73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_IQUX73_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_GQZX75_FAKESCRIPT))
