@@ -1,3 +1,4 @@
+
 -- Farewell Infortality.
 -- Version: 2.82
 -- Instances:
@@ -427,7 +428,7 @@ flyhacknum.Visible = false
 flyhacknum.Font = Enum.Font.SourceSansBold
 flyhacknum.PlaceholderColor3 = Color3.new(0.333333, 1, 1)
 flyhacknum.PlaceholderText = "Fly Speed number"
-flyhacknum.Text = "150"
+flyhacknum.Text = "300"
 flyhacknum.TextColor3 = Color3.new(0.333333, 1, 1)
 flyhacknum.TextScaled = true
 flyhacknum.TextSize = 14
@@ -495,7 +496,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_AVYY72_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_PZKJ87_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	if not _G.RedsJBGUI then
@@ -558,7 +559,7 @@ function SCRIPT_AVYY72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local briefframe = script.Parent.BriefcaseESPFrame
 	local speeds = {}
 	speeds.walkspeed = 30
-	speeds.flyspeed = 150
+	speeds.flyspeed = 300
 	mainframe.Speednum.Text = tostring(speeds.walkspeed)
 	local plrs = game.Players
 	local lplr = plrs.LocalPlayer
@@ -568,7 +569,7 @@ function SCRIPT_AVYY72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Replaced the flying hack with a vehicle fly hack!")
+	notify("Removed the max limit on the vehicle fly speed because funni")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -1055,9 +1056,6 @@ function SCRIPT_AVYY72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 	-- end of fly script
 	Changed(speeds, "flyspeed", function(num)
-	if num > 500 then
-	speeds.flyspeed = 500
-	end
 	if num < 100 then
 	speeds.flyspeed = 100
 	end
@@ -1143,4 +1141,4 @@ function SCRIPT_AVYY72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_AVYY72_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_PZKJ87_FAKESCRIPT))
