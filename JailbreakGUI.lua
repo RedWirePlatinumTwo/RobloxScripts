@@ -1,4 +1,3 @@
-
 -- Farewell Infortality.
 -- Version: 2.82
 -- Instances:
@@ -496,7 +495,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_PZKJ87_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_JNDN86_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	if not _G.RedsJBGUI then
@@ -569,7 +568,7 @@ function SCRIPT_PZKJ87_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Removed the max limit on the vehicle fly speed because funni")
+	notify("Increased vehicle flying max speed from 500 to 750 (and increased scroll speed modifier).")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -1059,13 +1058,16 @@ function SCRIPT_PZKJ87_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if num < 100 then
 	speeds.flyspeed = 100
 	end
+	if num > 750 then
+	speeds.flyspeed = 750
+	end
 	otherframe.flyhacknum.Text = tostring(speeds.flyspeed)
 	end)
 	otherframe.flyhacknum.MouseWheelForward:connect(function()
-	speeds.flyspeed = speeds.flyspeed + 10
+	speeds.flyspeed = speeds.flyspeed + 20
 	end)
 	otherframe.flyhacknum.MouseWheelBackward:connect(function()
-	speeds.flyspeed = speeds.flyspeed - 10
+	speeds.flyspeed = speeds.flyspeed - 20
 	end)
 	Changed(otherframe.flyhacknum, "Text", function(txt)
 	if tonumber(txt) then
@@ -1141,4 +1143,4 @@ function SCRIPT_PZKJ87_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_PZKJ87_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_JNDN86_FAKESCRIPT))
