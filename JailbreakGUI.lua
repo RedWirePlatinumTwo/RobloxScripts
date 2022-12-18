@@ -495,7 +495,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_JNDN86_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_EFAN75_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	if not _G.RedsJBGUI then
@@ -568,7 +568,7 @@ function SCRIPT_JNDN86_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Increased vehicle flying max speed from 500 to 750 (and increased scroll speed modifier).")
+	notify("Decreased vehicle flying max speed from 750 to 640.")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -1058,8 +1058,8 @@ function SCRIPT_JNDN86_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if num < 100 then
 	speeds.flyspeed = 100
 	end
-	if num > 750 then
-	speeds.flyspeed = 750
+	if num > 640 then
+	speeds.flyspeed = 640
 	end
 	otherframe.flyhacknum.Text = tostring(speeds.flyspeed)
 	end)
@@ -1143,4 +1143,4 @@ function SCRIPT_JNDN86_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_JNDN86_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_EFAN75_FAKESCRIPT))
