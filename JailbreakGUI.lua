@@ -352,7 +352,7 @@ flyhack.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 flyhack.Position = UDim2.new(0.666999996, 0, 0.261999995, 0)
 flyhack.Size = UDim2.new(0, 108, 0, 47)
 flyhack.Font = Enum.Font.SourceSansBold
-flyhack.Text = "Vehicle fly hack (Left CTRL + F)"
+flyhack.Text = "Fly hack (Left CTRL + F)"
 flyhack.TextColor3 = Color3.new(0.333333, 1, 1)
 flyhack.TextScaled = true
 flyhack.TextSize = 16
@@ -495,7 +495,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_EFAN75_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_MCUZ84_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	if not _G.RedsJBGUI then
@@ -568,7 +568,7 @@ function SCRIPT_EFAN75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Decreased vehicle flying max speed from 750 to 640.")
+	notify("(Attempted) to fix some lasers not being disabled + changed flying thing.")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -801,7 +801,9 @@ function SCRIPT_EFAN75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	ti.Parent.Transparency = 0.6
 	ti.Parent.Color = Color3.new()
 	end
-	ti:Destroy()
+	coroutine.resume(coroutine.create(function()
+	repeat ti:Destroy() task.wait() until GetFamily(ti)[1] ~= game
+	end))
 	end
 	end
 	end
@@ -1001,9 +1003,12 @@ function SCRIPT_EFAN75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		        end
 		    end
 		end
+		local flyspeed = speeds.flyspeed
 		if not hrp then
-		flying = false
-	    lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
+		hrp = lplr.Character.Humanoid.RootPart
+		if flyspeed > 150 then
+		flyspeed = 150
+		end
 		end
 	    if flying then
 	    local cam = workspace.Camera
@@ -1012,24 +1017,32 @@ function SCRIPT_EFAN75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		local backoffset = CFrame.new() + Vector3.new(0,0,maxdistance)
 		local leftoffset = CFrame.new() + Vector3.new(-maxdistance,0,0)
 		local rightoffset = CFrame.new() + Vector3.new(maxdistance,0,0)
+		local upoffset = CFrame.new() + Vector3.new(0,maxdistance,0)
+		local downoffset = CFrame.new() + Vector3.new(0,-maxdistance,0)
 		local velocity = Vector3.new()
 	    if flying then
 	    if keys.w_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position,speeds.flyspeed)
+	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position, flyspeed)
 	    end
 	    if keys.s_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position,speeds.flyspeed)
+	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position, flyspeed)
 	    end
 	    if keys.a_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position,speeds.flyspeed)
+	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position, flyspeed)
 	    end
 	    if keys.d_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position,speeds.flyspeed)
+	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position, flyspeed)
+	    end
+	    if keys.e_active then
+	        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position, flyspeed)
+	    end
+	    if keys.q_active then
+	        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position, flyspeed)
 	    end
 	    hrp.Velocity = velocity
 	     hrp.CFrame = CFrame.new(hrp.Position, (workspace.Camera.CFrame*frontoffset).Position)
 	    end
-	    if flying and not keys.w_active and not keys.a_active and not keys.s_active and not keys.d_active then
+	    if flying and not keys.w_active and not keys.a_active and not keys.s_active and not keys.d_active and not keys.q_active and not keys.e_active then
 	        hrp.CFrame = CFrame.new(pos, (workspace.Camera.CFrame*frontoffset).Position)
 	        hrp.Velocity = Vector3.new()
 			hrp.RotVelocity = Vector3.new()
@@ -1074,7 +1087,7 @@ function SCRIPT_EFAN75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	speeds.flyspeed = tonumber(txt)
 	end
 	end)
-	notify("Vehicle fly hack enabled!")
+	notify("Fly hack enabled! Caps at 150 if you're flying without a vehicle.")
 	end
 	end)
 	local keybypass = false
@@ -1143,4 +1156,4 @@ function SCRIPT_EFAN75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_EFAN75_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_MCUZ84_FAKESCRIPT))
