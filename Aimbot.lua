@@ -24,7 +24,7 @@ local Title_2 = Instance.new("TextLabel")
 local whitelistlable = Instance.new("TextLabel")
 local prioritylable = Instance.new("TextLabel")
 local typelabel = Instance.new("TextLabel")
-local SettingsUI = Instance.new("Frame")
+local GameSettingsUI = Instance.new("Frame")
 local Title_3 = Instance.new("TextLabel")
 local X_2 = Instance.new("TextButton")
 local Target = Instance.new("TextLabel")
@@ -35,7 +35,6 @@ local FPEnabled = Instance.new("TextLabel")
 local value_3 = Instance.new("TextButton")
 local OwnTeamWhitelisted = Instance.new("TextLabel")
 local value_4 = Instance.new("TextButton")
-local SaveSettings = Instance.new("TextButton")
 local SwitchToKeybinds = Instance.new("TextButton")
 local MaxStuds = Instance.new("TextLabel")
 local value_5 = Instance.new("TextBox")
@@ -43,15 +42,28 @@ local AimAdjust = Instance.new("TextLabel")
 local value_6 = Instance.new("TextBox")
 local WhitelistFriends = Instance.new("TextLabel")
 local value_7 = Instance.new("TextButton")
-local KeybindUI = Instance.new("Frame")
+local GlobalSettingsUI = Instance.new("Frame")
 local Title_4 = Instance.new("TextLabel")
 local AimbotToggle = Instance.new("TextLabel")
 local value_8 = Instance.new("TextButton")
 local reset = Instance.new("TextButton")
-local ChangeTargetedPart = Instance.new("TextLabel")
+local TargetedPartToggle = Instance.new("TextLabel")
 local value_9 = Instance.new("TextButton")
 local reset_2 = Instance.new("TextButton")
 local SwitchToSettings = Instance.new("TextButton")
+local TeamAutofill = Instance.new("TextLabel")
+local value_10 = Instance.new("TextButton")
+local yourteam = Instance.new("TextBox")
+local whitelistteam = Instance.new("TextBox")
+local WhitelistedTeams = Instance.new("ScrollingFrame")
+local whitelistframe_2 = Instance.new("Frame")
+local TextLabel_2 = Instance.new("TextLabel")
+local undo = Instance.new("TextButton")
+local UIListLayout_2 = Instance.new("UIListLayout")
+local label1 = Instance.new("TextLabel")
+local label2 = Instance.new("TextLabel")
+local WLTeam = Instance.new("TextButton")
+local X_3 = Instance.new("TextButton")
 --Properties:
 Aimbot.Name = "Aimbot"
 Aimbot.Parent = game.CoreGui
@@ -140,7 +152,7 @@ Manager.BorderColor3 = Color3.new(0.333333, 1, 0)
 Manager.Position = UDim2.new(0, 0, 0.807580113, 0)
 Manager.Size = UDim2.new(0, 260, 0, 38)
 Manager.Font = Enum.Font.Highway
-Manager.Text = "Manage Teams/Players"
+Manager.Text = "Manage Players"
 Manager.TextColor3 = Color3.new(0.333333, 1, 0)
 Manager.TextSize = 28
 Manager.TextWrapped = true
@@ -191,7 +203,7 @@ WhitelistedInstances.BackgroundColor3 = Color3.new(0, 0, 0)
 WhitelistedInstances.BorderColor3 = Color3.new(0.333333, 1, 0)
 WhitelistedInstances.Position = UDim2.new(0, 0, 0.359999865, 0)
 WhitelistedInstances.Size = UDim2.new(0, 460, 0, 172)
-WhitelistedInstances.CanvasSize = UDim2.new(0, 0, 0.140000001, 0)
+WhitelistedInstances.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 whitelistframe.Name = "whitelistframe"
 whitelistframe.Parent = WhitelistedInstances
@@ -228,7 +240,6 @@ PriorityToggle.BackgroundColor3 = Color3.new(1, 1, 1)
 PriorityToggle.BackgroundTransparency = 1
 PriorityToggle.Position = UDim2.new(0.530669451, 0, 0, 0)
 PriorityToggle.Size = UDim2.new(0, 119, 0, 37)
-PriorityToggle.Visible = false
 PriorityToggle.Font = Enum.Font.Highway
 PriorityToggle.Text = "No"
 PriorityToggle.TextColor3 = Color3.new(1, 0, 0)
@@ -317,28 +328,27 @@ typelabel.TextScaled = true
 typelabel.TextSize = 14
 typelabel.TextWrapped = true
 
-SettingsUI.Name = "SettingsUI"
-SettingsUI.Parent = Aimbot
-SettingsUI.BackgroundColor3 = Color3.new(0, 0, 0)
-SettingsUI.BorderColor3 = Color3.new(0.333333, 1, 0)
-SettingsUI.Position = UDim2.new(0.472395837, 0, 0.11203704, 0)
-SettingsUI.Size = UDim2.new(0, 289, 0, 561)
-SettingsUI.Visible = false
+GameSettingsUI.Name = "GameSettingsUI"
+GameSettingsUI.Parent = Aimbot
+GameSettingsUI.BackgroundColor3 = Color3.new(0, 0, 0)
+GameSettingsUI.BorderColor3 = Color3.new(0.333333, 1, 0)
+GameSettingsUI.Position = UDim2.new(0.472395837, 0, 0.162962958, 0)
+GameSettingsUI.Size = UDim2.new(0, 289, 0, 506)
+GameSettingsUI.Visible = false
 
 Title_3.Name = "Title"
-Title_3.Parent = SettingsUI
+Title_3.Parent = GameSettingsUI
 Title_3.BackgroundColor3 = Color3.new(0, 0, 0)
 Title_3.BorderColor3 = Color3.new(0.333333, 1, 0)
 Title_3.Size = UDim2.new(0, 242, 0, 45)
 Title_3.Font = Enum.Font.Highway
-Title_3.Text = "Settings"
+Title_3.Text = "Game Settings"
 Title_3.TextColor3 = Color3.new(0.333333, 1, 0)
-Title_3.TextScaled = true
-Title_3.TextSize = 14
+Title_3.TextSize = 40
 Title_3.TextWrapped = true
 
 X_2.Name = "X"
-X_2.Parent = SettingsUI
+X_2.Parent = GameSettingsUI
 X_2.BackgroundColor3 = Color3.new(0, 0, 0)
 X_2.BorderColor3 = Color3.new(0.333333, 1, 0)
 X_2.Position = UDim2.new(0.837431252, 0, 0, 0)
@@ -351,12 +361,12 @@ X_2.TextSize = 14
 X_2.TextWrapped = true
 
 Target.Name = "Target"
-Target.Parent = SettingsUI
+Target.Parent = GameSettingsUI
 Target.BackgroundColor3 = Color3.new(0, 0, 0)
 Target.BackgroundTransparency = 1
 Target.BorderColor3 = Color3.new(0, 0.666667, 0)
 Target.BorderSizePixel = 0
-Target.Position = UDim2.new(0, 0, 0.0769153982, 0)
+Target.Position = UDim2.new(0.00346020772, 0, 0.0887731016, 0)
 Target.Size = UDim2.new(0, 169, 0, 28)
 Target.Font = Enum.Font.Highway
 Target.Text = "Targeted Part:"
@@ -377,12 +387,12 @@ value.TextSize = 24
 value.TextXAlignment = Enum.TextXAlignment.Left
 
 AutoTarget.Name = "AutoTarget"
-AutoTarget.Parent = SettingsUI
+AutoTarget.Parent = GameSettingsUI
 AutoTarget.BackgroundColor3 = Color3.new(0, 0, 0)
 AutoTarget.BackgroundTransparency = 1
 AutoTarget.BorderColor3 = Color3.new(0, 0.666667, 0)
 AutoTarget.BorderSizePixel = 0
-AutoTarget.Position = UDim2.new(-0.00295857992, 0, 0.177647993, 0)
+AutoTarget.Position = UDim2.new(0.000501627801, 0, 0.191481978, 0)
 AutoTarget.Size = UDim2.new(0, 169, 0, 28)
 AutoTarget.Font = Enum.Font.Highway
 AutoTarget.Text = "Auto-Targeting Enabled:"
@@ -403,12 +413,12 @@ value_2.TextSize = 24
 value_2.TextXAlignment = Enum.TextXAlignment.Left
 
 FPEnabled.Name = "FPEnabled"
-FPEnabled.Parent = SettingsUI
+FPEnabled.Parent = GameSettingsUI
 FPEnabled.BackgroundColor3 = Color3.new(0, 0, 0)
 FPEnabled.BackgroundTransparency = 1
 FPEnabled.BorderColor3 = Color3.new(0, 0.666667, 0)
 FPEnabled.BorderSizePixel = 0
-FPEnabled.Position = UDim2.new(-0.00295857992, 0, 0.276904285, 0)
+FPEnabled.Position = UDim2.new(0.000501627801, 0, 0.302595973, 0)
 FPEnabled.Size = UDim2.new(0, 169, 0, 28)
 FPEnabled.Font = Enum.Font.Highway
 FPEnabled.Text = "First Person Mode Enabled:"
@@ -429,12 +439,12 @@ value_3.TextSize = 24
 value_3.TextXAlignment = Enum.TextXAlignment.Left
 
 OwnTeamWhitelisted.Name = "OwnTeamWhitelisted"
-OwnTeamWhitelisted.Parent = SettingsUI
+OwnTeamWhitelisted.Parent = GameSettingsUI
 OwnTeamWhitelisted.BackgroundColor3 = Color3.new(0, 0, 0)
 OwnTeamWhitelisted.BackgroundTransparency = 1
 OwnTeamWhitelisted.BorderColor3 = Color3.new(0, 0.666667, 0)
 OwnTeamWhitelisted.BorderSizePixel = 0
-OwnTeamWhitelisted.Position = UDim2.new(-0.00295857992, 0, 0.375213265, 0)
+OwnTeamWhitelisted.Position = UDim2.new(0.000501627801, 0, 0.416715235, 0)
 OwnTeamWhitelisted.Size = UDim2.new(0, 169, 0, 28)
 OwnTeamWhitelisted.Font = Enum.Font.Highway
 OwnTeamWhitelisted.Text = "Whitelist own team:"
@@ -454,39 +464,26 @@ value_4.TextColor3 = Color3.new(0.333333, 1, 0)
 value_4.TextSize = 24
 value_4.TextXAlignment = Enum.TextXAlignment.Left
 
-SaveSettings.Name = "SaveSettings"
-SaveSettings.Parent = SettingsUI
-SaveSettings.BackgroundColor3 = Color3.new(0, 0, 0)
-SaveSettings.BorderColor3 = Color3.new(0.333333, 1, 0)
-SaveSettings.Position = UDim2.new(0.210458443, 0, 0.916242361, 0)
-SaveSettings.Size = UDim2.new(0, 168, 0, 46)
-SaveSettings.Font = Enum.Font.Highway
-SaveSettings.Text = "Save Settings"
-SaveSettings.TextColor3 = Color3.new(0.333333, 1, 0)
-SaveSettings.TextScaled = true
-SaveSettings.TextSize = 24
-SaveSettings.TextWrapped = true
-
 SwitchToKeybinds.Name = "SwitchToKeybinds"
-SwitchToKeybinds.Parent = SettingsUI
+SwitchToKeybinds.Parent = GameSettingsUI
 SwitchToKeybinds.BackgroundColor3 = Color3.new(0, 0, 0)
 SwitchToKeybinds.BorderColor3 = Color3.new(0.333333, 1, 0)
-SwitchToKeybinds.Position = UDim2.new(0.210458443, 0, 0.833478212, 0)
-SwitchToKeybinds.Size = UDim2.new(0, 168, 0, 46)
+SwitchToKeybinds.Position = UDim2.new(0.144714564, 0, 0.907375753, 0)
+SwitchToKeybinds.Size = UDim2.new(0, 205, 0, 46)
 SwitchToKeybinds.Font = Enum.Font.Highway
-SwitchToKeybinds.Text = "Switch to Keybinds"
+SwitchToKeybinds.Text = "Edit Global Settings"
 SwitchToKeybinds.TextColor3 = Color3.new(0.333333, 1, 0)
 SwitchToKeybinds.TextScaled = true
 SwitchToKeybinds.TextSize = 24
 SwitchToKeybinds.TextWrapped = true
 
 MaxStuds.Name = "MaxStuds"
-MaxStuds.Parent = SettingsUI
+MaxStuds.Parent = GameSettingsUI
 MaxStuds.BackgroundColor3 = Color3.new(0, 0, 0)
 MaxStuds.BackgroundTransparency = 1
 MaxStuds.BorderColor3 = Color3.new(0, 0.666667, 0)
 MaxStuds.BorderSizePixel = 0
-MaxStuds.Position = UDim2.new(-0.00295857992, 0, 0.667083621, 0)
+MaxStuds.Position = UDim2.new(0.000501627801, 0, 0.75206387, 0)
 MaxStuds.Size = UDim2.new(0, 169, 0, 28)
 MaxStuds.Font = Enum.Font.Highway
 MaxStuds.Text = "Auto-Target max studs:"
@@ -509,12 +506,12 @@ value_5.TextSize = 24
 value_5.TextXAlignment = Enum.TextXAlignment.Left
 
 AimAdjust.Name = "AimAdjust"
-AimAdjust.Parent = SettingsUI
+AimAdjust.Parent = GameSettingsUI
 AimAdjust.BackgroundColor3 = Color3.new(0, 0, 0)
 AimAdjust.BackgroundTransparency = 1
 AimAdjust.BorderColor3 = Color3.new(0, 0.666667, 0)
 AimAdjust.BorderSizePixel = 0
-AimAdjust.Position = UDim2.new(0, 0, 0.570990562, 0)
+AimAdjust.Position = UDim2.new(0.00346020772, 0, 0.640160501, 0)
 AimAdjust.Size = UDim2.new(0, 169, 0, 28)
 AimAdjust.Font = Enum.Font.Highway
 AimAdjust.Text = "Aim Intensity"
@@ -537,12 +534,12 @@ value_6.TextSize = 24
 value_6.TextXAlignment = Enum.TextXAlignment.Left
 
 WhitelistFriends.Name = "WhitelistFriends"
-WhitelistFriends.Parent = SettingsUI
+WhitelistFriends.Parent = GameSettingsUI
 WhitelistFriends.BackgroundColor3 = Color3.new(0, 0, 0)
 WhitelistFriends.BackgroundTransparency = 1
 WhitelistFriends.BorderColor3 = Color3.new(0, 0.666667, 0)
 WhitelistFriends.BorderSizePixel = 0
-WhitelistFriends.Position = UDim2.new(-0.00295857992, 0, 0.473963648, 0)
+WhitelistFriends.Position = UDim2.new(0.000501627801, 0, 0.523370743, 0)
 WhitelistFriends.Size = UDim2.new(0, 169, 0, 28)
 WhitelistFriends.Font = Enum.Font.Highway
 WhitelistFriends.Text = "Auto-Whitelist Friends:"
@@ -562,33 +559,32 @@ value_7.TextColor3 = Color3.new(0.333333, 1, 0)
 value_7.TextSize = 24
 value_7.TextXAlignment = Enum.TextXAlignment.Left
 
-KeybindUI.Name = "KeybindUI"
-KeybindUI.Parent = Aimbot
-KeybindUI.BackgroundColor3 = Color3.new(0, 0, 0)
-KeybindUI.BorderColor3 = Color3.new(0.333333, 1, 0)
-KeybindUI.Position = UDim2.new(0.359375, 0, 0.126851857, 0)
-KeybindUI.Size = UDim2.new(0, 338, 0, 234)
-KeybindUI.Visible = false
+GlobalSettingsUI.Name = "GlobalSettingsUI"
+GlobalSettingsUI.Parent = Aimbot
+GlobalSettingsUI.BackgroundColor3 = Color3.new(0, 0, 0)
+GlobalSettingsUI.BorderColor3 = Color3.new(0.333333, 1, 0)
+GlobalSettingsUI.Position = UDim2.new(0.342708319, 0, 0.13611111, 0)
+GlobalSettingsUI.Size = UDim2.new(0, 338, 0, 482)
+GlobalSettingsUI.Visible = false
 
 Title_4.Name = "Title"
-Title_4.Parent = KeybindUI
+Title_4.Parent = GlobalSettingsUI
 Title_4.BackgroundColor3 = Color3.new(0, 0, 0)
 Title_4.BorderColor3 = Color3.new(0.333333, 1, 0)
-Title_4.Size = UDim2.new(0, 338, 0, 45)
+Title_4.Size = UDim2.new(0, 291, 0, 45)
 Title_4.Font = Enum.Font.Highway
-Title_4.Text = "Keybinds"
+Title_4.Text = "Global Settings"
 Title_4.TextColor3 = Color3.new(0.333333, 1, 0)
-Title_4.TextScaled = true
-Title_4.TextSize = 14
+Title_4.TextSize = 40
 Title_4.TextWrapped = true
 
 AimbotToggle.Name = "AimbotToggle"
-AimbotToggle.Parent = KeybindUI
+AimbotToggle.Parent = GlobalSettingsUI
 AimbotToggle.BackgroundColor3 = Color3.new(0, 0, 0)
 AimbotToggle.BackgroundTransparency = 1
 AimbotToggle.BorderColor3 = Color3.new(0, 0.666667, 0)
 AimbotToggle.BorderSizePixel = 0
-AimbotToggle.Position = UDim2.new(0.00295857992, 0, 0.20372282, 0)
+AimbotToggle.Position = UDim2.new(0, 0, 0.0947513431, 0)
 AimbotToggle.Size = UDim2.new(0, 169, 0, 28)
 AimbotToggle.Font = Enum.Font.Highway
 AimbotToggle.Text = "Aimbot Toggle:"
@@ -619,22 +615,22 @@ reset.Text = "Reset"
 reset.TextColor3 = Color3.new(1, 0, 0)
 reset.TextSize = 24
 
-ChangeTargetedPart.Name = "ChangeTargetedPart"
-ChangeTargetedPart.Parent = KeybindUI
-ChangeTargetedPart.BackgroundColor3 = Color3.new(0, 0, 0)
-ChangeTargetedPart.BackgroundTransparency = 1
-ChangeTargetedPart.BorderColor3 = Color3.new(0, 0.666667, 0)
-ChangeTargetedPart.BorderSizePixel = 0
-ChangeTargetedPart.Position = UDim2.new(0, 0, 0.448541999, 0)
-ChangeTargetedPart.Size = UDim2.new(0, 169, 0, 28)
-ChangeTargetedPart.Font = Enum.Font.Highway
-ChangeTargetedPart.Text = "Change Targeted Part:"
-ChangeTargetedPart.TextColor3 = Color3.new(0.333333, 1, 0)
-ChangeTargetedPart.TextSize = 24
-ChangeTargetedPart.TextXAlignment = Enum.TextXAlignment.Left
+TargetedPartToggle.Name = "TargetedPartToggle"
+TargetedPartToggle.Parent = GlobalSettingsUI
+TargetedPartToggle.BackgroundColor3 = Color3.new(0, 0, 0)
+TargetedPartToggle.BackgroundTransparency = 1
+TargetedPartToggle.BorderColor3 = Color3.new(0, 0.666667, 0)
+TargetedPartToggle.BorderSizePixel = 0
+TargetedPartToggle.Position = UDim2.new(0, 0, 0.210638717, 0)
+TargetedPartToggle.Size = UDim2.new(0, 169, 0, 28)
+TargetedPartToggle.Font = Enum.Font.Highway
+TargetedPartToggle.Text = "Targeted Part Toggle:"
+TargetedPartToggle.TextColor3 = Color3.new(0.333333, 1, 0)
+TargetedPartToggle.TextSize = 24
+TargetedPartToggle.TextXAlignment = Enum.TextXAlignment.Left
 
 value_9.Name = "value"
-value_9.Parent = ChangeTargetedPart
+value_9.Parent = TargetedPartToggle
 value_9.BackgroundColor3 = Color3.new(0, 0.333333, 0)
 value_9.BorderColor3 = Color3.new(0.333333, 1, 0)
 value_9.Position = UDim2.new(0.00591715984, 0, 0.998713911, 0)
@@ -646,7 +642,7 @@ value_9.TextSize = 24
 value_9.TextXAlignment = Enum.TextXAlignment.Left
 
 reset_2.Name = "reset"
-reset_2.Parent = ChangeTargetedPart
+reset_2.Parent = TargetedPartToggle
 reset_2.BackgroundColor3 = Color3.new(0, 0.333333, 0)
 reset_2.BorderColor3 = Color3.new(0.333333, 1, 0)
 reset_2.Position = UDim2.new(1.53846157, 0, 0.998714447, 0)
@@ -657,19 +653,171 @@ reset_2.TextColor3 = Color3.new(1, 0, 0)
 reset_2.TextSize = 24
 
 SwitchToSettings.Name = "SwitchToSettings"
-SwitchToSettings.Parent = KeybindUI
+SwitchToSettings.Parent = GlobalSettingsUI
 SwitchToSettings.BackgroundColor3 = Color3.new(0, 0, 0)
 SwitchToSettings.BorderColor3 = Color3.new(0.333333, 1, 0)
-SwitchToSettings.Position = UDim2.new(0.251479298, 0, 0.799804866, 0)
+SwitchToSettings.Position = UDim2.new(0.248520732, 0, 0.902638972, 0)
 SwitchToSettings.Size = UDim2.new(0, 168, 0, 46)
 SwitchToSettings.Font = Enum.Font.Highway
-SwitchToSettings.Text = "Switch to Settings"
+SwitchToSettings.Text = "Edit Game Settings"
 SwitchToSettings.TextColor3 = Color3.new(0.333333, 1, 0)
 SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
+
+TeamAutofill.Name = "TeamAutofill"
+TeamAutofill.Parent = GlobalSettingsUI
+TeamAutofill.BackgroundColor3 = Color3.new(0, 0, 0)
+TeamAutofill.BackgroundTransparency = 1
+TeamAutofill.BorderColor3 = Color3.new(0, 0.666667, 0)
+TeamAutofill.BorderSizePixel = 0
+TeamAutofill.Position = UDim2.new(0, 0, 0.326212406, 0)
+TeamAutofill.Size = UDim2.new(0, 169, 0, 28)
+TeamAutofill.Font = Enum.Font.Highway
+TeamAutofill.Text = "Autofill Team Names:"
+TeamAutofill.TextColor3 = Color3.new(0.333333, 1, 0)
+TeamAutofill.TextSize = 24
+TeamAutofill.TextXAlignment = Enum.TextXAlignment.Left
+
+value_10.Name = "value"
+value_10.Parent = TeamAutofill
+value_10.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_10.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_10.Position = UDim2.new(0.00591715984, 0, 0.998713911, 0)
+value_10.Size = UDim2.new(0, 337, 0, 28)
+value_10.Font = Enum.Font.Highway
+value_10.Text = "true"
+value_10.TextColor3 = Color3.new(0.333333, 1, 0)
+value_10.TextSize = 24
+value_10.TextXAlignment = Enum.TextXAlignment.Left
+
+yourteam.Name = "yourteam"
+yourteam.Parent = GlobalSettingsUI
+yourteam.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+yourteam.BorderColor3 = Color3.new(0.333333, 1, 0)
+yourteam.Position = UDim2.new(0.576612294, 0, 0.443606973, 0)
+yourteam.Size = UDim2.new(0, 143, 0, 28)
+yourteam.Font = Enum.Font.Highway
+yourteam.PlaceholderColor3 = Color3.new(0.333333, 1, 0)
+yourteam.PlaceholderText = "Your team"
+yourteam.Text = ""
+yourteam.TextColor3 = Color3.new(0.333333, 1, 0)
+yourteam.TextScaled = true
+yourteam.TextSize = 24
+yourteam.TextWrapped = true
+
+whitelistteam.Name = "whitelistteam"
+whitelistteam.Parent = GlobalSettingsUI
+whitelistteam.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+whitelistteam.BorderColor3 = Color3.new(0.333333, 1, 0)
+whitelistteam.Position = UDim2.new(0.576612294, 0, 0.500086904, 0)
+whitelistteam.Size = UDim2.new(0, 143, 0, 28)
+whitelistteam.Font = Enum.Font.Highway
+whitelistteam.PlaceholderColor3 = Color3.new(0.333333, 1, 0)
+whitelistteam.PlaceholderText = "Team to whitelist"
+whitelistteam.Text = ""
+whitelistteam.TextColor3 = Color3.new(0.333333, 1, 0)
+whitelistteam.TextScaled = true
+whitelistteam.TextSize = 24
+whitelistteam.TextWrapped = true
+
+WhitelistedTeams.Name = "WhitelistedTeams"
+WhitelistedTeams.Parent = GlobalSettingsUI
+WhitelistedTeams.Active = true
+WhitelistedTeams.BackgroundColor3 = Color3.new(0, 0, 0)
+WhitelistedTeams.BorderColor3 = Color3.new(0.333333, 1, 0)
+WhitelistedTeams.Position = UDim2.new(0.00589946331, 0, 0.64122808, 0)
+WhitelistedTeams.Size = UDim2.new(0, 336, 0, 113)
+WhitelistedTeams.ZIndex = 2
+WhitelistedTeams.CanvasSize = UDim2.new(0, 0, 0, 0)
+
+whitelistframe_2.Name = "whitelistframe"
+whitelistframe_2.Parent = WhitelistedTeams
+whitelistframe_2.BackgroundColor3 = Color3.new(0, 0, 0)
+whitelistframe_2.BorderColor3 = Color3.new(0.333333, 1, 0)
+whitelistframe_2.Size = UDim2.new(0, 336, 0, 37)
+whitelistframe_2.Visible = false
+
+TextLabel_2.Parent = whitelistframe_2
+TextLabel_2.BackgroundColor3 = Color3.new(1, 1, 1)
+TextLabel_2.BackgroundTransparency = 1
+TextLabel_2.Size = UDim2.new(0, 258, 0, 37)
+TextLabel_2.Font = Enum.Font.Highway
+TextLabel_2.Text = "[Criminal] will be ignored when on [Prisoner]"
+TextLabel_2.TextColor3 = Color3.new(0.333333, 1, 0)
+TextLabel_2.TextSize = 18
+TextLabel_2.TextWrapped = true
+
+undo.Name = "undo"
+undo.Parent = whitelistframe_2
+undo.BackgroundColor3 = Color3.new(1, 1, 1)
+undo.BackgroundTransparency = 1
+undo.Position = UDim2.new(0.767874956, 0, 0, 0)
+undo.Size = UDim2.new(0, 76, 0, 37)
+undo.Font = Enum.Font.Highway
+undo.Text = "undo"
+undo.TextColor3 = Color3.new(1, 0, 0)
+undo.TextSize = 22
+undo.TextWrapped = true
+
+UIListLayout_2.Parent = WhitelistedTeams
+UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+
+label1.Name = "label1"
+label1.Parent = GlobalSettingsUI
+label1.BackgroundColor3 = Color3.new(0, 0, 0)
+label1.BackgroundTransparency = 1
+label1.BorderColor3 = Color3.new(0.333333, 1, 0)
+label1.Position = UDim2.new(0.00591715984, 0, 0.441113621, 0)
+label1.Size = UDim2.new(0, 192, 0, 30)
+label1.Font = Enum.Font.Highway
+label1.Text = "When on this team: "
+label1.TextColor3 = Color3.new(0.333333, 1, 0)
+label1.TextSize = 24
+label1.TextWrapped = true
+label1.TextXAlignment = Enum.TextXAlignment.Left
+
+label2.Name = "label2"
+label2.Parent = GlobalSettingsUI
+label2.BackgroundColor3 = Color3.new(0, 0, 0)
+label2.BackgroundTransparency = 1
+label2.BorderColor3 = Color3.new(0.333333, 1, 0)
+label2.Position = UDim2.new(0.00589954946, 0, 0.501447916, 0)
+label2.Size = UDim2.new(0, 192, 0, 30)
+label2.Font = Enum.Font.Highway
+label2.Text = "Ignore this team:"
+label2.TextColor3 = Color3.new(0.333333, 1, 0)
+label2.TextSize = 24
+label2.TextWrapped = true
+label2.TextXAlignment = Enum.TextXAlignment.Left
+
+WLTeam.Name = "WLTeam"
+WLTeam.Parent = GlobalSettingsUI
+WLTeam.BackgroundColor3 = Color3.new(0, 0, 0)
+WLTeam.BorderColor3 = Color3.new(0.333333, 1, 0)
+WLTeam.Position = UDim2.new(0.251479298, 0, 0.574838042, 0)
+WLTeam.Size = UDim2.new(0, 168, 0, 32)
+WLTeam.Font = Enum.Font.Highway
+WLTeam.Text = "Whitelist"
+WLTeam.TextColor3 = Color3.new(0.333333, 1, 0)
+WLTeam.TextScaled = true
+WLTeam.TextSize = 24
+WLTeam.TextWrapped = true
+
+X_3.Name = "X"
+X_3.Parent = GlobalSettingsUI
+X_3.BackgroundColor3 = Color3.new(0, 0, 0)
+X_3.BorderColor3 = Color3.new(0.333333, 1, 0)
+X_3.Position = UDim2.new(0.861099899, 0, 0, 0)
+X_3.Size = UDim2.new(0, 46, 0, 45)
+X_3.Font = Enum.Font.Highway
+X_3.Text = "Close"
+X_3.TextColor3 = Color3.new(1, 0, 0)
+X_3.TextScaled = true
+X_3.TextSize = 14
+X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_CFBJ84_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -681,15 +829,100 @@ function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts
 	v.Active = true
 	end
 	end
+	for i,sframe in pairs(script.Parent:GetDescendants()) do
+	if sframe.ClassName == "ScrollingFrame" then
+	sframe.ChildAdded:connect(function(c)
+	if c.ClassName == "Frame" then
+	sframe.CanvasSize = sframe.CanvasSize + UDim2.new(0,0,c.Size.Y.Offset/250,0)
+	end
+	end)
+	sframe.ChildRemoved:connect(function(c)
+	if c.ClassName == "Frame" then
+	sframe.CanvasSize = sframe.CanvasSize - UDim2.new(0,0,c.Size.Y.Offset/250,0)
+	end
+	end)
+	end
+	end
+	local thread = function(f)
+	return coroutine.resume(coroutine.create(function()
+	return f()
+	end))
+	end
+	local Changed = function(part, PropertyName, func)
+	    local current = part[PropertyName]
+		local elapsedTime = 0
+	    thread(function()
+	        while true do
+	            repeat elapsedTime = elapsedTime + task.wait() until part[PropertyName] ~= current
+				local v,v2 = thread(function()
+	            return func(part[PropertyName], current, elapsedTime)
+				end)
+				if v2 == "stop" then break end
+				elapsedTime = 0
+	            current = part[PropertyName]
+	    end
+	    end)
+	end
+	local tablecount = function(t)
+	local n = 0
+	for i,v in pairs(t) do n = n + 1 end
+	return n
+	end
+	local TableAdded = function(Table, func)
+	    local count = tablecount(Table)
+		local clone = table.clone(Table)
+		local elapsedTime = 0
+	    thread(function()
+	        while true do
+	            repeat elapsedTime = elapsedTime + task.wait() until tablecount(Table) > count
+	            for i,v in pairs(Table) do
+	                if not clone[i] then
+					local v,v2 = thread(function()
+	                    return func(i,v,elapsedTime)
+					end)
+					if v2 == "stop" then break end
+	                end
+	            end
+				elapsedTime = 0
+	            count = tablecount(Table)
+				clone = table.clone(Table)
+	    end
+	    end)
+	end
+	local TableChanged = function(Table,f)
+	    for i,v in pairs(Table) do
+	        Changed(Table,i,function(...)
+			f(i,...)
+			end)
+	    end
+	    TableAdded(Table,function(index,value,t)
+	        f(index,value,nil,t)
+	        Changed(Table,index,function(...)
+			f(index,...)
+			end)
+	    end)
+	end
+	GetFamily = function(ins)
+	local Pathway = {}
+	function _GetFamily(v)
+	if v.Parent ~= nil then
+	        table.insert(Pathway, 1, v)
+	        _GetFamily(v.Parent)
+	    else
+	       table.insert(Pathway, 1, v)
+	    end
+	end
+	_GetFamily(ins)
+	return Pathway
+	end
 	local wlui = script.Parent.ManagerUI
-	local settingsui = script.Parent.SettingsUI
-	local keybindui = script.Parent.KeybindUI
-	if syn.protect_gui then
+	local gamesettings = script.Parent.GameSettingsUI
+	local globalsettings = script.Parent.GlobalSettingsUI
+	local teams = game.Teams
+	if syn then
 	syn.protect_gui(script.Parent)
 	end
-	local WhitelistedTeams = {}
 	local WhitelistedPlrs = {}
-	local AddedTeams = {} --This is NOT the same as whitelistedteams so don't remove it again smh
 	local PrioritizedPlrs = {}
 	local plrs = game.Players
 	local lplr = plrs.LocalPlayer
@@ -710,25 +943,61 @@ function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts
 	AimbotStats.WhitelistFriends = false
 	AimbotStats.MaxStuds = 500
 	AimbotStats.OwnTeamWhitelisted = true
+	AimbotStats.Teams = {}
 	end
-	if isfile("RedsAimbotStats.lua") then
+	if isfile and loadfile and isfile("RedsAimbotStats.lua") then
 	botstats = loadfile("RedsAimbotStats.lua")()
+	if botstats.TeamAutofill == nil then
+	botstats.TeamAutofill = true
+	end
 	if not botstats[game.PlaceId] then gengamestats() end
+	if not botstats[game.PlaceId].Teams then
+	botstats[game.PlaceId].Teams = {}
+	end
 	for i,v in pairs(botstats[game.PlaceId]) do
-	settingsui[i].value.Text = tostring(v)
+	if type(v) ~= "table" then
+	gamesettings[i].value.Text = tostring(v)
+	end
 	end
 	for i,v in pairs(botstats.Keybinds) do
-	keybindui[i].value.Text = tostring(v)
+	if globalsettings:FindFirstChild(i) then
+	globalsettings[i].value.Text = tostring(v)
 	end
+	end
+	globalsettings.TeamAutofill.Text = tostring(botstats.TeamAutofill)
 	else
 	botstats = {}
 	botstats.Keybinds = {}
+	botstats.TeamAutofill = true
 	gengamestats()
 	botstats.Keybinds.AimbotToggle = Enum.KeyCode.LeftAlt
-	botstats.Keybinds.ChangeTargetedPart = Enum.KeyCode.X
+	botstats.Keybinds.TargetedPartToggle = Enum.KeyCode.RightAlt
 	end
 	AimbotStats = botstats[game.PlaceId]
 	Keybinds = botstats.Keybinds
+	local function savesettings()
+	if writefile then
+	writefile("RedsAimbotStats.lua", TableToString(botstats))
+	end
+	end
+	TableChanged(botstats[game.PlaceId], savesettings)
+	TableChanged(botstats.Keybinds, savesettings)
+	TableChanged(botstats, savesettings)
+	TableChanged(botstats[game.PlaceId].Teams, savesettings)
+	local addteamframe = function(ttable)
+	local clone = globalsettings.WhitelistedTeams.whitelistframe:Clone()
+	clone.Parent = globalsettings.WhitelistedTeams
+	clone.TextLabel.Text = "["..ttable.team2.."] will be ignored when on ["..ttable.team1.."]"
+	clone.Visible = true
+	clone.undo.MouseButton1Click:connect(function()
+	clone:Destroy()
+	local tfind = table.find(AimbotStats.Teams,ttable)
+	table.remove(AimbotStats.Teams,tfind)
+	end)
+	end
+	for i,v in pairs(AimbotStats.Teams) do
+	addteamframe(v)
+	end
 	deselect = function()
 	misc.TargetedCharacter = ""
 	coroutine.resume(coroutine.create(function()
@@ -739,28 +1008,37 @@ function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end))
 	end
-	function CheckDN(plr)
+	local function CheckDN(plr)
 	if plr.DisplayName == plr.Name then
 	return plr.Name
 	else
 	return plr.Name.." (DisplayName: "..plr.DisplayName..")"
 	end
 	end
-	function IsNotWhitelisted(plr)
-	if AimbotStats.OwnTeamWhitelisted then
-	return plr.Team ~= lplr.Team and not table.find(WhitelistedPlrs, plr) and not table.find(WhitelistedTeams, plr.Team.Name)
-	else
+	local function IsNotWhitelisted(plr)
+	local function isteamwhitelisted()
+	local wl = false
+	for i,ttable in pairs(AimbotStats.Teams) do
+	if teams:FindFirstChild(ttable.team1) and teams:FindFirstChild(ttable.team2) then
+	wl = lplr.Team.Name == ttable.team1 and plr.Team.Name == ttable.team2
+	end
+	end
+	return wl
+	end
 	local validteam, teamname = pcall(function()
 	return plr.Team.Name
 	end)
 	if validteam then
-	return not table.find(WhitelistedPlrs, plr) and not table.find(WhitelistedTeams, teamname)
+	if AimbotStats.OwnTeamWhitelisted then
+	return plr.Team ~= lplr.Team and not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
+	else
+	return not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
+	end
 	else
 	return not table.find(WhitelistedPlrs, plr)
 	end
 	end
-	end
-	function GetPlayer(player)
+	local function GetPlayer(player)
 	local humanoidvalid, humanoid = pcall(function()
 	return player.Character.Humanoid
 	end)
@@ -768,14 +1046,14 @@ function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts
 	selectplr(player.Character)
 	end
 	if player.Name ~= lplr.Name and humanoidvalid then
-	if game.Teams:FindFirstChildOfClass("Team") and IsNotWhitelisted(player) and humanoid.Health ~= 0 then
+	if teams:FindFirstChildOfClass("Team") and IsNotWhitelisted(player) and humanoid.Health ~= 0 then
 	checkplr()
-	elseif not game.Teams:FindFirstChildOfClass("Team") and IsNotWhitelisted(player) then
+	elseif not teams:FindFirstChildOfClass("Team") and IsNotWhitelisted(player) then
 	checkplr()
 	end
 	end
 	end
-	GetNearestPlayer = function()
+	local GetNearestPlayer = function()
 	local table1 = {}
 	local table2 = {}
 	local PrioritizedPlrsOnScreen = {}
@@ -813,48 +1091,6 @@ function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end
 	end
-	Changed = function(part, value, func)
-	    local current = part[value]
-	    coroutine.resume(coroutine.create(function()
-	        while true do
-	            repeat task.wait() until part[value] ~= current
-	            func(part[value], current, part)
-	            current = part[value]
-	    end
-	    end))
-	end
-	GetFamily = function(ins)
-	local Pathway = {}
-	function _GetFamily(v)
-	if v.Parent ~= nil then
-	        table.insert(Pathway, 1, v)
-	        _GetFamily(v.Parent)
-	    else
-	       table.insert(Pathway, 1, v)
-	    end
-	end
-	_GetFamily(ins)
-	return Pathway
-	end
-	function repack(str)
-	local t = {}
-	local arg = ""
-	local tableseperator = " "
-	str = str..tableseperator
-	for i = 1, string.len(str) do
-	if str:sub(i,i) ~= tableseperator then
-	arg = arg..str:sub(i,i)
-	else
-	if tonumber(arg) then
-	table.insert(t, tonumber(arg))
-	else
-	table.insert(t, arg)
-	end
-	arg = ""
-	end
-	end
-	return t
-	end
 	function selectplr(chr)
 	if misc.IsAimbotOn == true and misc.TargetedCharacter == "" then
 	misc.TargetedCharacter = chr
@@ -883,7 +1119,7 @@ function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts
 	game.UserInputService.InputBegan:connect(function(key,processed)
 	    if processed then return end
 	local keycode = key.KeyCode
-	if keycode == Keybinds.ChangeTargetedPart then
+	if keycode == Keybinds.TargetedPartToggle then
 	if AimbotStats.Target == "Torso" or AimbotStats.Target == "UpperTorso" then
 	AimbotStats.Target = "Head"
 	else
@@ -894,23 +1130,10 @@ function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts
 	misc.IsAimbotOn = not misc.IsAimbotOn
 	end
 	end)
-	settingsui.X.MouseButton1Click:connect(function()
-	settingsui.Visible = false
+	gamesettings.X.MouseButton1Click:connect(function()
+	gamesettings.Visible = false
 	end)
-	local stext = settingsui.SaveSettings.Text
-	settingsui.SaveSettings.MouseButton1Click:connect(function()
-	if writefile then
-	writefile("RedsAimbotStats.lua",TableToString(botstats))
-	settingsui.SaveSettings.Text = "Success!"
-	wait(1)
-	settingsui.SaveSettings.Text = stext
-	else
-	settingsui.SaveSettings.Text = "Exploit can't use writefile :("
-	wait(3)
-	settingsui.SaveSettings.Text = stext
-	end
-	end)
-	for i,v in pairs(settingsui:GetChildren()) do
+	for i,v in pairs(gamesettings:GetChildren()) do
 	if v:FindFirstChild("value") then
 	if v.Name == "AutoTarget" or v.Name == "FPEnabled" or v.Name == "OwnTeamWhitelisted" or v.Name == "WhitelistFriends" then
 	v.value.MouseButton1Click:connect(function()
@@ -922,7 +1145,7 @@ function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end
 	end
-	settingsui.Target.value.MouseButton1Click:connect(function()
+	gamesettings.Target.value.MouseButton1Click:connect(function()
 	if AimbotStats.Target == "Head" then
 	AimbotStats.Target = Torso.Name
 	else
@@ -930,9 +1153,9 @@ function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end)
 	Changed(AimbotStats,"Target",function(val)
-	settingsui.Target.value.Text = val
+	gamesettings.Target.value.Text = val
 	end)
-	Changed(settingsui.MaxStuds.value, "Text", function(n)
+	Changed(gamesettings.MaxStuds.value, "Text", function(n)
 	local num = tonumber(n)
 	if num then
 	AimbotStats.MaxStuds = num
@@ -940,7 +1163,7 @@ function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts
 	AimbotStats.MaxStuds = 500
 	end
 	end)
-	Changed(settingsui.AimAdjust.value, "Text",function(n)
+	Changed(gamesettings.AimAdjust.value, "Text",function(n)
 	local num = tonumber(n)
 	if num then
 	AimbotStats.AimAdjust = num
@@ -948,14 +1171,14 @@ function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts
 	AimbotStats.AimAdjust = 250
 	end
 	end)
-	for i,v in pairs(keybindui:GetChildren()) do
+	for i,v in pairs(globalsettings:GetChildren()) do
 	if v:FindFirstChild("reset") then
 	v.reset.MouseButton1Click:connect(function()
 	botstats.Keybinds[v.Name] = "none"
 	v.value.Text = "none"
 	end)
 	end
-	if v:FindFirstChild("value") then
+	if v:FindFirstChild("value") and v.Name:find("Toggle") then
 	v.value.MouseButton1Click:connect(function()
 	botstats.Keybinds[v.Name] = "none"
 	v.value.Text = "Press any key"
@@ -964,7 +1187,59 @@ function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts
 	v.value.Text = tostring(key.KeyCode)
 	end)
 	end
+	if v.ClassName == "TextBox" and v.Name:find("team") then
+	Changed(v, "Text",function(txt)
+	if botstats.TeamAutofill then
+	local tnames = {}
+	for i,v in pairs(teams:GetTeams()) do
+	if v.Name:lower():sub(1,txt:len()) == txt:lower() then
+	table.insert(tnames,v)
 	end
+	end
+	if #tnames == 1 then
+	v.Text = tnames[1]
+	end
+	end
+	end)
+	end
+	end
+	Changed(botstats,"TeamAutofill",function(v)
+	globalsettings.TeamAutofill.value.Text = tostring(v)
+	end)
+	globalsettings.TeamAutofill.value.MouseButton1Click:connect(function()
+	botstats.TeamAutofill = not botstats.TeamAutofill
+	end)
+	local wlmsg = globalsettings.WLTeam.Text
+	globalsettings.WLTeam.MouseButton1Click:connect(function()
+	local function updatetxt(txt)
+	globalsettings.WLTeam.Text = txt
+	wait(2)
+	globalsettings.WLTeam.Text = wlmsg
+	end
+	local team1 = globalsettings.yourteam.Text
+	local team2 = globalsettings.whitelistteam.Text
+	if teams:FindFirstChild(team1) and teams:FindFirstChild(team2) then
+	local canadd = true
+	for i, teamtable in pairs(AimbotStats.Teams) do
+	if teamtable.team1 == team1 and teamtable.team2 == team2 then
+	canadd = false
+	break
+	end
+	end
+	if canadd then
+	local newtable = {["team1"] = team1 ,["team2"] = team2}
+	table.insert(AimbotStats.Teams, newtable)
+	addteamframe(newtable)
+	else
+	updatetxt("This already exists")
+	end
+	else
+	updatetxt("Invalid team name(s)")
+	end
+	end)
+	globalsettings.X.MouseButton1Click:connect(function()
+	globalsettings.Visible = false
+	end)
 	local AimbotFunction = game.RunService.RenderStepped:connect(function()
 	if misc.TargetedCharacter ~= "" and misc.TargetedCharacter:FindFirstChild(AimbotStats.Target) then
 	local v, _ = workspace.Camera:WorldToScreenPoint(misc.TargetedCharacter[AimbotStats.Target].Position)
@@ -1001,7 +1276,7 @@ function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts
 	game.StarterGui:SetCore("SendNotification", {
 	Title = "Aimbot Update:";
 	Duration = 5;
-	Text = "Made a huge re-design! cool amirite :0";})
+	Text = "Made some changes and slightly improved the aimbot functionality";})
 	
 	function Died(player)
 	if not player.Character then player.CharacterAdded:Wait() end
@@ -1046,15 +1321,15 @@ function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts
 	wlui.Visible = true
 	end)
 	MainFrame.Settings.MouseButton1Click:connect(function()
-	settingsui.Visible = true
+	gamesettings.Visible = true
 	end)
-	settingsui.SwitchToKeybinds.MouseButton1Click:connect(function()
-	settingsui.Visible = false
-	keybindui.Visible = true
+	gamesettings.SwitchToKeybinds.MouseButton1Click:connect(function()
+	gamesettings.Visible = false
+	globalsettings.Visible = true
 	end)
-	keybindui.SwitchToSettings.MouseButton1Click:connect(function()
-	keybindui.Visible = false
-	settingsui.Visible = true
+	globalsettings.SwitchToSettings.MouseButton1Click:connect(function()
+	globalsettings.Visible = false
+	gamesettings.Visible = true
 	end)
 	Changed(misc, "IsAimbotOn", function(v)
 	if v == false then
@@ -1084,7 +1359,7 @@ function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts
 	else
 	button = clone.WhitelistToggle
 	end
-	if ins.ClassName == "Player" and AimbotStats.WhitelistFriends and lplr:IsFriendsWith(ins.UserId) then
+	if ins.ClassName == "Player" and AimbotStats.WhitelistFriends and lplr:IsFriendsWith(ins.UserId) and Table == WhitelistedPlrs then
 	button.TextColor3 = Color3.new(0,1,0)
 	button.Text = "Yes"
 	table.insert(WhitelistedPlrs, ins)
@@ -1093,11 +1368,7 @@ function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts
 	if button.Text == "No" then
 	button.TextColor3 = Color3.new(0,1,0)
 	button.Text = "Yes"
-	if Table == WhitelistedTeams then
-	table.insert(Table, ins.Name)
-	else
 	table.insert(Table,ins)
-	end
 	if Table == PrioritizedPlrs and clone.WhitelistToggle.Text == "Yes" then
 	clone.WhitelistToggle.Text = "No"
 	clone.WhitelistToggle.TextColor3 = Color3.new(1,0,0)
@@ -1118,39 +1389,13 @@ function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end)
 	end
-	if ins.ClassName == "Team" then
-	clone.TextLabel.Text = ins.ClassName..": "..ins.Name
-	togglefunc(WhitelistedTeams)
-	table.insert(AddedTeams, ins.Name)
-	coroutine.resume(coroutine.create(function()
-	repeat task.wait() until not game.Teams:FindFirstChild(ins.Name)
-	clone:Destroy()
-	local team = table.find(AddedTeams,ins.Name)
-	table.remove(AddedTeams,team)
-	end))
-	else
 	clone.TextLabel.Text = ins.ClassName..": "..CheckDN(ins)
 	togglefunc(WhitelistedPlrs)
-	clone.PriorityToggle.Visible = true
 	togglefunc(PrioritizedPlrs)
 	coroutine.resume(coroutine.create(function()
 	repeat task.wait() until not game.Players:FindFirstChild(ins.Name)
 	clone:Destroy()
 	end))
-	end
-	end
-	wlui.WhitelistedInstances.ChildAdded:connect(function()
-	local yval = wlui.WhitelistedInstances.CanvasSize.Y.Scale + 0.14
-	wlui.WhitelistedInstances.CanvasSize = UDim2.new(0,0,yval, 0)
-	end)
-	wlui.WhitelistedInstances.ChildRemoved:connect(function()
-	local yval = wlui.WhitelistedInstances.CanvasSize.Y.Scale - 0.14
-	wlui.WhitelistedInstances.CanvasSize = UDim2.new(0,0,yval, 0)
-	end)
-	for i, team in pairs(game.Teams:GetTeams()) do
-	if not table.find(AddedTeams, team.Name) then
-	AddtoList(team)
-	end
 	end
 	for i,plr in pairs(plrs:GetPlayers()) do
 	if plr ~= lplr then
@@ -1158,11 +1403,6 @@ function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end
 	plrs.PlayerAdded:connect(AddtoList)
-	game.Teams.ChildAdded:connect(function(team)
-	if team.ClassName == "Team" and not table.find(AddedTeams, team.Name) then
-	AddtoList(team)
-	end
-	end)
 	Changed(wlui.searchbar, "Text", function(txt)
 	for i,v in pairs(wlui.WhitelistedInstances:GetChildren()) do
 	if v.ClassName == "Frame" and v ~= wlframe then
@@ -1185,4 +1425,4 @@ function SCRIPT_EJCV69_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_EJCV69_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_CFBJ84_FAKESCRIPT))
