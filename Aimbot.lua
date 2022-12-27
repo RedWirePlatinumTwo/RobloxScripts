@@ -322,7 +322,7 @@ typelabel.BorderColor3 = Color3.new(0.333333, 1, 0)
 typelabel.Position = UDim2.new(0, 0, 0.241635695, 0)
 typelabel.Size = UDim2.new(0, 234, 0, 29)
 typelabel.Font = Enum.Font.Highway
-typelabel.Text = "Player/Team Name"
+typelabel.Text = "Player Name"
 typelabel.TextColor3 = Color3.new(0.333333, 1, 0)
 typelabel.TextScaled = true
 typelabel.TextSize = 14
@@ -817,7 +817,7 @@ X_3.TextScaled = true
 X_3.TextSize = 14
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_ODPM69_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_PHTX71_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1193,7 +1193,7 @@ function SCRIPT_ODPM69_FAKESCRIPT() -- Aimbot.Scripts
 	local tnames = {}
 	for i,v in pairs(teams:GetTeams()) do
 	if v.Name:lower():sub(1,txt:len()) == txt:lower() and not table.find(tnames,v.Name) then
-	table.insert(tnames,v)
+	table.insert(tnames,v.Name)
 	end
 	end
 	if #tnames == 1 then
@@ -1425,4 +1425,4 @@ function SCRIPT_ODPM69_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_ODPM69_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_PHTX71_FAKESCRIPT))
