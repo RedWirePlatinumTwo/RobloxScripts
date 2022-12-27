@@ -817,7 +817,7 @@ X_3.TextScaled = true
 X_3.TextSize = 14
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_CFBJ84_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_ODPM69_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -964,7 +964,7 @@ function SCRIPT_CFBJ84_FAKESCRIPT() -- Aimbot.Scripts
 	globalsettings[i].value.Text = tostring(v)
 	end
 	end
-	globalsettings.TeamAutofill.Text = tostring(botstats.TeamAutofill)
+	globalsettings.TeamAutofill.value.Text = tostring(botstats.TeamAutofill)
 	else
 	botstats = {}
 	botstats.Keybinds = {}
@@ -1192,7 +1192,7 @@ function SCRIPT_CFBJ84_FAKESCRIPT() -- Aimbot.Scripts
 	if botstats.TeamAutofill then
 	local tnames = {}
 	for i,v in pairs(teams:GetTeams()) do
-	if v.Name:lower():sub(1,txt:len()) == txt:lower() then
+	if v.Name:lower():sub(1,txt:len()) == txt:lower() and not table.find(tnames,v.Name) then
 	table.insert(tnames,v)
 	end
 	end
@@ -1425,4 +1425,4 @@ function SCRIPT_CFBJ84_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_CFBJ84_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_ODPM69_FAKESCRIPT))
