@@ -817,7 +817,7 @@ X_3.TextScaled = true
 X_3.TextSize = 14
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_PHTX71_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_RYVK84_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1020,7 +1020,10 @@ function SCRIPT_PHTX71_FAKESCRIPT() -- Aimbot.Scripts
 	local wl = false
 	for i,ttable in pairs(AimbotStats.Teams) do
 	if teams:FindFirstChild(ttable.team1) and teams:FindFirstChild(ttable.team2) then
-	wl = lplr.Team.Name == ttable.team1 and plr.Team.Name == ttable.team2
+	if lplr.Team.Name == ttable.team1 and plr.Team.Name == ttable.team2 then
+	wl = true
+	break
+	end
 	end
 	end
 	return wl
@@ -1425,4 +1428,4 @@ function SCRIPT_PHTX71_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_PHTX71_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_RYVK84_FAKESCRIPT))
