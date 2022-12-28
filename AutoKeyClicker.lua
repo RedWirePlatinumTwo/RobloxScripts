@@ -142,7 +142,7 @@ toggle.TextStrokeTransparency = 0
 toggle.TextWrapped = true
 toggle.TextXAlignment = Enum.TextXAlignment.Left
 -- Scripts:
-function SCRIPT_YPAP87_FAKESCRIPT() -- AutoKeyClicker.LocalScript 
+function SCRIPT_HYZE75_FAKESCRIPT() -- AutoKeyClicker.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = AutoKeyClicker
 	local frame = script.Parent.Mainframe
@@ -167,10 +167,8 @@ function SCRIPT_YPAP87_FAKESCRIPT() -- AutoKeyClicker.LocalScript
 			end
 		end))
 	end
-	frame.keyframe.ChildAdded:connect(function()
-	local yval = frame.keyframe.CanvasSize.Y.Scale + 0.12
-	frame.keyframe.CanvasSize = UDim2.new(0,0,yval,0)
-	end)
+	frame.keyframe.AutomaticCanvasSize = 2
+	frame.keyframe.ScrollBarImageColor3 = Color3.fromRGB(0,0,127)
 	local Keycodes = {
 		["b"] = 0x42,
 		["c"] = 0x43,
@@ -226,4 +224,4 @@ function SCRIPT_YPAP87_FAKESCRIPT() -- AutoKeyClicker.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_YPAP87_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_HYZE75_FAKESCRIPT))
