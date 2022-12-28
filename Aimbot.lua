@@ -884,8 +884,8 @@ function SCRIPT_TDDK88_FAKESCRIPT() -- Aimbot.Scripts
 					if v2 == "stop" then break end
 	                end
 	            end
-				end
 				elapsedTime = 0
+				end
 	            count = tablecount(Table)
 				clone = table.clone(Table)
 	    end
