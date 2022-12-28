@@ -1,36 +1,72 @@
 catchrepeats = {}
 getgenv().TableToString = function(Table, IsInternalTable)
-if not IsInternalTable then
-catchrepeats = {}
-end
+local s = ""
 table.insert(catchrepeats, Table)
-local entry = "{"
-    local s = entry
-    function stringmethod(i,v)
-        local String = ", "
+if not IsInternalTable then
+catchrepeats = {Table}
+ s = "local table1 = {}"
+ local num = 1
+ local reps = {}
+local function definetables(f)
+    for i,v in pairs(f) do
+        local function istable(x)
+        if type(x) == "table" and not table.find(reps,x) and not table.find(catchrepeats,x) then
+            num = num + 1
+            s = s.."\nlocal table"..num.." = {}"
+            table.insert(reps,x)
+            definetables(x)
+        end
+        end
+        istable(i)
+        istable(v)
+    end
+end
+definetables(Table)
+ else
+s = "table"..table.find(catchrepeats,Table)
+end
+local num = table.find(catchrepeats,Table)
+    local function stringmethod(i,v)
+        local function isrecursivetable(x)
+        if table.find(catchrepeats,x) then
+		return "table"..table.find(catchrepeats,x)
+		else
+		return tostring(x)
+		end
+        end
         local part1 = ""
-        local part2 = ""
-        part1 = "["..Format(i).."]"
-        part2 = Format(v)
+        local part1formatted = Format(i)
+        local part2 = Format(v)
         if part1 == "[]" then
-		part1 = "["..tostring(i).."]"
+		part1 = "["..isrecursivetable(i).."]"
         end
 		if part2 == "" then
-		part2 = tostring(v)
+		part2 = isrecursivetable(v)
 		end
-		return part1.." = "..part2..String
+		if type(i) == "table" then
+        local findwhitespace = part1formatted:find("\n")
+        local tname = ""
+        if findwhitespace then
+        tname = part1formatted:sub(1,part1formatted:find("\n")-1)
+        part2 = part2.."\n"..part1formatted:sub(tname:len()+2)
+        else
+        tname = part1formatted
+        end
+        part1 = "\ntable"..num.."["..tname.."]"
+        else
+        part1 = "\ntable"..num.."["..part1formatted.."]"
+        end
+		return part1.." = "..part2
     end
     for i,v in pairs(Table) do
         s = s..stringmethod(i,v)
     end
-    s = s:sub(1,s:len()-2).."}"
-    if s:sub(1,entry:len()) ~= entry then s = entry..s end
     if not IsInternalTable then
-        s = "return "..s
+        s = s.."\nreturn table1"
     end
     return s
 end
-function fixstring(s)
+local function fixstring(s)
 	local oof = ""
 	for i = 1, s:len() do
 	if s:sub(i,i):find("%p") then
@@ -60,7 +96,6 @@ getgenv().Format = function(test)
             st = "'"..fixstring(test).."'"
         elseif type(test) == "table" then
             if not table.find(catchrepeats, test) then
-            table.insert(catchrepeats, test)
 			st = TableToString(test, true)
 			else
 			st = ""
@@ -141,7 +176,7 @@ end
 getgenv().LogFunctions = true
 LoggedFunctions = {}
 getgenv().FunctionLogger = function(funcparent, funcname)
-if funcparent[funcname] == FunctionLogger then error("No.") end
+if funcparent[funcname] == FunctionLogger or funcparent[funcname] == print or funcparent[funcname] == getrenv().print then error("No.") end
 	local oldfunc = funcparent[funcname]
 	if typeof(oldfunc) ~= "function" then error("function expected, got "..typeof(oldfunc)) end
 	local newfunc = function(...)
