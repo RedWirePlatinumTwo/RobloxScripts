@@ -264,7 +264,7 @@ hide.TextWrapped = true
 
 searchbar.Name = "searchbar"
 searchbar.Parent = ManagerUI
-searchbar.BackgroundColor3 = Color3.new(0, 0, 0)
+searchbar.BackgroundColor3 = Color3.new(0, 0.333333, 0)
 searchbar.BorderColor3 = Color3.new(0.333333, 1, 0)
 searchbar.Position = UDim2.new(0, 0, 0.111524165, 0)
 searchbar.Size = UDim2.new(0, 459, 0, 33)
@@ -817,7 +817,7 @@ X_3.TextScaled = true
 X_3.TextSize = 14
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_HHQB70_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_TDDK88_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1430,4 +1430,4 @@ function SCRIPT_HHQB70_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_HHQB70_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_TDDK88_FAKESCRIPT))
