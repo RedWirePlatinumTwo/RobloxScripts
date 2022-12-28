@@ -817,30 +817,19 @@ X_3.TextScaled = true
 X_3.TextSize = 14
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_TDDK88_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_LIVD67_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	if not _G.RedsAimbot then
 	_G.RedsAimbot = true
-	for i,v in pairs(script.Parent:GetChildren()) do
-	if v.ClassName == "Frame" then
+	for i,v in pairs(script.Parent:GetDescendants()) do
+	if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 	v.Draggable = true
 	v.Active = true
 	end
-	end
-	for i,sframe in pairs(script.Parent:GetDescendants()) do
-	if sframe.ClassName == "ScrollingFrame" then
-	sframe.ChildAdded:connect(function(c)
-	if c.ClassName == "Frame" then
-	sframe.CanvasSize = sframe.CanvasSize + UDim2.new(0,0,c.Size.Y.Offset/250,0)
-	end
-	end)
-	sframe.ChildRemoved:connect(function(c)
-	if c.ClassName == "Frame" then
-	sframe.CanvasSize = sframe.CanvasSize - UDim2.new(0,0,c.Size.Y.Offset/250,0)
-	end
-	end)
+	if v.ClassName == "ScrollingFrame" then
+	v.AutomaticCanvasSize = 2
 	end
 	end
 	local thread = function(f)
@@ -1430,4 +1419,4 @@ function SCRIPT_TDDK88_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_TDDK88_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_LIVD67_FAKESCRIPT))
