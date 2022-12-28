@@ -817,7 +817,7 @@ X_3.TextScaled = true
 X_3.TextSize = 14
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_LIVD67_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_WUUL73_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -830,6 +830,7 @@ function SCRIPT_LIVD67_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	if v.ClassName == "ScrollingFrame" then
 	v.AutomaticCanvasSize = 2
+	v.ScrollBarImageColor3 = Color3.new(0,1,0)
 	end
 	end
 	local thread = function(f)
@@ -1419,4 +1420,4 @@ function SCRIPT_LIVD67_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_LIVD67_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_WUUL73_FAKESCRIPT))
