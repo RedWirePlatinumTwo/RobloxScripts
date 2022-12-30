@@ -928,7 +928,7 @@ function SCRIPT_NAXH65_FAKESCRIPT() -- Aimbot.Scripts
 	            repeat elapsedTime = elapsedTime + task.wait() until tablecount(Table) ~= count
 				if tablecount(Table) > count then
 	            for i,v in pairs(Table) do
-	                if not clone[i] then
+	                if clone[i] == nil then
 					local v,v2 = thread(function()
 	                    return func(i,v,elapsedTime)
 					end)
