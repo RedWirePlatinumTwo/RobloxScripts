@@ -259,7 +259,7 @@ function SCRIPT_TKRL72_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	end)
 	mainframe.killothers.MouseButton1Click:connect(function()
 	if lplr.Backpack:FindFirstChild("Sword") or lplr.Character:FindFirstChild("Sword") then
-	local frontoffset = CFrame.new() + Vector3.new(0, 0, 3)
+	local frontoffset = CFrame.new() + Vector3.new(0, 0, 2)
 	local function kill(plr)
 	local chr = lplr.Character
 	local hrp = chr.HumanoidRootPart
