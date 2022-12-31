@@ -142,7 +142,7 @@ antifalltoggle.TextStrokeColor3 = Color3.new(0, 0, 1)
 antifalltoggle.TextStrokeTransparency = 0
 antifalltoggle.TextWrapped = true
 -- Scripts:
-function SCRIPT_RWFM84_FAKESCRIPT() -- SkyWarsGUI.LocalScript 
+function SCRIPT_TKRL72_FAKESCRIPT() -- SkyWarsGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = SkyWarsGUI
 	local lplr = game.Players.LocalPlayer
@@ -259,7 +259,7 @@ function SCRIPT_RWFM84_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	end)
 	mainframe.killothers.MouseButton1Click:connect(function()
 	if lplr.Backpack:FindFirstChild("Sword") or lplr.Character:FindFirstChild("Sword") then
-	local frontoffset = CFrame.new() + Vector3.new(0, 0, 4)
+	local frontoffset = CFrame.new() + Vector3.new(0, 0, 3)
 	local function kill(plr)
 	local chr = lplr.Character
 	local hrp = chr.HumanoidRootPart
@@ -336,4 +336,4 @@ function SCRIPT_RWFM84_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_RWFM84_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_TKRL72_FAKESCRIPT))
