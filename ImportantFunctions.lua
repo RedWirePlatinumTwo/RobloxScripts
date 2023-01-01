@@ -37,9 +37,6 @@ local num = table.find(catchrepeats,Table)
         local part1 = ""
         local part1formatted = Format(i)
         local part2 = Format(v)
-        if part1 == "[]" then
-		part1 = "["..isrecursivetable(i).."]"
-        end
 		if part2 == "" then
 		part2 = isrecursivetable(v)
 		end
@@ -55,6 +52,9 @@ local num = table.find(catchrepeats,Table)
         part1 = "\ntable"..num.."["..tname.."]"
         else
         part1 = "\ntable"..num.."["..part1formatted.."]"
+		end
+        if part1 == "\ntable"..num.."[]" then
+		part1 = "\ntable"..num.."["..isrecursivetable(i).."]"
         end
 		return part1.." = "..part2
     end
