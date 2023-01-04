@@ -878,7 +878,7 @@ SwitchToSettings_2.TextScaled = true
 SwitchToSettings_2.TextSize = 24
 SwitchToSettings_2.TextWrapped = true
 -- Scripts:
-function SCRIPT_GOLG79_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_CDDW70_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1238,7 +1238,7 @@ function SCRIPT_GOLG79_FAKESCRIPT() -- Aimbot.Scripts
 	v.value.Text = "none"
 	end)
 	end
-	if v:FindFirstChild("value") then
+	if v:FindFirstChild("value") and v.Name:lower():find("toggle") then
 	v.value.MouseButton1Click:connect(function()
 	GlobalStats.Keybinds[v.Name] = "none"
 	v.value.Text = "Press any key"
@@ -1498,4 +1498,4 @@ function SCRIPT_GOLG79_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_GOLG79_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_CDDW70_FAKESCRIPT))
