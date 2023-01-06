@@ -380,7 +380,7 @@ casinocode.Position = UDim2.new(-0.00224680966, 0, 0.518830538, 0)
 casinocode.Size = UDim2.new(0, 108, 0, 43)
 casinocode.ZIndex = 0
 casinocode.Font = Enum.Font.SourceSansBold
-casinocode.Text = "Click to (attempt) to get Casino code"
+casinocode.Text = "Click to get Casino code (if open)"
 casinocode.TextColor3 = Color3.new(0, 0.666667, 0.498039)
 casinocode.TextScaled = true
 casinocode.TextSize = 16
@@ -495,7 +495,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_MCUZ84_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_RVFS70_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	if not _G.RedsJBGUI then
@@ -568,7 +568,7 @@ function SCRIPT_MCUZ84_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("(Attempted) to fix some lasers not being disabled + changed flying thing.")
+	notify("Made some minor changes")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -797,12 +797,13 @@ function SCRIPT_MCUZ84_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if ti.Parent.Parent and ti.Parent.Parent.Name ~= "WindowEntry" then
 	if ti.Parent.CanCollide == false then
 	ti.Parent:Destroy()
-	else
-	ti.Parent.Transparency = 0.6
-	ti.Parent.Color = Color3.new()
 	end
 	coroutine.resume(coroutine.create(function()
-	repeat ti:Destroy() task.wait() until GetFamily(ti)[1] ~= game
+	repeat
+	ti.Parent.Transparency = 0.6
+	ti.Parent.Color = Color3.new()
+	ti:Destroy()
+	task.wait() until GetFamily(ti)[1] ~= game
 	end))
 	end
 	end
@@ -812,6 +813,7 @@ function SCRIPT_MCUZ84_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	removeTI(v)
 	end
 	workspace.DescendantAdded:connect(removeTI)
+	notify("Lasers that are NOT transparent will hurt you.")
 	end
 	end)
 	mainframe.forcedaytime.MouseButton1Click:connect(function()
@@ -1156,4 +1158,4 @@ function SCRIPT_MCUZ84_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_MCUZ84_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_RVFS70_FAKESCRIPT))
