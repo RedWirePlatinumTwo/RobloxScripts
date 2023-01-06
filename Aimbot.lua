@@ -1309,7 +1309,7 @@ function SCRIPT_CDDW70_FAKESCRIPT() -- Aimbot.Scripts
 	if misc.TargetedCharacter ~= "" and misc.TargetedCharacter:FindFirstChild(GameStats.Target) then
 	local v, _ = workspace.Camera:WorldToScreenPoint(misc.TargetedCharacter[GameStats.Target].Position)
 	if _ then
-	local StabilizeNum = GameStats.AimIntensity/workspace.Camera.ViewportSize.Y
+	local StabilizeNum = GlobalStats.AimIntensity/workspace.Camera.ViewportSize.Y
 	local x, y = (v.X - m.X)*StabilizeNum, (v.Y - m.Y)*StabilizeNum
 	if misc.IsAimbotOn then
 	mousemoverel(x, y)
