@@ -111,7 +111,7 @@ Airdop.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 Airdop.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 Airdop.Position = UDim2.new(0, 0, 0.409999996, 0)
 Airdop.Size = UDim2.new(0, 106, 0, 52)
-Airdop.ZIndex = 0
+Airdop.ZIndex = -222
 Airdop.Font = Enum.Font.SourceSansBold
 Airdop.Text = "Airdrop ESP"
 Airdop.TextColor3 = Color3.new(0.666667, 0.333333, 1)
@@ -201,7 +201,7 @@ gunmod.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 gunmod.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 gunmod.Position = UDim2.new(0.329939932, 0, 0.410478085, 0)
 gunmod.Size = UDim2.new(0, 106, 0, 52)
-gunmod.ZIndex = 2
+gunmod.ZIndex = -99
 gunmod.Font = Enum.Font.SourceSansBold
 gunmod.Text = "Mod guns"
 gunmod.TextColor3 = Color3.new(0.666667, 0, 0)
@@ -495,7 +495,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_MBVK89_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_HIHD83_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	if not _G.RedsJBGUI then
@@ -706,6 +706,7 @@ function SCRIPT_MBVK89_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end))
 	end
 	local function gui(child)
+	coroutine.resume(coroutine.create(function()
 	if child.Name == "Drop" then
 	local Airdrop = child:WaitForChild("Root")
 	local BillboardGui = Instance.new("BillboardGui")
@@ -723,7 +724,7 @@ function SCRIPT_MBVK89_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	TextButton.BackgroundTransparency = 1
 	TextButton.Size = UDim2.new(0, 200, 0, 50)
 	TextButton.Font = Enum.Font.SourceSansBold
-	TextButton.Text = "Airdrop | Distance:"
+	TextButton.Text = ""
 	TextButton.TextColor3 = Color3.new(1, 1, 1)
 	TextButton.TextSize = 22
 	TextButton.TextStrokeTransparency = 0
@@ -750,6 +751,7 @@ function SCRIPT_MBVK89_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	TextButton.Text = "Airdrop | Distance: "..FormatNumber(math.floor(lplr:DistanceFromCharacter(Airdrop.Position)))
 	end)
 	end
+	end))
 	end
 	for i,v in pairs(workspace:GetChildren()) do gui(v) end
 	workspace.ChildAdded:connect(gui)
@@ -1158,4 +1160,4 @@ function SCRIPT_MBVK89_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_MBVK89_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_HIHD83_FAKESCRIPT))
