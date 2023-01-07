@@ -495,7 +495,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_BDCI85_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_XSQG83_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	if not _G.RedsJBGUI then
@@ -827,7 +827,7 @@ function SCRIPT_BDCI85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	mainframe.holdebypass.MouseButton1Click:connect(function()
 	if not HoldEBypass then
 	HoldEBypass = true
-	notify("Hold E Bypass enabled. Sadly cannot be used with donut or gas station ;(")
+	notify("Hold E Bypass enabled. Sadly cannot be used with the donut shop, gas station, or air drops ;(")
 	end
 	end)
 	local SpeedBypass = false
@@ -1160,4 +1160,4 @@ function SCRIPT_BDCI85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_BDCI85_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_XSQG83_FAKESCRIPT))
