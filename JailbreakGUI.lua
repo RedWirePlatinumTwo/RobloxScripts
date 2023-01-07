@@ -7,7 +7,7 @@ local speed = Instance.new("TextButton")
 local aimbot = Instance.new("TextButton")
 local disablelasers = Instance.new("TextButton")
 local holdebypass = Instance.new("TextButton")
-local Airdop = Instance.new("TextButton")
+local Airdrop = Instance.new("TextButton")
 local forcedaytime = Instance.new("TextButton")
 local X = Instance.new("TextButton")
 local more = Instance.new("TextButton")
@@ -105,20 +105,20 @@ holdebypass.TextSize = 18
 holdebypass.TextStrokeTransparency = 0
 holdebypass.TextWrapped = true
 
-Airdop.Name = "Airdop"
-Airdop.Parent = MainFrame
-Airdop.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-Airdop.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Airdop.Position = UDim2.new(0, 0, 0.409999996, 0)
-Airdop.Size = UDim2.new(0, 106, 0, 52)
-Airdop.ZIndex = -222
-Airdop.Font = Enum.Font.SourceSansBold
-Airdop.Text = "Airdrop ESP"
-Airdop.TextColor3 = Color3.new(0.666667, 0.333333, 1)
-Airdop.TextScaled = true
-Airdop.TextSize = 18
-Airdop.TextStrokeTransparency = 0
-Airdop.TextWrapped = true
+Airdrop.Name = "Airdrop"
+Airdrop.Parent = MainFrame
+Airdrop.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+Airdrop.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+Airdrop.Position = UDim2.new(0, 0, 0.409999996, 0)
+Airdrop.Size = UDim2.new(0, 106, 0, 52)
+Airdrop.ZIndex = -222
+Airdrop.Font = Enum.Font.SourceSansBold
+Airdrop.Text = "Airdrop ESP"
+Airdrop.TextColor3 = Color3.new(0.666667, 0.333333, 1)
+Airdrop.TextScaled = true
+Airdrop.TextSize = 18
+Airdrop.TextStrokeTransparency = 0
+Airdrop.TextWrapped = true
 
 forcedaytime.Name = "forcedaytime"
 forcedaytime.Parent = MainFrame
@@ -495,7 +495,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_BKPG66_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_BDCI85_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	if not _G.RedsJBGUI then
@@ -1160,4 +1160,4 @@ function SCRIPT_BKPG66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_BKPG66_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_BDCI85_FAKESCRIPT))
