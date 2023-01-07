@@ -542,7 +542,7 @@ SwitchToTeam.Name = "SwitchToTeam"
 SwitchToTeam.Parent = GameSettingsUI
 SwitchToTeam.BackgroundColor3 = Color3.new(0, 0, 0)
 SwitchToTeam.BorderColor3 = Color3.new(0.333333, 1, 0)
-SwitchToTeam.Position = UDim2.new(0.501115978, 0, 0.886934855, 0)
+SwitchToTeam.Position = UDim2.new(0.500999987, 0, 0.885999978, 0)
 SwitchToTeam.Size = UDim2.new(0, 205, 0, 36)
 SwitchToTeam.Font = Enum.Font.Highway
 SwitchToTeam.Text = "Whitelist Teams"
@@ -922,7 +922,7 @@ SwitchToSettings_2.TextScaled = true
 SwitchToSettings_2.TextSize = 24
 SwitchToSettings_2.TextWrapped = true
 -- Scripts:
-function SCRIPT_KDHS79_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_UTFS86_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1259,6 +1259,12 @@ function SCRIPT_KDHS79_FAKESCRIPT() -- Aimbot.Scripts
 	if v.Name == "AutoTarget" or v.Name == "FPEnabled" or v.Name == "OwnTeamWhitelisted" or v.Name == "WhitelistFriends" or v.Name == "TargetNPCs" then
 	v.value.MouseButton1Click:connect(function()
 	GameStats[v.Name] = not GameStats[v.Name]
+	if v.Name == "TargetNPCs" and GameStats.TargetNPCs and GameStats.AutoTarget then
+	GameStats.AutoTarget = false
+	end
+	if v.Name == "AutoTarget" and GameStats.TargetNPCs and GameStats.AutoTarget then
+	GameStats.TargetNPCs = false
+	end
 	end)
 	Changed(GameStats,v.Name,function(val)
 	v.value.Text = tostring(val)
@@ -1569,4 +1575,4 @@ function SCRIPT_KDHS79_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_KDHS79_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_UTFS86_FAKESCRIPT))
