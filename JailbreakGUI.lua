@@ -7,7 +7,7 @@ local speed = Instance.new("TextButton")
 local aimbot = Instance.new("TextButton")
 local disablelasers = Instance.new("TextButton")
 local holdebypass = Instance.new("TextButton")
-local briefcase = Instance.new("TextButton")
+local Airdop = Instance.new("TextButton")
 local forcedaytime = Instance.new("TextButton")
 local X = Instance.new("TextButton")
 local more = Instance.new("TextButton")
@@ -32,7 +32,7 @@ local keybypass = Instance.new("TextButton")
 local respawn = Instance.new("TextButton")
 local flyhacknum = Instance.new("TextBox")
 local deleteradio = Instance.new("TextButton")
-local BriefcaseESPFrame = Instance.new("Frame")
+local AirdropESPFrame = Instance.new("Frame")
 local bguis = Instance.new("TextButton")
 local pointers = Instance.new("TextButton")
 local hide = Instance.new("TextButton")
@@ -105,20 +105,20 @@ holdebypass.TextSize = 18
 holdebypass.TextStrokeTransparency = 0
 holdebypass.TextWrapped = true
 
-briefcase.Name = "briefcase"
-briefcase.Parent = MainFrame
-briefcase.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-briefcase.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-briefcase.Position = UDim2.new(0, 0, 0.409999996, 0)
-briefcase.Size = UDim2.new(0, 106, 0, 52)
-briefcase.ZIndex = 0
-briefcase.Font = Enum.Font.SourceSansBold
-briefcase.Text = "Briefcase ESP"
-briefcase.TextColor3 = Color3.new(0.666667, 0.333333, 1)
-briefcase.TextScaled = true
-briefcase.TextSize = 18
-briefcase.TextStrokeTransparency = 0
-briefcase.TextWrapped = true
+Airdop.Name = "Airdop"
+Airdop.Parent = MainFrame
+Airdop.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+Airdop.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+Airdop.Position = UDim2.new(0, 0, 0.409999996, 0)
+Airdop.Size = UDim2.new(0, 106, 0, 52)
+Airdop.ZIndex = 0
+Airdop.Font = Enum.Font.SourceSansBold
+Airdop.Text = "Airdrop ESP"
+Airdop.TextColor3 = Color3.new(0.666667, 0.333333, 1)
+Airdop.TextScaled = true
+Airdop.TextSize = 18
+Airdop.TextStrokeTransparency = 0
+Airdop.TextWrapped = true
 
 forcedaytime.Name = "forcedaytime"
 forcedaytime.Parent = MainFrame
@@ -448,16 +448,16 @@ deleteradio.TextSize = 16
 deleteradio.TextStrokeTransparency = 0
 deleteradio.TextWrapped = true
 
-BriefcaseESPFrame.Name = "BriefcaseESPFrame"
-BriefcaseESPFrame.Parent = JailbreakGUI
-BriefcaseESPFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-BriefcaseESPFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-BriefcaseESPFrame.Position = UDim2.new(0.510416687, 0, 0.219444454, 0)
-BriefcaseESPFrame.Size = UDim2.new(0, 399, 0, 152)
-BriefcaseESPFrame.Visible = false
+AirdropESPFrame.Name = "AirdropESPFrame"
+AirdropESPFrame.Parent = JailbreakGUI
+AirdropESPFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+AirdropESPFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+AirdropESPFrame.Position = UDim2.new(0.510416687, 0, 0.219444454, 0)
+AirdropESPFrame.Size = UDim2.new(0, 399, 0, 152)
+AirdropESPFrame.Visible = false
 
 bguis.Name = "bguis"
-bguis.Parent = BriefcaseESPFrame
+bguis.Parent = AirdropESPFrame
 bguis.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 bguis.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 bguis.Position = UDim2.new(0.0836998522, 0, 0.0918822065, 0)
@@ -470,7 +470,7 @@ bguis.TextSize = 14
 bguis.TextWrapped = true
 
 pointers.Name = "pointers"
-pointers.Parent = BriefcaseESPFrame
+pointers.Parent = AirdropESPFrame
 pointers.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 pointers.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 pointers.Position = UDim2.new(0.0836998522, 0, 0.328724325, 0)
@@ -483,7 +483,7 @@ pointers.TextSize = 14
 pointers.TextWrapped = true
 
 hide.Name = "hide"
-hide.Parent = BriefcaseESPFrame
+hide.Parent = AirdropESPFrame
 hide.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 hide.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 hide.Position = UDim2.new(0.29422617, 0, 0.762934864, 0)
@@ -495,7 +495,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_RVFS70_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_MBVK89_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	if not _G.RedsJBGUI then
@@ -555,7 +555,7 @@ function SCRIPT_RVFS70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	return Pathway
 	end
 	local mainframe = script.Parent.MainFrame
-	local briefframe = script.Parent.BriefcaseESPFrame
+	local briefframe = script.Parent.AirdropESPFrame
 	local speeds = {}
 	speeds.walkspeed = 30
 	speeds.flyspeed = 300
@@ -568,7 +568,7 @@ function SCRIPT_RVFS70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn.protect_gui then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Made some minor changes")
+	notify("Excluded the Hold E bypass script when opening airdrops.")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -605,7 +605,7 @@ function SCRIPT_RVFS70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local moduleui = require(game.ReplicatedStorage.Module.UI)
 	game.RunService.RenderStepped:connect(function()
 		for i,a in pairs(moduleui.CircleAction.Specs) do
-		if a.Duration ~= false and HoldEBypass and a.Name ~= "Rob" then
+		if a.Duration ~= false and HoldEBypass and a.Name ~= "Rob" and a.Name ~= "Open Crate" then
 		   a.Timed = false;
 		end
 		end
@@ -685,7 +685,7 @@ function SCRIPT_RVFS70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	rope.Attachment1 = makeattachment(part2)
 	rope.Visible = true
 	rope.Thickness = 0.25
-	rope.Color = BrickColor.new(mainframe.briefcase.TextColor3)
+	rope.Color = BrickColor.new(mainframe.Airdrop.TextColor3)
 	local pointfunction = game.RunService.Heartbeat:connect(function()
 		local s, rootpart = pcall(function()
 		return lplr.Character.Humanoid.RootPart
@@ -707,11 +707,11 @@ function SCRIPT_RVFS70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	local function gui(child)
 	if child.Name == "Drop" then
-	local briefcase = child:WaitForChild("Root")
+	local Airdrop = child:WaitForChild("Root")
 	local BillboardGui = Instance.new("BillboardGui")
 	local TextButton = Instance.new("TextButton")
 	--Properties:
-	BillboardGui.Parent = briefcase
+	BillboardGui.Parent = Airdrop
 	BillboardGui.Active = true
 	BillboardGui.AlwaysOnTop = true
 	BillboardGui.LightInfluence = 1
@@ -723,13 +723,13 @@ function SCRIPT_RVFS70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	TextButton.BackgroundTransparency = 1
 	TextButton.Size = UDim2.new(0, 200, 0, 50)
 	TextButton.Font = Enum.Font.SourceSansBold
-	TextButton.Text = "Briefcase | Distance:"
+	TextButton.Text = "Airdrop | Distance:"
 	TextButton.TextColor3 = Color3.new(1, 1, 1)
 	TextButton.TextSize = 22
 	TextButton.TextStrokeTransparency = 0
 	TextButton.Visible = props.guitext
-	pointer(briefcase)
-	briefcase.RopeConstraint.Visible = props.pointers
+	pointer(Airdrop)
+	Airdrop.RopeConstraint.Visible = props.pointers
 	local FormatNumber = function(n)
 	local n2 = ""
 	for i = 1, tostring(n):len() do
@@ -747,13 +747,13 @@ function SCRIPT_RVFS70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	return n3
 	end
 	game.RunService.RenderStepped:connect(function()
-	TextButton.Text = "Briefcase | Distance: "..FormatNumber(math.floor(lplr:DistanceFromCharacter(briefcase.Position)))
+	TextButton.Text = "Airdrop | Distance: "..FormatNumber(math.floor(lplr:DistanceFromCharacter(Airdrop.Position)))
 	end)
 	end
 	end
 	for i,v in pairs(workspace:GetChildren()) do gui(v) end
 	workspace.ChildAdded:connect(gui)
-	mainframe.briefcase.MouseButton1Click:connect(function()
+	mainframe.Airdrop.MouseButton1Click:connect(function()
 	briefframe.Visible = true
 	end)
 	local itemconfig = game.ReplicatedStorage.Game.ItemConfig
@@ -1158,4 +1158,4 @@ function SCRIPT_RVFS70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_RVFS70_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_MBVK89_FAKESCRIPT))
