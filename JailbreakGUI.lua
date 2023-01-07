@@ -495,7 +495,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_HIHD83_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_BKPG66_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	if not _G.RedsJBGUI then
@@ -555,7 +555,7 @@ function SCRIPT_HIHD83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	return Pathway
 	end
 	local mainframe = script.Parent.MainFrame
-	local briefframe = script.Parent.AirdropESPFrame
+	local airdropframe = script.Parent.AirdropESPFrame
 	local speeds = {}
 	speeds.walkspeed = 30
 	speeds.flyspeed = 300
@@ -565,7 +565,7 @@ function SCRIPT_HIHD83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local mouse = lplr:GetMouse()
 	local jewel = workspace.Jewelrys:FindFirstChildOfClass("Model")
 	local bank = workspace.Banks:FindFirstChildOfClass("Model")
-	if syn.protect_gui then
+	if syn then
 	syn.protect_gui(script.Parent)
 	end
 	notify("Excluded the Hold E bypass script when opening airdrops.")
@@ -631,12 +631,12 @@ function SCRIPT_HIHD83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	props = {}
 	props.guitext = false
 	props.pointers = false
-	local bguistemplate = briefframe.bguis.Text
-	local pointerstemplate = briefframe.pointers.Text
-	briefframe.bguis.Text = bguistemplate..tostring(props.guitext)
-	briefframe.pointers.Text = pointerstemplate..tostring(props.pointers)
+	local bguistemplate = airdropframe.bguis.Text
+	local pointerstemplate = airdropframe.pointers.Text
+	airdropframe.bguis.Text = bguistemplate..tostring(props.guitext)
+	airdropframe.pointers.Text = pointerstemplate..tostring(props.pointers)
 	Changed(props, "guitext", function(val)
-	briefframe.bguis.Text = bguistemplate..tostring(val)
+	airdropframe.bguis.Text = bguistemplate..tostring(val)
 	for i,v in pairs(workspace:GetChildren()) do
 	local success, returnval = pcall(function()
 	return v.Root.BillboardGui.TextButton
@@ -647,7 +647,7 @@ function SCRIPT_HIHD83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	end)
 	Changed(props, "pointers", function(val)
-	briefframe.pointers.Text = pointerstemplate..tostring(val)
+	airdropframe.pointers.Text = pointerstemplate..tostring(val)
 	for i,v in pairs(workspace:GetChildren()) do
 	local success, returnval = pcall(function()
 	return v.Root.RopeConstraint
@@ -657,14 +657,14 @@ function SCRIPT_HIHD83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	end
 	end)
-	briefframe.bguis.MouseButton1Click:connect(function()
+	airdropframe.bguis.MouseButton1Click:connect(function()
 	props.guitext = not props.guitext
 	end)
-	briefframe.pointers.MouseButton1Click:connect(function()
+	airdropframe.pointers.MouseButton1Click:connect(function()
 	props.pointers = not props.pointers
 	end)
-	briefframe.hide.MouseButton1Click:Connect(function()
-	briefframe.Visible = false
+	airdropframe.hide.MouseButton1Click:Connect(function()
+	airdropframe.Visible = false
 	end)
 	local pointer = function(part)
 	local lplr = game.Players.LocalPlayer
@@ -756,7 +756,7 @@ function SCRIPT_HIHD83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	for i,v in pairs(workspace:GetChildren()) do gui(v) end
 	workspace.ChildAdded:connect(gui)
 	mainframe.Airdrop.MouseButton1Click:connect(function()
-	briefframe.Visible = true
+	airdropframe.Visible = true
 	end)
 	local itemconfig = game.ReplicatedStorage.Game.ItemConfig
 	function changegunstats(Table)
@@ -1160,4 +1160,4 @@ function SCRIPT_HIHD83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_HIHD83_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_BKPG66_FAKESCRIPT))
