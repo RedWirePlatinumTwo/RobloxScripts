@@ -1,1163 +1,1578 @@
 -- Farewell Infortality.
 -- Version: 2.82
 -- Instances:
-local JailbreakGUI = Instance.new("ScreenGui")
-local MainFrame = Instance.new("Frame")
-local speed = Instance.new("TextButton")
-local aimbot = Instance.new("TextButton")
-local disablelasers = Instance.new("TextButton")
-local holdebypass = Instance.new("TextButton")
-local Airdrop = Instance.new("TextButton")
-local forcedaytime = Instance.new("TextButton")
+local Aimbot = Instance.new("ScreenGui")
+local MFrame = Instance.new("Frame")
 local X = Instance.new("TextButton")
-local more = Instance.new("TextButton")
 local Title = Instance.new("TextLabel")
-local Speednum = Instance.new("TextBox")
-local gunmod = Instance.new("TextButton")
-local GravToggle = Instance.new("TextButton")
-local Confirmation = Instance.new("Frame")
-local Warning = Instance.new("TextLabel")
-local Yes = Instance.new("TextButton")
-local No = Instance.new("TextButton")
-local WarningIcon = Instance.new("ImageLabel")
-local otherFrame = Instance.new("Frame")
-local switch = Instance.new("TextButton")
-local RobberyNotifier = Instance.new("TextButton")
-local gunshoptpbutton = Instance.new("TextButton")
-local infiniteyeet = Instance.new("TextButton")
-local flyhack = Instance.new("TextButton")
-local removeragdoll = Instance.new("TextButton")
-local casinocode = Instance.new("TextButton")
-local keybypass = Instance.new("TextButton")
-local respawn = Instance.new("TextButton")
-local flyhacknum = Instance.new("TextBox")
-local deleteradio = Instance.new("TextButton")
-local AirdropESPFrame = Instance.new("Frame")
-local bguis = Instance.new("TextButton")
-local pointers = Instance.new("TextButton")
+local CurrentTargetTitle = Instance.new("TextLabel")
+local CurrentTarget = Instance.new("TextLabel")
+local Settings = Instance.new("TextButton")
+local Manager = Instance.new("TextButton")
+local StatusTitle = Instance.new("TextLabel")
+local Status = Instance.new("TextButton")
+local ManagerUI = Instance.new("Frame")
+local WhitelistedInstances = Instance.new("ScrollingFrame")
+local whitelistframe = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local WhitelistToggle = Instance.new("TextButton")
+local PriorityToggle = Instance.new("TextButton")
+local UIListLayout = Instance.new("UIListLayout")
 local hide = Instance.new("TextButton")
+local searchbar = Instance.new("TextBox")
+local Title_2 = Instance.new("TextLabel")
+local whitelistlable = Instance.new("TextLabel")
+local prioritylable = Instance.new("TextLabel")
+local typelabel = Instance.new("TextLabel")
+local GameSettingsUI = Instance.new("Frame")
+local Title_3 = Instance.new("TextLabel")
+local X_2 = Instance.new("TextButton")
+local Target = Instance.new("TextLabel")
+local value = Instance.new("TextButton")
+local AutoTarget = Instance.new("TextLabel")
+local value_2 = Instance.new("TextButton")
+local FPEnabled = Instance.new("TextLabel")
+local value_3 = Instance.new("TextButton")
+local OwnTeamWhitelisted = Instance.new("TextLabel")
+local value_4 = Instance.new("TextButton")
+local SwitchToGlobal = Instance.new("TextButton")
+local MaxStuds = Instance.new("TextLabel")
+local value_5 = Instance.new("TextBox")
+local WhitelistFriends = Instance.new("TextLabel")
+local value_6 = Instance.new("TextButton")
+local SwitchToTeam = Instance.new("TextButton")
+local TargetNPCs = Instance.new("TextLabel")
+local value_7 = Instance.new("TextButton")
+local NPCWarning = Instance.new("TextLabel")
+local GlobalSettingsUI = Instance.new("Frame")
+local Title_4 = Instance.new("TextLabel")
+local AimbotToggle = Instance.new("TextLabel")
+local value_8 = Instance.new("TextButton")
+local reset = Instance.new("TextButton")
+local TargetedPartToggle = Instance.new("TextLabel")
+local value_9 = Instance.new("TextButton")
+local reset_2 = Instance.new("TextButton")
+local SwitchToSettings = Instance.new("TextButton")
+local TeamAutofill = Instance.new("TextLabel")
+local value_10 = Instance.new("TextButton")
+local X_3 = Instance.new("TextButton")
+local AimIntensity = Instance.new("TextLabel")
+local value_11 = Instance.new("TextBox")
+local TeamUI = Instance.new("Frame")
+local WhitelistedTeams = Instance.new("ScrollingFrame")
+local whitelistframe_2 = Instance.new("Frame")
+local TextLabel_2 = Instance.new("TextLabel")
+local undo = Instance.new("TextButton")
+local UIListLayout_2 = Instance.new("UIListLayout")
+local WLTeam = Instance.new("TextButton")
+local whitelistteam = Instance.new("TextBox")
+local yourteam = Instance.new("TextBox")
+local label1 = Instance.new("TextLabel")
+local label2 = Instance.new("TextLabel")
+local Title_5 = Instance.new("TextLabel")
+local X_4 = Instance.new("TextButton")
+local SwitchToSettings_2 = Instance.new("TextButton")
 --Properties:
-JailbreakGUI.Name = "JailbreakGUI"
-JailbreakGUI.Parent = game.CoreGui
-JailbreakGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+Aimbot.Name = "Aimbot"
+Aimbot.Parent = game.CoreGui
+Aimbot.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-MainFrame.Name = "MainFrame"
-MainFrame.Parent = JailbreakGUI
-MainFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-MainFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-MainFrame.Position = UDim2.new(0.874887645, -384, 0.0564681552, 10)
-MainFrame.Size = UDim2.new(0, 318, 0, 240)
-
-speed.Name = "speed"
-speed.Parent = MainFrame
-speed.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-speed.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-speed.Position = UDim2.new(0, 0, 0.62316668, 0)
-speed.Size = UDim2.new(0, 104, 0, 52)
-speed.ZIndex = 33
-speed.Font = Enum.Font.SourceSansBold
-speed.Text = "Speedhack"
-speed.TextColor3 = Color3.new(0.333333, 1, 0.498039)
-speed.TextScaled = true
-speed.TextSize = 18
-speed.TextStrokeTransparency = 0
-speed.TextWrapped = true
-
-aimbot.Name = "aimbot"
-aimbot.Parent = MainFrame
-aimbot.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-aimbot.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-aimbot.Position = UDim2.new(0.668801665, 0, 0.189644754, 0)
-aimbot.Size = UDim2.new(0, 106, 0, 52)
-aimbot.Font = Enum.Font.SourceSansBold
-aimbot.Text = "Aimbot"
-aimbot.TextColor3 = Color3.new(0, 1, 0)
-aimbot.TextScaled = true
-aimbot.TextSize = 18
-aimbot.TextStrokeTransparency = 0
-aimbot.TextWrapped = true
-
-disablelasers.Name = "disablelasers"
-disablelasers.Parent = MainFrame
-disablelasers.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-disablelasers.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-disablelasers.Position = UDim2.new(0, 0, 0.189999998, 0)
-disablelasers.Size = UDim2.new(0, 106, 0, 52)
-disablelasers.Font = Enum.Font.SourceSansBold
-disablelasers.Text = "Disable Lasers"
-disablelasers.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-disablelasers.TextScaled = true
-disablelasers.TextSize = 18
-disablelasers.TextStrokeTransparency = 0
-disablelasers.TextWrapped = true
-
-holdebypass.Name = "holdebypass"
-holdebypass.Parent = MainFrame
-holdebypass.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-holdebypass.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-holdebypass.Position = UDim2.new(0.329939932, 0, 0.189644739, 0)
-holdebypass.Size = UDim2.new(0, 106, 0, 52)
-holdebypass.Font = Enum.Font.SourceSansBold
-holdebypass.Text = "Hold E Bypass"
-holdebypass.TextColor3 = Color3.new(0.666667, 0.666667, 0)
-holdebypass.TextScaled = true
-holdebypass.TextSize = 18
-holdebypass.TextStrokeTransparency = 0
-holdebypass.TextWrapped = true
-
-Airdrop.Name = "Airdrop"
-Airdrop.Parent = MainFrame
-Airdrop.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-Airdrop.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Airdrop.Position = UDim2.new(0, 0, 0.409999996, 0)
-Airdrop.Size = UDim2.new(0, 106, 0, 52)
-Airdrop.ZIndex = -222
-Airdrop.Font = Enum.Font.SourceSansBold
-Airdrop.Text = "Airdrop ESP"
-Airdrop.TextColor3 = Color3.new(0.666667, 0.333333, 1)
-Airdrop.TextScaled = true
-Airdrop.TextSize = 18
-Airdrop.TextStrokeTransparency = 0
-Airdrop.TextWrapped = true
-
-forcedaytime.Name = "forcedaytime"
-forcedaytime.Parent = MainFrame
-forcedaytime.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-forcedaytime.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-forcedaytime.Position = UDim2.new(0.333333343, 0, 0.623000026, 0)
-forcedaytime.Size = UDim2.new(0, 106, 0, 52)
-forcedaytime.ZIndex = 0
-forcedaytime.Font = Enum.Font.SourceSansBold
-forcedaytime.Text = "Force Daytime"
-forcedaytime.TextColor3 = Color3.new(1, 1, 0.498039)
-forcedaytime.TextScaled = true
-forcedaytime.TextSize = 18
-forcedaytime.TextStrokeTransparency = 0
-forcedaytime.TextWrapped = true
+MFrame.Name = "MFrame"
+MFrame.Parent = Aimbot
+MFrame.BackgroundColor3 = Color3.new(0, 0, 0)
+MFrame.BorderColor3 = Color3.new(0.333333, 1, 0)
+MFrame.Position = UDim2.new(0.663364828, 0, 0.163820162, 0)
+MFrame.Size = UDim2.new(0, 260, 0, 248)
 
 X.Name = "X"
-X.Parent = MainFrame
-X.BackgroundColor3 = Color3.new(1, 1, 1)
-X.BackgroundTransparency = 1
-X.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-X.Position = UDim2.new(0.868968844, 0, 0.0250000004, 0)
-X.Size = UDim2.new(0, 37, 0, 38)
-X.Font = Enum.Font.SourceSansBold
+X.Parent = MFrame
+X.BackgroundColor3 = Color3.new(0, 0, 0)
+X.BorderColor3 = Color3.new(0.333333, 1, 0)
+X.Position = UDim2.new(0.823076904, 0, 0, 0)
+X.Size = UDim2.new(0, 46, 0, 44)
+X.Font = Enum.Font.Highway
 X.Text = "×"
 X.TextColor3 = Color3.new(1, 0, 0)
 X.TextScaled = true
 X.TextSize = 14
 X.TextWrapped = true
 
-more.Name = "more"
-more.Parent = MainFrame
-more.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-more.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-more.Position = UDim2.new(0.668999851, 0, 0.623166621, 0)
-more.Size = UDim2.new(0, 105, 0, 52)
-more.Font = Enum.Font.SourceSansBold
-more.Text = "More Options"
-more.TextColor3 = Color3.new(1, 0, 1)
-more.TextScaled = true
-more.TextSize = 18
-more.TextStrokeTransparency = 0
-more.TextWrapped = true
-
 Title.Name = "Title"
-Title.Parent = MainFrame
-Title.BackgroundColor3 = Color3.new(1, 1, 1)
-Title.BackgroundTransparency = 1
-Title.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Title.LayoutOrder = 1
-Title.Position = UDim2.new(0.0186191779, 0, 1.27156582e-07, 0)
-Title.Size = UDim2.new(0, 265, 0, 50)
-Title.Font = Enum.Font.SourceSansBold
-Title.Text = "RedWire's Jailbreak GUI"
-Title.TextColor3 = Color3.new(1, 1, 1)
+Title.Parent = MFrame
+Title.BackgroundColor3 = Color3.new(0, 0, 0)
+Title.BorderColor3 = Color3.new(0.333333, 1, 0)
+Title.Size = UDim2.new(0, 214, 0, 44)
+Title.Font = Enum.Font.Highway
+Title.Text = "RedWire's Universal Aimbot"
+Title.TextColor3 = Color3.new(0.333333, 1, 0)
 Title.TextScaled = true
-Title.TextSize = 14
-Title.TextStrokeColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+Title.TextSize = 18
 Title.TextWrapped = true
 
-Speednum.Name = "Speednum"
-Speednum.Parent = MainFrame
-Speednum.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-Speednum.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Speednum.Position = UDim2.new(0, 0, 0.622978091, 0)
-Speednum.Size = UDim2.new(0, 104, 0, 52)
-Speednum.Font = Enum.Font.SourceSansBold
-Speednum.PlaceholderColor3 = Color3.new(0.333333, 1, 0.498039)
-Speednum.PlaceholderText = "Walkspeed number"
-Speednum.Text = ""
-Speednum.TextColor3 = Color3.new(0.333333, 1, 0.498039)
-Speednum.TextScaled = true
-Speednum.TextSize = 22
-Speednum.TextStrokeTransparency = 0
-Speednum.TextWrapped = true
+CurrentTargetTitle.Name = "CurrentTargetTitle"
+CurrentTargetTitle.Parent = MFrame
+CurrentTargetTitle.BackgroundColor3 = Color3.new(0, 0, 0)
+CurrentTargetTitle.BackgroundTransparency = 1
+CurrentTargetTitle.BorderColor3 = Color3.new(0.333333, 1, 0)
+CurrentTargetTitle.BorderSizePixel = 0
+CurrentTargetTitle.Position = UDim2.new(0, 0, 0.378930986, 0)
+CurrentTargetTitle.Size = UDim2.new(0, 259, 0, 29)
+CurrentTargetTitle.Font = Enum.Font.Highway
+CurrentTargetTitle.Text = "Current Target:"
+CurrentTargetTitle.TextColor3 = Color3.new(0.333333, 1, 0)
+CurrentTargetTitle.TextScaled = true
+CurrentTargetTitle.TextSize = 14
+CurrentTargetTitle.TextWrapped = true
+CurrentTargetTitle.TextXAlignment = Enum.TextXAlignment.Left
 
-gunmod.Name = "gunmod"
-gunmod.Parent = MainFrame
-gunmod.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-gunmod.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-gunmod.Position = UDim2.new(0.329939932, 0, 0.410478085, 0)
-gunmod.Size = UDim2.new(0, 106, 0, 52)
-gunmod.ZIndex = -99
-gunmod.Font = Enum.Font.SourceSansBold
-gunmod.Text = "Mod guns"
-gunmod.TextColor3 = Color3.new(0.666667, 0, 0)
-gunmod.TextScaled = true
-gunmod.TextSize = 18
-gunmod.TextStrokeTransparency = 0
-gunmod.TextWrapped = true
+CurrentTarget.Name = "CurrentTarget"
+CurrentTarget.Parent = MFrame
+CurrentTarget.BackgroundColor3 = Color3.new(0, 0, 0)
+CurrentTarget.BackgroundTransparency = 1
+CurrentTarget.BorderColor3 = Color3.new(0, 0.666667, 0)
+CurrentTarget.BorderSizePixel = 0
+CurrentTarget.Position = UDim2.new(-0.00548095722, 0, 0.499898672, 0)
+CurrentTarget.Size = UDim2.new(0, 260, 0, 29)
+CurrentTarget.Font = Enum.Font.Highway
+CurrentTarget.Text = "none"
+CurrentTarget.TextColor3 = Color3.new(0.333333, 1, 0)
+CurrentTarget.TextScaled = true
+CurrentTarget.TextSize = 14
+CurrentTarget.TextWrapped = true
+CurrentTarget.TextXAlignment = Enum.TextXAlignment.Left
 
-GravToggle.Name = "GravToggle"
-GravToggle.Parent = MainFrame
-GravToggle.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-GravToggle.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-GravToggle.Position = UDim2.new(0.668999851, 0, 0.410000026, 0)
-GravToggle.Size = UDim2.new(0, 105, 0, 52)
-GravToggle.ZIndex = 0
-GravToggle.Font = Enum.Font.SourceSansBold
-GravToggle.Text = "Gravity Toggle (196)"
-GravToggle.TextColor3 = Color3.new(1, 1, 1)
-GravToggle.TextScaled = true
-GravToggle.TextSize = 18
-GravToggle.TextStrokeTransparency = 0
-GravToggle.TextWrapped = true
+Settings.Name = "Settings"
+Settings.Parent = MFrame
+Settings.BackgroundColor3 = Color3.new(0, 0, 0)
+Settings.BorderColor3 = Color3.new(0.333333, 1, 0)
+Settings.Position = UDim2.new(0, 0, 0.654240847, 0)
+Settings.Size = UDim2.new(0, 260, 0, 38)
+Settings.Font = Enum.Font.Highway
+Settings.Text = "Manage Settings"
+Settings.TextColor3 = Color3.new(0.333333, 1, 0)
+Settings.TextSize = 28
+Settings.TextWrapped = true
 
-Confirmation.Name = "Confirmation"
-Confirmation.Parent = JailbreakGUI
-Confirmation.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-Confirmation.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Confirmation.Position = UDim2.new(0.361629754, 0, 0.0886246264, 0)
-Confirmation.Size = UDim2.new(0, 318, 0, 236)
-Confirmation.Visible = false
+Manager.Name = "Manager"
+Manager.Parent = MFrame
+Manager.BackgroundColor3 = Color3.new(0, 0, 0)
+Manager.BorderColor3 = Color3.new(0.333333, 1, 0)
+Manager.Position = UDim2.new(0, 0, 0.807580113, 0)
+Manager.Size = UDim2.new(0, 260, 0, 38)
+Manager.Font = Enum.Font.Highway
+Manager.Text = "Manage Players"
+Manager.TextColor3 = Color3.new(0.333333, 1, 0)
+Manager.TextSize = 28
+Manager.TextWrapped = true
 
-Warning.Name = "Warning"
-Warning.Parent = Confirmation
-Warning.BackgroundColor3 = Color3.new(1, 1, 1)
-Warning.BackgroundTransparency = 1
-Warning.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Warning.BorderSizePixel = 0
-Warning.Position = UDim2.new(0, 0, 0.169345021, 0)
-Warning.Size = UDim2.new(0, 318, 0, 102)
-Warning.Font = Enum.Font.SourceSansBold
-Warning.Text = "Warning: If your exploit cannot use 'mousemoverel', the aimbot will not work. Proceed?"
-Warning.TextColor3 = Color3.new(0.996078, 0.858824, 0.211765)
-Warning.TextScaled = true
-Warning.TextSize = 14
-Warning.TextStrokeColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Warning.TextWrapped = true
+StatusTitle.Name = "StatusTitle"
+StatusTitle.Parent = MFrame
+StatusTitle.BackgroundColor3 = Color3.new(0, 0, 0)
+StatusTitle.BackgroundTransparency = 1
+StatusTitle.BorderColor3 = Color3.new(0, 0.666667, 0)
+StatusTitle.BorderSizePixel = 0
+StatusTitle.Position = UDim2.new(-0.00548095722, 0, 0.213608384, 0)
+StatusTitle.Size = UDim2.new(0, 260, 0, 29)
+StatusTitle.Font = Enum.Font.Highway
+StatusTitle.Text = "Aimbot status:"
+StatusTitle.TextColor3 = Color3.new(0.333333, 1, 0)
+StatusTitle.TextScaled = true
+StatusTitle.TextSize = 14
+StatusTitle.TextWrapped = true
+StatusTitle.TextXAlignment = Enum.TextXAlignment.Left
 
-Yes.Name = "Yes"
-Yes.Parent = Confirmation
-Yes.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-Yes.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Yes.Position = UDim2.new(0.0503144637, 0, 0.631355882, 0)
-Yes.Size = UDim2.new(0, 110, 0, 50)
-Yes.Font = Enum.Font.SourceSansBold
-Yes.Text = "Yes"
-Yes.TextColor3 = Color3.new(0, 0.882353, 0)
-Yes.TextScaled = true
-Yes.TextSize = 14
-Yes.TextWrapped = true
+Status.Name = "Status"
+Status.Parent = MFrame
+Status.BackgroundColor3 = Color3.new(0, 0, 0)
+Status.BackgroundTransparency = 1
+Status.BorderColor3 = Color3.new(0.333333, 1, 0)
+Status.Position = UDim2.new(0.587000012, 0, 0.214000002, 0)
+Status.Size = UDim2.new(0, 106, 0, 29)
+Status.Font = Enum.Font.Highway
+Status.Text = "disabled"
+Status.TextColor3 = Color3.new(1, 0, 0)
+Status.TextSize = 28
+Status.TextWrapped = true
+Status.TextXAlignment = Enum.TextXAlignment.Right
 
-No.Name = "No"
-No.Parent = Confirmation
-No.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-No.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-No.Position = UDim2.new(0.597484291, 0, 0.631355882, 0)
-No.Size = UDim2.new(0, 110, 0, 50)
-No.Font = Enum.Font.SourceSansBold
-No.Text = "No"
-No.TextColor3 = Color3.new(1, 0, 0)
-No.TextScaled = true
-No.TextSize = 14
-No.TextWrapped = true
+ManagerUI.Name = "ManagerUI"
+ManagerUI.Parent = Aimbot
+ManagerUI.BackgroundColor3 = Color3.new(0, 0, 0)
+ManagerUI.BorderColor3 = Color3.new(0.333333, 1, 0)
+ManagerUI.BorderSizePixel = 2
+ManagerUI.Position = UDim2.new(0.319356978, 0, 0.110677086, 0)
+ManagerUI.Size = UDim2.new(0, 460, 0, 269)
+ManagerUI.Visible = false
 
-WarningIcon.Name = "WarningIcon"
-WarningIcon.Parent = Confirmation
-WarningIcon.BackgroundColor3 = Color3.new(1, 1, 1)
-WarningIcon.BackgroundTransparency = 1
-WarningIcon.Position = UDim2.new(0.42764321, 0, 0.00847457722, 0)
-WarningIcon.Size = UDim2.new(0, 45, 0, 45)
-WarningIcon.Image = "http://www.roblox.com/asset/?id=3369561948"
+WhitelistedInstances.Name = "WhitelistedInstances"
+WhitelistedInstances.Parent = ManagerUI
+WhitelistedInstances.Active = true
+WhitelistedInstances.BackgroundColor3 = Color3.new(0, 0, 0)
+WhitelistedInstances.BorderColor3 = Color3.new(0.333333, 1, 0)
+WhitelistedInstances.Position = UDim2.new(0, 0, 0.359999865, 0)
+WhitelistedInstances.Size = UDim2.new(0, 460, 0, 172)
+WhitelistedInstances.CanvasSize = UDim2.new(0, 0, 0, 0)
 
-otherFrame.Name = "otherFrame"
-otherFrame.Parent = JailbreakGUI
-otherFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-otherFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-otherFrame.Position = UDim2.new(0.469269663, 0, 0.270840377, 0)
-otherFrame.Size = UDim2.new(0, 324, 0, 183)
-otherFrame.Visible = false
+whitelistframe.Name = "whitelistframe"
+whitelistframe.Parent = WhitelistedInstances
+whitelistframe.BackgroundColor3 = Color3.new(0, 0, 0)
+whitelistframe.BorderColor3 = Color3.new(0.333333, 1, 0)
+whitelistframe.Size = UDim2.new(0, 445, 0, 37)
+whitelistframe.Visible = false
 
-switch.Name = "switch"
-switch.Parent = otherFrame
-switch.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-switch.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-switch.Position = UDim2.new(0.31862399, 0, 0.754811764, 0)
-switch.Size = UDim2.new(0, 107, 0, 44)
-switch.Font = Enum.Font.SourceSansBold
-switch.Text = "Switch back"
-switch.TextColor3 = Color3.new(1, 1, 1)
-switch.TextSize = 18
-switch.TextWrapped = true
+TextLabel.Parent = whitelistframe
+TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+TextLabel.BackgroundTransparency = 1
+TextLabel.Size = UDim2.new(0, 235, 0, 37)
+TextLabel.Font = Enum.Font.Highway
+TextLabel.Text = "sample text lmao"
+TextLabel.TextColor3 = Color3.new(0.333333, 1, 0)
+TextLabel.TextSize = 18
+TextLabel.TextWrapped = true
 
-RobberyNotifier.Name = "RobberyNotifier"
-RobberyNotifier.Parent = otherFrame
-RobberyNotifier.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-RobberyNotifier.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-RobberyNotifier.Position = UDim2.new(0.327883303, 0, 0, 0)
-RobberyNotifier.Size = UDim2.new(0, 108, 0, 47)
-RobberyNotifier.Font = Enum.Font.SourceSansBold
-RobberyNotifier.Text = "Robbery Notifier"
-RobberyNotifier.TextColor3 = Color3.new(0, 0.666667, 0)
-RobberyNotifier.TextScaled = true
-RobberyNotifier.TextSize = 16
-RobberyNotifier.TextStrokeTransparency = 0
-RobberyNotifier.TextWrapped = true
+WhitelistToggle.Name = "WhitelistToggle"
+WhitelistToggle.Parent = whitelistframe
+WhitelistToggle.BackgroundColor3 = Color3.new(1, 1, 1)
+WhitelistToggle.BackgroundTransparency = 1
+WhitelistToggle.Position = UDim2.new(0.846153855, 0, 0, 0)
+WhitelistToggle.Size = UDim2.new(0, 68, 0, 37)
+WhitelistToggle.Font = Enum.Font.Highway
+WhitelistToggle.Text = "No"
+WhitelistToggle.TextColor3 = Color3.new(1, 0, 0)
+WhitelistToggle.TextSize = 22
+WhitelistToggle.TextWrapped = true
 
-gunshoptpbutton.Name = "gunshoptpbutton"
-gunshoptpbutton.Parent = otherFrame
-gunshoptpbutton.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-gunshoptpbutton.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-gunshoptpbutton.Position = UDim2.new(0, 0, 0.261999995, 0)
-gunshoptpbutton.Size = UDim2.new(0, 108, 0, 47)
-gunshoptpbutton.Font = Enum.Font.SourceSansBold
-gunshoptpbutton.Text = "Gunshop TP Enabled:"
-gunshoptpbutton.TextColor3 = Color3.new(1, 0.666667, 0)
-gunshoptpbutton.TextScaled = true
-gunshoptpbutton.TextSize = 16
-gunshoptpbutton.TextStrokeTransparency = 0
-gunshoptpbutton.TextWrapped = true
+PriorityToggle.Name = "PriorityToggle"
+PriorityToggle.Parent = whitelistframe
+PriorityToggle.BackgroundColor3 = Color3.new(1, 1, 1)
+PriorityToggle.BackgroundTransparency = 1
+PriorityToggle.Position = UDim2.new(0.530669451, 0, 0, 0)
+PriorityToggle.Size = UDim2.new(0, 119, 0, 37)
+PriorityToggle.Font = Enum.Font.Highway
+PriorityToggle.Text = "No"
+PriorityToggle.TextColor3 = Color3.new(1, 0, 0)
+PriorityToggle.TextSize = 22
+PriorityToggle.TextWrapped = true
 
-infiniteyeet.Name = "infiniteyeet"
-infiniteyeet.Parent = otherFrame
-infiniteyeet.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-infiniteyeet.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-infiniteyeet.Position = UDim2.new(0.666999996, 0, 0, 0)
-infiniteyeet.Size = UDim2.new(0, 108, 0, 47)
-infiniteyeet.Font = Enum.Font.SourceSansBold
-infiniteyeet.Text = "Inf Yield"
-infiniteyeet.TextColor3 = Color3.new(0.333333, 0.333333, 0.498039)
-infiniteyeet.TextScaled = true
-infiniteyeet.TextSize = 16
-infiniteyeet.TextStrokeTransparency = 0
-infiniteyeet.TextWrapped = true
-
-flyhack.Name = "flyhack"
-flyhack.Parent = otherFrame
-flyhack.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-flyhack.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-flyhack.Position = UDim2.new(0.666999996, 0, 0.261999995, 0)
-flyhack.Size = UDim2.new(0, 108, 0, 47)
-flyhack.Font = Enum.Font.SourceSansBold
-flyhack.Text = "Fly hack (Left CTRL + F)"
-flyhack.TextColor3 = Color3.new(0.333333, 1, 1)
-flyhack.TextScaled = true
-flyhack.TextSize = 16
-flyhack.TextStrokeTransparency = 0
-flyhack.TextWrapped = true
-
-removeragdoll.Name = "removeragdoll"
-removeragdoll.Parent = otherFrame
-removeragdoll.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-removeragdoll.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-removeragdoll.Size = UDim2.new(0, 108, 0, 47)
-removeragdoll.Font = Enum.Font.SourceSansBold
-removeragdoll.Text = "Remove Ragdoll"
-removeragdoll.TextColor3 = Color3.new(1, 0.333333, 0.498039)
-removeragdoll.TextScaled = true
-removeragdoll.TextSize = 16
-removeragdoll.TextStrokeTransparency = 0
-removeragdoll.TextWrapped = true
-
-casinocode.Name = "casinocode"
-casinocode.Parent = otherFrame
-casinocode.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-casinocode.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-casinocode.Position = UDim2.new(-0.00224680966, 0, 0.518830538, 0)
-casinocode.Size = UDim2.new(0, 108, 0, 43)
-casinocode.ZIndex = 0
-casinocode.Font = Enum.Font.SourceSansBold
-casinocode.Text = "Click to get Casino code (if open)"
-casinocode.TextColor3 = Color3.new(0, 0.666667, 0.498039)
-casinocode.TextScaled = true
-casinocode.TextSize = 16
-casinocode.TextStrokeTransparency = 0
-casinocode.TextWrapped = true
-
-keybypass.Name = "keybypass"
-keybypass.Parent = otherFrame
-keybypass.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-keybypass.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-keybypass.Position = UDim2.new(0.328000009, 0, 0.261999995, 0)
-keybypass.Size = UDim2.new(0, 108, 0, 47)
-keybypass.ZIndex = 0
-keybypass.Font = Enum.Font.SourceSansBold
-keybypass.Text = "Keycard Bypass"
-keybypass.TextColor3 = Color3.new(0, 0.666667, 1)
-keybypass.TextScaled = true
-keybypass.TextSize = 16
-keybypass.TextStrokeTransparency = 0
-keybypass.TextWrapped = true
-
-respawn.Name = "respawn"
-respawn.Parent = otherFrame
-respawn.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-respawn.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-respawn.Position = UDim2.new(0.667000115, 0, 0.518999934, 0)
-respawn.Size = UDim2.new(0, 107, 0, 43)
-respawn.ZIndex = -1
-respawn.Font = Enum.Font.SourceSansBold
-respawn.Text = "Choose spawn point (makes u die)"
-respawn.TextColor3 = Color3.new(1, 0, 0)
-respawn.TextScaled = true
-respawn.TextSize = 16
-respawn.TextStrokeTransparency = 0
-respawn.TextWrapped = true
-
-flyhacknum.Name = "flyhacknum"
-flyhacknum.Parent = otherFrame
-flyhacknum.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-flyhacknum.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-flyhacknum.Position = UDim2.new(0.666999996, 0, 0.261999995, 0)
-flyhacknum.Size = UDim2.new(0, 108, 0, 47)
-flyhacknum.Visible = false
-flyhacknum.Font = Enum.Font.SourceSansBold
-flyhacknum.PlaceholderColor3 = Color3.new(0.333333, 1, 1)
-flyhacknum.PlaceholderText = "Fly Speed number"
-flyhacknum.Text = "300"
-flyhacknum.TextColor3 = Color3.new(0.333333, 1, 1)
-flyhacknum.TextScaled = true
-flyhacknum.TextSize = 14
-flyhacknum.TextWrapped = true
-
-deleteradio.Name = "deleteradio"
-deleteradio.Parent = otherFrame
-deleteradio.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-deleteradio.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-deleteradio.Position = UDim2.new(0.333333343, 0, 0.518999934, 0)
-deleteradio.Size = UDim2.new(0, 106, 0, 42)
-deleteradio.ZIndex = -1
-deleteradio.Font = Enum.Font.SourceSansBold
-deleteradio.Text = "Delete Radio Gui (its stupid)"
-deleteradio.TextColor3 = Color3.new(1, 0.666667, 1)
-deleteradio.TextScaled = true
-deleteradio.TextSize = 16
-deleteradio.TextStrokeTransparency = 0
-deleteradio.TextWrapped = true
-
-AirdropESPFrame.Name = "AirdropESPFrame"
-AirdropESPFrame.Parent = JailbreakGUI
-AirdropESPFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-AirdropESPFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-AirdropESPFrame.Position = UDim2.new(0.510416687, 0, 0.219444454, 0)
-AirdropESPFrame.Size = UDim2.new(0, 399, 0, 152)
-AirdropESPFrame.Visible = false
-
-bguis.Name = "bguis"
-bguis.Parent = AirdropESPFrame
-bguis.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-bguis.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-bguis.Position = UDim2.new(0.0836998522, 0, 0.0918822065, 0)
-bguis.Size = UDim2.new(0, 332, 0, 36)
-bguis.Font = Enum.Font.SourceSansBold
-bguis.Text = "Billboard GUIs: "
-bguis.TextColor3 = Color3.new(1, 1, 1)
-bguis.TextScaled = true
-bguis.TextSize = 14
-bguis.TextWrapped = true
-
-pointers.Name = "pointers"
-pointers.Parent = AirdropESPFrame
-pointers.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-pointers.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-pointers.Position = UDim2.new(0.0836998522, 0, 0.328724325, 0)
-pointers.Size = UDim2.new(0, 332, 0, 36)
-pointers.Font = Enum.Font.SourceSansBold
-pointers.Text = "Pointers: "
-pointers.TextColor3 = Color3.new(1, 1, 1)
-pointers.TextScaled = true
-pointers.TextSize = 14
-pointers.TextWrapped = true
+UIListLayout.Parent = WhitelistedInstances
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
 hide.Name = "hide"
-hide.Parent = AirdropESPFrame
-hide.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-hide.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-hide.Position = UDim2.new(0.29422617, 0, 0.762934864, 0)
-hide.Size = UDim2.new(0, 163, 0, 36)
-hide.Font = Enum.Font.SourceSansBold
-hide.Text = "Hide GUI"
-hide.TextColor3 = Color3.new(1, 1, 1)
+hide.Parent = ManagerUI
+hide.BackgroundColor3 = Color3.new(0, 0, 0)
+hide.BorderColor3 = Color3.new(0.333333, 1, 0)
+hide.Position = UDim2.new(0.804481864, 0, 0, 0)
+hide.Size = UDim2.new(0, 89, 0, 29)
+hide.Font = Enum.Font.Highway
+hide.Text = "Close"
+hide.TextColor3 = Color3.new(1, 0, 0)
 hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
+
+searchbar.Name = "searchbar"
+searchbar.Parent = ManagerUI
+searchbar.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+searchbar.BorderColor3 = Color3.new(0.333333, 1, 0)
+searchbar.Position = UDim2.new(0, 0, 0.111524165, 0)
+searchbar.Size = UDim2.new(0, 459, 0, 33)
+searchbar.Font = Enum.Font.Highway
+searchbar.PlaceholderColor3 = Color3.new(0.333333, 1, 0)
+searchbar.PlaceholderText = "Filter Scrolling Frame results"
+searchbar.Text = ""
+searchbar.TextColor3 = Color3.new(0.333333, 1, 0)
+searchbar.TextScaled = true
+searchbar.TextSize = 14
+searchbar.TextWrapped = true
+
+Title_2.Name = "Title"
+Title_2.Parent = ManagerUI
+Title_2.BackgroundColor3 = Color3.new(0, 0, 0)
+Title_2.BorderColor3 = Color3.new(0.333333, 1, 0)
+Title_2.Size = UDim2.new(0, 370, 0, 29)
+Title_2.Font = Enum.Font.Highway
+Title_2.Text = "Aimbot Manager"
+Title_2.TextColor3 = Color3.new(0.333333, 1, 0)
+Title_2.TextScaled = true
+Title_2.TextSize = 14
+Title_2.TextWrapped = true
+
+whitelistlable.Name = "whitelistlable"
+whitelistlable.Parent = ManagerUI
+whitelistlable.BackgroundColor3 = Color3.new(0, 0, 0)
+whitelistlable.BorderColor3 = Color3.new(0.333333, 1, 0)
+whitelistlable.Position = UDim2.new(0.746994019, 0, 0.241635695, 0)
+whitelistlable.Size = UDim2.new(0, 115, 0, 29)
+whitelistlable.Font = Enum.Font.Highway
+whitelistlable.Text = "Is Whitelisted"
+whitelistlable.TextColor3 = Color3.new(0.333333, 1, 0)
+whitelistlable.TextScaled = true
+whitelistlable.TextSize = 14
+whitelistlable.TextWrapped = true
+
+prioritylable.Name = "prioritylable"
+prioritylable.Parent = ManagerUI
+prioritylable.BackgroundColor3 = Color3.new(0, 0, 0)
+prioritylable.BorderColor3 = Color3.new(0.333333, 1, 0)
+prioritylable.Position = UDim2.new(0.507863581, 0, 0.24163568, 0)
+prioritylable.Size = UDim2.new(0, 110, 0, 29)
+prioritylable.Font = Enum.Font.Highway
+prioritylable.Text = "Is Prioritized"
+prioritylable.TextColor3 = Color3.new(0.333333, 1, 0)
+prioritylable.TextScaled = true
+prioritylable.TextSize = 14
+prioritylable.TextWrapped = true
+
+typelabel.Name = "typelabel"
+typelabel.Parent = ManagerUI
+typelabel.BackgroundColor3 = Color3.new(0, 0, 0)
+typelabel.BorderColor3 = Color3.new(0.333333, 1, 0)
+typelabel.Position = UDim2.new(0, 0, 0.241635695, 0)
+typelabel.Size = UDim2.new(0, 234, 0, 29)
+typelabel.Font = Enum.Font.Highway
+typelabel.Text = "Player Name"
+typelabel.TextColor3 = Color3.new(0.333333, 1, 0)
+typelabel.TextScaled = true
+typelabel.TextSize = 14
+typelabel.TextWrapped = true
+
+GameSettingsUI.Name = "GameSettingsUI"
+GameSettingsUI.Parent = Aimbot
+GameSettingsUI.BackgroundColor3 = Color3.new(0, 0, 0)
+GameSettingsUI.BorderColor3 = Color3.new(0.333333, 1, 0)
+GameSettingsUI.Position = UDim2.new(0.349479169, 0, 0.170278385, 0)
+GameSettingsUI.Size = UDim2.new(0, 578, 0, 322)
+GameSettingsUI.Visible = false
+
+Title_3.Name = "Title"
+Title_3.Parent = GameSettingsUI
+Title_3.BackgroundColor3 = Color3.new(0, 0, 0)
+Title_3.BorderColor3 = Color3.new(0.333333, 1, 0)
+Title_3.Size = UDim2.new(0, 534, 0, 32)
+Title_3.Font = Enum.Font.Highway
+Title_3.Text = "Game Settings"
+Title_3.TextColor3 = Color3.new(0.333333, 1, 0)
+Title_3.TextSize = 32
+Title_3.TextWrapped = true
+
+X_2.Name = "X"
+X_2.Parent = GameSettingsUI
+X_2.BackgroundColor3 = Color3.new(0, 0, 0)
+X_2.BorderColor3 = Color3.new(0.333333, 1, 0)
+X_2.Position = UDim2.new(0.920764387, 0, 0, 0)
+X_2.Size = UDim2.new(0, 46, 0, 32)
+X_2.Font = Enum.Font.Highway
+X_2.Text = "Close"
+X_2.TextColor3 = Color3.new(1, 0, 0)
+X_2.TextScaled = true
+X_2.TextSize = 14
+X_2.TextWrapped = true
+
+Target.Name = "Target"
+Target.Parent = GameSettingsUI
+Target.BackgroundColor3 = Color3.new(0, 0, 0)
+Target.BackgroundTransparency = 1
+Target.BorderColor3 = Color3.new(0, 0.666667, 0)
+Target.BorderSizePixel = 0
+Target.Position = UDim2.new(1.1931872e-05, 0, 0.0989464074, 0)
+Target.Size = UDim2.new(0, 169, 0, 28)
+Target.Font = Enum.Font.Highway
+Target.Text = "Targeted Part:"
+Target.TextColor3 = Color3.new(0.333333, 1, 0)
+Target.TextSize = 24
+Target.TextXAlignment = Enum.TextXAlignment.Left
+
+value.Name = "value"
+value.Parent = Target
+value.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value.BorderColor3 = Color3.new(0.333333, 1, 0)
+value.Position = UDim2.new(0, 0, 0.998714447, 0)
+value.Size = UDim2.new(0, 288, 0, 28)
+value.Font = Enum.Font.Highway
+value.Text = "Head"
+value.TextColor3 = Color3.new(0.333333, 1, 0)
+value.TextSize = 24
+value.TextXAlignment = Enum.TextXAlignment.Left
+
+AutoTarget.Name = "AutoTarget"
+AutoTarget.Parent = GameSettingsUI
+AutoTarget.BackgroundColor3 = Color3.new(0, 0, 0)
+AutoTarget.BackgroundTransparency = 1
+AutoTarget.BorderColor3 = Color3.new(0, 0.666667, 0)
+AutoTarget.BorderSizePixel = 0
+AutoTarget.Position = UDim2.new(0.500572026, 0, 0.0992105901, 0)
+AutoTarget.Size = UDim2.new(0, 169, 0, 28)
+AutoTarget.Font = Enum.Font.Highway
+AutoTarget.Text = "Auto-Targeting Enabled:"
+AutoTarget.TextColor3 = Color3.new(0.333333, 1, 0)
+AutoTarget.TextSize = 24
+AutoTarget.TextXAlignment = Enum.TextXAlignment.Left
+
+value_2.Name = "value"
+value_2.Parent = AutoTarget
+value_2.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_2.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_2.Position = UDim2.new(0.00591752073, 0, 0.998713911, 0)
+value_2.Size = UDim2.new(0, 288, 0, 28)
+value_2.Font = Enum.Font.Highway
+value_2.Text = "true"
+value_2.TextColor3 = Color3.new(0.333333, 1, 0)
+value_2.TextSize = 24
+value_2.TextXAlignment = Enum.TextXAlignment.Left
+
+FPEnabled.Name = "FPEnabled"
+FPEnabled.Parent = GameSettingsUI
+FPEnabled.BackgroundColor3 = Color3.new(0, 0, 0)
+FPEnabled.BackgroundTransparency = 1
+FPEnabled.BorderColor3 = Color3.new(0, 0.666667, 0)
+FPEnabled.BorderSizePixel = 0
+FPEnabled.Position = UDim2.new(-0.00122250989, 0, 0.27860409, 0)
+FPEnabled.Size = UDim2.new(0, 169, 0, 28)
+FPEnabled.Font = Enum.Font.Highway
+FPEnabled.Text = "First Person Mode Enabled:"
+FPEnabled.TextColor3 = Color3.new(0.333333, 1, 0)
+FPEnabled.TextSize = 24
+FPEnabled.TextXAlignment = Enum.TextXAlignment.Left
+
+value_3.Name = "value"
+value_3.Parent = FPEnabled
+value_3.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_3.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_3.Position = UDim2.new(0.00591752073, 0, 0.998713911, 0)
+value_3.Size = UDim2.new(0, 288, 0, 28)
+value_3.Font = Enum.Font.Highway
+value_3.Text = "true"
+value_3.TextColor3 = Color3.new(0.333333, 1, 0)
+value_3.TextSize = 24
+value_3.TextXAlignment = Enum.TextXAlignment.Left
+
+OwnTeamWhitelisted.Name = "OwnTeamWhitelisted"
+OwnTeamWhitelisted.Parent = GameSettingsUI
+OwnTeamWhitelisted.BackgroundColor3 = Color3.new(0, 0, 0)
+OwnTeamWhitelisted.BackgroundTransparency = 1
+OwnTeamWhitelisted.BorderColor3 = Color3.new(0, 0.666667, 0)
+OwnTeamWhitelisted.BorderSizePixel = 0
+OwnTeamWhitelisted.Position = UDim2.new(0.5, 0, 0.282000005, 0)
+OwnTeamWhitelisted.Size = UDim2.new(0, 169, 0, 28)
+OwnTeamWhitelisted.Font = Enum.Font.Highway
+OwnTeamWhitelisted.Text = "Whitelist own team:"
+OwnTeamWhitelisted.TextColor3 = Color3.new(0.333333, 1, 0)
+OwnTeamWhitelisted.TextSize = 24
+OwnTeamWhitelisted.TextXAlignment = Enum.TextXAlignment.Left
+
+value_4.Name = "value"
+value_4.Parent = OwnTeamWhitelisted
+value_4.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_4.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_4.Position = UDim2.new(0.00591752073, 0, 0.962999642, 0)
+value_4.Size = UDim2.new(0, 288, 0, 28)
+value_4.Font = Enum.Font.Highway
+value_4.Text = "true"
+value_4.TextColor3 = Color3.new(0.333333, 1, 0)
+value_4.TextSize = 24
+value_4.TextXAlignment = Enum.TextXAlignment.Left
+
+SwitchToGlobal.Name = "SwitchToGlobal"
+SwitchToGlobal.Parent = GameSettingsUI
+SwitchToGlobal.BackgroundColor3 = Color3.new(0, 0, 0)
+SwitchToGlobal.BorderColor3 = Color3.new(0.333333, 1, 0)
+SwitchToGlobal.Position = UDim2.new(0.146444663, 0, 0.886300981, 0)
+SwitchToGlobal.Size = UDim2.new(0, 205, 0, 36)
+SwitchToGlobal.Font = Enum.Font.Highway
+SwitchToGlobal.Text = "Edit Global Settings"
+SwitchToGlobal.TextColor3 = Color3.new(0.333333, 1, 0)
+SwitchToGlobal.TextSize = 24
+SwitchToGlobal.TextWrapped = true
+
+MaxStuds.Name = "MaxStuds"
+MaxStuds.Parent = GameSettingsUI
+MaxStuds.BackgroundColor3 = Color3.new(0, 0, 0)
+MaxStuds.BackgroundTransparency = 1
+MaxStuds.BorderColor3 = Color3.new(0, 0.666667, 0)
+MaxStuds.BorderSizePixel = 0
+MaxStuds.Position = UDim2.new(0.500519574, 0, 0.455896914, 0)
+MaxStuds.Size = UDim2.new(0, 169, 0, 28)
+MaxStuds.Font = Enum.Font.Highway
+MaxStuds.Text = "Auto-Target max studs:"
+MaxStuds.TextColor3 = Color3.new(0.333333, 1, 0)
+MaxStuds.TextSize = 24
+MaxStuds.TextXAlignment = Enum.TextXAlignment.Left
+
+value_5.Name = "value"
+value_5.Parent = MaxStuds
+value_5.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_5.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_5.Position = UDim2.new(0.00599986408, 0, 0.962999642, 0)
+value_5.Size = UDim2.new(0, 288, 0, 28)
+value_5.Font = Enum.Font.Highway
+value_5.PlaceholderColor3 = Color3.new(0.333333, 1, 0)
+value_5.PlaceholderText = "Default is 500"
+value_5.Text = "500"
+value_5.TextColor3 = Color3.new(0.333333, 1, 0)
+value_5.TextSize = 24
+value_5.TextXAlignment = Enum.TextXAlignment.Left
+
+WhitelistFriends.Name = "WhitelistFriends"
+WhitelistFriends.Parent = GameSettingsUI
+WhitelistFriends.BackgroundColor3 = Color3.new(0, 0, 0)
+WhitelistFriends.BackgroundTransparency = 1
+WhitelistFriends.BorderColor3 = Color3.new(0, 0.666667, 0)
+WhitelistFriends.BorderSizePixel = 0
+WhitelistFriends.Position = UDim2.new(-0.00122251012, 0, 0.456346214, 0)
+WhitelistFriends.Size = UDim2.new(0, 169, 0, 28)
+WhitelistFriends.Font = Enum.Font.Highway
+WhitelistFriends.Text = "Auto-Whitelist Friends:"
+WhitelistFriends.TextColor3 = Color3.new(0.333333, 1, 0)
+WhitelistFriends.TextSize = 24
+WhitelistFriends.TextXAlignment = Enum.TextXAlignment.Left
+
+value_6.Name = "value"
+value_6.Parent = WhitelistFriends
+value_6.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_6.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_6.Position = UDim2.new(0.00591752073, 0, 0.962999642, 0)
+value_6.Size = UDim2.new(0, 288, 0, 28)
+value_6.Font = Enum.Font.Highway
+value_6.Text = "false"
+value_6.TextColor3 = Color3.new(0.333333, 1, 0)
+value_6.TextSize = 24
+value_6.TextXAlignment = Enum.TextXAlignment.Left
+
+SwitchToTeam.Name = "SwitchToTeam"
+SwitchToTeam.Parent = GameSettingsUI
+SwitchToTeam.BackgroundColor3 = Color3.new(0, 0, 0)
+SwitchToTeam.BorderColor3 = Color3.new(0.333333, 1, 0)
+SwitchToTeam.Position = UDim2.new(0.500999987, 0, 0.885999978, 0)
+SwitchToTeam.Size = UDim2.new(0, 205, 0, 36)
+SwitchToTeam.Font = Enum.Font.Highway
+SwitchToTeam.Text = "Whitelist Teams"
+SwitchToTeam.TextColor3 = Color3.new(0.333333, 1, 0)
+SwitchToTeam.TextSize = 24
+SwitchToTeam.TextWrapped = true
+
+TargetNPCs.Name = "TargetNPCs"
+TargetNPCs.Parent = GameSettingsUI
+TargetNPCs.BackgroundColor3 = Color3.new(0, 0, 0)
+TargetNPCs.BackgroundTransparency = 1
+TargetNPCs.BorderColor3 = Color3.new(0, 0.666667, 0)
+TargetNPCs.BorderSizePixel = 0
+TargetNPCs.Position = UDim2.new(-0.00239777565, 0, 0.626825094, 0)
+TargetNPCs.Size = UDim2.new(0, 169, 0, 28)
+TargetNPCs.Font = Enum.Font.Highway
+TargetNPCs.Text = "Target NPCs (test):"
+TargetNPCs.TextColor3 = Color3.new(0.333333, 1, 0)
+TargetNPCs.TextSize = 24
+TargetNPCs.TextXAlignment = Enum.TextXAlignment.Left
+
+value_7.Name = "value"
+value_7.Parent = TargetNPCs
+value_7.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_7.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_7.Position = UDim2.new(0.00591752073, 0, 0.962999642, 0)
+value_7.Size = UDim2.new(0, 288, 0, 28)
+value_7.Font = Enum.Font.Highway
+value_7.Text = "false"
+value_7.TextColor3 = Color3.new(0.333333, 1, 0)
+value_7.TextSize = 24
+value_7.TextXAlignment = Enum.TextXAlignment.Left
+
+NPCWarning.Name = "NPCWarning"
+NPCWarning.Parent = TargetNPCs
+NPCWarning.BackgroundColor3 = Color3.new(0, 0, 0)
+NPCWarning.BackgroundTransparency = 1
+NPCWarning.BorderColor3 = Color3.new(0, 0.666667, 0)
+NPCWarning.BorderSizePixel = 0
+NPCWarning.Position = UDim2.new(1.71949577, 0, 0.00249263225, 0)
+NPCWarning.Size = UDim2.new(0, 282, 0, 54)
+NPCWarning.Font = Enum.Font.Highway
+NPCWarning.Text = "For performance reasons, you cannot auto-target NPCs."
+NPCWarning.TextColor3 = Color3.new(0.333333, 1, 0)
+NPCWarning.TextSize = 24
+NPCWarning.TextWrapped = true
+NPCWarning.TextXAlignment = Enum.TextXAlignment.Left
+
+GlobalSettingsUI.Name = "GlobalSettingsUI"
+GlobalSettingsUI.Parent = Aimbot
+GlobalSettingsUI.BackgroundColor3 = Color3.new(0, 0, 0)
+GlobalSettingsUI.BorderColor3 = Color3.new(0.333333, 1, 0)
+GlobalSettingsUI.Position = UDim2.new(0.270833343, 0, 0.151851848, 0)
+GlobalSettingsUI.Size = UDim2.new(0, 338, 0, 313)
+GlobalSettingsUI.Visible = false
+
+Title_4.Name = "Title"
+Title_4.Parent = GlobalSettingsUI
+Title_4.BackgroundColor3 = Color3.new(0, 0, 0)
+Title_4.BorderColor3 = Color3.new(0.333333, 1, 0)
+Title_4.Size = UDim2.new(0, 291, 0, 37)
+Title_4.Font = Enum.Font.Highway
+Title_4.Text = "Global Settings"
+Title_4.TextColor3 = Color3.new(0.333333, 1, 0)
+Title_4.TextSize = 37
+Title_4.TextWrapped = true
+
+AimbotToggle.Name = "AimbotToggle"
+AimbotToggle.Parent = GlobalSettingsUI
+AimbotToggle.BackgroundColor3 = Color3.new(0, 0, 0)
+AimbotToggle.BackgroundTransparency = 1
+AimbotToggle.BorderColor3 = Color3.new(0, 0.666667, 0)
+AimbotToggle.BorderSizePixel = 0
+AimbotToggle.Position = UDim2.new(0.00295857992, 0, 0.115200594, 0)
+AimbotToggle.Size = UDim2.new(0, 169, 0, 28)
+AimbotToggle.Font = Enum.Font.Highway
+AimbotToggle.Text = "Aimbot Toggle:"
+AimbotToggle.TextColor3 = Color3.new(0.333333, 1, 0)
+AimbotToggle.TextSize = 24
+AimbotToggle.TextXAlignment = Enum.TextXAlignment.Left
+
+value_8.Name = "value"
+value_8.Parent = AimbotToggle
+value_8.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_8.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_8.Position = UDim2.new(0, 0, 0.998714447, 0)
+value_8.Size = UDim2.new(0, 258, 0, 28)
+value_8.Font = Enum.Font.Highway
+value_8.Text = "Enum.KeyCode.LeftAlt"
+value_8.TextColor3 = Color3.new(0.333333, 1, 0)
+value_8.TextSize = 24
+value_8.TextXAlignment = Enum.TextXAlignment.Left
+
+reset.Name = "reset"
+reset.Parent = AimbotToggle
+reset.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+reset.BorderColor3 = Color3.new(0.333333, 1, 0)
+reset.Position = UDim2.new(1.53254437, 0, 0.998714447, 0)
+reset.Size = UDim2.new(0, 78, 0, 28)
+reset.Font = Enum.Font.Highway
+reset.Text = "Reset"
+reset.TextColor3 = Color3.new(1, 0, 0)
+reset.TextSize = 24
+
+TargetedPartToggle.Name = "TargetedPartToggle"
+TargetedPartToggle.Parent = GlobalSettingsUI
+TargetedPartToggle.BackgroundColor3 = Color3.new(0, 0, 0)
+TargetedPartToggle.BackgroundTransparency = 1
+TargetedPartToggle.BorderColor3 = Color3.new(0, 0.666667, 0)
+TargetedPartToggle.BorderSizePixel = 0
+TargetedPartToggle.Position = UDim2.new(0, 0, 0.305518538, 0)
+TargetedPartToggle.Size = UDim2.new(0, 169, 0, 28)
+TargetedPartToggle.Font = Enum.Font.Highway
+TargetedPartToggle.Text = "Targeted Part Toggle:"
+TargetedPartToggle.TextColor3 = Color3.new(0.333333, 1, 0)
+TargetedPartToggle.TextSize = 24
+TargetedPartToggle.TextXAlignment = Enum.TextXAlignment.Left
+
+value_9.Name = "value"
+value_9.Parent = TargetedPartToggle
+value_9.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_9.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_9.Position = UDim2.new(0.00591715984, 0, 0.998713911, 0)
+value_9.Size = UDim2.new(0, 258, 0, 28)
+value_9.Font = Enum.Font.Highway
+value_9.Text = "Enum.KeyCode.X"
+value_9.TextColor3 = Color3.new(0.333333, 1, 0)
+value_9.TextSize = 24
+value_9.TextXAlignment = Enum.TextXAlignment.Left
+
+reset_2.Name = "reset"
+reset_2.Parent = TargetedPartToggle
+reset_2.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+reset_2.BorderColor3 = Color3.new(0.333333, 1, 0)
+reset_2.Position = UDim2.new(1.53846157, 0, 0.998714447, 0)
+reset_2.Size = UDim2.new(0, 78, 0, 28)
+reset_2.Font = Enum.Font.Highway
+reset_2.Text = "Reset"
+reset_2.TextColor3 = Color3.new(1, 0, 0)
+reset_2.TextSize = 24
+
+SwitchToSettings.Name = "SwitchToSettings"
+SwitchToSettings.Parent = GlobalSettingsUI
+SwitchToSettings.BackgroundColor3 = Color3.new(0, 0, 0)
+SwitchToSettings.BorderColor3 = Color3.new(0.333333, 1, 0)
+SwitchToSettings.Position = UDim2.new(0.251479298, 0, 0.852364004, 0)
+SwitchToSettings.Size = UDim2.new(0, 168, 0, 46)
+SwitchToSettings.Font = Enum.Font.Highway
+SwitchToSettings.Text = "Edit Game Settings"
+SwitchToSettings.TextColor3 = Color3.new(0.333333, 1, 0)
+SwitchToSettings.TextScaled = true
+SwitchToSettings.TextSize = 24
+SwitchToSettings.TextWrapped = true
+
+TeamAutofill.Name = "TeamAutofill"
+TeamAutofill.Parent = GlobalSettingsUI
+TeamAutofill.BackgroundColor3 = Color3.new(0, 0, 0)
+TeamAutofill.BackgroundTransparency = 1
+TeamAutofill.BorderColor3 = Color3.new(0, 0.666667, 0)
+TeamAutofill.BorderSizePixel = 0
+TeamAutofill.Position = UDim2.new(0, 0, 0.481642425, 0)
+TeamAutofill.Size = UDim2.new(0, 169, 0, 28)
+TeamAutofill.Font = Enum.Font.Highway
+TeamAutofill.Text = "Autofill Team Names:"
+TeamAutofill.TextColor3 = Color3.new(0.333333, 1, 0)
+TeamAutofill.TextSize = 24
+TeamAutofill.TextXAlignment = Enum.TextXAlignment.Left
+
+value_10.Name = "value"
+value_10.Parent = TeamAutofill
+value_10.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_10.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_10.Position = UDim2.new(0.00591715984, 0, 0.998713911, 0)
+value_10.Size = UDim2.new(0, 337, 0, 28)
+value_10.Font = Enum.Font.Highway
+value_10.Text = "true"
+value_10.TextColor3 = Color3.new(0.333333, 1, 0)
+value_10.TextSize = 24
+value_10.TextXAlignment = Enum.TextXAlignment.Left
+
+X_3.Name = "X"
+X_3.Parent = GlobalSettingsUI
+X_3.BackgroundColor3 = Color3.new(0, 0, 0)
+X_3.BorderColor3 = Color3.new(0.333333, 1, 0)
+X_3.Position = UDim2.new(0.861099899, 0, 0, 0)
+X_3.Size = UDim2.new(0, 46, 0, 37)
+X_3.Font = Enum.Font.Highway
+X_3.Text = "Close"
+X_3.TextColor3 = Color3.new(1, 0, 0)
+X_3.TextScaled = true
+X_3.TextSize = 14
+X_3.TextWrapped = true
+
+AimIntensity.Name = "AimIntensity"
+AimIntensity.Parent = GlobalSettingsUI
+AimIntensity.BackgroundColor3 = Color3.new(0, 0, 0)
+AimIntensity.BackgroundTransparency = 1
+AimIntensity.BorderColor3 = Color3.new(0, 0.666667, 0)
+AimIntensity.BorderSizePixel = 0
+AimIntensity.Position = UDim2.new(0.000501627801, 0, 0.658900499, 0)
+AimIntensity.Size = UDim2.new(0, 169, 0, 28)
+AimIntensity.Font = Enum.Font.Highway
+AimIntensity.Text = "Aim Intensity"
+AimIntensity.TextColor3 = Color3.new(0.333333, 1, 0)
+AimIntensity.TextSize = 24
+AimIntensity.TextXAlignment = Enum.TextXAlignment.Left
+
+value_11.Name = "value"
+value_11.Parent = AimIntensity
+value_11.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_11.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_11.Position = UDim2.new(8.23432856e-05, 0, 0.927285314, 0)
+value_11.Size = UDim2.new(0, 337, 0, 28)
+value_11.Font = Enum.Font.Highway
+value_11.PlaceholderColor3 = Color3.new(0.333333, 1, 0)
+value_11.PlaceholderText = "Default is 250"
+value_11.Text = "250"
+value_11.TextColor3 = Color3.new(0.333333, 1, 0)
+value_11.TextSize = 24
+value_11.TextXAlignment = Enum.TextXAlignment.Left
+
+TeamUI.Name = "TeamUI"
+TeamUI.Parent = Aimbot
+TeamUI.BackgroundColor3 = Color3.new(0, 0, 0)
+TeamUI.BorderColor3 = Color3.new(0.333333, 1, 0)
+TeamUI.Position = UDim2.new(0.460416645, 0, 0.239812747, 0)
+TeamUI.Size = UDim2.new(0, 352, 0, 309)
+TeamUI.Visible = false
+
+WhitelistedTeams.Name = "WhitelistedTeams"
+WhitelistedTeams.Parent = TeamUI
+WhitelistedTeams.Active = true
+WhitelistedTeams.BackgroundColor3 = Color3.new(0, 0, 0)
+WhitelistedTeams.BorderColor3 = Color3.new(0.333333, 1, 0)
+WhitelistedTeams.Position = UDim2.new(0.0201041475, 0, 0.457388461, 0)
+WhitelistedTeams.Size = UDim2.new(0, 336, 0, 136)
+WhitelistedTeams.ZIndex = 2
+WhitelistedTeams.CanvasSize = UDim2.new(0, 0, 0, 0)
+
+whitelistframe_2.Name = "whitelistframe"
+whitelistframe_2.Parent = WhitelistedTeams
+whitelistframe_2.BackgroundColor3 = Color3.new(0, 0, 0)
+whitelistframe_2.BorderColor3 = Color3.new(0.333333, 1, 0)
+whitelistframe_2.Size = UDim2.new(0, 336, 0, 37)
+whitelistframe_2.Visible = false
+
+TextLabel_2.Parent = whitelistframe_2
+TextLabel_2.BackgroundColor3 = Color3.new(1, 1, 1)
+TextLabel_2.BackgroundTransparency = 1
+TextLabel_2.Size = UDim2.new(0, 258, 0, 37)
+TextLabel_2.Font = Enum.Font.Highway
+TextLabel_2.Text = "[Criminal] will be ignored when on [Prisoner]"
+TextLabel_2.TextColor3 = Color3.new(0.333333, 1, 0)
+TextLabel_2.TextSize = 18
+TextLabel_2.TextWrapped = true
+
+undo.Name = "undo"
+undo.Parent = whitelistframe_2
+undo.BackgroundColor3 = Color3.new(1, 1, 1)
+undo.BackgroundTransparency = 1
+undo.Position = UDim2.new(0.767874956, 0, 0, 0)
+undo.Size = UDim2.new(0, 76, 0, 37)
+undo.Font = Enum.Font.Highway
+undo.Text = "undo"
+undo.TextColor3 = Color3.new(1, 0, 0)
+undo.TextSize = 22
+undo.TextWrapped = true
+
+UIListLayout_2.Parent = WhitelistedTeams
+UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+
+WLTeam.Name = "WLTeam"
+WLTeam.Parent = TeamUI
+WLTeam.BackgroundColor3 = Color3.new(0, 0, 0)
+WLTeam.BorderColor3 = Color3.new(0.333333, 1, 0)
+WLTeam.Position = UDim2.new(0.260002017, 0, 0.355608493, 0)
+WLTeam.Size = UDim2.new(0, 168, 0, 32)
+WLTeam.Font = Enum.Font.Highway
+WLTeam.Text = "Whitelist"
+WLTeam.TextColor3 = Color3.new(0.333333, 1, 0)
+WLTeam.TextScaled = true
+WLTeam.TextSize = 24
+WLTeam.TextWrapped = true
+
+whitelistteam.Name = "whitelistteam"
+whitelistteam.Parent = TeamUI
+whitelistteam.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+whitelistteam.BorderColor3 = Color3.new(0.333333, 1, 0)
+whitelistteam.Position = UDim2.new(0.548530579, 0, 0.230982572, 0)
+whitelistteam.Size = UDim2.new(0, 158, 0, 28)
+whitelistteam.Font = Enum.Font.Highway
+whitelistteam.PlaceholderColor3 = Color3.new(0.333333, 1, 0)
+whitelistteam.PlaceholderText = "Team to whitelist"
+whitelistteam.Text = ""
+whitelistteam.TextColor3 = Color3.new(0.333333, 1, 0)
+whitelistteam.TextScaled = true
+whitelistteam.TextSize = 24
+whitelistteam.TextWrapped = true
+
+yourteam.Name = "yourteam"
+yourteam.Parent = TeamUI
+yourteam.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+yourteam.BorderColor3 = Color3.new(0.333333, 1, 0)
+yourteam.Position = UDim2.new(0.548513234, 0, 0.104414456, 0)
+yourteam.Size = UDim2.new(0, 158, 0, 28)
+yourteam.Font = Enum.Font.Highway
+yourteam.PlaceholderColor3 = Color3.new(0.333333, 1, 0)
+yourteam.PlaceholderText = "Your team"
+yourteam.Text = ""
+yourteam.TextColor3 = Color3.new(0.333333, 1, 0)
+yourteam.TextScaled = true
+yourteam.TextSize = 24
+yourteam.TextWrapped = true
+
+label1.Name = "label1"
+label1.Parent = TeamUI
+label1.BackgroundColor3 = Color3.new(0, 0, 0)
+label1.BackgroundTransparency = 1
+label1.BorderColor3 = Color3.new(0.333333, 1, 0)
+label1.Position = UDim2.new(0.00307625066, 0, 0.107597612, 0)
+label1.Size = UDim2.new(0, 192, 0, 30)
+label1.Font = Enum.Font.Highway
+label1.Text = "When on this team: "
+label1.TextColor3 = Color3.new(0.333333, 1, 0)
+label1.TextSize = 24
+label1.TextWrapped = true
+label1.TextXAlignment = Enum.TextXAlignment.Left
+
+label2.Name = "label2"
+label2.Parent = TeamUI
+label2.BackgroundColor3 = Color3.new(0, 0, 0)
+label2.BackgroundTransparency = 1
+label2.BorderColor3 = Color3.new(0.333333, 1, 0)
+label2.Position = UDim2.new(0.00305864029, 0, 0.22910738, 0)
+label2.Size = UDim2.new(0, 192, 0, 30)
+label2.Font = Enum.Font.Highway
+label2.Text = "Ignore this team:"
+label2.TextColor3 = Color3.new(0.333333, 1, 0)
+label2.TextSize = 24
+label2.TextWrapped = true
+label2.TextXAlignment = Enum.TextXAlignment.Left
+
+Title_5.Name = "Title"
+Title_5.Parent = TeamUI
+Title_5.BackgroundColor3 = Color3.new(0, 0, 0)
+Title_5.BorderColor3 = Color3.new(0.333333, 1, 0)
+Title_5.Size = UDim2.new(0, 305, 0, 31)
+Title_5.Font = Enum.Font.Highway
+Title_5.Text = "Team Whitelister"
+Title_5.TextColor3 = Color3.new(0.333333, 1, 0)
+Title_5.TextSize = 31
+Title_5.TextWrapped = true
+
+X_4.Name = "X"
+X_4.Parent = TeamUI
+X_4.BackgroundColor3 = Color3.new(0, 0, 0)
+X_4.BorderColor3 = Color3.new(0.333333, 1, 0)
+X_4.Position = UDim2.new(0.866781771, 0, 0, 0)
+X_4.Size = UDim2.new(0, 46, 0, 31)
+X_4.Font = Enum.Font.Highway
+X_4.Text = "Close"
+X_4.TextColor3 = Color3.new(1, 0, 0)
+X_4.TextScaled = true
+X_4.TextSize = 14
+X_4.TextWrapped = true
+
+SwitchToSettings_2.Name = "SwitchToSettings"
+SwitchToSettings_2.Parent = TeamUI
+SwitchToSettings_2.BackgroundColor3 = Color3.new(0, 0, 0)
+SwitchToSettings_2.BorderColor3 = Color3.new(0.333333, 1, 0)
+SwitchToSettings_2.Position = UDim2.new(0.260002136, 0, 0.89751792, 0)
+SwitchToSettings_2.Size = UDim2.new(0, 168, 0, 31)
+SwitchToSettings_2.Font = Enum.Font.Highway
+SwitchToSettings_2.Text = "Edit Game Settings"
+SwitchToSettings_2.TextColor3 = Color3.new(0.333333, 1, 0)
+SwitchToSettings_2.TextScaled = true
+SwitchToSettings_2.TextSize = 24
+SwitchToSettings_2.TextWrapped = true
 -- Scripts:
-function SCRIPT_XSQG83_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_UTFS86_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
-	script.Parent = JailbreakGUI
-	if not _G.RedsJBGUI then
-	_G.RedsJBGUI = true
-	for i,v in pairs(script.Parent:GetChildren()) do
-		if v.ClassName == "Frame" then
-			v.Active = true
-			v.Draggable = true
-		end
+	script.Parent = Aimbot
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
+	if not _G.RedsAimbot then
+	_G.RedsAimbot = true
+	for i,v in pairs(script.Parent:GetDescendants()) do
+	if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
+	v.Draggable = true
+	v.Active = true
 	end
-	local function makeattachment(obj)
-	if not obj:FindFirstChild("Attachment") then
-	Instance.new("Attachment", obj)
-	obj:WaitForChild("Attachment")
+	if v.ClassName == "ScrollingFrame" then
+	v.AutomaticCanvasSize = 2
+	v.ScrollBarImageColor3 = Color3.new(0,1,0)
 	end
-	return obj.Attachment
 	end
-	local function notify(text)
-	local notiftime = 0
-	for i = 1, text:len() do
-	notiftime = notiftime + 0.04
-	end
-	local n = require(game:GetService("ReplicatedStorage").Game.Notification)
-	n.new({["Text"] = text,["Duration"] = notiftime})
+	local thread = function(f)
+	return coroutine.resume(coroutine.create(function()
+	return f()
+	end))
 	end
 	local Changed = function(part, PropertyName, func)
 	    local current = part[PropertyName]
-	    coroutine.resume(coroutine.create(function()
+		local elapsedTime = 0
+	    thread(function()
 	        while true do
-	            repeat task.wait() until part[PropertyName] ~= current
-				coroutine.resume(coroutine.create(function()
-	            func(part[PropertyName], current, part)
-				end))
+	            repeat elapsedTime = elapsedTime + task.wait() until part[PropertyName] ~= current
+				local v,v2 = thread(function()
+	            return func(part[PropertyName], current, elapsedTime)
+				end)
+				if v2 == "stop" then break end
+				elapsedTime = 0
 	            current = part[PropertyName]
 	    end
-	    end))
+	    end)
 	end
-	local GetFamily = function(ins, reverseorder)
+	local tablecount = function(t)
+	local n = 0
+	for i,v in pairs(t) do n = n + 1 end
+	return n
+	end
+	local TableAdded = function(Table, func)
+	    local count = tablecount(Table)
+		local clone = table.clone(Table)
+		local elapsedTime = 0
+	    thread(function()
+	        while true do
+	            repeat elapsedTime = elapsedTime + task.wait() until tablecount(Table) ~= count
+				if tablecount(Table) > count then
+	            for i,v in pairs(Table) do
+	                if clone[i] == nil then
+					local v,v2 = thread(function()
+	                    return func(i,v,elapsedTime)
+					end)
+					if v2 == "stop" then break end
+	                end
+	            end
+				elapsedTime = 0
+				end
+	            count = tablecount(Table)
+				clone = table.clone(Table)
+	    end
+	    end)
+	end
+	local TableChanged = function(Table,f)
+	    for i,v in pairs(Table) do
+	        Changed(Table,i,function(...)
+			f(i,...)
+			end)
+	    end
+	    TableAdded(Table,function(index,value,t)
+	        f(index,value,nil,t)
+	        Changed(Table,index,function(...)
+			f(index,...)
+			end)
+	    end)
+	end
+	GetFamily = function(ins)
 	local Pathway = {}
-	local function _GetFamily(v)
+	function _GetFamily(v)
 	if v.Parent ~= nil then
-			if reverseorder then
-			table.insert(Pathway, v)
-			else
 	        table.insert(Pathway, 1, v)
-			end
 	        _GetFamily(v.Parent)
 	    else
-	       	if reverseorder then
-			table.insert(Pathway, v)
-			else
-	        table.insert(Pathway, 1, v)
-			end
+	       table.insert(Pathway, 1, v)
 	    end
 	end
 	_GetFamily(ins)
 	return Pathway
 	end
-	local mainframe = script.Parent.MainFrame
-	local airdropframe = script.Parent.AirdropESPFrame
-	local speeds = {}
-	speeds.walkspeed = 30
-	speeds.flyspeed = 300
-	mainframe.Speednum.Text = tostring(speeds.walkspeed)
 	local plrs = game.Players
 	local lplr = plrs.LocalPlayer
-	local mouse = lplr:GetMouse()
-	local jewel = workspace.Jewelrys:FindFirstChildOfClass("Model")
-	local bank = workspace.Banks:FindFirstChildOfClass("Model")
+	local ischaracter = function(part)
+	for i,v in pairs(GetFamily(part)) do
+	for i,plr in pairs(plrs:GetPlayers()) do
+	if plr.Character == v then
+	return v
+	end
+	end
+	end
+	end
+	local isnpc = function(ins)
+	for i,v in pairs(GetFamily(ins,true)) do
+	if v:FindFirstChildOfClass("Humanoid") and v:FindFirstChild("HumanoidRootPart") and not ischaracter(v) then
+	return v
+	end
+	end
+	end
+	local wlui = script.Parent.ManagerUI
+	local gamesettings = script.Parent.GameSettingsUI
+	local globalsettings = script.Parent.GlobalSettingsUI
+	local teamui = script.Parent.TeamUI
+	local teams = game.Teams
 	if syn then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Excluded the Hold E bypass script when opening airdrops.")
-	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
-	local function makevisible(plr)
-	plr:GetPropertyChangedSignal("Visible"):connect(function()
-	if plr.Visible == false then
-		plr.Visible = true
+	local WhitelistedPlrs = {}
+	local PrioritizedPlrs = {}
+	local m = lplr:GetMouse()
+	local misc = {}
+	misc.IsAimbotOn = false
+	misc.TargetedCharacter = ""
+	local GlobalStats
+	local GameStats
+	local Keybinds
+	local function gengamestats()
+	GlobalStats[game.PlaceId] = {}
+	GameStats = GlobalStats[game.PlaceId]
+	GameStats.Target = "Head"
+	GameStats.TargetNPCs = false
+	GameStats.AutoTarget = true
+	GameStats.FPEnabled = true
+	GameStats.WhitelistFriends = false
+	GameStats.MaxStuds = 500
+	GameStats.OwnTeamWhitelisted = true
+	GameStats.Teams = {}
 	end
-	end)
+	if isfile and loadfile and isfile("RedsAimbotStats.lua") then
+	GlobalStats = loadfile("RedsAimbotStats.lua")()
+	if GlobalStats.TeamAutofill == nil then
+	GlobalStats.TeamAutofill = true
 	end
-	for i, plr in pairs(minimap:GetChildren()) do makevisible(plr) end
-	minimap.ChildAdded:connect(makevisible)
-	local plrgui = lplr.PlayerGui
-	function walcc()
-	lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(function()
-	if lplr.Character.Humanoid.WalkSpeed == 0 then
-	    lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
+	if not GlobalStats.AimIntensity then
+	GlobalStats.AimIntensity = 250
 	end
-	end)
-	end
-	walcc()
-	lplr.CharacterAdded:connect(function(chr)
-	chr:WaitForChild("Humanoid")
-	walcc()
-	end)
-	lplr:GetPropertyChangedSignal("Team"):connect(function()
-		if lplr.Team == game.Teams.Criminal then
-			local fire = fireclickdetector
-			if fire ~= nil then
-				fire(workspace.ClothingRacks.ClothingRack.Hitbox.ClickDetector)
-			end
-		end
-	end)
-	local HoldEBypass = false
-	local gunshoptp = false
-	local moduleui = require(game.ReplicatedStorage.Module.UI)
-	game.RunService.RenderStepped:connect(function()
-		for i,a in pairs(moduleui.CircleAction.Specs) do
-		if a.Duration ~= false and HoldEBypass and a.Name ~= "Rob" and a.Name ~= "Open Crate" then
-		   a.Timed = false;
-		end
-		end
-	end)
-	mainframe.GravToggle.Text = "Gravity Toggle ("..tostring(math.floor(workspace.Gravity))..")"
-	Changed(workspace, "Gravity", function(grav)
-	mainframe.GravToggle.Text = "Gravity Toggle ("..tostring(grav)..")"
-	end)
-	mainframe.GravToggle.MouseButton1Click:connect(function()
-	if math.floor(workspace.Gravity) == 196 then
-	workspace.Gravity = 0
-	elseif workspace.Gravity == 0 then
-	workspace.Gravity = 196
-	end
-	end)
-	mainframe.X.MouseButton1Click:connect(function()
-	mainframe.Parent:Destroy()
-	_G.RedsJBGUI = false
-	end)
-	mainframe.aimbot.MouseButton1Click:connect(function()
-	mainframe.Parent.Confirmation.Visible = true
-	end)
-	props = {}
-	props.guitext = false
-	props.pointers = false
-	local bguistemplate = airdropframe.bguis.Text
-	local pointerstemplate = airdropframe.pointers.Text
-	airdropframe.bguis.Text = bguistemplate..tostring(props.guitext)
-	airdropframe.pointers.Text = pointerstemplate..tostring(props.pointers)
-	Changed(props, "guitext", function(val)
-	airdropframe.bguis.Text = bguistemplate..tostring(val)
-	for i,v in pairs(workspace:GetChildren()) do
-	local success, returnval = pcall(function()
-	return v.Root.BillboardGui.TextButton
-	end)
-	if success then
-	returnval.Visible = val
+	if not GlobalStats[game.PlaceId] then gengamestats() end
+	for i,v in pairs(GlobalStats[game.PlaceId]) do
+	if type(v) ~= "table" then
+	gamesettings[i].value.Text = tostring(v)
 	end
 	end
-	end)
-	Changed(props, "pointers", function(val)
-	airdropframe.pointers.Text = pointerstemplate..tostring(val)
-	for i,v in pairs(workspace:GetChildren()) do
-	local success, returnval = pcall(function()
-	return v.Root.RopeConstraint
-	end)
-	if success then
-	returnval.Visible = val
+	for i,v in pairs(GlobalStats.Keybinds) do
+	if globalsettings:FindFirstChild(i) then
+	globalsettings[i].value.Text = tostring(v)
 	end
 	end
-	end)
-	airdropframe.bguis.MouseButton1Click:connect(function()
-	props.guitext = not props.guitext
-	end)
-	airdropframe.pointers.MouseButton1Click:connect(function()
-	props.pointers = not props.pointers
-	end)
-	airdropframe.hide.MouseButton1Click:Connect(function()
-	airdropframe.Visible = false
-	end)
-	local pointer = function(part)
-	local lplr = game.Players.LocalPlayer
-	local part1 = Instance.new("Part", workspace)
-	part1.Transparency = 1
-	part1.CanCollide = false
-	local part2 = Instance.new("Part", workspace)
-	part2.Transparency = 1
-	part2.CanCollide = false
-	function makeattachment(v)
-	    if not v:FindFirstChild("Attachment") then
-	        Instance.new("Attachment",v)
-	    end
-	    return v.Attachment
+	globalsettings.TeamAutofill.value.Text = tostring(GlobalStats.TeamAutofill)
+	else
+	GlobalStats = {}
+	GlobalStats.Keybinds = {}
+	GlobalStats.TeamAutofill = true
+	GlobalStats.AimIntensity = 250
+	gengamestats()
+	GlobalStats.Keybinds.AimbotToggle = Enum.KeyCode.LeftAlt
+	GlobalStats.Keybinds.TargetedPartToggle = Enum.KeyCode.RightAlt
 	end
-	local rope = Instance.new("RopeConstraint", part)
-	rope.Attachment0 = makeattachment(part1)
-	rope.Attachment1 = makeattachment(part2)
-	rope.Visible = true
-	rope.Thickness = 0.25
-	rope.Color = BrickColor.new(mainframe.Airdrop.TextColor3)
-	local pointfunction = game.RunService.Heartbeat:connect(function()
-		local s, rootpart = pcall(function()
-		return lplr.Character.Humanoid.RootPart
-		end)
-		if s and rootpart then
-	    local pos = (part.Position - rootpart.Position)
-	    rope.Length = pos.Magnitude
-	    part1.CFrame = lplr.Character.Humanoid.RootPart.CFrame
-	    part2.CFrame = part.CFrame
-		end
+	GameStats = GlobalStats[game.PlaceId]
+	Keybinds = GlobalStats.Keybinds
+	if not GameStats.Teams then
+	GameStats.Teams = {}
+	end
+	if GameStats.TargetNPCs == nil then
+	GameStats.TargetNPCs = false
+	end
+	local function savesettings()
+	if writefile then
+	writefile("RedsAimbotStats.lua", TableToString(GlobalStats))
+	end
+	end
+	TableChanged(GlobalStats[game.PlaceId], savesettings)
+	TableChanged(GlobalStats.Keybinds, savesettings)
+	TableChanged(GlobalStats, savesettings)
+	TableChanged(GlobalStats[game.PlaceId].Teams, savesettings)
+	local addteamframe = function(ttable)
+	local clone = teamui.WhitelistedTeams.whitelistframe:Clone()
+	clone.Parent = teamui.WhitelistedTeams
+	clone.TextLabel.Text = "["..ttable.team2.."] will be ignored when on ["..ttable.team1.."]"
+	clone.Visible = true
+	clone.undo.MouseButton1Click:connect(function()
+	clone:Destroy()
+	local tfind = table.find(GameStats.Teams,ttable)
+	table.remove(GameStats.Teams,tfind)
 	end)
+	end
+	for i,v in pairs(GameStats.Teams) do
+	addteamframe(v)
+	end
+	deselect = function()
+	misc.TargetedCharacter = ""
 	coroutine.resume(coroutine.create(function()
-	repeat task.wait() until GetFamily(part)[1] ~= game
-	pointfunction:Disconnect()
-	part1:Destroy()
-	part2:Destroy()
-	rope:Destroy()
-	end))
-	end
-	local function gui(child)
-	coroutine.resume(coroutine.create(function()
-	if child.Name == "Drop" then
-	local Airdrop = child:WaitForChild("Root")
-	local BillboardGui = Instance.new("BillboardGui")
-	local TextButton = Instance.new("TextButton")
-	--Properties:
-	BillboardGui.Parent = Airdrop
-	BillboardGui.Active = true
-	BillboardGui.AlwaysOnTop = true
-	BillboardGui.LightInfluence = 1
-	BillboardGui.Size = UDim2.new(0, 200, 0, 50)
-	BillboardGui.StudsOffset = Vector3.new(0, 2, 0)
-	
-	TextButton.Parent = BillboardGui
-	TextButton.BackgroundColor3 = Color3.new(1, 1, 1)
-	TextButton.BackgroundTransparency = 1
-	TextButton.Size = UDim2.new(0, 200, 0, 50)
-	TextButton.Font = Enum.Font.SourceSansBold
-	TextButton.Text = ""
-	TextButton.TextColor3 = Color3.new(1, 1, 1)
-	TextButton.TextSize = 22
-	TextButton.TextStrokeTransparency = 0
-	TextButton.Visible = props.guitext
-	pointer(Airdrop)
-	Airdrop.RopeConstraint.Visible = props.pointers
-	local FormatNumber = function(n)
-	local n2 = ""
-	for i = 1, tostring(n):len() do
-	    local v = tostring(n):reverse():sub(i,i)
-	    if i/3 == math.floor(i/3) then
-	        n2 = n2..v..","
-	    else
-	        n2 = n2..v
-	    end
-	end
-	local n3 = n2:reverse()
-	if n3:sub(1,1) == "," then
-	n3 = n3:sub(2, n3:len())
-	end
-	return n3
-	end
-	game.RunService.RenderStepped:connect(function()
-	TextButton.Text = "Airdrop | Distance: "..FormatNumber(math.floor(lplr:DistanceFromCharacter(Airdrop.Position)))
-	end)
+	if misc.IsAimbotOn then
+	misc.IsAimbotOn = false
+	task.wait()
+	misc.IsAimbotOn = true
 	end
 	end))
 	end
-	for i,v in pairs(workspace:GetChildren()) do gui(v) end
-	workspace.ChildAdded:connect(gui)
-	mainframe.Airdrop.MouseButton1Click:connect(function()
-	airdropframe.Visible = true
-	end)
-	local itemconfig = game.ReplicatedStorage.Game.ItemConfig
-	function changegunstats(Table)
-	for i,v in pairs(itemconfig:GetChildren()) do
-	local gun = require(v)
-	if v.Name == "Shotgun" then
-	gun.BulletSpread = 0.02
-	end
-	for index, value in pairs(Table) do
-	gun[index] = value
+	local function CheckDN(plr)
+	if plr.DisplayName == plr.Name then
+	return plr.Name
+	else
+	return plr.Name.." (DisplayName: "..plr.DisplayName..")"
 	end
 	end
-	end
-	mainframe.gunmod.MouseButton1Click:connect(function()
-	changegunstats({["CamShakeMagnitude"] = 0,["FireAuto"] = true})
-	local g = require(game.ReplicatedStorage.Game.ItemConfig.Grenade)
-	g.ReloadTime = 0
-	g.FuseTime = 0.8
-	end)
-	local lasersdisabled = false
-	mainframe.disablelasers.MouseButton1Click:connect(function()
-	if lasersdisabled == false then
-	lasersdisabled = true
-	require(game:GetService("ReplicatedStorage").Game.MilitaryIsland).StopSpin() -- If I don't include this then the dev log will be spammed with SetPrimaryPartCFrame errors
-	local function removeTI(ti)
-	if ti.ClassName == "TouchTransmitter" then
-	local laserdescendant = false
-	for i, fam in pairs(GetFamily(ti)) do
-	local idklmao, notnil = pcall(function()
-	return fam.Parent ~= nil and fam.Parent.Parent ~= nil and fam.Parent.Parent.Parent ~= nil
-	end)
-	if notnil == true then
-	if fam.Parent.Name:lower():match("laser") or fam.Parent.Name:lower():match("camera") or fam.Parent.Parent.Parent.Name == "Floors" then
-	laserdescendant = true
+	local function IsNotWhitelisted(plr)
+	local function isteamwhitelisted()
+	local wl = false
+	for i,ttable in pairs(GameStats.Teams) do
+	if teams:FindFirstChild(ttable.team1) and teams:FindFirstChild(ttable.team2) then
+	if lplr.Team.Name == ttable.team1 and plr.Team.Name == ttable.team2 then
+	wl = true
 	break
 	end
 	end
 	end
-	if laserdescendant or ti.Parent.Name == "BarbedWire" or ti.Parent.Name == "Light" then
-	if ti.Parent.Parent and ti.Parent.Parent.Name ~= "WindowEntry" then
-	if ti.Parent.CanCollide == false then
-	ti.Parent:Destroy()
+	return wl
 	end
+	local validteam, teamname = pcall(function()
+	return plr.Team.Name
+	end)
+	if validteam then
+	if GameStats.OwnTeamWhitelisted then
+	return plr.Team ~= lplr.Team and not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
+	else
+	return not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
+	end
+	else
+	return not table.find(WhitelistedPlrs, plr)
+	end
+	end
+	local function targetplayer(player)
+	local humanoidvalid, humanoid = pcall(function()
+	return player.Character.Humanoid
+	end)
+	if player.Name ~= lplr.Name and humanoidvalid then
+	if teams:FindFirstChildOfClass("Team") and IsNotWhitelisted(player) and humanoid.Health ~= 0 then
+	selectcharacter(player.Character)
+	elseif not teams:FindFirstChildOfClass("Team") and IsNotWhitelisted(player) then
+	selectcharacter(player.Character)
+	end
+	end
+	end
+	local GetNearestPlayer = function()
+	local table1 = {}
+	local table2 = {}
+	local PrioritizedPlrsOnScreen = {}
+	for i,v in pairs(plrs:GetPlayers()) do
+	local outcome = pcall(function()
+	 return v.Character.Humanoid and v.Character[GameStats.Target]
+	end)
+	if outcome and v.Name ~= lplr.Name and v.Character.Humanoid.Health ~= 0 and IsNotWhitelisted(v) then
+	local pos = math.floor(lplr:DistanceFromCharacter(v.Character[GameStats.Target].Position))
+	local _, onscreen = workspace.Camera:WorldToScreenPoint(v.Character[GameStats.Target].Position)
+	if onscreen and pos < GameStats.MaxStuds then
+	table1[pos] = v
+	table.insert(table2, pos)
+	if table.find(PrioritizedPlrs, v) then
+	table.insert(PrioritizedPlrsOnScreen, v)
+	end
+	end
+	end
+	end
+	if #PrioritizedPlrsOnScreen == 0 then
+	table.sort(table2)
+	else
+	for pos, plr in pairs(table1) do
+	if not table.find(PrioritizedPlrsOnScreen, plr) then
+	local num = table.find(table2,pos)
+	table.remove(table2, num)
+	table1[pos] = nil
+	end
+	end
+	table.sort(table2)
+	end
+	for position, player in pairs(table1) do
+	if table2[1] == position then
+	targetplayer(player)
+	end
+	end
+	end
+	function selectcharacter(chr)
+	if misc.IsAimbotOn == true and misc.TargetedCharacter == "" then
+	misc.TargetedCharacter = chr
+	if game.PlaceId == 286090429 then
+	chr.ChildAdded:connect(function(c)
+	if c.Name == "Cam" and misc.TargetedCharacter == chr then
+	chr.Humanoid.Health = 0
+	chr.ChildRemoved:Wait()
+	chr.Humanoid.Health = 100
+	end
+	end)
+	end
+	end
+	end
+	if not lplr.Character then
+	game.StarterGui:SetCore("SendNotification", {
+	Title = "Aimbot target";
+	Duration = 10;
+	Text = "Spawn in the game for the aimbot to work";
+	})
+	lplr.CharacterAdded:Wait()
+	end
+	local chr = lplr.Character
+	repeat task.wait() until chr:FindFirstChild("Torso") or chr:FindFirstChild("UpperTorso")
+	local Torso = chr:FindFirstChild("Torso") or chr:FindFirstChild("UpperTorso")
+	game.UserInputService.InputBegan:connect(function(key,processed)
+	    if processed then return end
+	local keycode = key.KeyCode
+	if keycode == Keybinds.TargetedPartToggle then
+	if GameStats.Target == "Torso" or GameStats.Target == "UpperTorso" then
+	GameStats.Target = "Head"
+	else
+	GameStats.Target = Torso.Name
+	end
+	end
+	if keycode == Keybinds.AimbotToggle then
+	misc.IsAimbotOn = not misc.IsAimbotOn
+	end
+	end)
+	gamesettings.X.MouseButton1Click:connect(function()
+	gamesettings.Visible = false
+	end)
+	for i,v in pairs(gamesettings:GetChildren()) do
+	if v:FindFirstChild("value") then
+	if v.Name == "AutoTarget" or v.Name == "FPEnabled" or v.Name == "OwnTeamWhitelisted" or v.Name == "WhitelistFriends" or v.Name == "TargetNPCs" then
+	v.value.MouseButton1Click:connect(function()
+	GameStats[v.Name] = not GameStats[v.Name]
+	if v.Name == "TargetNPCs" and GameStats.TargetNPCs and GameStats.AutoTarget then
+	GameStats.AutoTarget = false
+	end
+	if v.Name == "AutoTarget" and GameStats.TargetNPCs and GameStats.AutoTarget then
+	GameStats.TargetNPCs = false
+	end
+	end)
+	Changed(GameStats,v.Name,function(val)
+	v.value.Text = tostring(val)
+	end)
+	end
+	end
+	end
+	gamesettings.Target.value.MouseButton1Click:connect(function()
+	if GameStats.Target == "Head" then
+	GameStats.Target = Torso.Name
+	else
+	GameStats.Target = "Head"
+	end
+	end)
+	Changed(GameStats,"Target",function(val)
+	gamesettings.Target.value.Text = val
+	end)
+	Changed(gamesettings.MaxStuds.value, "Text", function(n)
+	local num = tonumber(n)
+	if num then
+	GameStats.MaxStuds = num
+	else 
+	GameStats.MaxStuds = 500
+	end
+	end)
+	Changed(globalsettings.AimIntensity.value, "Text", function(n)
+	local num = tonumber(n)
+	if num then
+	GlobalStats.AimIntensity = num
+	else
+	GlobalStats.AimIntensity = 250
+	end
+	end)
+	for i,v in pairs(globalsettings:GetChildren()) do
+	if v:FindFirstChild("reset") then
+	v.reset.MouseButton1Click:connect(function()
+	GlobalStats.Keybinds[v.Name] = "none"
+	v.value.Text = "none"
+	end)
+	end
+	if v:FindFirstChild("value") and v.Name:lower():find("toggle") then
+	v.value.MouseButton1Click:connect(function()
+	GlobalStats.Keybinds[v.Name] = "none"
+	v.value.Text = "Press any key"
+	local key = game.UserInputService.InputBegan:Wait()
+	GlobalStats.Keybinds[v.Name] = key.KeyCode
+	v.value.Text = tostring(key.KeyCode)
+	end)
+	end
+	end
+	for i,v in pairs(teamui:GetChildren()) do
+	if v.ClassName == "TextBox" then
+	Changed(v, "Text", function(txt)
+	if GlobalStats.TeamAutofill then
+	local tnames = {}
+	for i,v in pairs(teams:GetTeams()) do
+	if v.Name:lower():sub(1,txt:len()) == txt:lower() and not table.find(tnames,v.Name) then
+	table.insert(tnames,v.Name)
+	end
+	end
+	if #tnames == 1 then
+	v.Text = tnames[1]
+	end
+	end
+	end)
+	end
+	end
+	Changed(GlobalStats,"TeamAutofill",function(v)
+	globalsettings.TeamAutofill.value.Text = tostring(v)
+	end)
+	globalsettings.TeamAutofill.value.MouseButton1Click:connect(function()
+	GlobalStats.TeamAutofill = not GlobalStats.TeamAutofill
+	end)
+	local wlmsg = teamui.WLTeam.Text
+	teamui.WLTeam.MouseButton1Click:connect(function()
+	local function updatetxt(txt)
+	teamui.WLTeam.Text = txt
+	wait(2)
+	teamui.WLTeam.Text = wlmsg
+	end
+	local team1 = teamui.yourteam.Text
+	local team2 = teamui.whitelistteam.Text
+	if teams:FindFirstChild(team1) and teams:FindFirstChild(team2) then
+	local canadd = true
+	for i, teamtable in pairs(GameStats.Teams) do
+	if teamtable.team1 == team1 and teamtable.team2 == team2 then
+	canadd = false
+	break
+	end
+	end
+	if canadd then
+	local newtable = {["team1"] = team1 ,["team2"] = team2}
+	table.insert(GameStats.Teams, newtable)
+	addteamframe(newtable)
+	else
+	updatetxt("This already exists")
+	end
+	else
+	updatetxt("Invalid team name(s)")
+	end
+	end)
+	globalsettings.X.MouseButton1Click:connect(function()
+	globalsettings.Visible = false
+	end)
+	teamui.X.MouseButton1Click:connect(function()
+	teamui.Visible = false
+	end)
+	local AimbotFunction = game.RunService.RenderStepped:connect(function()
+	if misc.TargetedCharacter ~= "" and misc.TargetedCharacter:FindFirstChild(GameStats.Target) then
+	local v, _ = workspace.Camera:WorldToScreenPoint(misc.TargetedCharacter[GameStats.Target].Position)
+	if _ then
+	local StabilizeNum = GlobalStats.AimIntensity/workspace.Camera.ViewportSize.Y
+	local x, y = (v.X - m.X)*StabilizeNum, (v.Y - m.Y)*StabilizeNum
+	if misc.IsAimbotOn then
+	mousemoverel(x, y)
+	end
+	else
+	deselect()
+	end
+	end
+	if m.Target ~= nil then
+	for i,v in pairs(GetFamily(m.Target)) do
+	if game.Players:FindFirstChild(v.Name) then
+	targetplayer(game.Players[v.Name])
+	end
+	end
+	if GameStats.TargetNPCs then
+	local npc = isnpc(m.Target)
+	if npc then
+	selectcharacter(npc)
+	end
+	end
+	end
+	if GameStats.AutoTarget then
+	GetNearestPlayer()
+	end
+	if GameStats.FPEnabled then
+	if misc.TargetedCharacter ~= ""  and misc.IsAimbotOn then
+	plrs.LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
+	else
+	plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
+	end
+	else
+	plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
+	end
+	end)
+	game.StarterGui:SetCore("SendNotification", {
+	Title = "Aimbot Update:";
+	Duration = 5;
+	Text = "NPCs can now be targetd via game settings.";})
+	
+	function Died(player)
+	if not player.Character then player.CharacterAdded:Wait() end
+	local function OnDeath(chr)
+	chr:WaitForChild("Humanoid")
+	chr.Humanoid.Died:connect(function()
+	if misc.TargetedCharacter == chr then
+	deselect()
+	end
+	end)
+	end
+	OnDeath(player.Character)
+	player.CharacterAdded:connect(OnDeath)
+	player.CharacterRemoving:connect(function(chr)
+	if misc.TargetedCharacter == chr then
+	deselect()
+	end
+	end)
+	end
+	for i,v in pairs(plrs:GetPlayers()) do Died(v) end
+	plrs.PlayerAdded:connect(Died)
+	plrs.PlayerRemoving:connect(function(plr)
+	if plr.Character and plr.Character == misc.TargetedCharacter then
+	deselect()
+	end
+	end)
+	local MainFrame = script.Parent.MFrame
+	MainFrame.X.MouseButton1Click:connect(function()
+	AimbotFunction:disconnect()
+	_G.RedsAimbot = false
+	MainFrame.Parent:Destroy()
+	end)
+	Changed(misc, "TargetedCharacter", function(v)
+	if v ~= "" then
+	local player = game.Players:GetPlayerFromCharacter(v)
+	if player then
+	MainFrame.CurrentTarget.Text = CheckDN(player)
+	else
+	MainFrame.CurrentTarget.Text = v.Name
+	end
+	else
+	MainFrame.CurrentTarget.Text = "none"
+	end
+	end)
+	MainFrame.Manager.MouseButton1Click:connect(function()
+	wlui.Visible = true
+	end)
+	MainFrame.Settings.MouseButton1Click:connect(function()
+	gamesettings.Visible = true
+	end)
+	gamesettings.SwitchToGlobal.MouseButton1Click:connect(function()
+	gamesettings.Visible = false
+	globalsettings.Visible = true
+	end)
+	gamesettings.SwitchToTeam.MouseButton1Click:connect(function()
+	gamesettings.Visible = false
+	teamui.Visible = true
+	end)
+	teamui.SwitchToSettings.MouseButton1Click:connect(function()
+	teamui.Visible = false
+	gamesettings.Visible = true
+	end)
+	globalsettings.SwitchToSettings.MouseButton1Click:connect(function()
+	globalsettings.Visible = false
+	gamesettings.Visible = true
+	end)
+	Changed(misc, "IsAimbotOn", function(v)
+	if v == false then
+	MainFrame.Status.TextColor3 = Color3.new(1,0,0)
+	MainFrame.Status.Text = "disabled"
+	deselect()
+	else
+	MainFrame.Status.TextColor3 = Color3.new(0,1,0)
+	MainFrame.Status.Text = "enabled"
+	end
+	end)
+	wlui.hide.MouseButton1Click:connect(function()
+	wlui.Visible = false
+	end)
+	MainFrame.Status.MouseButton1Click:connect(function()
+	misc.IsAimbotOn = not misc.IsAimbotOn
+	end)
+	local wlframe = wlui.WhitelistedInstances.whitelistframe
+	function AddtoList(ins)
+	local clone = wlframe:Clone()
+	clone.Visible = true
+	clone.Parent = wlframe.Parent
+	local function togglefunc(Table)
+	local button
+	if Table == PrioritizedPlrs then
+	button = clone.PriorityToggle
+	else
+	button = clone.WhitelistToggle
+	end
+	if ins.ClassName == "Player" and GameStats.WhitelistFriends and lplr:IsFriendsWith(ins.UserId) and Table == WhitelistedPlrs then
+	button.TextColor3 = Color3.new(0,1,0)
+	button.Text = "Yes"
+	table.insert(WhitelistedPlrs, ins)
+	end
+	button.MouseButton1Click:connect(function()
+	if button.Text == "No" then
+	button.TextColor3 = Color3.new(0,1,0)
+	button.Text = "Yes"
+	table.insert(Table,ins)
+	if Table == PrioritizedPlrs and clone.WhitelistToggle.Text == "Yes" then
+	clone.WhitelistToggle.Text = "No"
+	clone.WhitelistToggle.TextColor3 = Color3.new(1,0,0)
+	local wlistplr = table.find(WhitelistedPlrs, ins)
+	table.remove(WhitelistedPlrs, wlistplr)
+	end
+	if Table == WhitelistedPlrs and clone.PriorityToggle.Text == "Yes" then
+	clone.PriorityToggle.Text = "No"
+	clone.PriorityToggle.TextColor3 = Color3.new(1,0,0)
+	local prioplr = table.find(PrioritizedPlrs, ins)
+	table.remove(PrioritizedPlrs, prioplr)
+	end
+	else
+	button.TextColor3 = Color3.new(1,0,0)
+	button.Text = "No"
+	local removeins = table.find(Table, ins)
+	table.remove(Table,removeins)
+	end
+	end)
+	end
+	clone.TextLabel.Text = ins.ClassName..": "..CheckDN(ins)
+	togglefunc(WhitelistedPlrs)
+	togglefunc(PrioritizedPlrs)
 	coroutine.resume(coroutine.create(function()
-	repeat
-	ti.Parent.Transparency = 0.6
-	ti.Parent.Color = Color3.new()
-	ti:Destroy()
-	task.wait() until GetFamily(ti)[1] ~= game
+	repeat task.wait() until not game.Players:FindFirstChild(ins.Name)
+	clone:Destroy()
 	end))
 	end
+	for i,plr in pairs(plrs:GetPlayers()) do
+	if plr ~= lplr then
+	AddtoList(plr)
 	end
 	end
-	end
-	for i,v in pairs(workspace:GetDescendants()) do
-	removeTI(v)
-	end
-	workspace.DescendantAdded:connect(removeTI)
-	notify("Lasers that are NOT transparent will hurt you.")
-	end
-	end)
-	mainframe.forcedaytime.MouseButton1Click:connect(function()
-	game.Lighting.ClockTime = 12
-	game.Lighting:GetPropertyChangedSignal("ClockTime"):connect(function()
-	game.Lighting.ClockTime = 12
-	end)
-	end)
-	mainframe.holdebypass.MouseButton1Click:connect(function()
-	if not HoldEBypass then
-	HoldEBypass = true
-	notify("Hold E Bypass enabled. Sadly cannot be used with the donut shop, gas station, or air drops ;(")
-	end
-	end)
-	local SpeedBypass = false
-	mainframe.more.MouseButton1Click:connect(function()
-		local gui = mainframe.Parent
-		gui.MainFrame.Visible = false
-		gui.otherFrame.Visible = true
-	end)
-	mainframe.speed.MouseButton1Click:Connect(function()
-	mainframe.speed.Visible = false
-	mainframe.Speednum.Visible = true
-	local function speedhack()
-	lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(function()
-	if lplr.Character.Humanoid.WalkSpeed ~= speeds.walkspeed then
-	    lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
-	end
-	end)
-	lplr.Character.Humanoid.Running:connect(function()
-	lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
-	end)
-	end
-	if not SpeedBypass then
-	SpeedBypass = true
-	speedhack()
-	lplr.CharacterAdded:connect(function(chr)
-	chr:WaitForChild("Humanoid")
-	speedhack()
-	end)
-	notify("To edit your walkspeed, scroll up/down on the number in the textbox (max 150).")
-	end
-	mainframe.Speednum.MouseWheelForward:connect(function()
-	speeds.walkspeed = speeds.walkspeed + 5
-	end)
-	mainframe.Speednum.MouseWheelBackward:connect(function()
-	speeds.walkspeed = speeds.walkspeed - 5
-	end)
-	Changed(speeds, "walkspeed", function(num)
-	if num > 150 then
-	speeds.walkspeed = 150
-	end
-	if num < 5 then
-	speeds.walkspeed = 5
-	end
-	mainframe.Speednum.Text = tostring(speeds.walkspeed)
-	end)
-	Changed(mainframe.Speednum, "Text", function(txt)
-	if tonumber(txt) then
-	speeds.walkspeed = tonumber(txt)
-	end
-	end)
-	end)
-	local ConfGUI = script.Parent.Confirmation
-	ConfGUI.No.MouseButton1Click:connect(function()
-	ConfGUI.Parent.Confirmation.Visible = false
-	end)
-	ConfGUI.Yes.MouseButton1Click:connect(function()
-	ConfGUI.Parent.Confirmation.Visible = false
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/Aimbot.lua"))()
-	end)
-	local otherframe = script.Parent.otherFrame
-	local RobberyNotifier = false
-	local robtitle = "RedWire's Robbery Notifier"
-	otherframe.RobberyNotifier.MouseButton1Click:connect(function()
-		if not RobberyNotifier then
-		RobberyNotifier = true
-	local IconIds = {["bank truck"] = "6133383545",["gas station"] = "4643750797",["donut shop"] = "4643750660", ["museum"] = "4643749917", ["tomb"] = "6896911415",["casino"] = "9255252609"}
-	for i,v in pairs(plrgui.WorldMarkersGui:GetChildren()) do
-	for i2, v2 in pairs(v:GetChildren()) do
-	for name, id in pairs(IconIds) do
-	if v2.ImageLabel.Image == "rbxassetid://"..id then
-	Changed(v2, "ImageColor3", function(color)
-	if color == Color3.new(0,1,0) then
-	notify("The "..name.." is open for robbery.")
-	end
-	end)
-	end
-	end
-	end
-	end
-		local smoke = workspace.PowerPlant.Smoke.smoke
-		jewel.Floors.ChildAdded:connect(function()
-			notify("The jewelry is open for robbery.")
-		end)
-		bank.Layout.ChildAdded:connect(function()
-			notify("The bank is open for robbery.")
-		end)
-		smoke:GetPropertyChangedSignal("Enabled"):connect(function()
-			if smoke.Enabled == true then
-				notify("The powerplant is open for robbery.")
-			end
-		end)
-		workspace.Trains.ChildAdded:connect(function(child)
-		if child.Name == "PassengerArmor" then
-			notify("A passenger train has entered the map.")
-		elseif child.Name == "LocomotiveFront" then
-			notify("A cargo train has entered the map.")
-		end
-		end)
-		workspace.ChildAdded:connect(function(c)
-			if c.Name == "Plane" then
-				notify("The cargo plane is inbound!")
-			end
-			if c.Name == "CargoShip" then
-				notify("The cargo ship is coming!")
-			end
-			end)
-	end
-	end)
-	otherframe.infiniteyeet.MouseButton1Click:connect(function()
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-	end)
-	local ragdollremoved = false
-	otherframe.removeragdoll.MouseButton1Click:connect(function()
-	if not ragdollremoved then
-	ragdollremoved = true
-	require(game.ReplicatedStorage.Module.AlexRagdoll).Ragdoll = nil
-	notify("Removed ragdolling. (WARNING: in some cases you will still take fall damage)")
-	end
-	end)
-	otherframe.switch.MouseButton1Down:connect(function()
-	local gui = otherframe.Parent
-	gui.otherFrame.Visible = false
-	gui.MainFrame.Visible = true
-	end)
-	otherframe.gunshoptpbutton.Text = "Gunshop TP enabled: "..tostring(gunshoptp)
-	game.RunService.Heartbeat:connect(function()
-		local hrpvalid, hrp = pcall(function()
-		return lplr.Character.HumanoidRootPart
-		end)
-		if hrpvalid and gunshoptp then
-	hrp.CFrame = CFrame.new() + Vector3.new(418.439, 18, 520)
-	end
-	end)
-	otherframe.gunshoptpbutton.MouseButton1Click:connect(function()
-	if gunshoptp then
-	gunshoptp = false
+	plrs.PlayerAdded:connect(AddtoList)
+	Changed(wlui.searchbar, "Text", function(txt)
+	for i,v in pairs(wlui.WhitelistedInstances:GetChildren()) do
+	if v.ClassName == "Frame" and v ~= wlframe then
+	if v.TextLabel.Text:lower():match(txt:lower()) then
+	v.Visible = true
 	else
-	gunshoptp = true
-	end
-	otherframe.gunshoptpbutton.Text = "Gunshop TP enabled: "..tostring(gunshoptp)
-	end)
-	local enablefly = false
-	local uiservice = game.UserInputService
-	otherframe.flyhack.MouseButton1Click:connect(function()
-	otherframe.flyhacknum.Visible = true
-	otherframe.flyhack.Visible = false
-	if not enablefly then
-	enablefly = true
-	-- actual fly script
-	local flying = false
-	local maxdistance = 100000000000000 --using math.huge makes this script wonky
-	local uiservice = game.UserInputService
-	local lplr = game.Players.LocalPlayer
-	local mouse = lplr:GetMouse()
-	local function GetVelocity(pos1,pos2,StudsPerSecond)
-	local distance = (pos2 - pos1)
-	local mag = distance.Magnitude
-	return (distance/mag)*StudsPerSecond
-	end
-	local function getkey(keycode)
-	local key = tostring(keycode):lower()
-	local findcode, a = key:find("keycode.")
-	return key:sub(a+1)
-	end
-	local keys = {}
-	local pos = Vector3.new()
-	game.RunService.Heartbeat:connect(function()
-		pcall(function()
-		local hrp
-		for i,v in pairs(workspace.Vehicles:GetChildren()) do
-		    if pcall(function() return v.Engine and v.Seat.PlayerName end) then
-		        if v.Seat.PlayerName.Value == lplr.Name then
-		            hrp = v.Engine
-		            break
-		       else
-		           hrp = nil
-		        end
-		    end
-		end
-		local flyspeed = speeds.flyspeed
-		if not hrp then
-		hrp = lplr.Character.Humanoid.RootPart
-		if flyspeed > 150 then
-		flyspeed = 150
-		end
-		end
-	    if flying then
-	    local cam = workspace.Camera
-	    end
-		local frontoffset = CFrame.new() + Vector3.new(0,0,-maxdistance)
-		local backoffset = CFrame.new() + Vector3.new(0,0,maxdistance)
-		local leftoffset = CFrame.new() + Vector3.new(-maxdistance,0,0)
-		local rightoffset = CFrame.new() + Vector3.new(maxdistance,0,0)
-		local upoffset = CFrame.new() + Vector3.new(0,maxdistance,0)
-		local downoffset = CFrame.new() + Vector3.new(0,-maxdistance,0)
-		local velocity = Vector3.new()
-	    if flying then
-	    if keys.w_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position, flyspeed)
-	    end
-	    if keys.s_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position, flyspeed)
-	    end
-	    if keys.a_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position, flyspeed)
-	    end
-	    if keys.d_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position, flyspeed)
-	    end
-	    if keys.e_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position, flyspeed)
-	    end
-	    if keys.q_active then
-	        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position, flyspeed)
-	    end
-	    hrp.Velocity = velocity
-	     hrp.CFrame = CFrame.new(hrp.Position, (workspace.Camera.CFrame*frontoffset).Position)
-	    end
-	    if flying and not keys.w_active and not keys.a_active and not keys.s_active and not keys.d_active and not keys.q_active and not keys.e_active then
-	        hrp.CFrame = CFrame.new(pos, (workspace.Camera.CFrame*frontoffset).Position)
-	        hrp.Velocity = Vector3.new()
-			hrp.RotVelocity = Vector3.new()
-	    else
-	        pos = hrp.Position
-	    end
-		end)
-	end)
-	uiservice.InputBegan:connect(function(key,processed)
-	if processed then return end
-	    if key.KeyCode == Enum.KeyCode.F and game.UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
-	        flying = not flying
-	        if flying then
-	            lplr.Character.Humanoid.CameraOffset = Vector3.new(2,0,0)
-	        else
-	            lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
-	        end
-	    end
-	    keys[getkey(key.KeyCode).."_active"] = true
-	end)
-	uiservice.InputEnded:connect(function(key)
-	    keys[getkey(key.KeyCode).."_active"] = false
-	end)
-	-- end of fly script
-	Changed(speeds, "flyspeed", function(num)
-	if num < 100 then
-	speeds.flyspeed = 100
-	end
-	if num > 640 then
-	speeds.flyspeed = 640
-	end
-	otherframe.flyhacknum.Text = tostring(speeds.flyspeed)
-	end)
-	otherframe.flyhacknum.MouseWheelForward:connect(function()
-	speeds.flyspeed = speeds.flyspeed + 20
-	end)
-	otherframe.flyhacknum.MouseWheelBackward:connect(function()
-	speeds.flyspeed = speeds.flyspeed - 20
-	end)
-	Changed(otherframe.flyhacknum, "Text", function(txt)
-	if tonumber(txt) then
-	speeds.flyspeed = tonumber(txt)
-	end
-	end)
-	notify("Fly hack enabled! Caps at 150 if you're flying without a vehicle.")
-	end
-	end)
-	local keybypass = false
-	otherframe.keybypass.MouseButton1Click:connect(function()
-	if not keybypass then
-	keybypass = true
-	require(game.ReplicatedStorage.Game.PlayerUtils).hasKey = function()
-	return true
-	end
-	notify("Keycard bypass enabled.")
-	end
-	end)
-	local ctxt = otherframe.casinocode.Text
-	otherframe.casinocode.MouseButton1Down:connect(function()
-	local codes = workspace.Casino.RobberyDoor.Codes
-	local code
-	for i,v in pairs(codes:GetChildren()) do
-	if v:FindFirstChildOfClass("Part").SurfaceGui.TextLabel.Text ~= "" then
-	    code = v
-	    break
+	v.Visible = false
 	end
 	end
-	local txt = ""
-	if code then
-	for i,v in pairs(code:GetChildren()) do
-	    txt = txt..v.SurfaceGui.TextLabel.Text
-	end
-	otherframe.casinocode.Text = txt
-	else
-	otherframe.casinocode.Text = "code non-existent"
-	end
-	delay(5,function()
-	otherframe.casinocode.Text = ctxt
-	end)
-	end)
-	otherframe.respawn.MouseButton1Click:connect(function()
-	lplr.Character.Humanoid.Health = 0
-	end)
-	local delradio = false
-	otherframe.deleteradio.MouseButton1Click:connect(function()
-	if not delradio then
-	delradio = true
-	if lplr.PlayerGui:FindFirstChild("RadioGui") then
-	lplr.PlayerGui.RadioGui:Destroy()
-	end
-	lplr.PlayerGui.ChildAdded:connect(function(c)
-	if c.Name == "RadioGui" then
-	c:Destroy()
-	end
-	end)
-	notify("fuck this stupid gui")
 	end
 	end)
 	else
-	local function notify(text)
-	local notiftime = 0
-	for i = 1, text:len() do
-	notiftime = notiftime + 0.04
-	end
-	local n = require(game:GetService("ReplicatedStorage").Game.Notification)
-	n.new({["Text"] = text,["Duration"] = notiftime})
-	end
-	notify("Deleting clone gui")
-	wait(0.5)
+	game.StarterGui:SetCore("SendNotification", {
+	Title = "Aimbot";
+	Text = "Seems like you've already executed this. Deleting clone GUI.";
+	})
+	task.wait(0.2)
 	script.Parent:Destroy()
 	end
+	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_XSQG83_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_UTFS86_FAKESCRIPT))
