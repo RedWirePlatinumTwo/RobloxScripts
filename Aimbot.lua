@@ -342,7 +342,6 @@ GameSettingsUI.BackgroundColor3 = Color3.new(0, 0, 0)
 GameSettingsUI.BorderColor3 = Color3.new(0.333333, 1, 0)
 GameSettingsUI.Position = UDim2.new(0.349479169, 0, 0.170278385, 0)
 GameSettingsUI.Size = UDim2.new(0, 578, 0, 322)
-GameSettingsUI.Visible = false
 
 Title_3.Name = "Title"
 Title_3.Parent = GameSettingsUI
@@ -583,14 +582,13 @@ NPCWarning.BackgroundTransparency = 1
 NPCWarning.BorderColor3 = Color3.new(0, 0.666667, 0)
 NPCWarning.BorderSizePixel = 0
 NPCWarning.Position = UDim2.new(1.71949577, 0, 0.00249263225, 0)
-NPCWarning.Size = UDim2.new(0, 282, 0, 54)
+NPCWarning.Size = UDim2.new(0, 289, 0, 54)
 NPCWarning.Font = Enum.Font.Highway
-NPCWarning.Text = "For performance reasons, you cannot auto-target NPCs. Auto-Targeting will be turned off to be able to target NPCs."
+NPCWarning.Text = "For performance reasons, you cannot auto-target NPCs. Auto-Targeting will be disabled to be able to target NPCs."
 NPCWarning.TextColor3 = Color3.new(0.333333, 1, 0)
 NPCWarning.TextScaled = true
 NPCWarning.TextSize = 24
 NPCWarning.TextWrapped = true
-NPCWarning.TextXAlignment = Enum.TextXAlignment.Left
 
 GlobalSettingsUI.Name = "GlobalSettingsUI"
 GlobalSettingsUI.Parent = Aimbot
@@ -923,7 +921,7 @@ SwitchToSettings_2.TextScaled = true
 SwitchToSettings_2.TextSize = 24
 SwitchToSettings_2.TextWrapped = true
 -- Scripts:
-function SCRIPT_WTRF87_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_BYGI66_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1122,13 +1120,6 @@ function SCRIPT_WTRF87_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	deselect = function()
 	misc.TargetedCharacter = ""
-	coroutine.resume(coroutine.create(function()
-	if misc.IsAimbotOn then
-	misc.IsAimbotOn = false
-	task.wait()
-	misc.IsAimbotOn = true
-	end
-	end))
 	end
 	local function CheckDN(plr)
 	if plr.DisplayName == plr.Name then
@@ -1163,57 +1154,7 @@ function SCRIPT_WTRF87_FAKESCRIPT() -- Aimbot.Scripts
 	return not table.find(WhitelistedPlrs, plr)
 	end
 	end
-	local function targetplayer(player)
-	local humanoidvalid, humanoid = pcall(function()
-	return player.Character.Humanoid
-	end)
-	if player.Name ~= lplr.Name and humanoidvalid then
-	if teams:FindFirstChildOfClass("Team") and IsNotWhitelisted(player) and humanoid.Health ~= 0 then
-	selectcharacter(player.Character)
-	elseif not teams:FindFirstChildOfClass("Team") and IsNotWhitelisted(player) then
-	selectcharacter(player.Character)
-	end
-	end
-	end
-	local GetNearestPlayer = function()
-	local table1 = {}
-	local table2 = {}
-	local PrioritizedPlrsOnScreen = {}
-	for i,v in pairs(plrs:GetPlayers()) do
-	local outcome = pcall(function()
-	 return v.Character.Humanoid and v.Character[GameStats.Target]
-	end)
-	if outcome and v.Name ~= lplr.Name and v.Character.Humanoid.Health ~= 0 and IsNotWhitelisted(v) then
-	local pos = math.floor(lplr:DistanceFromCharacter(v.Character[GameStats.Target].Position))
-	local _, onscreen = workspace.Camera:WorldToScreenPoint(v.Character[GameStats.Target].Position)
-	if onscreen and pos < GameStats.MaxStuds then
-	table1[pos] = v
-	table.insert(table2, pos)
-	if table.find(PrioritizedPlrs, v) then
-	table.insert(PrioritizedPlrsOnScreen, v)
-	end
-	end
-	end
-	end
-	if #PrioritizedPlrsOnScreen == 0 then
-	table.sort(table2)
-	else
-	for pos, plr in pairs(table1) do
-	if not table.find(PrioritizedPlrsOnScreen, plr) then
-	local num = table.find(table2,pos)
-	table.remove(table2, num)
-	table1[pos] = nil
-	end
-	end
-	table.sort(table2)
-	end
-	for position, player in pairs(table1) do
-	if table2[1] == position then
-	targetplayer(player)
-	end
-	end
-	end
-	function selectcharacter(chr)
+	local function selectcharacter(chr)
 	if misc.IsAimbotOn == true and misc.TargetedCharacter == "" then
 	misc.TargetedCharacter = chr
 	if game.PlaceId == 286090429 then
@@ -1225,6 +1166,14 @@ function SCRIPT_WTRF87_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end)
 	end
+	end
+	end
+	local function targetplayer(player)
+	local humanoidvalid, humanoid = pcall(function()
+	return player.Character.Humanoid
+	end)
+	if player.Name ~= lplr.Name and humanoidvalid and IsNotWhitelisted(player) and humanoid.Health ~= 0 then
+	selectcharacter(player.Character)
 	end
 	end
 	if not lplr.Character then
@@ -1260,12 +1209,6 @@ function SCRIPT_WTRF87_FAKESCRIPT() -- Aimbot.Scripts
 	if v.Name == "AutoTarget" or v.Name == "FPEnabled" or v.Name == "OwnTeamWhitelisted" or v.Name == "WhitelistFriends" or v.Name == "TargetNPCs" then
 	v.value.MouseButton1Click:connect(function()
 	GameStats[v.Name] = not GameStats[v.Name]
-	if v.Name == "TargetNPCs" and GameStats.TargetNPCs and GameStats.AutoTarget then
-	GameStats.AutoTarget = false
-	end
-	if v.Name == "AutoTarget" and GameStats.TargetNPCs and GameStats.AutoTarget then
-	GameStats.TargetNPCs = false
-	end
 	end)
 	Changed(GameStats,v.Name,function(val)
 	v.value.Text = tostring(val)
@@ -1394,13 +1337,48 @@ function SCRIPT_WTRF87_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	if GameStats.TargetNPCs then
 	local npc = isnpc(m.Target)
-	if npc then
+	if npc and npc.Humanoid.Health > 0 then
 	selectcharacter(npc)
 	end
 	end
 	end
-	if GameStats.AutoTarget then
-	GetNearestPlayer()
+	if GameStats.AutoTarget and not GameStats.TargetNPCs then
+	local table1 = {}
+	local table2 = {}
+	local PrioritizedPlrsOnScreen = {}
+	for i,v in pairs(plrs:GetPlayers()) do
+	local outcome = pcall(function()
+	 return v.Character.Humanoid and v.Character[GameStats.Target]
+	end)
+	if outcome and v.Name ~= lplr.Name and v.Character.Humanoid.Health ~= 0 and IsNotWhitelisted(v) then
+	local pos = math.floor(lplr:DistanceFromCharacter(v.Character[GameStats.Target].Position))
+	local _, onscreen = workspace.Camera:WorldToScreenPoint(v.Character[GameStats.Target].Position)
+	if onscreen and pos < GameStats.MaxStuds then
+	table1[pos] = v
+	table.insert(table2, pos)
+	if table.find(PrioritizedPlrs, v) then
+	table.insert(PrioritizedPlrsOnScreen, v)
+	end
+	end
+	end
+	end
+	if #PrioritizedPlrsOnScreen == 0 then
+	table.sort(table2)
+	else
+	for pos, plr in pairs(table1) do
+	if not table.find(PrioritizedPlrsOnScreen, plr) then
+	local num = table.find(table2,pos)
+	table.remove(table2, num)
+	table1[pos] = nil
+	end
+	end
+	table.sort(table2)
+	end
+	for position, player in pairs(table1) do
+	if table2[1] == position then
+	targetplayer(player)
+	end
+	end
 	end
 	if GameStats.FPEnabled then
 	if misc.TargetedCharacter ~= ""  and misc.IsAimbotOn then
@@ -1576,4 +1554,4 @@ function SCRIPT_WTRF87_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_WTRF87_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_BYGI66_FAKESCRIPT))
