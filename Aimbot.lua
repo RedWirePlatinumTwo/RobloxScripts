@@ -131,11 +131,11 @@ CurrentTarget.BackgroundColor3 = Color3.new(0, 0, 0)
 CurrentTarget.BackgroundTransparency = 1
 CurrentTarget.BorderColor3 = Color3.new(0, 0.666667, 0)
 CurrentTarget.BorderSizePixel = 0
-CurrentTarget.Position = UDim2.new(-0.00548095722, 0, 0.499898672, 0)
-CurrentTarget.Size = UDim2.new(0, 260, 0, 29)
+CurrentTarget.Position = UDim2.new(0.0076923077, 0, 0.495866358, 0)
+CurrentTarget.Size = UDim2.new(0, 258, 0, 29)
 CurrentTarget.Font = Enum.Font.Highway
 CurrentTarget.Text = "none"
-CurrentTarget.TextColor3 = Color3.new(0.333333, 1, 0)
+CurrentTarget.TextColor3 = Color3.new(1, 0, 0)
 CurrentTarget.TextScaled = true
 CurrentTarget.TextSize = 14
 CurrentTarget.TextWrapped = true
@@ -922,7 +922,7 @@ SwitchToSettings_2.TextScaled = true
 SwitchToSettings_2.TextSize = 24
 SwitchToSettings_2.TextWrapped = true
 -- Scripts:
-function SCRIPT_YLFW76_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_ASLC83_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1439,8 +1439,10 @@ function SCRIPT_YLFW76_FAKESCRIPT() -- Aimbot.Scripts
 	else
 	MainFrame.CurrentTarget.Text = v.Name
 	end
+	MainFrame.CurrentTarget.TextColor3 = Color3.new(0,1,0)
 	else
 	MainFrame.CurrentTarget.Text = "none"
+	MainFrame.CurrentTarget.TextColor3 = Color3.new(1,0,0)
 	end
 	end)
 	MainFrame.Manager.MouseButton1Click:connect(function()
@@ -1559,4 +1561,4 @@ function SCRIPT_YLFW76_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_YLFW76_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_ASLC83_FAKESCRIPT))
