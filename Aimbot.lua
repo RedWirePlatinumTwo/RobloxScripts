@@ -342,6 +342,7 @@ GameSettingsUI.BackgroundColor3 = Color3.new(0, 0, 0)
 GameSettingsUI.BorderColor3 = Color3.new(0.333333, 1, 0)
 GameSettingsUI.Position = UDim2.new(0.349479169, 0, 0.170278385, 0)
 GameSettingsUI.Size = UDim2.new(0, 578, 0, 322)
+GameSettingsUI.Visible = false
 
 Title_3.Name = "Title"
 Title_3.Parent = GameSettingsUI
@@ -921,7 +922,7 @@ SwitchToSettings_2.TextScaled = true
 SwitchToSettings_2.TextSize = 24
 SwitchToSettings_2.TextWrapped = true
 -- Scripts:
-function SCRIPT_BYGI66_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_YXGN78_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1554,4 +1555,4 @@ function SCRIPT_BYGI66_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_BYGI66_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_YXGN78_FAKESCRIPT))
