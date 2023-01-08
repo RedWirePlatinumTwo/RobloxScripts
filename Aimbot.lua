@@ -922,7 +922,7 @@ SwitchToSettings_2.TextScaled = true
 SwitchToSettings_2.TextSize = 24
 SwitchToSettings_2.TextWrapped = true
 -- Scripts:
-function SCRIPT_YXGN78_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_YLFW76_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1122,6 +1122,26 @@ function SCRIPT_YXGN78_FAKESCRIPT() -- Aimbot.Scripts
 	deselect = function()
 	misc.TargetedCharacter = ""
 	end
+	local function Died(player)
+	if not player.Character then player.CharacterAdded:Wait() end
+	local function OnDeath(chr)
+	chr:WaitForChild("Humanoid")
+	chr.Humanoid.Died:connect(function()
+	if misc.TargetedCharacter == chr then
+	deselect()
+	end
+	end)
+	end
+	OnDeath(player.Character)
+	player.CharacterAdded:connect(OnDeath)
+	player.CharacterRemoving:connect(function(chr)
+	if misc.TargetedCharacter == chr then
+	deselect()
+	end
+	end)
+	end
+	for i,v in pairs(plrs:GetPlayers()) do Died(v) end
+	plrs.PlayerAdded:connect(Died)
 	local function CheckDN(plr)
 	if plr.DisplayName == plr.Name then
 	return plr.Name
@@ -1340,6 +1360,11 @@ function SCRIPT_YXGN78_FAKESCRIPT() -- Aimbot.Scripts
 	local npc = isnpc(m.Target)
 	if npc and npc.Humanoid.Health > 0 then
 	selectcharacter(npc)
+	Changed(npc.Humanoid, "Health",function(hp)
+	if hp <= 0 and misc.TargetedCharacter == npc then
+	deselect()
+	end
+	end)
 	end
 	end
 	end
@@ -1395,27 +1420,6 @@ function SCRIPT_YXGN78_FAKESCRIPT() -- Aimbot.Scripts
 	Title = "Aimbot Update:";
 	Duration = 5;
 	Text = "NPCs can now be targetd via game settings.";})
-	
-	function Died(player)
-	if not player.Character then player.CharacterAdded:Wait() end
-	local function OnDeath(chr)
-	chr:WaitForChild("Humanoid")
-	chr.Humanoid.Died:connect(function()
-	if misc.TargetedCharacter == chr then
-	deselect()
-	end
-	end)
-	end
-	OnDeath(player.Character)
-	player.CharacterAdded:connect(OnDeath)
-	player.CharacterRemoving:connect(function(chr)
-	if misc.TargetedCharacter == chr then
-	deselect()
-	end
-	end)
-	end
-	for i,v in pairs(plrs:GetPlayers()) do Died(v) end
-	plrs.PlayerAdded:connect(Died)
 	plrs.PlayerRemoving:connect(function(plr)
 	if plr.Character and plr.Character == misc.TargetedCharacter then
 	deselect()
@@ -1478,7 +1482,7 @@ function SCRIPT_YXGN78_FAKESCRIPT() -- Aimbot.Scripts
 	misc.IsAimbotOn = not misc.IsAimbotOn
 	end)
 	local wlframe = wlui.WhitelistedInstances.whitelistframe
-	function AddtoList(ins)
+	local function AddtoList(ins)
 	local clone = wlframe:Clone()
 	clone.Visible = true
 	clone.Parent = wlframe.Parent
@@ -1555,4 +1559,4 @@ function SCRIPT_YXGN78_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_YXGN78_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_YLFW76_FAKESCRIPT))
