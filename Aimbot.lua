@@ -585,8 +585,9 @@ NPCWarning.BorderSizePixel = 0
 NPCWarning.Position = UDim2.new(1.71949577, 0, 0.00249263225, 0)
 NPCWarning.Size = UDim2.new(0, 282, 0, 54)
 NPCWarning.Font = Enum.Font.Highway
-NPCWarning.Text = "For performance reasons, you cannot auto-target NPCs."
+NPCWarning.Text = "For performance reasons, you cannot auto-target NPCs. Auto-Targeting will be turned off to be able to target NPCs."
 NPCWarning.TextColor3 = Color3.new(0.333333, 1, 0)
+NPCWarning.TextScaled = true
 NPCWarning.TextSize = 24
 NPCWarning.TextWrapped = true
 NPCWarning.TextXAlignment = Enum.TextXAlignment.Left
@@ -922,7 +923,7 @@ SwitchToSettings_2.TextScaled = true
 SwitchToSettings_2.TextSize = 24
 SwitchToSettings_2.TextWrapped = true
 -- Scripts:
-function SCRIPT_UTFS86_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_WTRF87_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1575,4 +1576,4 @@ function SCRIPT_UTFS86_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_UTFS86_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_WTRF87_FAKESCRIPT))
