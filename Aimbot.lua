@@ -952,12 +952,13 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_DGQJ80_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	if not _G.RedsAimbot then
 	_G.RedsAimbot = true
+	
 	for i,v in pairs(script.Parent:GetDescendants()) do
 	if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 	v.Draggable = true
@@ -968,11 +969,13 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	v.ScrollBarImageColor3 = Color3.new(0,1,0)
 	end
 	end
+	
 	local thread = function(f)
 	return coroutine.resume(coroutine.create(function()
 	return f()
 	end))
 	end
+	
 	local Changed = function(part, PropertyName, func)
 	    local current = part[PropertyName]
 		local elapsedTime = 0
@@ -988,11 +991,13 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	    end
 	    end)
 	end
+	
 	local tablecount = function(t)
 	local n = 0
 	for i,v in pairs(t) do n = n + 1 end
 	return n
 	end
+	
 	local TableAdded = function(Table, func)
 	    local count = tablecount(Table)
 		local clone = table.clone(Table)
@@ -1016,6 +1021,7 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	    end
 	    end)
 	end
+	
 	local TableChanged = function(Table,f)
 	    for i,v in pairs(Table) do
 	        Changed(Table,i,function(...)
@@ -1029,6 +1035,7 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 			end)
 	    end)
 	end
+	
 	GetFamily = function(ins)
 	local Pathway = {}
 	function _GetFamily(v)
@@ -1042,6 +1049,7 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	_GetFamily(ins)
 	return Pathway
 	end
+	
 	local plrs = game.Players
 	local lplr = plrs.LocalPlayer
 	local ischaracter = function(part)
@@ -1053,6 +1061,7 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end
 	end
+	
 	local isnpc = function(ins)
 	for i,v in pairs(GetFamily(ins,true)) do
 	if v:FindFirstChildOfClass("Humanoid") and v:FindFirstChild("HumanoidRootPart") and not ischaracter(v) then
@@ -1060,14 +1069,17 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end
 	end
+	
 	local wlui = script.Parent.ManagerUI
 	local gamesettings = script.Parent.GameSettingsUI
 	local globalsettings = script.Parent.GlobalSettingsUI
 	local teamui = script.Parent.TeamUI
 	local teams = game.Teams
+	
 	if syn then
 	syn.protect_gui(script.Parent)
 	end
+	
 	local WhitelistedPlrs = {}
 	local PrioritizedPlrs = {}
 	local m = lplr:GetMouse()
@@ -1077,6 +1089,7 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	local GlobalStats
 	local GameStats
 	local Keybinds
+	
 	local function gengamestats()
 	GlobalStats[game.PlaceId] = {}
 	GameStats = GlobalStats[game.PlaceId]
@@ -1090,25 +1103,34 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	GameStats.Teams = {}
 	GameStats.TargetCloserPlayers = true
 	end
+	
 	if isfile and loadfile and isfile("RedsAimbotStats.lua") then
 	GlobalStats = loadfile("RedsAimbotStats.lua")()
+	
 	if GlobalStats.TeamAutofill == nil then
 	GlobalStats.TeamAutofill = true
 	end
+	
 	if not GlobalStats.AimIntensity then
 	GlobalStats.AimIntensity = 250
 	end
-	if not GlobalStats[game.PlaceId] then gengamestats() end
+	
+	if not GlobalStats[game.PlaceId] then
+	gengamestats()
+	end
+	
 	for i,v in pairs(GlobalStats[game.PlaceId]) do
 	if type(v) ~= "table" then
 	gamesettings[i].value.Text = tostring(v)
 	end
 	end
+	
 	for i,v in pairs(GlobalStats.Keybinds) do
 	if globalsettings:FindFirstChild(i) then
 	globalsettings[i].value.Text = tostring(v)
 	end
 	end
+	
 	globalsettings.TeamAutofill.value.Text = tostring(GlobalStats.TeamAutofill)
 	else
 	GlobalStats = {}
@@ -1119,26 +1141,33 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	GlobalStats.Keybinds.AimbotToggle = Enum.KeyCode.LeftAlt
 	GlobalStats.Keybinds.TargetedPartToggle = Enum.KeyCode.RightAlt
 	end
+	
 	GameStats = GlobalStats[game.PlaceId]
 	Keybinds = GlobalStats.Keybinds
+	
 	if not GameStats.Teams then
 	GameStats.Teams = {}
 	end
+	
 	if GameStats.TargetNPCs == nil then
 	GameStats.TargetNPCs = false
 	end
+	
 	if GameStats.TargetCloserPlayers == nil then
 	GameStats.TargetCloserPlayers = true
 	end
+	
 	local function savesettings()
 	if writefile then
 	writefile("RedsAimbotStats.lua", TableToString(GlobalStats))
 	end
 	end
+	
 	TableChanged(GlobalStats[game.PlaceId], savesettings)
 	TableChanged(GlobalStats.Keybinds, savesettings)
 	TableChanged(GlobalStats, savesettings)
 	TableChanged(GlobalStats[game.PlaceId].Teams, savesettings)
+	
 	local addteamframe = function(ttable)
 	local clone = teamui.WhitelistedTeams.whitelistframe:Clone()
 	clone.Parent = teamui.WhitelistedTeams
@@ -1150,10 +1179,12 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	table.remove(GameStats.Teams,tfind)
 	end)
 	end
+	
 	for i,v in pairs(GameStats.Teams) do
 	addteamframe(v)
 	end
-	deselect = function()
+	
+	local deselect = function()
 	misc.TargetedCharacter = ""
 	end
 	local function Died(player)
@@ -1166,6 +1197,7 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end)
 	end
+	
 	OnDeath(player.Character)
 	player.CharacterAdded:connect(OnDeath)
 	player.CharacterRemoving:connect(function(chr)
@@ -1174,8 +1206,11 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end)
 	end
+	
 	for i,v in pairs(plrs:GetPlayers()) do Died(v) end
+	
 	plrs.PlayerAdded:connect(Died)
+	
 	local function CheckDN(plr)
 	if plr.DisplayName == plr.Name then
 	return plr.Name
@@ -1183,7 +1218,9 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	return plr.Name.." (DisplayName: "..plr.DisplayName..")"
 	end
 	end
+	
 	local function IsNotWhitelisted(plr)
+	
 	local function isteamwhitelisted()
 	local wl = false
 	for i,ttable in pairs(GameStats.Teams) do
@@ -1196,6 +1233,7 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	return wl
 	end
+	
 	local validteam, teamname = pcall(function()
 	return plr.Team.Name
 	end)
@@ -1209,6 +1247,7 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	return not table.find(WhitelistedPlrs, plr)
 	end
 	end
+	
 	local function selectcharacter(chr)
 	if misc.IsAimbotOn and misc.TargetedCharacter == "" and not GameStats.TargetCloserPlayers or GameStats.TargetCloserPlayers and misc.IsAimbotOn then
 	misc.TargetedCharacter = chr
@@ -1223,6 +1262,7 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end
 	end
+	
 	local function targetplayer(player)
 	local humanoidvalid, humanoid = pcall(function()
 	return player.Character.Humanoid
@@ -1231,6 +1271,7 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	selectcharacter(player.Character)
 	end
 	end
+	
 	if not lplr.Character then
 	game.StarterGui:SetCore("SendNotification", {
 	Title = "Aimbot target";
@@ -1239,11 +1280,14 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	})
 	lplr.CharacterAdded:Wait()
 	end
+	
 	local chr = lplr.Character
+	
 	repeat task.wait() until chr:FindFirstChild("Torso") or chr:FindFirstChild("UpperTorso")
 	local Torso = chr:FindFirstChild("Torso") or chr:FindFirstChild("UpperTorso")
+	
 	game.UserInputService.InputBegan:connect(function(key,processed)
-	    if processed then return end
+	if processed then return end
 	local keycode = key.KeyCode
 	if keycode == Keybinds.TargetedPartToggle then
 	if GameStats.Target == "Torso" or GameStats.Target == "UpperTorso" then
@@ -1256,9 +1300,11 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	misc.IsAimbotOn = not misc.IsAimbotOn
 	end
 	end)
+	
 	gamesettings.X.MouseButton1Click:connect(function()
 	gamesettings.Visible = false
 	end)
+	
 	for i,v in pairs(gamesettings:GetChildren()) do
 	if v:FindFirstChild("value") then
 	if type(GameStats[v.Name]) == "boolean" then
@@ -1271,6 +1317,7 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end
 	end
+	
 	gamesettings.Target.value.MouseButton1Click:connect(function()
 	if GameStats.Target == "Head" then
 	GameStats.Target = Torso.Name
@@ -1278,9 +1325,11 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	GameStats.Target = "Head"
 	end
 	end)
+	
 	Changed(GameStats,"Target",function(val)
 	gamesettings.Target.value.Text = val
 	end)
+	
 	Changed(gamesettings.MaxStuds.value, "Text", function(n)
 	local num = tonumber(n)
 	if num then
@@ -1289,6 +1338,7 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	GameStats.MaxStuds = 500
 	end
 	end)
+	
 	Changed(globalsettings.AimIntensity.value, "Text", function(n)
 	local num = tonumber(n)
 	if num then
@@ -1297,6 +1347,7 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	GlobalStats.AimIntensity = 250
 	end
 	end)
+	
 	for i,v in pairs(globalsettings:GetChildren()) do
 	if v:FindFirstChild("reset") then
 	v.reset.MouseButton1Click:connect(function()
@@ -1304,6 +1355,7 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	v.value.Text = "none"
 	end)
 	end
+	
 	if v:FindFirstChild("value") and v.Name:lower():find("toggle") then
 	v.value.MouseButton1Click:connect(function()
 	GlobalStats.Keybinds[v.Name] = "none"
@@ -1314,6 +1366,7 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	end)
 	end
 	end
+	
 	for i,v in pairs(teamui:GetChildren()) do
 	if v.ClassName == "TextBox" then
 	Changed(v, "Text", function(txt)
@@ -1331,19 +1384,24 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	end)
 	end
 	end
+	
 	Changed(GlobalStats,"TeamAutofill",function(v)
 	globalsettings.TeamAutofill.value.Text = tostring(v)
 	end)
+	
 	globalsettings.TeamAutofill.value.MouseButton1Click:connect(function()
 	GlobalStats.TeamAutofill = not GlobalStats.TeamAutofill
 	end)
+	
 	local wlmsg = teamui.WLTeam.Text
 	teamui.WLTeam.MouseButton1Click:connect(function()
+	
 	local function updatetxt(txt)
 	teamui.WLTeam.Text = txt
 	wait(2)
 	teamui.WLTeam.Text = wlmsg
 	end
+	
 	local team1 = teamui.yourteam.Text
 	local team2 = teamui.whitelistteam.Text
 	if teams:FindFirstChild(team1) and teams:FindFirstChild(team2) then
@@ -1365,25 +1423,33 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	updatetxt("Invalid team name(s)")
 	end
 	end)
+	
 	globalsettings.X.MouseButton1Click:connect(function()
 	globalsettings.Visible = false
 	end)
+	
 	teamui.X.MouseButton1Click:connect(function()
 	teamui.Visible = false
 	end)
+	
 	local AimbotFunction = game.RunService.RenderStepped:connect(function()
 	if misc.TargetedCharacter ~= "" then
 	local part
+	
 	local bool, result = pcall(function()
 	return misc.TargetedCharacter[GameStats.Target]
 	end)
+	
 	if bool then
 	part = result
 	else
 	part = misc.TargetedCharacter.HumanoidRootPart
 	end
+	
 	local v, onscreen = workspace.Camera:WorldToScreenPoint(part.Position)
+	
 	if onscreen then
+	
 	local StabilizeNum = GlobalStats.AimIntensity/workspace.Camera.ViewportSize.Y
 	local x, y = (v.X - m.X)*StabilizeNum, (v.Y - m.Y)*StabilizeNum
 	if misc.IsAimbotOn then
@@ -1393,6 +1459,7 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	deselect()
 	end
 	end
+	
 	if m.Target ~= nil then
 	for i,v in pairs(GetFamily(m.Target)) do
 	if game.Players:FindFirstChild(v.Name) then
@@ -1400,15 +1467,18 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	break
 	end
 	end
+	
 	if GameStats.TargetNPCs then
 	local npc = isnpc(m.Target)
 	if npc and npc.Humanoid.Health > 0 then
 	selectcharacter(npc)
+	
 	Changed(npc.Humanoid, "Health",function(hp)
 	if hp <= 0 and misc.TargetedCharacter == npc then
 	deselect()
 	end
 	end)
+	
 	end
 	end
 	end
@@ -1416,10 +1486,13 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	local table1 = {}
 	local table2 = {}
 	local PrioritizedPlrsOnScreen = {}
+	
 	for i,v in pairs(plrs:GetPlayers()) do
+	
 	local outcome = pcall(function()
 	 return v.Character.Humanoid and v.Character[GameStats.Target]
 	end)
+	
 	if outcome and v.Name ~= lplr.Name and v.Character.Humanoid.Health ~= 0 and IsNotWhitelisted(v) then
 	local pos = math.floor(lplr:DistanceFromCharacter(v.Character[GameStats.Target].Position))
 	local _, onscreen = workspace.Camera:WorldToScreenPoint(v.Character[GameStats.Target].Position)
@@ -1432,6 +1505,7 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end
 	end
+	
 	if #PrioritizedPlrsOnScreen == 0 then
 	table.sort(table2)
 	else
@@ -1442,14 +1516,18 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	table1[pos] = nil
 	end
 	end
+	
 	table.sort(table2)
 	end
+	
 	for position, player in pairs(table1) do
 	if table2[1] == position then
 	targetplayer(player)
 	end
 	end
+	
 	end
+	
 	if GameStats.FPEnabled then
 	if misc.TargetedCharacter ~= ""  and misc.IsAimbotOn then
 	plrs.LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
@@ -1460,6 +1538,7 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
 	end
 	end)
+	
 	game.StarterGui:SetCore("SendNotification", {
 	Title = "Aimbot Update:";
 	Duration = 5;
@@ -1469,12 +1548,15 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	deselect()
 	end
 	end)
+	
 	local MainFrame = script.Parent.MFrame
+	
 	MainFrame.X.MouseButton1Click:connect(function()
 	AimbotFunction:disconnect()
 	_G.RedsAimbot = false
 	MainFrame.Parent:Destroy()
 	end)
+	
 	Changed(misc, "TargetedCharacter", function(v)
 	if v ~= "" then
 	local player = game.Players:GetPlayerFromCharacter(v)
@@ -1489,23 +1571,29 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	MainFrame.CurrentTarget.TextColor3 = Color3.new(1,0,0)
 	end
 	end)
+	
 	MainFrame.Manager.MouseButton1Click:connect(function()
 	wlui.Visible = true
 	end)
+	
 	MainFrame.EditGameSettings.MouseButton1Click:connect(function()
 	gamesettings.Visible = true
 	end)
+	
 	MainFrame.EditGlobalSettings.MouseButton1Click:connect(function()
 	globalsettings.Visible = true
 	end)
+	
 	gamesettings.SwitchToTeam.MouseButton1Click:connect(function()
 	gamesettings.Visible = false
 	teamui.Visible = true
 	end)
+	
 	teamui.SwitchToSettings.MouseButton1Click:connect(function()
 	teamui.Visible = false
 	gamesettings.Visible = true
 	end)
+	
 	Changed(misc, "IsAimbotOn", function(v)
 	if v == false then
 	MainFrame.Status.TextColor3 = Color3.new(1,0,0)
@@ -1516,17 +1604,22 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	MainFrame.Status.Text = "enabled"
 	end
 	end)
+	
 	wlui.hide.MouseButton1Click:connect(function()
 	wlui.Visible = false
 	end)
+	
 	MainFrame.Status.MouseButton1Click:connect(function()
 	misc.IsAimbotOn = not misc.IsAimbotOn
 	end)
+	
 	local wlframe = wlui.WhitelistedInstances.whitelistframe
+	
 	local function AddtoList(ins)
 	local clone = wlframe:Clone()
 	clone.Visible = true
 	clone.Parent = wlframe.Parent
+	
 	local function togglefunc(Table)
 	local button
 	if Table == PrioritizedPlrs then
@@ -1534,28 +1627,34 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	else
 	button = clone.WhitelistToggle
 	end
+	
 	if ins.ClassName == "Player" and GameStats.WhitelistFriends and lplr:IsFriendsWith(ins.UserId) and Table == WhitelistedPlrs then
 	button.TextColor3 = Color3.new(0,1,0)
 	button.Text = "Yes"
 	table.insert(WhitelistedPlrs, ins)
 	end
+	
 	button.MouseButton1Click:connect(function()
+	
 	if button.Text == "No" then
 	button.TextColor3 = Color3.new(0,1,0)
 	button.Text = "Yes"
 	table.insert(Table,ins)
+	
 	if Table == PrioritizedPlrs and clone.WhitelistToggle.Text == "Yes" then
 	clone.WhitelistToggle.Text = "No"
 	clone.WhitelistToggle.TextColor3 = Color3.new(1,0,0)
 	local wlistplr = table.find(WhitelistedPlrs, ins)
 	table.remove(WhitelistedPlrs, wlistplr)
 	end
+	
 	if Table == WhitelistedPlrs and clone.PriorityToggle.Text == "Yes" then
 	clone.PriorityToggle.Text = "No"
 	clone.PriorityToggle.TextColor3 = Color3.new(1,0,0)
 	local prioplr = table.find(PrioritizedPlrs, ins)
 	table.remove(PrioritizedPlrs, prioplr)
 	end
+	
 	else
 	button.TextColor3 = Color3.new(1,0,0)
 	button.Text = "No"
@@ -1563,21 +1662,27 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	table.remove(Table,removeins)
 	end
 	end)
+	
 	end
 	clone.TextLabel.Text = ins.ClassName..": "..CheckDN(ins)
 	togglefunc(WhitelistedPlrs)
 	togglefunc(PrioritizedPlrs)
+	
 	coroutine.resume(coroutine.create(function()
 	repeat task.wait() until not game.Players:FindFirstChild(ins.Name)
 	clone:Destroy()
 	end))
+	
 	end
+	
 	for i,plr in pairs(plrs:GetPlayers()) do
 	if plr ~= lplr then
 	AddtoList(plr)
 	end
 	end
+	
 	plrs.PlayerAdded:connect(AddtoList)
+	
 	Changed(wlui.searchbar, "Text", function(txt)
 	for i,v in pairs(wlui.WhitelistedInstances:GetChildren()) do
 	if v.ClassName == "Frame" and v ~= wlframe then
@@ -1589,15 +1694,18 @@ function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	end
 	end)
+	
 	else
+	
 	game.StarterGui:SetCore("SendNotification", {
 	Title = "Aimbot";
 	Text = "You've already executed this. Deleting clone GUI.";
 	})
+	
 	task.wait(0.2)
 	script.Parent:Destroy()
 	end
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_CAZJ81_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_DGQJ80_FAKESCRIPT))
