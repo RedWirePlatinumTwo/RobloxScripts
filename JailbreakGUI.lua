@@ -495,14 +495,14 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_VTDL87_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
 	local function notify(text)
 	local notiftime = 0
 	for i = 1, text:len() do
-	notiftime = notiftime + 0.04
+	notiftime = notiftime + 0.05
 	end
 	notif.new({["Text"] = text,["Duration"] = notiftime})
 	end
@@ -583,7 +583,7 @@ function SCRIPT_VTDL87_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	syn.protect_gui(script.Parent)
 	end
 	
-	notify("Brought back the minimum number limits but as negative numbers")
+	notify("Brought back the minimum number limits but as negative numbers + robbery notifier now works with mansion")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 	local function makevisible(plr)
@@ -1007,6 +1007,7 @@ function SCRIPT_VTDL87_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	IconIds["museum"] = "4643749917"
 	IconIds["tomb"] = "6896911415"
 	IconIds["casino"] = "9255252609"
+	IconIds["mansion"] = "11831534984"
 	
 	for i,v in pairs(plrgui.WorldMarkersGui:GetChildren()) do
 	
@@ -1333,4 +1334,4 @@ function SCRIPT_VTDL87_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_VTDL87_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_EGCW72_FAKESCRIPT))
