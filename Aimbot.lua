@@ -952,7 +952,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_RRVF73_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_YKXG68_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1372,9 +1372,23 @@ function SCRIPT_RRVF73_FAKESCRIPT() -- Aimbot.Scripts
 	teamui.Visible = false
 	end)
 	local AimbotFunction = game.RunService.RenderStepped:connect(function()
-	if misc.TargetedCharacter ~= "" and misc.TargetedCharacter:FindFirstChild(GameStats.Target) then
-	local v, _ = workspace.Camera:WorldToScreenPoint(misc.TargetedCharacter[GameStats.Target].Position)
-	if _ then
+	if misc.TargetedCharacter ~= "" then
+	local part
+	local bool, result = pcall(function()
+	return misc.TargetedCharacter[GameStats.Target]
+	end)
+	if bool then
+	part = result
+	else
+	for i,v in pairs(misc.TargetedCharacter:GetChildren()) do
+	if v:IsA("BasePart") then
+	part = v
+	break
+	end
+	end
+	end
+	local v, onscreen = workspace.Camera:WorldToScreenPoint(part.Position)
+	if onscreen then
 	local StabilizeNum = GlobalStats.AimIntensity/workspace.Camera.ViewportSize.Y
 	local x, y = (v.X - m.X)*StabilizeNum, (v.Y - m.Y)*StabilizeNum
 	if misc.IsAimbotOn then
@@ -1388,6 +1402,7 @@ function SCRIPT_RRVF73_FAKESCRIPT() -- Aimbot.Scripts
 	for i,v in pairs(GetFamily(m.Target)) do
 	if game.Players:FindFirstChild(v.Name) then
 	targetplayer(game.Players[v.Name])
+	break
 	end
 	end
 	if GameStats.TargetNPCs then
@@ -1453,7 +1468,7 @@ function SCRIPT_RRVF73_FAKESCRIPT() -- Aimbot.Scripts
 	game.StarterGui:SetCore("SendNotification", {
 	Title = "Aimbot Update:";
 	Duration = 5;
-	Text = "Added closer player targeting via game settings, on by default.";})
+	Text = "Added closer player targeting via game settings, on by default + support for npc targeting.";})
 	plrs.PlayerRemoving:connect(function(plr)
 	if plr.Character and plr.Character == misc.TargetedCharacter then
 	deselect()
@@ -1590,4 +1605,4 @@ function SCRIPT_RRVF73_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_RRVF73_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_YKXG68_FAKESCRIPT))
