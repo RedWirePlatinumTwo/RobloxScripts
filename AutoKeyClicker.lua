@@ -142,11 +142,12 @@ toggle.TextStrokeTransparency = 0
 toggle.TextWrapped = true
 toggle.TextXAlignment = Enum.TextXAlignment.Left
 -- Scripts:
-function SCRIPT_HYZE75_FAKESCRIPT() -- AutoKeyClicker.LocalScript 
+function SCRIPT_UBIQ75_FAKESCRIPT() -- AutoKeyClicker.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = AutoKeyClicker
 	local frame = script.Parent.Mainframe
 	local clickspersecond = 0.1
+	
 	function doclickwait()
 	if clickspersecond > 0.03 then
 	task.wait(clickspersecond)
@@ -154,19 +155,26 @@ function SCRIPT_HYZE75_FAKESCRIPT() -- AutoKeyClicker.LocalScript
 	game.RunService.RenderStepped:Wait()
 	end
 	end
+	
 	frame.Draggable = true
+	
 	local Changed = function(part, PropertyName, func)
 		local current = part[PropertyName]
+	
 		coroutine.resume(coroutine.create(function()
 			while true do
 				repeat task.wait() until part[PropertyName] ~= current
+	
 				coroutine.resume(coroutine.create(function()
 					func(part[PropertyName], current, part)
 				end))
+	
 				current = part[PropertyName]
 			end
 		end))
+	
 	end
+	
 	frame.keyframe.AutomaticCanvasSize = 2
 	frame.keyframe.ScrollBarImageColor3 = Color3.fromRGB(0,0,127)
 	local Keycodes = {
@@ -196,6 +204,7 @@ function SCRIPT_HYZE75_FAKESCRIPT() -- AutoKeyClicker.LocalScript
 	clone.Parent = frame.keyframe
 	clone.Visible = true
 	clone.keylabel.Text = i
+	
 	coroutine.resume(coroutine.create(function()
 	while true do
 	if clone.togglebutton.Text == "On" then
@@ -205,6 +214,7 @@ function SCRIPT_HYZE75_FAKESCRIPT() -- AutoKeyClicker.LocalScript
 	doclickwait()
 	end
 	end))
+	
 	clone.togglebutton.MouseButton1Click:connect(function()
 	if clone.togglebutton.Text == "On" then
 	clone.togglebutton.TextColor3 = Color3.fromRGB(170,0,0)
@@ -214,7 +224,9 @@ function SCRIPT_HYZE75_FAKESCRIPT() -- AutoKeyClicker.LocalScript
 	clone.togglebutton.Text = "On"
 	end
 	end)
+	
 	end
+	
 	Changed(frame.clickrate, "Text", function(txt)
 	if tonumber(txt) then
 	clickspersecond = 1/tonumber(txt)
@@ -224,4 +236,4 @@ function SCRIPT_HYZE75_FAKESCRIPT() -- AutoKeyClicker.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_HYZE75_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_UBIQ75_FAKESCRIPT))
