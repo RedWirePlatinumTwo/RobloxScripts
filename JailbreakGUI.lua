@@ -495,7 +495,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_REBG88_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_DOSO75_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	if not _G.RedsJBGUI then
@@ -568,7 +568,7 @@ function SCRIPT_REBG88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if syn then
 	syn.protect_gui(script.Parent)
 	end
-	notify("Excluded the Hold E bypass script when opening airdrops.")
+	notify("Removed minimum number limit on speedhack and flyhack because cring")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local function makevisible(plr)
 	plr:GetPropertyChangedSignal("Visible"):connect(function()
@@ -868,9 +868,6 @@ function SCRIPT_REBG88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if num > 150 then
 	speeds.walkspeed = 150
 	end
-	if num < 5 then
-	speeds.walkspeed = 5
-	end
 	mainframe.Speednum.Text = tostring(speeds.walkspeed)
 	end)
 	Changed(mainframe.Speednum, "Text", function(txt)
@@ -1072,9 +1069,6 @@ function SCRIPT_REBG88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 	-- end of fly script
 	Changed(speeds, "flyspeed", function(num)
-	if num < 100 then
-	speeds.flyspeed = 100
-	end
 	if num > 640 then
 	speeds.flyspeed = 640
 	end
@@ -1160,4 +1154,4 @@ function SCRIPT_REBG88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_REBG88_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_DOSO75_FAKESCRIPT))
