@@ -952,7 +952,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_YKXG68_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_GZIZ76_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1380,12 +1380,7 @@ function SCRIPT_YKXG68_FAKESCRIPT() -- Aimbot.Scripts
 	if bool then
 	part = result
 	else
-	for i,v in pairs(misc.TargetedCharacter:GetChildren()) do
-	if v:IsA("BasePart") then
-	part = v
-	break
-	end
-	end
+	part = misc.TargetedCharacter.HumanoidRootPart
 	end
 	local v, onscreen = workspace.Camera:WorldToScreenPoint(part.Position)
 	if onscreen then
@@ -1605,4 +1600,4 @@ function SCRIPT_YKXG68_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_YKXG68_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_GZIZ76_FAKESCRIPT))
