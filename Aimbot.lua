@@ -952,7 +952,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_DGQJ80_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_KBCU70_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -971,25 +971,31 @@ function SCRIPT_DGQJ80_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	
 	local thread = function(f)
+	
 	return coroutine.resume(coroutine.create(function()
 	return f()
 	end))
+	
 	end
 	
 	local Changed = function(part, PropertyName, func)
 	    local current = part[PropertyName]
 		local elapsedTime = 0
+	
 	    thread(function()
 	        while true do
 	            repeat elapsedTime = elapsedTime + task.wait() until part[PropertyName] ~= current
+	
 				local v,v2 = thread(function()
 	            return func(part[PropertyName], current, elapsedTime)
 				end)
+	
 				if v2 == "stop" then break end
 				elapsedTime = 0
 	            current = part[PropertyName]
 	    end
 	    end)
+	
 	end
 	
 	local tablecount = function(t)
@@ -1002,72 +1008,76 @@ function SCRIPT_DGQJ80_FAKESCRIPT() -- Aimbot.Scripts
 	    local count = tablecount(Table)
 		local clone = table.clone(Table)
 		local elapsedTime = 0
+	
 	    thread(function()
 	        while true do
 	            repeat elapsedTime = elapsedTime + task.wait() until tablecount(Table) ~= count
 				if tablecount(Table) > count then
+	
 	            for i,v in pairs(Table) do
 	                if clone[i] == nil then
+	
 					local v,v2 = thread(function()
 	                    return func(i,v,elapsedTime)
 					end)
+	
 					if v2 == "stop" then break end
 	                end
 	            end
 				elapsedTime = 0
 				end
+	
 	            count = tablecount(Table)
 				clone = table.clone(Table)
 	    end
 	    end)
+	
 	end
 	
 	local TableChanged = function(Table,f)
+	
 	    for i,v in pairs(Table) do
+	
 	        Changed(Table,i,function(...)
 			f(i,...)
 			end)
+	
 	    end
+	
 	    TableAdded(Table,function(index,value,t)
 	        f(index,value,nil,t)
+	
 	        Changed(Table,index,function(...)
 			f(index,...)
 			end)
-	    end)
-	end
 	
-	GetFamily = function(ins)
-	local Pathway = {}
-	function _GetFamily(v)
-	if v.Parent ~= nil then
-	        table.insert(Pathway, 1, v)
-	        _GetFamily(v.Parent)
-	    else
-	       table.insert(Pathway, 1, v)
-	    end
-	end
-	_GetFamily(ins)
-	return Pathway
+	    end)
 	end
 	
 	local plrs = game.Players
 	local lplr = plrs.LocalPlayer
+	
 	local ischaracter = function(part)
+	
 	for i,v in pairs(GetFamily(part)) do
+	
 	for i,plr in pairs(plrs:GetPlayers()) do
 	if plr.Character == v then
 	return v
 	end
 	end
+	
 	end
 	end
 	
 	local isnpc = function(ins)
+	
 	for i,v in pairs(GetFamily(ins,true)) do
 	if v:FindFirstChildOfClass("Humanoid") and v:FindFirstChild("HumanoidRootPart") and not ischaracter(v) then
 	return v
 	end
 	end
+	
 	end
 	
 	local wlui = script.Parent.ManagerUI
@@ -1173,11 +1183,13 @@ function SCRIPT_DGQJ80_FAKESCRIPT() -- Aimbot.Scripts
 	clone.Parent = teamui.WhitelistedTeams
 	clone.TextLabel.Text = "["..ttable.team2.."] will be ignored when on ["..ttable.team1.."]"
 	clone.Visible = true
+	
 	clone.undo.MouseButton1Click:connect(function()
 	clone:Destroy()
 	local tfind = table.find(GameStats.Teams,ttable)
 	table.remove(GameStats.Teams,tfind)
 	end)
+	
 	end
 	
 	for i,v in pairs(GameStats.Teams) do
@@ -1189,22 +1201,27 @@ function SCRIPT_DGQJ80_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	local function Died(player)
 	if not player.Character then player.CharacterAdded:Wait() end
+	
 	local function OnDeath(chr)
 	chr:WaitForChild("Humanoid")
+	
 	chr.Humanoid.Died:connect(function()
 	if misc.TargetedCharacter == chr then
 	deselect()
 	end
 	end)
+	
 	end
 	
 	OnDeath(player.Character)
 	player.CharacterAdded:connect(OnDeath)
+	
 	player.CharacterRemoving:connect(function(chr)
 	if misc.TargetedCharacter == chr then
 	deselect()
 	end
 	end)
+	
 	end
 	
 	for i,v in pairs(plrs:GetPlayers()) do Died(v) end
@@ -1223,6 +1240,7 @@ function SCRIPT_DGQJ80_FAKESCRIPT() -- Aimbot.Scripts
 	
 	local function isteamwhitelisted()
 	local wl = false
+	
 	for i,ttable in pairs(GameStats.Teams) do
 	if teams:FindFirstChild(ttable.team1) and teams:FindFirstChild(ttable.team2) then
 	if lplr.Team.Name == ttable.team1 and plr.Team.Name == ttable.team2 then
@@ -1230,6 +1248,7 @@ function SCRIPT_DGQJ80_FAKESCRIPT() -- Aimbot.Scripts
 	break
 	end
 	end
+	
 	end
 	return wl
 	end
@@ -1264,9 +1283,11 @@ function SCRIPT_DGQJ80_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	
 	local function targetplayer(player)
+	
 	local humanoidvalid, humanoid = pcall(function()
 	return player.Character.Humanoid
 	end)
+	
 	if player.Name ~= lplr.Name and humanoidvalid and IsNotWhitelisted(player) and humanoid.Health ~= 0 then
 	selectcharacter(player.Character)
 	end
@@ -1372,11 +1393,13 @@ function SCRIPT_DGQJ80_FAKESCRIPT() -- Aimbot.Scripts
 	Changed(v, "Text", function(txt)
 	if GlobalStats.TeamAutofill then
 	local tnames = {}
+	
 	for i,v in pairs(teams:GetTeams()) do
 	if v.Name:lower():sub(1,txt:len()) == txt:lower() and not table.find(tnames,v.Name) then
 	table.insert(tnames,v.Name)
 	end
 	end
+	
 	if #tnames == 1 then
 	v.Text = tnames[1]
 	end
@@ -1406,12 +1429,14 @@ function SCRIPT_DGQJ80_FAKESCRIPT() -- Aimbot.Scripts
 	local team2 = teamui.whitelistteam.Text
 	if teams:FindFirstChild(team1) and teams:FindFirstChild(team2) then
 	local canadd = true
+	
 	for i, teamtable in pairs(GameStats.Teams) do
 	if teamtable.team1 == team1 and teamtable.team2 == team2 then
 	canadd = false
 	break
 	end
 	end
+	
 	if canadd then
 	local newtable = {["team1"] = team1 ,["team2"] = team2}
 	table.insert(GameStats.Teams, newtable)
@@ -1509,6 +1534,7 @@ function SCRIPT_DGQJ80_FAKESCRIPT() -- Aimbot.Scripts
 	if #PrioritizedPlrsOnScreen == 0 then
 	table.sort(table2)
 	else
+	
 	for pos, plr in pairs(table1) do
 	if not table.find(PrioritizedPlrsOnScreen, plr) then
 	local num = table.find(table2,pos)
@@ -1708,4 +1734,4 @@ function SCRIPT_DGQJ80_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_DGQJ80_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_KBCU70_FAKESCRIPT))
