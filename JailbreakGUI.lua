@@ -45,14 +45,14 @@ MainFrame.Name = "MainFrame"
 MainFrame.Parent = JailbreakGUI
 MainFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 MainFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-MainFrame.Position = UDim2.new(0.874887645, -384, 0.0564681552, 10)
+MainFrame.Position = UDim2.new(0.88322103, -384, 0.052764453, 10)
 MainFrame.Size = UDim2.new(0, 318, 0, 240)
 
 speed.Name = "speed"
 speed.Parent = MainFrame
 speed.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 speed.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-speed.Position = UDim2.new(0, 0, 0.62316668, 0)
+speed.Position = UDim2.new(0, 0, 0.710666656, 0)
 speed.Size = UDim2.new(0, 104, 0, 52)
 speed.ZIndex = 33
 speed.Font = Enum.Font.SourceSansBold
@@ -109,8 +109,8 @@ Airdrop.Name = "Airdrop"
 Airdrop.Parent = MainFrame
 Airdrop.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 Airdrop.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Airdrop.Position = UDim2.new(0, 0, 0.409999996, 0)
-Airdrop.Size = UDim2.new(0, 106, 0, 52)
+Airdrop.Position = UDim2.new(0, 0, 0.451666713, 0)
+Airdrop.Size = UDim2.new(0, 106, 0, 51)
 Airdrop.ZIndex = -222
 Airdrop.Font = Enum.Font.SourceSansBold
 Airdrop.Text = "Airdrop ESP"
@@ -124,7 +124,7 @@ forcedaytime.Name = "forcedaytime"
 forcedaytime.Parent = MainFrame
 forcedaytime.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 forcedaytime.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-forcedaytime.Position = UDim2.new(0.333333343, 0, 0.623000026, 0)
+forcedaytime.Position = UDim2.new(0.333333343, 0, 0.710666597, 0)
 forcedaytime.Size = UDim2.new(0, 106, 0, 52)
 forcedaytime.ZIndex = 0
 forcedaytime.Font = Enum.Font.SourceSansBold
@@ -153,7 +153,7 @@ more.Name = "more"
 more.Parent = MainFrame
 more.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 more.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-more.Position = UDim2.new(0.668999851, 0, 0.623166621, 0)
+more.Position = UDim2.new(0.668999851, 0, 0.710666597, 0)
 more.Size = UDim2.new(0, 105, 0, 52)
 more.Font = Enum.Font.SourceSansBold
 more.Text = "More Options"
@@ -183,7 +183,7 @@ Speednum.Name = "Speednum"
 Speednum.Parent = MainFrame
 Speednum.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 Speednum.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Speednum.Position = UDim2.new(0, 0, 0.622978091, 0)
+Speednum.Position = UDim2.new(0, 0, 0.710666597, 0)
 Speednum.Size = UDim2.new(0, 104, 0, 52)
 Speednum.Font = Enum.Font.SourceSansBold
 Speednum.PlaceholderColor3 = Color3.new(0.333333, 1, 0.498039)
@@ -199,8 +199,8 @@ gunmod.Name = "gunmod"
 gunmod.Parent = MainFrame
 gunmod.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 gunmod.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-gunmod.Position = UDim2.new(0.329939932, 0, 0.410478085, 0)
-gunmod.Size = UDim2.new(0, 106, 0, 52)
+gunmod.Position = UDim2.new(0.329939932, 0, 0.451666713, 0)
+gunmod.Size = UDim2.new(0, 106, 0, 51)
 gunmod.ZIndex = -99
 gunmod.Font = Enum.Font.SourceSansBold
 gunmod.Text = "Mod guns"
@@ -214,8 +214,8 @@ GravToggle.Name = "GravToggle"
 GravToggle.Parent = MainFrame
 GravToggle.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 GravToggle.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-GravToggle.Position = UDim2.new(0.668999851, 0, 0.410000026, 0)
-GravToggle.Size = UDim2.new(0, 105, 0, 52)
+GravToggle.Position = UDim2.new(0.668999851, 0, 0.451666713, 0)
+GravToggle.Size = UDim2.new(0, 105, 0, 51)
 GravToggle.ZIndex = 0
 GravToggle.Font = Enum.Font.SourceSansBold
 GravToggle.Text = "Gravity Toggle (196)"
@@ -287,15 +287,15 @@ otherFrame.Name = "otherFrame"
 otherFrame.Parent = JailbreakGUI
 otherFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 otherFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-otherFrame.Position = UDim2.new(0.469269663, 0, 0.270840377, 0)
-otherFrame.Size = UDim2.new(0, 324, 0, 183)
+otherFrame.Position = UDim2.new(0.469269693, 0, 0.268062592, 0)
+otherFrame.Size = UDim2.new(0, 351, 0, 217)
 otherFrame.Visible = false
 
 switch.Name = "switch"
 switch.Parent = otherFrame
 switch.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 switch.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-switch.Position = UDim2.new(0.31862399, 0, 0.754811764, 0)
+switch.Position = UDim2.new(0.347114027, 0, 0.796286404, 0)
 switch.Size = UDim2.new(0, 107, 0, 44)
 switch.Font = Enum.Font.SourceSansBold
 switch.Text = "Switch back"
@@ -308,7 +308,7 @@ RobberyNotifier.Parent = otherFrame
 RobberyNotifier.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 RobberyNotifier.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 RobberyNotifier.Position = UDim2.new(0.327883303, 0, 0, 0)
-RobberyNotifier.Size = UDim2.new(0, 108, 0, 47)
+RobberyNotifier.Size = UDim2.new(0, 117, 0, 47)
 RobberyNotifier.Font = Enum.Font.SourceSansBold
 RobberyNotifier.Text = "Robbery Notifier"
 RobberyNotifier.TextColor3 = Color3.new(0, 0.666667, 0)
@@ -321,8 +321,8 @@ gunshoptpbutton.Name = "gunshoptpbutton"
 gunshoptpbutton.Parent = otherFrame
 gunshoptpbutton.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 gunshoptpbutton.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-gunshoptpbutton.Position = UDim2.new(0, 0, 0.261999995, 0)
-gunshoptpbutton.Size = UDim2.new(0, 108, 0, 47)
+gunshoptpbutton.Position = UDim2.new(0, 0, 0.262000024, 0)
+gunshoptpbutton.Size = UDim2.new(0, 117, 0, 47)
 gunshoptpbutton.Font = Enum.Font.SourceSansBold
 gunshoptpbutton.Text = "Gunshop TP Enabled:"
 gunshoptpbutton.TextColor3 = Color3.new(1, 0.666667, 0)
@@ -335,8 +335,8 @@ infiniteyeet.Name = "infiniteyeet"
 infiniteyeet.Parent = otherFrame
 infiniteyeet.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 infiniteyeet.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-infiniteyeet.Position = UDim2.new(0.666999996, 0, 0, 0)
-infiniteyeet.Size = UDim2.new(0, 108, 0, 47)
+infiniteyeet.Position = UDim2.new(0.663817644, 0, 0, 0)
+infiniteyeet.Size = UDim2.new(0, 117, 0, 47)
 infiniteyeet.Font = Enum.Font.SourceSansBold
 infiniteyeet.Text = "Inf Yield"
 infiniteyeet.TextColor3 = Color3.new(0.333333, 0.333333, 0.498039)
@@ -349,8 +349,8 @@ flyhack.Name = "flyhack"
 flyhack.Parent = otherFrame
 flyhack.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 flyhack.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-flyhack.Position = UDim2.new(0.666999996, 0, 0.261999995, 0)
-flyhack.Size = UDim2.new(0, 108, 0, 47)
+flyhack.Position = UDim2.new(0.666999817, 0, 0.262000024, 0)
+flyhack.Size = UDim2.new(0, 116, 0, 47)
 flyhack.Font = Enum.Font.SourceSansBold
 flyhack.Text = "Fly hack (Left CTRL + F)"
 flyhack.TextColor3 = Color3.new(0.333333, 1, 1)
@@ -363,7 +363,7 @@ removeragdoll.Name = "removeragdoll"
 removeragdoll.Parent = otherFrame
 removeragdoll.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 removeragdoll.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-removeragdoll.Size = UDim2.new(0, 108, 0, 47)
+removeragdoll.Size = UDim2.new(0, 115, 0, 47)
 removeragdoll.Font = Enum.Font.SourceSansBold
 removeragdoll.Text = "Remove Ragdoll"
 removeragdoll.TextColor3 = Color3.new(1, 0.333333, 0.498039)
@@ -376,8 +376,8 @@ casinocode.Name = "casinocode"
 casinocode.Parent = otherFrame
 casinocode.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 casinocode.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-casinocode.Position = UDim2.new(-0.00224680966, 0, 0.518830538, 0)
-casinocode.Size = UDim2.new(0, 108, 0, 43)
+casinocode.Position = UDim2.new(0, 0, 0.555696845, 0)
+casinocode.Size = UDim2.new(0, 116, 0, 43)
 casinocode.ZIndex = 0
 casinocode.Font = Enum.Font.SourceSansBold
 casinocode.Text = "Click to get Casino code (if open)"
@@ -391,8 +391,8 @@ keybypass.Name = "keybypass"
 keybypass.Parent = otherFrame
 keybypass.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 keybypass.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-keybypass.Position = UDim2.new(0.328000009, 0, 0.261999995, 0)
-keybypass.Size = UDim2.new(0, 108, 0, 47)
+keybypass.Position = UDim2.new(0.333333343, 0, 0.262000024, 0)
+keybypass.Size = UDim2.new(0, 116, 0, 47)
 keybypass.ZIndex = 0
 keybypass.Font = Enum.Font.SourceSansBold
 keybypass.Text = "Keycard Bypass"
@@ -406,8 +406,8 @@ respawn.Name = "respawn"
 respawn.Parent = otherFrame
 respawn.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 respawn.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-respawn.Position = UDim2.new(0.667000115, 0, 0.518999934, 0)
-respawn.Size = UDim2.new(0, 107, 0, 43)
+respawn.Position = UDim2.new(0.667000175, 0, 0.555696845, 0)
+respawn.Size = UDim2.new(0, 116, 0, 43)
 respawn.ZIndex = -1
 respawn.Font = Enum.Font.SourceSansBold
 respawn.Text = "Choose spawn point (makes u die)"
@@ -421,8 +421,8 @@ flyhacknum.Name = "flyhacknum"
 flyhacknum.Parent = otherFrame
 flyhacknum.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 flyhacknum.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-flyhacknum.Position = UDim2.new(0.666999996, 0, 0.261999995, 0)
-flyhacknum.Size = UDim2.new(0, 108, 0, 47)
+flyhacknum.Position = UDim2.new(0.666999817, 0, 0.262000024, 0)
+flyhacknum.Size = UDim2.new(0, 116, 0, 47)
 flyhacknum.Visible = false
 flyhacknum.Font = Enum.Font.SourceSansBold
 flyhacknum.PlaceholderColor3 = Color3.new(0.333333, 1, 1)
@@ -437,8 +437,8 @@ deleteradio.Name = "deleteradio"
 deleteradio.Parent = otherFrame
 deleteradio.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 deleteradio.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-deleteradio.Position = UDim2.new(0.333333343, 0, 0.518999934, 0)
-deleteradio.Size = UDim2.new(0, 106, 0, 42)
+deleteradio.Position = UDim2.new(0.333333343, 0, 0.555696845, 0)
+deleteradio.Size = UDim2.new(0, 117, 0, 43)
 deleteradio.ZIndex = -1
 deleteradio.Font = Enum.Font.SourceSansBold
 deleteradio.Text = "Delete Radio Gui (its stupid)"
@@ -495,7 +495,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_SPHL81_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_VTDL87_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
@@ -583,7 +583,7 @@ function SCRIPT_SPHL81_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	syn.protect_gui(script.Parent)
 	end
 	
-	notify("Removed minimum number limit on speedhack and flyhack because cring")
+	notify("Brought back the minimum number limits but as negative numbers")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 	local function makevisible(plr)
@@ -968,6 +968,9 @@ function SCRIPT_SPHL81_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if num > 150 then
 	speeds.walkspeed = 150
 	end
+	if num < -150 then
+	speeds.walkspeed = -150
+	end
 	mainframe.Speednum.Text = tostring(speeds.walkspeed)
 	end)
 	
@@ -1232,6 +1235,9 @@ function SCRIPT_SPHL81_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if num > 640 then
 	speeds.flyspeed = 640
 	end
+	if num < -640 then
+	speeds.flyspeed = -640
+	end
 	otherframe.flyhacknum.Text = tostring(speeds.flyspeed)
 	end)
 	
@@ -1327,4 +1333,4 @@ function SCRIPT_SPHL81_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_SPHL81_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_VTDL87_FAKESCRIPT))
