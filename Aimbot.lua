@@ -1088,6 +1088,7 @@ function SCRIPT_RRVF73_FAKESCRIPT() -- Aimbot.Scripts
 	GameStats.MaxStuds = 500
 	GameStats.OwnTeamWhitelisted = true
 	GameStats.Teams = {}
+	GameStats.TargetCloserPlayers = true
 	end
 	if isfile and loadfile and isfile("RedsAimbotStats.lua") then
 	GlobalStats = loadfile("RedsAimbotStats.lua")()
