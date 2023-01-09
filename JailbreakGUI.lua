@@ -495,7 +495,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_GTTL79_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_SPHL81_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
@@ -527,15 +527,19 @@ function SCRIPT_GTTL79_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 	local Changed = function(part, PropertyName, func)
 	    local current = part[PropertyName]
+	
 	    coroutine.resume(coroutine.create(function()
 	        while true do
 	            repeat task.wait() until part[PropertyName] ~= current
+	
 				coroutine.resume(coroutine.create(function()
 	            func(part[PropertyName], current, part)
 				end))
+	
 	            current = part[PropertyName]
 	    end
 	    end))
+	
 	end
 	
 	local GetFamily = function(ins, reverseorder)
@@ -624,11 +628,13 @@ function SCRIPT_GTTL79_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local moduleui = require(game.ReplicatedStorage.Module.UI)
 	
 	game.RunService.RenderStepped:connect(function()
+	
 		for i,a in pairs(moduleui.CircleAction.Specs) do
 		if a.Duration ~= false and HoldEBypass and a.Name ~= "Rob" and a.Name ~= "Open Crate" then
 		   a.Timed = false;
 		end
 		end
+	
 	end)
 	
 	mainframe.GravToggle.Text = "Gravity Toggle ("..tostring(math.floor(workspace.Gravity))..")"
@@ -665,26 +671,34 @@ function SCRIPT_GTTL79_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 	Changed(props, "guitext", function(val)
 	airdropframe.bguis.Text = bguistemplate..tostring(val)
+	
 	for i,v in pairs(workspace:GetChildren()) do
+	
 	local success, returnval = pcall(function()
 	return v.Root.BillboardGui.TextButton
 	end)
+	
 	if success then
 	returnval.Visible = val
 	end
 	end
+	
 	end)
 	
 	Changed(props, "pointers", function(val)
 	airdropframe.pointers.Text = pointerstemplate..tostring(val)
+	
 	for i,v in pairs(workspace:GetChildren()) do
+	
 	local success, returnval = pcall(function()
 	return v.Root.RopeConstraint
 	end)
+	
 	if success then
 	returnval.Visible = val
 	end
 	end
+	
 	end)
 	
 	airdropframe.bguis.MouseButton1Click:connect(function()
@@ -776,6 +790,7 @@ function SCRIPT_GTTL79_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 	local FormatNumber = function(n)
 	local n2 = ""
+	
 	for i = 1, tostring(n):len() do
 	    local v = tostring(n):reverse():sub(i,i)
 	    if i/3 == math.floor(i/3) then
@@ -784,6 +799,7 @@ function SCRIPT_GTTL79_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	        n2 = n2..v
 	    end
 	end
+	
 	local n3 = n2:reverse()
 	if n3:sub(1,1) == "," then
 	n3 = n3:sub(2, n3:len())
@@ -799,7 +815,9 @@ function SCRIPT_GTTL79_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end))
 	end
 	
-	for i,v in pairs(workspace:GetChildren()) do gui(v) end
+	for i,v in pairs(workspace:GetChildren()) do
+	gui(v)
+	end
 	
 	workspace.ChildAdded:connect(gui)
 	
@@ -810,15 +828,19 @@ function SCRIPT_GTTL79_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local itemconfig = game.ReplicatedStorage.Game.ItemConfig
 	
 	local function changegunstats(Table)
+	
 	for i,v in pairs(itemconfig:GetChildren()) do
 	local gun = require(v)
 	if v.Name == "Shotgun" then
 	gun.BulletSpread = 0.02
 	end
+	
 	for index, value in pairs(Table) do
 	gun[index] = value
 	end
+	
 	end
+	
 	end
 	
 	mainframe.gunmod.MouseButton1Click:connect(function()
@@ -838,10 +860,13 @@ function SCRIPT_GTTL79_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local function removeTI(ti)
 	if ti.ClassName == "TouchTransmitter" then
 	local laserdescendant = false
+	
 	for i, fam in pairs(GetFamily(ti)) do
+	
 	local idklmao, notnil = pcall(function()
 	return fam.Parent ~= nil and fam.Parent.Parent ~= nil and fam.Parent.Parent.Parent ~= nil
 	end)
+	
 	if notnil == true then
 	if fam.Parent.Name:lower():match("laser") or fam.Parent.Name:lower():match("camera") or fam.Parent.Parent.Parent.Name == "Floors" then
 	laserdescendant = true
@@ -970,12 +995,22 @@ function SCRIPT_GTTL79_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local robtitle = "RedWire's Robbery Notifier"
 	
 	otherframe.RobberyNotifier.MouseButton1Click:connect(function()
-		if not RobberyNotifier then
-		RobberyNotifier = true
-	local IconIds = {["bank truck"] = "6133383545",["gas station"] = "4643750797",["donut shop"] = "4643750660", ["museum"] = "4643749917", ["tomb"] = "6896911415",["casino"] = "9255252609"}
+	if not RobberyNotifier then
+	RobberyNotifier = true
+	local IconIds = {}
+	IconIds["bank truck"] = "6133383545"
+	IconIds["gas station"] = "4643750797"
+	IconIds["donut shop"] = "4643750660"
+	IconIds["museum"] = "4643749917"
+	IconIds["tomb"] = "6896911415"
+	IconIds["casino"] = "9255252609"
+	
 	for i,v in pairs(plrgui.WorldMarkersGui:GetChildren()) do
+	
 	for i2, v2 in pairs(v:GetChildren()) do
+	
 	for name, id in pairs(IconIds) do
+	
 	if v2.ImageLabel.Image == "rbxassetid://"..id then
 	
 	Changed(v2, "ImageColor3", function(color)
@@ -985,8 +1020,11 @@ function SCRIPT_GTTL79_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end)
 	
 	end
+	
 	end
+	
 	end
+	
 	end
 		local smoke = workspace.PowerPlant.Smoke.smoke
 	
@@ -1100,6 +1138,7 @@ function SCRIPT_GTTL79_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 		pcall(function()
 		local hrp
+	
 		for i,v in pairs(workspace.Vehicles:GetChildren()) do
 		    if pcall(function() return v.Engine and v.Seat.PlayerName end) then
 		        if v.Seat.PlayerName.Value == lplr.Name then
@@ -1231,17 +1270,21 @@ function SCRIPT_GTTL79_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	otherframe.casinocode.MouseButton1Down:connect(function()
 	local codes = workspace.Casino.RobberyDoor.Codes
 	local code
+	
 	for i,v in pairs(codes:GetChildren()) do
 	if v:FindFirstChildOfClass("Part").SurfaceGui.TextLabel.Text ~= "" then
 	    code = v
 	    break
 	end
 	end
+	
 	local txt = ""
 	if code then
+	
 	for i,v in pairs(code:GetChildren()) do
 	    txt = txt..v.SurfaceGui.TextLabel.Text
 	end
+	
 	otherframe.casinocode.Text = txt
 	else
 	otherframe.casinocode.Text = "code non-existent"
@@ -1284,4 +1327,4 @@ function SCRIPT_GTTL79_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_GTTL79_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_SPHL81_FAKESCRIPT))
