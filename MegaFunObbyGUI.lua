@@ -166,7 +166,7 @@ X.TextScaled = true
 X.TextSize = 14
 X.TextWrapped = true
 -- Scripts:
-function SCRIPT_DKLD67_FAKESCRIPT() -- Megafunobby.LocalScript 
+function SCRIPT_RPLS76_FAKESCRIPT() -- Megafunobby.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = Megafunobby
 	local frame = script.Parent.MainFrame
@@ -175,30 +175,37 @@ function SCRIPT_DKLD67_FAKESCRIPT() -- Megafunobby.LocalScript
 	local lplr = game.Players.LocalPlayer
 	local plrgui = lplr.PlayerGui
 	if game.PlaceId == 12996397 then
+	
 	plrgui.Chat.Frame.Changed:connect(function()
 	if plrgui.Chat.Frame.Visible ~= true then
 	game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
 	end
 	end)
+	
 	local skip = plrgui.MFO_UI.Groundbar.SKIPS
 	skip.RemainT.Text = "SKIPS LEFT : inf"
 	plrgui.Note.Contents.Info_Skip:Destroy()
+	
 	skip.SELECT.MouseButton1Click:connect(function()
 	lplr.Character.HumanoidRootPart.CFrame = workspace.stages[lplr.leaderstats.Stage.Value + 1].CFrame
 	end)
+	
 	elseif game.PlaceId == 982130670 then
 	local f = plrgui.HUD.skipsLabel
 	local skips = f:Clone()
 	skips.Parent = f.Parent
 	f:Destroy()
 	skips.Text = "Skips Left: inf"
+	
 	skips.MouseButton1Click:connect(function()
 	lplr.Character.HumanoidRootPart.CFrame = workspace.stages[lplr.leaderstats.Stage.Value + 1].CFrame
 	end)
+	
 	end
 	frame.respawn.MouseButton1Click:connect(function()
 	game.Players.LocalPlayer.Character.Humanoid.Health = 0
 	end)
+	
 	frame.delkill.MouseButton1Click:connect(function()
 		for i, kill in ipairs(workspace.kill:GetChildren()) do
 		if kill:IsA("BasePart") and kill.Transparency ~= 1 then
@@ -206,6 +213,7 @@ function SCRIPT_DKLD67_FAKESCRIPT() -- Megafunobby.LocalScript
 		end
 	end
 	end)
+	
 		local mps = game:GetService("MarketplaceService")
 		local success, gamename = pcall(mps.GetProductInfo, mps, game.PlaceId)
 		if success then
@@ -213,6 +221,7 @@ function SCRIPT_DKLD67_FAKESCRIPT() -- Megafunobby.LocalScript
 			namestring = namestring:gsub("Mega Fun Obby 2", "oof")
 			frame.Endstage.Textbox.Text = string.match(namestring,"%d+")
 		end
+	
 	frame.stageskip.MouseButton1Click:connect(function()
 	local start = tonumber(frame.Currentstage.Textbox.Text)
 	local End = tonumber(frame.Endstage.Textbox.Text)
@@ -224,14 +233,16 @@ function SCRIPT_DKLD67_FAKESCRIPT() -- Megafunobby.LocalScript
 			end
 	end
 	end)
+	
 	local stage = game.Players.LocalPlayer.leaderstats.Stage
 	frame.Currentstage.Textbox.Text = tostring(stage.Value)
 	stage.Changed:connect(function()
 	frame.Currentstage.Textbox.Text = tostring(stage.Value)
 	end)
+	
 	frame.X.MouseButton1Click:connect(function()
 	frame.Parent:Destroy()
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_DKLD67_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_RPLS76_FAKESCRIPT))
