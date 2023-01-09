@@ -952,7 +952,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_GZIZ76_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_CAZJ81_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1261,7 +1261,7 @@ function SCRIPT_GZIZ76_FAKESCRIPT() -- Aimbot.Scripts
 	end)
 	for i,v in pairs(gamesettings:GetChildren()) do
 	if v:FindFirstChild("value") then
-	if v.Name == "AutoTarget" or v.Name == "FPEnabled" or v.Name == "OwnTeamWhitelisted" or v.Name == "WhitelistFriends" or v.Name == "TargetNPCs" then
+	if type(GameStats[v.Name]) == "boolean" then
 	v.value.MouseButton1Click:connect(function()
 	GameStats[v.Name] = not GameStats[v.Name]
 	end)
@@ -1600,4 +1600,4 @@ function SCRIPT_GZIZ76_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_GZIZ76_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_CAZJ81_FAKESCRIPT))
