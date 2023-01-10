@@ -583,7 +583,7 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	syn.protect_gui(script.Parent)
 	end
 	
-	notify("Brought back the minimum number limits but as negative numbers + robbery notifier now works with mansion")
+	notify("Brought back the minimum number limits but as 0 + robbery notifier now works with mansion")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 	local function makevisible(plr)
@@ -968,8 +968,8 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if num > 150 then
 	speeds.walkspeed = 150
 	end
-	if num < -1 then
-	speeds.walkspeed = -1
+	if num < 0 then
+	speeds.walkspeed = 0
 	end
 	mainframe.Speednum.Text = tostring(speeds.walkspeed)
 	end)
@@ -1236,8 +1236,8 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if num > 640 then
 	speeds.flyspeed = 640
 	end
-	if num < -1 then
-	speeds.flyspeed = -1
+	if num < 0 then
+	speeds.flyspeed = 0
 	end
 	otherframe.flyhacknum.Text = tostring(speeds.flyspeed)
 	end)
