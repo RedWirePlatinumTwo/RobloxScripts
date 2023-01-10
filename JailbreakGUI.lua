@@ -968,8 +968,8 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if num > 150 then
 	speeds.walkspeed = 150
 	end
-	if num < -150 then
-	speeds.walkspeed = -150
+	if num < -1 then
+	speeds.walkspeed = -1
 	end
 	mainframe.Speednum.Text = tostring(speeds.walkspeed)
 	end)
@@ -1236,8 +1236,8 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if num > 640 then
 	speeds.flyspeed = 640
 	end
-	if num < -640 then
-	speeds.flyspeed = -640
+	if num < -1 then
+	speeds.flyspeed = -1
 	end
 	otherframe.flyhacknum.Text = tostring(speeds.flyspeed)
 	end)
