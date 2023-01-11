@@ -37,21 +37,18 @@ local function setname(t, name)
         end
     end
     if type(name) == "number" then
-        name = "Table"..tostring(name)
+        name = "t"..tostring(name)
         name = name:gsub("%W", "")
     end
     if type(name) ~= "string" then name = "Table" checkreps() return end
-        name = name:gsub(" ", "")
+        name = name:gsub("%W", "")
+        if tonumber(name:sub(1,1)) then
+        name = "t"..name
+        end
         if name:len() == 0 then
         name = "Table"
         checkreps()
         return
-        end
-        if name == reformatstring(name) then
-           checkreps()
-           else
-            name = "Table"
-            checkreps()
         end
 end
 
