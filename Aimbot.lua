@@ -952,7 +952,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_WUVR71_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_NAWG90_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1039,7 +1039,7 @@ function SCRIPT_WUVR71_FAKESCRIPT() -- Aimbot.Scripts
 	    for i,v in pairs(Table) do
 	
 	        Changed(Table,i,function(...)
-			f(i,...)
+				f(i,...)
 			end)
 	
 	    end
@@ -1048,7 +1048,7 @@ function SCRIPT_WUVR71_FAKESCRIPT() -- Aimbot.Scripts
 	        f(index,value,nil,t)
 	
 	        Changed(Table,index,function(...)
-			f(index,...)
+				f(index,...)
 			end)
 	
 	    end)
@@ -1352,7 +1352,7 @@ function SCRIPT_WUVR71_FAKESCRIPT() -- Aimbot.Scripts
 	end)
 	
 	Changed(gamesettings.MaxStuds.value, "Text", function(n)
-	local num = tonumber(n)
+		local num = tonumber(n)
 		if num then
 			GameStats.MaxStuds = num
 		else 
@@ -1361,7 +1361,7 @@ function SCRIPT_WUVR71_FAKESCRIPT() -- Aimbot.Scripts
 	end)
 	
 	Changed(globalsettings.AimIntensity.value, "Text", function(n)
-	local num = tonumber(n)
+		local num = tonumber(n)
 		if num then
 			GlobalStats.AimIntensity = num
 		else
@@ -1391,19 +1391,19 @@ function SCRIPT_WUVR71_FAKESCRIPT() -- Aimbot.Scripts
 	for i,v in pairs(teamui:GetChildren()) do
 		if v.ClassName == "TextBox" then
 			Changed(v, "Text", function(txt)
-			if GlobalStats.TeamAutofill then
-				local tnames = {}
+				if GlobalStats.TeamAutofill then
+					local tnames = {}
+		
+					for i,v in pairs(teams:GetTeams()) do
+						if v.Name:lower():sub(1,txt:len()) == txt:lower() and not table.find(tnames,v.Name) then
+							table.insert(tnames,v.Name)
+						end
+					end
 	
-				for i,v in pairs(teams:GetTeams()) do
-					if v.Name:lower():sub(1,txt:len()) == txt:lower() and not table.find(tnames,v.Name) then
-						table.insert(tnames,v.Name)
+					if #tnames == 1 then
+						v.Text = tnames[1]
 					end
 				end
-	
-				if #tnames == 1 then
-					v.Text = tnames[1]
-				end
-			end
 			end)
 	end
 	end
@@ -1584,18 +1584,18 @@ function SCRIPT_WUVR71_FAKESCRIPT() -- Aimbot.Scripts
 	end)
 	
 	Changed(misc, "TargetedCharacter", function(v)
-	if v ~= "" then
-		local player = game.Players:GetPlayerFromCharacter(v)
-		if player then
-			MainFrame.CurrentTarget.Text = CheckDN(player)
+		if v ~= "" then
+			local player = game.Players:GetPlayerFromCharacter(v)
+			if player then
+				MainFrame.CurrentTarget.Text = CheckDN(player)
+			else
+				MainFrame.CurrentTarget.Text = v.Name
+			end
+			MainFrame.CurrentTarget.TextColor3 = Color3.new(0,1,0)
 		else
-		MainFrame.CurrentTarget.Text = v.Name
+			MainFrame.CurrentTarget.Text = "none"
+			MainFrame.CurrentTarget.TextColor3 = Color3.new(1,0,0)
 		end
-		MainFrame.CurrentTarget.TextColor3 = Color3.new(0,1,0)
-	else
-		MainFrame.CurrentTarget.Text = "none"
-		MainFrame.CurrentTarget.TextColor3 = Color3.new(1,0,0)
-	end
 	end)
 	
 	MainFrame.Manager.MouseButton1Click:connect(function()
@@ -1621,14 +1621,14 @@ function SCRIPT_WUVR71_FAKESCRIPT() -- Aimbot.Scripts
 	end)
 	
 	Changed(misc, "IsAimbotOn", function(v)
-	if v == false then
-		MainFrame.Status.TextColor3 = Color3.new(1,0,0)
-		MainFrame.Status.Text = "disabled"
-		deselect()
-	else
-		MainFrame.Status.TextColor3 = Color3.new(0,1,0)
-		MainFrame.Status.Text = "enabled"
-	end
+		if v == false then
+			MainFrame.Status.TextColor3 = Color3.new(1,0,0)
+			MainFrame.Status.Text = "disabled"
+			deselect()
+		else
+			MainFrame.Status.TextColor3 = Color3.new(0,1,0)
+			MainFrame.Status.Text = "enabled"
+		end
 	end)
 	
 	wlui.hide.MouseButton1Click:connect(function()
@@ -1647,57 +1647,57 @@ function SCRIPT_WUVR71_FAKESCRIPT() -- Aimbot.Scripts
 	clone.Parent = wlframe.Parent
 	
 	local function togglefunc(Table)
-	local button
-	if Table == PrioritizedPlrs then
-		button = clone.PriorityToggle
-	else
-		button = clone.WhitelistToggle
-	end
+		local button
+			if Table == PrioritizedPlrs then
+				button = clone.PriorityToggle
+			else
+				button = clone.WhitelistToggle
+			end
 	
-	if ins.ClassName == "Player" and GameStats.WhitelistFriends and lplr:IsFriendsWith(ins.UserId) and Table == WhitelistedPlrs then
-		button.TextColor3 = Color3.new(0,1,0)
-		button.Text = "Yes"
-		table.insert(WhitelistedPlrs, ins)
-	end
+		if ins.ClassName == "Player" and GameStats.WhitelistFriends and lplr:IsFriendsWith(ins.UserId) and Table == WhitelistedPlrs then
+			button.TextColor3 = Color3.new(0,1,0)
+			button.Text = "Yes"
+			table.insert(WhitelistedPlrs, ins)
+		end
 	
-	button.MouseButton1Click:connect(function()
+		button.MouseButton1Click:connect(function()
 	
-	if button.Text == "No" then
-		button.TextColor3 = Color3.new(0,1,0)
-		button.Text = "Yes"
-		table.insert(Table,ins)
+		if button.Text == "No" then
+			button.TextColor3 = Color3.new(0,1,0)
+			button.Text = "Yes"
+			table.insert(Table,ins)
 	
-	if Table == PrioritizedPlrs and clone.WhitelistToggle.Text == "Yes" then
-		clone.WhitelistToggle.Text = "No"
-		clone.WhitelistToggle.TextColor3 = Color3.new(1,0,0)
-		local wlistplr = table.find(WhitelistedPlrs, ins)
-		table.remove(WhitelistedPlrs, wlistplr)
-	end
+		if Table == PrioritizedPlrs and clone.WhitelistToggle.Text == "Yes" then
+			clone.WhitelistToggle.Text = "No"
+			clone.WhitelistToggle.TextColor3 = Color3.new(1,0,0)
+			local wlistplr = table.find(WhitelistedPlrs, ins)
+			table.remove(WhitelistedPlrs, wlistplr)
+		end
 	
-	if Table == WhitelistedPlrs and clone.PriorityToggle.Text == "Yes" then
-		clone.PriorityToggle.Text = "No"
-		clone.PriorityToggle.TextColor3 = Color3.new(1,0,0)
-		local prioplr = table.find(PrioritizedPlrs, ins)
-		table.remove(PrioritizedPlrs, prioplr)
-	end
+		if Table == WhitelistedPlrs and clone.PriorityToggle.Text == "Yes" then
+			clone.PriorityToggle.Text = "No"
+			clone.PriorityToggle.TextColor3 = Color3.new(1,0,0)
+			local prioplr = table.find(PrioritizedPlrs, ins)
+			table.remove(PrioritizedPlrs, prioplr)
+		end
 	
-	else
-		button.TextColor3 = Color3.new(1,0,0)
-		button.Text = "No"
-		local removeins = table.find(Table, ins)
-		table.remove(Table,removeins)
-	end
-	end)
+		else
+			button.TextColor3 = Color3.new(1,0,0)
+			button.Text = "No"
+			local removeins = table.find(Table, ins)
+			table.remove(Table,removeins)
+		end
+		end)
 	
-	end
-	clone.TextLabel.Text = ins.ClassName..": "..CheckDN(ins)
-	togglefunc(WhitelistedPlrs)
-	togglefunc(PrioritizedPlrs)
+		end
+		clone.TextLabel.Text = ins.ClassName..": "..CheckDN(ins)
+		togglefunc(WhitelistedPlrs)
+		togglefunc(PrioritizedPlrs)
 	
-	coroutine.resume(coroutine.create(function()
-	repeat task.wait() until not game.Players:FindFirstChild(ins.Name)
-	clone:Destroy()
-	end))
+		coroutine.resume(coroutine.create(function()
+			repeat task.wait() until not game.Players:FindFirstChild(ins.Name)
+			clone:Destroy()
+		end))
 	
 	end
 	
@@ -1711,15 +1711,15 @@ function SCRIPT_WUVR71_FAKESCRIPT() -- Aimbot.Scripts
 	
 	Changed(wlui.searchbar, "Text", function(txt)
 	
-	for i,v in pairs(wlui.WhitelistedInstances:GetChildren()) do
-		if v.ClassName == "Frame" and v ~= wlframe then
-			if v.TextLabel.Text:lower():match(txt:lower()) then
-				v.Visible = true
-		else
-			v.Visible = false
+		for i,v in pairs(wlui.WhitelistedInstances:GetChildren()) do
+			if v.ClassName == "Frame" and v ~= wlframe then
+				if v.TextLabel.Text:lower():match(txt:lower()) then
+					v.Visible = true
+			else
+				v.Visible = false
+				end
 			end
 		end
-	end
 	
 	end)
 	
@@ -1736,4 +1736,4 @@ function SCRIPT_WUVR71_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_WUVR71_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_NAWG90_FAKESCRIPT))
