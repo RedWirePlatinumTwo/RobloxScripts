@@ -36,7 +36,10 @@ local function setname(t, name)
             indexs[name] = t
         end
     end
-    
+    if type(name) == "number" then
+        name = "Table"..tostring(name)
+        name = name:gsub("%W", "")
+    end
     if type(name) ~= "string" then name = "Table" checkreps() return end
         name = name:gsub(" ", "")
         if name:len() == 0 then
