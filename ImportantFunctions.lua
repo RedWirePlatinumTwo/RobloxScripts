@@ -1,11 +1,74 @@
 catchrepeats = {}
-getgenv().TableToString = function(Table, IsInternalTable)
+indexreps = {}
+indexs = {}
+local function reformatstring(s)
+	local restring = ""
+	for i = 1, s:len() do
+	if s:sub(i,i):find("%p") then
+    restring = restring.."\\"..s:sub(i,i)
+    elseif s:sub(i,i) == "\n" then
+    restring = restring.."\\n"..s:sub(i-1,i-1)
+    else
+    restring = restring..s:sub(i,i)
+	end
+	end
+	return restring
+end
+
+getgenv().TableToString = function(Table, TableName, IsInternalTable)
 local s = ""
+
+local function setname(t, name)
+    
+    local function checkreps()
+        local reps = 0
+        table.insert(indexreps,name)
+        
+        for i,v in pairs(indexreps) do
+            if v == name then
+                reps = reps + 1
+            end
+        end
+        
+        if reps > 1 then
+            indexs[name.."_"..reps] = t
+        else
+            indexs[name] = t
+        end
+    end
+    
+    if type(name) ~= "string" then name = "Table" checkreps() return end
+        name = name:gsub(" ", "")
+        if name:len() == 0 then
+        name = "Table"
+        checkreps()
+        return
+        end
+        if name == reformatstring(name) then
+           checkreps()
+           else
+            name = "Table"
+            checkreps()
+        end
+end
+
+local function getname(t)
+    
+    for i,v in pairs(indexs) do
+        if v == t then
+            return i
+        end
+    end
+    
+end
+
 table.insert(catchrepeats, Table)
 if not IsInternalTable then
 catchrepeats = {Table}
- s = "local table1 = {}"
- local num = 1
+indexreps = {}
+indexs = {}
+setname(Table, TableName)
+ s = "local "..getname(Table).." = {}"
  local reps = {}
  
 local function definetables(f)
@@ -14,8 +77,14 @@ local function definetables(f)
 	
         local function istable(x)
         if type(x) == "table" and not table.find(reps,x) and not table.find(catchrepeats,x) then
-            num = num + 1
-            s = s.."\nlocal table"..num.." = {}"
+            local tname
+            if x == i then
+                tname = v
+            else
+                tname = i
+            end
+            setname(x, tname)
+            s = s.."\nlocal "..getname(x).." = {}"
             table.insert(reps,x)
             definetables(x)
         end
@@ -28,23 +97,23 @@ end
 
 definetables(Table)
  else
-s = "table"..table.find(catchrepeats,Table)
+s = getname(Table)
 end
-local num = table.find(catchrepeats,Table)
+local name = getname(Table)
 
     local function stringmethod(i,v)
 	
         local function isrecursivetable(x)
         if table.find(catchrepeats,x) then
-		return "table"..table.find(catchrepeats,x)
+		return getname(x)
 		else
 		return tostring(x)
 		end
         end
 		
         local part1 = ""
-        local part1formatted = Format(i)
-        local part2 = Format(v)
+        local part1formatted = Format(i,v)
+        local part2 = Format(v,i)
 		
 		if part2 == "" then
 		part2 = isrecursivetable(v)
@@ -59,70 +128,56 @@ local num = table.find(catchrepeats,Table)
         else
         tname = part1formatted
         end
-        part1 = "\ntable"..num.."["..tname.."]"
+        part1 = "\n"..name.."["..tname.."]"
         else
-        part1 = "\ntable"..num.."["..part1formatted.."]"
+        part1 = "\n"..name.."["..part1formatted.."]"
 		end
-        if part1 == "\ntable"..num.."[]" then
-		part1 = "\ntable"..num.."["..isrecursivetable(i).."]"
+        if part1 == "\n"..name.."[]" then
+		part1 = "\n"..name.."["..isrecursivetable(i).."]"
         end
 		return part1.." = "..part2
+		
     end
 	
     for i,v in pairs(Table) do
         s = s..stringmethod(i,v)
     end
-	
     if not IsInternalTable then
-        s = s.."\nreturn table1"
+        s = s.."\nreturn "..name
     end
     return s
 end
 
-local function reformatstring(s)
-	local oof = ""
-	for i = 1, s:len() do
-	if s:sub(i,i):find("%p") then
-    oof = oof.."\\"..s:sub(i,i)
-    elseif s:sub(i,i) == "\n" then
-    oof = oof.."\\n"..s:sub(i-1,i-1)
-    else
-    oof = oof..s:sub(i,i)
-	end
-	end
-	return oof
-end
-
-getgenv().Format = function(test)
+getgenv().Format = function(var, tname)
 	local st = ""
 	local supportedtypes = {"number", "boolean", "string", "EnumItem", "table", "Instance", "Vector2", "Vector3", "CFrame", "Color3", "BrickColor","Enum","Enums","UDim2","NumberRange"}
-        if typeof(test) == "EnumItem" or type(test) == "boolean" then
-            st = tostring(test)
-		elseif type(test) == "number" then
-		if test == math.huge then
+        if typeof(var) == "EnumItem" or type(var) == "boolean" then
+            st = tostring(var)
+		elseif type(var) == "number" then
+		if var == math.huge then
 		st = "math.huge"
-		elseif test == math.huge * -1 then
+		elseif var == math.huge * -1 then
 		st = "math.huge * -1"
 		else
-		st = tostring(test)
+		st = tostring(var)
 		end
-        elseif type(test) == "string" then
-            st = "'"..reformatstring(test).."'"
-        elseif type(test) == "table" then
-            if not table.find(catchrepeats, test) then
-			st = TableToString(test, true)
+        elseif type(var) == "string" then
+            st = "'"..reformatstring(var).."'"
+        elseif type(var) == "table" then
+            if not table.find(catchrepeats, var) then
+			st = TableToString(var, tname, true)
 			else
 			st = ""
 			end
-		elseif typeof(test) == "Instance" then
-			st = GetFullName(test)
-		elseif typeof(test) == "Vector3" or typeof(test) == "Vector2" or typeof(test) == "CFrame" or typeof(test) == "Color3" or typeof(test) == "UDim2" or typeof(test) == "NumberRange" then
-			st = typeof(test)..".new("..tostring(test)..")"
-		elseif typeof(test) == "BrickColor" then
-			st = typeof(test)..".new('"..tostring(test).."')"
-		elseif typeof(test) == "Enum" then
-		    st = "Enum."..tostring(test)
-		elseif typeof(test) == "Enums" then
+		elseif typeof(var) == "Instance" then
+			st = GetFullName(var)
+		elseif typeof(var) == "Vector3" or typeof(var) == "Vector2" or typeof(var) == "CFrame" or typeof(var) == "Color3" or typeof(var) == "UDim2" or typeof(var) == "NumberRange" then
+			st = typeof(var)..".new("..tostring(var)..")"
+		elseif typeof(var) == "BrickColor" then
+			st = typeof(var)..".new('"..tostring(var).."')"
+		elseif typeof(var) == "Enum" then
+		    st = "Enum."..tostring(var)
+		elseif typeof(var) == "Enums" then
 		st = "Enum"
 		end
 	return st
