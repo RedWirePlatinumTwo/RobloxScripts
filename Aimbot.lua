@@ -952,7 +952,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_WZTM70_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_WUVR71_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -960,20 +960,20 @@ function SCRIPT_WZTM70_FAKESCRIPT() -- Aimbot.Scripts
 	_G.RedsAimbot = true
 	
 	for i,v in pairs(script.Parent:GetDescendants()) do
-	if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
-	v.Draggable = true
-	v.Active = true
-	end
-	if v.ClassName == "ScrollingFrame" then
-	v.AutomaticCanvasSize = 2
-	v.ScrollBarImageColor3 = Color3.new(0,1,0)
-	end
+		if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
+			v.Draggable = true
+			v.Active = true
+		end
+		if v.ClassName == "ScrollingFrame" then
+			v.AutomaticCanvasSize = 2
+			v.ScrollBarImageColor3 = Color3.new(0,1,0)
+		end
 	end
 	
 	local thread = function(f)
 	
 	return coroutine.resume(coroutine.create(function()
-	return f()
+		return f()
 	end))
 	
 	end
@@ -1062,9 +1062,9 @@ function SCRIPT_WZTM70_FAKESCRIPT() -- Aimbot.Scripts
 	for i,v in pairs(GetFamily(part)) do
 	
 	for i,plr in pairs(plrs:GetPlayers()) do
-	if plr.Character == v then
-	return v
-	end
+		if plr.Character == v then
+			return v
+		end
 	end
 	
 	end
@@ -1115,30 +1115,30 @@ function SCRIPT_WZTM70_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	
 	if isfile and loadfile and isfile("RedsAimbotStats.lua") then
-	GlobalStats = loadfile("RedsAimbotStats.lua")()
+		GlobalStats = loadfile("RedsAimbotStats.lua")()
 	
 	if GlobalStats.TeamAutofill == nil then
-	GlobalStats.TeamAutofill = true
+		GlobalStats.TeamAutofill = true
 	end
 	
 	if not GlobalStats.AimIntensity then
-	GlobalStats.AimIntensity = 250
+		GlobalStats.AimIntensity = 250
 	end
 	
 	if not GlobalStats[game.PlaceId] then
-	gengamestats()
+		gengamestats()
 	end
 	
 	for i,v in pairs(GlobalStats[game.PlaceId]) do
-	if type(v) ~= "table" then
-	gamesettings[i].value.Text = tostring(v)
-	end
+		if type(v) ~= "table" then
+			gamesettings[i].value.Text = tostring(v)
+		end
 	end
 	
 	for i,v in pairs(GlobalStats.Keybinds) do
-	if globalsettings:FindFirstChild(i) then
-	globalsettings[i].value.Text = tostring(v)
-	end
+		if globalsettings:FindFirstChild(i) then
+			globalsettings[i].value.Text = tostring(v)
+		end
 	end
 	
 	globalsettings.TeamAutofill.value.Text = tostring(GlobalStats.TeamAutofill)
@@ -1156,21 +1156,21 @@ function SCRIPT_WZTM70_FAKESCRIPT() -- Aimbot.Scripts
 	Keybinds = GlobalStats.Keybinds
 	
 	if not GameStats.Teams then
-	GameStats.Teams = {}
+		GameStats.Teams = {}
 	end
 	
 	if GameStats.TargetNPCs == nil then
-	GameStats.TargetNPCs = false
+		GameStats.TargetNPCs = false
 	end
 	
 	if GameStats.TargetCloserPlayers == nil then
-	GameStats.TargetCloserPlayers = true
+		GameStats.TargetCloserPlayers = true
 	end
 	
 	local function savesettings()
-	if writefile then
-	writefile("RedsAimbotStats.lua", TableToString(GlobalStats, "AimbotStats"))
-	end
+		if writefile then
+			writefile("RedsAimbotStats.lua", TableToString(GlobalStats, "AimbotStats"))
+		end
 	end
 	
 	TableChanged(GlobalStats[game.PlaceId], savesettings)
@@ -1193,7 +1193,7 @@ function SCRIPT_WZTM70_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	
 	for i,v in pairs(GameStats.Teams) do
-	addteamframe(v)
+		addteamframe(v)
 	end
 	
 	local deselect = function()
@@ -1206,9 +1206,9 @@ function SCRIPT_WZTM70_FAKESCRIPT() -- Aimbot.Scripts
 	chr:WaitForChild("Humanoid")
 	
 	chr.Humanoid.Died:connect(function()
-	if misc.TargetedCharacter == chr then
-	deselect()
-	end
+		if misc.TargetedCharacter == chr then
+			deselect()
+		end
 	end)
 	
 	end
@@ -1217,9 +1217,9 @@ function SCRIPT_WZTM70_FAKESCRIPT() -- Aimbot.Scripts
 	player.CharacterAdded:connect(OnDeath)
 	
 	player.CharacterRemoving:connect(function(chr)
-	if misc.TargetedCharacter == chr then
-	deselect()
-	end
+		if misc.TargetedCharacter == chr then
+			deselect()
+		end
 	end)
 	
 	end
@@ -1229,11 +1229,11 @@ function SCRIPT_WZTM70_FAKESCRIPT() -- Aimbot.Scripts
 	plrs.PlayerAdded:connect(Died)
 	
 	local function CheckDN(plr)
-	if plr.DisplayName == plr.Name then
-	return plr.Name
-	else
-	return plr.Name.." (DisplayName: "..plr.DisplayName..")"
-	end
+		if plr.DisplayName == plr.Name then
+			return plr.Name
+		else
+			return plr.Name.." (DisplayName: "..plr.DisplayName..")"
+		end
 	end
 	
 	local function IsNotWhitelisted(plr)
@@ -1242,11 +1242,11 @@ function SCRIPT_WZTM70_FAKESCRIPT() -- Aimbot.Scripts
 	local wl = false
 	
 	for i,ttable in pairs(GameStats.Teams) do
-	if teams:FindFirstChild(ttable.team1) and teams:FindFirstChild(ttable.team2) then
-	if lplr.Team.Name == ttable.team1 and plr.Team.Name == ttable.team2 then
-	wl = true
-	break
-	end
+		if teams:FindFirstChild(ttable.team1) and teams:FindFirstChild(ttable.team2) then
+			if lplr.Team.Name == ttable.team1 and plr.Team.Name == ttable.team2 then
+				wl = true
+			break
+		end
 	end
 	
 	end
@@ -1254,42 +1254,42 @@ function SCRIPT_WZTM70_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	
 	local validteam, teamname = pcall(function()
-	return plr.Team.Name
+		return plr.Team.Name
 	end)
 	if validteam then
-	if GameStats.OwnTeamWhitelisted then
-	return plr.Team ~= lplr.Team and not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
-	else
-	return not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
+		if GameStats.OwnTeamWhitelisted then
+			return plr.Team ~= lplr.Team and not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
+		else
+			return not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
 	end
-	else
-	return not table.find(WhitelistedPlrs, plr)
-	end
+		else
+			return not table.find(WhitelistedPlrs, plr)
+		end
 	end
 	
 	local function selectcharacter(chr)
-	if misc.IsAimbotOn and misc.TargetedCharacter == "" and not GameStats.TargetCloserPlayers or GameStats.TargetCloserPlayers and misc.IsAimbotOn then
-	misc.TargetedCharacter = chr
-	if game.PlaceId == 286090429 then
-	chr.ChildAdded:connect(function(c)
-	if c.Name == "Cam" and misc.TargetedCharacter == chr then
-	chr.Humanoid.Health = 0
-	chr.ChildRemoved:Wait()
-	chr.Humanoid.Health = 100
-	end
-	end)
-	end
+		if misc.IsAimbotOn and misc.TargetedCharacter == "" and not GameStats.TargetCloserPlayers or GameStats.TargetCloserPlayers and misc.IsAimbotOn then
+			misc.TargetedCharacter = chr
+		if game.PlaceId == 286090429 then
+			chr.ChildAdded:connect(function(c)
+			if c.Name == "Cam" and misc.TargetedCharacter == chr then
+				chr.Humanoid.Health = 0
+				chr.ChildRemoved:Wait()
+				chr.Humanoid.Health = 100
+			end
+			end)
+		end
 	end
 	end
 	
 	local function targetplayer(player)
 	
 	local humanoidvalid, humanoid = pcall(function()
-	return player.Character.Humanoid
+		return player.Character.Humanoid
 	end)
 	
 	if player.Name ~= lplr.Name and humanoidvalid and IsNotWhitelisted(player) and humanoid.Health ~= 0 then
-	selectcharacter(player.Character)
+		selectcharacter(player.Character)
 	end
 	end
 	
@@ -1309,111 +1309,111 @@ function SCRIPT_WZTM70_FAKESCRIPT() -- Aimbot.Scripts
 	
 	game.UserInputService.InputBegan:connect(function(key,processed)
 	if processed then return end
-	local keycode = key.KeyCode
-	if keycode == Keybinds.TargetedPartToggle then
-	if GameStats.Target == "Torso" or GameStats.Target == "UpperTorso" then
-	GameStats.Target = "Head"
-	else
-	GameStats.Target = Torso.Name
-	end
-	end
+		local keycode = key.KeyCode
+		if keycode == Keybinds.TargetedPartToggle then
+			if GameStats.Target == "Torso" or GameStats.Target == "UpperTorso" then
+				GameStats.Target = "Head"
+			else
+				GameStats.Target = Torso.Name
+			end
+		end
 	if keycode == Keybinds.AimbotToggle then
-	misc.IsAimbotOn = not misc.IsAimbotOn
+		misc.IsAimbotOn = not misc.IsAimbotOn
 	end
 	end)
 	
 	gamesettings.X.MouseButton1Click:connect(function()
-	gamesettings.Visible = false
+		gamesettings.Visible = false
 	end)
 	
 	for i,v in pairs(gamesettings:GetChildren()) do
-	if v:FindFirstChild("value") then
-	if type(GameStats[v.Name]) == "boolean" then
-	v.value.MouseButton1Click:connect(function()
-	GameStats[v.Name] = not GameStats[v.Name]
-	end)
-	Changed(GameStats,v.Name,function(val)
-	v.value.Text = tostring(val)
-	end)
-	end
-	end
+		if v:FindFirstChild("value") then
+			if type(GameStats[v.Name]) == "boolean" then
+			v.value.MouseButton1Click:connect(function()
+				GameStats[v.Name] = not GameStats[v.Name]
+			end)
+			Changed(GameStats,v.Name,function(val)
+				v.value.Text = tostring(val)
+			end)
+			end
+		end
 	end
 	
 	gamesettings.Target.value.MouseButton1Click:connect(function()
-	if GameStats.Target == "Head" then
-	GameStats.Target = Torso.Name
-	else
-	GameStats.Target = "Head"
-	end
+		if GameStats.Target == "Head" then
+			GameStats.Target = Torso.Name
+		else
+			GameStats.Target = "Head"
+		end
 	end)
 	
 	Changed(GameStats,"Target",function(val)
-	gamesettings.Target.value.Text = val
+		gamesettings.Target.value.Text = val
 	end)
 	
 	Changed(gamesettings.MaxStuds.value, "Text", function(n)
 	local num = tonumber(n)
-	if num then
-	GameStats.MaxStuds = num
-	else 
-	GameStats.MaxStuds = 500
-	end
+		if num then
+			GameStats.MaxStuds = num
+		else 
+			GameStats.MaxStuds = 500
+		end
 	end)
 	
 	Changed(globalsettings.AimIntensity.value, "Text", function(n)
 	local num = tonumber(n)
-	if num then
-	GlobalStats.AimIntensity = num
-	else
-	GlobalStats.AimIntensity = 250
-	end
+		if num then
+			GlobalStats.AimIntensity = num
+		else
+			GlobalStats.AimIntensity = 250
+		end
 	end)
 	
 	for i,v in pairs(globalsettings:GetChildren()) do
-	if v:FindFirstChild("reset") then
-	v.reset.MouseButton1Click:connect(function()
-	GlobalStats.Keybinds[v.Name] = "none"
-	v.value.Text = "none"
-	end)
+		if v:FindFirstChild("reset") then
+			v.reset.MouseButton1Click:connect(function()
+			GlobalStats.Keybinds[v.Name] = "none"
+			v.value.Text = "none"
+		end)
 	end
 	
 	if v:FindFirstChild("value") and v.Name:lower():find("toggle") then
-	v.value.MouseButton1Click:connect(function()
-	GlobalStats.Keybinds[v.Name] = "none"
-	v.value.Text = "Press any key"
-	local key = game.UserInputService.InputBegan:Wait()
-	GlobalStats.Keybinds[v.Name] = key.KeyCode
-	v.value.Text = tostring(key.KeyCode)
-	end)
-	end
+		v.value.MouseButton1Click:connect(function()
+		GlobalStats.Keybinds[v.Name] = "none"
+		v.value.Text = "Press any key"
+		local key = game.UserInputService.InputBegan:Wait()
+		GlobalStats.Keybinds[v.Name] = key.KeyCode
+		v.value.Text = tostring(key.KeyCode)
+		end)
+		end
 	end
 	
 	for i,v in pairs(teamui:GetChildren()) do
-	if v.ClassName == "TextBox" then
-	Changed(v, "Text", function(txt)
-	if GlobalStats.TeamAutofill then
-	local tnames = {}
+		if v.ClassName == "TextBox" then
+			Changed(v, "Text", function(txt)
+			if GlobalStats.TeamAutofill then
+				local tnames = {}
 	
-	for i,v in pairs(teams:GetTeams()) do
-	if v.Name:lower():sub(1,txt:len()) == txt:lower() and not table.find(tnames,v.Name) then
-	table.insert(tnames,v.Name)
-	end
-	end
+				for i,v in pairs(teams:GetTeams()) do
+					if v.Name:lower():sub(1,txt:len()) == txt:lower() and not table.find(tnames,v.Name) then
+						table.insert(tnames,v.Name)
+					end
+				end
 	
-	if #tnames == 1 then
-	v.Text = tnames[1]
-	end
-	end
-	end)
+				if #tnames == 1 then
+					v.Text = tnames[1]
+				end
+			end
+			end)
 	end
 	end
 	
 	Changed(GlobalStats,"TeamAutofill",function(v)
-	globalsettings.TeamAutofill.value.Text = tostring(v)
+		globalsettings.TeamAutofill.value.Text = tostring(v)
 	end)
 	
 	globalsettings.TeamAutofill.value.MouseButton1Click:connect(function()
-	GlobalStats.TeamAutofill = not GlobalStats.TeamAutofill
+		GlobalStats.TeamAutofill = not GlobalStats.TeamAutofill
 	end)
 	
 	local wlmsg = teamui.WLTeam.Text
@@ -1431,9 +1431,9 @@ function SCRIPT_WZTM70_FAKESCRIPT() -- Aimbot.Scripts
 	local canadd = true
 	
 	for i, teamtable in pairs(GameStats.Teams) do
-	if teamtable.team1 == team1 and teamtable.team2 == team2 then
-	canadd = false
-	break
+		if teamtable.team1 == team1 and teamtable.team2 == team2 then
+			canadd = false
+		break
 	end
 	end
 	
@@ -1450,118 +1450,118 @@ function SCRIPT_WZTM70_FAKESCRIPT() -- Aimbot.Scripts
 	end)
 	
 	globalsettings.X.MouseButton1Click:connect(function()
-	globalsettings.Visible = false
+		globalsettings.Visible = false
 	end)
 	
 	teamui.X.MouseButton1Click:connect(function()
-	teamui.Visible = false
+		teamui.Visible = false
 	end)
 	
 	local AimbotFunction = game.RunService.RenderStepped:connect(function()
 	if misc.TargetedCharacter ~= "" then
-	local part
+		local part
 	
-	local bool, result = pcall(function()
-	return misc.TargetedCharacter[GameStats.Target]
-	end)
+		local bool, result = pcall(function()
+			return misc.TargetedCharacter[GameStats.Target]
+		end)
 	
-	if bool then
-	part = result
-	else
-	part = misc.TargetedCharacter.HumanoidRootPart
-	end
+		if bool then
+			part = result
+		else
+			part = misc.TargetedCharacter.HumanoidRootPart
+		end
 	
 	local v, onscreen = workspace.Camera:WorldToScreenPoint(part.Position)
 	
 	if onscreen then
 	
-	local StabilizeNum = GlobalStats.AimIntensity/workspace.Camera.ViewportSize.Y
-	local x, y = (v.X - m.X)*StabilizeNum, (v.Y - m.Y)*StabilizeNum
-	if misc.IsAimbotOn then
-	mousemoverel(x, y)
-	end
+		local StabilizeNum = GlobalStats.AimIntensity/workspace.Camera.ViewportSize.Y
+		local x, y = (v.X - m.X)*StabilizeNum, (v.Y - m.Y)*StabilizeNum
+		if misc.IsAimbotOn then
+			mousemoverel(x, y)
+		end
 	else
-	deselect()
+		deselect()
 	end
 	end
 	
 	if m.Target ~= nil then
-	for i,v in pairs(GetFamily(m.Target)) do
-	if game.Players:FindFirstChild(v.Name) then
-	targetplayer(game.Players[v.Name])
-	break
-	end
+		for i,v in pairs(GetFamily(m.Target)) do
+			if game.Players:FindFirstChild(v.Name) then
+				targetplayer(game.Players[v.Name])
+			break
+		end
 	end
 	
 	if GameStats.TargetNPCs then
 	local npc = isnpc(m.Target)
-	if npc and npc.Humanoid.Health > 0 then
-	selectcharacter(npc)
+		if npc and npc.Humanoid.Health > 0 then
+			selectcharacter(npc)
 	
-	Changed(npc.Humanoid, "Health",function(hp)
-	if hp <= 0 and misc.TargetedCharacter == npc then
-	deselect()
-	end
-	end)
+			Changed(npc.Humanoid, "Health",function(hp)
+				if hp <= 0 and misc.TargetedCharacter == npc then
+					deselect()
+				end
+			end)
 	
-	end
+		end
 	end
 	end
 	if GameStats.AutoTarget and not GameStats.TargetNPCs then
-	local table1 = {}
-	local table2 = {}
-	local PrioritizedPlrsOnScreen = {}
+	    local table1 = {}
+	    local table2 = {}
+	    local PrioritizedPlrsOnScreen = {}
 	
-	for i,v in pairs(plrs:GetPlayers()) do
+	    for i,v in pairs(plrs:GetPlayers()) do
 	
-	local outcome = pcall(function()
-	 return v.Character.Humanoid and v.Character[GameStats.Target]
-	end)
+	        local outcome = pcall(function()
+	            return v.Character.Humanoid and v.Character[GameStats.Target]
+	        end)
 	
-	if outcome and v.Name ~= lplr.Name and v.Character.Humanoid.Health ~= 0 and IsNotWhitelisted(v) then
-	local pos = math.floor(lplr:DistanceFromCharacter(v.Character[GameStats.Target].Position))
-	local _, onscreen = workspace.Camera:WorldToScreenPoint(v.Character[GameStats.Target].Position)
-	if onscreen and pos < GameStats.MaxStuds then
-	table1[pos] = v
-	table.insert(table2, pos)
-	if table.find(PrioritizedPlrs, v) then
-	table.insert(PrioritizedPlrsOnScreen, v)
-	end
-	end
+	    if outcome and v.Name ~= lplr.Name and v.Character.Humanoid.Health ~= 0 and IsNotWhitelisted(v) then
+	        local pos = math.floor(lplr:DistanceFromCharacter(v.Character[GameStats.Target].Position))
+	        local _, onscreen = workspace.Camera:WorldToScreenPoint(v.Character[GameStats.Target].Position)
+	        if onscreen and pos < GameStats.MaxStuds then
+	            table1[pos] = v
+				table.insert(table2, pos)
+			if table.find(PrioritizedPlrs, v) then
+				table.insert(PrioritizedPlrsOnScreen, v)
+			end
+		end
 	end
 	end
 	
 	if #PrioritizedPlrsOnScreen == 0 then
-	table.sort(table2)
+		table.sort(table2)
 	else
 	
 	for pos, plr in pairs(table1) do
-	if not table.find(PrioritizedPlrsOnScreen, plr) then
-	local num = table.find(table2,pos)
-	table.remove(table2, num)
-	table1[pos] = nil
-	end
+		if not table.find(PrioritizedPlrsOnScreen, plr) then
+			local num = table.find(table2,pos)
+			table.remove(table2, num)
+			table1[pos] = nil
+		end
 	end
 	
 	table.sort(table2)
 	end
 	
 	for position, player in pairs(table1) do
-	if table2[1] == position then
-	targetplayer(player)
-	end
+		if table2[1] == position then
+			targetplayer(player)
+		end
 	end
 	
 	end
 	
 	if GameStats.FPEnabled then
-	if misc.TargetedCharacter ~= ""  and misc.IsAimbotOn then
-	plrs.LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
+		if misc.TargetedCharacter ~= ""  and misc.IsAimbotOn then
+			plrs.LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
+		else
+			plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
+		end
 	else
-	plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
-	end
-	else
-	plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
+		plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
 	end
 	end)
 	
@@ -1570,73 +1570,73 @@ function SCRIPT_WZTM70_FAKESCRIPT() -- Aimbot.Scripts
 	Duration = 5;
 	Text = "Added closer player targeting via game settings, on by default + support for npc targeting.";})
 	plrs.PlayerRemoving:connect(function(plr)
-	if plr.Character and plr.Character == misc.TargetedCharacter then
-	deselect()
-	end
+		if plr.Character and plr.Character == misc.TargetedCharacter then
+			deselect()
+		end
 	end)
 	
 	local MainFrame = script.Parent.MFrame
 	
 	MainFrame.X.MouseButton1Click:connect(function()
 	AimbotFunction:disconnect()
-	_G.RedsAimbot = false
-	MainFrame.Parent:Destroy()
+		_G.RedsAimbot = false
+		MainFrame.Parent:Destroy()
 	end)
 	
 	Changed(misc, "TargetedCharacter", function(v)
 	if v ~= "" then
-	local player = game.Players:GetPlayerFromCharacter(v)
-	if player then
-	MainFrame.CurrentTarget.Text = CheckDN(player)
+		local player = game.Players:GetPlayerFromCharacter(v)
+		if player then
+			MainFrame.CurrentTarget.Text = CheckDN(player)
+		else
+		MainFrame.CurrentTarget.Text = v.Name
+		end
+		MainFrame.CurrentTarget.TextColor3 = Color3.new(0,1,0)
 	else
-	MainFrame.CurrentTarget.Text = v.Name
-	end
-	MainFrame.CurrentTarget.TextColor3 = Color3.new(0,1,0)
-	else
-	MainFrame.CurrentTarget.Text = "none"
-	MainFrame.CurrentTarget.TextColor3 = Color3.new(1,0,0)
+		MainFrame.CurrentTarget.Text = "none"
+		MainFrame.CurrentTarget.TextColor3 = Color3.new(1,0,0)
 	end
 	end)
 	
 	MainFrame.Manager.MouseButton1Click:connect(function()
-	wlui.Visible = true
+		wlui.Visible = true
 	end)
 	
 	MainFrame.EditGameSettings.MouseButton1Click:connect(function()
-	gamesettings.Visible = true
+		gamesettings.Visible = true
 	end)
 	
 	MainFrame.EditGlobalSettings.MouseButton1Click:connect(function()
-	globalsettings.Visible = true
+		globalsettings.Visible = true
 	end)
 	
 	gamesettings.SwitchToTeam.MouseButton1Click:connect(function()
-	gamesettings.Visible = false
-	teamui.Visible = true
+		gamesettings.Visible = false
+		teamui.Visible = true
 	end)
 	
 	teamui.SwitchToSettings.MouseButton1Click:connect(function()
-	teamui.Visible = false
-	gamesettings.Visible = true
+		teamui.Visible = false
+		gamesettings.Visible = true
 	end)
 	
 	Changed(misc, "IsAimbotOn", function(v)
 	if v == false then
-	MainFrame.Status.TextColor3 = Color3.new(1,0,0)
-	MainFrame.Status.Text = "disabled"
-	deselect()
+		MainFrame.Status.TextColor3 = Color3.new(1,0,0)
+		MainFrame.Status.Text = "disabled"
+		deselect()
 	else
-	MainFrame.Status.TextColor3 = Color3.new(0,1,0)
-	MainFrame.Status.Text = "enabled"
+		MainFrame.Status.TextColor3 = Color3.new(0,1,0)
+		MainFrame.Status.Text = "enabled"
 	end
 	end)
 	
 	wlui.hide.MouseButton1Click:connect(function()
-	wlui.Visible = false
+		wlui.Visible = false
 	end)
 	
 	MainFrame.Status.MouseButton1Click:connect(function()
-	misc.IsAimbotOn = not misc.IsAimbotOn
+		misc.IsAimbotOn = not misc.IsAimbotOn
 	end)
 	
 	local wlframe = wlui.WhitelistedInstances.whitelistframe
@@ -1649,43 +1649,43 @@ function SCRIPT_WZTM70_FAKESCRIPT() -- Aimbot.Scripts
 	local function togglefunc(Table)
 	local button
 	if Table == PrioritizedPlrs then
-	button = clone.PriorityToggle
+		button = clone.PriorityToggle
 	else
-	button = clone.WhitelistToggle
+		button = clone.WhitelistToggle
 	end
 	
 	if ins.ClassName == "Player" and GameStats.WhitelistFriends and lplr:IsFriendsWith(ins.UserId) and Table == WhitelistedPlrs then
-	button.TextColor3 = Color3.new(0,1,0)
-	button.Text = "Yes"
-	table.insert(WhitelistedPlrs, ins)
+		button.TextColor3 = Color3.new(0,1,0)
+		button.Text = "Yes"
+		table.insert(WhitelistedPlrs, ins)
 	end
 	
 	button.MouseButton1Click:connect(function()
 	
 	if button.Text == "No" then
-	button.TextColor3 = Color3.new(0,1,0)
-	button.Text = "Yes"
-	table.insert(Table,ins)
+		button.TextColor3 = Color3.new(0,1,0)
+		button.Text = "Yes"
+		table.insert(Table,ins)
 	
 	if Table == PrioritizedPlrs and clone.WhitelistToggle.Text == "Yes" then
-	clone.WhitelistToggle.Text = "No"
-	clone.WhitelistToggle.TextColor3 = Color3.new(1,0,0)
-	local wlistplr = table.find(WhitelistedPlrs, ins)
-	table.remove(WhitelistedPlrs, wlistplr)
+		clone.WhitelistToggle.Text = "No"
+		clone.WhitelistToggle.TextColor3 = Color3.new(1,0,0)
+		local wlistplr = table.find(WhitelistedPlrs, ins)
+		table.remove(WhitelistedPlrs, wlistplr)
 	end
 	
 	if Table == WhitelistedPlrs and clone.PriorityToggle.Text == "Yes" then
-	clone.PriorityToggle.Text = "No"
-	clone.PriorityToggle.TextColor3 = Color3.new(1,0,0)
-	local prioplr = table.find(PrioritizedPlrs, ins)
-	table.remove(PrioritizedPlrs, prioplr)
+		clone.PriorityToggle.Text = "No"
+		clone.PriorityToggle.TextColor3 = Color3.new(1,0,0)
+		local prioplr = table.find(PrioritizedPlrs, ins)
+		table.remove(PrioritizedPlrs, prioplr)
 	end
 	
 	else
-	button.TextColor3 = Color3.new(1,0,0)
-	button.Text = "No"
-	local removeins = table.find(Table, ins)
-	table.remove(Table,removeins)
+		button.TextColor3 = Color3.new(1,0,0)
+		button.Text = "No"
+		local removeins = table.find(Table, ins)
+		table.remove(Table,removeins)
 	end
 	end)
 	
@@ -1702,23 +1702,25 @@ function SCRIPT_WZTM70_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	
 	for i,plr in pairs(plrs:GetPlayers()) do
-	if plr ~= lplr then
-	AddtoList(plr)
-	end
+		if plr ~= lplr then
+			AddtoList(plr)
+		end
 	end
 	
 	plrs.PlayerAdded:connect(AddtoList)
 	
 	Changed(wlui.searchbar, "Text", function(txt)
+	
 	for i,v in pairs(wlui.WhitelistedInstances:GetChildren()) do
-	if v.ClassName == "Frame" and v ~= wlframe then
-	if v.TextLabel.Text:lower():match(txt:lower()) then
-	v.Visible = true
-	else
-	v.Visible = false
+		if v.ClassName == "Frame" and v ~= wlframe then
+			if v.TextLabel.Text:lower():match(txt:lower()) then
+				v.Visible = true
+		else
+			v.Visible = false
+			end
+		end
 	end
-	end
-	end
+	
 	end)
 	
 	else
@@ -1734,4 +1736,4 @@ function SCRIPT_WZTM70_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_WZTM70_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_WUVR71_FAKESCRIPT))
