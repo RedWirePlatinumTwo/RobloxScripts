@@ -126,17 +126,17 @@ antifalltoggle.TextStrokeColor3 = Color3.new(0, 0, 1)
 antifalltoggle.TextStrokeTransparency = 0
 antifalltoggle.TextWrapped = true
 -- Scripts:
-function SCRIPT_SOKG73_FAKESCRIPT() -- SkyWarsGUI.LocalScript 
+function SCRIPT_CJIV80_FAKESCRIPT() -- SkyWarsGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = SkyWarsGUI
 	local lplr = game.Players.LocalPlayer
 	local mainframe = script.Parent.MainFrame
 	
 	for i,v in pairs(script.Parent:GetChildren()) do
-	if v.ClassName == "Frame" then
-	v.Draggable = true
-	v.Active = true
-	end
+		if v.ClassName == "Frame" then
+			v.Draggable = true
+			v.Active = true
+		end
 	end
 	
 	local function highlightOre(ore)
@@ -150,58 +150,58 @@ function SCRIPT_SOKG73_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	end
 	
 	mainframe.mineores.MouseButton1Click:connect(function()
-	if lplr.Backpack:FindFirstChild("Axe") or lplr.Character:FindFirstChild("Axe") then
-	local chr = lplr.Character
-	local cframe = chr.HumanoidRootPart.CFrame
+		if lplr.Backpack:FindFirstChild("Axe") or lplr.Character:FindFirstChild("Axe") then
+			local chr = lplr.Character
+			local cframe = chr.HumanoidRootPart.CFrame
 	
-	local function farm(o)
+			local function farm(o)
 	
-	local function isBroken(b)
-	return b.Name == "Broken"
-	end
+			local function isBroken(b)
+				return b.Name == "Broken"
+			end
 	
-	local tp = true
-	local blockcooldown = false
+			local tp = true
+			local blockcooldown = false
 	
-	game.RunService.Heartbeat:connect(function()
-	if tp then
-	if chr:FindFirstChild("Axe") then
-	if not blockcooldown then
-	blockcooldown = true
-	chr.Axe.RemoteEvent:FireServer(o)
+			game.RunService.Heartbeat:connect(function()
+				if tp then
+					if chr:FindFirstChild("Axe") then
+						if not blockcooldown then
+							blockcooldown = true
+							chr.Axe.RemoteEvent:FireServer(o)
 	
-	delay(0.1,function()
-	blockcooldown = false
-	end)
+						delay(0.1,function()
+								blockcooldown = false
+						end)
 	
-	end
-	chr.HumanoidRootPart.CFrame = o.CFrame
-	else
-	lplr.Backpack.Axe.Parent = chr
-	end
-	end
-	end)
+						end
+						chr.HumanoidRootPart.CFrame = o.CFrame
+					else
+						lplr.Backpack.Axe.Parent = chr
+					end
+				end
+			end)
 	
-	repeat task.wait() until isBroken(o)
-	tp = false
-	end
-	local m
+			repeat task.wait() until isBroken(o)
+			tp = false
+			end
+			local m
 	
-	for i, b in pairs(workspace:GetChildren()) do
-		if b.Name:match("Map") then
-			m = b
+			for i, b in pairs(workspace:GetChildren()) do
+				if b.Name:match("Map") then
+					m = b
+				end
+			end
+	
+			if m then
+			for i, ore in pairs(m.Map.Ores:GetChildren()) do
+				farm(ore)
+			end
+	
+			task.wait(0.1)
+			chr.HumanoidRootPart.CFrame = cframe
+			end
 		end
-	end
-	
-	if m then
-	for i, ore in pairs(m.Map.Ores:GetChildren()) do
-		farm(ore)
-	end
-	
-	task.wait(0.1)
-	chr.HumanoidRootPart.CFrame = cframe
-	end
-	end
 	end)
 	
 	mainframe.highlightores.MouseButton1Click:connect(function()
@@ -216,9 +216,9 @@ function SCRIPT_SOKG73_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	
 	for i, ore in pairs(m.Map.Ores:GetChildren()) do
 		if not ore:FindFirstChild("BoxHandleAdornment") then
-		highlightOre(ore)
+			highlightOre(ore)
+			end
 		end
-	end
 	end
 	
 	end)
@@ -226,47 +226,47 @@ function SCRIPT_SOKG73_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	local blockcooldown2 = false
 	
 	game.RunService.RenderStepped:connect(function()
-	if not automining then return end
-	if lplr.Character:FindFirstChild("Axe") then
-	if not blockcooldown2 then
-	blockcooldown2 = true
-	lplr.Character.Axe.RemoteEvent:FireServer(lplr:GetMouse().Target)
+		if not automining then return end
+			if lplr.Character:FindFirstChild("Axe") then
+			if not blockcooldown2 then
+				blockcooldown2 = true
+				lplr.Character.Axe.RemoteEvent:FireServer(lplr:GetMouse().Target)
 	
-	delay(0.1,function()
-	blockcooldown2 = false
-	end)
+			delay(0.1,function()
+				blockcooldown2 = false
+			end)
 	
-	end
-	end
+			end
+		end
 	end)
 	
 	local amtext = mainframe.automine.Text
 	mainframe.automine.Text = amtext..tostring(automining)
 	
 	mainframe.automine.MouseButton1Click:connect(function()
-	automining = not automining
-	mainframe.automine.Text = amtext..tostring(automining)
+		automining = not automining
+		mainframe.automine.Text = amtext..tostring(automining)
 	end)
 	
 	local megavip = true
 	local enter = workspace.Lobby["Mega VIP Room"].Teleport.Enter
 	
 	enter["Teleporter B"].Touched:connect(function(h)
-	if game.Players:GetPlayerFromCharacter(h.Parent) and game.Players:GetPlayerFromCharacter(h.Parent) == lplr and megavip then
-		h.Parent:MoveTo(enter["Teleporter A"].Position)
-	end
+		if game.Players:GetPlayerFromCharacter(h.Parent) and game.Players:GetPlayerFromCharacter(h.Parent) == lplr and megavip then
+			h.Parent:MoveTo(enter["Teleporter A"].Position)
+		end
 	end)
 	
 	local mvtext = mainframe.megavipenter.Text
 	mainframe.megavipenter.Text = mvtext..tostring(megavip)
 	
 	mainframe.megavipenter.MouseButton1Click:connect(function()
-	megavip = not megavip
-	mainframe.megavipenter.Text = mvtext..tostring(megavip)
+		megavip = not megavip
+		mainframe.megavipenter.Text = mvtext..tostring(megavip)
 	end)
 	
 	mainframe.infyeet.MouseButton1Click:connect(function()
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 	end)
 	
 	local part = Instance.new("Part", workspace)
@@ -276,26 +276,26 @@ function SCRIPT_SOKG73_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	local antifall = true
 	
 	game.RunService.RenderStepped:connect(function()
-	if antifall and lplr.Character then 
-	part.Position = (lplr.Character.HumanoidRootPart.Position * Vector3.new(1,0,1)) + Vector3.new(0,147,0)
-	if lplr.Character.HumanoidRootPart.CFrame.Y < 147 then
-	lplr.Character.HumanoidRootPart.CFrame = part.CFrame + Vector3.new(0, 3, 0)
-	lplr.Character.HumanoidRootPart.Velocity = Vector3.new()
-	end
-	end
+		if antifall and lplr.Character then 
+			part.Position = (lplr.Character.HumanoidRootPart.Position * Vector3.new(1,0,1)) + Vector3.new(0,147,0)
+			if lplr.Character.HumanoidRootPart.CFrame.Y < 147 then
+				lplr.Character.HumanoidRootPart.CFrame = part.CFrame + Vector3.new(0, 3, 0)
+				lplr.Character.HumanoidRootPart.Velocity = Vector3.new()
+			end
+		end
 	end)
 	
 	local aftext = mainframe.antifalltoggle.Text
 	mainframe.antifalltoggle.Text = aftext..tostring(antifall)
 	
 	mainframe.antifalltoggle.MouseButton1Click:connect(function()
-	antifall = not antifall
-	mainframe.antifalltoggle.Text = aftext..tostring(antifall)
-	if not antifall then
-	part.CanCollide = false
-	else
-	part.CanCollide = true
-	end
+		antifall = not antifall
+		mainframe.antifalltoggle.Text = aftext..tostring(antifall)
+		if not antifall then
+			part.CanCollide = false
+		else
+			part.CanCollide = true
+		end
 	end)
 	
 	lplr.PlayerGui.Extra:Destroy()
@@ -307,4 +307,4 @@ function SCRIPT_SOKG73_FAKESCRIPT() -- SkyWarsGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_SOKG73_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_CJIV80_FAKESCRIPT))
