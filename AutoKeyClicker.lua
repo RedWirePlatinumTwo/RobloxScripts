@@ -142,18 +142,18 @@ toggle.TextStrokeTransparency = 0
 toggle.TextWrapped = true
 toggle.TextXAlignment = Enum.TextXAlignment.Left
 -- Scripts:
-function SCRIPT_UBIQ75_FAKESCRIPT() -- AutoKeyClicker.LocalScript 
+function SCRIPT_QTXF79_FAKESCRIPT() -- AutoKeyClicker.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = AutoKeyClicker
 	local frame = script.Parent.Mainframe
 	local clickspersecond = 0.1
 	
 	function doclickwait()
-	if clickspersecond > 0.03 then
-	task.wait(clickspersecond)
-	else
-	game.RunService.RenderStepped:Wait()
-	end
+		if clickspersecond > 0.03 then
+			task.wait(clickspersecond)
+		else
+			game.RunService.RenderStepped:Wait()
+		end
 	end
 	
 	frame.Draggable = true
@@ -200,40 +200,40 @@ function SCRIPT_UBIQ75_FAKESCRIPT() -- AutoKeyClicker.LocalScript
 		["z"] = 0x5A
 	}
 	for i,v in pairs(Keycodes) do
-	local clone = frame.keyframe.testframe:Clone()
-	clone.Parent = frame.keyframe
-	clone.Visible = true
-	clone.keylabel.Text = i
+		local clone = frame.keyframe.testframe:Clone()
+		clone.Parent = frame.keyframe
+		clone.Visible = true
+		clone.keylabel.Text = i
 	
-	coroutine.resume(coroutine.create(function()
-	while true do
-	if clone.togglebutton.Text == "On" then
-	keypress(v)
-	keyrelease(v)
-	end
-	doclickwait()
-	end
-	end))
+		coroutine.resume(coroutine.create(function()
+			while true do
+				if clone.togglebutton.Text == "On" then
+					keypress(v)
+					keyrelease(v)
+				end
+				doclickwait()
+			end
+		end))
 	
-	clone.togglebutton.MouseButton1Click:connect(function()
-	if clone.togglebutton.Text == "On" then
-	clone.togglebutton.TextColor3 = Color3.fromRGB(170,0,0)
-	clone.togglebutton.Text = "Off"
-	else
-	clone.togglebutton.TextColor3 = Color3.fromRGB(0,170,0)
-	clone.togglebutton.Text = "On"
-	end
-	end)
+		clone.togglebutton.MouseButton1Click:connect(function()
+			if clone.togglebutton.Text == "On" then
+				clone.togglebutton.TextColor3 = Color3.fromRGB(170,0,0)
+				clone.togglebutton.Text = "Off"
+			else
+				clone.togglebutton.TextColor3 = Color3.fromRGB(0,170,0)
+				clone.togglebutton.Text = "On"
+			end
+		end)
 	
 	end
 	
 	Changed(frame.clickrate, "Text", function(txt)
-	if tonumber(txt) then
-	clickspersecond = 1/tonumber(txt)
-	else
-	clickspersecond = 0.1
-	end
+		if tonumber(txt) then
+			clickspersecond = 1/tonumber(txt)
+		else
+			clickspersecond = 0.1
+		end
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_UBIQ75_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_QTXF79_FAKESCRIPT))
