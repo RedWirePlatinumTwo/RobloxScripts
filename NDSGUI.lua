@@ -115,7 +115,7 @@ X.TextScaled = true
 X.TextSize = 14
 X.TextWrapped = true
 -- Scripts:
-function SCRIPT_BGGG84_FAKESCRIPT() -- RedWiresNDSGUI.LocalScript 
+function SCRIPT_UFGZ88_FAKESCRIPT() -- RedWiresNDSGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = RedWiresNDSGUI
 	local mframe = script.Parent.MainFrame
@@ -123,37 +123,37 @@ function SCRIPT_BGGG84_FAKESCRIPT() -- RedWiresNDSGUI.LocalScript
 	local lplr = game.Players.LocalPlayer
 	
 	mframe.Admin.MouseButton1Click:connect(function()
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 	end)
 	
 	mframe.lobbytp.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-290, 178, 379)
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-290, 178, 379)
 	end)
 	
 	mframe.ChatDisaster.MouseButton1Click:connect(function()
-	game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("The disaster for this match is: ".. game.Players.LocalPlayer.Character.SurvivalTag.Value, "All")
+		game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("The disaster for this match is: ".. game.Players.LocalPlayer.Character.SurvivalTag.Value, "All")
 	end)
 	
 	mframe.Falldamageremove.MouseButton1Click:connect(function()
 		print("Fall damage is no more")
 		local falldmg = lplr.Character:FindFirstChild("FallDamageScript") or lplr.Character:FindFirstChild("CharacterScript")
 		if falldmg then
-		falldmg:Destroy()
+			falldmg:Destroy()
 		end
 	
 		local function nofalldmg(chr)
 	
-		chr.ChildAdded:connect(function(c)
-		if c.Name == "FallDamageScript" or c.Name == "CharacterScript" then
-		task.wait(0.2)
-		c:Destroy()
-		end
-		end)
+			chr.ChildAdded:connect(function(c)
+				if c.Name == "FallDamageScript" or c.Name == "CharacterScript" then
+					task.wait(0.2)
+					c:Destroy()
+				end
+			end)
 	
 		end
 	
 		lplr.CharacterAdded:connect(function(chr)
-		nofalldmg(chr)
+			nofalldmg(chr)
 		end)
 	
 	end)
@@ -161,34 +161,34 @@ function SCRIPT_BGGG84_FAKESCRIPT() -- RedWiresNDSGUI.LocalScript
 	mframe.prewarn.MouseButton1Click:connect(function()
 		local tag = lplr.Character:FindFirstChild("SurvivalTag")
 		if tag then
-		local hint = Instance.new("Message", workspace)
-		hint.Text = tag.Value
-		task.wait(4)
-		hint:Destroy()
+			local hint = Instance.new("Message", workspace)
+			hint.Text = tag.Value
+			task.wait(4)
+			hint:Destroy()
 		end
 	
 		local function prewarn(chr)
-		chr.ChildAdded:connect(function(c)
-		if c.Name == "SurvivalTag" then
-		local hint = Instance.new("Message", workspace)
-		hint.Text = "The disaster is: "..c.Value
-		task.wait(4)
-		hint:Destroy()
-		end
-		end)
+			chr.ChildAdded:connect(function(c)
+				if c.Name == "SurvivalTag" then
+					local hint = Instance.new("Message", workspace)
+					hint.Text = "The disaster is: "..c.Value
+					task.wait(4)
+					hint:Destroy()
+				end
+			end)
 		end
 	
 		prewarn(lplr.Character)
 	
 		lplr.CharacterAdded:connect(function(chr)
-		prewarn(chr)
+			prewarn(chr)
 		end)
 	
 	end)
 	
 	mframe.X.MouseButton1Click:connect(function()
-	mframe.Parent:Destroy()
+		mframe.Parent:Destroy()
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_BGGG84_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_UFGZ88_FAKESCRIPT))
