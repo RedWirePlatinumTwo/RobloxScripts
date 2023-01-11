@@ -200,78 +200,78 @@ X.TextSize = 14
 X.TextStrokeTransparency = 0
 X.TextWrapped = true
 -- Scripts:
-function SCRIPT_OVRP67_FAKESCRIPT() -- FallDownStairsGUI.LocalScript 
+function SCRIPT_POFQ67_FAKESCRIPT() -- FallDownStairsGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = FallDownStairsGUI
 	local GUI = script.Parent.MainFrame
 	
 	for i,v in pairs(script.Parent:GetChildren()) do
-	if v.ClassName == "Frame" then
-	v.Active = true
-	v.Draggable = true
-	end
+		if v.ClassName == "Frame" then
+			v.Active = true
+			v.Draggable = true
+		end
 	end
 	
 	GUI.ItemGet.MouseButton1Click:connect(function()
-	for i, Item in pairs(game.ReplicatedStorage.ShopItems:GetChildren()) do
-	local itemname = GUI.ItemName.Text
-	if string.match (string.lower(Item.Name), string.lower(itemname)) then
-	game.ReplicatedStorage.Events.PlayerShopPurchase:FireServer(Item.Name, 0)
-	end
-	end
+		for i, Item in pairs(game.ReplicatedStorage.ShopItems:GetChildren()) do
+			local itemname = GUI.ItemName.Text
+			if string.match (string.lower(Item.Name), string.lower(itemname)) then
+				game.ReplicatedStorage.Events.PlayerShopPurchase:FireServer(Item.Name, 0)
+			end
+		end
 	end)
 	
 	GUI.TPPlinko.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.Dest_Plinko.CFrame
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.Dest_Plinko.CFrame
 	end)
 	
 	GUI.TPPyramid.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.Dest_Pyramid.CFrame
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.Dest_Pyramid.CFrame
 	end)
 	
 	GUI.TPSlide.MouseButton1Click:connect(function()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.Dest_Slide.CFrame
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.Dest_Slide.CFrame
 	end)
 	
 	GUI.Explode.MouseButton1Click:connect(function()
-	for i, plr in pairs(game.Players:GetPlayers()) do
-	local plrname = GUI.Plrname.Text
-	if string.match (string.lower(plr.Name), string.lower(plrname)) then
-	if workspace:FindFirstChild(plr.Name) then
-	game.ReplicatedStorage.Events.GenerateExplosion:FireServer(100, 100000000, plr.Character.Torso.Position)
-	end
-	end
-	end
+		for i, plr in pairs(game.Players:GetPlayers()) do
+		local plrname = GUI.Plrname.Text
+			if string.match (string.lower(plr.Name), string.lower(plrname)) then
+				if workspace:FindFirstChild(plr.Name) then
+					game.ReplicatedStorage.Events.GenerateExplosion:FireServer(100, 100000000, plr.Character.Torso.Position)
+				end
+			end
+		end
 	end)
 	
 	GUI.stealhats.MouseButton1Click:connect(function()
-	for i, plr in pairs(game.Players:GetPlayers()) do
-	if plr.Character then
-	game.ReplicatedStorage.Events.TransferHats:FireServer(plr.Character)
-	end
-	end
+		for i, plr in pairs(game.Players:GetPlayers()) do
+			if plr.Character then
+				game.ReplicatedStorage.Events.TransferHats:FireServer(plr.Character)
+			end
+		end
 	end)
 	
 	GUI.velocity.MouseButton1Click:connect(function()
-	for i, child in pairs(workspace:GetDescendants()) do
-	if child:IsA("BasePart") then
-	child.Velocity = Vector3.new(0, 0, 0)
-	end
-	end
+		for i, child in pairs(workspace:GetDescendants()) do
+			if child:IsA("BasePart") then
+				child.Velocity = Vector3.new(0, 0, 0)
+			end
+		end
 	end)
 	
 	GUI.visibilitytoggle.MouseButton1Click:connect(function()
-	local torso = game.Players.LocalPlayer.Character.Torso
-	if torso.Transparency == 0 then
-	game.ReplicatedStorage.Events.SetPlayerTransparency:FireServer(1)
-	elseif torso.Transparency == 1 then
-	game.ReplicatedStorage.Events.SetPlayerTransparency:FireServer(0)
-	end
+		local torso = game.Players.LocalPlayer.Character.Torso
+		if torso.Transparency == 0 then
+			game.ReplicatedStorage.Events.SetPlayerTransparency:FireServer(1)
+		elseif torso.Transparency == 1 then
+			game.ReplicatedStorage.Events.SetPlayerTransparency:FireServer(0)
+		end
 	end)
 	
 	GUI.X.MouseButton1Click:connect(function()
-	GUI.Parent:Destroy()
+		GUI.Parent:Destroy()
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_OVRP67_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_POFQ67_FAKESCRIPT))
