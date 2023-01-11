@@ -952,7 +952,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_KBCU70_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_WZTM70_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1169,7 +1169,7 @@ function SCRIPT_KBCU70_FAKESCRIPT() -- Aimbot.Scripts
 	
 	local function savesettings()
 	if writefile then
-	writefile("RedsAimbotStats.lua", TableToString(GlobalStats))
+	writefile("RedsAimbotStats.lua", TableToString(GlobalStats, "AimbotStats"))
 	end
 	end
 	
@@ -1734,4 +1734,4 @@ function SCRIPT_KBCU70_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_KBCU70_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_WZTM70_FAKESCRIPT))
