@@ -495,7 +495,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_FPIL66_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
@@ -583,7 +583,7 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	syn.protect_gui(script.Parent)
 	end
 	
-	notify("Brought back the minimum number limits but as 0 + robbery notifier now works with mansion")
+	notify("Brought back the minimum number limits but as negative numbers + robbery notifier now works with mansion")
 	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 	local function makevisible(plr)
@@ -640,24 +640,24 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	mainframe.GravToggle.Text = "Gravity Toggle ("..tostring(math.floor(workspace.Gravity))..")"
 	
 	Changed(workspace, "Gravity", function(grav)
-	mainframe.GravToggle.Text = "Gravity Toggle ("..tostring(grav)..")"
+		mainframe.GravToggle.Text = "Gravity Toggle ("..tostring(grav)..")"
 	end)
 	
 	mainframe.GravToggle.MouseButton1Click:connect(function()
-	if math.floor(workspace.Gravity) == 196 then
-	workspace.Gravity = 0
-	elseif workspace.Gravity == 0 then
-	workspace.Gravity = 196
-	end
+		if math.floor(workspace.Gravity) == 196 then
+			workspace.Gravity = 0
+		elseif workspace.Gravity == 0 then
+		workspace.Gravity = 196
+		end
 	end)
 	
 	mainframe.X.MouseButton1Click:connect(function()
-	mainframe.Parent:Destroy()
-	_G.RedsJBGUI = false
+		mainframe.Parent:Destroy()
+		_G.RedsJBGUI = false
 	end)
 	
 	mainframe.aimbot.MouseButton1Click:connect(function()
-	mainframe.Parent.Confirmation.Visible = true
+		mainframe.Parent.Confirmation.Visible = true
 	end)
 	
 	props = {}
@@ -670,47 +670,47 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	airdropframe.pointers.Text = pointerstemplate..tostring(props.pointers)
 	
 	Changed(props, "guitext", function(val)
-	airdropframe.bguis.Text = bguistemplate..tostring(val)
+		airdropframe.bguis.Text = bguistemplate..tostring(val)
 	
-	for i,v in pairs(workspace:GetChildren()) do
+		for i,v in pairs(workspace:GetChildren()) do
 	
-	local success, returnval = pcall(function()
-	return v.Root.BillboardGui.TextButton
-	end)
+			local success, returnval = pcall(function()
+			return v.Root.BillboardGui.TextButton
+			end)
 	
-	if success then
-	returnval.Visible = val
-	end
-	end
+			if success then
+					returnval.Visible = val
+			end
+		end
 	
 	end)
 	
 	Changed(props, "pointers", function(val)
-	airdropframe.pointers.Text = pointerstemplate..tostring(val)
+		airdropframe.pointers.Text = pointerstemplate..tostring(val)
 	
 	for i,v in pairs(workspace:GetChildren()) do
 	
-	local success, returnval = pcall(function()
-	return v.Root.RopeConstraint
-	end)
+		local success, returnval = pcall(function()
+			return v.Root.RopeConstraint
+		end)
 	
-	if success then
-	returnval.Visible = val
-	end
+		if success then
+			returnval.Visible = val
+		end
 	end
 	
 	end)
 	
 	airdropframe.bguis.MouseButton1Click:connect(function()
-	props.guitext = not props.guitext
+		props.guitext = not props.guitext
 	end)
 	
 	airdropframe.pointers.MouseButton1Click:connect(function()
-	props.pointers = not props.pointers
+		props.pointers = not props.pointers
 	end)
 	
 	airdropframe.hide.MouseButton1Click:Connect(function()
-	airdropframe.Visible = false
+		airdropframe.Visible = false
 	end)
 	
 	local pointer = function(part)
@@ -764,51 +764,51 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 	coroutine.resume(coroutine.create(function()
 	if child.Name == "Drop" then
-	local Airdrop = child:WaitForChild("Root")
-	local BillboardGui = Instance.new("BillboardGui")
-	local TextButton = Instance.new("TextButton")
-	--Properties:
-	BillboardGui.Parent = Airdrop
-	BillboardGui.Active = true
-	BillboardGui.AlwaysOnTop = true
-	BillboardGui.LightInfluence = 1
-	BillboardGui.Size = UDim2.new(0, 200, 0, 50)
-	BillboardGui.StudsOffset = Vector3.new(0, 2, 0)
+		local Airdrop = child:WaitForChild("Root")
+		local BillboardGui = Instance.new("BillboardGui")
+		local TextButton = Instance.new("TextButton")
+		--Properties:
+		BillboardGui.Parent = Airdrop
+		BillboardGui.Active = true
+		BillboardGui.AlwaysOnTop = true
+		BillboardGui.LightInfluence = 1
+		BillboardGui.Size = UDim2.new(0, 200, 0, 50)
+		BillboardGui.StudsOffset = Vector3.new(0, 2, 0)
 	
-	TextButton.Parent = BillboardGui
-	TextButton.BackgroundColor3 = Color3.new(1, 1, 1)
-	TextButton.BackgroundTransparency = 1
-	TextButton.Size = UDim2.new(0, 200, 0, 50)
-	TextButton.Font = Enum.Font.SourceSansBold
-	TextButton.Text = ""
-	TextButton.TextColor3 = Color3.new(1, 1, 1)
-	TextButton.TextSize = 22
-	TextButton.TextStrokeTransparency = 0
-	TextButton.Visible = props.guitext
-	pointer(Airdrop)
-	Airdrop.RopeConstraint.Visible = props.pointers
+		TextButton.Parent = BillboardGui
+		TextButton.BackgroundColor3 = Color3.new(1, 1, 1)
+		TextButton.BackgroundTransparency = 1
+		TextButton.Size = UDim2.new(0, 200, 0, 50)
+		TextButton.Font = Enum.Font.SourceSansBold
+		TextButton.Text = ""
+		TextButton.TextColor3 = Color3.new(1, 1, 1)
+		TextButton.TextSize = 22
+		TextButton.TextStrokeTransparency = 0
+		TextButton.Visible = props.guitext
+		pointer(Airdrop)
+		Airdrop.RopeConstraint.Visible = props.pointers
 	
 	local FormatNumber = function(n)
-	local n2 = ""
+		local n2 = ""
 	
-	for i = 1, tostring(n):len() do
-	    local v = tostring(n):reverse():sub(i,i)
-	    if i/3 == math.floor(i/3) then
-	        n2 = n2..v..","
-	    else
-	        n2 = n2..v
-	    end
-	end
+		for i = 1, tostring(n):len() do
+		    local v = tostring(n):reverse():sub(i,i)
+		    if i/3 == math.floor(i/3) then
+		        n2 = n2..v..","
+		    else
+		        n2 = n2..v
+		    end
+		end
 	
-	local n3 = n2:reverse()
-	if n3:sub(1,1) == "," then
-	n3 = n3:sub(2, n3:len())
-	end
-	return n3
+		local n3 = n2:reverse()
+		if n3:sub(1,1) == "," then
+			n3 = n3:sub(2, n3:len())
+		end
+		return n3
 	end
 	
 	game.RunService.RenderStepped:connect(function()
-	TextButton.Text = "Airdrop | Distance: "..FormatNumber(math.floor(lplr:DistanceFromCharacter(Airdrop.Position)))
+		TextButton.Text = "Airdrop | Distance: "..FormatNumber(math.floor(lplr:DistanceFromCharacter(Airdrop.Position)))
 	end)
 	
 	end
@@ -816,13 +816,13 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	
 	for i,v in pairs(workspace:GetChildren()) do
-	gui(v)
+		gui(v)
 	end
 	
 	workspace.ChildAdded:connect(gui)
 	
 	mainframe.Airdrop.MouseButton1Click:connect(function()
-	airdropframe.Visible = true
+		airdropframe.Visible = true
 	end)
 	
 	local itemconfig = game.ReplicatedStorage.Game.ItemConfig
@@ -830,92 +830,92 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local function changegunstats(Table)
 	
 	for i,v in pairs(itemconfig:GetChildren()) do
-	local gun = require(v)
-	if v.Name == "Shotgun" then
-	gun.BulletSpread = 0.02
-	end
+		local gun = require(v)
+		if v.Name == "Shotgun" then
+			gun.BulletSpread = 0.02
+		end
 	
-	for index, value in pairs(Table) do
-	gun[index] = value
-	end
+		for index, value in pairs(Table) do
+			gun[index] = value
+		end
 	
 	end
 	
 	end
 	
 	mainframe.gunmod.MouseButton1Click:connect(function()
-	changegunstats({["CamShakeMagnitude"] = 0,["FireAuto"] = true})
-	local g = require(game.ReplicatedStorage.Game.ItemConfig.Grenade)
-	g.ReloadTime = 0
-	g.FuseTime = 0.8
+		changegunstats({["CamShakeMagnitude"] = 0,["FireAuto"] = true})
+		local g = require(game.ReplicatedStorage.Game.ItemConfig.Grenade)
+		g.ReloadTime = 0
+		g.FuseTime = 0.8
 	end)
 	
 	local lasersdisabled = false
 	
 	mainframe.disablelasers.MouseButton1Click:connect(function()
 	if lasersdisabled == false then
-	lasersdisabled = true
-	require(game:GetService("ReplicatedStorage").Game.MilitaryIsland).StopSpin() -- If I don't include this then the dev log will be spammed with SetPrimaryPartCFrame errors
+		lasersdisabled = true
+		require(game:GetService("ReplicatedStorage").Game.MilitaryIsland).StopSpin() -- If I don't include this then the dev log will be spammed with SetPrimaryPartCFrame errors
 	
-	local function removeTI(ti)
-	if ti.ClassName == "TouchTransmitter" then
-	local laserdescendant = false
+		local function removeTI(ti)
+			if ti.ClassName == "TouchTransmitter" then
+				local laserdescendant = false
+		
+				for i, fam in pairs(GetFamily(ti)) do
 	
-	for i, fam in pairs(GetFamily(ti)) do
+					local idklmao, notnil = pcall(function()
+						return fam.Parent ~= nil and fam.Parent.Parent ~= nil and fam.Parent.Parent.Parent ~= nil
+					end)
 	
-	local idklmao, notnil = pcall(function()
-	return fam.Parent ~= nil and fam.Parent.Parent ~= nil and fam.Parent.Parent.Parent ~= nil
-	end)
+					if notnil == true then
+						if fam.Parent.Name:lower():match("laser") or fam.Parent.Name:lower():match("camera") or fam.Parent.Parent.Parent.Name == "Floors" then
+							laserdescendant = true
+						break
+						end
+					end
+				end
 	
-	if notnil == true then
-	if fam.Parent.Name:lower():match("laser") or fam.Parent.Name:lower():match("camera") or fam.Parent.Parent.Parent.Name == "Floors" then
-	laserdescendant = true
-	break
-	end
-	end
-	end
+				if laserdescendant or ti.Parent.Name == "BarbedWire" or ti.Parent.Name == "Light" then
+					if ti.Parent.Parent and ti.Parent.Parent.Name ~= "WindowEntry" then
+						if ti.Parent.CanCollide == false then
+							ti.Parent:Destroy()
+						end
 	
-	if laserdescendant or ti.Parent.Name == "BarbedWire" or ti.Parent.Name == "Light" then
-	if ti.Parent.Parent and ti.Parent.Parent.Name ~= "WindowEntry" then
-	if ti.Parent.CanCollide == false then
-	ti.Parent:Destroy()
-	end
+						coroutine.resume(coroutine.create(function()
+						repeat
+						ti.Parent.Transparency = 0.6
+						ti.Parent.Color = Color3.new()
+						ti:Destroy()
+						task.wait() until GetFamily(ti)[1] ~= game
+						end))
 	
-	coroutine.resume(coroutine.create(function()
-	repeat
-	ti.Parent.Transparency = 0.6
-	ti.Parent.Color = Color3.new()
-	ti:Destroy()
-	task.wait() until GetFamily(ti)[1] ~= game
-	end))
+					end
+				end
+			end
+		end
 	
-	end
-	end
-	end
-	end
+		for i,v in pairs(workspace:GetDescendants()) do
+			removeTI(v)
+		end
 	
-	for i,v in pairs(workspace:GetDescendants()) do
-	removeTI(v)
-	end
+		workspace.DescendantAdded:connect(removeTI)
 	
-	workspace.DescendantAdded:connect(removeTI)
-	
-	notify("Lasers that are NOT transparent will hurt you.")
-	end
+		notify("Lasers that are NOT transparent will hurt you.")
+		end
 	end)
 	
 	mainframe.forcedaytime.MouseButton1Click:connect(function()
-	game.Lighting.ClockTime = 12
-	game.Lighting:GetPropertyChangedSignal("ClockTime"):connect(function()
-	game.Lighting.ClockTime = 12
+		game.Lighting.ClockTime = 12
+		game.Lighting:GetPropertyChangedSignal("ClockTime"):connect(function()
+		game.Lighting.ClockTime = 12
 	end)
 	
 	end)
 	
 	mainframe.holdebypass.MouseButton1Click:connect(function()
 	if not HoldEBypass then
-	HoldEBypass = true
-	notify("Hold E Bypass enabled. Sadly cannot be used with the donut shop, gas station, or air drops ;(")
+		HoldEBypass = true
+		notify("Hold E Bypass enabled. Sadly cannot be used with the donut shop, gas station, or air drops ;(")
 	end
 	end)
 	
@@ -933,15 +933,15 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 	local function speedhack()
 	
-	lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(function()
-	if lplr.Character.Humanoid.WalkSpeed ~= speeds.walkspeed then
-	    lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
-	end
-	end)
+		lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(function()
+				if lplr.Character.Humanoid.WalkSpeed ~= speeds.walkspeed then
+			    lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
+			end
+		end)
 	
-	lplr.Character.Humanoid.Running:connect(function()
-	lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
-	end)
+		lplr.Character.Humanoid.Running:connect(function()
+		lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
+		end)
 	
 	end
 	if not SpeedBypass then
@@ -949,35 +949,35 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	speedhack()
 	
 	lplr.CharacterAdded:connect(function(chr)
-	chr:WaitForChild("Humanoid")
-	speedhack()
+		chr:WaitForChild("Humanoid")
+		speedhack()
 	end)
 	
 	notify("To edit your walkspeed, scroll up/down on the number in the textbox (max 150).")
 	end
 	
 	mainframe.Speednum.MouseWheelForward:connect(function()
-	speeds.walkspeed = speeds.walkspeed + 5
+		speeds.walkspeed = speeds.walkspeed + 5
 	end)
 	
 	mainframe.Speednum.MouseWheelBackward:connect(function()
-	speeds.walkspeed = speeds.walkspeed - 5
+		speeds.walkspeed = speeds.walkspeed - 5
 	end)
 	
 	Changed(speeds, "walkspeed", function(num)
-	if num > 150 then
-	speeds.walkspeed = 150
-	end
-	if num < 0 then
-	speeds.walkspeed = 0
-	end
-	mainframe.Speednum.Text = tostring(speeds.walkspeed)
+		if num > 150 then
+			speeds.walkspeed = 150
+		end
+		if num < 0 then
+			speeds.walkspeed = 0
+		end
+		mainframe.Speednum.Text = tostring(speeds.walkspeed)
 	end)
 	
 	Changed(mainframe.Speednum, "Text", function(txt)
-	if tonumber(txt) then
-	speeds.walkspeed = tonumber(txt)
-	end
+		if tonumber(txt) then
+			speeds.walkspeed = tonumber(txt)
+		end
 	end)
 	
 	end)
@@ -985,7 +985,7 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local ConfGUI = script.Parent.Confirmation
 	
 	ConfGUI.No.MouseButton1Click:connect(function()
-	ConfGUI.Parent.Confirmation.Visible = false
+		ConfGUI.Parent.Confirmation.Visible = false
 	end)
 	
 	ConfGUI.Yes.MouseButton1Click:connect(function()
@@ -998,92 +998,92 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local robtitle = "RedWire's Robbery Notifier"
 	
 	otherframe.RobberyNotifier.MouseButton1Click:connect(function()
-	if not RobberyNotifier then
-	RobberyNotifier = true
-	local IconIds = {}
-	IconIds["bank truck"] = "6133383545"
-	IconIds["gas station"] = "4643750797"
-	IconIds["donut shop"] = "4643750660"
-	IconIds["museum"] = "4643749917"
-	IconIds["tomb"] = "6896911415"
-	IconIds["casino"] = "9255252609"
-	IconIds["mansion"] = "11831534984"
+		if not RobberyNotifier then
+			RobberyNotifier = true
+			local IconIds = {}
+			IconIds["bank truck"] = "6133383545"
+			IconIds["gas station"] = "4643750797"
+			IconIds["donut shop"] = "4643750660"
+			IconIds["museum"] = "4643749917"
+			IconIds["tomb"] = "6896911415"
+			IconIds["casino"] = "9255252609"
+			IconIds["mansion"] = "11831534984"
 	
-	for i,v in pairs(plrgui.WorldMarkersGui:GetChildren()) do
+			for i,v in pairs(plrgui.WorldMarkersGui:GetChildren()) do
 	
-	for i2, v2 in pairs(v:GetChildren()) do
+				for i2, v2 in pairs(v:GetChildren()) do
 	
-	for name, id in pairs(IconIds) do
+					for name, id in pairs(IconIds) do
 	
-	if v2.ImageLabel.Image == "rbxassetid://"..id then
+						if v2.ImageLabel.Image == "rbxassetid://"..id then
 	
-	Changed(v2, "ImageColor3", function(color)
-	if color == Color3.new(0,1,0) then
-	notify("The "..name.." is open for robbery.")
-	end
-	end)
+							Changed(v2, "ImageColor3", function(color)
+									if color == Color3.new(0,1,0) then
+										notify("The "..name.." is open for robbery.")
+									end
+							end)
 	
-	end
+						end
 	
-	end
+					end
 	
-	end
+				end
 	
-	end
-		local smoke = workspace.PowerPlant.Smoke.smoke
-	
-		jewel.Floors.ChildAdded:connect(function()
-			notify("The jewelry is open for robbery.")
-		end)
-	
-		bank.Layout.ChildAdded:connect(function()
-			notify("The bank is open for robbery.")
-		end)
-	
-		smoke:GetPropertyChangedSignal("Enabled"):connect(function()
-			if smoke.Enabled == true then
-				notify("The powerplant is open for robbery.")
 			end
-		end)
+			local smoke = workspace.PowerPlant.Smoke.smoke
 	
-		workspace.Trains.ChildAdded:connect(function(child)
-		if child.Name == "PassengerArmor" then
-			notify("A passenger train has entered the map.")
-		elseif child.Name == "LocomotiveFront" then
-			notify("A cargo train has entered the map.")
-		end
-		end)
+			jewel.Floors.ChildAdded:connect(function()
+				notify("The jewelry is open for robbery.")
+			end)
 	
-		workspace.ChildAdded:connect(function(c)
-			if c.Name == "Plane" then
-				notify("The cargo plane is inbound!")
-			end
-			if c.Name == "CargoShip" then
-				notify("The cargo ship is coming!")
+			bank.Layout.ChildAdded:connect(function()
+				notify("The bank is open for robbery.")
+			end)
+	
+			smoke:GetPropertyChangedSignal("Enabled"):connect(function()
+				if smoke.Enabled == true then
+					notify("The powerplant is open for robbery.")
+				end
+			end)
+	
+			workspace.Trains.ChildAdded:connect(function(child)
+			if child.Name == "PassengerArmor" then
+				notify("A passenger train has entered the map.")
+			elseif child.Name == "LocomotiveFront" then
+				notify("A cargo train has entered the map.")
 			end
 			end)
 	
-	end
+			workspace.ChildAdded:connect(function(c)
+				if c.Name == "Plane" then
+					notify("The cargo plane is inbound!")
+				end
+				if c.Name == "CargoShip" then
+					notify("The cargo ship is coming!")
+				end
+			end)
+	
+		end
 	end)
 	
 	otherframe.infiniteyeet.MouseButton1Click:connect(function()
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 	end)
 	
 	local ragdollremoved = false
 	
 	otherframe.removeragdoll.MouseButton1Click:connect(function()
-	if not ragdollremoved then
-	ragdollremoved = true
-	require(game.ReplicatedStorage.Module.AlexRagdoll).Ragdoll = nil
-	notify("Removed ragdolling. (WARNING: in some cases you will still take fall damage)")
-	end
+		if not ragdollremoved then
+			ragdollremoved = true
+			require(game.ReplicatedStorage.Module.AlexRagdoll).Ragdoll = nil
+			notify("Removed ragdolling. (WARNING: in some cases you will still take fall damage)")
+		end
 	end)
 	
 	otherframe.switch.MouseButton1Down:connect(function()
-	local gui = otherframe.Parent
-	gui.otherFrame.Visible = false
-	gui.MainFrame.Visible = true
+		local gui = otherframe.Parent
+		gui.otherFrame.Visible = false
+		gui.MainFrame.Visible = true
 	end)
 	
 	otherframe.gunshoptpbutton.Text = "Gunshop TP enabled: "..tostring(gunshoptp)
@@ -1091,21 +1091,21 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	game.RunService.Heartbeat:connect(function()
 	
 		local hrpvalid, hrp = pcall(function()
-		return lplr.Character.HumanoidRootPart
+			return lplr.Character.HumanoidRootPart
 		end)
 	
 		if hrpvalid and gunshoptp then
-	hrp.CFrame = CFrame.new() + Vector3.new(418.439, 18, 520)
-	end
+			hrp.CFrame = CFrame.new() + Vector3.new(418.439, 18, 520)
+		end
 	end)
 	
 	otherframe.gunshoptpbutton.MouseButton1Click:connect(function()
-	if gunshoptp then
-	gunshoptp = false
-	else
-	gunshoptp = true
-	end
-	otherframe.gunshoptpbutton.Text = "Gunshop TP enabled: "..tostring(gunshoptp)
+		if gunshoptp then
+			gunshoptp = false
+		else
+			gunshoptp = true
+		end
+		otherframe.gunshoptpbutton.Text = "Gunshop TP enabled: "..tostring(gunshoptp)
 	end)
 	
 	local enablefly = false
@@ -1155,15 +1155,15 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		end
 	
 		local flyspeed = speeds.flyspeed
-		if not hrp then
-		hrp = lplr.Character.Humanoid.RootPart
-		if flyspeed > 150 then
-		flyspeed = 150
-		end
-		end
+			if not hrp then
+				hrp = lplr.Character.Humanoid.RootPart
+				if flyspeed > 150 then
+					flyspeed = 150
+				end
+			end
 	
 	    if flying then
-	    local cam = workspace.Camera
+	    	local cam = workspace.Camera
 	    end
 	
 		local frontoffset = CFrame.new() + Vector3.new(0,0,-maxdistance)
@@ -1233,27 +1233,27 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	-- end of fly script
 	
 	Changed(speeds, "flyspeed", function(num)
-	if num > 640 then
-	speeds.flyspeed = 640
-	end
-	if num < 0 then
-	speeds.flyspeed = 0
-	end
-	otherframe.flyhacknum.Text = tostring(speeds.flyspeed)
+		if num > 640 then
+			speeds.flyspeed = 640
+		end
+		if num < 0 then
+			speeds.flyspeed = 0
+		end
+		otherframe.flyhacknum.Text = tostring(speeds.flyspeed)
 	end)
 	
 	otherframe.flyhacknum.MouseWheelForward:connect(function()
-	speeds.flyspeed = speeds.flyspeed + 20
+		speeds.flyspeed = speeds.flyspeed + 20
 	end)
 	
 	otherframe.flyhacknum.MouseWheelBackward:connect(function()
-	speeds.flyspeed = speeds.flyspeed - 20
+		speeds.flyspeed = speeds.flyspeed - 20
 	end)
 	
 	Changed(otherframe.flyhacknum, "Text", function(txt)
-	if tonumber(txt) then
-	speeds.flyspeed = tonumber(txt)
-	end
+		if tonumber(txt) then
+			speeds.flyspeed = tonumber(txt)
+		end
 	end)
 	
 	notify("Fly hack enabled! Caps at 150 if you're flying without a vehicle.")
@@ -1263,13 +1263,13 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local keybypass = false
 	
 	otherframe.keybypass.MouseButton1Click:connect(function()
-	if not keybypass then
-	keybypass = true
-	require(game.ReplicatedStorage.Game.PlayerUtils).hasKey = function()
-	return true
-	end
-	notify("Keycard bypass enabled.")
-	end
+		if not keybypass then
+			keybypass = true
+			require(game.ReplicatedStorage.Game.PlayerUtils).hasKey = function()
+				return true
+			end
+			notify("Keycard bypass enabled.")
+		end
 	end)
 	
 	local ctxt = otherframe.casinocode.Text
@@ -1279,10 +1279,10 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local code
 	
 	for i,v in pairs(codes:GetChildren()) do
-	if v:FindFirstChildOfClass("Part").SurfaceGui.TextLabel.Text ~= "" then
-	    code = v
-	    break
-	end
+		if v:FindFirstChildOfClass("Part").SurfaceGui.TextLabel.Text ~= "" then
+		    code = v
+		    break
+		end
 	end
 	
 	local txt = ""
@@ -1298,32 +1298,32 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	
 	delay(5,function()
-	otherframe.casinocode.Text = ctxt
+		otherframe.casinocode.Text = ctxt
 	end)
 	
 	end)
 	
 	otherframe.respawn.MouseButton1Click:connect(function()
-	lplr.Character.Humanoid.Health = 0
+		lplr.Character.Humanoid.Health = 0
 	end)
 	
 	local delradio = false
 	
 	otherframe.deleteradio.MouseButton1Click:connect(function()
-	if not delradio then
-	delradio = true
-	if lplr.PlayerGui:FindFirstChild("RadioGui") then
-	lplr.PlayerGui.RadioGui:Destroy()
-	end
+		if not delradio then
+			delradio = true
+			if lplr.PlayerGui:FindFirstChild("RadioGui") then
+				lplr.PlayerGui.RadioGui:Destroy()
+			end
 	
-	lplr.PlayerGui.ChildAdded:connect(function(c)
-	if c.Name == "RadioGui" then
-	c:Destroy()
-	end
-	end)
+			lplr.PlayerGui.ChildAdded:connect(function(c)
+				if c.Name == "RadioGui" then
+					c:Destroy()
+				end
+			end)
 	
-	notify("fuck this stupid gui")
-	end
+		notify("fuck this stupid gui")
+		end
 	end)
 	
 	else
@@ -1334,4 +1334,4 @@ function SCRIPT_EGCW72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_EGCW72_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_FPIL66_FAKESCRIPT))
