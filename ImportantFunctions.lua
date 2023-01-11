@@ -50,6 +50,7 @@ local function setname(t, name)
         checkreps()
         return
         end
+        checkreps()
 end
 
 local function getname(t)
