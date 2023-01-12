@@ -171,10 +171,6 @@ function SCRIPT_LEJU74_FAKESCRIPT() -- RedWiresNDSGUI.LocalScript
 		end)
 	
 	end)
-	
-	mframe.X.MouseButton1Click:connect(function()
-		mframe.Parent:Destroy()
-	end)
 
 end
 coroutine.resume(coroutine.create(SCRIPT_LEJU74_FAKESCRIPT))
