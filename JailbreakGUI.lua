@@ -1,3 +1,4 @@
+
 -- Farewell Infortality.
 -- Version: 2.82
 -- Instances:
@@ -9,7 +10,6 @@ local disablelasers = Instance.new("TextButton")
 local holdebypass = Instance.new("TextButton")
 local Airdrop = Instance.new("TextButton")
 local forcedaytime = Instance.new("TextButton")
-local X = Instance.new("TextButton")
 local more = Instance.new("TextButton")
 local Title = Instance.new("TextLabel")
 local Speednum = Instance.new("TextBox")
@@ -135,20 +135,6 @@ forcedaytime.TextSize = 18
 forcedaytime.TextStrokeTransparency = 0
 forcedaytime.TextWrapped = true
 
-X.Name = "X"
-X.Parent = MainFrame
-X.BackgroundColor3 = Color3.new(1, 1, 1)
-X.BackgroundTransparency = 1
-X.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-X.Position = UDim2.new(0.868968844, 0, 0.0250000004, 0)
-X.Size = UDim2.new(0, 37, 0, 38)
-X.Font = Enum.Font.SourceSansBold
-X.Text = "×"
-X.TextColor3 = Color3.new(1, 0, 0)
-X.TextScaled = true
-X.TextSize = 14
-X.TextWrapped = true
-
 more.Name = "more"
 more.Parent = MainFrame
 more.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
@@ -169,8 +155,8 @@ Title.BackgroundColor3 = Color3.new(1, 1, 1)
 Title.BackgroundTransparency = 1
 Title.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 Title.LayoutOrder = 1
-Title.Position = UDim2.new(0.0186191779, 0, 1.27156582e-07, 0)
-Title.Size = UDim2.new(0, 265, 0, 50)
+Title.Position = UDim2.new(0.0909462199, 0, 1.27156582e-07, 0)
+Title.Size = UDim2.new(0, 259, 0, 45)
 Title.Font = Enum.Font.SourceSansBold
 Title.Text = "RedWire's Jailbreak GUI"
 Title.TextColor3 = Color3.new(1, 1, 1)
@@ -495,7 +481,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_CTMW82_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_UNDN73_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
@@ -650,11 +636,6 @@ function SCRIPT_CTMW82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			elseif workspace.Gravity == 0 then
 				workspace.Gravity = 196
 			end
-		end)
-	
-		mainframe.X.MouseButton1Click:connect(function()
-			mainframe.Parent:Destroy()
-			_G.RedsJBGUI = false
 		end)
 	
 		mainframe.aimbot.MouseButton1Click:connect(function()
@@ -1333,4 +1314,4 @@ function SCRIPT_CTMW82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_CTMW82_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_UNDN73_FAKESCRIPT))
