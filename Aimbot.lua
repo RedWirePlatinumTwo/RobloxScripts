@@ -1440,7 +1440,7 @@ function SCRIPT_SXSK81_FAKESCRIPT() -- Aimbot.Scripts
 	    end)
 	
 	    for i,v in pairs(workspace:GetDescendants()) do
-	        if v.ClassName == "Humanoid" and v.RootPart and not ischaracter(v.Parent) and not table.find(npcs,v) then
+	        if v.ClassName == "Humanoid" and v.RootPart and not ischaracter(v.Parent) and not table.find(npcs, v.Parent) then
 	            table.insert(npcs, v.Parent)
 	       end
 	    end
@@ -1448,7 +1448,7 @@ function SCRIPT_SXSK81_FAKESCRIPT() -- Aimbot.Scripts
 	    workspace.DescendantAdded:connect(function(v)
 	        if v.ClassName == "Humanoid" then
 	            if not v.RootPart then repeat task.wait() until v.RootPart end
-		            if not ischaracter(v.Parent) and not table.find(npcs, v) then
+		            if not ischaracter(v.Parent) and not table.find(npcs, v.Parent) then
 		                table.insert(npcs, v.Parent)
 		            end
 	        end
