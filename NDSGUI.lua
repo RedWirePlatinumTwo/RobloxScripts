@@ -9,7 +9,6 @@ local Title = Instance.new("TextLabel")
 local ChatDisaster = Instance.new("TextButton")
 local Admin = Instance.new("TextButton")
 local lobbytp = Instance.new("TextButton")
-local X = Instance.new("TextButton")
 --Properties:
 RedWiresNDSGUI.Name = "RedWiresNDSGUI"
 RedWiresNDSGUI.Parent = game.CoreGui
@@ -18,7 +17,7 @@ RedWiresNDSGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = RedWiresNDSGUI
 MainFrame.Active = true
-MainFrame.BackgroundColor3 = Color3.new(1, 1, 1)
+MainFrame.BackgroundColor3 = Color3.new(0.333333, 0.666667, 1)
 MainFrame.BorderSizePixel = 0
 MainFrame.Position = UDim2.new(0.63411206, 0, 0.140000343, 0)
 MainFrame.Size = UDim2.new(0, 322, 0, 199)
@@ -51,15 +50,15 @@ prewarn.TextWrapped = true
 
 Title.Name = "Title"
 Title.Parent = MainFrame
-Title.BackgroundColor3 = Color3.new(1, 1, 1)
+Title.BackgroundColor3 = Color3.new(0.333333, 0.666667, 1)
 Title.BorderSizePixel = 0
-Title.Size = UDim2.new(0, 270, 0, 49)
+Title.Size = UDim2.new(0, 320, 0, 49)
 Title.Font = Enum.Font.SourceSansBold
 Title.Text = "RedWire's Natural Disaster Survival GUI"
-Title.TextColor3 = Color3.new(0.309804, 0.619608, 1)
+Title.TextColor3 = Color3.new(1, 1, 1)
 Title.TextScaled = true
 Title.TextSize = 16
-Title.TextStrokeColor3 = Color3.new(0.435294, 0.435294, 0.435294)
+Title.TextStrokeColor3 = Color3.new(0, 0.333333, 1)
 Title.TextStrokeTransparency = 0
 Title.TextWrapped = true
 
@@ -101,21 +100,8 @@ lobbytp.TextColor3 = Color3.new(1, 1, 1)
 lobbytp.TextScaled = true
 lobbytp.TextSize = 14
 lobbytp.TextWrapped = true
-
-X.Name = "X"
-X.Parent = MainFrame
-X.BackgroundColor3 = Color3.new(1, 1, 1)
-X.BackgroundTransparency = 1
-X.Position = UDim2.new(0.838509321, 0, 0.00502512557, 0)
-X.Size = UDim2.new(0, 50, 0, 50)
-X.Font = Enum.Font.SourceSansBold
-X.Text = "×"
-X.TextColor3 = Color3.new(1, 0, 0)
-X.TextScaled = true
-X.TextSize = 14
-X.TextWrapped = true
 -- Scripts:
-function SCRIPT_UFGZ88_FAKESCRIPT() -- RedWiresNDSGUI.LocalScript 
+function SCRIPT_LEJU74_FAKESCRIPT() -- RedWiresNDSGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = RedWiresNDSGUI
 	local mframe = script.Parent.MainFrame
@@ -191,4 +177,4 @@ function SCRIPT_UFGZ88_FAKESCRIPT() -- RedWiresNDSGUI.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_UFGZ88_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_LEJU74_FAKESCRIPT))
