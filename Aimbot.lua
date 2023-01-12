@@ -42,7 +42,6 @@ local value_6 = Instance.new("TextButton")
 local SwitchToTeam = Instance.new("TextButton")
 local TargetNPCs = Instance.new("TextLabel")
 local value_7 = Instance.new("TextButton")
-local NPCWarning = Instance.new("TextLabel")
 local TargetCloserPlayers = Instance.new("TextLabel")
 local value_8 = Instance.new("TextButton")
 local About = Instance.new("TextLabel")
@@ -544,10 +543,10 @@ TargetNPCs.BackgroundColor3 = Color3.new(0, 0, 0)
 TargetNPCs.BackgroundTransparency = 1
 TargetNPCs.BorderColor3 = Color3.new(0, 0.666667, 0)
 TargetNPCs.BorderSizePixel = 0
-TargetNPCs.Position = UDim2.new(-0.000667671789, 0, 0.533571303, 0)
+TargetNPCs.Position = UDim2.new(0.00106243207, 0, 0.676044405, 0)
 TargetNPCs.Size = UDim2.new(0, 169, 0, 28)
 TargetNPCs.Font = Enum.Font.Highway
-TargetNPCs.Text = "Target NPCs (test):"
+TargetNPCs.Text = "Target NPCs:"
 TargetNPCs.TextColor3 = Color3.new(0.333333, 1, 0)
 TargetNPCs.TextSize = 24
 TargetNPCs.TextXAlignment = Enum.TextXAlignment.Left
@@ -564,28 +563,13 @@ value_7.TextColor3 = Color3.new(0.333333, 1, 0)
 value_7.TextSize = 24
 value_7.TextXAlignment = Enum.TextXAlignment.Left
 
-NPCWarning.Name = "NPCWarning"
-NPCWarning.Parent = TargetNPCs
-NPCWarning.BackgroundColor3 = Color3.new(0, 0, 0)
-NPCWarning.BackgroundTransparency = 1
-NPCWarning.BorderColor3 = Color3.new(0, 0.666667, 0)
-NPCWarning.BorderSizePixel = 0
-NPCWarning.Position = UDim2.new(1.76091588, 0, 0.252492636, 0)
-NPCWarning.Size = UDim2.new(0, 280, 0, 46)
-NPCWarning.Font = Enum.Font.Highway
-NPCWarning.Text = "For performance reasons, you cannot auto-target NPCs. Auto-Targeting will be disabled to be able to target NPCs."
-NPCWarning.TextColor3 = Color3.new(0.333333, 1, 0)
-NPCWarning.TextScaled = true
-NPCWarning.TextSize = 24
-NPCWarning.TextWrapped = true
-
 TargetCloserPlayers.Name = "TargetCloserPlayers"
 TargetCloserPlayers.Parent = GameSettingsUI
 TargetCloserPlayers.BackgroundColor3 = Color3.new(0, 0, 0)
 TargetCloserPlayers.BackgroundTransparency = 1
 TargetCloserPlayers.BorderColor3 = Color3.new(0, 0.666667, 0)
 TargetCloserPlayers.BorderSizePixel = 0
-TargetCloserPlayers.Position = UDim2.new(-0.000667671789, 0, 0.678828359, 0)
+TargetCloserPlayers.Position = UDim2.new(-0.000667671789, 0, 0.528290749, 0)
 TargetCloserPlayers.Size = UDim2.new(0, 169, 0, 28)
 TargetCloserPlayers.Font = Enum.Font.Highway
 TargetCloserPlayers.Text = "Target Closer Players:"
@@ -938,7 +922,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_RTVF86_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_RERG85_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1249,10 +1233,10 @@ function SCRIPT_RTVF86_FAKESCRIPT() -- Aimbot.Scripts
 					return plr.Team ~= lplr.Team and not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
 				else
 					return not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
-			end
+			    end
 				else
 					return not table.find(WhitelistedPlrs, plr)
-				end
+			end
 		end
 	
 		local function selectcharacter(chr)
@@ -1440,21 +1424,49 @@ function SCRIPT_RTVF86_FAKESCRIPT() -- Aimbot.Scripts
 		teamui.X.MouseButton1Click:connect(function()
 			teamui.Visible = false
 		end)
+	    local npcs = {}
+	
+	    TableAdded(npcs, function(i, npc)
+	        
+	        Changed(npc.Humanoid, "Health", function(hp)
+	            if hp <= 0 then
+	                npcs[i] = nil
+	            end
+	        end)
+	        
+	    end)
+	
+	    for i,v in pairs(workspace:GetDescendants()) do
+	        if v.ClassName == "Humanoid" and v.RootPart and not ischaracter(v.Parent) and not table.find(npcs,v) then
+	            table.insert(npcs, v.Parent)
+	       end
+	    end
+	
+	    workspace.DescendantAdded:connect(function(v)
+	        if v.ClassName == "Humanoid" then
+	            if not v.RootPart then repeat task.wait() until v.RootPart end
+		            if not ischaracter(v.Parent) and not table.find(npcs, v) then
+		                table.insert(npcs, v.Parent)
+		            end
+	        end
+	    end)
+	
+	    local function gettargetpart(chr)
+	
+			local bool, result = pcall(function()
+				return chr[GameStats.Target]
+			end)
+	
+			if bool then
+				return result
+			else
+				return chr.HumanoidRootPart
+			end
+	   end
 	
 		local AimbotFunction = game.RunService.RenderStepped:connect(function()
 			if misc.TargetedCharacter ~= "" then
-				local part
-	
-				local bool, result = pcall(function()
-					return misc.TargetedCharacter[GameStats.Target]
-				end)
-	
-				if bool then
-					part = result
-				else
-					part = misc.TargetedCharacter.HumanoidRootPart
-				end
-				local v, onscreen = workspace.Camera:WorldToScreenPoint(part.Position)
+				local v, onscreen = workspace.Camera:WorldToScreenPoint(gettargetpart(misc.TargetedCharacter).Position)
 				if onscreen then
 					local StabilizeNum = GlobalStats.AimIntensity/workspace.Camera.ViewportSize.Y
 					local x, y = (v.X - m.X)*StabilizeNum, (v.Y - m.Y)*StabilizeNum
@@ -1489,52 +1501,66 @@ function SCRIPT_RTVF86_FAKESCRIPT() -- Aimbot.Scripts
 			end
 			end
 	
-			if GameStats.AutoTarget and not GameStats.TargetNPCs then
+			if GameStats.AutoTarget then
 			    local table1 = {}
 			    local table2 = {}
 			    local PrioritizedPlrsOnScreen = {}
-	
-			    for i,v in pairs(plrs:GetPlayers()) do
+	            local function addchr(v)
+	           	local outcome = pcall(function()
+		    	    	return v.Humanoid and gettargetpart(v)
+		    	 end)
 		    
-		    		local outcome = pcall(function()
-		    	    	return v.Character.Humanoid and v.Character[GameStats.Target]
-		    	    end)
-		    
-		    	    if outcome and v.Name ~= lplr.Name and v.Character.Humanoid.Health ~= 0 and IsNotWhitelisted(v) then
-		    	        local pos = math.floor(lplr:DistanceFromCharacter(v.Character[GameStats.Target].Position))
-		    	        local _, onscreen = workspace.Camera:WorldToScreenPoint(v.Character[GameStats.Target].Position)
+		    	    if outcome and v.Humanoid.Health ~= 0 and IsNotWhitelisted(v) then
+		    	        local pos = math.floor(lplr:DistanceFromCharacter(gettargetpart(v).Position))
+		    	        local _, onscreen = workspace.Camera:WorldToScreenPoint(gettargetpart(v).Position)
 		    	        if onscreen and pos < GameStats.MaxStuds then
-		    	                table1[pos] = v
-		    			    	table.insert(table2, pos)
+		    	            table1[pos] = v
+		    			    table.insert(table2, pos)
 		        			if table.find(PrioritizedPlrs, v) then
 		        				table.insert(PrioritizedPlrsOnScreen, v)
 		        			end
 		    		    end
 		        	end
+	            end
+	            
+	            if GameStats.TargetNPCs then
+	                for i, npc in pairs(npcs) do
+	                    addchr(npc)
+	               end
+	           end
+	            
+			    for i,v in pairs(plrs:GetPlayers()) do
+			        if v ~= lplr then
+		            addchr(v.Character)
+		            end
 			    end
 	
 				if #PrioritizedPlrsOnScreen == 0 then
 					table.sort(table2)
 				else
 	
-				for pos, plr in pairs(table1) do
-					if not table.find(PrioritizedPlrsOnScreen, plr) then
-						local num = table.find(table2,pos)
-						table.remove(table2, num)
-						table1[pos] = nil
+					for pos, plr in pairs(table1) do
+						if not table.find(PrioritizedPlrsOnScreen, plr) then
+							local num = table.find(table2,pos)
+							table.remove(table2, num)
+							table1[pos] = nil
+						end
 					end
+	
+				    table.sort(table2)
 				end
 	
-				table.sort(table2)
-				end
-	
-				for position, player in pairs(table1) do
+				for position, Char in pairs(table1) do
 					if table2[1] == position then
-						targetplayer(player)
-					end
+					    local plr = plrs:GetPlayerFromCharacter(Char)
+					    if plr then
+						    targetplayer(plr)
+						else
+						    selectcharacter(Char)
+					    end
+				    end
 				end
-	
-			end
+		    end
 	
 			if GameStats.FPEnabled then
 				if misc.TargetedCharacter ~= ""  and misc.IsAimbotOn then
@@ -1547,7 +1573,8 @@ function SCRIPT_RTVF86_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","Added closer player targeting via game settings, on by default + support for npc targeting.")
+		sendnotif("Aimbot Update","NPCs can now be auto-targeted!")
+		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
 				deselect()
@@ -1700,7 +1727,6 @@ function SCRIPT_RTVF86_FAKESCRIPT() -- Aimbot.Scripts
 		task.wait(0.2)
 		script.Parent:Destroy()
 	end
-	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_RTVF86_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_RERG85_FAKESCRIPT))
