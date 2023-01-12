@@ -142,20 +142,11 @@ toggle.TextStrokeTransparency = 0
 toggle.TextWrapped = true
 toggle.TextXAlignment = Enum.TextXAlignment.Left
 -- Scripts:
-function SCRIPT_QTXF79_FAKESCRIPT() -- AutoKeyClicker.LocalScript 
+function SCRIPT_PUHP89_FAKESCRIPT() -- AutoKeyClicker.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = AutoKeyClicker
 	local frame = script.Parent.Mainframe
 	local clickspersecond = 0.1
-	
-	function doclickwait()
-		if clickspersecond > 0.03 then
-			task.wait(clickspersecond)
-		else
-			game.RunService.RenderStepped:Wait()
-		end
-	end
-	
 	frame.Draggable = true
 	
 	local Changed = function(part, PropertyName, func)
@@ -211,7 +202,7 @@ function SCRIPT_QTXF79_FAKESCRIPT() -- AutoKeyClicker.LocalScript
 					keypress(v)
 					keyrelease(v)
 				end
-				doclickwait()
+				task.wait(clickspersecond)
 			end
 		end))
 	
@@ -236,4 +227,4 @@ function SCRIPT_QTXF79_FAKESCRIPT() -- AutoKeyClicker.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_QTXF79_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_PUHP89_FAKESCRIPT))
