@@ -40,7 +40,6 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 		end
 		if type(name) == "number" then
 			name = "t"..tostring(name)
-			name = name:gsub("%W", "")
 		end
 		if type(name) ~= "string" then name = "Table" checkreps() return end
 			name = name:gsub("%W", "")
