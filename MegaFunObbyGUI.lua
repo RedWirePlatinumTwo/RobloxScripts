@@ -14,7 +14,6 @@ local stageskip = Instance.new("ImageButton")
 local TextLabel_2 = Instance.new("TextLabel")
 local delkill = Instance.new("ImageButton")
 local TextLabel_3 = Instance.new("TextLabel")
-local X = Instance.new("TextButton")
 --Properties:
 Megafunobby.Name = "Megafunobby"
 Megafunobby.Parent = game.CoreGui
@@ -34,7 +33,7 @@ Title.Parent = MainFrame
 Title.BackgroundColor3 = Color3.new(1, 1, 1)
 Title.BackgroundTransparency = 1
 Title.Position = UDim2.new(0.0295752808, 0, 0.0325169191, 0)
-Title.Size = UDim2.new(0, 280, 0, 43)
+Title.Size = UDim2.new(0, 321, 0, 43)
 Title.Font = Enum.Font.SourceSansBold
 Title.Text = "REDWIRE'S MEGA FUN OBBY GUI"
 Title.TextColor3 = Color3.new(0.00784314, 0.329412, 0.454902)
@@ -152,21 +151,8 @@ TextLabel_3.TextColor3 = Color3.new(0.384314, 0.0980392, 0.0980392)
 TextLabel_3.TextScaled = true
 TextLabel_3.TextSize = 14
 TextLabel_3.TextWrapped = true
-
-X.Name = "X"
-X.Parent = MainFrame
-X.BackgroundColor3 = Color3.new(1, 1, 1)
-X.BackgroundTransparency = 1
-X.Position = UDim2.new(0.850877166, 0, 0.028846154, 0)
-X.Size = UDim2.new(0, 40, 0, 37)
-X.Font = Enum.Font.SourceSansBold
-X.Text = "×"
-X.TextColor3 = Color3.new(1, 0, 0)
-X.TextScaled = true
-X.TextSize = 14
-X.TextWrapped = true
 -- Scripts:
-function SCRIPT_MZWG87_FAKESCRIPT() -- Megafunobby.LocalScript 
+function SCRIPT_LTLG66_FAKESCRIPT() -- Megafunobby.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = Megafunobby
 	local frame = script.Parent.MainFrame
@@ -239,10 +225,6 @@ function SCRIPT_MZWG87_FAKESCRIPT() -- Megafunobby.LocalScript
 	stage.Changed:connect(function()
 		frame.Currentstage.Textbox.Text = tostring(stage.Value)
 	end)
-	
-	frame.X.MouseButton1Click:connect(function()
-		frame.Parent:Destroy()
-	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_MZWG87_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_LTLG66_FAKESCRIPT))
