@@ -499,6 +499,7 @@ function SCRIPT_CTMW82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
+	
 	local function notify(text)
 		local notiftime = 0
 		for i = 1, text:len() do
