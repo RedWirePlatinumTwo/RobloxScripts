@@ -922,7 +922,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_RERG85_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_SXSK81_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1431,6 +1431,9 @@ function SCRIPT_RERG85_FAKESCRIPT() -- Aimbot.Scripts
 	        Changed(npc.Humanoid, "Health", function(hp)
 	            if hp <= 0 then
 	                npcs[i] = nil
+					if misc.TargetedCharacter == npc then
+						deselect()
+					end
 	            end
 	        end)
 	        
@@ -1490,13 +1493,6 @@ function SCRIPT_RERG85_FAKESCRIPT() -- Aimbot.Scripts
 			local npc = isnpc(m.Target)
 				if npc and npc.Humanoid.Health > 0 then
 					selectcharacter(npc)
-	
-					Changed(npc.Humanoid, "Health",function(hp)
-						if hp <= 0 and misc.TargetedCharacter == npc then
-							deselect()
-						end
-					end)
-	
 				end
 			end
 			end
@@ -1729,4 +1725,4 @@ function SCRIPT_RERG85_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_RERG85_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_SXSK81_FAKESCRIPT))
