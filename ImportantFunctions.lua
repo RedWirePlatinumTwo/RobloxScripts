@@ -254,7 +254,7 @@ getgenv().FunctionLogger = function(funcparent, funcname)
 					return tostring(thing)
 				else
 					catchrepeats = {}
-					return Format(thing)
+					return Format(thing, "FuncTable")
 				end
 			end
 			
