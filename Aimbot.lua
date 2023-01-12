@@ -952,10 +952,18 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_AIMO76_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_LMXZ78_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
+	
+	local function sendnotif(title, text)
+		game.StarterGui:SetCore("SendNotification", {
+		Title = title;
+		Duration = 10;
+		Text = text;
+		})
+	end
 	
 	if not _G.RedsAimbot then
 	_G.RedsAimbot = true
@@ -1059,15 +1067,15 @@ function SCRIPT_AIMO76_FAKESCRIPT() -- Aimbot.Scripts
 	
 		local ischaracter = function(part)
 	
-		for i,v in pairs(GetFamily(part)) do
+			for i,v in pairs(GetFamily(part)) do
 	
-		for i,plr in pairs(plrs:GetPlayers()) do
-			if plr.Character == v then
-				return v
+				for i,plr in pairs(plrs:GetPlayers()) do
+					if plr.Character == v then
+						return v
+					end
+				end
+	
 			end
-		end
-	
-		end
 		end
 	
 		local isnpc = function(ins)
@@ -1101,30 +1109,27 @@ function SCRIPT_AIMO76_FAKESCRIPT() -- Aimbot.Scripts
 		local Keybinds
 	
 		local function gengamestats()
-		GlobalStats[game.PlaceId] = {}
-		GameStats = GlobalStats[game.PlaceId]
-		GameStats.Target = "Head"
-		GameStats.TargetNPCs = false
-		GameStats.AutoTarget = true
-		GameStats.FPEnabled = true
-		GameStats.WhitelistFriends = false
-		GameStats.MaxStuds = 500
-		GameStats.OwnTeamWhitelisted = true
-		GameStats.Teams = {}
-		GameStats.TargetCloserPlayers = true
+			GlobalStats[game.PlaceId] = {}
+			GameStats = GlobalStats[game.PlaceId]
+			GameStats.Target = "Head"
+			GameStats.TargetNPCs = false
+			GameStats.AutoTarget = true
+			GameStats.FPEnabled = true
+			GameStats.WhitelistFriends = false
+			GameStats.MaxStuds = 500
+			GameStats.OwnTeamWhitelisted = true
+			GameStats.Teams = {}
+			GameStats.TargetCloserPlayers = true
 		end
 	
 		if isfile and loadfile and isfile("RedsAimbotStats.lua") then
-				GlobalStats = loadfile("RedsAimbotStats.lua")()
-	
+			GlobalStats = loadfile("RedsAimbotStats.lua")()
 			if GlobalStats.TeamAutofill == nil then
 				GlobalStats.TeamAutofill = true
 			end
-	
 			if not GlobalStats.AimIntensity then
 				GlobalStats.AimIntensity = 250
 			end
-	
 			if not GlobalStats[game.PlaceId] then
 				gengamestats()
 			end
@@ -1154,15 +1159,12 @@ function SCRIPT_AIMO76_FAKESCRIPT() -- Aimbot.Scripts
 	
 		GameStats = GlobalStats[game.PlaceId]
 		Keybinds = GlobalStats.Keybinds
-	
 		if not GameStats.Teams then
 			GameStats.Teams = {}
 		end
-	
 		if GameStats.TargetNPCs == nil then
 			GameStats.TargetNPCs = false
 		end
-	
 		if GameStats.TargetCloserPlayers == nil then
 			GameStats.TargetCloserPlayers = true
 		end
@@ -1284,22 +1286,18 @@ function SCRIPT_AIMO76_FAKESCRIPT() -- Aimbot.Scripts
 	
 		local function targetplayer(player)
 	
-		local humanoidvalid, humanoid = pcall(function()
-			return player.Character.Humanoid
-		end)
+			local humanoidvalid, humanoid = pcall(function()
+				return player.Character.Humanoid
+			end)
 	
-		if player.Name ~= lplr.Name and humanoidvalid and IsNotWhitelisted(player) and humanoid.Health ~= 0 then
-			selectcharacter(player.Character)
-		end
+			if player.Name ~= lplr.Name and humanoidvalid and IsNotWhitelisted(player) and humanoid.Health ~= 0 then
+				selectcharacter(player.Character)
+			end
 		end
 	
 		if not lplr.Character then
-		game.StarterGui:SetCore("SendNotification", {
-		Title = "Aimbot target";
-		Duration = 10;
-		Text = "Spawn in the game for the aimbot to work";
-		})
-		lplr.CharacterAdded:Wait()
+			sendnotif("Aimbot", "spawn in the game for this to work")
+			lplr.CharacterAdded:Wait()
 		end
 	
 		local chr = lplr.Character
@@ -1563,10 +1561,7 @@ function SCRIPT_AIMO76_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		game.StarterGui:SetCore("SendNotification", {
-		Title = "Aimbot Update:";
-		Duration = 5;
-		Text = "Added closer player targeting via game settings, on by default + support for npc targeting.";})
+		sendnotif("Aimbot Update","Added closer player targeting via game settings, on by default + support for npc targeting.")
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
 				deselect()
@@ -1640,62 +1635,61 @@ function SCRIPT_AIMO76_FAKESCRIPT() -- Aimbot.Scripts
 		local wlframe = wlui.WhitelistedInstances.whitelistframe
 	
 		local function AddtoList(ins)
-		local clone = wlframe:Clone()
-		clone.Visible = true
-		clone.Parent = wlframe.Parent
+			local clone = wlframe:Clone()
+			clone.Visible = true
+			clone.Parent = wlframe.Parent
 	
-		local function togglefunc(Table)
-			local button
-				if Table == PrioritizedPlrs then
-					button = clone.PriorityToggle
-				else
-					button = clone.WhitelistToggle
+			local function togglefunc(Table)
+				local button
+					if Table == PrioritizedPlrs then
+						button = clone.PriorityToggle
+					else
+						button = clone.WhitelistToggle
+					end
+	
+				if ins.ClassName == "Player" and GameStats.WhitelistFriends and lplr:IsFriendsWith(ins.UserId) and Table == WhitelistedPlrs then
+					button.TextColor3 = Color3.new(0,1,0)
+					button.Text = "Yes"
+					table.insert(WhitelistedPlrs, ins)
 				end
 	
-			if ins.ClassName == "Player" and GameStats.WhitelistFriends and lplr:IsFriendsWith(ins.UserId) and Table == WhitelistedPlrs then
-				button.TextColor3 = Color3.new(0,1,0)
-				button.Text = "Yes"
-				table.insert(WhitelistedPlrs, ins)
-			end
+				button.MouseButton1Click:connect(function()
+					if button.Text == "No" then
+						button.TextColor3 = Color3.new(0,1,0)
+						button.Text = "Yes"
+						table.insert(Table,ins)
 	
-			button.MouseButton1Click:connect(function()
+					if Table == PrioritizedPlrs and clone.WhitelistToggle.Text == "Yes" then
+						clone.WhitelistToggle.Text = "No"
+						clone.WhitelistToggle.TextColor3 = Color3.new(1,0,0)
+						local wlistplr = table.find(WhitelistedPlrs, ins)
+						table.remove(WhitelistedPlrs, wlistplr)
+					end
 	
-			if button.Text == "No" then
-				button.TextColor3 = Color3.new(0,1,0)
-				button.Text = "Yes"
-				table.insert(Table,ins)
+					if Table == WhitelistedPlrs and clone.PriorityToggle.Text == "Yes" then
+						clone.PriorityToggle.Text = "No"
+						clone.PriorityToggle.TextColor3 = Color3.new(1,0,0)
+						local prioplr = table.find(PrioritizedPlrs, ins)
+						table.remove(PrioritizedPlrs, prioplr)
+					end
 	
-			if Table == PrioritizedPlrs and clone.WhitelistToggle.Text == "Yes" then
-				clone.WhitelistToggle.Text = "No"
-				clone.WhitelistToggle.TextColor3 = Color3.new(1,0,0)
-				local wlistplr = table.find(WhitelistedPlrs, ins)
-				table.remove(WhitelistedPlrs, wlistplr)
-			end
-	
-			if Table == WhitelistedPlrs and clone.PriorityToggle.Text == "Yes" then
-				clone.PriorityToggle.Text = "No"
-				clone.PriorityToggle.TextColor3 = Color3.new(1,0,0)
-				local prioplr = table.find(PrioritizedPlrs, ins)
-				table.remove(PrioritizedPlrs, prioplr)
-			end
-	
-			else
-				button.TextColor3 = Color3.new(1,0,0)
-				button.Text = "No"
-				local removeins = table.find(Table, ins)
-				table.remove(Table,removeins)
-			end
-			end)
+					else
+						button.TextColor3 = Color3.new(1,0,0)
+						button.Text = "No"
+						local removeins = table.find(Table, ins)
+						table.remove(Table,removeins)
+					end
+				end)
 	
 			end
-			clone.TextLabel.Text = ins.ClassName..": "..CheckDN(ins)
-			togglefunc(WhitelistedPlrs)
-			togglefunc(PrioritizedPlrs)
+				clone.TextLabel.Text = ins.ClassName..": "..CheckDN(ins)
+				togglefunc(WhitelistedPlrs)
+				togglefunc(PrioritizedPlrs)
 	
-			coroutine.resume(coroutine.create(function()
-				repeat task.wait() until not game.Players:FindFirstChild(ins.Name)
-				clone:Destroy()
-			end))
+				coroutine.resume(coroutine.create(function()
+					repeat task.wait() until not game.Players:FindFirstChild(ins.Name)
+					clone:Destroy()
+				end))
 	
 		end
 	
@@ -1722,15 +1716,11 @@ function SCRIPT_AIMO76_FAKESCRIPT() -- Aimbot.Scripts
 		end)
 	
 	else
-		game.StarterGui:SetCore("SendNotification", {
-		Title = "Aimbot";
-		Text = "You've already executed this. Deleting clone GUI.";
-		})
-	
+		sendnotif("Aimbot", "You've already executed this. Deleting clone.")
 		task.wait(0.2)
 		script.Parent:Destroy()
 	end
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_AIMO76_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_LMXZ78_FAKESCRIPT))
