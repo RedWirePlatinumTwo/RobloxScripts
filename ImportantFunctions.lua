@@ -3,150 +3,152 @@ indexreps = {}
 indexs = {}
 local function reformatstring(s)
 	local restring = ""
+	
 	for i = 1, s:len() do
-	if s:sub(i,i):find("%p") then
-    restring = restring.."\\"..s:sub(i,i)
-    elseif s:sub(i,i) == "\n" then
-    restring = restring.."\\n"..s:sub(i-1,i-1)
-    else
-    restring = restring..s:sub(i,i)
+		if s:sub(i,i):find("%p") then
+			restring = restring.."\\"..s:sub(i,i)
+		elseif s:sub(i,i) == "\n" then
+			restring = restring.."\\n"..s:sub(i-1,i-1)
+		else
+			restring = restring..s:sub(i,i)
+		end
 	end
-	end
+	
 	return restring
 end
 
 getgenv().TableToString = function(Table, TableName, IsInternalTable)
-local s = ""
+	local s = ""
 
-local function setname(t, name)
-    
-    local function checkreps()
-        local reps = 0
-        table.insert(indexreps,name)
-        
-        for i,v in pairs(indexreps) do
-            if v == name then
-                reps = reps + 1
-            end
-        end
-        
-        if reps > 1 then
-            indexs[name.."_"..reps] = t
-        else
-            indexs[name] = t
-        end
-    end
-    if type(name) == "number" then
-        name = "t"..tostring(name)
-        name = name:gsub("%W", "")
-    end
-    if type(name) ~= "string" then name = "Table" checkreps() return end
-        name = name:gsub("%W", "")
-        if tonumber(name:sub(1,1)) then
-        name = "t"..name
-        end
-        if name:len() == 0 then
-        name = "Table"
-        checkreps()
-        return
-        end
-        checkreps()
-end
+	local function setname(t, name)
+		
+		local function checkreps()
+			local reps = 0
+			table.insert(indexreps,name)
+			
+			for i,v in pairs(indexreps) do
+				if v == name then
+					reps = reps + 1
+				end
+			end
+			
+			if reps > 1 then
+				indexs[name.."_"..reps] = t
+			else
+				indexs[name] = t
+			end
+		end
+		if type(name) == "number" then
+			name = "t"..tostring(name)
+			name = name:gsub("%W", "")
+		end
+		if type(name) ~= "string" then name = "Table" checkreps() return end
+			name = name:gsub("%W", "")
+			if tonumber(name:sub(1,1)) then
+				name = "t"..name
+			end
+			if name:len() == 0 then
+				name = "Table"
+				checkreps()
+				return
+			end
+			checkreps()
+	end
 
-local function getname(t)
-    
-    for i,v in pairs(indexs) do
-        if v == t then
-            return i
-        end
-    end
-    
-end
-
-table.insert(catchrepeats, Table)
-if not IsInternalTable then
-catchrepeats = {Table}
-indexreps = {}
-indexs = {}
-setname(Table, TableName)
- s = "local "..getname(Table).." = {}"
- local reps = {}
- 
-local function definetables(f)
-
-    for i,v in pairs(f) do
-	
-        local function istable(x)
-        if type(x) == "table" and not table.find(reps,x) and not table.find(catchrepeats,x) then
-            local tname
-            if x == i then
-                tname = v
-            else
-                tname = i
-            end
-            setname(x, tname)
-            s = s.."\nlocal "..getname(x).." = {}"
-            table.insert(reps,x)
-            definetables(x)
-        end
+	local function getname(t)
+		
+		for i,v in pairs(indexs) do
+			if v == t then
+				return i
+			end
 		end
 		
-        istable(i)
-        istable(v)
-    end
-end
+	end
 
-definetables(Table)
- else
-s = getname(Table)
-end
-local name = getname(Table)
+	table.insert(catchrepeats, Table)
+	if not IsInternalTable then
+		catchrepeats = {Table}
+		indexreps = {}
+		indexs = {}
+		setname(Table, TableName)
+		s = "local "..getname(Table).." = {}"
+		local reps = {}
+	 
+		local function definetables(f)
 
-    local function stringmethod(i,v)
-	
-        local function isrecursivetable(x)
-        if table.find(catchrepeats,x) then
-		return getname(x)
-		else
-		return tostring(x)
+			for i,v in pairs(f) do
+		
+				local function istable(x)
+				if type(x) == "table" and not table.find(reps,x) and not table.find(catchrepeats,x) then
+					local tname
+					if x == i then
+						tname = v
+					else
+						tname = i
+					end
+					setname(x, tname)
+					s = s.."\nlocal "..getname(x).." = {}"
+					table.insert(reps,x)
+					definetables(x)
+				end
+				end
+			
+				istable(i)
+				istable(v)
+			end
 		end
-        end
+
+		definetables(Table)
+	 else
+		s = getname(Table)
+	end
+	local name = getname(Table)
+
+		local function stringmethod(i,v)
 		
-        local part1 = ""
-        local part1formatted = Format(i,v)
-        local part2 = Format(v,i)
-		
-		if part2 == "" then
-		part2 = isrecursivetable(v)
+			local function isrecursivetable(x)
+				if table.find(catchrepeats,x) then
+					return getname(x)
+				else
+					return tostring(x)
+				end
+			end
+			
+			local part1 = ""
+			local part1formatted = Format(i,v)
+			local part2 = Format(v,i)
+			
+			if part2 == "" then
+				part2 = isrecursivetable(v)
+			end
+			
+			if type(i) == "table" then
+				local findwhitespace = part1formatted:find("\n")
+				local tname = ""
+				if findwhitespace then
+					tname = part1formatted:sub(1,part1formatted:find("\n")-1)
+					part2 = part2.."\n"..part1formatted:sub(tname:len()+2)
+				else
+					tname = part1formatted
+				end
+				part1 = "\n"..name.."["..tname.."]"
+			else
+				part1 = "\n"..name.."["..part1formatted.."]"
+			end
+			if part1 == "\n"..name.."[]" then
+				part1 = "\n"..name.."["..isrecursivetable(i).."]"
+			end
+			return part1.." = "..part2
+			
 		end
 		
-		if type(i) == "table" then
-        local findwhitespace = part1formatted:find("\n")
-        local tname = ""
-        if findwhitespace then
-        tname = part1formatted:sub(1,part1formatted:find("\n")-1)
-        part2 = part2.."\n"..part1formatted:sub(tname:len()+2)
-        else
-        tname = part1formatted
-        end
-        part1 = "\n"..name.."["..tname.."]"
-        else
-        part1 = "\n"..name.."["..part1formatted.."]"
+		for i,v in pairs(Table) do
+			s = s..stringmethod(i,v)
 		end
-        if part1 == "\n"..name.."[]" then
-		part1 = "\n"..name.."["..isrecursivetable(i).."]"
-        end
-		return part1.." = "..part2
-		
-    end
-	
-    for i,v in pairs(Table) do
-        s = s..stringmethod(i,v)
-    end
-    if not IsInternalTable then
-        s = s.."\nreturn "..name
-    end
-    return s
+		if not IsInternalTable then
+			s = s.."\nreturn "..name
+		end
+		return s
 end
 
 getgenv().Format = function(var, tname)
@@ -155,20 +157,18 @@ getgenv().Format = function(var, tname)
         if typeof(var) == "EnumItem" or type(var) == "boolean" then
             st = tostring(var)
 		elseif type(var) == "number" then
-		if var == math.huge then
-		st = "math.huge"
-		elseif var == math.huge * -1 then
-		st = "math.huge * -1"
-		else
-		st = tostring(var)
-		end
+			if var == math.huge then
+				st = "math.huge"
+			elseif var == math.huge * -1 then
+				st = "math.huge * -1"
+			else
+				st = tostring(var)
+			end
         elseif type(var) == "string" then
             st = "'"..reformatstring(var).."'"
         elseif type(var) == "table" then
             if not table.find(catchrepeats, var) then
-			st = TableToString(var, tname, true)
-			else
-			st = ""
+				st = TableToString(var, tname, true)
 			end
 		elseif typeof(var) == "Instance" then
 			st = GetFullName(var)
@@ -184,142 +184,142 @@ getgenv().Format = function(var, tname)
 	return st
 end
 getgenv().GetFamily = function(ins, reverseorder)
-local Pathway = {}
+	local Pathway = {}
 
-local function _getFamily(v)
-if v.Parent ~= nil then
-		if reverseorder then
-		table.insert(Pathway, v)
+	local function _getFamily(v)
+		if v.Parent ~= nil then
+			if reverseorder then
+				table.insert(Pathway, v)
+			else
+				table.insert(Pathway, 1, v)
+			end
+			_getFamily(v.Parent)
 		else
-        table.insert(Pathway, 1, v)
-		end
-        _getFamily(v.Parent)
-    else
-       	if reverseorder then
-		table.insert(Pathway, v)
-		else
-        table.insert(Pathway, 1, v)
-		end
+			if reverseorder then
+				table.insert(Pathway, v)
+			else
+				table.insert(Pathway, 1, v)
+			end
 		end
 	end
-	
+		
 	_getFamily(ins)
 	return Pathway
 end
 
 getgenv().GetFullName = function(ins)
-local Pathway = GetFamily(ins)
-local Services = {'Workspace','RunService','GuiService','Stats','SoundService','NonReplicatedCSGDictionaryService','CSGDictionaryService','LogService','ContentProvider','KeyframeSequenceProvider','Chat','MarketplaceService','Players','PointsService','AdService','NotificationService','ReplicatedFirst','HttpRbxApiService','TweenService','TextService','StudioData','StarterPlayer','StarterPack','StarterGui','CoreGui','LocalizationService','TeleportService','JointsService','CollectionService','PhysicsService','BadgeService','Geometry','FriendService','InsertService','GamePassService','Debris','TimerService','CookiesService','UserInputService','KeyboardService','MouseService','VRService','ContextActionService','ScriptService','AssetService','TouchInputService','BrowserService','AppStorageService','AnalyticsService','ScriptContext','','Selection','MeshContentProvider','Lighting','SolidModelContentProvider','GamepadService','ControllerService','CorePackages','RuntimeScriptService','ABTestService','HttpService','RobloxReplicatedStorage','HapticService','RbxAnalyticsService','NetworkClient','EventIngestService','ChangeHistoryService','Visit','GuidRegistryService','PermissionsService','Teams','ReplicatedStorage','TestService','SocialService','PolicyService','MemStorageService','GroupService','SpawnerService','PathfindingService'}
+	local Pathway = GetFamily(ins)
+	local Services = {'Workspace','RunService','GuiService','Stats','SoundService','NonReplicatedCSGDictionaryService','CSGDictionaryService','LogService','ContentProvider','KeyframeSequenceProvider','Chat','MarketplaceService','Players','PointsService','AdService','NotificationService','ReplicatedFirst','HttpRbxApiService','TweenService','TextService','StudioData','StarterPlayer','StarterPack','StarterGui','CoreGui','LocalizationService','TeleportService','JointsService','CollectionService','PhysicsService','BadgeService','Geometry','FriendService','InsertService','GamePassService','Debris','TimerService','CookiesService','UserInputService','KeyboardService','MouseService','VRService','ContextActionService','ScriptService','AssetService','TouchInputService','BrowserService','AppStorageService','AnalyticsService','ScriptContext','','Selection','MeshContentProvider','Lighting','SolidModelContentProvider','GamepadService','ControllerService','CorePackages','RuntimeScriptService','ABTestService','HttpService','RobloxReplicatedStorage','HapticService','RbxAnalyticsService','NetworkClient','EventIngestService','ChangeHistoryService','Visit','GuidRegistryService','PermissionsService','Teams','ReplicatedStorage','TestService','SocialService','PolicyService','MemStorageService','GroupService','SpawnerService','PathfindingService'}
 
-local function formatchild(s)
-local s = reformatstring(s)
-if s:find("%A") then
-return "['"..s.."']"
-else
-return "."..s
-end
-end
+	local function formatchild(s)
+		local s = reformatstring(s)
+		if s:find("%A") then
+			return "['"..s.."']"
+		else
+			return "."..s
+		end
+	end
 
-local fns = ""
+	local fns = ""
 
-for i,v in pairs(Pathway) do
-if i == 1 then
-    fns = v.Name
-else
-    if i == 2 then
-        if table.find(Services, v.ClassName) then
-            fns = fns..":GetService('"..v.ClassName.."')"
-        else
-            fns = fns..formatchild(v.Name)
-        end
-else
-fns = fns..formatchild(v.Name)
-end
-end
-end
-return fns
+	for i,v in pairs(Pathway) do
+		if i == 1 then
+			fns = v.Name
+		else
+			if i == 2 then
+				if table.find(Services, v.ClassName) then
+					fns = fns..":GetService('"..v.ClassName.."')"
+				else
+					fns = fns..formatchild(v.Name)
+				end
+			else
+				fns = fns..formatchild(v.Name)
+			end
+		end
+	end
+	return fns
 end
 
 getgenv().LogFunctions = true
 LoggedFunctions = {}
 
 getgenv().FunctionLogger = function(funcparent, funcname)
-if funcparent[funcname] == FunctionLogger or funcparent[funcname] == print or funcparent[funcname] == getrenv().print then error("No.") end
-	local oldfunc = funcparent[funcname]
-	if typeof(oldfunc) ~= "function" then error("function expected, got "..typeof(oldfunc)) end
-	
-	local newfunc = function(...)
-	
-		local function canFormat(thing)
-		if Format(thing) == "" then
-		return tostring(thing)
-		else
-		catchrepeats = {}
-		return Format(thing)
-		end
-		end
+	if funcparent[funcname] == FunctionLogger or funcparent[funcname] == print or funcparent[funcname] == getrenv().print then error("No.") end
+		local oldfunc = funcparent[funcname]
+		if typeof(oldfunc) ~= "function" then error("function expected, got "..typeof(oldfunc)) end
 		
-        local args = {...}
-        local str = "Function "..funcname.." was called!"
-        if getcallingscript() ~= nil then
-        str = str.."\nCalling script: "..GetFullName(getcallingscript())
-        else
-        str = str.."\nCalling script: nil"
-        end
-        if #args == 0 then
-            str = str.."\nArguments: none!"
-        else
+		local newfunc = function(...)
 		
-        for i,v in pairs(args) do
-            str = str.."\nArgument "..i..": "..canFormat(v)
-        end
-		
-        end
-        local returnval = {oldfunc(...)}
-        if #returnval == 0 then
-            str = str.."\nReturn values: none!"
-            else
-			
-            for i,v in pairs(returnval) do
-			str = str.."\nReturn value "..i..": "..canFormat(v)
+			local function canFormat(thing)
+				if Format(thing) == "" then
+					return tostring(thing)
+				else
+					catchrepeats = {}
+					return Format(thing)
+				end
 			end
 			
-        end
-		if LogFunctions == true then
-        print(str)
+			local args = {...}
+			local str = "Function "..funcname.." was called!"
+			if getcallingscript() ~= nil then
+				str = str.."\nCalling script: "..GetFullName(getcallingscript())
+			else
+				str = str.."\nCalling script: nil"
+			end
+			if #args == 0 then
+				str = str.."\nArguments: none!"
+			else
+			
+			for i,v in pairs(args) do
+				str = str.."\nArgument "..i..": "..canFormat(v)
+			end
+			
+			end
+			local returnval = {oldfunc(...)}
+			if #returnval == 0 then
+				str = str.."\nReturn values: none!"
+			else
+				
+				for i,v in pairs(returnval) do
+					str = str.."\nReturn value "..i..": "..canFormat(v)
+				end
+				
+			end
+			if LogFunctions == true then
+				print(str)
+			end
+		    return unpack(returnval)
+	    end
+		local isFunctionLogged = false
+		
+		for i,v in pairs(LoggedFunctions) do
+			if i == funcparent and v == funcname then
+				isFunctionLogged = true
+				break
+			end
 		end
-		return unpack(returnval)
-    end
-	local isFunctionLogged = false
-	
-	for i,v in pairs(LoggedFunctions) do
-	if i == funcparent and v == funcname then
-	isFunctionLogged = true
-	break
-	end
-	end
-	
+		
 	if isFunctionLogged then
-	error("This function has already been logged!")
+		error("This function has already been logged!")
 	else
-	LoggedFunctions[funcparent] = funcname
-	funcparent[funcname] = newfunc
-	return newfunc
+		LoggedFunctions[funcparent] = funcname
+		funcparent[funcname] = newfunc
+		return newfunc
 	end
 end
 
 local meta 
 meta = hookmetamethod(game,"__namecall",function(Self,...)
-local method = getnamecallmethod()
-if getcallingscript() == nil then
-if method == "GetFamily" then
-return GetFamily(Self,...)
-elseif method == "GetFullName" then
-return GetFullName(Self)
-else
-return meta(Self,...)
-end
-else
-return meta(Self,...)
-end
+	local method = getnamecallmethod()
+	if getcallingscript() == nil then
+		if method == "GetFamily" then
+			return GetFamily(Self,...)
+		elseif method == "GetFullName" then
+			return GetFullName(Self)
+		else
+			return meta(Self,...)
+		end
+	else
+		return meta(Self,...)
+	end
 end)
