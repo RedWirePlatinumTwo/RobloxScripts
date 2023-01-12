@@ -1722,7 +1722,6 @@ function SCRIPT_AIMO76_FAKESCRIPT() -- Aimbot.Scripts
 		end)
 	
 	else
-	
 		game.StarterGui:SetCore("SendNotification", {
 		Title = "Aimbot";
 		Text = "You've already executed this. Deleting clone GUI.";
