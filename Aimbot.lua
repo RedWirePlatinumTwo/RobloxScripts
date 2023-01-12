@@ -3,7 +3,6 @@
 -- Instances:
 local Aimbot = Instance.new("ScreenGui")
 local MFrame = Instance.new("Frame")
-local X = Instance.new("TextButton")
 local Title = Instance.new("TextLabel")
 local CurrentTargetTitle = Instance.new("TextLabel")
 local CurrentTarget = Instance.new("TextLabel")
@@ -27,7 +26,7 @@ local prioritylable = Instance.new("TextLabel")
 local typelabel = Instance.new("TextLabel")
 local GameSettingsUI = Instance.new("Frame")
 local Title_3 = Instance.new("TextLabel")
-local X_2 = Instance.new("TextButton")
+local X = Instance.new("TextButton")
 local Target = Instance.new("TextLabel")
 local value = Instance.new("TextButton")
 local AutoTarget = Instance.new("TextLabel")
@@ -57,7 +56,7 @@ local value_10 = Instance.new("TextButton")
 local reset_2 = Instance.new("TextButton")
 local TeamAutofill = Instance.new("TextLabel")
 local value_11 = Instance.new("TextButton")
-local X_3 = Instance.new("TextButton")
+local X_2 = Instance.new("TextButton")
 local AimIntensity = Instance.new("TextLabel")
 local value_12 = Instance.new("TextBox")
 local TeamUI = Instance.new("Frame")
@@ -72,7 +71,7 @@ local yourteam = Instance.new("TextBox")
 local label1 = Instance.new("TextLabel")
 local label2 = Instance.new("TextLabel")
 local Title_5 = Instance.new("TextLabel")
-local X_4 = Instance.new("TextButton")
+local X_3 = Instance.new("TextButton")
 local SwitchToSettings = Instance.new("TextButton")
 --Properties:
 Aimbot.Name = "Aimbot"
@@ -86,24 +85,11 @@ MFrame.BorderColor3 = Color3.new(0.333333, 1, 0)
 MFrame.Position = UDim2.new(0.682635665, 0, 0.170301646, 0)
 MFrame.Size = UDim2.new(0, 260, 0, 252)
 
-X.Name = "X"
-X.Parent = MFrame
-X.BackgroundColor3 = Color3.new(0, 0, 0)
-X.BorderColor3 = Color3.new(0.333333, 1, 0)
-X.Position = UDim2.new(0.823076904, 0, 0, 0)
-X.Size = UDim2.new(0, 46, 0, 44)
-X.Font = Enum.Font.Highway
-X.Text = "×"
-X.TextColor3 = Color3.new(1, 0, 0)
-X.TextScaled = true
-X.TextSize = 14
-X.TextWrapped = true
-
 Title.Name = "Title"
 Title.Parent = MFrame
 Title.BackgroundColor3 = Color3.new(0, 0, 0)
 Title.BorderColor3 = Color3.new(0.333333, 1, 0)
-Title.Size = UDim2.new(0, 214, 0, 44)
+Title.Size = UDim2.new(0, 260, 0, 44)
 Title.Font = Enum.Font.Highway
 Title.Text = "RedWire's Universal Aimbot"
 Title.TextColor3 = Color3.new(0.333333, 1, 0)
@@ -369,18 +355,18 @@ Title_3.TextColor3 = Color3.new(0.333333, 1, 0)
 Title_3.TextSize = 32
 Title_3.TextWrapped = true
 
-X_2.Name = "X"
-X_2.Parent = GameSettingsUI
-X_2.BackgroundColor3 = Color3.new(0, 0, 0)
-X_2.BorderColor3 = Color3.new(0.333333, 1, 0)
-X_2.Position = UDim2.new(0.920764387, 0, 0, 0)
-X_2.Size = UDim2.new(0, 46, 0, 32)
-X_2.Font = Enum.Font.Highway
-X_2.Text = "Close"
-X_2.TextColor3 = Color3.new(1, 0, 0)
-X_2.TextScaled = true
-X_2.TextSize = 14
-X_2.TextWrapped = true
+X.Name = "X"
+X.Parent = GameSettingsUI
+X.BackgroundColor3 = Color3.new(0, 0, 0)
+X.BorderColor3 = Color3.new(0.333333, 1, 0)
+X.Position = UDim2.new(0.920764387, 0, 0, 0)
+X.Size = UDim2.new(0, 46, 0, 32)
+X.Font = Enum.Font.Highway
+X.Text = "Close"
+X.TextColor3 = Color3.new(1, 0, 0)
+X.TextScaled = true
+X.TextSize = 14
+X.TextWrapped = true
 
 Target.Name = "Target"
 Target.Parent = GameSettingsUI
@@ -753,18 +739,18 @@ value_11.TextColor3 = Color3.new(0.333333, 1, 0)
 value_11.TextSize = 24
 value_11.TextXAlignment = Enum.TextXAlignment.Left
 
-X_3.Name = "X"
-X_3.Parent = GlobalSettingsUI
-X_3.BackgroundColor3 = Color3.new(0, 0, 0)
-X_3.BorderColor3 = Color3.new(0.333333, 1, 0)
-X_3.Position = UDim2.new(0.861099899, 0, 0, 0)
-X_3.Size = UDim2.new(0, 46, 0, 37)
-X_3.Font = Enum.Font.Highway
-X_3.Text = "Close"
-X_3.TextColor3 = Color3.new(1, 0, 0)
-X_3.TextScaled = true
-X_3.TextSize = 14
-X_3.TextWrapped = true
+X_2.Name = "X"
+X_2.Parent = GlobalSettingsUI
+X_2.BackgroundColor3 = Color3.new(0, 0, 0)
+X_2.BorderColor3 = Color3.new(0.333333, 1, 0)
+X_2.Position = UDim2.new(0.861099899, 0, 0, 0)
+X_2.Size = UDim2.new(0, 46, 0, 37)
+X_2.Font = Enum.Font.Highway
+X_2.Text = "Close"
+X_2.TextColor3 = Color3.new(1, 0, 0)
+X_2.TextScaled = true
+X_2.TextSize = 14
+X_2.TextWrapped = true
 
 AimIntensity.Name = "AimIntensity"
 AimIntensity.Parent = GlobalSettingsUI
@@ -926,18 +912,18 @@ Title_5.TextColor3 = Color3.new(0.333333, 1, 0)
 Title_5.TextSize = 31
 Title_5.TextWrapped = true
 
-X_4.Name = "X"
-X_4.Parent = TeamUI
-X_4.BackgroundColor3 = Color3.new(0, 0, 0)
-X_4.BorderColor3 = Color3.new(0.333333, 1, 0)
-X_4.Position = UDim2.new(0.866781771, 0, 0, 0)
-X_4.Size = UDim2.new(0, 46, 0, 31)
-X_4.Font = Enum.Font.Highway
-X_4.Text = "Close"
-X_4.TextColor3 = Color3.new(1, 0, 0)
-X_4.TextScaled = true
-X_4.TextSize = 14
-X_4.TextWrapped = true
+X_3.Name = "X"
+X_3.Parent = TeamUI
+X_3.BackgroundColor3 = Color3.new(0, 0, 0)
+X_3.BorderColor3 = Color3.new(0.333333, 1, 0)
+X_3.Position = UDim2.new(0.866781771, 0, 0, 0)
+X_3.Size = UDim2.new(0, 46, 0, 31)
+X_3.Font = Enum.Font.Highway
+X_3.Text = "Close"
+X_3.TextColor3 = Color3.new(1, 0, 0)
+X_3.TextScaled = true
+X_3.TextSize = 14
+X_3.TextWrapped = true
 
 SwitchToSettings.Name = "SwitchToSettings"
 SwitchToSettings.Parent = TeamUI
@@ -952,7 +938,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_LMXZ78_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_RTVF86_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1570,12 +1556,6 @@ function SCRIPT_LMXZ78_FAKESCRIPT() -- Aimbot.Scripts
 	
 		local MainFrame = script.Parent.MFrame
 	
-		MainFrame.X.MouseButton1Click:connect(function()
-		AimbotFunction:disconnect()
-			_G.RedsAimbot = false
-			MainFrame.Parent:Destroy()
-		end)
-	
 		Changed(misc, "TargetedCharacter", function(v)
 			if v ~= "" then
 				local player = game.Players:GetPlayerFromCharacter(v)
@@ -1723,4 +1703,4 @@ function SCRIPT_LMXZ78_FAKESCRIPT() -- Aimbot.Scripts
 	
 
 end
-coroutine.resume(coroutine.create(SCRIPT_LMXZ78_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_RTVF86_FAKESCRIPT))
