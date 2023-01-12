@@ -14,7 +14,6 @@ local Explode = Instance.new("TextButton")
 local stealhats = Instance.new("TextButton")
 local velocity = Instance.new("TextButton")
 local visibilitytoggle = Instance.new("TextButton")
-local X = Instance.new("TextButton")
 --Properties:
 FallDownStairsGUI.Name = "FallDownStairsGUI"
 FallDownStairsGUI.Parent = game.CoreGui
@@ -33,7 +32,7 @@ GUITitle.Parent = MainFrame
 GUITitle.BackgroundColor3 = Color3.new(0.392157, 0.392157, 0.392157)
 GUITitle.BorderColor3 = Color3.new(1, 0.666667, 1)
 GUITitle.Position = UDim2.new(0.00235222699, 0, 0, 0)
-GUITitle.Size = UDim2.new(0, 322, 0, 38)
+GUITitle.Size = UDim2.new(0, 359, 0, 38)
 GUITitle.Font = Enum.Font.TitilliumWeb
 GUITitle.Text = "RedWire's Fall Down Stairs GUI"
 GUITitle.TextColor3 = Color3.new(1, 1, 1)
@@ -185,22 +184,8 @@ visibilitytoggle.TextScaled = true
 visibilitytoggle.TextSize = 14
 visibilitytoggle.TextStrokeTransparency = 0
 visibilitytoggle.TextWrapped = true
-
-X.Name = "X"
-X.Parent = MainFrame
-X.BackgroundColor3 = Color3.new(0.392157, 0.392157, 0.392157)
-X.BorderColor3 = Color3.new(1, 0.666667, 1)
-X.Position = UDim2.new(0.895679057, 0, 0, 0)
-X.Size = UDim2.new(0, 37, 0, 38)
-X.Font = Enum.Font.TitilliumWeb
-X.Text = "×"
-X.TextColor3 = Color3.new(1, 0, 0)
-X.TextScaled = true
-X.TextSize = 14
-X.TextStrokeTransparency = 0
-X.TextWrapped = true
 -- Scripts:
-function SCRIPT_POFQ67_FAKESCRIPT() -- FallDownStairsGUI.LocalScript 
+function SCRIPT_KJFV85_FAKESCRIPT() -- FallDownStairsGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = FallDownStairsGUI
 	local GUI = script.Parent.MainFrame
@@ -268,10 +253,6 @@ function SCRIPT_POFQ67_FAKESCRIPT() -- FallDownStairsGUI.LocalScript
 			game.ReplicatedStorage.Events.SetPlayerTransparency:FireServer(0)
 		end
 	end)
-	
-	GUI.X.MouseButton1Click:connect(function()
-		GUI.Parent:Destroy()
-	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_POFQ67_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_KJFV85_FAKESCRIPT))
