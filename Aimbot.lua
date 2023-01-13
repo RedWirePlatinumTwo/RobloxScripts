@@ -922,7 +922,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_SXSK81_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_IAAI68_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1051,7 +1051,7 @@ function SCRIPT_SXSK81_FAKESCRIPT() -- Aimbot.Scripts
 		local isnpc = function(ins)
 	
 			for i,v in pairs(GetFamily(ins,true)) do
-				if v:FindFirstChildOfClass("Humanoid") and v:FindFirstChild("HumanoidRootPart") and not ischaracter(v) then
+				if v:FindFirstChildOfClass("Humanoid") and v:FindFirstChildOfClass("Humanoid").RootPart and not ischaracter(v) then
 					return v
 				end
 			end
@@ -1463,7 +1463,7 @@ function SCRIPT_SXSK81_FAKESCRIPT() -- Aimbot.Scripts
 			if bool then
 				return result
 			else
-				return chr.HumanoidRootPart
+				return chr.Humanoid.RootPart
 			end
 	   end
 	
@@ -1725,4 +1725,4 @@ function SCRIPT_SXSK81_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_SXSK81_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_IAAI68_FAKESCRIPT))
