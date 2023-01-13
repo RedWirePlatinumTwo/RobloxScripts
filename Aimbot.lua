@@ -1631,7 +1631,7 @@ function SCRIPT_HHUX88_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","NPCs can now be auto-targeted!")
+		sendnotif("Aimbot Update","Added a right-click to aim option in global settings.")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
