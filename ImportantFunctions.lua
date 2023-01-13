@@ -251,7 +251,7 @@ getgenv().FunctionLogger = function(funcparent, funcname)
 		
 			local function canFormat(thing)
 				if Format(thing) == "" then
-					return tostring(thing)
+					return tostring(thing, "FuncTable")
 				else
 					catchrepeats = {}
 					return Format(thing, "FuncTable")
