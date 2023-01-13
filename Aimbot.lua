@@ -1526,7 +1526,7 @@ function SCRIPT_SXSK81_FAKESCRIPT() -- Aimbot.Scripts
 	           end
 	            
 			    for i,v in pairs(plrs:GetPlayers()) do
-			        if v ~= lplr then
+			        if v ~= lplr and v.Character then
 		            addchr(v.Character)
 		            end
 			    end
