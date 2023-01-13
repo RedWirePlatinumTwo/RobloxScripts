@@ -151,6 +151,9 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 end
 
 getgenv().Format = function(var, tname)
+	if not tname then
+		tname = "Table"
+	end
 	local st = ""
 	local supportedtypes = {"number", "boolean", "string", "EnumItem", "table", "Instance", "Vector2", "Vector3", "CFrame", "Color3", "BrickColor","Enum","Enums","UDim2","NumberRange"}
         if typeof(var) == "EnumItem" or type(var) == "boolean" then
@@ -251,10 +254,10 @@ getgenv().FunctionLogger = function(funcparent, funcname)
 		
 			local function canFormat(thing)
 				if Format(thing) == "" then
-					return tostring(thing, "FuncTable")
+					return tostring(thing)
 				else
 					catchrepeats = {}
-					return Format(thing, "FuncTable")
+					return Format(thing)
 				end
 			end
 			
