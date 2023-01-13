@@ -58,6 +58,8 @@ local value_11 = Instance.new("TextButton")
 local X_2 = Instance.new("TextButton")
 local AimIntensity = Instance.new("TextLabel")
 local value_12 = Instance.new("TextBox")
+local RightClickAim = Instance.new("TextLabel")
+local value_13 = Instance.new("TextButton")
 local TeamUI = Instance.new("Frame")
 local WhitelistedTeams = Instance.new("ScrollingFrame")
 local whitelistframe_2 = Instance.new("Frame")
@@ -608,8 +610,8 @@ GlobalSettingsUI.Name = "GlobalSettingsUI"
 GlobalSettingsUI.Parent = Aimbot
 GlobalSettingsUI.BackgroundColor3 = Color3.new(0, 0, 0)
 GlobalSettingsUI.BorderColor3 = Color3.new(0.333333, 1, 0)
-GlobalSettingsUI.Position = UDim2.new(0.270833343, 0, 0.151851848, 0)
-GlobalSettingsUI.Size = UDim2.new(0, 338, 0, 294)
+GlobalSettingsUI.Position = UDim2.new(0.402604163, 0, 0.130555555, 0)
+GlobalSettingsUI.Size = UDim2.new(0, 338, 0, 323)
 GlobalSettingsUI.Visible = false
 
 Title_4.Name = "Title"
@@ -629,7 +631,7 @@ AimbotToggle.BackgroundColor3 = Color3.new(0, 0, 0)
 AimbotToggle.BackgroundTransparency = 1
 AimbotToggle.BorderColor3 = Color3.new(0, 0.666667, 0)
 AimbotToggle.BorderSizePixel = 0
-AimbotToggle.Position = UDim2.new(0, 0, 0.125404671, 0)
+AimbotToggle.Position = UDim2.new(0, 0, 0.11302077, 0)
 AimbotToggle.Size = UDim2.new(0, 169, 0, 28)
 AimbotToggle.Font = Enum.Font.Highway
 AimbotToggle.Text = "Aimbot Toggle:"
@@ -666,7 +668,7 @@ TargetedPartToggle.BackgroundColor3 = Color3.new(0, 0, 0)
 TargetedPartToggle.BackgroundTransparency = 1
 TargetedPartToggle.BorderColor3 = Color3.new(0, 0.666667, 0)
 TargetedPartToggle.BorderSizePixel = 0
-TargetedPartToggle.Position = UDim2.new(0, 0, 0.315722615, 0)
+TargetedPartToggle.Position = UDim2.new(0, 0, 0.284762859, 0)
 TargetedPartToggle.Size = UDim2.new(0, 169, 0, 28)
 TargetedPartToggle.Font = Enum.Font.Highway
 TargetedPartToggle.Text = "Targeted Part Toggle:"
@@ -703,7 +705,7 @@ TeamAutofill.BackgroundColor3 = Color3.new(0, 0, 0)
 TeamAutofill.BackgroundTransparency = 1
 TeamAutofill.BorderColor3 = Color3.new(0, 0.666667, 0)
 TeamAutofill.BorderSizePixel = 0
-TeamAutofill.Position = UDim2.new(0, 0, 0.505451977, 0)
+TeamAutofill.Position = UDim2.new(0, 0, 0.455916375, 0)
 TeamAutofill.Size = UDim2.new(0, 169, 0, 28)
 TeamAutofill.Font = Enum.Font.Highway
 TeamAutofill.Text = "Autofill Team Names:"
@@ -742,7 +744,7 @@ AimIntensity.BackgroundColor3 = Color3.new(0, 0, 0)
 AimIntensity.BackgroundTransparency = 1
 AimIntensity.BorderColor3 = Color3.new(0, 0.666667, 0)
 AimIntensity.BorderSizePixel = 0
-AimIntensity.Position = UDim2.new(0.000501627801, 0, 0.692914128, 0)
+AimIntensity.Position = UDim2.new(0.000501627801, 0, 0.627898633, 0)
 AimIntensity.Size = UDim2.new(0, 169, 0, 28)
 AimIntensity.Font = Enum.Font.Highway
 AimIntensity.Text = "Aim Intensity"
@@ -763,6 +765,32 @@ value_12.Text = "250"
 value_12.TextColor3 = Color3.new(0.333333, 1, 0)
 value_12.TextSize = 24
 value_12.TextXAlignment = Enum.TextXAlignment.Left
+
+RightClickAim.Name = "RightClickAim"
+RightClickAim.Parent = GlobalSettingsUI
+RightClickAim.BackgroundColor3 = Color3.new(0, 0, 0)
+RightClickAim.BackgroundTransparency = 1
+RightClickAim.BorderColor3 = Color3.new(0, 0.666667, 0)
+RightClickAim.BorderSizePixel = 0
+RightClickAim.Position = UDim2.new(0, 0, 0.799569607, 0)
+RightClickAim.Size = UDim2.new(0, 169, 0, 28)
+RightClickAim.Font = Enum.Font.Highway
+RightClickAim.Text = "Right-click To Aim:"
+RightClickAim.TextColor3 = Color3.new(0.333333, 1, 0)
+RightClickAim.TextSize = 24
+RightClickAim.TextXAlignment = Enum.TextXAlignment.Left
+
+value_13.Name = "value"
+value_13.Parent = RightClickAim
+value_13.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_13.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_13.Position = UDim2.new(0.00591715984, 0, 0.998713911, 0)
+value_13.Size = UDim2.new(0, 337, 0, 28)
+value_13.Font = Enum.Font.Highway
+value_13.Text = "false"
+value_13.TextColor3 = Color3.new(0.333333, 1, 0)
+value_13.TextSize = 24
+value_13.TextXAlignment = Enum.TextXAlignment.Left
 
 TeamUI.Name = "TeamUI"
 TeamUI.Parent = Aimbot
@@ -922,7 +950,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_IAAI68_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_HHUX88_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1034,6 +1062,8 @@ function SCRIPT_IAAI68_FAKESCRIPT() -- Aimbot.Scripts
 	
 		local plrs = game.Players
 		local lplr = plrs.LocalPlayer
+		local m = lplr:GetMouse()
+		local RightClick = false
 	
 		local ischaracter = function(part)
 	
@@ -1058,6 +1088,14 @@ function SCRIPT_IAAI68_FAKESCRIPT() -- Aimbot.Scripts
 	
 		end
 	
+		m.Button2Down:connect(function()
+			RightClick = true
+		end)
+		
+		m.Button2Up:connect(function()
+			RightClick = false
+		end)
+	
 		local wlui = script.Parent.ManagerUI
 		local gamesettings = script.Parent.GameSettingsUI
 		local globalsettings = script.Parent.GlobalSettingsUI
@@ -1070,7 +1108,6 @@ function SCRIPT_IAAI68_FAKESCRIPT() -- Aimbot.Scripts
 	
 		local WhitelistedPlrs = {}
 		local PrioritizedPlrs = {}
-		local m = lplr:GetMouse()
 		local misc = {}
 		misc.IsAimbotOn = false
 		misc.TargetedCharacter = ""
@@ -1103,16 +1140,25 @@ function SCRIPT_IAAI68_FAKESCRIPT() -- Aimbot.Scripts
 			if not GlobalStats[game.PlaceId] then
 				gengamestats()
 			end
-	
-			for i,v in pairs(GlobalStats[game.PlaceId]) do
-				if type(v) ~= "table" then
-					gamesettings[i].value.Text = tostring(v)
-				end
+			if GlobalStats.RightClickAim == nil then
+				GlobalStats.RightClickAim = false
 			end
 	
 			for i,v in pairs(GlobalStats.Keybinds) do
 				if globalsettings:FindFirstChild(i) then
 					globalsettings[i].value.Text = tostring(v)
+				else
+					GlobalStats.Keybinds[i] = nil -- remove out-of-date values
+				end
+			end
+	
+			for i,v in pairs(GlobalStats) do 
+				if type(v) ~= "table" then
+					if globalsettings:FindFirstChild(i) then
+						globalsettings[i].value.Text = tostring(v)
+					else
+						GlobalStats[i] = nil -- remove out-of-date values
+					end
 				end
 			end
 	
@@ -1137,6 +1183,16 @@ function SCRIPT_IAAI68_FAKESCRIPT() -- Aimbot.Scripts
 		end
 		if GameStats.TargetCloserPlayers == nil then
 			GameStats.TargetCloserPlayers = true
+		end
+	
+		for i,v in pairs(GameStats) do
+			if type(v) ~= "table" then
+				if gamesettings:FindFirstChild(i) then
+					gamesettings[i].value.Text = tostring(v)
+				else
+					GameStats[i] = nil -- remove out of date values
+				end
+			end
 		end
 	
 		local function savesettings()
@@ -1240,18 +1296,22 @@ function SCRIPT_IAAI68_FAKESCRIPT() -- Aimbot.Scripts
 		end
 	
 		local function selectcharacter(chr)
-			if misc.IsAimbotOn and misc.TargetedCharacter == "" and not GameStats.TargetCloserPlayers or GameStats.TargetCloserPlayers and misc.IsAimbotOn then
-				misc.TargetedCharacter = chr
-			if game.PlaceId == 286090429 then
-				chr.ChildAdded:connect(function(c)
-					if c.Name == "Cam" and misc.TargetedCharacter == chr then
-						chr.Humanoid.Health = 0
-						chr.ChildRemoved:Wait()
-						chr.Humanoid.Health = 100
+			if GlobalStats.RightClickAim and RightClick or not GlobalStats.RightClickAim then
+				if misc.IsAimbotOn and misc.TargetedCharacter == "" and not GameStats.TargetCloserPlayers or GameStats.TargetCloserPlayers and misc.IsAimbotOn then
+						misc.TargetedCharacter = chr
+					if game.PlaceId == 286090429 then
+						chr.ChildAdded:connect(function(c)
+							if c.Name == "Cam" and misc.TargetedCharacter == chr then
+								chr.Humanoid.Health = 0
+								chr.ChildRemoved:Wait()
+								chr.Humanoid.Health = 100
+							end
+						end)
 					end
-				end)
+				end
+			else
+				deselect()
 			end
-		end
 		end
 	
 		local function targetplayer(player)
@@ -1338,21 +1398,29 @@ function SCRIPT_IAAI68_FAKESCRIPT() -- Aimbot.Scripts
 		end)
 	
 		for i,v in pairs(globalsettings:GetChildren()) do
-			if v:FindFirstChild("reset") then
-				v.reset.MouseButton1Click:connect(function()
-				GlobalStats.Keybinds[v.Name] = "none"
-				v.value.Text = "none"
-			end)
-		end
+				if v:FindFirstChild("reset") then
+					v.reset.MouseButton1Click:connect(function()
+						GlobalStats.Keybinds[v.Name] = "none"
+						v.value.Text = "none"
+					end)
+				end
 	
-		if v:FindFirstChild("value") and v.Name:lower():find("toggle") then
-			v.value.MouseButton1Click:connect(function()
-				GlobalStats.Keybinds[v.Name] = "none"
-				v.value.Text = "Press any key"
-				local key = game.UserInputService.InputBegan:Wait()
-				GlobalStats.Keybinds[v.Name] = key.KeyCode
-				v.value.Text = tostring(key.KeyCode)
-			end)
+			if v:FindFirstChild("value") and v.Name:lower():find("toggle") then
+				v.value.MouseButton1Click:connect(function()
+					GlobalStats.Keybinds[v.Name] = "none"
+					v.value.Text = "Press any key"
+					local key = game.UserInputService.InputBegan:Wait()
+					GlobalStats.Keybinds[v.Name] = key.KeyCode
+					v.value.Text = tostring(key.KeyCode)
+				end)
+			end
+			if type(GlobalStats[v.Name]) == "boolean" then
+				v.value.MouseButton1Click:connect(function()
+					GlobalStats[v.Name] = not GlobalStats[v.Name]
+				end)
+				Changed(GlobalStats, v.Name, function(val)
+					v.value.Text = tostring(val)
+				end)
 			end
 		end
 	
@@ -1373,16 +1441,8 @@ function SCRIPT_IAAI68_FAKESCRIPT() -- Aimbot.Scripts
 						end
 					end
 				end)
+			end
 		end
-		end
-	
-		Changed(GlobalStats,"TeamAutofill",function(v)
-			globalsettings.TeamAutofill.value.Text = tostring(v)
-		end)
-	
-		globalsettings.TeamAutofill.value.MouseButton1Click:connect(function()
-			GlobalStats.TeamAutofill = not GlobalStats.TeamAutofill
-		end)
 	
 		local wlmsg = teamui.WLTeam.Text
 		teamui.WLTeam.MouseButton1Click:connect(function()
@@ -1474,7 +1534,9 @@ function SCRIPT_IAAI68_FAKESCRIPT() -- Aimbot.Scripts
 					local StabilizeNum = GlobalStats.AimIntensity/workspace.Camera.ViewportSize.Y
 					local x, y = (v.X - m.X)*StabilizeNum, (v.Y - m.Y)*StabilizeNum
 					if misc.IsAimbotOn then
-						mousemoverel(x, y)
+						if GlobalStats.RightClickAim and RightClick or not GlobalStats.RightClickAim then
+							mousemoverel(x, y)
+						end
 					end
 				else
 					deselect()
@@ -1725,4 +1787,4 @@ function SCRIPT_IAAI68_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_IAAI68_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_HHUX88_FAKESCRIPT))
