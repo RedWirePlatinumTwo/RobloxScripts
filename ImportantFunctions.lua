@@ -10,7 +10,7 @@ local function reformatstring(s)
 			restring = restring.."\\"..letter
 		elseif letter == "\n" then
 			restring = restring.."\\n"..s:sub(i, i-1)
-		elseif letter == string.char(13) then
+		elseif letter == "\r" then
 		    restring = restring.."\\r"
 		else
 			restring = restring..letter
