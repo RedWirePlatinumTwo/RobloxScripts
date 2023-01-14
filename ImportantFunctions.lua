@@ -6,7 +6,7 @@ local function reformatstring(s)
 	
 	for i = 1, s:len() do
 	   local letter = s:sub(i,i)
-		if letter == "\\" or letter == "\"" then
+		if letter == "\\" or letter == "\"" or letter == "'" then
 			restring = restring.."\\"..letter
 		elseif letter == "\n" then
 			restring = restring.."\\n"..s:sub(i, i-1)
