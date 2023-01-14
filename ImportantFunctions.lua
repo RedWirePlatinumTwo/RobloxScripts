@@ -70,7 +70,7 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 		indexreps = {}
 		indexs = {}
 		setname(Table, TableName)
-		s = "local "..getname(Table).." = {}"
+		s = getname(Table).." = {}"
 		local reps = {}
 	 
 		local function definetables(f)
@@ -86,7 +86,7 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 						tname = i
 					end
 					setname(x, tname)
-					s = s.."\nlocal "..getname(x).." = {}"
+					s = s.."\n"..getname(x).." = {}"
 					table.insert(reps,x)
 					definetables(x)
 				end
@@ -114,8 +114,8 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 			end
 			
 			local part1 = ""
-			local part1formatted = Format(i,v)
-			local part2 = Format(v,i)
+			local part1formatted = Format(i,v,true)
+			local part2 = Format(v,i,true)
 			
 			if part2 == "" then
 				part2 = isrecursivetable(v)
@@ -150,7 +150,7 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 		return s
 end
 
-getgenv().Format = function(var, tname)
+getgenv().Format = function(var, tname, IsInternalTable)
 	if not tname then
 		tname = "Table"
 	end
@@ -170,7 +170,7 @@ getgenv().Format = function(var, tname)
             st = "'"..reformatstring(var).."'"
         elseif type(var) == "table" then
             if not table.find(catchrepeats, var) then
-				st = TableToString(var, tname, true)
+				st = TableToString(var, tname, IsInternalTable)
 			end
 		elseif typeof(var) == "Instance" then
 			st = GetFullName(var)
@@ -253,14 +253,10 @@ getgenv().FunctionLogger = function(funcparent, funcname)
 		local newfunc = function(...)
 		
 			local function canFormat(thing)
-				if type(thing) ~= "table" then
-					if Format(thing) == "" then
-						return tostring(thing)
-					else
-						return Format(thing)
-					end
+				if Format(thing) == "" then
+					return tostring(thing)
 				else
-					return TableToString(thing, "FuncTable")
+					return Format(thing)
 				end
 			end
 			
