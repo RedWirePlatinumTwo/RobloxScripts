@@ -1,7 +1,7 @@
 catchrepeats = {}
 indexreps = {}
 indexs = {}
-local function reformatstring(s)
+getgenv().reformatstring = function(s)
 	local restring = ""
 	
 	for i = 1, s:len() do
@@ -12,6 +12,8 @@ local function reformatstring(s)
 			restring = restring.."\\n"..s:sub(i, i-1)
 		elseif letter == "\r" then
 		    restring = restring.."\\r"
+		elseif letter == "\0" then
+		    restring = restring.."\\0"
 		else
 			restring = restring..letter
 		end
