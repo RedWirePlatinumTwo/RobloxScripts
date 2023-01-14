@@ -27,7 +27,11 @@ getgenv().reformatstring = function(s)
 		end
 		
 		if not keyfound then
-			restring = restring..letter
+		    if letter == "\\" then
+		        restring = restring.."\\\\"
+		    else
+			    restring = restring..letter
+			end
 		end
 	end
 	
