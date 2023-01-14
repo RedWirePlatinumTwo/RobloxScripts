@@ -10,7 +10,7 @@ local function reformatstring(s)
 		if letter:find("%p") and not table.find(exclusions, letter) and letter ~= "." then
 			restring = restring.."\\"..letter
 		elseif letter == "\n" then
-			restring = restring.."\\n"..s:sub(i-1,i-1)
+			restring = restring.."\\n"..s:sub(i, i-1)
 		else
 			restring = restring..letter
 		end
