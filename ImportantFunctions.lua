@@ -8,19 +8,16 @@ getgenv().reformatstring = function(s)
     backkeys["a"] = "\a"
     backkeys["b"] = "\b"
     backkeys["f"] = "\f"
+    backkeys["n"] = "\n"
     backkeys["r"] = "\r"
     backkeys["t"] = "\t"
     backkeys["v"] = "\v"
+    backkeys["'"] = "\'"
+    backkeys['"'] = '\"'
 	
 	for i = 1, s:len() do
 	   local letter = s:sub(i,i)
 	   local keyfound = false
-	   
-		if letter == "\"" or letter == "'" then
-			restring = restring.."\\"..letter
-		elseif letter == "\n" then
-			restring = restring.."\\n"..s:sub(i, i-1)
-		end
 		
 		for i,v in pairs(backkeys) do
 		    if letter == v then
