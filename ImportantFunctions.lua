@@ -6,10 +6,12 @@ local function reformatstring(s)
 	
 	for i = 1, s:len() do
 	   local letter = s:sub(i,i)
-		if letter == "\\" or letter == "\"" or letter == "'" or letter == string.char(13) then
+		if letter == "\\" or letter == "\"" or letter == "'" then
 			restring = restring.."\\"..letter
 		elseif letter == "\n" then
 			restring = restring.."\\n"..s:sub(i, i-1)
+		elseif letter == string.char(13) then
+		    restring = restring.."\\r"
 		else
 			restring = restring..letter
 		end
