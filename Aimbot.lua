@@ -950,7 +950,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_HHUX88_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_ZZUO82_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1088,14 +1088,6 @@ function SCRIPT_HHUX88_FAKESCRIPT() -- Aimbot.Scripts
 	
 		end
 	
-		m.Button2Down:connect(function()
-			RightClick = true
-		end)
-		
-		m.Button2Up:connect(function()
-			RightClick = false
-		end)
-	
 		local wlui = script.Parent.ManagerUI
 		local gamesettings = script.Parent.GameSettingsUI
 		local globalsettings = script.Parent.GlobalSettingsUI
@@ -1227,6 +1219,17 @@ function SCRIPT_HHUX88_FAKESCRIPT() -- Aimbot.Scripts
 		local deselect = function()
 			misc.TargetedCharacter = ""
 		end
+	
+		m.Button2Down:connect(function()
+			RightClick = true
+		end)
+		
+		m.Button2Up:connect(function()
+			RightClick = false
+		if GlobalStats.RightClickAim and misc.TargetedCharacter ~= "" then
+			deselect()
+		end
+		end)
 		local function Died(player)
 			if not player.Character then player.CharacterAdded:Wait() end
 	
@@ -1309,8 +1312,6 @@ function SCRIPT_HHUX88_FAKESCRIPT() -- Aimbot.Scripts
 						end)
 					end
 				end
-			else
-				deselect()
 			end
 		end
 	
@@ -1787,4 +1788,4 @@ function SCRIPT_HHUX88_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_HHUX88_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_ZZUO82_FAKESCRIPT))
