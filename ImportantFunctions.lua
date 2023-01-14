@@ -3,14 +3,16 @@ indexreps = {}
 indexs = {}
 local function reformatstring(s)
 	local restring = ""
+	local exclusions = {"_", "-", "!", "?"}
 	
 	for i = 1, s:len() do
-		if s:sub(i,i):find("%p") then
-			restring = restring.."\\"..s:sub(i,i)
-		elseif s:sub(i,i) == "\n" then
+	   local letter = s:sub(i,i)
+		if letter:find("%p") and not table.find(exclusions, letter) and letter ~= "." then
+			restring = restring.."\\"..letter
+		elseif letter == "\n" then
 			restring = restring.."\\n"..s:sub(i-1,i-1)
 		else
-			restring = restring..s:sub(i,i)
+			restring = restring..letter
 		end
 	end
 	
