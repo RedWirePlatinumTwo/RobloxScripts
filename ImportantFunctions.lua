@@ -3,18 +3,33 @@ indexreps = {}
 indexs = {}
 getgenv().reformatstring = function(s)
 	local restring = ""
+	local backkeys = {}
+    backkeys["0"] = "\0"
+    backkeys["a"] = "\a"
+    backkeys["b"] = "\b"
+    backkeys["f"] = "\f"
+    backkeys["r"] = "\r"
+    backkeys["t"] = "\t"
+    backkeys["v"] = "\v"
 	
 	for i = 1, s:len() do
 	   local letter = s:sub(i,i)
-		if letter == "\\" or letter == "\"" or letter == "'" then
+	   local keyfound = false
+	   
+		if letter == "\"" or letter == "'" then
 			restring = restring.."\\"..letter
 		elseif letter == "\n" then
 			restring = restring.."\\n"..s:sub(i, i-1)
-		elseif letter == "\r" then
-		    restring = restring.."\\r"
-		elseif letter == "\0" then
-		    restring = restring.."\\0"
-		else
+		end
+		
+		for i,v in pairs(backkeys) do
+		    if letter == v then
+		        keyfound = true
+		        restring = restring.."\\"..i
+		    end
+		end
+		
+		if not keyfound then
 			restring = restring..letter
 		end
 	end
