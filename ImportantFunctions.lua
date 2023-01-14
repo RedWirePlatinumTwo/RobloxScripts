@@ -1,7 +1,7 @@
 catchrepeats = {}
 indexreps = {}
 indexs = {}
-getgenv().reformatstring = function(s)
+local reformatstring = function(s)
 	local restring = ""
 	local backkeys = {}
     backkeys["0"] = "\0"
