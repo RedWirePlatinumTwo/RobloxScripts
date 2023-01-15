@@ -91,7 +91,7 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 		indexreps = {}
 		indexs = {}
 		setname(Table, TableName)
-		s = getname(Table).." = {}"
+		s = "-- Table names:\n"..getname(Table).." = {}"
 		local reps = {}
 	 
 		local function definetables(f)
@@ -119,6 +119,7 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 		end
 
 		definetables(Table)
+		s = s.."\n-- Properties:"
 	 else
 		s = getname(Table)
 	end
@@ -165,6 +166,7 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 		for i,v in pairs(Table) do
 			s = s..stringmethod(i,v)
 		end
+		s = s.."\n"
 		if not IsInternalTable then
 			s = s.."\nreturn "..name
 		end
