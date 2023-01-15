@@ -950,7 +950,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_ZZUO82_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_TWCS76_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1231,28 +1231,29 @@ function SCRIPT_ZZUO82_FAKESCRIPT() -- Aimbot.Scripts
 		end
 		end)
 		local function Died(player)
-			if not player.Character then player.CharacterAdded:Wait() end
+			thread(function()
+				if not player.Character then player.CharacterAdded:Wait() end
 	
-			local function OnDeath(chr)
-			chr:WaitForChild("Humanoid")
+				local function OnDeath(chr)
+					chr:WaitForChild("Humanoid")
 	
-			chr.Humanoid.Died:connect(function()
+					chr.Humanoid.Died:connect(function()
+						if misc.TargetedCharacter == chr then
+							deselect()
+						end
+					end)
+	
+				end
+	
+			OnDeath(player.Character)
+			player.CharacterAdded:connect(OnDeath)
+	
+			player.CharacterRemoving:connect(function(chr)
 				if misc.TargetedCharacter == chr then
 					deselect()
 				end
 			end)
-	
-		end
-	
-		OnDeath(player.Character)
-		player.CharacterAdded:connect(OnDeath)
-	
-		player.CharacterRemoving:connect(function(chr)
-			if misc.TargetedCharacter == chr then
-				deselect()
-			end
 		end)
-	
 		end
 	
 		for i,v in pairs(plrs:GetPlayers()) do Died(v) end
@@ -1788,4 +1789,4 @@ function SCRIPT_ZZUO82_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_ZZUO82_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_TWCS76_FAKESCRIPT))
