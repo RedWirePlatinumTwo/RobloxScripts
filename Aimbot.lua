@@ -597,10 +597,10 @@ About.BackgroundColor3 = Color3.new(0, 0, 0)
 About.BackgroundTransparency = 1
 About.BorderColor3 = Color3.new(0, 0.666667, 0)
 About.BorderSizePixel = 0
-About.Position = UDim2.new(1.75499868, 0, 0.00249263225, 0)
+About.Position = UDim2.new(1.75499868, 0, 0.323921204, 0)
 About.Size = UDim2.new(0, 280, 0, 46)
 About.Font = Enum.Font.Highway
-About.Text = "If enabled, targets can swap with players closer to you. If disabled, targets will only swap if dead."
+About.Text = "If enabled, targets can swap with players closer to you. If disabled, targets will only swap if dead. prioritized players will not swap"
 About.TextColor3 = Color3.new(0.333333, 1, 0)
 About.TextScaled = true
 About.TextSize = 24
@@ -950,7 +950,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_TWCS76_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_ELDF65_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1323,7 +1323,12 @@ function SCRIPT_TWCS76_FAKESCRIPT() -- Aimbot.Scripts
 			end)
 	
 			if player.Name ~= lplr.Name and humanoidvalid and IsNotWhitelisted(player) and humanoid.Health ~= 0 then
-				selectcharacter(player.Character)
+				local b, isprio = pcall(function()
+					return table.find(PrioritizedPlrs, plrs[misc.TargetedCharacter.Name])
+				end)
+				if not b or not isprio then
+					selectcharacter(player.Character)
+				end
 			end
 		end
 	
@@ -1633,7 +1638,7 @@ function SCRIPT_TWCS76_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","Added a right-click to aim option in global settings.")
+		sendnotif("Aimbot Update","Prioritized players will remain locked even if target closer players is on.")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
@@ -1789,4 +1794,4 @@ function SCRIPT_TWCS76_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_TWCS76_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_ELDF65_FAKESCRIPT))
