@@ -37,7 +37,7 @@ local pointers = Instance.new("TextButton")
 local hide = Instance.new("TextButton")
 --Properties:
 JailbreakGUI.Name = "JailbreakGUI"
-JailbreakGUI.Parent = game.CodeGui
+JailbreakGUI.Parent = game.CoreGui
 JailbreakGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
@@ -453,7 +453,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_OAYP65_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_DADI85_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
@@ -528,6 +528,7 @@ function SCRIPT_OAYP65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			local mainframe = script.Parent.MainFrame.ScrollingFrame
 			local confirm = script.Parent.Confirmation
 			mainframe.AutomaticCanvasSize = 2
+			mainframe.UIGridLayout.SortOrder = 0
 			mainframe.ScrollBarImageColor3 = mainframe.Parent.BorderColor3
 			local mframe = mainframe.Parent
 			local airdropframe = script.Parent.AirdropESPFrame
@@ -1344,4 +1345,4 @@ function SCRIPT_OAYP65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_OAYP65_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_DADI85_FAKESCRIPT))
