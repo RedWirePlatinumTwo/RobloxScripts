@@ -12,7 +12,7 @@ local holdebypass = Instance.new("TextButton")
 local aimbot = Instance.new("TextButton")
 local Airdrop = Instance.new("TextButton")
 local UIGridLayout = Instance.new("UIGridLayout")
-local gunmod = Instance.new("TextButton")
+local modguns = Instance.new("TextButton")
 local GravToggle = Instance.new("TextButton")
 local forcedaytime = Instance.new("TextButton")
 local removeragdoll = Instance.new("TextButton")
@@ -20,10 +20,10 @@ local RobberyNotifier = Instance.new("TextButton")
 local infiniteyeet = Instance.new("TextButton")
 local gunshoptpbutton = Instance.new("TextButton")
 local keybypass = Instance.new("TextButton")
-local casinocode = Instance.new("TextButton")
+local getcode = Instance.new("TextButton")
 local deleteradio = Instance.new("TextButton")
 local respawn = Instance.new("TextButton")
-local vehiclemod = Instance.new("TextButton")
+local lockonexit = Instance.new("TextButton")
 local flyhack = Instance.new("TextButton")
 local flyhacknum = Instance.new("TextBox")
 local Confirmation = Instance.new("Frame")
@@ -37,7 +37,7 @@ local pointers = Instance.new("TextButton")
 local hide = Instance.new("TextButton")
 --Properties:
 JailbreakGUI.Name = "JailbreakGUI"
-JailbreakGUI.Parent = game.CoreGui
+JailbreakGUI.Parent = game.CodeGui
 JailbreakGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
@@ -155,22 +155,21 @@ Airdrop.TextStrokeTransparency = 0
 Airdrop.TextWrapped = true
 
 UIGridLayout.Parent = ScrollingFrame
-UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
 UIGridLayout.CellSize = UDim2.new(0, 110, 0, 50)
 
-gunmod.Name = "gunmod"
-gunmod.Parent = ScrollingFrame
-gunmod.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-gunmod.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-gunmod.Position = UDim2.new(0.329939932, 0, 0.451666713, 0)
-gunmod.Size = UDim2.new(0, 106, 0, 51)
-gunmod.ZIndex = -99
-gunmod.Font = Enum.Font.SourceSansBold
-gunmod.Text = "Mod guns"
-gunmod.TextColor3 = Color3.new(0.666667, 0, 0)
-gunmod.TextSize = 18
-gunmod.TextStrokeTransparency = 0
-gunmod.TextWrapped = true
+modguns.Name = "modguns"
+modguns.Parent = ScrollingFrame
+modguns.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+modguns.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+modguns.Position = UDim2.new(0.329939932, 0, 0.451666713, 0)
+modguns.Size = UDim2.new(0, 106, 0, 51)
+modguns.ZIndex = -99
+modguns.Font = Enum.Font.SourceSansBold
+modguns.Text = "Mod guns"
+modguns.TextColor3 = Color3.new(0.666667, 0, 0)
+modguns.TextSize = 18
+modguns.TextStrokeTransparency = 0
+modguns.TextWrapped = true
 
 GravToggle.Name = "GravToggle"
 GravToggle.Parent = ScrollingFrame
@@ -265,19 +264,19 @@ keybypass.TextSize = 18
 keybypass.TextStrokeTransparency = 0
 keybypass.TextWrapped = true
 
-casinocode.Name = "casinocode"
-casinocode.Parent = ScrollingFrame
-casinocode.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-casinocode.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-casinocode.Position = UDim2.new(0, 0, 0.523438752, 0)
-casinocode.Size = UDim2.new(0, 116, 0, 47)
-casinocode.ZIndex = 0
-casinocode.Font = Enum.Font.SourceSansBold
-casinocode.Text = "Get Casino code"
-casinocode.TextColor3 = Color3.new(0, 0.666667, 0.498039)
-casinocode.TextSize = 18
-casinocode.TextStrokeTransparency = 0
-casinocode.TextWrapped = true
+getcode.Name = "getcode"
+getcode.Parent = ScrollingFrame
+getcode.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+getcode.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+getcode.Position = UDim2.new(0, 0, 0.523438752, 0)
+getcode.Size = UDim2.new(0, 116, 0, 47)
+getcode.ZIndex = 0
+getcode.Font = Enum.Font.SourceSansBold
+getcode.Text = "Get Casino code"
+getcode.TextColor3 = Color3.new(0, 0.666667, 0.498039)
+getcode.TextSize = 18
+getcode.TextStrokeTransparency = 0
+getcode.TextWrapped = true
 
 deleteradio.Name = "deleteradio"
 deleteradio.Parent = ScrollingFrame
@@ -307,19 +306,19 @@ respawn.TextSize = 18
 respawn.TextStrokeTransparency = 0
 respawn.TextWrapped = true
 
-vehiclemod.Name = "vehiclemod"
-vehiclemod.Parent = ScrollingFrame
-vehiclemod.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-vehiclemod.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-vehiclemod.Position = UDim2.new(0.667000175, 0, 0.523438752, 0)
-vehiclemod.Size = UDim2.new(0, 116, 0, 47)
-vehiclemod.ZIndex = -1
-vehiclemod.Font = Enum.Font.SourceSansBold
-vehiclemod.Text = "Lock on exit + Unlock on enter"
-vehiclemod.TextColor3 = Color3.new(0.333333, 1, 0.498039)
-vehiclemod.TextSize = 18
-vehiclemod.TextStrokeTransparency = 0
-vehiclemod.TextWrapped = true
+lockonexit.Name = "lockonexit"
+lockonexit.Parent = ScrollingFrame
+lockonexit.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+lockonexit.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+lockonexit.Position = UDim2.new(0.667000175, 0, 0.523438752, 0)
+lockonexit.Size = UDim2.new(0, 116, 0, 47)
+lockonexit.ZIndex = -1
+lockonexit.Font = Enum.Font.SourceSansBold
+lockonexit.Text = "Lock on exit + Unlock on enter"
+lockonexit.TextColor3 = Color3.new(0.333333, 1, 0.498039)
+lockonexit.TextSize = 18
+lockonexit.TextStrokeTransparency = 0
+lockonexit.TextWrapped = true
 
 flyhack.Name = "flyhack"
 flyhack.Parent = MainFrame
@@ -454,7 +453,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_QHRH79_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_OAYP65_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
@@ -801,7 +800,7 @@ function SCRIPT_QHRH79_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 			end
 	
-			mainframe.gunmod.MouseButton1Click:connect(function()
+			mainframe.modguns.MouseButton1Click:connect(function()
 				changegunstats({["CamShakeMagnitude"] = 0,["FireAuto"] = true})
 				local g = require(game.ReplicatedStorage.Game.ItemConfig.Grenade)
 				g.ReloadTime = 0
@@ -1212,9 +1211,9 @@ function SCRIPT_QHRH79_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 			end)
 	
-			local ctxt = mainframe.casinocode.Text
+			local ctxt = mainframe.getcode.Text
 	
-			mainframe.casinocode.MouseButton1Down:connect(function()
+			mainframe.getcode.MouseButton1Down:connect(function()
 				local codes = workspace.Casino.RobberyDoor.Codes
 				local code
 	
@@ -1232,13 +1231,13 @@ function SCRIPT_QHRH79_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				    txt = txt..v.SurfaceGui.TextLabel.Text
 				end
 	
-				mainframe.casinocode.Text = txt
+				mainframe.getcode.Text = txt
 				else
-				mainframe.casinocode.Text = "code non-existent"
+				mainframe.getcode.Text = "code non-existent"
 				end
 	
 				delay(5,function()
-					mainframe.casinocode.Text = ctxt
+					mainframe.getcode.Text = ctxt
 				end)
 	
 			end)
@@ -1268,7 +1267,7 @@ function SCRIPT_QHRH79_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			
 			local vmod = false
 	
-			mainframe.vehiclemod.MouseButton1Click:connect(function()
+			mainframe.lockonexit.MouseButton1Click:connect(function()
 				if not vmod then 
 					vmod = true
 					local vehicle = require(game.ReplicatedStorage.Game.Vehicle)
@@ -1345,4 +1344,4 @@ function SCRIPT_QHRH79_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_QHRH79_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_OAYP65_FAKESCRIPT))
