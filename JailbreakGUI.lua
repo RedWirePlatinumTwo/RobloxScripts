@@ -454,7 +454,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_TTNK77_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_QHRH79_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
@@ -527,6 +527,7 @@ function SCRIPT_TTNK77_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end
 	
 			local mainframe = script.Parent.MainFrame.ScrollingFrame
+			local confirm = script.Parent.Confirmation
 			mainframe.AutomaticCanvasSize = 2
 			mainframe.ScrollBarImageColor3 = mainframe.Parent.BorderColor3
 			local mframe = mainframe.Parent
@@ -615,7 +616,7 @@ function SCRIPT_TTNK77_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end)
 	
 			mainframe.aimbot.MouseButton1Click:connect(function()
-				mainframe.Parent.Confirmation.Visible = true
+				confirm.Visible = true
 			end)
 	
 			props = {}
@@ -931,14 +932,11 @@ function SCRIPT_TTNK77_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end)
 			end)
 	
-			local ConfGUI = script.Parent.Confirmation
-	
-			ConfGUI.No.MouseButton1Click:connect(function()
-				ConfGUI.Parent.Confirmation.Visible = false
+			confirm.No.MouseButton1Click:connect(function()
+				confirm.Visible = false
 			end)
-	
-			ConfGUI.Yes.MouseButton1Click:connect(function()
-			ConfGUI.Parent.Confirmation.Visible = false
+			confirm.Yes.MouseButton1Click:connect(function()
+			confirm.Visible = false
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/Aimbot.lua"))()
 			end)
 	
@@ -1347,4 +1345,4 @@ function SCRIPT_TTNK77_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_TTNK77_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_QHRH79_FAKESCRIPT))
