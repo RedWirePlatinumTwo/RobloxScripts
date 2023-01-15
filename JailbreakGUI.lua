@@ -546,7 +546,7 @@ function SCRIPT_TTNK77_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Brought back the minimum number limits but as negative numbers + robbery notifier now works with mansion")
+			notify("Added a vehicle auto-lock/unlock and redesigned gui :)")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
