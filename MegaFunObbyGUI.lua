@@ -152,7 +152,7 @@ TextLabel_3.TextScaled = true
 TextLabel_3.TextSize = 14
 TextLabel_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_LTLG66_FAKESCRIPT() -- Megafunobby.LocalScript 
+function SCRIPT_FTTB89_FAKESCRIPT() -- Megafunobby.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = Megafunobby
 	local frame = script.Parent.MainFrame
@@ -187,6 +187,10 @@ function SCRIPT_LTLG66_FAKESCRIPT() -- Megafunobby.LocalScript
 			lplr.Character.HumanoidRootPart.CFrame = workspace.stages[lplr.leaderstats.Stage.Value + 1].CFrame
 		end)
 	
+	else
+		wait(0.5)
+		script.Parent:Destroy()
+		return
 	end
 	frame.respawn.MouseButton1Click:connect(function()
 		game.Players.LocalPlayer.Character.Humanoid.Health = 0
@@ -227,4 +231,4 @@ function SCRIPT_LTLG66_FAKESCRIPT() -- Megafunobby.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_LTLG66_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_FTTB89_FAKESCRIPT))
