@@ -126,185 +126,190 @@ antifalltoggle.TextStrokeColor3 = Color3.new(0, 0, 1)
 antifalltoggle.TextStrokeTransparency = 0
 antifalltoggle.TextWrapped = true
 -- Scripts:
-function SCRIPT_CJIV80_FAKESCRIPT() -- SkyWarsGUI.LocalScript 
+function SCRIPT_MBRZ87_FAKESCRIPT() -- SkyWarsGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = SkyWarsGUI
 	local lplr = game.Players.LocalPlayer
 	local mainframe = script.Parent.MainFrame
 	
-	for i,v in pairs(script.Parent:GetChildren()) do
-		if v.ClassName == "Frame" then
-			v.Draggable = true
-			v.Active = true
-		end
-	end
-	
-	local function highlightOre(ore)
-		local bha = Instance.new("BoxHandleAdornment", ore)
-		bha.Adornee = ore
-		bha.Size = ore.Size
-		bha.ZIndex = 0
-		bha.AlwaysOnTop = true
-		bha.Transparency = 0.5
-		bha.Color = ore.BrickColor
-	end
-	
-	mainframe.mineores.MouseButton1Click:connect(function()
-		if lplr.Backpack:FindFirstChild("Axe") or lplr.Character:FindFirstChild("Axe") then
-			local chr = lplr.Character
-			local cframe = chr.HumanoidRootPart.CFrame
-	
-			local function farm(o)
-	
-			local function isBroken(b)
-				return b.Name == "Broken"
+	if game.PlaceId == 855499080 then
+		for i,v in pairs(script.Parent:GetChildren()) do
+			if v.ClassName == "Frame" then
+				v.Draggable = true
+				v.Active = true
 			end
+		end
 	
-			local tp = true
-			local blockcooldown = false
+		local function highlightOre(ore)
+			local bha = Instance.new("BoxHandleAdornment", ore)
+			bha.Adornee = ore
+			bha.Size = ore.Size
+			bha.ZIndex = 0
+			bha.AlwaysOnTop = true
+			bha.Transparency = 0.5
+			bha.Color = ore.BrickColor
+		end
 	
-			game.RunService.Heartbeat:connect(function()
-				if tp then
-					if chr:FindFirstChild("Axe") then
-						if not blockcooldown then
-							blockcooldown = true
-							chr.Axe.RemoteEvent:FireServer(o)
+		mainframe.mineores.MouseButton1Click:connect(function()
+			if lplr.Backpack:FindFirstChild("Axe") or lplr.Character:FindFirstChild("Axe") then
+				local chr = lplr.Character
+				local cframe = chr.HumanoidRootPart.CFrame
 	
-						delay(0.1,function()
-								blockcooldown = false
-						end)
+				local function farm(o)
 	
+				local function isBroken(b)
+					return b.Name == "Broken"
+				end
+	
+				local tp = true
+				local blockcooldown = false
+	
+				game.RunService.Heartbeat:connect(function()
+					if tp then
+						if chr:FindFirstChild("Axe") then
+							if not blockcooldown then
+								blockcooldown = true
+								chr.Axe.RemoteEvent:FireServer(o)
+	
+							delay(0.1,function()
+									blockcooldown = false
+							end)
+	
+							end
+							chr.HumanoidRootPart.CFrame = o.CFrame
+						else
+							lplr.Backpack.Axe.Parent = chr
 						end
-						chr.HumanoidRootPart.CFrame = o.CFrame
-					else
-						lplr.Backpack.Axe.Parent = chr
+					end
+				end)
+	
+				repeat task.wait() until isBroken(o)
+				tp = false
+				end
+				local m
+	
+				for i, b in pairs(workspace:GetChildren()) do
+					if b.Name:match("Map") then
+						m = b
 					end
 				end
-			end)
 	
-			repeat task.wait() until isBroken(o)
-			tp = false
-			end
-			local m
+				if m then
+				for i, ore in pairs(m.Map.Ores:GetChildren()) do
+					farm(ore)
+				end
 	
-			for i, b in pairs(workspace:GetChildren()) do
-				if b.Name:match("Map") then
-					m = b
+				task.wait(0.1)
+				chr.HumanoidRootPart.CFrame = cframe
 				end
 			end
+		end)
 	
-			if m then
-			for i, ore in pairs(m.Map.Ores:GetChildren()) do
-				farm(ore)
-			end
+		mainframe.highlightores.MouseButton1Click:connect(function()
+		local m
 	
-			task.wait(0.1)
-			chr.HumanoidRootPart.CFrame = cframe
-			end
-		end
-	end)
-	
-	mainframe.highlightores.MouseButton1Click:connect(function()
-	local m
-	
-	for i, b in pairs(workspace:GetChildren()) do
-		if b.Name:match("Map") then
-			m = b
-		end
-	end
-	if m then
-	
-	for i, ore in pairs(m.Map.Ores:GetChildren()) do
-		if not ore:FindFirstChild("BoxHandleAdornment") then
-			highlightOre(ore)
+		for i, b in pairs(workspace:GetChildren()) do
+			if b.Name:match("Map") then
+				m = b
 			end
 		end
-	end
+		if m then
 	
-	end)
-	local automining = false
-	local blockcooldown2 = false
-	
-	game.RunService.RenderStepped:connect(function()
-		if not automining then return end
-			if lplr.Character:FindFirstChild("Axe") then
-			if not blockcooldown2 then
-				blockcooldown2 = true
-				lplr.Character.Axe.RemoteEvent:FireServer(lplr:GetMouse().Target)
-	
-			delay(0.1,function()
-				blockcooldown2 = false
-			end)
-	
+		for i, ore in pairs(m.Map.Ores:GetChildren()) do
+			if not ore:FindFirstChild("BoxHandleAdornment") then
+				highlightOre(ore)
+				end
 			end
 		end
-	end)
 	
-	local amtext = mainframe.automine.Text
-	mainframe.automine.Text = amtext..tostring(automining)
+		end)
+		local automining = false
+		local blockcooldown2 = false
 	
-	mainframe.automine.MouseButton1Click:connect(function()
-		automining = not automining
+		game.RunService.RenderStepped:connect(function()
+			if not automining then return end
+				if lplr.Character:FindFirstChild("Axe") then
+				if not blockcooldown2 then
+					blockcooldown2 = true
+					lplr.Character.Axe.RemoteEvent:FireServer(lplr:GetMouse().Target)
+	
+				delay(0.1,function()
+					blockcooldown2 = false
+				end)
+	
+				end
+			end
+		end)
+	
+		local amtext = mainframe.automine.Text
 		mainframe.automine.Text = amtext..tostring(automining)
-	end)
 	
-	local megavip = true
-	local enter = workspace.Lobby["Mega VIP Room"].Teleport.Enter
+		mainframe.automine.MouseButton1Click:connect(function()
+			automining = not automining
+			mainframe.automine.Text = amtext..tostring(automining)
+		end)
 	
-	enter["Teleporter B"].Touched:connect(function(h)
-		if game.Players:GetPlayerFromCharacter(h.Parent) and game.Players:GetPlayerFromCharacter(h.Parent) == lplr and megavip then
-			h.Parent:MoveTo(enter["Teleporter A"].Position)
-		end
-	end)
+		local megavip = true
+		local enter = workspace.Lobby["Mega VIP Room"].Teleport.Enter
 	
-	local mvtext = mainframe.megavipenter.Text
-	mainframe.megavipenter.Text = mvtext..tostring(megavip)
-	
-	mainframe.megavipenter.MouseButton1Click:connect(function()
-		megavip = not megavip
-		mainframe.megavipenter.Text = mvtext..tostring(megavip)
-	end)
-	
-	mainframe.infyeet.MouseButton1Click:connect(function()
-		loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-	end)
-	
-	local part = Instance.new("Part", workspace)
-	part.Anchored = true
-	part.Size = Vector3.new(9, 1, 9)
-	part.Transparency = 1
-	local antifall = true
-	
-	game.RunService.RenderStepped:connect(function()
-		if antifall and lplr.Character then 
-			part.Position = (lplr.Character.HumanoidRootPart.Position * Vector3.new(1,0,1)) + Vector3.new(0,147,0)
-			if lplr.Character.HumanoidRootPart.CFrame.Y < 147 then
-				lplr.Character.HumanoidRootPart.CFrame = part.CFrame + Vector3.new(0, 3, 0)
-				lplr.Character.HumanoidRootPart.Velocity = Vector3.new()
+		enter["Teleporter B"].Touched:connect(function(h)
+			if game.Players:GetPlayerFromCharacter(h.Parent) and game.Players:GetPlayerFromCharacter(h.Parent) == lplr and megavip then
+				h.Parent:MoveTo(enter["Teleporter A"].Position)
 			end
-		end
-	end)
+		end)
 	
-	local aftext = mainframe.antifalltoggle.Text
-	mainframe.antifalltoggle.Text = aftext..tostring(antifall)
+		local mvtext = mainframe.megavipenter.Text
+		mainframe.megavipenter.Text = mvtext..tostring(megavip)
 	
-	mainframe.antifalltoggle.MouseButton1Click:connect(function()
-		antifall = not antifall
+		mainframe.megavipenter.MouseButton1Click:connect(function()
+			megavip = not megavip
+			mainframe.megavipenter.Text = mvtext..tostring(megavip)
+		end)
+	
+		mainframe.infyeet.MouseButton1Click:connect(function()
+			loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+		end)
+	
+		local part = Instance.new("Part", workspace)
+		part.Anchored = true
+		part.Size = Vector3.new(9, 1, 9)
+		part.Transparency = 1
+		local antifall = true
+	
+		game.RunService.RenderStepped:connect(function()
+			if antifall and lplr.Character then 
+				part.Position = (lplr.Character.HumanoidRootPart.Position * Vector3.new(1,0,1)) + Vector3.new(0,147,0)
+				if lplr.Character.HumanoidRootPart.CFrame.Y < 147 then
+					lplr.Character.HumanoidRootPart.CFrame = part.CFrame + Vector3.new(0, 3, 0)
+					lplr.Character.HumanoidRootPart.Velocity = Vector3.new()
+				end
+			end
+		end)
+	
+		local aftext = mainframe.antifalltoggle.Text
 		mainframe.antifalltoggle.Text = aftext..tostring(antifall)
-		if not antifall then
-			part.CanCollide = false
-		else
-			part.CanCollide = true
-		end
-	end)
 	
-	lplr.PlayerGui.Extra:Destroy()
+		mainframe.antifalltoggle.MouseButton1Click:connect(function()
+			antifall = not antifall
+			mainframe.antifalltoggle.Text = aftext..tostring(antifall)
+			if not antifall then
+				part.CanCollide = false
+			else
+				part.CanCollide = true
+			end
+		end)
 	
-	lplr.PlayerGui.ChildAdded:connect(function(c)
-	    if c.Name == "Extra" then
-	        c:Destroy()
-	    end
-	end)
+		lplr.PlayerGui.Extra:Destroy()
+	
+		lplr.PlayerGui.ChildAdded:connect(function(c)
+		    if c.Name == "Extra" then
+		        c:Destroy()
+		    end
+		end)
+	else
+		wait(0.5)
+		script.Parent:Destroy()
+	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_CJIV80_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_MBRZ87_FAKESCRIPT))
