@@ -44,7 +44,7 @@ MainFrame.Name = "MainFrame"
 MainFrame.Parent = JailbreakGUI
 MainFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 MainFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-MainFrame.Position = UDim2.new(0.886346042, -384, 0.0555422306, 10)
+MainFrame.Position = UDim2.new(0.879054368, -384, 0.0564681552, 10)
 MainFrame.Size = UDim2.new(0, 368, 0, 308)
 
 speed.Name = "speed"
@@ -325,7 +325,7 @@ flyhack.Parent = MainFrame
 flyhack.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 flyhack.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 flyhack.Position = UDim2.new(0.509391129, 0, 0.142545477, 0)
-flyhack.Size = UDim2.new(0, 172, 0, 45)
+flyhack.Size = UDim2.new(0, 172, 0, 46)
 flyhack.Font = Enum.Font.SourceSansBold
 flyhack.Text = "Fly hack (Left CTRL + F)"
 flyhack.TextColor3 = Color3.new(0.333333, 1, 1)
@@ -337,8 +337,8 @@ flyhacknum.Name = "flyhacknum"
 flyhacknum.Parent = MainFrame
 flyhacknum.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 flyhacknum.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-flyhacknum.Position = UDim2.new(0.509000003, 0, 0.143000007, 0)
-flyhacknum.Size = UDim2.new(0, 172, 0, 45)
+flyhacknum.Position = UDim2.new(0.509000003, 0, 0.139753267, 0)
+flyhacknum.Size = UDim2.new(0, 172, 0, 46)
 flyhacknum.Visible = false
 flyhacknum.Font = Enum.Font.SourceSansBold
 flyhacknum.PlaceholderColor3 = Color3.new(0.333333, 1, 1)
@@ -453,7 +453,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_DADI85_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_VKKG82_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
@@ -1345,4 +1345,4 @@ function SCRIPT_DADI85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_DADI85_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_VKKG82_FAKESCRIPT))
