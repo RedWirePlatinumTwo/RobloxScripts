@@ -720,7 +720,6 @@ function SCRIPT_NQLQ75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					TextButton.TextStrokeTransparency = 0
 					TextButton.Visible = props.guitext
 					pointer(Airdrop)
-					Airdrop.RopeConstraint.Visible = props.pointers
 	
 				local FormatNumber = function(n)
 					local n2 = ""
