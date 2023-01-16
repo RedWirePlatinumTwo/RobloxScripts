@@ -453,20 +453,27 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_NQLQ75_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_LEYV85_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
-	local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
-	
-	local function notify(text)
-		local notiftime = 0
-		for i = 1, text:len() do
-			notiftime = notiftime + 0.05
-		end
-		notif.new({["Text"] = text,["Duration"] = notiftime})
-	end
+	local mainframe = script.Parent.MainFrame.ScrollingFrame
+	local confirm = script.Parent.Confirmation
+	mainframe.AutomaticCanvasSize = 2
+	mainframe.UIGridLayout.SortOrder = 0
+	mainframe.ScrollBarImageColor3 = mainframe.Parent.BorderColor3
+	local mframe = mainframe.Parent
+	local airdropframe = script.Parent.AirdropESPFrame
 	
 	if game.PlaceId == 606849621 then
+		local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
+	
+		local function notify(text)
+			local notiftime = 0
+			for i = 1, text:len() do
+				notiftime = notiftime + 0.05
+			end
+			notif.new({["Text"] = text,["Duration"] = notiftime})
+		end
 		if not _G.RedsJBGUI then
 			_G.RedsJBGUI = true
 			for i,v in pairs(script.Parent:GetChildren()) do
@@ -524,14 +531,6 @@ function SCRIPT_NQLQ75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				_GetFamily(ins)
 				return Pathway
 			end
-	
-			local mainframe = script.Parent.MainFrame.ScrollingFrame
-			local confirm = script.Parent.Confirmation
-			mainframe.AutomaticCanvasSize = 2
-			mainframe.UIGridLayout.SortOrder = 0
-			mainframe.ScrollBarImageColor3 = mainframe.Parent.BorderColor3
-			local mframe = mainframe.Parent
-			local airdropframe = script.Parent.AirdropESPFrame
 			local speeds = {}
 			speeds.walkspeed = 30
 			speeds.flyspeed = 300
@@ -1318,4 +1317,4 @@ function SCRIPT_NQLQ75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_NQLQ75_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_LEYV85_FAKESCRIPT))
