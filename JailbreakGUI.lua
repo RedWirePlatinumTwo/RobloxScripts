@@ -453,7 +453,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_VKKG82_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_NQLQ75_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
@@ -643,19 +643,13 @@ function SCRIPT_VKKG82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 	
 			end)
-	
+			
+			local lines = {}
 			Changed(props, "pointers", function(val)
 				airdropframe.pointers.Text = pointerstemplate..tostring(val)
 	
-				for i,v in pairs(workspace:GetChildren()) do
-	
-					local success, returnval = pcall(function()
-						return v.Root.RopeConstraint
-					end)
-	
-					if success then
-						returnval.Visible = val
-					end
+				for i,v in pairs(lines) do
+					v.Visible = val
 				end
 	
 			end)
@@ -671,50 +665,32 @@ function SCRIPT_VKKG82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			airdropframe.hide.MouseButton1Click:Connect(function()
 				airdropframe.Visible = false
 			end)
+			
+			local function pointer(part)
+				local Line = Drawing.new("Line")
+				table.insert(lines, Line)
+				Line.Visible = props.pointers
+				Line.Color = mainframe.Airdrop.TextColor3
+				Line.Thickness = 2
+				Line.Transparency = 1
 	
-			local pointer = function(part)
-			local lplr = game.Players.LocalPlayer
-			local part1 = Instance.new("Part", workspace)
-			part1.Transparency = 1
-			part1.CanCollide = false
-			local part2 = Instance.new("Part", workspace)
-			part2.Transparency = 1
-			part2.CanCollide = false
-	
-			function makeattachment(v)
-			    if not v:FindFirstChild("Attachment") then
-			        Instance.new("Attachment",v)
-			    end
-			    return v.Attachment
-			end
-			local rope = Instance.new("RopeConstraint", part)
-			rope.Attachment0 = makeattachment(part1)
-			rope.Attachment1 = makeattachment(part2)
-			rope.Visible = true
-			rope.Thickness = 0.25
-			rope.Color = BrickColor.new(mainframe.Airdrop.TextColor3)
-	
-			local pointfunction = game.RunService.Heartbeat:connect(function()
-	
-				local s, rootpart = pcall(function()
-					return lplr.Character.Humanoid.RootPart
+				local pointfunction = game.RunService.Heartbeat:connect(function()
+					pcall(function()
+						local v = workspace.CurrentCamera:WorldToScreenPoint(lplr.Character.Humanoid.RootPart.Position)
+						local v2 = workspace.CurrentCamera:WorldToScreenPoint(part.Position)
+						local x,y = v.X, v.Y
+						local x2, y2 = v2.X, v2.Y
+						Line.From = Vector2.new(x,y)
+						Line.To = Vector2.new(x2, y2)
+					end)
 				end)
 	
-				if s and rootpart then
-				    local pos = (part.Position - rootpart.Position)
-				    rope.Length = pos.Magnitude
-				    part1.CFrame = lplr.Character.Humanoid.RootPart.CFrame
-				    part2.CFrame = part.CFrame
-				end
-			end)
-	
-			coroutine.resume(coroutine.create(function()
-				repeat task.wait() until GetFamily(part)[1] ~= game
-				pointfunction:Disconnect()
-				part1:Destroy()
-				part2:Destroy()
-				rope:Destroy()
-			end))
+				coroutine.resume(coroutine.create(function()
+					repeat task.wait() until GetFamily(part)[1] ~= game
+					pointfunction:Disconnect()
+					Line:Remove()
+					table.remove(lines, table.find(Line))
+				end))
 	
 			end
 	
@@ -1031,7 +1007,7 @@ function SCRIPT_VKKG82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			game.RunService.Heartbeat:connect(function()
 	
 				local hrpvalid, hrp = pcall(function()
-					return lplr.Character.HumanoidRootPart
+					return lplr.Character.Humanoid.RootPart
 				end)
 	
 				if hrpvalid and gunshoptp then
@@ -1060,7 +1036,6 @@ function SCRIPT_VKKG82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					local flying = false
 					local maxdistance = 100000000000000 --using math.huge makes this script wonky
 					local uiservice = game.UserInputService
-					local lplr = game.Players.LocalPlayer
 					local mouse = lplr:GetMouse()
 	
 					local function GetVelocity(pos1,pos2,StudsPerSecond)
@@ -1281,7 +1256,6 @@ function SCRIPT_VKKG82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					local enterfn = onenter._fn
 	
 					local unlockOnEnter = true -- whether or not you actually want your car to auto-unlock on enter
-					local lplr = game.Players.LocalPlayer
 	
 					local function isdriver()
 					    local model = getmodel()
@@ -1345,4 +1319,4 @@ function SCRIPT_VKKG82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_VKKG82_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_NQLQ75_FAKESCRIPT))
