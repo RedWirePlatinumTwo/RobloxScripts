@@ -950,7 +950,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_ELDF65_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_UOTZ73_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1536,9 +1536,9 @@ function SCRIPT_ELDF65_FAKESCRIPT() -- Aimbot.Scripts
 	
 		local AimbotFunction = game.RunService.RenderStepped:connect(function()
 			if misc.TargetedCharacter ~= "" then
-				local v, onscreen = workspace.Camera:WorldToScreenPoint(gettargetpart(misc.TargetedCharacter).Position)
+				local v, onscreen = workspace.CurrentCamera:WorldToScreenPoint(gettargetpart(misc.TargetedCharacter).Position)
 				if onscreen then
-					local StabilizeNum = GlobalStats.AimIntensity/workspace.Camera.ViewportSize.Y
+					local StabilizeNum = GlobalStats.AimIntensity/workspace.CurrentCamera.ViewportSize.Y
 					local x, y = (v.X - m.X)*StabilizeNum, (v.Y - m.Y)*StabilizeNum
 					if misc.IsAimbotOn then
 						if GlobalStats.RightClickAim and RightClick or not GlobalStats.RightClickAim then
@@ -1577,7 +1577,7 @@ function SCRIPT_ELDF65_FAKESCRIPT() -- Aimbot.Scripts
 		    
 		    	    if outcome and v.Humanoid.Health ~= 0 and IsNotWhitelisted(v) then
 		    	        local pos = math.floor(lplr:DistanceFromCharacter(gettargetpart(v).Position))
-		    	        local _, onscreen = workspace.Camera:WorldToScreenPoint(gettargetpart(v).Position)
+		    	        local _, onscreen = workspace.CurrentCamera:WorldToScreenPoint(gettargetpart(v).Position)
 		    	        if onscreen and pos < GameStats.MaxStuds then
 		    	            table1[pos] = v
 		    			    table.insert(table2, pos)
@@ -1794,4 +1794,4 @@ function SCRIPT_ELDF65_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_ELDF65_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_UOTZ73_FAKESCRIPT))
