@@ -950,7 +950,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_UOTZ73_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_EAJZ89_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1102,7 +1102,7 @@ function SCRIPT_UOTZ73_FAKESCRIPT() -- Aimbot.Scripts
 		local PrioritizedPlrs = {}
 		local misc = {}
 		misc.IsAimbotOn = false
-		misc.TargetedCharacter = ""
+		misc.TargetedCharacter = nil
 		local GlobalStats
 		local GameStats
 		local Keybinds
@@ -1217,7 +1217,7 @@ function SCRIPT_UOTZ73_FAKESCRIPT() -- Aimbot.Scripts
 		end
 	
 		local deselect = function()
-			misc.TargetedCharacter = ""
+			misc.TargetedCharacter = nil
 		end
 	
 		m.Button2Down:connect(function()
@@ -1226,7 +1226,7 @@ function SCRIPT_UOTZ73_FAKESCRIPT() -- Aimbot.Scripts
 		
 		m.Button2Up:connect(function()
 			RightClick = false
-		if GlobalStats.RightClickAim and misc.TargetedCharacter ~= "" then
+		if GlobalStats.RightClickAim and misc.TargetedCharacter then
 			deselect()
 		end
 		end)
@@ -1301,16 +1301,23 @@ function SCRIPT_UOTZ73_FAKESCRIPT() -- Aimbot.Scripts
 	
 		local function selectcharacter(chr)
 			if GlobalStats.RightClickAim and RightClick or not GlobalStats.RightClickAim then
-				if misc.IsAimbotOn and misc.TargetedCharacter == "" and not GameStats.TargetCloserPlayers or GameStats.TargetCloserPlayers and misc.IsAimbotOn then
+				if misc.IsAimbotOn and not misc.TargetedCharacter and not GameStats.TargetCloserPlayers or GameStats.TargetCloserPlayers and misc.IsAimbotOn then
+					local isprio
+					if misc.TargetedCharacter then
+						local plr = plrs:GetPlayerFromCharacter(misc.TargetedCharacter)
+						isprio = table.find(PrioritizedPlrs, plr) ~= nil
+					end
+					if not isprio then	
 						misc.TargetedCharacter = chr
-					if game.PlaceId == 286090429 then
-						chr.ChildAdded:connect(function(c)
-							if c.Name == "Cam" and misc.TargetedCharacter == chr then
-								chr.Humanoid.Health = 0
-								chr.ChildRemoved:Wait()
-								chr.Humanoid.Health = 100
-							end
-						end)
+						if game.PlaceId == 286090429 then
+							chr.ChildAdded:connect(function(c)
+								if c.Name == "Cam" and misc.TargetedCharacter == chr then
+									chr.Humanoid.Health = 0
+									chr.ChildRemoved:Wait()
+									chr.Humanoid.Health = 100
+								end
+							end)
+						end
 					end
 				end
 			end
@@ -1323,12 +1330,7 @@ function SCRIPT_UOTZ73_FAKESCRIPT() -- Aimbot.Scripts
 			end)
 	
 			if player.Name ~= lplr.Name and humanoidvalid and IsNotWhitelisted(player) and humanoid.Health ~= 0 then
-				local b, isprio = pcall(function()
-					return table.find(PrioritizedPlrs, plrs[misc.TargetedCharacter.Name])
-				end)
-				if not b or not isprio then
-					selectcharacter(player.Character)
-				end
+				selectcharacter(player.Character)
 			end
 		end
 	
@@ -1535,7 +1537,7 @@ function SCRIPT_UOTZ73_FAKESCRIPT() -- Aimbot.Scripts
 	   end
 	
 		local AimbotFunction = game.RunService.RenderStepped:connect(function()
-			if misc.TargetedCharacter ~= "" then
+			if misc.TargetedCharacter then
 				local v, onscreen = workspace.CurrentCamera:WorldToScreenPoint(gettargetpart(misc.TargetedCharacter).Position)
 				if onscreen then
 					local StabilizeNum = GlobalStats.AimIntensity/workspace.CurrentCamera.ViewportSize.Y
@@ -1628,7 +1630,7 @@ function SCRIPT_UOTZ73_FAKESCRIPT() -- Aimbot.Scripts
 		    end
 	
 			if GameStats.FPEnabled then
-				if misc.TargetedCharacter ~= ""  and misc.IsAimbotOn then
+				if misc.TargetedCharacter and misc.IsAimbotOn then
 					plrs.LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
 				else
 					plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
@@ -1649,7 +1651,7 @@ function SCRIPT_UOTZ73_FAKESCRIPT() -- Aimbot.Scripts
 		local MainFrame = script.Parent.MFrame
 	
 		Changed(misc, "TargetedCharacter", function(v)
-			if v ~= "" then
+			if v then
 				local player = game.Players:GetPlayerFromCharacter(v)
 				if player then
 					MainFrame.CurrentTarget.Text = CheckDN(player)
@@ -1794,4 +1796,4 @@ function SCRIPT_UOTZ73_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_UOTZ73_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_EAJZ89_FAKESCRIPT))
