@@ -453,7 +453,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_HBQV82_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_STES78_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -646,11 +646,6 @@ function SCRIPT_HBQV82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			local lines = {}
 			Changed(props, "pointers", function(val)
 				airdropframe.pointers.Text = pointerstemplate..tostring(val)
-	
-				for i,v in pairs(lines) do
-					v.Visible = val
-				end
-	
 			end)
 	
 			airdropframe.bguis.MouseButton1Click:connect(function()
@@ -668,7 +663,6 @@ function SCRIPT_HBQV82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			local function pointer(part)
 				local Line = Drawing.new("Line")
 				table.insert(lines, Line)
-				Line.Visible = props.pointers
 				Line.Color = mainframe.Airdrop.TextColor3
 				Line.Thickness = 2
 				Line.Transparency = 1
@@ -679,6 +673,8 @@ function SCRIPT_HBQV82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						local v2, onscreen = workspace.CurrentCamera:WorldToScreenPoint(part.Position)
 						if not onscreen then
 							Line.Visible = false
+						else
+							Line.Visible = props.pointers
 						end
 						local x,y = v.X, v.Y
 						local x2, y2 = v2.X, v2.Y
@@ -1305,4 +1301,4 @@ function SCRIPT_HBQV82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_HBQV82_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_STES78_FAKESCRIPT))
