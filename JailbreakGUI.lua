@@ -453,7 +453,7 @@ hide.TextScaled = true
 hide.TextSize = 14
 hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_LEYV85_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_HBQV82_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -546,7 +546,7 @@ function SCRIPT_LEYV85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Added a vehicle auto-lock/unlock and redesigned gui :)")
+			notify("Fixed pointer issues with airdrops.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -676,7 +676,10 @@ function SCRIPT_LEYV85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				local pointfunction = game.RunService.Heartbeat:connect(function()
 					pcall(function()
 						local v = workspace.CurrentCamera:WorldToScreenPoint(lplr.Character.Humanoid.RootPart.Position)
-						local v2 = workspace.CurrentCamera:WorldToScreenPoint(part.Position)
+						local v2, onscreen = workspace.CurrentCamera:WorldToScreenPoint(part.Position)
+						if not onscreen then
+							Line.Visible = false
+						end
 						local x,y = v.X, v.Y
 						local x2, y2 = v2.X, v2.Y
 						Line.From = Vector2.new(x,y)
@@ -688,7 +691,7 @@ function SCRIPT_LEYV85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					repeat task.wait() until GetFamily(part)[1] ~= game
 					pointfunction:Disconnect()
 					Line:Remove()
-					table.remove(lines, table.find(Line))
+					table.remove(lines, table.find(lines, Line))
 				end))
 	
 			end
@@ -780,6 +783,7 @@ function SCRIPT_LEYV85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				local g = require(game.ReplicatedStorage.Game.ItemConfig.Grenade)
 				g.ReloadTime = 0
 				g.FuseTime = 0.8
+				notify("Removed recoil + all guns fire automatically (also funni grenade spam)")
 			end)
 	
 			local lasersdisabled = false
@@ -1024,6 +1028,33 @@ function SCRIPT_LEYV85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 			local enablefly = false
 			local uiservice = game.UserInputService
+			local vehicle = require(game.ReplicatedStorage.Game.Vehicle)
+			local getmodel = vehicle.GetLocalVehicleModel
+			local getseats = vehicle.getSeats
+			local togglelock = vehicle.toggleLocalLocked
+			local onexit = vehicle.OnVehicleJumpExited._handlerListHead
+			local exitfn = onexit._fn
+			local onenter = vehicle.OnVehicleEntered._handlerListHead
+			local enterfn = onenter._fn
+			local bservice = require(game.ReplicatedStorage.ActionButton.ActionButtonService)
+	
+			local unlockOnEnter = true -- whether or not you actually want your car to auto-unlock on enter
+	
+			local function isdriver()
+			    local model = getmodel()
+			    local driving = false
+			    if model then
+			        for i,v in pairs(getseats(model)) do
+			            if v.Part.Name == "Seat" and v.Player == lplr then
+			                driving = true 
+			                break
+			            end
+			        end
+			        return driving
+			    else
+			        return false
+			    end
+			end
 	
 			mframe.flyhack.MouseButton1Click:connect(function()
 				mframe.flyhacknum.Visible = true
@@ -1055,20 +1086,11 @@ function SCRIPT_LEYV85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 						pcall(function()
 							local hrp
-	
-							for i,v in pairs(workspace.Vehicles:GetChildren()) do
-							    if pcall(function() return v.Engine and v.Seat.PlayerName end) then
-							        if v.Seat.PlayerName.Value == lplr.Name then
-							            hrp = v.Engine
-							            break
-							       else
-							           hrp = nil
-							        end
-							    end
-							end
-	
 							local flyspeed = speeds.flyspeed
-								if not hrp then
+							local invehicle = getmodel()
+								if invehicle and isdriver() then
+									hrp = invehicle.Engine
+								else
 									hrp = lplr.Character.Humanoid.RootPart
 									if flyspeed > 150 then
 										flyspeed = 150
@@ -1087,35 +1109,27 @@ function SCRIPT_LEYV85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 							local downoffset = CFrame.new() + Vector3.new(0,-maxdistance,0)
 							local velocity = Vector3.new()
 						    if flying then
-	
-						    if keys.w_active then
-						        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position, flyspeed)
+							    if keys.w_active then
+							        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position, flyspeed)
+							    end
+							    if keys.s_active then
+							        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position, flyspeed)
+							    end
+							    if keys.a_active then
+							        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position, flyspeed)
+							    end
+							    if keys.d_active then
+							        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position, flyspeed)
+							    end
+							    if keys.e_active then
+							        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position, flyspeed)
+							    end
+							    if keys.q_active then
+							        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position, flyspeed)
+							    end
+							    hrp.Velocity = velocity
+							    hrp.CFrame = CFrame.new(hrp.Position, (workspace.Camera.CFrame*frontoffset).Position)
 						    end
-	
-						    if keys.s_active then
-						        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position, flyspeed)
-						    end
-	
-						    if keys.a_active then
-						        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position, flyspeed)
-						    end
-	
-						    if keys.d_active then
-						        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position, flyspeed)
-						    end
-	
-						    if keys.e_active then
-						        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position, flyspeed)
-						    end
-	
-						    if keys.q_active then
-						        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position, flyspeed)
-						    end
-	
-						    hrp.Velocity = velocity
-						     hrp.CFrame = CFrame.new(hrp.Position, (workspace.Camera.CFrame*frontoffset).Position)
-						    end
-	
 						    if flying and not keys.w_active and not keys.a_active and not keys.s_active and not keys.d_active and not keys.q_active and not keys.e_active then
 						        hrp.CFrame = CFrame.new(pos, (workspace.Camera.CFrame*frontoffset).Position)
 						        hrp.Velocity = Vector3.new()
@@ -1244,32 +1258,6 @@ function SCRIPT_LEYV85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			mainframe.lockonexit.MouseButton1Click:connect(function()
 				if not vmod then 
 					vmod = true
-					local vehicle = require(game.ReplicatedStorage.Game.Vehicle)
-					local getmodel = vehicle.GetLocalVehicleModel
-					local getseats = vehicle.getSeats
-					local togglelock = vehicle.toggleLocalLocked
-					local onexit = vehicle.OnVehicleJumpExited._handlerListHead
-					local exitfn = onexit._fn
-					local onenter = vehicle.OnVehicleEntered._handlerListHead
-					local enterfn = onenter._fn
-	
-					local unlockOnEnter = true -- whether or not you actually want your car to auto-unlock on enter
-	
-					local function isdriver()
-					    local model = getmodel()
-					    local driving = false
-					    if model then
-					        for i,v in pairs(getseats(model)) do
-					            if v.Part.Name == "Seat" and v.Player == lplr then
-					                driving = true 
-					                break
-					            end
-					        end
-					        return driving
-					    else
-					        return false
-					    end
-					end
 	
 					local function iscarlocked()
 					    local idk, icon = pcall(function()
@@ -1317,4 +1305,4 @@ function SCRIPT_LEYV85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_LEYV85_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_HBQV82_FAKESCRIPT))
