@@ -1689,7 +1689,7 @@ function SCRIPT_JZWM71_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","nevermind")
+		sendnotif("Aimbot Update","Whitelist Own Team no longer applies to games without teams.")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
