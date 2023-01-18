@@ -47,25 +47,23 @@ local value_7 = Instance.new("TextButton")
 local About = Instance.new("TextLabel")
 local TargetNPCs = Instance.new("TextLabel")
 local value_8 = Instance.new("TextButton")
-local AimThroughWalls = Instance.new("TextLabel")
-local value_9 = Instance.new("TextButton")
 local GlobalSettingsUI = Instance.new("Frame")
 local Title_4 = Instance.new("TextLabel")
 local X_2 = Instance.new("TextButton")
 local ScrollingFrame_2 = Instance.new("ScrollingFrame")
 local UIListLayout_3 = Instance.new("UIListLayout")
 local AimIntensity = Instance.new("TextLabel")
-local value_10 = Instance.new("TextBox")
+local value_9 = Instance.new("TextBox")
 local AimbotToggle = Instance.new("TextLabel")
-local value_11 = Instance.new("TextButton")
+local value_10 = Instance.new("TextButton")
 local reset = Instance.new("TextButton")
 local TargetedPartToggle = Instance.new("TextLabel")
-local value_12 = Instance.new("TextButton")
+local value_11 = Instance.new("TextButton")
 local reset_2 = Instance.new("TextButton")
 local RightClickAim = Instance.new("TextLabel")
-local value_13 = Instance.new("TextButton")
+local value_12 = Instance.new("TextButton")
 local TeamAutofill = Instance.new("TextLabel")
-local value_14 = Instance.new("TextButton")
+local value_13 = Instance.new("TextButton")
 local TeamUI = Instance.new("Frame")
 local WhitelistedTeams = Instance.new("ScrollingFrame")
 local whitelistframe_2 = Instance.new("Frame")
@@ -630,33 +628,6 @@ value_8.TextColor3 = Color3.new(0.333333, 1, 0)
 value_8.TextSize = 24
 value_8.TextXAlignment = Enum.TextXAlignment.Left
 
-AimThroughWalls.Name = "AimThroughWalls"
-AimThroughWalls.Parent = ScrollingFrame
-AimThroughWalls.BackgroundColor3 = Color3.new(0, 0, 0)
-AimThroughWalls.BackgroundTransparency = 1
-AimThroughWalls.BorderColor3 = Color3.new(0, 0.666667, 0)
-AimThroughWalls.BorderSizePixel = 0
-AimThroughWalls.Position = UDim2.new(0, 0, 0.752941191, 0)
-AimThroughWalls.Size = UDim2.new(0, 169, 0, 63)
-AimThroughWalls.Font = Enum.Font.Highway
-AimThroughWalls.Text = "Aim through walls:"
-AimThroughWalls.TextColor3 = Color3.new(0.333333, 1, 0)
-AimThroughWalls.TextSize = 24
-AimThroughWalls.TextXAlignment = Enum.TextXAlignment.Left
-AimThroughWalls.TextYAlignment = Enum.TextYAlignment.Top
-
-value_9.Name = "value"
-value_9.Parent = AimThroughWalls
-value_9.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_9.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_9.Position = UDim2.new(0.00591715984, 0, 0.494633496, 0)
-value_9.Size = UDim2.new(0, 290, 0, 28)
-value_9.Font = Enum.Font.Highway
-value_9.Text = "true"
-value_9.TextColor3 = Color3.new(0.333333, 1, 0)
-value_9.TextSize = 24
-value_9.TextXAlignment = Enum.TextXAlignment.Left
-
 GlobalSettingsUI.Name = "GlobalSettingsUI"
 GlobalSettingsUI.Parent = Aimbot
 GlobalSettingsUI.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -713,19 +684,19 @@ AimIntensity.TextSize = 24
 AimIntensity.TextXAlignment = Enum.TextXAlignment.Left
 AimIntensity.TextYAlignment = Enum.TextYAlignment.Top
 
-value_10.Name = "value"
-value_10.Parent = AimIntensity
-value_10.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_10.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_10.Position = UDim2.new(8.23433511e-05, 0, 0.520505667, 0)
-value_10.Size = UDim2.new(0, 337, 0, 28)
-value_10.Font = Enum.Font.Highway
-value_10.PlaceholderColor3 = Color3.new(0.333333, 1, 0)
-value_10.PlaceholderText = "Default is 250"
-value_10.Text = "250"
-value_10.TextColor3 = Color3.new(0.333333, 1, 0)
-value_10.TextSize = 24
-value_10.TextXAlignment = Enum.TextXAlignment.Left
+value_9.Name = "value"
+value_9.Parent = AimIntensity
+value_9.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_9.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_9.Position = UDim2.new(8.23433511e-05, 0, 0.520505667, 0)
+value_9.Size = UDim2.new(0, 337, 0, 28)
+value_9.Font = Enum.Font.Highway
+value_9.PlaceholderColor3 = Color3.new(0.333333, 1, 0)
+value_9.PlaceholderText = "Default is 250"
+value_9.Text = "250"
+value_9.TextColor3 = Color3.new(0.333333, 1, 0)
+value_9.TextSize = 24
+value_9.TextXAlignment = Enum.TextXAlignment.Left
 
 AimbotToggle.Name = "AimbotToggle"
 AimbotToggle.Parent = ScrollingFrame_2
@@ -742,17 +713,17 @@ AimbotToggle.TextSize = 24
 AimbotToggle.TextXAlignment = Enum.TextXAlignment.Left
 AimbotToggle.TextYAlignment = Enum.TextYAlignment.Top
 
-value_11.Name = "value"
-value_11.Parent = AimbotToggle
-value_11.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_11.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_11.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
-value_11.Size = UDim2.new(0, 260, 0, 28)
-value_11.Font = Enum.Font.Highway
-value_11.Text = "Enum.KeyCode.LeftAlt"
-value_11.TextColor3 = Color3.new(0.333333, 1, 0)
-value_11.TextSize = 24
-value_11.TextXAlignment = Enum.TextXAlignment.Left
+value_10.Name = "value"
+value_10.Parent = AimbotToggle
+value_10.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_10.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_10.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
+value_10.Size = UDim2.new(0, 260, 0, 28)
+value_10.Font = Enum.Font.Highway
+value_10.Text = "Enum.KeyCode.LeftAlt"
+value_10.TextColor3 = Color3.new(0.333333, 1, 0)
+value_10.TextSize = 24
+value_10.TextXAlignment = Enum.TextXAlignment.Left
 
 reset.Name = "reset"
 reset.Parent = AimbotToggle
@@ -780,17 +751,17 @@ TargetedPartToggle.TextSize = 24
 TargetedPartToggle.TextXAlignment = Enum.TextXAlignment.Left
 TargetedPartToggle.TextYAlignment = Enum.TextYAlignment.Top
 
-value_12.Name = "value"
-value_12.Parent = TargetedPartToggle
-value_12.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_12.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_12.Position = UDim2.new(0.00591715984, 0, 0.524137616, 0)
-value_12.Size = UDim2.new(0, 258, 0, 28)
-value_12.Font = Enum.Font.Highway
-value_12.Text = "Enum.KeyCode.X"
-value_12.TextColor3 = Color3.new(0.333333, 1, 0)
-value_12.TextSize = 24
-value_12.TextXAlignment = Enum.TextXAlignment.Left
+value_11.Name = "value"
+value_11.Parent = TargetedPartToggle
+value_11.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_11.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_11.Position = UDim2.new(0.00591715984, 0, 0.524137616, 0)
+value_11.Size = UDim2.new(0, 258, 0, 28)
+value_11.Font = Enum.Font.Highway
+value_11.Text = "Enum.KeyCode.X"
+value_11.TextColor3 = Color3.new(0.333333, 1, 0)
+value_11.TextSize = 24
+value_11.TextXAlignment = Enum.TextXAlignment.Left
 
 reset_2.Name = "reset"
 reset_2.Parent = TargetedPartToggle
@@ -818,17 +789,17 @@ RightClickAim.TextSize = 24
 RightClickAim.TextXAlignment = Enum.TextXAlignment.Left
 RightClickAim.TextYAlignment = Enum.TextYAlignment.Top
 
-value_13.Name = "value"
-value_13.Parent = RightClickAim
-value_13.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_13.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_13.Position = UDim2.new(0.00591715984, 0, 0.524137616, 0)
-value_13.Size = UDim2.new(0, 337, 0, 28)
-value_13.Font = Enum.Font.Highway
-value_13.Text = "false"
-value_13.TextColor3 = Color3.new(0.333333, 1, 0)
-value_13.TextSize = 24
-value_13.TextXAlignment = Enum.TextXAlignment.Left
+value_12.Name = "value"
+value_12.Parent = RightClickAim
+value_12.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_12.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_12.Position = UDim2.new(0.00591715984, 0, 0.524137616, 0)
+value_12.Size = UDim2.new(0, 337, 0, 28)
+value_12.Font = Enum.Font.Highway
+value_12.Text = "false"
+value_12.TextColor3 = Color3.new(0.333333, 1, 0)
+value_12.TextSize = 24
+value_12.TextXAlignment = Enum.TextXAlignment.Left
 
 TeamAutofill.Name = "TeamAutofill"
 TeamAutofill.Parent = ScrollingFrame_2
@@ -845,17 +816,17 @@ TeamAutofill.TextSize = 24
 TeamAutofill.TextXAlignment = Enum.TextXAlignment.Left
 TeamAutofill.TextYAlignment = Enum.TextYAlignment.Top
 
-value_14.Name = "value"
-value_14.Parent = TeamAutofill
-value_14.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_14.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_14.Position = UDim2.new(0.00591715984, 0, 0.422470868, 0)
-value_14.Size = UDim2.new(0, 337, 0, 28)
-value_14.Font = Enum.Font.Highway
-value_14.Text = "true"
-value_14.TextColor3 = Color3.new(0.333333, 1, 0)
-value_14.TextSize = 24
-value_14.TextXAlignment = Enum.TextXAlignment.Left
+value_13.Name = "value"
+value_13.Parent = TeamAutofill
+value_13.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_13.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_13.Position = UDim2.new(0.00591715984, 0, 0.422470868, 0)
+value_13.Size = UDim2.new(0, 337, 0, 28)
+value_13.Font = Enum.Font.Highway
+value_13.Text = "true"
+value_13.TextColor3 = Color3.new(0.333333, 1, 0)
+value_13.TextSize = 24
+value_13.TextXAlignment = Enum.TextXAlignment.Left
 
 TeamUI.Name = "TeamUI"
 TeamUI.Parent = Aimbot
@@ -1015,7 +986,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_UGDY79_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_TMHD82_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1242,9 +1213,6 @@ function SCRIPT_UGDY79_FAKESCRIPT() -- Aimbot.Scripts
 		end
 		if GameStats.TargetCloserPlayers == nil then
 			GameStats.TargetCloserPlayers = true
-		end
-		if GameStats.AimThroughWalls == nil then
-			GameStats.AimThroughWalls = false
 		end
 	
 		for i,v in pairs(GameStats) do
@@ -1569,7 +1537,6 @@ function SCRIPT_UGDY79_FAKESCRIPT() -- Aimbot.Scripts
 		end)
 	
 	    local npcs = {}
-		local noncparts = {}
 	
 	    TableAdded(npcs, function(i, npc)
 	        
@@ -1592,9 +1559,6 @@ function SCRIPT_UGDY79_FAKESCRIPT() -- Aimbot.Scripts
 	        if v.ClassName == "Humanoid" and v.RootPart and not ischaracter(v.Parent) and not table.find(npcs, v.Parent) then
 	            table.insert(npcs, v.Parent)
 	       end
-			if v:IsA("BasePart") and checkpart(v) and not table.find(noncparts, v) then
-				table.insert(noncparts, v)
-			end
 	    end
 	
 	    workspace.DescendantAdded:connect(function(v)
@@ -1604,27 +1568,7 @@ function SCRIPT_UGDY79_FAKESCRIPT() -- Aimbot.Scripts
 		                table.insert(npcs, v.Parent)
 		            end
 	        end
-			if v:IsA("BasePart") and checkpart(v) and not table.find(noncparts, v) then
-				table.insert(noncparts, v)
-			end
 	    end)
-	
-		workspace.DescendantRemoving:connect(function(v)
-			if v:IsA("BasePart") and checkpart(v) and table.find(noncparts, v) then
-				table.remove(noncparts, table.find(noncparts, v))
-			end
-		end)
-	
-		local function wallcheck(part)
-		    local params = RaycastParams.new()
-		    params.IgnoreWater = true
-		    local chrs = {}
-		    for i,v in pairs(plrs:GetPlayers()) do
-		        table.insert(chrs,v)
-		    end
-		    params.FilterDescendantsInstances = {chrs, part, noncparts}
-		    return workspace:Raycast(lplr.Character.Head.Position, part.Position, params)
-		end
 	
 	    local function gettargetpart(chr)
 	
@@ -1684,14 +1628,12 @@ function SCRIPT_UGDY79_FAKESCRIPT() -- Aimbot.Scripts
 			    	        local pos = math.floor(lplr:DistanceFromCharacter(targpart.Position))
 			    	        local _, onscreen = workspace.CurrentCamera:WorldToScreenPoint(targpart.Position)
 			    	        if onscreen and pos < GameStats.MaxStuds then
-								if not GameStats.AimThroughWalls and not wallcheck(targpart) or GameStats.AimThroughWalls then
-				    	            table1[pos] = v
-				    			    table.insert(table2, pos)
-				        			if table.find(PrioritizedPlrs, v) then
-				        				table.insert(PrioritizedPlrsOnScreen, v)
-				        			end
-								end
-			    		    end
+			    	            table1[pos] = v
+			    			    table.insert(table2, pos)
+			        			if table.find(PrioritizedPlrs, v) then
+			        				table.insert(PrioritizedPlrsOnScreen, v)
+			        			end
+							end
 			        	end
 					end
 	            end
@@ -1747,7 +1689,7 @@ function SCRIPT_UGDY79_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","Added wall checking in game stats, on by default.")
+		sendnotif("Aimbot Update","nevermind")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
@@ -1903,4 +1845,4 @@ function SCRIPT_UGDY79_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_UGDY79_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_TMHD82_FAKESCRIPT))
