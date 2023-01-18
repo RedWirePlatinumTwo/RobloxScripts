@@ -1015,7 +1015,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_HJII69_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_TOQZ82_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1354,16 +1354,16 @@ function SCRIPT_HJII69_FAKESCRIPT() -- Aimbot.Scripts
 	
 				return wl
 			end
+			if GameStats.OwnTeamWhitelisted then
 	
-			local validteam, teamname = pcall(function()
-				return plr.Team.Name
-			end)
+				local validteam, teamname = pcall(function()
+					return plr.Team.Name
+				end)
 	
-			if validteam then
-				if GameStats.OwnTeamWhitelisted then
+			    if validteam then
 					return plr.Team ~= lplr.Team and not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
 				else
-					return not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
+					return not table.find(WhitelistedPlrs, plr) and plr.Team ~= lplr.Team
 			    end
 			else
 				return not table.find(WhitelistedPlrs, plr)
@@ -1900,4 +1900,4 @@ function SCRIPT_HJII69_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_HJII69_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_TOQZ82_FAKESCRIPT))
