@@ -268,7 +268,8 @@ end
 getgenv().LogFunctions = true
 LoggedFunctions = {}
 
-getgenv().FunctionLogger = function(funcparent, funcname)
+getgenv().FunctionLogger = function(funcparent, funcname, customfname)
+if not customfname then customfname = funcname end
 	if funcparent[funcname] == FunctionLogger or funcparent[funcname] == print or funcparent[funcname] == getrenv().print then error("No.") end
 		local oldfunc = funcparent[funcname]
 		if typeof(oldfunc) ~= "function" then error("function expected, got "..typeof(oldfunc)) end
@@ -288,7 +289,7 @@ getgenv().FunctionLogger = function(funcparent, funcname)
 			end
 			
 			local args = {...}
-			local str = "Function "..funcname.." was called!"
+			local str = "Function "..customfname.." was called!"
 			if getcallingscript() ~= nil then
 				str = str.."\nCalling script: "..GetFullName(getcallingscript())
 			else
