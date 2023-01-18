@@ -1331,7 +1331,7 @@ function SCRIPT_JZWM71_FAKESCRIPT() -- Aimbot.Scripts
 			    if validteam then
 					return plr.Team ~= lplr.Team or not lplr.Team and not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
 				else
-					return plr.Team ~= lplr.Team or not lplr.Team and table.find(WhitelistedPlrs, plr)
+					return plr.Team ~= lplr.Team or not lplr.Team and not table.find(WhitelistedPlrs, plr)
 			    end
 			else
 				return not table.find(WhitelistedPlrs, plr)
