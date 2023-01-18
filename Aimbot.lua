@@ -1015,7 +1015,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_TOQZ82_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_UGDY79_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1677,20 +1677,23 @@ function SCRIPT_TOQZ82_FAKESCRIPT() -- Aimbot.Scripts
 			    local PrioritizedPlrsOnScreen = {}
 	
 	            local function addchr(v)
-		    		if v:FindFirstChildOfClass("Humanoid") and v:FindFirstChildOfClass("Humanoid").Health ~= 0 and IsNotWhitelisted(v) then
-						local targpart = gettargetpart(v)
-		    	        local pos = math.floor(lplr:DistanceFromCharacter(targpart.Position))
-		    	        local _, onscreen = workspace.CurrentCamera:WorldToScreenPoint(targpart.Position)
-		    	        if onscreen and pos < GameStats.MaxStuds then
-							if not GameStats.AimThroughWalls and not wallcheck(targpart) or GameStats.AimThroughWalls then
-			    	            table1[pos] = v
-			    			    table.insert(table2, pos)
-			        			if table.find(PrioritizedPlrs, v) then
-			        				table.insert(PrioritizedPlrsOnScreen, v)
-			        			end
-							end
-		    		    end
-		        	end
+				local player = plrs:GetPlayerFromCharacter(v)
+					if player and IsNotWhitelisted(player) or not player then
+			    		if v:FindFirstChildOfClass("Humanoid") and v:FindFirstChildOfClass("Humanoid").Health ~= 0 then
+							local targpart = gettargetpart(v)
+			    	        local pos = math.floor(lplr:DistanceFromCharacter(targpart.Position))
+			    	        local _, onscreen = workspace.CurrentCamera:WorldToScreenPoint(targpart.Position)
+			    	        if onscreen and pos < GameStats.MaxStuds then
+								if not GameStats.AimThroughWalls and not wallcheck(targpart) or GameStats.AimThroughWalls then
+				    	            table1[pos] = v
+				    			    table.insert(table2, pos)
+				        			if table.find(PrioritizedPlrs, v) then
+				        				table.insert(PrioritizedPlrsOnScreen, v)
+				        			end
+								end
+			    		    end
+			        	end
+					end
 	            end
 	            
 	            if GameStats.TargetNPCs then
@@ -1900,4 +1903,4 @@ function SCRIPT_TOQZ82_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_TOQZ82_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_UGDY79_FAKESCRIPT))
