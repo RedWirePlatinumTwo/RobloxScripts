@@ -1331,7 +1331,7 @@ function SCRIPT_PAKY89_FAKESCRIPT() -- Aimbot.Scripts
 					if GameStats.OwnTeamWhitelisted then
 						return plr.Team ~= lplr.Team or not lplr.Team and not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
 					else
-						return plr.Team ~= lplr.Team or not lplr.Team and not table.find(WhitelistedPlrs, plr)
+						return not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
 			    	end
 				else
 					return not table.find(WhitelistedPlrs, plr)
