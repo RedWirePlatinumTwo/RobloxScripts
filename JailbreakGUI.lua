@@ -31,10 +31,6 @@ local Warning = Instance.new("TextLabel")
 local Yes = Instance.new("TextButton")
 local No = Instance.new("TextButton")
 local WarningIcon = Instance.new("ImageLabel")
-local AirdropESPFrame = Instance.new("Frame")
-local bguis = Instance.new("TextButton")
-local pointers = Instance.new("TextButton")
-local hide = Instance.new("TextButton")
 --Properties:
 JailbreakGUI.Name = "JailbreakGUI"
 JailbreakGUI.Parent = game.CoreGui
@@ -51,8 +47,8 @@ speed.Name = "speed"
 speed.Parent = MainFrame
 speed.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 speed.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-speed.Position = UDim2.new(0.016869586, 0, 0.142545462, 0)
-speed.Size = UDim2.new(0, 172, 0, 46)
+speed.Position = UDim2.new(0.0169972964, 0, 0.14200002, 0)
+speed.Size = UDim2.new(0, 165, 0, 50)
 speed.ZIndex = 33
 speed.Font = Enum.Font.SourceSansBold
 speed.Text = "Speedhack"
@@ -67,13 +63,12 @@ Title.BackgroundColor3 = Color3.new(1, 1, 1)
 Title.BackgroundTransparency = 1
 Title.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 Title.LayoutOrder = 1
-Title.Position = UDim2.new(0.0286232401, 0, -0.00324662938, 0)
-Title.Size = UDim2.new(0, 331, 0, 45)
+Title.Position = UDim2.new(0.0169972964, 0, 0, 0)
+Title.Size = UDim2.new(0, 335, 0, 43)
 Title.Font = Enum.Font.SourceSansBold
 Title.Text = "RedWire's Jailbreak GUI"
 Title.TextColor3 = Color3.new(1, 1, 1)
-Title.TextScaled = true
-Title.TextSize = 14
+Title.TextSize = 32
 Title.TextStrokeColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 Title.TextWrapped = true
 
@@ -81,8 +76,8 @@ Speednum.Name = "Speednum"
 Speednum.Parent = MainFrame
 Speednum.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 Speednum.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Speednum.Position = UDim2.new(0.0170000009, 0, 0.143000007, 0)
-Speednum.Size = UDim2.new(0, 172, 0, 46)
+Speednum.Position = UDim2.new(0.0169972964, 0, 0.14200002, 0)
+Speednum.Size = UDim2.new(0, 165, 0, 50)
 Speednum.Visible = false
 Speednum.Font = Enum.Font.SourceSansBold
 Speednum.PlaceholderColor3 = Color3.new(0.333333, 1, 0.498039)
@@ -110,7 +105,7 @@ disablelasers.Size = UDim2.new(0, 106, 0, 52)
 disablelasers.Font = Enum.Font.SourceSansBold
 disablelasers.Text = "Disable Lasers"
 disablelasers.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-disablelasers.TextSize = 18
+disablelasers.TextSize = 20
 disablelasers.TextStrokeTransparency = 0
 disablelasers.TextWrapped = true
 
@@ -123,7 +118,7 @@ holdebypass.Size = UDim2.new(0, 106, 0, 52)
 holdebypass.Font = Enum.Font.SourceSansBold
 holdebypass.Text = "Hold E Bypass"
 holdebypass.TextColor3 = Color3.new(0.666667, 0.666667, 0)
-holdebypass.TextSize = 18
+holdebypass.TextSize = 20
 holdebypass.TextStrokeTransparency = 0
 holdebypass.TextWrapped = true
 
@@ -136,7 +131,7 @@ aimbot.Size = UDim2.new(0, 110, 0, 50)
 aimbot.Font = Enum.Font.SourceSansBold
 aimbot.Text = "Aimbot"
 aimbot.TextColor3 = Color3.new(0, 1, 0)
-aimbot.TextSize = 18
+aimbot.TextSize = 20
 aimbot.TextStrokeTransparency = 0
 aimbot.TextWrapped = true
 
@@ -148,14 +143,14 @@ Airdrop.Position = UDim2.new(0, 0, 0.451666713, 0)
 Airdrop.Size = UDim2.new(0, 106, 0, 51)
 Airdrop.ZIndex = -222
 Airdrop.Font = Enum.Font.SourceSansBold
-Airdrop.Text = "Airdrop ESP"
+Airdrop.Text = "Airdrop ESP Toggle"
 Airdrop.TextColor3 = Color3.new(0.666667, 0.333333, 1)
-Airdrop.TextSize = 18
+Airdrop.TextSize = 20
 Airdrop.TextStrokeTransparency = 0
 Airdrop.TextWrapped = true
 
 UIGridLayout.Parent = ScrollingFrame
-UIGridLayout.CellSize = UDim2.new(0, 110, 0, 50)
+UIGridLayout.CellSize = UDim2.new(0, 165, 0, 50)
 
 modguns.Name = "modguns"
 modguns.Parent = ScrollingFrame
@@ -167,7 +162,7 @@ modguns.ZIndex = -99
 modguns.Font = Enum.Font.SourceSansBold
 modguns.Text = "Mod guns"
 modguns.TextColor3 = Color3.new(0.666667, 0, 0)
-modguns.TextSize = 18
+modguns.TextSize = 20
 modguns.TextStrokeTransparency = 0
 modguns.TextWrapped = true
 
@@ -181,7 +176,7 @@ GravToggle.ZIndex = 0
 GravToggle.Font = Enum.Font.SourceSansBold
 GravToggle.Text = "Gravity Toggle (196)"
 GravToggle.TextColor3 = Color3.new(1, 1, 1)
-GravToggle.TextSize = 18
+GravToggle.TextSize = 20
 GravToggle.TextStrokeTransparency = 0
 GravToggle.TextWrapped = true
 
@@ -195,7 +190,7 @@ forcedaytime.ZIndex = 0
 forcedaytime.Font = Enum.Font.SourceSansBold
 forcedaytime.Text = "Force Daytime"
 forcedaytime.TextColor3 = Color3.new(1, 1, 0.498039)
-forcedaytime.TextSize = 18
+forcedaytime.TextSize = 20
 forcedaytime.TextStrokeTransparency = 0
 forcedaytime.TextWrapped = true
 
@@ -207,7 +202,7 @@ removeragdoll.Size = UDim2.new(0, 115, 0, 47)
 removeragdoll.Font = Enum.Font.SourceSansBold
 removeragdoll.Text = "Remove Ragdoll"
 removeragdoll.TextColor3 = Color3.new(1, 0.333333, 0.498039)
-removeragdoll.TextSize = 18
+removeragdoll.TextSize = 20
 removeragdoll.TextStrokeTransparency = 0
 removeragdoll.TextWrapped = true
 
@@ -220,7 +215,7 @@ RobberyNotifier.Size = UDim2.new(0, 117, 0, 47)
 RobberyNotifier.Font = Enum.Font.SourceSansBold
 RobberyNotifier.Text = "Robbery Notifier"
 RobberyNotifier.TextColor3 = Color3.new(0, 0.666667, 0)
-RobberyNotifier.TextSize = 18
+RobberyNotifier.TextSize = 20
 RobberyNotifier.TextStrokeTransparency = 0
 RobberyNotifier.TextWrapped = true
 
@@ -233,7 +228,7 @@ infiniteyeet.Size = UDim2.new(0, 117, 0, 47)
 infiniteyeet.Font = Enum.Font.SourceSansBold
 infiniteyeet.Text = "Inf Yield"
 infiniteyeet.TextColor3 = Color3.new(0.333333, 0.333333, 0.498039)
-infiniteyeet.TextSize = 18
+infiniteyeet.TextSize = 20
 infiniteyeet.TextStrokeTransparency = 0
 infiniteyeet.TextWrapped = true
 
@@ -246,7 +241,7 @@ gunshoptpbutton.Size = UDim2.new(0, 117, 0, 47)
 gunshoptpbutton.Font = Enum.Font.SourceSansBold
 gunshoptpbutton.Text = "Gunshop TP Enabled: "
 gunshoptpbutton.TextColor3 = Color3.new(1, 0.666667, 0)
-gunshoptpbutton.TextSize = 18
+gunshoptpbutton.TextSize = 20
 gunshoptpbutton.TextStrokeTransparency = 0
 gunshoptpbutton.TextWrapped = true
 
@@ -260,7 +255,7 @@ keybypass.ZIndex = 0
 keybypass.Font = Enum.Font.SourceSansBold
 keybypass.Text = "Keycard Bypass"
 keybypass.TextColor3 = Color3.new(0, 0.666667, 1)
-keybypass.TextSize = 18
+keybypass.TextSize = 20
 keybypass.TextStrokeTransparency = 0
 keybypass.TextWrapped = true
 
@@ -272,9 +267,9 @@ getcode.Position = UDim2.new(0, 0, 0.523438752, 0)
 getcode.Size = UDim2.new(0, 116, 0, 47)
 getcode.ZIndex = 0
 getcode.Font = Enum.Font.SourceSansBold
-getcode.Text = "Get Casino code"
+getcode.Text = "(attempt to) Get Casino code"
 getcode.TextColor3 = Color3.new(0, 0.666667, 0.498039)
-getcode.TextSize = 18
+getcode.TextSize = 20
 getcode.TextStrokeTransparency = 0
 getcode.TextWrapped = true
 
@@ -288,7 +283,7 @@ deleteradio.ZIndex = -1
 deleteradio.Font = Enum.Font.SourceSansBold
 deleteradio.Text = "Delete Radio Gui (its stupid)"
 deleteradio.TextColor3 = Color3.new(1, 0.666667, 1)
-deleteradio.TextSize = 18
+deleteradio.TextSize = 20
 deleteradio.TextStrokeTransparency = 0
 deleteradio.TextWrapped = true
 
@@ -302,7 +297,7 @@ respawn.ZIndex = -1
 respawn.Font = Enum.Font.SourceSansBold
 respawn.Text = "Respawn"
 respawn.TextColor3 = Color3.new(1, 0, 0)
-respawn.TextSize = 18
+respawn.TextSize = 20
 respawn.TextStrokeTransparency = 0
 respawn.TextWrapped = true
 
@@ -316,7 +311,7 @@ lockonexit.ZIndex = -1
 lockonexit.Font = Enum.Font.SourceSansBold
 lockonexit.Text = "Lock on exit + Unlock on enter"
 lockonexit.TextColor3 = Color3.new(0.333333, 1, 0.498039)
-lockonexit.TextSize = 18
+lockonexit.TextSize = 20
 lockonexit.TextStrokeTransparency = 0
 lockonexit.TextWrapped = true
 
@@ -324,8 +319,8 @@ flyhack.Name = "flyhack"
 flyhack.Parent = MainFrame
 flyhack.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 flyhack.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-flyhack.Position = UDim2.new(0.509391129, 0, 0.142545477, 0)
-flyhack.Size = UDim2.new(0, 172, 0, 46)
+flyhack.Position = UDim2.new(0.478953809, 0, 0.14200002, 0)
+flyhack.Size = UDim2.new(0, 165, 0, 50)
 flyhack.Font = Enum.Font.SourceSansBold
 flyhack.Text = "Fly hack (Left CTRL + F)"
 flyhack.TextColor3 = Color3.new(0.333333, 1, 1)
@@ -337,8 +332,8 @@ flyhacknum.Name = "flyhacknum"
 flyhacknum.Parent = MainFrame
 flyhacknum.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 flyhacknum.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-flyhacknum.Position = UDim2.new(0.509000003, 0, 0.139753267, 0)
-flyhacknum.Size = UDim2.new(0, 172, 0, 46)
+flyhacknum.Position = UDim2.new(0.479000002, 0, 0.142000005, 0)
+flyhacknum.Size = UDim2.new(0, 165, 0, 50)
 flyhacknum.Visible = false
 flyhacknum.Font = Enum.Font.SourceSansBold
 flyhacknum.PlaceholderColor3 = Color3.new(0.333333, 1, 1)
@@ -352,7 +347,7 @@ Confirmation.Name = "Confirmation"
 Confirmation.Parent = JailbreakGUI
 Confirmation.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 Confirmation.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Confirmation.Position = UDim2.new(0.361629754, 0, 0.0886246264, 0)
+Confirmation.Position = UDim2.new(0.459546417, 0, 0.114550553, 0)
 Confirmation.Size = UDim2.new(0, 318, 0, 236)
 Confirmation.Visible = false
 
@@ -362,13 +357,12 @@ Warning.BackgroundColor3 = Color3.new(1, 1, 1)
 Warning.BackgroundTransparency = 1
 Warning.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 Warning.BorderSizePixel = 0
-Warning.Position = UDim2.new(0, 0, 0.169345021, 0)
-Warning.Size = UDim2.new(0, 318, 0, 102)
+Warning.Position = UDim2.new(0.0251572318, 0, 0.169345021, 0)
+Warning.Size = UDim2.new(0, 301, 0, 102)
 Warning.Font = Enum.Font.SourceSansBold
 Warning.Text = "Warning: If your exploit cannot use 'mousemoverel', the aimbot will not work. Proceed?"
 Warning.TextColor3 = Color3.new(0.996078, 0.858824, 0.211765)
-Warning.TextScaled = true
-Warning.TextSize = 14
+Warning.TextSize = 24
 Warning.TextStrokeColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 Warning.TextWrapped = true
 
@@ -381,8 +375,7 @@ Yes.Size = UDim2.new(0, 110, 0, 50)
 Yes.Font = Enum.Font.SourceSansBold
 Yes.Text = "Yes"
 Yes.TextColor3 = Color3.new(0, 0.882353, 0)
-Yes.TextScaled = true
-Yes.TextSize = 14
+Yes.TextSize = 40
 Yes.TextWrapped = true
 
 No.Name = "No"
@@ -394,66 +387,18 @@ No.Size = UDim2.new(0, 110, 0, 50)
 No.Font = Enum.Font.SourceSansBold
 No.Text = "No"
 No.TextColor3 = Color3.new(1, 0, 0)
-No.TextScaled = true
-No.TextSize = 14
+No.TextSize = 40
 No.TextWrapped = true
 
 WarningIcon.Name = "WarningIcon"
 WarningIcon.Parent = Confirmation
 WarningIcon.BackgroundColor3 = Color3.new(1, 1, 1)
 WarningIcon.BackgroundTransparency = 1
-WarningIcon.Position = UDim2.new(0.42764321, 0, 0.00847457722, 0)
+WarningIcon.Position = UDim2.new(0.424498558, 0, 0.0381355919, 0)
 WarningIcon.Size = UDim2.new(0, 45, 0, 45)
 WarningIcon.Image = "http://www.roblox.com/asset/?id=3369561948"
-
-AirdropESPFrame.Name = "AirdropESPFrame"
-AirdropESPFrame.Parent = JailbreakGUI
-AirdropESPFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-AirdropESPFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-AirdropESPFrame.Position = UDim2.new(0.510416687, 0, 0.219444454, 0)
-AirdropESPFrame.Size = UDim2.new(0, 399, 0, 152)
-AirdropESPFrame.Visible = false
-
-bguis.Name = "bguis"
-bguis.Parent = AirdropESPFrame
-bguis.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-bguis.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-bguis.Position = UDim2.new(0.0836998522, 0, 0.0918822065, 0)
-bguis.Size = UDim2.new(0, 332, 0, 36)
-bguis.Font = Enum.Font.SourceSansBold
-bguis.Text = "Billboard GUIs: "
-bguis.TextColor3 = Color3.new(1, 1, 1)
-bguis.TextScaled = true
-bguis.TextSize = 14
-bguis.TextWrapped = true
-
-pointers.Name = "pointers"
-pointers.Parent = AirdropESPFrame
-pointers.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-pointers.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-pointers.Position = UDim2.new(0.0836998522, 0, 0.328724325, 0)
-pointers.Size = UDim2.new(0, 332, 0, 36)
-pointers.Font = Enum.Font.SourceSansBold
-pointers.Text = "Pointers: "
-pointers.TextColor3 = Color3.new(1, 1, 1)
-pointers.TextScaled = true
-pointers.TextSize = 14
-pointers.TextWrapped = true
-
-hide.Name = "hide"
-hide.Parent = AirdropESPFrame
-hide.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-hide.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-hide.Position = UDim2.new(0.29422617, 0, 0.762934864, 0)
-hide.Size = UDim2.new(0, 163, 0, 36)
-hide.Font = Enum.Font.SourceSansBold
-hide.Text = "Hide GUI"
-hide.TextColor3 = Color3.new(1, 1, 1)
-hide.TextScaled = true
-hide.TextSize = 14
-hide.TextWrapped = true
 -- Scripts:
-function SCRIPT_STES78_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_ZEDP73_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -462,7 +407,6 @@ function SCRIPT_STES78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	mainframe.UIGridLayout.SortOrder = 0
 	mainframe.ScrollBarImageColor3 = mainframe.Parent.BorderColor3
 	local mframe = mainframe.Parent
-	local airdropframe = script.Parent.AirdropESPFrame
 	
 	if game.PlaceId == 606849621 then
 		local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
@@ -622,13 +566,7 @@ function SCRIPT_STES78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			props.guitext = false
 			props.pointers = false
 	
-			local bguistemplate = airdropframe.bguis.Text
-			local pointerstemplate = airdropframe.pointers.Text
-			airdropframe.bguis.Text = bguistemplate..tostring(props.guitext)
-			airdropframe.pointers.Text = pointerstemplate..tostring(props.pointers)
-	
 			Changed(props, "guitext", function(val)
-				airdropframe.bguis.Text = bguistemplate..tostring(val)
 	
 				for i,v in pairs(workspace:GetChildren()) do
 	
@@ -644,21 +582,6 @@ function SCRIPT_STES78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end)
 			
 			local lines = {}
-			Changed(props, "pointers", function(val)
-				airdropframe.pointers.Text = pointerstemplate..tostring(val)
-			end)
-	
-			airdropframe.bguis.MouseButton1Click:connect(function()
-				props.guitext = not props.guitext
-			end)
-	
-			airdropframe.pointers.MouseButton1Click:connect(function()
-				props.pointers = not props.pointers
-			end)
-	
-			airdropframe.hide.MouseButton1Click:Connect(function()
-				airdropframe.Visible = false
-			end)
 			
 			local function pointer(part)
 				local Line = Drawing.new("Line")
@@ -753,7 +676,13 @@ function SCRIPT_STES78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			workspace.ChildAdded:connect(gui)
 	
 			mainframe.Airdrop.MouseButton1Click:connect(function()
-				airdropframe.Visible = true
+				if not props.pointers then
+					props.pointers = true
+					props.guitext = true
+				else
+					props.pointers = false
+					props.guitext = false
+				end
 			end)
 	
 			local itemconfig = game.ReplicatedStorage.Game.ItemConfig
@@ -1301,4 +1230,4 @@ function SCRIPT_STES78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_STES78_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_ZEDP73_FAKESCRIPT))
