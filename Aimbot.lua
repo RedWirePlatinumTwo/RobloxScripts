@@ -1684,7 +1684,7 @@ function SCRIPT_KPLN80_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","Whitelist Own Team no longer applies to games without teams.")
+		sendnotif("Aimbot Update","Fixed prioritized players not... being prioritized.")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
