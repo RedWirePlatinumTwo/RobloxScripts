@@ -428,7 +428,7 @@ WarningIcon.Position = UDim2.new(0.424498558, 0, 0.0381355919, 0)
 WarningIcon.Size = UDim2.new(0, 45, 0, 45)
 WarningIcon.Image = "http://www.roblox.com/asset/?id=3369561948"
 -- Scripts:
-function SCRIPT_OCOM82_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_ZEHW90_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -437,6 +437,8 @@ function SCRIPT_OCOM82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	mainframe.UIGridLayout.SortOrder = 0
 	mainframe.ScrollBarImageColor3 = mainframe.Parent.BorderColor3
 	local mframe = mainframe.Parent
+	local rstorage = game.ReplicatedStorage
+	local runservice = game["Run Service"]
 	
 	if game.PlaceId == 606849621 then
 		local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
@@ -522,8 +524,8 @@ function SCRIPT_OCOM82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			local plrgui = lplr.PlayerGui
 	
 			local function walcc()
-				Changed(lplr.Character.Humanoid, "WalkSpeed", function(ws)
-					if ws == 0 then
+				runservice.Heartbeat:connect(function()
+					if lplr.Character.Humanoid.WalkSpeed == 0 then
 					    lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
 					end
 				end)
@@ -807,13 +809,7 @@ function SCRIPT_OCOM82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 				local function speedhack()
 	
-					Changed(lplr.Character.Humanoid, "WalkSpeed", function(ws)
-						if ws ~= speeds.walkspeed then
-						    lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
-						end
-					end)
-	
-					lplr.Character.Humanoid.Running:connect(function()
+					runservice.Heartbeat:connect(function()
 						lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
 					end)
 	
@@ -1268,8 +1264,6 @@ function SCRIPT_OCOM82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			local ropefollow = false
 			local selectedvehicle = nil
 			local ropenotif = false
-			local rstorage = game.ReplicatedStorage
-			local runservice = game["Run Service"]
 			local ropetxt = mainframe.ropefollow.Text
 			mainframe.ropefollow.Text = ropetxt.." ("..tostring(ropefollow)..")"
 	
@@ -1315,4 +1309,4 @@ function SCRIPT_OCOM82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_OCOM82_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_ZEHW90_FAKESCRIPT))
