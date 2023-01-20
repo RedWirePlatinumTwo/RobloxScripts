@@ -986,7 +986,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_XYQV76_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_KPLN80_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1651,8 +1651,7 @@ function SCRIPT_XYQV76_FAKESCRIPT() -- Aimbot.Scripts
 				else
 	
 					for pos, chr in pairs(table1) do
-						local plr = plrs:GetPlayerFromCharacter(chr)
-						if not table.find(PrioritizedPlrsOnScreen, plr) then
+						if not table.find(PrioritizedPlrsOnScreen, chr) then
 							table.remove(table2, table.find(table2,pos))
 							table1[pos] = nil
 						end
@@ -1841,4 +1840,4 @@ function SCRIPT_XYQV76_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_XYQV76_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_KPLN80_FAKESCRIPT))
