@@ -24,6 +24,8 @@ local getcode = Instance.new("TextButton")
 local deleteradio = Instance.new("TextButton")
 local respawn = Instance.new("TextButton")
 local lockonexit = Instance.new("TextButton")
+local Tazermod = Instance.new("TextButton")
+local ropefollow = Instance.new("TextButton")
 local flyhack = Instance.new("TextButton")
 local flyhacknum = Instance.new("TextBox")
 local Confirmation = Instance.new("Frame")
@@ -239,7 +241,7 @@ gunshoptpbutton.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 gunshoptpbutton.Position = UDim2.new(0, 0, 0.262000024, 0)
 gunshoptpbutton.Size = UDim2.new(0, 117, 0, 47)
 gunshoptpbutton.Font = Enum.Font.SourceSansBold
-gunshoptpbutton.Text = "Gunshop TP Enabled: "
+gunshoptpbutton.Text = "Gunshop TP"
 gunshoptpbutton.TextColor3 = Color3.new(1, 0.666667, 0)
 gunshoptpbutton.TextSize = 20
 gunshoptpbutton.TextStrokeTransparency = 0
@@ -314,6 +316,34 @@ lockonexit.TextColor3 = Color3.new(0.333333, 1, 0.498039)
 lockonexit.TextSize = 20
 lockonexit.TextStrokeTransparency = 0
 lockonexit.TextWrapped = true
+
+Tazermod.Name = "Tazermod"
+Tazermod.Parent = ScrollingFrame
+Tazermod.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+Tazermod.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+Tazermod.Position = UDim2.new(0, 0, 0.451666713, 0)
+Tazermod.Size = UDim2.new(0, 106, 0, 51)
+Tazermod.ZIndex = -222
+Tazermod.Font = Enum.Font.SourceSansBold
+Tazermod.Text = "Tazer mod"
+Tazermod.TextColor3 = Color3.new(1, 1, 0)
+Tazermod.TextSize = 20
+Tazermod.TextStrokeTransparency = 0
+Tazermod.TextWrapped = true
+
+ropefollow.Name = "ropefollow"
+ropefollow.Parent = ScrollingFrame
+ropefollow.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+ropefollow.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+ropefollow.Position = UDim2.new(0, 0, 0.451666713, 0)
+ropefollow.Size = UDim2.new(0, 106, 0, 51)
+ropefollow.ZIndex = -222
+ropefollow.Font = Enum.Font.SourceSansBold
+ropefollow.Text = "Rope-Follow-Vehicle"
+ropefollow.TextColor3 = Color3.new(0.666667, 1, 0)
+ropefollow.TextSize = 20
+ropefollow.TextStrokeTransparency = 0
+ropefollow.TextWrapped = true
 
 flyhack.Name = "flyhack"
 flyhack.Parent = MainFrame
@@ -398,7 +428,7 @@ WarningIcon.Position = UDim2.new(0.424498558, 0, 0.0381355919, 0)
 WarningIcon.Size = UDim2.new(0, 45, 0, 45)
 WarningIcon.Image = "http://www.roblox.com/asset/?id=3369561948"
 -- Scripts:
-function SCRIPT_ZEDP73_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_OCOM82_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -420,6 +450,8 @@ function SCRIPT_ZEDP73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		end
 		if not _G.RedsJBGUI then
 			_G.RedsJBGUI = true
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
+	
 			for i,v in pairs(script.Parent:GetChildren()) do
 				if v.ClassName == "Frame" then
 					v.Active = true
@@ -427,54 +459,37 @@ function SCRIPT_ZEDP73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 			end
 	
-			local function makeattachment(obj)
-				if not obj:FindFirstChild("Attachment") then
-				Instance.new("Attachment", obj)
-				obj:WaitForChild("Attachment")
-				end
-				return obj.Attachment
+	
+			local thread = function(f)
+	
+				return coroutine.resume(coroutine.create(function()
+					return f()
+				end))
+	
 			end
+	
 	
 			local Changed = function(part, PropertyName, func)
 			    local current = part[PropertyName]
-	
-			    coroutine.resume(coroutine.create(function()
+				local elapsedTime = 0
+				
+			    thread(function()
 			        while true do
-			            repeat task.wait() until part[PropertyName] ~= current
-	
-						coroutine.resume(coroutine.create(function()
-			            	func(part[PropertyName], current, part)
-						end))
-	
-			            current = part[PropertyName]
-			    	end
-			    end))
-	
-			end
-	
-			local GetFamily = function(ins, reverseorder)
-				local Pathway = {}
-	
-				local function _GetFamily(v)
-					if v.Parent ~= nil then
-						if reverseorder then
-							table.insert(Pathway, v)
-						else
-					      	table.insert(Pathway, 1, v)
-						end
-					 _GetFamily(v.Parent)
-					 else
-					 	if reverseorder then
-							table.insert(Pathway, v)
-						else
-					       	table.insert(Pathway, 1, v)
-						end
+			            repeat elapsedTime = elapsedTime + task.wait() until part[PropertyName] ~= current
+						
+						local v,v2 = thread(function()
+							return func(part[PropertyName], current, elapsedTime)
+						end)
+						
+						if v2 == "stop" then break end
+						elapsedTime = 0
+						current = part[PropertyName]
 					end
-				end
-	
-				_GetFamily(ins)
-				return Pathway
+				end)
+				
 			end
+	
+	
 			local speeds = {}
 			speeds.walkspeed = 30
 			speeds.flyspeed = 300
@@ -490,12 +505,12 @@ function SCRIPT_ZEDP73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Fixed pointer issues with airdrops.")
+			notify("Added a Tazer mod and rope follow button!")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
-				plr:GetPropertyChangedSignal("Visible"):connect(function()
-					if plr.Visible == false then
+				Changed(plr, "Visible", function(v)
+					if not v then
 						plr.Visible = true
 					end
 				end)
@@ -507,8 +522,8 @@ function SCRIPT_ZEDP73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			local plrgui = lplr.PlayerGui
 	
 			local function walcc()
-				lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(function()
-					if lplr.Character.Humanoid.WalkSpeed == 0 then
+				Changed(lplr.Character.Humanoid, "WalkSpeed", function(ws)
+					if ws == 0 then
 					    lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
 					end
 				end)
@@ -521,8 +536,8 @@ function SCRIPT_ZEDP73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				walcc()
 			end)
 	
-			lplr:GetPropertyChangedSignal("Team"):connect(function()
-				if lplr.Team == game.Teams.Criminal then
+			Changed(lplr, "Team", function(team)
+				if team == game.Teams.Criminal then
 					local fire = fireclickdetector
 					if fire ~= nil then
 						fire(workspace.ClothingRacks.ClothingRack.Hitbox.ClickDetector)
@@ -565,23 +580,16 @@ function SCRIPT_ZEDP73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			props = {}
 			props.guitext = false
 			props.pointers = false
+			local lines = {}
+			local bbguis = {}
 	
 			Changed(props, "guitext", function(val)
 	
-				for i,v in pairs(workspace:GetChildren()) do
-	
-					local success, returnval = pcall(function()
-						return v.Root.BillboardGui.TextButton
-					end)
-	
-					if success then
-						returnval.Visible = val
-					end
+				for i,v in pairs(bbguis) do
+					v.TextButton.Visible = val
 				end
 	
 			end)
-			
-			local lines = {}
 			
 			local function pointer(part)
 				local Line = Drawing.new("Line")
@@ -621,6 +629,13 @@ function SCRIPT_ZEDP73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				if child.Name == "Drop" then
 					local Airdrop = child:WaitForChild("Root")
 					local BillboardGui = Instance.new("BillboardGui")
+					table.insert(bbguis, BillboardGui)
+	
+					coroutine.resume(coroutine.create(function()
+						repeat task.wait() until GetFamily(child)[1] ~= game
+						table.remove(bbguis, table.find(bbguis, BillboardGui))
+					end))
+	
 					local TextButton = Instance.new("TextButton")
 					--Properties:
 					BillboardGui.Parent = Airdrop
@@ -674,6 +689,8 @@ function SCRIPT_ZEDP73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end
 	
 			workspace.ChildAdded:connect(gui)
+			local airdroptxt = mainframe.Airdrop.Text
+			mainframe.Airdrop.Text = airdroptxt.." ("..tostring(props.pointers)..")"
 	
 			mainframe.Airdrop.MouseButton1Click:connect(function()
 				if not props.pointers then
@@ -683,6 +700,7 @@ function SCRIPT_ZEDP73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					props.pointers = false
 					props.guitext = false
 				end
+				mainframe.Airdrop.Text = airdroptxt.." ("..tostring(props.pointers)..")"
 			end)
 	
 			local itemconfig = game.ReplicatedStorage.Game.ItemConfig
@@ -767,9 +785,10 @@ function SCRIPT_ZEDP73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 			mainframe.forcedaytime.MouseButton1Click:connect(function()
 				game.Lighting.ClockTime = 12
-				game.Lighting:GetPropertyChangedSignal("ClockTime"):connect(function()
-				game.Lighting.ClockTime = 12
-			end)
+				
+				Changed(game.Lighting, "ClockTime", function()
+					game.Lighting.ClockTime = 12
+				end)
 	
 			end)
 	
@@ -788,8 +807,8 @@ function SCRIPT_ZEDP73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 				local function speedhack()
 	
-					lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(function()
-						if lplr.Character.Humanoid.WalkSpeed ~= speeds.walkspeed then
+					Changed(lplr.Character.Humanoid, "WalkSpeed", function(ws)
+						if ws ~= speeds.walkspeed then
 						    lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
 						end
 					end)
@@ -889,8 +908,8 @@ function SCRIPT_ZEDP73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						notify("The bank is open for robbery.")
 					end)
 	
-					smoke:GetPropertyChangedSignal("Enabled"):connect(function()
-						if smoke.Enabled == true then
+					Changed(smoke, "Enabled", function(en)
+						if en == true then
 							notify("The powerplant is open for robbery.")
 						end
 					end)
@@ -929,8 +948,6 @@ function SCRIPT_ZEDP73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 			end)
 	
-			mainframe.gunshoptpbutton.Text = "Gunshop TP enabled: "..tostring(gunshoptp)
-	
 			game.RunService.Heartbeat:connect(function()
 	
 				local hrpvalid, hrp = pcall(function()
@@ -942,13 +959,15 @@ function SCRIPT_ZEDP73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 			end)
 	
+			mainframe.gunshoptpbutton.Text = "Gunshop TP ("..tostring(gunshoptp)..")"
+	
 			mainframe.gunshoptpbutton.MouseButton1Click:connect(function()
 				if gunshoptp then
 					gunshoptp = false
 				else
 					gunshoptp = true
 				end
-				mainframe.gunshoptpbutton.Text = "Gunshop TP enabled: "..tostring(gunshoptp)
+				mainframe.gunshoptpbutton.Text = "Gunshop TP ("..tostring(gunshoptp)..")"
 			end)
 	
 			local enablefly = false
@@ -1154,9 +1173,20 @@ function SCRIPT_ZEDP73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end)
 	
 			end)
-	
+			local respawnconfirm = false
+			local respawntxt = mainframe.respawn.Text
+			
 			mainframe.respawn.MouseButton1Click:connect(function()
-				lplr.Character.Humanoid.Health = 0
+				if respawnconfirm then
+					lplr.Character.Humanoid.Health = 0
+				end
+				if not respawnconfirm then
+					respawnconfirm = true
+					mainframe.respawn.Text = respawntxt.." (you sure?)"
+					wait(1)
+					respawnconfirm = false
+					mainframe.respawn.Text = respawntxt
+				end
 			end)
 	
 			local delradio = false
@@ -1214,7 +1244,62 @@ function SCRIPT_ZEDP73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					notify("Vehicle auto-lock/unlock enabled!")
 				end
 			end)
+			
+			local tazermod = false
+				
+			mainframe.Tazermod.MouseButton1Click:connect(function()
+				if not tazermod then
+					local function hasval(t, child)
+					    return pcall(function()
+					        return t[child]
+					    end)
+					end
 	
+					for i,v in pairs(getreg()) do
+					    if type(v) == "table" and hasval(v, "ReloadTime") and hasval(v, "ReloadTimeHit") then
+					        v.ReloadTime = 0
+					        v.ReloadTimeHit = 0
+					    end
+					end
+					notify("Funni tazer")
+				end
+			end)
+	
+			local ropefollow = false
+			local selectedvehicle = nil
+			local ropenotif = false
+			local rstorage = game.ReplicatedStorage
+			local runservice = game["Run Service"]
+			local ropetxt = mainframe.ropefollow.Text
+			mainframe.ropefollow.Text = ropetxt.." ("..tostring(ropefollow)..")"
+	
+			mainframe.ropefollow.MouseButton1Click:connect(function()
+		        ropefollow = not ropefollow
+				mainframe.ropefollow.Text = ropetxt.." ("..tostring(ropefollow)..")"
+		        if not ropefollow then
+		            selectedvehicle = nil
+		        end
+				if not ropenotif then
+					ropenotif = true
+					notify("Click on a vehicle to follow it with a rope.")
+				end
+			end)
+	
+			runservice.Heartbeat:connect(function()
+			    local model = require(rstorage.Game.Vehicle).GetLocalVehicleModel()
+			    if model and ropefollow and selectedvehicle and selectedvehicle ~= model then
+			        if pcall(function() return model.Preset.RopePull end) then
+			            model.Preset.RopePull.CFrame = selectedvehicle.Engine.CFrame
+			        end
+			    end
+			end)
+	
+			mouse.Button1Down:connect(function()
+			    local t = mouse.Target
+			    if t and ropefollow and GetFamily(t)[3] == workspace.Vehicles then
+			        selectedvehicle = GetFamily(t)[4]
+			    end
+			end)
 		else
 			notify("Deleting clone gui")
 			wait(0.5)
@@ -1230,4 +1315,4 @@ function SCRIPT_ZEDP73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_ZEDP73_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_OCOM82_FAKESCRIPT))
