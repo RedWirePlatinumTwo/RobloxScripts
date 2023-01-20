@@ -986,7 +986,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_UIKQ85_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_XYQV76_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1626,7 +1626,7 @@ function SCRIPT_UIKQ85_FAKESCRIPT() -- Aimbot.Scripts
 			    	        if onscreen and pos < GameStats.MaxStuds then
 			    	            table1[pos] = v
 			    			    table.insert(table2, pos)
-			        			if table.find(PrioritizedPlrs, v) then
+			        			if table.find(PrioritizedPlrs, plrs:GetPlayerFromCharacter(v)) then
 			        				table.insert(PrioritizedPlrsOnScreen, v)
 			        			end
 							end
@@ -1841,4 +1841,4 @@ function SCRIPT_UIKQ85_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_UIKQ85_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_XYQV76_FAKESCRIPT))
