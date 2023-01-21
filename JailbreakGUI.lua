@@ -428,7 +428,7 @@ WarningIcon.Position = UDim2.new(0.424498558, 0, 0.0381355919, 0)
 WarningIcon.Size = UDim2.new(0, 45, 0, 45)
 WarningIcon.Image = "http://www.roblox.com/asset/?id=3369561948"
 -- Scripts:
-function SCRIPT_ZEHW90_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_DBXB87_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -525,9 +525,13 @@ function SCRIPT_ZEHW90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 			local function walcc()
 				runservice.RenderStepped:connect(function()
-					if lplr.Character.Humanoid.WalkSpeed == 0 then
-					    lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
-					end
+					
+					pcall(function()
+						if lplr.Character.Humanoid.WalkSpeed == 0 then
+						    lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
+						end
+					end)
+					
 				end)
 			end
 	
@@ -551,7 +555,7 @@ function SCRIPT_ZEHW90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			local gunshoptp = false
 			local moduleui = require(game.ReplicatedStorage.Module.UI)
 	
-			game.RunService.RenderStepped:connect(function()
+			runservice.RenderStepped:connect(function()
 	
 				for i,a in pairs(moduleui.CircleAction.Specs) do
 					if a.Duration ~= false and HoldEBypass and a.Name ~= "Rob" and a.Name ~= "Open Crate" then
@@ -600,7 +604,7 @@ function SCRIPT_ZEHW90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				Line.Thickness = 2
 				Line.Transparency = 1
 	
-				local pointfunction = game.RunService.Heartbeat:connect(function()
+				local pointfunction = runservice.Heartbeat:connect(function()
 					pcall(function()
 						local v = workspace.CurrentCamera:WorldToScreenPoint(lplr.Character.Humanoid.RootPart.Position)
 						local v2, onscreen = workspace.CurrentCamera:WorldToScreenPoint(part.Position)
@@ -678,7 +682,7 @@ function SCRIPT_ZEHW90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					return n3
 				end
 	
-				game.RunService.RenderStepped:connect(function()
+				runservice.RenderStepped:connect(function()
 					TextButton.Text = "Airdrop | Distance: "..FormatNumber(math.floor(lplr:DistanceFromCharacter(Airdrop.Position)))
 				end)
 	
@@ -810,7 +814,9 @@ function SCRIPT_ZEHW90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				local function speedhack()
 	
 					runservice.RenderStepped:connect(function()
-						lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
+						pcall(function()
+							lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
+						end)
 					end)
 	
 				end
@@ -944,7 +950,7 @@ function SCRIPT_ZEHW90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 			end)
 	
-			game.RunService.Heartbeat:connect(function()
+			runservice.Heartbeat:connect(function()
 	
 				local hrpvalid, hrp = pcall(function()
 					return lplr.Character.Humanoid.RootPart
@@ -1022,7 +1028,7 @@ function SCRIPT_ZEHW90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					local keys = {}
 					local pos = Vector3.new()
 	
-					game.RunService.Heartbeat:connect(function()
+					runservice.Heartbeat:connect(function()
 	
 						pcall(function()
 							local hrp
@@ -1252,10 +1258,15 @@ function SCRIPT_ZEHW90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					end
 	
 					for i,v in pairs(getreg()) do
-					    if type(v) == "table" and hasval(v, "ReloadTime") and hasval(v, "ReloadTimeHit") then
-					        v.ReloadTime = 0
-					        v.ReloadTimeHit = 0
-					    end
+						if type(v) == "table" then
+							if isreadonly and setreadonly and isreadonly(v) then
+								setreadonly(v, false)
+							end
+							if hasval(v, "ReloadTime") and hasval(v, "ReloadTimeHit") then
+					        	v.ReloadTime = 0
+					        	v.ReloadTimeHit = 0
+							end
+						end
 					end
 					notify("Funni tazer")
 				end
@@ -1309,4 +1320,4 @@ function SCRIPT_ZEHW90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_ZEHW90_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_DBXB87_FAKESCRIPT))
