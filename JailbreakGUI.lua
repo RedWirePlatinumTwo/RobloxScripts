@@ -524,7 +524,7 @@ function SCRIPT_ZEHW90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			local plrgui = lplr.PlayerGui
 	
 			local function walcc()
-				runservice.Heartbeat:connect(function()
+				runservice.RenderStepped:connect(function()
 					if lplr.Character.Humanoid.WalkSpeed == 0 then
 					    lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
 					end
@@ -809,7 +809,7 @@ function SCRIPT_ZEHW90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 				local function speedhack()
 	
-					runservice.Heartbeat:connect(function()
+					runservice.RenderStepped:connect(function()
 						lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
 					end)
 	
