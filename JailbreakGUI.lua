@@ -26,6 +26,7 @@ local respawn = Instance.new("TextButton")
 local lockonexit = Instance.new("TextButton")
 local Tazermod = Instance.new("TextButton")
 local ropefollow = Instance.new("TextButton")
+local Hotbarautosort = Instance.new("TextButton")
 local flyhack = Instance.new("TextButton")
 local flyhacknum = Instance.new("TextBox")
 local Confirmation = Instance.new("Frame")
@@ -33,6 +34,23 @@ local Warning = Instance.new("TextLabel")
 local Yes = Instance.new("TextButton")
 local No = Instance.new("TextButton")
 local WarningIcon = Instance.new("ImageLabel")
+local AutosortFrame = Instance.new("Frame")
+local ScrollingFrame_2 = Instance.new("ScrollingFrame")
+local UIListLayout = Instance.new("UIListLayout")
+local loadoutframe = Instance.new("ScrollingFrame")
+local Title_2 = Instance.new("TextLabel")
+local delloadout = Instance.new("TextButton")
+local itemframe = Instance.new("Frame")
+local x = Instance.new("TextButton")
+local itemname = Instance.new("TextBox")
+local slotnum = Instance.new("TextBox")
+local active = Instance.new("TextButton")
+local additem = Instance.new("TextButton")
+local UIListLayout_2 = Instance.new("UIListLayout")
+local Title_3 = Instance.new("TextLabel")
+local hide = Instance.new("TextButton")
+local addloadout = Instance.new("TextButton")
+local loadoutname = Instance.new("TextBox")
 --Properties:
 JailbreakGUI.Name = "JailbreakGUI"
 JailbreakGUI.Parent = game.CoreGui
@@ -42,7 +60,7 @@ MainFrame.Name = "MainFrame"
 MainFrame.Parent = JailbreakGUI
 MainFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 MainFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-MainFrame.Position = UDim2.new(0.879054368, -384, 0.0564681552, 10)
+MainFrame.Position = UDim2.new(0.884783566, -384, 0.0722088963, 10)
 MainFrame.Size = UDim2.new(0, 368, 0, 308)
 
 speed.Name = "speed"
@@ -96,7 +114,7 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 ScrollingFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 ScrollingFrame.Position = UDim2.new(0.0169971678, 0, 0.330357075, 0)
 ScrollingFrame.Size = UDim2.new(0, 354, 0, 187)
-ScrollingFrame.CanvasPosition = Vector2.new(0, 303)
+ScrollingFrame.CanvasPosition = Vector2.new(0, 150)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 disablelasers.Name = "disablelasers"
@@ -270,7 +288,7 @@ getcode.Position = UDim2.new(0, 0, 0.523438752, 0)
 getcode.Size = UDim2.new(0, 116, 0, 47)
 getcode.ZIndex = 0
 getcode.Font = Enum.Font.SourceSansBold
-getcode.Text = "(attempt to) Get Casino code"
+getcode.Text = "Get Casino code"
 getcode.TextColor3 = Color3.new(0, 0.666667, 0.498039)
 getcode.TextSize = 20
 getcode.TextStrokeTransparency = 0
@@ -345,6 +363,20 @@ ropefollow.TextColor3 = Color3.new(0.666667, 1, 0)
 ropefollow.TextSize = 20
 ropefollow.TextStrokeTransparency = 0
 ropefollow.TextWrapped = true
+
+Hotbarautosort.Name = "Hotbarautosort"
+Hotbarautosort.Parent = ScrollingFrame
+Hotbarautosort.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+Hotbarautosort.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+Hotbarautosort.Position = UDim2.new(0, 0, 0.451666713, 0)
+Hotbarautosort.Size = UDim2.new(0, 106, 0, 51)
+Hotbarautosort.ZIndex = -222
+Hotbarautosort.Font = Enum.Font.SourceSansBold
+Hotbarautosort.Text = "Hotbar Auto-sorter"
+Hotbarautosort.TextColor3 = Color3.new(1, 0.333333, 0)
+Hotbarautosort.TextSize = 20
+Hotbarautosort.TextStrokeTransparency = 0
+Hotbarautosort.TextWrapped = true
 
 flyhack.Name = "flyhack"
 flyhack.Parent = MainFrame
@@ -428,18 +460,215 @@ WarningIcon.BackgroundTransparency = 1
 WarningIcon.Position = UDim2.new(0.424498558, 0, 0.0381355919, 0)
 WarningIcon.Size = UDim2.new(0, 45, 0, 45)
 WarningIcon.Image = "http://www.roblox.com/asset/?id=3369561948"
+
+AutosortFrame.Name = "AutosortFrame"
+AutosortFrame.Parent = JailbreakGUI
+AutosortFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+AutosortFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+AutosortFrame.Position = UDim2.new(0.462671399, 0, 0.0823940709, 0)
+AutosortFrame.Size = UDim2.new(0, 402, 0, 335)
+AutosortFrame.Visible = false
+
+ScrollingFrame_2.Parent = AutosortFrame
+ScrollingFrame_2.Active = true
+ScrollingFrame_2.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+ScrollingFrame_2.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+ScrollingFrame_2.Position = UDim2.new(0.0329122208, 0, 0.127253339, 0)
+ScrollingFrame_2.Size = UDim2.new(0, 375, 0, 215)
+ScrollingFrame_2.CanvasSize = UDim2.new(0, 0, 0, 0)
+
+UIListLayout.Parent = ScrollingFrame_2
+UIListLayout.Padding = UDim.new(0, 10)
+
+loadoutframe.Name = "loadoutframe"
+loadoutframe.Parent = ScrollingFrame_2
+loadoutframe.Active = true
+loadoutframe.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+loadoutframe.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+loadoutframe.Size = UDim2.new(0, 358, 0, 198)
+loadoutframe.Visible = false
+loadoutframe.CanvasSize = UDim2.new(0, 0, 0, 0)
+
+Title_2.Name = "Title"
+Title_2.Parent = loadoutframe
+Title_2.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+Title_2.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+Title_2.LayoutOrder = 1
+Title_2.Size = UDim2.new(0, 317, 0, 25)
+Title_2.Font = Enum.Font.SourceSansBold
+Title_2.Text = "loadoutname"
+Title_2.TextColor3 = Color3.new(1, 1, 1)
+Title_2.TextScaled = true
+Title_2.TextSize = 27
+Title_2.TextStrokeColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+Title_2.TextWrapped = true
+
+delloadout.Name = "delloadout"
+delloadout.Parent = Title_2
+delloadout.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+delloadout.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+delloadout.Position = UDim2.new(1, 0, -0.0149493404, 0)
+delloadout.Size = UDim2.new(0, 25, 0, 25)
+delloadout.Font = Enum.Font.SourceSansBold
+delloadout.Text = "X"
+delloadout.TextColor3 = Color3.new(1, 0, 0)
+delloadout.TextScaled = true
+delloadout.TextSize = 14
+delloadout.TextWrapped = true
+
+itemframe.Name = "itemframe"
+itemframe.Parent = loadoutframe
+itemframe.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+itemframe.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+itemframe.Position = UDim2.new(0, 0, 0.378787875, 0)
+itemframe.Size = UDim2.new(0, 342, 0, 25)
+itemframe.Visible = false
+
+x.Name = "x"
+x.Parent = itemframe
+x.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+x.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+x.Position = UDim2.new(0.926900625, 0, 0, 0)
+x.Size = UDim2.new(0, 25, 0, 25)
+x.Font = Enum.Font.SourceSansBold
+x.Text = "X"
+x.TextColor3 = Color3.new(1, 0, 0)
+x.TextScaled = true
+x.TextSize = 14
+x.TextWrapped = true
+
+itemname.Name = "itemname"
+itemname.Parent = itemframe
+itemname.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+itemname.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+itemname.Size = UDim2.new(0, 171, 0, 25)
+itemname.Font = Enum.Font.SourceSansBold
+itemname.PlaceholderText = "Item Name"
+itemname.Text = ""
+itemname.TextColor3 = Color3.new(1, 1, 1)
+itemname.TextScaled = true
+itemname.TextSize = 14
+itemname.TextWrapped = true
+
+slotnum.Name = "slotnum"
+slotnum.Parent = itemframe
+slotnum.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+slotnum.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+slotnum.Position = UDim2.new(0.5, 0, 0, 0)
+slotnum.Size = UDim2.new(0, 146, 0, 25)
+slotnum.Font = Enum.Font.SourceSansBold
+slotnum.PlaceholderText = "Slot number"
+slotnum.Text = ""
+slotnum.TextColor3 = Color3.new(1, 1, 1)
+slotnum.TextScaled = true
+slotnum.TextSize = 14
+slotnum.TextWrapped = true
+
+active.Name = "active"
+active.Parent = loadoutframe
+active.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+active.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+active.Position = UDim2.new(0, 0, 0.25252524, 0)
+active.Size = UDim2.new(0, 342, 0, 25)
+active.Font = Enum.Font.SourceSansBold
+active.Text = "Active"
+active.TextColor3 = Color3.new(1, 0, 0)
+active.TextScaled = true
+active.TextSize = 14
+active.TextWrapped = true
+
+additem.Name = "additem"
+additem.Parent = loadoutframe
+additem.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+additem.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+additem.Position = UDim2.new(0, 0, 0.25252524, 0)
+additem.Size = UDim2.new(0, 342, 0, 25)
+additem.Font = Enum.Font.SourceSansBold
+additem.Text = "+ Add Item"
+additem.TextColor3 = Color3.new(0.333333, 1, 0)
+additem.TextScaled = true
+additem.TextSize = 14
+additem.TextWrapped = true
+
+UIListLayout_2.Parent = loadoutframe
+
+Title_3.Name = "Title"
+Title_3.Parent = AutosortFrame
+Title_3.BackgroundColor3 = Color3.new(1, 1, 1)
+Title_3.BackgroundTransparency = 1
+Title_3.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+Title_3.LayoutOrder = 1
+Title_3.Position = UDim2.new(0.0602755435, 0, 0.0149253728, 0)
+Title_3.Size = UDim2.new(0, 352, 0, 30)
+Title_3.Font = Enum.Font.SourceSansBold
+Title_3.Text = "Hotbar Auto-Sorter"
+Title_3.TextColor3 = Color3.new(1, 1, 1)
+Title_3.TextSize = 30
+Title_3.TextStrokeColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+Title_3.TextWrapped = true
+
+hide.Name = "hide"
+hide.Parent = AutosortFrame
+hide.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+hide.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+hide.Position = UDim2.new(0.337292314, 0, 0.922172725, 0)
+hide.Size = UDim2.new(0, 129, 0, 26)
+hide.ZIndex = 33
+hide.Font = Enum.Font.SourceSansBold
+hide.Text = "Hide"
+hide.TextColor3 = Color3.new(1, 1, 1)
+hide.TextSize = 28
+hide.TextStrokeTransparency = 0
+hide.TextWrapped = true
+
+addloadout.Name = "addloadout"
+addloadout.Parent = AutosortFrame
+addloadout.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+addloadout.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+addloadout.Position = UDim2.new(0.0315795019, 0, 0.803062916, 0)
+addloadout.Size = UDim2.new(0, 168, 0, 25)
+addloadout.ZIndex = 33
+addloadout.Font = Enum.Font.SourceSansBold
+addloadout.Text = "Add loadout with name:"
+addloadout.TextColor3 = Color3.new(1, 1, 1)
+addloadout.TextScaled = true
+addloadout.TextSize = 28
+addloadout.TextStrokeTransparency = 0
+addloadout.TextWrapped = true
+
+loadoutname.Name = "loadoutname"
+loadoutname.Parent = AutosortFrame
+loadoutname.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
+loadoutname.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+loadoutname.Position = UDim2.new(0.449489921, 0, 0.802994728, 0)
+loadoutname.Size = UDim2.new(0, 206, 0, 25)
+loadoutname.Font = Enum.Font.SourceSansBold
+loadoutname.PlaceholderText = "Loadout Name"
+loadoutname.Text = ""
+loadoutname.TextColor3 = Color3.new(1, 1, 1)
+loadoutname.TextScaled = true
+loadoutname.TextSize = 14
+loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_BQMB69_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_NIBN82_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
-	local mainframe = script.Parent.MainFrame.ScrollingFrame
+	local mframe = script.Parent.MainFrame
+	local mainframe = mframe.ScrollingFrame
 	local confirm = script.Parent.Confirmation
-	mainframe.AutomaticCanvasSize = 2
 	mainframe.UIGridLayout.SortOrder = 0
-	mainframe.ScrollBarImageColor3 = mainframe.Parent.BorderColor3
-	local mframe = mainframe.Parent
+	local aframe = script.Parent.AutosortFrame
+	local autosortframe = aframe.ScrollingFrame
+	autosortframe.UIListLayout.SortOrder = 0
 	local rstorage = game.ReplicatedStorage
 	local runservice = game["Run Service"]
+	
+	for i,v in pairs(script.Parent:GetDescendants()) do
+		if v.ClassName == "ScrollingFrame" then
+			v.AutomaticCanvasSize = 2
+			v.ScrollBarImageColor3 = mainframe.Parent.BorderColor3
+		end
+	end
 	
 	if game.PlaceId == 606849621 then
 		local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
@@ -508,7 +737,7 @@ function SCRIPT_BQMB69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Added a Tazer mod and rope follow button!")
+			notify("Added auto-sort button and made casino code button more accurate.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1161,14 +1390,23 @@ function SCRIPT_BQMB69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 				local txt = ""
 				if code then
-	
-				for i,v in pairs(code:GetChildren()) do
-				    txt = txt..v.SurfaceGui.TextLabel.Text
-				end
-	
-				mainframe.getcode.Text = txt
+					local c = {}
+					
+					for i,v in pairs(code:GetChildren()) do
+					    table.insert(c, v.Position.Magnitude)
+					end
+					
+					table.sort(c)
+					for i,v in pairs(c) do
+						for i, cpart in pairs(code:GetChildren()) do
+							if v == cpart.Position.Magnitude then
+								txt = txt..cpart.SurfaceGui.TextLabel.Text
+							end
+						end
+					end
+					mainframe.getcode.Text = txt.." (or "..txt:reverse()..")"
 				else
-				mainframe.getcode.Text = "code non-existent"
+					mainframe.getcode.Text = "code non-existent"
 				end
 	
 				delay(5,function()
@@ -1315,6 +1553,186 @@ function SCRIPT_BQMB69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					end
 			    end
 			end)
+			
+			local loadouts
+			local file = "JBLoadouts.lua"
+			if isfile and loadfile then
+				if isfile(file) then
+					loadouts = loadfile(file)()
+				else
+				loadouts = {}
+				end
+			else
+				loadouts = {}
+			end
+			local items = {}
+			
+			for i,v in pairs(rstorage.Game.Item:GetChildren()) do 
+				table.insert(items, v.Name)
+			end
+			
+			local function saveloadout()
+				if writefile then
+					writefile(file, TableToString(loadouts, "Loadouts"))
+				end
+			end
+			
+			local function addloadout(name)
+				if not loadouts[name] then
+					loadouts[name] = {}
+					loadouts[name].active = false
+					loadouts[name].items = {}
+				end
+				local loadout = loadouts[name]
+				local clone = autosortframe.loadoutframe:Clone()
+				clone.Parent = autosortframe
+				clone.Visible = true
+				clone.Title.Text = name
+				clone.active.Text = "Active ("..tostring(loadouts[name].active)..")"
+				
+				local function updateloadout()
+					loadout.items = {}
+					for i,v in pairs(clone:GetChildren()) do 
+						if v.Name == "itemframe" and table.find(items, v.itemname.Text) and tonumber(v.slotnum.Text) then
+							loadout.items[v.itemname.Text] = tonumber(v.slotnum.Text)
+						end
+					end
+					saveloadout()
+				end
+				
+				if loadout.active then 
+					clone.active.TextColor3 = Color3.new(0,1,0)
+				end
+				
+				clone.active.MouseButton1Click:connect(function()
+					loadout.active = not loadout.active
+					updateloadout()
+				end)
+				
+				Changed(loadout, "active", function(val)
+					if val then
+						clone.active.TextColor3 = Color3.new(0,1,0)
+						
+						for i,v in pairs(loadouts) do
+							if v ~= loadout and v.active then
+								v.active = false
+							end
+						end
+						
+					else
+						clone.active.TextColor3 = Color3.new(1,0,0)
+					end
+					clone.active.Text = "Active ("..tostring(val)..")"
+				end)
+				
+				local function additem(txt,txt2)
+					if not txt then txt = "" end
+					if not txt2 then txt2 = "" end
+					local itemclone = clone.itemframe:Clone()
+					itemclone.Parent = clone
+					itemclone.Visible = true
+					itemclone.itemname.Text = txt
+					itemclone.slotnum.Text = txt2
+					itemclone.itemname.FocusLost:connect(updateloadout)
+					itemclone.slotnum.FocusLost:connect(updateloadout)
+	
+					Changed(itemclone.itemname, "Text", function(txt)
+						local items2 = {}
+	
+						for i,v in pairs(items) do
+							if v:lower():sub(1, txt:len()) == txt:lower() then
+								table.insert(items2, v)
+							end
+						end
+	
+						if #items2 == 1 then
+							itemclone.itemname.Text = items2[1]
+						end
+					end)
+	
+					itemclone.x.MouseButton1Click:connect(function()
+						itemclone:Destroy()
+						updateloadout()
+					end)
+					
+				end
+				
+				for i,v in pairs(loadout.items) do
+					additem(i, tostring(v))
+				end
+				
+				clone.additem.MouseButton1Click:connect(function()
+					additem()
+				end)
+				
+				clone.Title.delloadout.MouseButton1Click:connect(function()
+					
+					for i,v in pairs(loadouts) do
+						if i == clone.Title.Text then
+							loadouts[i] = nil
+						end
+					end
+					
+					clone:Destroy()
+					saveloadout()
+				end)
+			end
+			
+			for i,v in pairs(loadouts) do
+				addloadout(i)
+			end
+			
+			aframe.addloadout.MouseButton1Click:connect(function()
+				local lname = aframe.loadoutname.Text
+				local namematch = false
+				
+				for i,v in pairs(loadouts) do
+					if i == lname then
+						namematch = true
+						break
+					end
+				end
+				
+				if not namematch then
+					addloadout(lname)
+				end
+			end)
+			
+			aframe.hide.MouseButton1Click:connect(function()
+				aframe.Visible = false
+			end)
+			
+			local hb = require(rstorage.Hotbar.HotbarItemUtils)
+			local setorder = hb.setDisplayOrder
+			local getorder = hb.getDisplayOrder
+	
+			runservice.Heartbeat:connect(function()
+				local loadout
+				for i,v in pairs(loadouts) do
+					if v.active then
+						loadout = v.items
+						break
+					end
+				end
+				if loadout then
+					local folitems = lplr.Folder:GetChildren()
+					for item, pos in pairs(loadout) do
+						for i, item2 in pairs(folitems) do
+							if getorder(item2) == pos and item2.Name ~= item then
+								setorder(item2, #folitems+1)
+							end
+							if lplr.Folder:FindFirstChild(item) then
+								setorder(lplr.Folder[item], pos)
+							end
+						end
+					end
+				end
+			end)
+			
+			mainframe.Hotbarautosort.MouseButton1Click:connect(function()
+				aframe.Visible = true
+			end)
+	
 		else
 			notify("Deleting clone gui")
 			wait(0.5)
@@ -1330,4 +1748,4 @@ function SCRIPT_BQMB69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_BQMB69_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_NIBN82_FAKESCRIPT))
