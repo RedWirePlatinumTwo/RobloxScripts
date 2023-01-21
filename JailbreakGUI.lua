@@ -96,6 +96,7 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 ScrollingFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 ScrollingFrame.Position = UDim2.new(0.0169971678, 0, 0.330357075, 0)
 ScrollingFrame.Size = UDim2.new(0, 354, 0, 187)
+ScrollingFrame.CanvasPosition = Vector2.new(0, 303)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 disablelasers.Name = "disablelasers"
@@ -339,7 +340,7 @@ ropefollow.Position = UDim2.new(0, 0, 0.451666713, 0)
 ropefollow.Size = UDim2.new(0, 106, 0, 51)
 ropefollow.ZIndex = -222
 ropefollow.Font = Enum.Font.SourceSansBold
-ropefollow.Text = "Rope-Follow-Vehicle"
+ropefollow.Text = "Rope-Follow-Part"
 ropefollow.TextColor3 = Color3.new(0.666667, 1, 0)
 ropefollow.TextSize = 20
 ropefollow.TextStrokeTransparency = 0
@@ -428,7 +429,7 @@ WarningIcon.Position = UDim2.new(0.424498558, 0, 0.0381355919, 0)
 WarningIcon.Size = UDim2.new(0, 45, 0, 45)
 WarningIcon.Image = "http://www.roblox.com/asset/?id=3369561948"
 -- Scripts:
-function SCRIPT_DBXB87_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_BQMB69_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -1273,7 +1274,7 @@ function SCRIPT_DBXB87_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end)
 	
 			local ropefollow = false
-			local selectedvehicle = nil
+			local ropepart = nil
 			local ropenotif = false
 			local ropetxt = mainframe.ropefollow.Text
 			mainframe.ropefollow.Text = ropetxt.." ("..tostring(ropefollow)..")"
@@ -1282,27 +1283,36 @@ function SCRIPT_DBXB87_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		        ropefollow = not ropefollow
 				mainframe.ropefollow.Text = ropetxt.." ("..tostring(ropefollow)..")"
 		        if not ropefollow then
-		            selectedvehicle = nil
+		            ropepart = nil
 		        end
 				if not ropenotif then
 					ropenotif = true
-					notify("Click on a vehicle to follow it with a rope.")
+					notify("Click on a vehicle (or cargo plane crate) to follow it with a rope.")
 				end
 			end)
 	
 			runservice.Heartbeat:connect(function()
 			    local model = require(rstorage.Game.Vehicle).GetLocalVehicleModel()
-			    if model and ropefollow and selectedvehicle and selectedvehicle ~= model then
-			        if pcall(function() return model.Preset.RopePull end) then
-			            model.Preset.RopePull.CFrame = selectedvehicle.Engine.CFrame
+			    if model and ropefollow and ropepart and ropepart ~= model then
+					if pcall(function() return model.Preset.RopePull end) then
+						if ropepart.Parent == workspace.Vehicles then
+							model.Preset.RopePull.CFrame = ropepart.Engine.CFrame
+						else
+							model.Preset.RopePull.CFrame = ropepart.MeshPart.CFrame
+						end
 			        end
 			    end
 			end)
 	
 			mouse.Button1Down:connect(function()
-			    local t = mouse.Target
-			    if t and ropefollow and GetFamily(t)[3] == workspace.Vehicles then
-			        selectedvehicle = GetFamily(t)[4]
+				local t = mouse.Target
+				if t and ropefollow then
+					local gf = GetFamily(t)
+					if gf[3] == workspace.Vehicles then
+						ropepart = gf[4]
+					elseif gf[3].Name == "CargoShip" and gf[4].Name == "Crates" then
+						ropepart = gf[5]
+					end
 			    end
 			end)
 		else
@@ -1320,4 +1330,4 @@ function SCRIPT_DBXB87_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_DBXB87_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_BQMB69_FAKESCRIPT))
