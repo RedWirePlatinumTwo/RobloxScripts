@@ -1056,7 +1056,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_VUDZ90_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_WTEZ73_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1231,19 +1231,20 @@ function SCRIPT_VUDZ90_FAKESCRIPT() -- Aimbot.Scripts
 	
 		if isfile and loadfile and isfile("RedsAimbotStats.lua") then
 			GlobalStats = loadfile("RedsAimbotStats.lua")()
-			if GlobalStats.TeamAutofill == nil then
-				GlobalStats.TeamAutofill = true
-			end
-			if not GlobalStats.AimIntensity then
-				GlobalStats.AimIntensity = 250
-			end
+			local newglobalstats = {}
+			newglobalstats["TeamAutofill"] = true
+			newglobalstats["AimIntensity"] = 250
+			newglobalstats["RightClickAim"] = false
 			if not GlobalStats[game.PlaceId] then
 				gengamestats()
 			end
-			if GlobalStats.RightClickAim == nil then
-				GlobalStats.RightClickAim = false
+			
+			for name, default in pairs(newglobalstats) do
+				if GlobalStats[name] == nil then
+					GlobalStats[name] = default
+				end
 			end
-	
+			
 			for i,v in pairs(GlobalStats.Keybinds) do
 				if globalsettings:FindFirstChild(i) then
 					globalsettings[i].value.Text = tostring(v)
@@ -1279,17 +1280,16 @@ function SCRIPT_VUDZ90_FAKESCRIPT() -- Aimbot.Scripts
 		if not Keybinds.NPCToggle then
 			Keybinds.NPCToggle = "none"
 		end
-		if not GameStats.Teams then
-			GameStats.Teams = {}
-		end
-		if GameStats.TargetNPCs == nil then
-			GameStats.TargetNPCs = false
-		end
-		if GameStats.TargetCloserPlayers == nil then
-			GameStats.TargetCloserPlayers = true
-		end
-		if GameStats.IgnorePlayers == nil then
-			GameStats.IgnorePlayers = false
+		local newgamestats = {}
+		newgamestats["Teams"] = {}
+		newgamestats["TargetNPCs"] = false
+		newgamestats["TargetCloserPlayers"] = true
+		newgamestats["IgnorePlayers"] = false
+		
+		for name, default in pairs(newgamestats) do
+			if GameStats[name] == nil then
+				GameStats[name] = default
+			end
 		end
 	
 		for i,v in pairs(GameStats) do
@@ -1923,4 +1923,4 @@ function SCRIPT_VUDZ90_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_VUDZ90_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_WTEZ73_FAKESCRIPT))
