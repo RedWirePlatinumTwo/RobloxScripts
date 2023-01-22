@@ -28,7 +28,7 @@ Title.BackgroundTransparency = 1
 Title.Position = UDim2.new(0.0295752808, 0, -0.0011369288, 0)
 Title.Size = UDim2.new(0, 321, 0, 43)
 Title.Font = Enum.Font.Unknown
-Title.Text = "REDWIRE'S MEGA FUN OBBY GUI"
+Title.Text = "RedWire's Mega Fun Obby GUI"
 Title.TextColor3 = Color3.new(0.666667, 0.333333, 1)
 Title.TextScaled = true
 Title.TextSize = 14
@@ -43,7 +43,7 @@ Currentstage.Position = UDim2.new(0.0672514588, 0, 0.3125, 0)
 Currentstage.Size = UDim2.new(0, 126, 0, 49)
 Currentstage.Font = Enum.Font.Unknown
 Currentstage.PlaceholderColor3 = Color3.new(0.670588, 0.670588, 0.670588)
-Currentstage.PlaceholderText = "CURRENT STAGE NUMBER HERE"
+Currentstage.PlaceholderText = "Current stage number"
 Currentstage.Text = ""
 Currentstage.TextColor3 = Color3.new(0.666667, 0.333333, 1)
 Currentstage.TextSize = 24
@@ -58,7 +58,7 @@ Endstage.Position = UDim2.new(0.555555522, 0, 0.3125, 0)
 Endstage.Size = UDim2.new(0, 126, 0, 49)
 Endstage.Font = Enum.Font.Unknown
 Endstage.PlaceholderColor3 = Color3.new(0.670588, 0.670588, 0.670588)
-Endstage.PlaceholderText = "END STAGE NUMBER HERE"
+Endstage.PlaceholderText = "End stage number"
 Endstage.Text = ""
 Endstage.TextColor3 = Color3.new(0.666667, 0.333333, 1)
 Endstage.TextSize = 24
@@ -103,7 +103,7 @@ respawn.TextSize = 24
 respawn.TextStrokeTransparency = 0
 respawn.TextWrapped = true
 -- Scripts:
-function SCRIPT_NDKX83_FAKESCRIPT() -- Megafunobby.LocalScript 
+function SCRIPT_DJJR70_FAKESCRIPT() -- Megafunobby.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = Megafunobby
 	local frame = script.Parent.MainFrame
@@ -189,4 +189,4 @@ function SCRIPT_NDKX83_FAKESCRIPT() -- Megafunobby.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_NDKX83_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_DJJR70_FAKESCRIPT))
