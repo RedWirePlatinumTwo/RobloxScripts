@@ -649,7 +649,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_HCSE80_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_RXDI88_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -736,7 +736,7 @@ function SCRIPT_HCSE80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("GUI Re-design v2 because idk lmao.")
+			notify("The robbery notifier should be up to date now.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1111,6 +1111,13 @@ function SCRIPT_HCSE80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					IconIds["tomb"] = "6896911415"
 					IconIds["casino"] = "9255252609"
 					IconIds["mansion"] = "11831534984"
+					IconIds["power plant"] = "4643749556"
+					IconIds["jewelry"] = "4643749718"
+					IconIds["bank"] = "4643749317"
+					IconIds["cargo train"] = "7301405189"
+					IconIds["cargo plane"]= "7301406769"
+					IconIds["cargo ship"] = "7301406299"
+					IconIds["passenger train"] = "7301405813"
 	
 					for i,v in pairs(plrgui.WorldMarkersGui:GetChildren()) do
 	
@@ -1133,36 +1140,30 @@ function SCRIPT_HCSE80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						end
 	
 					end
-					local smoke = workspace.PowerPlant.Smoke.smoke
 	
-					jewel.Floors.ChildAdded:connect(function()
-						notify("The jewelry is open for robbery.")
-					end)
-	
-					bank.Layout.ChildAdded:connect(function()
-						notify("The bank is open for robbery.")
-					end)
-	
-					Changed(smoke, "Enabled", function(en)
-						if en == true then
-							notify("The powerplant is open for robbery.")
+					plrgui.WorldMarkersGui.ChildAdded:connect(function(marker)
+						while true do
+							if pcall(function()
+									return marker.ImageLabel.ImageLabel.Image
+								end) then
+								break
+							else
+								task.wait()
+							end
 						end
-					end)
-	
-					workspace.Trains.ChildAdded:connect(function(child)
-						if child.Name == "PassengerArmor" then
-							notify("A passenger train has entered the map.")
-						elseif child.Name == "LocomotiveFront" then
-							notify("A cargo train has entered the map.")
-						end
-					end)
-	
-					workspace.ChildAdded:connect(function(c)
-						if c.Name == "Plane" then
-							notify("The cargo plane is inbound!")
-						end
-						if c.Name == "CargoShip" then
-							notify("The cargo ship is coming!")
+						local img = marker.ImageLabel.ImageLabel.Image
+						for i,v in pairs(IconIds) do
+							if img == "rbxassetid://"..v then
+								if i == "cargo train" or i == "passenger train" then
+									notify("The "..i.." has entered the map.")
+								elseif i == "cargo ship" then
+									notify("The cargo ship is coming!")
+								elseif i == "cargo plane" then
+									notify("The cargo plane is inbound!")
+								else
+									notify("The "..i.." is open for robbery.")
+								end
+							end
 						end
 					end)
 	
@@ -1752,4 +1753,4 @@ function SCRIPT_HCSE80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_HCSE80_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_RXDI88_FAKESCRIPT))
