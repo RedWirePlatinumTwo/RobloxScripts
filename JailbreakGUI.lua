@@ -1215,7 +1215,6 @@ function SCRIPT_YYBK87_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			local exitfn = onexit._fn
 			local onenter = vehicle.OnVehicleEntered._handlerListHead
 			local enterfn = onenter._fn
-			local bservice = require(game.ReplicatedStorage.ActionButton.ActionButtonService)
 	
 			local unlockOnEnter = true -- whether or not you actually want your car to auto-unlock on enter
 	
