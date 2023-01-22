@@ -649,7 +649,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_WODN76_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_YYBK87_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -955,13 +955,17 @@ function SCRIPT_WODN76_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end
 	
 			end
-	
+			local gunnotif = false
+			
 			mainframe.modguns.MouseButton1Click:connect(function()
 				changegunstats({["CamShakeMagnitude"] = 0,["FireAuto"] = true})
 				local g = require(game.ReplicatedStorage.Game.ItemConfig.Grenade)
 				g.ReloadTime = 0
 				g.FuseTime = 0.8
+				if not gunnotif then
+				gunnotif = true
 				notify("Removed recoil + all guns fire automatically (also funni grenade spam)")
+				end
 			end)
 	
 			local lasersdisabled = false
@@ -1749,4 +1753,4 @@ function SCRIPT_WODN76_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_WODN76_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_YYBK87_FAKESCRIPT))
