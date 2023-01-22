@@ -17,6 +17,7 @@ Megafunobby.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = Megafunobby
 MainFrame.BackgroundColor3 = Color3.new(0.333333, 0.333333, 0.498039)
+MainFrame.BorderColor3 = Color3.new(0.666667, 0.333333, 1)
 MainFrame.Position = UDim2.new(0.551999986, 0, 0.129999995, 0)
 MainFrame.Size = UDim2.new(0, 342, 0, 208)
 
@@ -31,11 +32,13 @@ Title.Text = "REDWIRE'S MEGA FUN OBBY GUI"
 Title.TextColor3 = Color3.new(0.333333, 0, 0.498039)
 Title.TextScaled = true
 Title.TextSize = 14
+Title.TextStrokeTransparency = 0
 Title.TextWrapped = true
 
 Currentstage.Name = "Currentstage"
 Currentstage.Parent = MainFrame
 Currentstage.BackgroundColor3 = Color3.new(0.333333, 0.333333, 0.498039)
+Currentstage.BorderColor3 = Color3.new(0.666667, 0.333333, 1)
 Currentstage.Position = UDim2.new(0.0672514588, 0, 0.3125, 0)
 Currentstage.Size = UDim2.new(0, 126, 0, 49)
 Currentstage.Font = Enum.Font.Unknown
@@ -44,11 +47,13 @@ Currentstage.PlaceholderText = "CURRENT STAGE NUMBER HERE"
 Currentstage.Text = ""
 Currentstage.TextColor3 = Color3.new(0.333333, 0, 0.498039)
 Currentstage.TextSize = 20
+Currentstage.TextStrokeTransparency = 0
 Currentstage.TextWrapped = true
 
 Endstage.Name = "Endstage"
 Endstage.Parent = MainFrame
 Endstage.BackgroundColor3 = Color3.new(0.333333, 0.333333, 0.498039)
+Endstage.BorderColor3 = Color3.new(0.666667, 0.333333, 1)
 Endstage.Position = UDim2.new(0.555555522, 0, 0.3125, 0)
 Endstage.Size = UDim2.new(0, 126, 0, 49)
 Endstage.Font = Enum.Font.Unknown
@@ -57,41 +62,48 @@ Endstage.PlaceholderText = "END STAGE NUMBER HERE"
 Endstage.Text = ""
 Endstage.TextColor3 = Color3.new(0.333333, 0, 0.498039)
 Endstage.TextSize = 20
+Endstage.TextStrokeTransparency = 0
 Endstage.TextWrapped = true
 
 stageskip.Name = "stageskip"
 stageskip.Parent = MainFrame
 stageskip.BackgroundColor3 = Color3.new(0.333333, 0.333333, 0.498039)
+stageskip.BorderColor3 = Color3.new(0.666667, 0.333333, 1)
 stageskip.Position = UDim2.new(0.0266959202, 0, 0.651538432, 0)
 stageskip.Size = UDim2.new(0, 100, 0, 50)
 stageskip.Font = Enum.Font.DenkOne
 stageskip.Text = "Skip Stage"
 stageskip.TextColor3 = Color3.new(0.333333, 0, 0.498039)
 stageskip.TextSize = 20
+stageskip.TextStrokeTransparency = 0
 
 delkill.Name = "delkill"
 delkill.Parent = MainFrame
 delkill.BackgroundColor3 = Color3.new(0.333333, 0.333333, 0.498039)
+delkill.BorderColor3 = Color3.new(0.666667, 0.333333, 1)
 delkill.Position = UDim2.new(0.338923931, 0, 0.651538432, 0)
 delkill.Size = UDim2.new(0, 109, 0, 50)
 delkill.Font = Enum.Font.DenkOne
 delkill.Text = "Delete Kill Objects"
 delkill.TextColor3 = Color3.new(0.333333, 0, 0.498039)
 delkill.TextSize = 20
+delkill.TextStrokeTransparency = 0
 delkill.TextWrapped = true
 
 respawn.Name = "respawn"
 respawn.Parent = MainFrame
 respawn.BackgroundColor3 = Color3.new(0.333333, 0.333333, 0.498039)
+respawn.BorderColor3 = Color3.new(0.666667, 0.333333, 1)
 respawn.Position = UDim2.new(0.673000038, 0, 0.651538432, 0)
 respawn.Size = UDim2.new(0, 100, 0, 50)
 respawn.Font = Enum.Font.DenkOne
 respawn.Text = "Self-die button"
 respawn.TextColor3 = Color3.new(0.333333, 0, 0.498039)
 respawn.TextSize = 20
+respawn.TextStrokeTransparency = 0
 respawn.TextWrapped = true
 -- Scripts:
-function SCRIPT_MKRW65_FAKESCRIPT() -- Megafunobby.LocalScript 
+function SCRIPT_EDZD86_FAKESCRIPT() -- Megafunobby.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = Megafunobby
 	local frame = script.Parent.MainFrame
@@ -177,4 +189,4 @@ function SCRIPT_MKRW65_FAKESCRIPT() -- Megafunobby.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_MKRW65_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_EDZD86_FAKESCRIPT))
