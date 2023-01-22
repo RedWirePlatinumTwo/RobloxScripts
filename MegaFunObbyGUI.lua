@@ -2,18 +2,13 @@
 -- Version: 2.82
 -- Instances:
 local Megafunobby = Instance.new("ScreenGui")
-local MainFrame = Instance.new("ImageLabel")
+local MainFrame = Instance.new("Frame")
 local Title = Instance.new("TextLabel")
-local Currentstage = Instance.new("ImageLabel")
-local Textbox = Instance.new("TextBox")
-local Endstage = Instance.new("ImageLabel")
-local Textbox_2 = Instance.new("TextBox")
-local respawn = Instance.new("ImageButton")
-local TextLabel = Instance.new("TextLabel")
-local stageskip = Instance.new("ImageButton")
-local TextLabel_2 = Instance.new("TextLabel")
-local delkill = Instance.new("ImageButton")
-local TextLabel_3 = Instance.new("TextLabel")
+local Currentstage = Instance.new("TextBox")
+local Endstage = Instance.new("TextBox")
+local stageskip = Instance.new("TextButton")
+local delkill = Instance.new("TextButton")
+local respawn = Instance.new("TextButton")
 --Properties:
 Megafunobby.Name = "Megafunobby"
 Megafunobby.Parent = game.CoreGui
@@ -21,138 +16,82 @@ Megafunobby.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = Megafunobby
-MainFrame.BackgroundColor3 = Color3.new(1, 1, 1)
-MainFrame.BackgroundTransparency = 1
-MainFrame.Position = UDim2.new(0.551976562, 0, 0.130208328, 0)
+MainFrame.BackgroundColor3 = Color3.new(0.333333, 0.333333, 0.498039)
+MainFrame.Position = UDim2.new(0.551999986, 0, 0.129999995, 0)
 MainFrame.Size = UDim2.new(0, 342, 0, 208)
-MainFrame.Image = "rbxassetid://2372029791"
-MainFrame.ImageColor3 = Color3.new(0.0235294, 0.709804, 1)
 
 Title.Name = "Title"
 Title.Parent = MainFrame
 Title.BackgroundColor3 = Color3.new(1, 1, 1)
 Title.BackgroundTransparency = 1
-Title.Position = UDim2.new(0.0295752808, 0, 0.0325169191, 0)
+Title.Position = UDim2.new(0.0295752808, 0, -0.0011369288, 0)
 Title.Size = UDim2.new(0, 321, 0, 43)
-Title.Font = Enum.Font.SourceSansBold
+Title.Font = Enum.Font.Unknown
 Title.Text = "REDWIRE'S MEGA FUN OBBY GUI"
-Title.TextColor3 = Color3.new(0.00784314, 0.329412, 0.454902)
+Title.TextColor3 = Color3.new(0.333333, 0, 0.498039)
 Title.TextScaled = true
 Title.TextSize = 14
 Title.TextWrapped = true
 
 Currentstage.Name = "Currentstage"
 Currentstage.Parent = MainFrame
-Currentstage.BackgroundColor3 = Color3.new(1, 1, 1)
-Currentstage.BackgroundTransparency = 1
-Currentstage.Position = UDim2.new(0.0497847758, 0, 0.240384609, 0)
+Currentstage.BackgroundColor3 = Color3.new(0.333333, 0.333333, 0.498039)
+Currentstage.Position = UDim2.new(0.0672514588, 0, 0.3125, 0)
 Currentstage.Size = UDim2.new(0, 126, 0, 49)
-Currentstage.Image = "rbxassetid://2372029791"
-Currentstage.ImageColor3 = Color3.new(0.333333, 1, 0.498039)
-
-Textbox.Name = "Textbox"
-Textbox.Parent = Currentstage
-Textbox.BackgroundColor3 = Color3.new(1, 1, 1)
-Textbox.BackgroundTransparency = 1
-Textbox.Position = UDim2.new(0, 0, 0.136587977, 0)
-Textbox.Size = UDim2.new(0, 127, 0, 34)
-Textbox.Font = Enum.Font.SourceSansBold
-Textbox.PlaceholderColor3 = Color3.new(0.0745098, 0.223529, 0.105882)
-Textbox.PlaceholderText = "CURRENT STAGE NUMBER HERE"
-Textbox.Text = ""
-Textbox.TextColor3 = Color3.new(0.0745098, 0.223529, 0.105882)
-Textbox.TextScaled = true
-Textbox.TextSize = 14
-Textbox.TextWrapped = true
+Currentstage.Font = Enum.Font.Unknown
+Currentstage.PlaceholderColor3 = Color3.new(0.670588, 0.670588, 0.670588)
+Currentstage.PlaceholderText = "CURRENT STAGE NUMBER HERE"
+Currentstage.Text = ""
+Currentstage.TextColor3 = Color3.new(0.333333, 0, 0.498039)
+Currentstage.TextSize = 20
+Currentstage.TextWrapped = true
 
 Endstage.Name = "Endstage"
 Endstage.Parent = MainFrame
-Endstage.BackgroundColor3 = Color3.new(1, 1, 1)
-Endstage.BackgroundTransparency = 1
-Endstage.Position = UDim2.new(0.565982342, 0, 0.240384609, 0)
+Endstage.BackgroundColor3 = Color3.new(0.333333, 0.333333, 0.498039)
+Endstage.Position = UDim2.new(0.555555522, 0, 0.3125, 0)
 Endstage.Size = UDim2.new(0, 126, 0, 49)
-Endstage.Image = "rbxassetid://2372029791"
-Endstage.ImageColor3 = Color3.new(0.333333, 1, 0.498039)
-
-Textbox_2.Name = "Textbox"
-Textbox_2.Parent = Endstage
-Textbox_2.BackgroundColor3 = Color3.new(1, 1, 1)
-Textbox_2.BackgroundTransparency = 1
-Textbox_2.Position = UDim2.new(0, 0, 0.136587977, 0)
-Textbox_2.Size = UDim2.new(0, 127, 0, 34)
-Textbox_2.Font = Enum.Font.SourceSansBold
-Textbox_2.PlaceholderColor3 = Color3.new(0.0745098, 0.223529, 0.105882)
-Textbox_2.PlaceholderText = "END STAGE NUMBER HERE"
-Textbox_2.Text = ""
-Textbox_2.TextColor3 = Color3.new(0.0745098, 0.223529, 0.105882)
-Textbox_2.TextScaled = true
-Textbox_2.TextSize = 14
-Textbox_2.TextWrapped = true
-
-respawn.Name = "respawn"
-respawn.Parent = MainFrame
-respawn.BackgroundColor3 = Color3.new(1, 1, 1)
-respawn.BackgroundTransparency = 1
-respawn.Position = UDim2.new(0.672999978, 0, 0.564999998, 0)
-respawn.Size = UDim2.new(0, 101, 0, 47)
-respawn.Image = "rbxassetid://2372029791"
-respawn.ImageColor3 = Color3.new(1, 0.270588, 0.270588)
-
-TextLabel.Parent = respawn
-TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
-TextLabel.BackgroundTransparency = 1
-TextLabel.Position = UDim2.new(-0.00909121707, 0, 0.148936167, 0)
-TextLabel.Size = UDim2.new(0, 101, 0, 34)
-TextLabel.Font = Enum.Font.SourceSansBold
-TextLabel.Text = "RESPAWN"
-TextLabel.TextColor3 = Color3.new(0.384314, 0.0980392, 0.0980392)
-TextLabel.TextScaled = true
-TextLabel.TextSize = 14
-TextLabel.TextWrapped = true
+Endstage.Font = Enum.Font.Unknown
+Endstage.PlaceholderColor3 = Color3.new(0.670588, 0.670588, 0.670588)
+Endstage.PlaceholderText = "END STAGE NUMBER HERE"
+Endstage.Text = ""
+Endstage.TextColor3 = Color3.new(0.333333, 0, 0.498039)
+Endstage.TextSize = 20
+Endstage.TextWrapped = true
 
 stageskip.Name = "stageskip"
 stageskip.Parent = MainFrame
-stageskip.BackgroundColor3 = Color3.new(1, 1, 1)
-stageskip.BackgroundTransparency = 1
-stageskip.Position = UDim2.new(0.0237719305, 0, 0.564999998, 0)
-stageskip.Size = UDim2.new(0, 101, 0, 47)
-stageskip.Image = "rbxassetid://2372029791"
-stageskip.ImageColor3 = Color3.new(1, 0.270588, 0.270588)
-
-TextLabel_2.Parent = stageskip
-TextLabel_2.BackgroundColor3 = Color3.new(1, 1, 1)
-TextLabel_2.BackgroundTransparency = 1
-TextLabel_2.Position = UDim2.new(-3.02154234e-07, 0, 0.127659574, 0)
-TextLabel_2.Size = UDim2.new(0, 101, 0, 34)
-TextLabel_2.Font = Enum.Font.SourceSansBold
-TextLabel_2.Text = "SKIP TO END"
-TextLabel_2.TextColor3 = Color3.new(0.384314, 0.0980392, 0.0980392)
-TextLabel_2.TextScaled = true
-TextLabel_2.TextSize = 14
-TextLabel_2.TextWrapped = true
+stageskip.BackgroundColor3 = Color3.new(0.333333, 0.333333, 0.498039)
+stageskip.Position = UDim2.new(0.0266959202, 0, 0.651538432, 0)
+stageskip.Size = UDim2.new(0, 100, 0, 50)
+stageskip.Font = Enum.Font.DenkOne
+stageskip.Text = "Skip Stage"
+stageskip.TextColor3 = Color3.new(0.333333, 0, 0.498039)
+stageskip.TextSize = 20
 
 delkill.Name = "delkill"
 delkill.Parent = MainFrame
-delkill.BackgroundColor3 = Color3.new(1, 1, 1)
-delkill.BackgroundTransparency = 1
-delkill.Position = UDim2.new(0.335999995, 0, 0.564999998, 0)
-delkill.Size = UDim2.new(0, 110, 0, 47)
-delkill.Image = "rbxassetid://2372029791"
-delkill.ImageColor3 = Color3.new(1, 0.270588, 0.270588)
+delkill.BackgroundColor3 = Color3.new(0.333333, 0.333333, 0.498039)
+delkill.Position = UDim2.new(0.338923931, 0, 0.651538432, 0)
+delkill.Size = UDim2.new(0, 109, 0, 50)
+delkill.Font = Enum.Font.DenkOne
+delkill.Text = "Delete Kill Objects"
+delkill.TextColor3 = Color3.new(0.333333, 0, 0.498039)
+delkill.TextSize = 20
+delkill.TextWrapped = true
 
-TextLabel_3.Parent = delkill
-TextLabel_3.BackgroundColor3 = Color3.new(1, 1, 1)
-TextLabel_3.BackgroundTransparency = 1
-TextLabel_3.Position = UDim2.new(-2.7743252e-07, 0, 0.127659574, 0)
-TextLabel_3.Size = UDim2.new(0, 110, 0, 34)
-TextLabel_3.Font = Enum.Font.SourceSansBold
-TextLabel_3.Text = "DELETE KILL OBJECTS"
-TextLabel_3.TextColor3 = Color3.new(0.384314, 0.0980392, 0.0980392)
-TextLabel_3.TextScaled = true
-TextLabel_3.TextSize = 14
-TextLabel_3.TextWrapped = true
+respawn.Name = "respawn"
+respawn.Parent = MainFrame
+respawn.BackgroundColor3 = Color3.new(0.333333, 0.333333, 0.498039)
+respawn.Position = UDim2.new(0.673000038, 0, 0.651538432, 0)
+respawn.Size = UDim2.new(0, 100, 0, 50)
+respawn.Font = Enum.Font.DenkOne
+respawn.Text = "Self-die button"
+respawn.TextColor3 = Color3.new(0.333333, 0, 0.498039)
+respawn.TextSize = 20
+respawn.TextWrapped = true
 -- Scripts:
-function SCRIPT_FTTB89_FAKESCRIPT() -- Megafunobby.LocalScript 
+function SCRIPT_MKRW65_FAKESCRIPT() -- Megafunobby.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = Megafunobby
 	local frame = script.Parent.MainFrame
@@ -160,6 +99,13 @@ function SCRIPT_FTTB89_FAKESCRIPT() -- Megafunobby.LocalScript
 	frame.Draggable = true
 	local lplr = game.Players.LocalPlayer
 	local plrgui = lplr.PlayerGui
+	
+	for i,v in pairs(script.Parent:GetChildren()) do
+		if v.ClassName == "TextBox" or v.ClassName == "TextButton" or v.ClassName == "TextLabel" then
+			v.Font = Enum.Font.DenkOne
+		end
+	end
+	
 	if game.PlaceId == 12996397 then
 	
 			plrgui.Chat.Frame.Changed:connect(function()
@@ -209,12 +155,12 @@ function SCRIPT_FTTB89_FAKESCRIPT() -- Megafunobby.LocalScript
 		if success then
 			namestring = gamename.Name
 			namestring = namestring:gsub("Mega Fun Obby 2", "oof")
-			frame.Endstage.Textbox.Text = string.match(namestring,"%d+")
+			frame.Endstage.Text = string.match(namestring,"%d+")
 		end
 	
 	frame.stageskip.MouseButton1Click:connect(function()
-	local start = tonumber(frame.Currentstage.Textbox.Text)
-	local End = tonumber(frame.Endstage.Textbox.Text)
+	local start = tonumber(frame.Currentstage.Text)
+	local End = tonumber(frame.Endstage.Text)
 		if start ~= End then
 		start = start + 1
 			for i = start, End do
@@ -225,10 +171,10 @@ function SCRIPT_FTTB89_FAKESCRIPT() -- Megafunobby.LocalScript
 	end)
 	
 	local stage = game.Players.LocalPlayer.leaderstats.Stage
-	frame.Currentstage.Textbox.Text = tostring(stage.Value)
+	frame.Currentstage.Text = tostring(stage.Value)
 	stage.Changed:connect(function()
-		frame.Currentstage.Textbox.Text = tostring(stage.Value)
+		frame.Currentstage.Text = tostring(stage.Value)
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_FTTB89_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_MKRW65_FAKESCRIPT))
