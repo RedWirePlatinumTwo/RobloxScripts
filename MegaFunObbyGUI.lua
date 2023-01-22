@@ -16,7 +16,7 @@ Megafunobby.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = Megafunobby
-MainFrame.BackgroundColor3 = Color3.new(0.333333, 0.333333, 0.498039)
+MainFrame.BackgroundColor3 = Color3.new(0.223529, 0.223529, 0.333333)
 MainFrame.BorderColor3 = Color3.new(0.333333, 0, 0.498039)
 MainFrame.Position = UDim2.new(0.551999986, 0, 0.129999995, 0)
 MainFrame.Size = UDim2.new(0, 342, 0, 208)
@@ -103,7 +103,7 @@ respawn.TextSize = 20
 respawn.TextStrokeTransparency = 0
 respawn.TextWrapped = true
 -- Scripts:
-function SCRIPT_LHIV68_FAKESCRIPT() -- Megafunobby.LocalScript 
+function SCRIPT_GBKC78_FAKESCRIPT() -- Megafunobby.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = Megafunobby
 	local frame = script.Parent.MainFrame
@@ -189,4 +189,4 @@ function SCRIPT_LHIV68_FAKESCRIPT() -- Megafunobby.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_LHIV68_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_GBKC78_FAKESCRIPT))
