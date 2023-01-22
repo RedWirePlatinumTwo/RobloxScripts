@@ -169,7 +169,7 @@ function SCRIPT_VAPQ77_FAKESCRIPT() -- AutoKeyClicker.LocalScript
 	end
 	
 	frame.keyframe.AutomaticCanvasSize = 2
-	frame.keyframe.ScrollBarImageColor3 = Color3.fromRGB(0,0,127)
+	frame.keyframe.ScrollBarImageColor3 = frame.BackgroundColor3
 	local Keycodes = {
 		["b"] = 0x42,
 		["c"] = 0x43,
