@@ -46,7 +46,7 @@ Currentstage.PlaceholderColor3 = Color3.new(0.670588, 0.670588, 0.670588)
 Currentstage.PlaceholderText = "CURRENT STAGE NUMBER HERE"
 Currentstage.Text = ""
 Currentstage.TextColor3 = Color3.new(0.666667, 0.333333, 1)
-Currentstage.TextSize = 20
+Currentstage.TextSize = 24
 Currentstage.TextStrokeTransparency = 0
 Currentstage.TextWrapped = true
 
@@ -61,7 +61,7 @@ Endstage.PlaceholderColor3 = Color3.new(0.670588, 0.670588, 0.670588)
 Endstage.PlaceholderText = "END STAGE NUMBER HERE"
 Endstage.Text = ""
 Endstage.TextColor3 = Color3.new(0.666667, 0.333333, 1)
-Endstage.TextSize = 20
+Endstage.TextSize = 24
 Endstage.TextStrokeTransparency = 0
 Endstage.TextWrapped = true
 
@@ -71,10 +71,10 @@ stageskip.BackgroundColor3 = Color3.new(0.333333, 0.333333, 0.498039)
 stageskip.BorderColor3 = Color3.new(0.333333, 0, 0.498039)
 stageskip.Position = UDim2.new(0.0266959202, 0, 0.651538432, 0)
 stageskip.Size = UDim2.new(0, 100, 0, 50)
-stageskip.Font = Enum.Font.DenkOne
+stageskip.Font = Enum.Font.PatrickHand
 stageskip.Text = "Skip Stage"
 stageskip.TextColor3 = Color3.new(0.666667, 0.333333, 1)
-stageskip.TextSize = 20
+stageskip.TextSize = 24
 stageskip.TextStrokeTransparency = 0
 
 delkill.Name = "delkill"
@@ -83,10 +83,10 @@ delkill.BackgroundColor3 = Color3.new(0.333333, 0.333333, 0.498039)
 delkill.BorderColor3 = Color3.new(0.333333, 0, 0.498039)
 delkill.Position = UDim2.new(0.338923931, 0, 0.651538432, 0)
 delkill.Size = UDim2.new(0, 109, 0, 50)
-delkill.Font = Enum.Font.DenkOne
+delkill.Font = Enum.Font.PatrickHand
 delkill.Text = "Delete Kill Objects"
 delkill.TextColor3 = Color3.new(0.666667, 0.333333, 1)
-delkill.TextSize = 20
+delkill.TextSize = 24
 delkill.TextStrokeTransparency = 0
 delkill.TextWrapped = true
 
@@ -96,14 +96,14 @@ respawn.BackgroundColor3 = Color3.new(0.333333, 0.333333, 0.498039)
 respawn.BorderColor3 = Color3.new(0.333333, 0, 0.498039)
 respawn.Position = UDim2.new(0.673000038, 0, 0.651538432, 0)
 respawn.Size = UDim2.new(0, 100, 0, 50)
-respawn.Font = Enum.Font.DenkOne
+respawn.Font = Enum.Font.PatrickHand
 respawn.Text = "Self-die button"
 respawn.TextColor3 = Color3.new(0.666667, 0.333333, 1)
-respawn.TextSize = 20
+respawn.TextSize = 24
 respawn.TextStrokeTransparency = 0
 respawn.TextWrapped = true
 -- Scripts:
-function SCRIPT_GBKC78_FAKESCRIPT() -- Megafunobby.LocalScript 
+function SCRIPT_NDKX83_FAKESCRIPT() -- Megafunobby.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = Megafunobby
 	local frame = script.Parent.MainFrame
@@ -114,7 +114,7 @@ function SCRIPT_GBKC78_FAKESCRIPT() -- Megafunobby.LocalScript
 	
 	for i,v in pairs(script.Parent:GetChildren()) do
 		if v.ClassName == "TextBox" or v.ClassName == "TextButton" or v.ClassName == "TextLabel" then
-			v.Font = Enum.Font.DenkOne
+			v.Font = Enum.Font.PatrickHand
 		end
 	end
 	
@@ -189,4 +189,4 @@ function SCRIPT_GBKC78_FAKESCRIPT() -- Megafunobby.LocalScript
 	end)
 
 end
-coroutine.resume(coroutine.create(SCRIPT_GBKC78_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_NDKX83_FAKESCRIPT))
