@@ -114,7 +114,6 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 ScrollingFrame.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 ScrollingFrame.Position = UDim2.new(0.0169971678, 0, 0.330357075, 0)
 ScrollingFrame.Size = UDim2.new(0, 354, 0, 187)
-ScrollingFrame.CanvasPosition = Vector2.new(0, 150)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 disablelasers.Name = "disablelasers"
@@ -650,7 +649,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_NIBN82_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_WODN76_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -1715,17 +1714,19 @@ function SCRIPT_NIBN82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					end
 				end
 				if loadout then
-					local folitems = lplr.Folder:GetChildren()
-					for item, pos in pairs(loadout) do
-						for i, item2 in pairs(folitems) do
-							if getorder(item2) == pos and item2.Name ~= item then
-								setorder(item2, #folitems+1)
-							end
-							if lplr.Folder:FindFirstChild(item) then
-								setorder(lplr.Folder[item], pos)
+					pcall(function()
+						local folitems = lplr.Folder:GetChildren()
+						for item, pos in pairs(loadout) do
+							for i, item2 in pairs(folitems) do
+								if getorder(item2) == pos and item2.Name ~= item then
+									setorder(item2, #folitems+1)
+								end
+								if lplr.Folder:FindFirstChild(item) then
+									setorder(lplr.Folder[item], pos)
+								end
 							end
 						end
-					end
+					end)
 				end
 			end)
 			
@@ -1748,4 +1749,4 @@ function SCRIPT_NIBN82_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_NIBN82_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_WODN76_FAKESCRIPT))
