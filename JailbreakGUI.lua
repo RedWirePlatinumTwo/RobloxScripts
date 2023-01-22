@@ -485,6 +485,7 @@ loadoutframe.Active = true
 loadoutframe.BackgroundColor3 = Color3.new(0.0117647, 0.164706, 0.00392157)
 loadoutframe.BorderColor3 = Color3.new(0.333333, 1, 0)
 loadoutframe.Size = UDim2.new(0, 358, 0, 198)
+loadoutframe.Visible = false
 loadoutframe.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 Title_2.Name = "Title"
@@ -520,6 +521,7 @@ itemframe.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
 itemframe.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 itemframe.Position = UDim2.new(0, 0, 0.378787875, 0)
 itemframe.Size = UDim2.new(0, 342, 0, 25)
+itemframe.Visible = false
 
 x.Name = "x"
 x.Parent = itemframe
@@ -647,7 +649,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_JDPG86_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_HCSE80_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -665,6 +667,13 @@ function SCRIPT_JDPG86_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			v.AutomaticCanvasSize = 2
 			v.ScrollBarImageColor3 = mainframe.Parent.BorderColor3
 		end
+		if v.ClassName == "Frame" then
+			v.Active = true
+			v.Draggable = true
+		end
+		if v.ClassName == "TextBox" or v.ClassName == "TextButton" or v.ClassName == "TextLabel" then
+			v.Font = Enum.Font.Jura
+		end
 	end
 	
 	if game.PlaceId == 606849621 then
@@ -680,13 +689,6 @@ function SCRIPT_JDPG86_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		if not _G.RedsJBGUI then
 			_G.RedsJBGUI = true
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
-	
-			for i,v in pairs(script.Parent:GetChildren()) do
-				if v.ClassName == "Frame" then
-					v.Active = true
-					v.Draggable = true
-				end
-			end
 	
 	
 			local thread = function(f)
@@ -1750,4 +1752,4 @@ function SCRIPT_JDPG86_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_JDPG86_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_HCSE80_FAKESCRIPT))
