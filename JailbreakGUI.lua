@@ -649,7 +649,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_RXDI88_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_MZWD83_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -736,7 +736,7 @@ function SCRIPT_RXDI88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("The robbery notifier should be up to date now.")
+			notify("Fixed train robbery notifs appearing more than once.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1098,7 +1098,7 @@ function SCRIPT_RXDI88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end)
 	
 			local RobberyNotifier = false
-			local robtitle = "RedWire's Robbery Notifier"
+			local trainrob = true
 	
 			mainframe.RobberyNotifier.MouseButton1Click:connect(function()
 				if not RobberyNotifier then
@@ -1155,7 +1155,15 @@ function SCRIPT_RXDI88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						for i,v in pairs(IconIds) do
 							if img == "rbxassetid://"..v then
 								if i == "cargo train" or i == "passenger train" then
-									notify("The "..i.." has entered the map.")
+									if trainrob then
+										notify("The "..i.." has entered the map.")
+										trainrob = false
+										
+										delay(4, function()
+											trainrob = true
+										end)
+	
+									end
 								elseif i == "cargo ship" then
 									notify("The cargo ship is coming!")
 								elseif i == "cargo plane" then
@@ -1753,4 +1761,4 @@ function SCRIPT_RXDI88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_RXDI88_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_MZWD83_FAKESCRIPT))
