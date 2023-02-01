@@ -649,7 +649,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_MZWD83_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_OEAX70_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -661,6 +661,7 @@ function SCRIPT_MZWD83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	autosortframe.UIListLayout.SortOrder = 0
 	local rstorage = game.ReplicatedStorage
 	local runservice = game["Run Service"]
+	local buttons = {mainframe.RobberyNotifier, mainframe.Tazermod, mainframe.deleteradio, mainframe.disablelasers, mainframe.forcedaytime, mainframe.holdebypass, mainframe.keybypass, mainframe.lockonexit, mainframe.modguns, mainframe. removeragdoll}
 	
 	for i,v in pairs(script.Parent:GetDescendants()) do
 		if v.ClassName == "ScrollingFrame" then
@@ -674,6 +675,15 @@ function SCRIPT_MZWD83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		if v.ClassName == "TextBox" or v.ClassName == "TextButton" or v.ClassName == "TextLabel" then
 			v.Font = Enum.Font.Jura
 		end
+	end
+	
+	for i,v in pairs(buttons) do
+		v.TextColor3 = Color3.new(1,0,0)
+		
+		v.MouseButton1Click:connect(function()
+			v.TextColor3 = Color3.new(0,1,0)
+		end)
+		
 	end
 	
 	if game.PlaceId == 606849621 then
@@ -736,7 +746,7 @@ function SCRIPT_MZWD83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Fixed train robbery notifs appearing more than once.")
+			notify("Made visual update for like half the GUI buttons.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1761,4 +1771,4 @@ function SCRIPT_MZWD83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_MZWD83_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_OEAX70_FAKESCRIPT))
