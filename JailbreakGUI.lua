@@ -649,7 +649,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_OEAX70_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_ZWNW84_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -661,7 +661,18 @@ function SCRIPT_OEAX70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	autosortframe.UIListLayout.SortOrder = 0
 	local rstorage = game.ReplicatedStorage
 	local runservice = game["Run Service"]
-	local buttons = {mainframe.RobberyNotifier, mainframe.Tazermod, mainframe.deleteradio, mainframe.disablelasers, mainframe.forcedaytime, mainframe.holdebypass, mainframe.keybypass, mainframe.lockonexit, mainframe.modguns, mainframe. removeragdoll}
+	local buttons = {
+		mainframe.RobberyNotifier,
+		mainframe.Tazermod,
+		mainframe.deleteradio,
+		mainframe.disablelasers,
+		mainframe.forcedaytime,
+		mainframe.holdebypass,
+		mainframe.keybypass,
+		mainframe.lockonexit,
+		mainframe.modguns,
+		mainframe.removeragdoll
+		}
 	
 	for i,v in pairs(script.Parent:GetDescendants()) do
 		if v.ClassName == "ScrollingFrame" then
@@ -1771,4 +1782,4 @@ function SCRIPT_OEAX70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_OEAX70_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_ZWNW84_FAKESCRIPT))
