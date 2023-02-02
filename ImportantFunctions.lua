@@ -68,7 +68,7 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 				return loadstring("return "..name)()
 			end)
 			
-			if not success or result ~= Table then
+			if not success then
 				name = "TABLE"..name
 			end
 			if name:len() == 0 then
