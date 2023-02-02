@@ -39,6 +39,9 @@ local reformatstring = function(s)
 end
 
 getgenv().TableToString = function(Table, TableName, IsInternalTable)
+	if not TableName then
+		TableName = "TABLE"
+	end
 	local s = ""
 
 	local function setname(t, name)
@@ -59,16 +62,17 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 				indexs[name] = t
 			end
 		end
-		if type(name) == "number" then
-			name = "t"..tostring(name)
-		end
-		if type(name) ~= "string" then name = "Table" checkreps() return end
-			name = name:gsub("%W", "")
-			if tonumber(name:sub(1,1)) then
-				name = "t"..name
+			name = tostring(name):gsub("%W", "")
+			
+			local success, result = pcall(function()
+				return loadstring("return "..name)()
+			end)
+			
+			if result ~= nil then
+				name = "TABLE"..name
 			end
 			if name:len() == 0 then
-				name = "Table"
+				name = "TABLE"
 				checkreps()
 				return
 			end
