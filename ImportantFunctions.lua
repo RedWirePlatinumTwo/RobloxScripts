@@ -64,8 +64,8 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 		end
 			name = tostring(name):gsub("%W", "")
 			
-			local success, result = pcall(function()
-				return loadstring("return "..name)()
+			local success = pcall(function()
+				return loadstring("local "..name)()
 			end)
 			
 			if not success then
