@@ -39,9 +39,6 @@ local reformatstring = function(s)
 end
 
 getgenv().TableToString = function(Table, TableName, IsInternalTable)
-	if not TableName then
-		TableName = "TABLE"
-	end
 	local s = ""
 
 	local function setname(t, name)
@@ -69,10 +66,10 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 			end)
 			
 			if not success then
-				name = "TABLE"..name
+				name = "Table"..name
 			end
 			if name:len() == 0 then
-				name = "TABLE"
+				name = "Table"
 				checkreps()
 				return
 			end
@@ -178,9 +175,6 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 end
 
 getgenv().Format = function(var, tname, IsInternalTable)
-	if not tname then
-		tname = "Table"
-	end
 	local st = ""
 	local supportedtypes = {"number", "boolean", "string", "EnumItem", "table", "Instance", "Vector2", "Vector3", "CFrame", "Color3", "BrickColor","Enum","Enums","UDim2","NumberRange"}
         if typeof(var) == "EnumItem" or type(var) == "boolean" then
