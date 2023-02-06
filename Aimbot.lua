@@ -69,6 +69,9 @@ local value_14 = Instance.new("TextButton")
 local NPCToggle = Instance.new("TextLabel")
 local value_15 = Instance.new("TextButton")
 local reset_3 = Instance.new("TextButton")
+local GUIVisibilityToggle = Instance.new("TextLabel")
+local value_16 = Instance.new("TextButton")
+local reset_4 = Instance.new("TextButton")
 local TeamUI = Instance.new("Frame")
 local WhitelistedTeams = Instance.new("ScrollingFrame")
 local whitelistframe_2 = Instance.new("Frame")
@@ -698,6 +701,7 @@ ScrollingFrame_2.BackgroundColor3 = Color3.new(0, 0, 0)
 ScrollingFrame_2.BorderColor3 = Color3.new(0.333333, 1, 0)
 ScrollingFrame_2.Position = UDim2.new(0, 0, 0.0959752351, 0)
 ScrollingFrame_2.Size = UDim2.new(0, 346, 0, 292)
+ScrollingFrame_2.CanvasPosition = Vector2.new(0, 62)
 ScrollingFrame_2.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 UIListLayout_3.Parent = ScrollingFrame_2
@@ -898,6 +902,44 @@ reset_3.Text = "Reset"
 reset_3.TextColor3 = Color3.new(1, 0, 0)
 reset_3.TextSize = 24
 
+GUIVisibilityToggle.Name = "GUIVisibilityToggle"
+GUIVisibilityToggle.Parent = ScrollingFrame_2
+GUIVisibilityToggle.BackgroundColor3 = Color3.new(0, 0, 0)
+GUIVisibilityToggle.BackgroundTransparency = 1
+GUIVisibilityToggle.BorderColor3 = Color3.new(0, 0.666667, 0)
+GUIVisibilityToggle.BorderSizePixel = 0
+GUIVisibilityToggle.Position = UDim2.new(0, 0, 0.207017541, 0)
+GUIVisibilityToggle.Size = UDim2.new(0, 169, 0, 59)
+GUIVisibilityToggle.Font = Enum.Font.Highway
+GUIVisibilityToggle.Text = "GUI Visibility Toggle:"
+GUIVisibilityToggle.TextColor3 = Color3.new(0.333333, 1, 0)
+GUIVisibilityToggle.TextSize = 24
+GUIVisibilityToggle.TextXAlignment = Enum.TextXAlignment.Left
+GUIVisibilityToggle.TextYAlignment = Enum.TextYAlignment.Top
+
+value_16.Name = "value"
+value_16.Parent = GUIVisibilityToggle
+value_16.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_16.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_16.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
+value_16.Size = UDim2.new(0, 260, 0, 28)
+value_16.Font = Enum.Font.Highway
+value_16.Text = "none"
+value_16.TextColor3 = Color3.new(0.333333, 1, 0)
+value_16.TextSize = 24
+value_16.TextXAlignment = Enum.TextXAlignment.Left
+
+reset_4.Name = "reset"
+reset_4.Parent = GUIVisibilityToggle
+reset_4.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+reset_4.BorderColor3 = Color3.new(0.333333, 1, 0)
+reset_4.Position = UDim2.new(1.53846157, 0, 0.490239859, 0)
+reset_4.Size = UDim2.new(0, 78, 0, 28)
+reset_4.Font = Enum.Font.Highway
+reset_4.Text = "Reset"
+reset_4.TextColor3 = Color3.new(1, 0, 0)
+reset_4.TextSize = 24
+
 TeamUI.Name = "TeamUI"
 TeamUI.Parent = Aimbot
 TeamUI.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -1056,7 +1098,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_WTEZ73_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_RQRS73_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1070,9 +1112,17 @@ function SCRIPT_WTEZ73_FAKESCRIPT() -- Aimbot.Scripts
 	end
 	
 	if not _G.RedsAimbot then
-	_G.RedsAimbot = true
+		_G.RedsAimbot = true
+		local gui = script.Parent
+		local MainFrame = gui.MFrame
+		local wlui = gui.ManagerUI
+		local gamesettings = gui.GameSettingsUI.ScrollingFrame
+		local globalsettings = gui.GlobalSettingsUI.ScrollingFrame
+		local games = gui.GameSettingsUI
+		local globals = gui.GlobalSettingsUI
+		local teamui = gui.TeamUI
 	
-		for i,v in pairs(script.Parent:GetDescendants()) do
+		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
 				v.Active = true
@@ -1193,17 +1243,11 @@ function SCRIPT_WTEZ73_FAKESCRIPT() -- Aimbot.Scripts
 			end
 	
 		end
-	
-		local wlui = script.Parent.ManagerUI
-		local gamesettings = script.Parent.GameSettingsUI.ScrollingFrame
-		local globalsettings = script.Parent.GlobalSettingsUI.ScrollingFrame
-		local games = script.Parent.GameSettingsUI
-		local globals = script.Parent.GlobalSettingsUI
-		local teamui = script.Parent.TeamUI
+		
 		local teams = game.Teams
 	
 		if syn then
-			syn.protect_gui(script.Parent)
+			syn.protect_gui(gui)
 		end
 	
 		local WhitelistedPlrs = {}
@@ -1272,7 +1316,15 @@ function SCRIPT_WTEZ73_FAKESCRIPT() -- Aimbot.Scripts
 			gengamestats()
 			GlobalStats.Keybinds.AimbotToggle = Enum.KeyCode.LeftAlt
 			GlobalStats.Keybinds.TargetedPartToggle = Enum.KeyCode.RightAlt
-			GlobalStats.Keybinds.NPCToggle = "none"
+			local newkeybinds = {}
+			newkeybinds["NPCToggle"] = "none"
+			newkeybinds["GUIVisibilityToggle"] = "none"
+			
+			for name, default in pairs(newkeybinds) do
+				if GlobalStats.Keybinds[name] == nil then
+					GlobalStats.Keybinds[name] = default
+				end
+			end
 		end
 	
 		GameStats = GlobalStats[game.PlaceId]
@@ -1474,6 +1526,17 @@ function SCRIPT_WTEZ73_FAKESCRIPT() -- Aimbot.Scripts
 			end
 			if keycode == Keybinds.NPCToggle then
 				GameStats.TargetNPCs = not GameStats.TargetNPCs
+			end
+			if keycode == Keybinds.GUIVisibilityToggle then
+				if MainFrame.Visible then
+					for i,v in pairs(gui:GetChildren()) do
+					    if v.ClassName == "Frame" then
+						    v.Visible = false
+						end
+					end
+				else
+					MainFrame.Visible = true
+				end
 			end
 		end)
 	
@@ -1775,8 +1838,6 @@ function SCRIPT_WTEZ73_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		local MainFrame = script.Parent.MFrame
-	
 		Changed(misc, "TargetedCharacter", function(v)
 			if v then
 				local player = game.Players:GetPlayerFromCharacter(v)
@@ -1919,8 +1980,8 @@ function SCRIPT_WTEZ73_FAKESCRIPT() -- Aimbot.Scripts
 	else
 		sendnotif("Aimbot", "You've already executed this. Deleting clone.")
 		task.wait(0.2)
-		script.Parent:Destroy()
+		gui:Destroy()
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_WTEZ73_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_RQRS73_FAKESCRIPT))
