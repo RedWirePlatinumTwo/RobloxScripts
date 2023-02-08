@@ -1830,7 +1830,7 @@ function SCRIPT_RQRS73_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","Added NPC toggle keybind option and ignore players option in game stats.")
+		sendnotif("Aimbot Update","Added a GUI hide/unhide keybind setting.")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
