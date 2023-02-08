@@ -68,7 +68,7 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 			if not success then
 				name = "Table"..name
 			end
-			if name:len() == 0 then
+			if name:len() == 0 or name == "Tablenil" then
 				name = "Table"
 				checkreps()
 				return
