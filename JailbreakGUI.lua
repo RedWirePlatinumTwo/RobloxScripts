@@ -1769,9 +1769,12 @@ function SCRIPT_JONG78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			
 			plrs.PlayerRemoving:connect(function(plr)
 				if plr == lplr then
+						
 					for i,v in pairs(loadouts) do
 						v.active = false
 					end
+						
+					saveloadout()
 				end
 			end)
 	
