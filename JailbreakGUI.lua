@@ -649,7 +649,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_ZWNW84_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_JONG78_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -757,7 +757,7 @@ function SCRIPT_ZWNW84_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Made visual update for like half the GUI buttons.")
+			notify("All loadouts will turn off automatically when you leave the game.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1766,6 +1766,14 @@ function SCRIPT_ZWNW84_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			mainframe.Hotbarautosort.MouseButton1Click:connect(function()
 				aframe.Visible = true
 			end)
+			
+			plrs.PlayerRemoving:connect(function(plr)
+				if plr == lplr then
+					for i,v in pairs(loadouts) do
+						v.active = false
+					end
+				end
+			end)
 	
 		else
 			notify("Deleting clone gui")
@@ -1782,4 +1790,4 @@ function SCRIPT_ZWNW84_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_ZWNW84_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_JONG78_FAKESCRIPT))
