@@ -114,6 +114,7 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0.0117647, 0.164706, 0.00392157)
 ScrollingFrame.BorderColor3 = Color3.new(0.333333, 1, 0)
 ScrollingFrame.Position = UDim2.new(0.0169971678, 0, 0.330357075, 0)
 ScrollingFrame.Size = UDim2.new(0, 354, 0, 187)
+ScrollingFrame.CanvasPosition = Vector2.new(0, 358)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 disablelasers.Name = "disablelasers"
@@ -649,7 +650,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_JONG78_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_NQMP84_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -671,7 +672,8 @@ function SCRIPT_JONG78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		mainframe.keybypass,
 		mainframe.lockonexit,
 		mainframe.modguns,
-		mainframe.removeragdoll
+		mainframe.removeragdoll,
+		mainframe.infiniteyeet
 		}
 	
 	for i,v in pairs(script.Parent:GetDescendants()) do
@@ -757,7 +759,7 @@ function SCRIPT_JONG78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("All loadouts will turn off automatically when you leave the game.")
+			notify("Improved hotbar auto-loadout + loadouts no longer disable themselves when leaving a game.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1748,10 +1750,11 @@ function SCRIPT_JONG78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 				if loadout then
 					pcall(function()
-						local folitems = lplr.Folder:GetChildren()
+						local folder = lplr.Folder
+						local folitems = folder:GetChildren()
 						for item, pos in pairs(loadout) do
 							for i, item2 in pairs(folitems) do
-								if getorder(item2) == pos and item2.Name ~= item then
+								if getorder(item2) == pos and item2.Name ~= item and folder:FindFirstChild(item) then
 									setorder(item2, #folitems+1)
 								end
 								if lplr.Folder:FindFirstChild(item) then
@@ -1765,17 +1768,6 @@ function SCRIPT_JONG78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			
 			mainframe.Hotbarautosort.MouseButton1Click:connect(function()
 				aframe.Visible = true
-			end)
-			
-			plrs.PlayerRemoving:connect(function(plr)
-				if plr == lplr then
-						
-					for i,v in pairs(loadouts) do
-						v.active = false
-					end
-						
-					saveloadout()
-				end
 			end)
 	
 		else
@@ -1793,4 +1785,4 @@ function SCRIPT_JONG78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_JONG78_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_NQMP84_FAKESCRIPT))
