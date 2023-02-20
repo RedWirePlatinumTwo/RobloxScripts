@@ -1692,15 +1692,7 @@ function SCRIPT_WNKS68_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					
 				end
 				
-				local litems = {}
-				
 				for i,v in pairs(loadout.items) do
-					litems[v] = i
-				end
-				
-				table.sort(litems)
-				
-				for v, i in pairs(litems) do
 					additem(i, tostring(v))
 				end
 				
