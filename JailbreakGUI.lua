@@ -114,7 +114,6 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0.0117647, 0.164706, 0.00392157)
 ScrollingFrame.BorderColor3 = Color3.new(0.333333, 1, 0)
 ScrollingFrame.Position = UDim2.new(0.0169971678, 0, 0.330357075, 0)
 ScrollingFrame.Size = UDim2.new(0, 354, 0, 187)
-ScrollingFrame.CanvasPosition = Vector2.new(0, 358)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 disablelasers.Name = "disablelasers"
@@ -650,7 +649,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_NQMP84_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_WNKS68_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -759,7 +758,7 @@ function SCRIPT_NQMP84_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Improved hotbar auto-loadout + loadouts no longer disable themselves when leaving a game.")
+			notify("Improved hotbar auto-loadout again.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1622,15 +1621,17 @@ function SCRIPT_NQMP84_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				clone.Parent = autosortframe
 				clone.Visible = true
 				clone.Title.Text = name
-				clone.active.Text = "Active ("..tostring(loadouts[name].active)..")"
+				clone.active.Text = "Active ("..tostring(loadout.active)..")"
 				
 				local function updateloadout()
 					loadout.items = {}
+					
 					for i,v in pairs(clone:GetChildren()) do 
 						if v.Name == "itemframe" and table.find(items, v.itemname.Text) and tonumber(v.slotnum.Text) then
 							loadout.items[v.itemname.Text] = tonumber(v.slotnum.Text)
 						end
 					end
+					
 					saveloadout()
 				end
 				
@@ -1640,7 +1641,6 @@ function SCRIPT_NQMP84_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				
 				clone.active.MouseButton1Click:connect(function()
 					loadout.active = not loadout.active
-					updateloadout()
 				end)
 				
 				Changed(loadout, "active", function(val)
@@ -1657,6 +1657,7 @@ function SCRIPT_NQMP84_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						clone.active.TextColor3 = Color3.new(1,0,0)
 					end
 					clone.active.Text = "Active ("..tostring(val)..")"
+					saveloadout()
 				end)
 				
 				local function additem(txt,txt2)
@@ -1691,7 +1692,15 @@ function SCRIPT_NQMP84_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					
 				end
 				
+				local litems = {}
+				
 				for i,v in pairs(loadout.items) do
+					litems[v] = i
+				end
+				
+				table.sort(litems)
+				
+				for v, i in pairs(litems) do
 					additem(i, tostring(v))
 				end
 				
@@ -1785,4 +1794,4 @@ function SCRIPT_NQMP84_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_NQMP84_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_WNKS68_FAKESCRIPT))
