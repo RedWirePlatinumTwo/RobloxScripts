@@ -649,7 +649,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_WNKS68_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_RIKL88_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -758,7 +758,7 @@ function SCRIPT_WNKS68_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Improved hotbar auto-loadout again.")
+			notify("Loadout slots now appear in order.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1692,9 +1692,28 @@ function SCRIPT_WNKS68_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					
 				end
 				
-				for i,v in pairs(loadout.items) do
-					additem(i, tostring(v))
+				local valuesort = function(t, func)
+					local revert = {}
+					local vals = {}
+	
+	
+					for i,v in pairs(t) do
+						revert[v] = i
+						table.insert(vals,v)
+					end
+	
+					table.sort(vals)
+	
+					for i,v in pairs(vals) do
+						local val = revert[v]
+						func(val, v)
+					end
+	
 				end
+				
+				valuesort(loadout.items, function(i,v)
+					additem(i, tostring(v))
+				end)
 				
 				clone.additem.MouseButton1Click:connect(function()
 					additem()
@@ -1786,4 +1805,4 @@ function SCRIPT_WNKS68_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_WNKS68_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_RIKL88_FAKESCRIPT))
