@@ -1821,13 +1821,11 @@ function SCRIPT_CXBH68_FAKESCRIPT() -- Aimbot.Scripts
 				end
 	
 				valuesort(table1, function(Char, position)
-					if position < GameStats.MaxStuds then
-						local plr = plrs:GetPlayerFromCharacter(Char)
-						if plr then
-							targetplayer(plr)
-						else
-							selectcharacter(Char)
-						end
+					local plr = plrs:GetPlayerFromCharacter(Char)
+					if plr then
+						targetplayer(plr)
+					else
+						selectcharacter(Char)
 					end
 					return "stop"
 				end)
