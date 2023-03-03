@@ -1705,8 +1705,10 @@ function SCRIPT_RIKL88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					table.sort(vals)
 	
 					for i,v in pairs(vals) do
-						local val = revert[v]
-						func(val, v)
+						local f = func(revert[v], v)
+						if f == "stop" then
+							break
+						end
 					end
 	
 				end
