@@ -701,7 +701,6 @@ ScrollingFrame_2.BackgroundColor3 = Color3.new(0, 0, 0)
 ScrollingFrame_2.BorderColor3 = Color3.new(0.333333, 1, 0)
 ScrollingFrame_2.Position = UDim2.new(0, 0, 0.0959752351, 0)
 ScrollingFrame_2.Size = UDim2.new(0, 346, 0, 292)
-ScrollingFrame_2.CanvasPosition = Vector2.new(0, 62)
 ScrollingFrame_2.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 UIListLayout_3.Parent = ScrollingFrame_2
@@ -1098,7 +1097,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_RQRS73_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_CXBH68_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1239,6 +1238,27 @@ function SCRIPT_RQRS73_FAKESCRIPT() -- Aimbot.Scripts
 			for i,v in pairs(GetFamily(ins,true)) do
 				if v:FindFirstChildOfClass("Humanoid") and v:FindFirstChildOfClass("Humanoid").RootPart and not ischaracter(v) then
 					return v
+				end
+			end
+	
+		end
+		
+		local valuesort = function(t, func)
+			local revert = {}
+			local vals = {}
+	
+	
+			for i,v in pairs(t) do
+				revert[v] = i
+				table.insert(vals,v)
+			end
+	
+			table.sort(vals)
+	
+			for i,v in pairs(vals) do
+				local f = func(revert[v], v)
+				if f == "stop" then
+					break
 				end
 			end
 	
@@ -1530,8 +1550,8 @@ function SCRIPT_RQRS73_FAKESCRIPT() -- Aimbot.Scripts
 			if keycode == Keybinds.GUIVisibilityToggle then
 				if MainFrame.Visible then
 					for i,v in pairs(gui:GetChildren()) do
-					    if v.ClassName == "Frame" then
-						    v.Visible = false
+						if v.ClassName == "Frame" then
+							v.Visible = false
 						end
 					end
 				else
@@ -1758,7 +1778,6 @@ function SCRIPT_RQRS73_FAKESCRIPT() -- Aimbot.Scripts
 	
 			if GameStats.AutoTarget then
 			    local table1 = {}
-			    local table2 = {}
 			    local PrioritizedPlrsOnScreen = {}
 	
 	            local function addchr(v)
@@ -1769,8 +1788,7 @@ function SCRIPT_RQRS73_FAKESCRIPT() -- Aimbot.Scripts
 			    	        local pos = math.floor(lplr:DistanceFromCharacter(targpart.Position))
 			    	        local _, onscreen = workspace.CurrentCamera:WorldToScreenPoint(targpart.Position)
 			    	        if onscreen and pos < GameStats.MaxStuds then
-			    	            table1[pos] = v
-			    			    table.insert(table2, pos)
+			    	            table1[v] = pos
 			        			if table.find(PrioritizedPlrs, plrs:GetPlayerFromCharacter(v)) then
 			        				table.insert(PrioritizedPlrsOnScreen, v)
 			        			end
@@ -1792,31 +1810,27 @@ function SCRIPT_RQRS73_FAKESCRIPT() -- Aimbot.Scripts
 					end
 				end
 	
-				if #PrioritizedPlrsOnScreen == 0 then
-					table.sort(table2)
-				else
+				if #PrioritizedPlrsOnScreen ~= 0 then
 	
-					for pos, chr in pairs(table1) do
+					for chr, pos in pairs(table1) do
 						if not table.find(PrioritizedPlrsOnScreen, chr) then
-							table.remove(table2, table.find(table2,pos))
-							table1[pos] = nil
+							table1[chr] = nil
 						end
 					end
 	
-				    table.sort(table2)
 				end
 	
-				for position, Char in pairs(table1) do
-					if table2[1] == position then
-					    local plr = plrs:GetPlayerFromCharacter(Char)
-					    if plr then
-						    targetplayer(plr)
+				valuesort(table1, function(Char, position)
+					if position < GameStats.MaxStuds then
+						local plr = plrs:GetPlayerFromCharacter(Char)
+						if plr then
+							targetplayer(plr)
 						else
-						    selectcharacter(Char)
-					    end
-						break
-				    end
-				end
+							selectcharacter(Char)
+						end
+					end
+					return "stop"
+				end)
 		    end
 	
 			if GameStats.FPEnabled then
@@ -1830,7 +1844,7 @@ function SCRIPT_RQRS73_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","Added a GUI hide/unhide keybind setting.")
+		sendnotif("Aimbot Update","Improved Auto-Targeting ever so slightly.")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
@@ -1984,4 +1998,4 @@ function SCRIPT_RQRS73_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_RQRS73_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_CXBH68_FAKESCRIPT))
