@@ -1097,7 +1097,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_CXBH68_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_FUNK68_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1832,7 +1832,7 @@ function SCRIPT_CXBH68_FAKESCRIPT() -- Aimbot.Scripts
 		    end
 	
 			if GameStats.FPEnabled then
-				if misc.TargetedCharacter and misc.IsAimbotOn then
+				if misc.TargetedCharacter and misc.IsAimbotOn and workspace.CurrentCamera.CameraType ~= Enum.CameraType.Scriptable then
 					plrs.LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
 				else
 					plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
@@ -1842,7 +1842,7 @@ function SCRIPT_CXBH68_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","Improved Auto-Targeting ever so slightly.")
+		sendnotif("Aimbot Update","Fixed bug where your cursor would get stuck in the center of the screen in certain cases.")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
@@ -1996,4 +1996,4 @@ function SCRIPT_CXBH68_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_CXBH68_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_FUNK68_FAKESCRIPT))
