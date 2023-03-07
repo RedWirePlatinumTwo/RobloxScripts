@@ -10,7 +10,7 @@ local ChatDisaster = Instance.new("TextButton")
 local Admin = Instance.new("TextButton")
 local lobbytp = Instance.new("TextButton")
 --Properties:
-RedWiresNDSGUI.Name = "RedWiresAAAAAAAAAAAAAA"
+RedWiresNDSGUI.Name = "RedWiresNDSGUI"
 RedWiresNDSGUI.Parent = game.CoreGui
 RedWiresNDSGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
