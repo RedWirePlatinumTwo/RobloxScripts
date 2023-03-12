@@ -114,6 +114,7 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0.0117647, 0.164706, 0.00392157)
 ScrollingFrame.BorderColor3 = Color3.new(0.333333, 1, 0)
 ScrollingFrame.Position = UDim2.new(0.0169971678, 0, 0.330357075, 0)
 ScrollingFrame.Size = UDim2.new(0, 354, 0, 187)
+ScrollingFrame.CanvasPosition = Vector2.new(0, 358)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 disablelasers.Name = "disablelasers"
@@ -649,7 +650,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_RIKL88_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_HBBX68_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -669,7 +670,6 @@ function SCRIPT_RIKL88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		mainframe.forcedaytime,
 		mainframe.holdebypass,
 		mainframe.keybypass,
-		mainframe.lockonexit,
 		mainframe.modguns,
 		mainframe.removeragdoll,
 		mainframe.infiniteyeet
@@ -758,7 +758,7 @@ function SCRIPT_RIKL88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Loadout slots now appear in order.")
+			notify("The vehicle auto-lock on exit + unlock on enter is now togglable.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1246,8 +1246,7 @@ function SCRIPT_RIKL88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			local exitfn = onexit._fn
 			local onenter = vehicle.OnVehicleEntered._handlerListHead
 			local enterfn = onenter._fn
-	
-			local unlockOnEnter = true -- whether or not you actually want your car to auto-unlock on enter
+			
 	
 			local function isdriver()
 			    local model = getmodel()
@@ -1457,7 +1456,7 @@ function SCRIPT_RIKL88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				if not respawnconfirm then
 					respawnconfirm = true
 					mainframe.respawn.Text = respawntxt.." (you sure?)"
-					wait(1)
+					wait(2)
 					respawnconfirm = false
 					mainframe.respawn.Text = respawntxt
 				end
@@ -1483,6 +1482,10 @@ function SCRIPT_RIKL88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end)
 			
 			local vmod = false
+			local vmodtoggle = false
+			local locktxt = mainframe.lockonexit.Text
+			mainframe.lockonexit.Text = locktxt.." ("..tostring(vmodtoggle)..")"
+			
 	
 			mainframe.lockonexit.MouseButton1Click:connect(function()
 				if not vmod then 
@@ -1498,7 +1501,7 @@ function SCRIPT_RIKL88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					end
 	
 					onexit._fn = function(...)
-					    if isdriver() and not iscarlocked() then
+					    if isdriver() and not iscarlocked() and vmodtoggle then
 					        togglelock()
 					    end
 					    return exitfn(...)
@@ -1508,7 +1511,7 @@ function SCRIPT_RIKL88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					    coroutine.resume(coroutine.create(function()
 					        repeat task.wait() until getmodel()
 					        task.wait(0.1) -- sometimes it doesn't always work immediately, so this is just to be safe
-					        if isdriver() and iscarlocked() and unlockOnEnter then
+					        if isdriver() and iscarlocked() and vmodtoggle then
 					            togglelock()
 					        end
 					    end))
@@ -1517,6 +1520,8 @@ function SCRIPT_RIKL88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 					notify("Vehicle auto-lock/unlock enabled!")
 				end
+				vmodtoggle = not vmodtoggle
+				mainframe.lockonexit.Text = locktxt.." ("..tostring(vmodtoggle)..")"
 			end)
 			
 			local tazermod = false
@@ -1807,4 +1812,4 @@ function SCRIPT_RIKL88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_RIKL88_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_HBBX68_FAKESCRIPT))
