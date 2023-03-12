@@ -114,7 +114,7 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0.0117647, 0.164706, 0.00392157)
 ScrollingFrame.BorderColor3 = Color3.new(0.333333, 1, 0)
 ScrollingFrame.Position = UDim2.new(0.0169971678, 0, 0.330357075, 0)
 ScrollingFrame.Size = UDim2.new(0, 354, 0, 187)
-ScrollingFrame.CanvasPosition = Vector2.new(0, 358)
+ScrollingFrame.CanvasPosition = Vector2.new(0, 208)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 disablelasers.Name = "disablelasers"
@@ -126,7 +126,7 @@ disablelasers.Size = UDim2.new(0, 106, 0, 52)
 disablelasers.Font = Enum.Font.Unknown
 disablelasers.Text = "Disable Lasers"
 disablelasers.TextColor3 = Color3.new(0.666667, 1, 0.498039)
-disablelasers.TextSize = 20
+disablelasers.TextSize = 16
 disablelasers.TextStrokeTransparency = 0
 disablelasers.TextWrapped = true
 
@@ -139,7 +139,7 @@ holdebypass.Size = UDim2.new(0, 106, 0, 52)
 holdebypass.Font = Enum.Font.Unknown
 holdebypass.Text = "Hold E Bypass"
 holdebypass.TextColor3 = Color3.new(0.666667, 1, 0.498039)
-holdebypass.TextSize = 20
+holdebypass.TextSize = 16
 holdebypass.TextStrokeTransparency = 0
 holdebypass.TextWrapped = true
 
@@ -152,7 +152,7 @@ aimbot.Size = UDim2.new(0, 110, 0, 50)
 aimbot.Font = Enum.Font.Unknown
 aimbot.Text = "Aimbot"
 aimbot.TextColor3 = Color3.new(0.666667, 1, 0.498039)
-aimbot.TextSize = 20
+aimbot.TextSize = 16
 aimbot.TextStrokeTransparency = 0
 aimbot.TextWrapped = true
 
@@ -166,7 +166,7 @@ Airdrop.ZIndex = -222
 Airdrop.Font = Enum.Font.Unknown
 Airdrop.Text = "Airdrop ESP Toggle"
 Airdrop.TextColor3 = Color3.new(0.666667, 1, 0.498039)
-Airdrop.TextSize = 20
+Airdrop.TextSize = 16
 Airdrop.TextStrokeTransparency = 0
 Airdrop.TextWrapped = true
 
@@ -183,7 +183,7 @@ modguns.ZIndex = -99
 modguns.Font = Enum.Font.Unknown
 modguns.Text = "Mod guns"
 modguns.TextColor3 = Color3.new(0.666667, 1, 0.498039)
-modguns.TextSize = 20
+modguns.TextSize = 16
 modguns.TextStrokeTransparency = 0
 modguns.TextWrapped = true
 
@@ -197,7 +197,7 @@ GravToggle.ZIndex = 0
 GravToggle.Font = Enum.Font.Unknown
 GravToggle.Text = "Gravity Toggle (196)"
 GravToggle.TextColor3 = Color3.new(0.666667, 1, 0.498039)
-GravToggle.TextSize = 20
+GravToggle.TextSize = 16
 GravToggle.TextStrokeTransparency = 0
 GravToggle.TextWrapped = true
 
@@ -211,7 +211,7 @@ forcedaytime.ZIndex = 0
 forcedaytime.Font = Enum.Font.Unknown
 forcedaytime.Text = "Force Daytime"
 forcedaytime.TextColor3 = Color3.new(0.666667, 1, 0.498039)
-forcedaytime.TextSize = 20
+forcedaytime.TextSize = 16
 forcedaytime.TextStrokeTransparency = 0
 forcedaytime.TextWrapped = true
 
@@ -223,7 +223,7 @@ removeragdoll.Size = UDim2.new(0, 115, 0, 47)
 removeragdoll.Font = Enum.Font.Unknown
 removeragdoll.Text = "Remove Ragdoll"
 removeragdoll.TextColor3 = Color3.new(0.666667, 1, 0.498039)
-removeragdoll.TextSize = 20
+removeragdoll.TextSize = 16
 removeragdoll.TextStrokeTransparency = 0
 removeragdoll.TextWrapped = true
 
@@ -236,7 +236,7 @@ RobberyNotifier.Size = UDim2.new(0, 117, 0, 47)
 RobberyNotifier.Font = Enum.Font.Unknown
 RobberyNotifier.Text = "Robbery Notifier"
 RobberyNotifier.TextColor3 = Color3.new(0.666667, 1, 0.498039)
-RobberyNotifier.TextSize = 20
+RobberyNotifier.TextSize = 16
 RobberyNotifier.TextStrokeTransparency = 0
 RobberyNotifier.TextWrapped = true
 
@@ -249,7 +249,7 @@ infiniteyeet.Size = UDim2.new(0, 117, 0, 47)
 infiniteyeet.Font = Enum.Font.Unknown
 infiniteyeet.Text = "Inf Yield"
 infiniteyeet.TextColor3 = Color3.new(0.666667, 1, 0.498039)
-infiniteyeet.TextSize = 20
+infiniteyeet.TextSize = 16
 infiniteyeet.TextStrokeTransparency = 0
 infiniteyeet.TextWrapped = true
 
@@ -262,7 +262,7 @@ gunshoptp.Size = UDim2.new(0, 117, 0, 47)
 gunshoptp.Font = Enum.Font.Unknown
 gunshoptp.Text = "Gunshop TP"
 gunshoptp.TextColor3 = Color3.new(0.666667, 1, 0.498039)
-gunshoptp.TextSize = 20
+gunshoptp.TextSize = 16
 gunshoptp.TextStrokeTransparency = 0
 gunshoptp.TextWrapped = true
 
@@ -276,7 +276,7 @@ keybypass.ZIndex = 0
 keybypass.Font = Enum.Font.Unknown
 keybypass.Text = "Keycard Bypass"
 keybypass.TextColor3 = Color3.new(0.666667, 1, 0.498039)
-keybypass.TextSize = 20
+keybypass.TextSize = 16
 keybypass.TextStrokeTransparency = 0
 keybypass.TextWrapped = true
 
@@ -290,7 +290,7 @@ getcode.ZIndex = 0
 getcode.Font = Enum.Font.Unknown
 getcode.Text = "Get Casino code"
 getcode.TextColor3 = Color3.new(0.666667, 1, 0.498039)
-getcode.TextSize = 20
+getcode.TextSize = 16
 getcode.TextStrokeTransparency = 0
 getcode.TextWrapped = true
 
@@ -304,7 +304,7 @@ deleteradio.ZIndex = -1
 deleteradio.Font = Enum.Font.Unknown
 deleteradio.Text = "Delete Radio Gui (its stupid)"
 deleteradio.TextColor3 = Color3.new(0.666667, 1, 0.498039)
-deleteradio.TextSize = 20
+deleteradio.TextSize = 16
 deleteradio.TextStrokeTransparency = 0
 deleteradio.TextWrapped = true
 
@@ -318,7 +318,7 @@ respawn.ZIndex = -1
 respawn.Font = Enum.Font.Unknown
 respawn.Text = "Respawn"
 respawn.TextColor3 = Color3.new(0.666667, 1, 0.498039)
-respawn.TextSize = 20
+respawn.TextSize = 16
 respawn.TextStrokeTransparency = 0
 respawn.TextWrapped = true
 
@@ -330,9 +330,9 @@ lockonexit.Position = UDim2.new(0.667000175, 0, 0.523438752, 0)
 lockonexit.Size = UDim2.new(0, 116, 0, 47)
 lockonexit.ZIndex = -1
 lockonexit.Font = Enum.Font.Unknown
-lockonexit.Text = "Lock on exit + Unlock on enter"
+lockonexit.Text = "Lock on exit + Unlock on enter (false)"
 lockonexit.TextColor3 = Color3.new(0.666667, 1, 0.498039)
-lockonexit.TextSize = 20
+lockonexit.TextSize = 16
 lockonexit.TextStrokeTransparency = 0
 lockonexit.TextWrapped = true
 
@@ -346,7 +346,7 @@ Tazermod.ZIndex = -222
 Tazermod.Font = Enum.Font.Unknown
 Tazermod.Text = "Tazer mod"
 Tazermod.TextColor3 = Color3.new(0.666667, 1, 0.498039)
-Tazermod.TextSize = 20
+Tazermod.TextSize = 16
 Tazermod.TextStrokeTransparency = 0
 Tazermod.TextWrapped = true
 
@@ -360,7 +360,7 @@ ropefollow.ZIndex = -222
 ropefollow.Font = Enum.Font.Unknown
 ropefollow.Text = "Rope-Follow-Part"
 ropefollow.TextColor3 = Color3.new(0.666667, 1, 0.498039)
-ropefollow.TextSize = 20
+ropefollow.TextSize = 16
 ropefollow.TextStrokeTransparency = 0
 ropefollow.TextWrapped = true
 
@@ -374,7 +374,7 @@ Hotbarautosort.ZIndex = -222
 Hotbarautosort.Font = Enum.Font.Unknown
 Hotbarautosort.Text = "Hotbar Auto-sorter"
 Hotbarautosort.TextColor3 = Color3.new(0.666667, 1, 0.498039)
-Hotbarautosort.TextSize = 20
+Hotbarautosort.TextSize = 16
 Hotbarautosort.TextStrokeTransparency = 0
 Hotbarautosort.TextWrapped = true
 
@@ -650,7 +650,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_HBBX68_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_BOAB88_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -1812,4 +1812,4 @@ function SCRIPT_HBBX68_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_HBBX68_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_BOAB88_FAKESCRIPT))
