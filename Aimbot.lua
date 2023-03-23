@@ -30,47 +30,43 @@ local X = Instance.new("TextButton")
 local SwitchToTeam = Instance.new("TextButton")
 local ScrollingFrame = Instance.new("ScrollingFrame")
 local UIListLayout_2 = Instance.new("UIListLayout")
-local FPEnabled = Instance.new("TextLabel")
-local value = Instance.new("TextButton")
 local AutoTarget = Instance.new("TextLabel")
-local value_2 = Instance.new("TextButton")
+local value = Instance.new("TextButton")
 local Target = Instance.new("TextLabel")
-local value_3 = Instance.new("TextButton")
+local value_2 = Instance.new("TextButton")
 local WhitelistFriends = Instance.new("TextLabel")
-local value_4 = Instance.new("TextButton")
+local value_3 = Instance.new("TextButton")
 local MaxStuds = Instance.new("TextLabel")
-local value_5 = Instance.new("TextBox")
+local value_4 = Instance.new("TextBox")
 local OwnTeamWhitelisted = Instance.new("TextLabel")
-local value_6 = Instance.new("TextButton")
+local value_5 = Instance.new("TextButton")
 local TargetCloserPlayers = Instance.new("TextLabel")
-local value_7 = Instance.new("TextButton")
+local value_6 = Instance.new("TextButton")
 local About = Instance.new("TextLabel")
 local TargetNPCs = Instance.new("TextLabel")
-local value_8 = Instance.new("TextButton")
+local value_7 = Instance.new("TextButton")
 local IgnorePlayers = Instance.new("TextLabel")
-local value_9 = Instance.new("TextButton")
+local value_8 = Instance.new("TextButton")
 local GlobalSettingsUI = Instance.new("Frame")
 local Title_4 = Instance.new("TextLabel")
 local X_2 = Instance.new("TextButton")
 local ScrollingFrame_2 = Instance.new("ScrollingFrame")
 local UIListLayout_3 = Instance.new("UIListLayout")
-local AimIntensity = Instance.new("TextLabel")
-local value_10 = Instance.new("TextBox")
 local AimbotToggle = Instance.new("TextLabel")
-local value_11 = Instance.new("TextButton")
+local value_9 = Instance.new("TextButton")
 local reset = Instance.new("TextButton")
 local TargetedPartToggle = Instance.new("TextLabel")
-local value_12 = Instance.new("TextButton")
+local value_10 = Instance.new("TextButton")
 local reset_2 = Instance.new("TextButton")
 local RightClickAim = Instance.new("TextLabel")
-local value_13 = Instance.new("TextButton")
+local value_11 = Instance.new("TextButton")
 local TeamAutofill = Instance.new("TextLabel")
-local value_14 = Instance.new("TextButton")
+local value_12 = Instance.new("TextButton")
 local NPCToggle = Instance.new("TextLabel")
-local value_15 = Instance.new("TextButton")
+local value_13 = Instance.new("TextButton")
 local reset_3 = Instance.new("TextButton")
 local GUIVisibilityToggle = Instance.new("TextLabel")
-local value_16 = Instance.new("TextButton")
+local value_14 = Instance.new("TextButton")
 local reset_4 = Instance.new("TextButton")
 local TeamUI = Instance.new("Frame")
 local WhitelistedTeams = Instance.new("ScrollingFrame")
@@ -404,33 +400,6 @@ ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 UIListLayout_2.Parent = ScrollingFrame
 
-FPEnabled.Name = "FPEnabled"
-FPEnabled.Parent = ScrollingFrame
-FPEnabled.BackgroundColor3 = Color3.new(0, 0, 0)
-FPEnabled.BackgroundTransparency = 1
-FPEnabled.BorderColor3 = Color3.new(0, 0.666667, 0)
-FPEnabled.BorderSizePixel = 0
-FPEnabled.Position = UDim2.new(0, 0, 0.247058824, 0)
-FPEnabled.Size = UDim2.new(0, 169, 0, 63)
-FPEnabled.Font = Enum.Font.Highway
-FPEnabled.Text = "First Person Mode Enabled:"
-FPEnabled.TextColor3 = Color3.new(0.333333, 1, 0)
-FPEnabled.TextSize = 24
-FPEnabled.TextXAlignment = Enum.TextXAlignment.Left
-FPEnabled.TextYAlignment = Enum.TextYAlignment.Top
-
-value.Name = "value"
-value.Parent = FPEnabled
-value.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value.BorderColor3 = Color3.new(0.333333, 1, 0)
-value.Position = UDim2.new(0, 0, 0.548714161, 0)
-value.Size = UDim2.new(0, 290, 0, 28)
-value.Font = Enum.Font.Highway
-value.Text = "true"
-value.TextColor3 = Color3.new(0.333333, 1, 0)
-value.TextSize = 24
-value.TextXAlignment = Enum.TextXAlignment.Left
-
 AutoTarget.Name = "AutoTarget"
 AutoTarget.Parent = ScrollingFrame
 AutoTarget.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -445,17 +414,17 @@ AutoTarget.TextSize = 24
 AutoTarget.TextXAlignment = Enum.TextXAlignment.Left
 AutoTarget.TextYAlignment = Enum.TextYAlignment.Top
 
-value_2.Name = "value"
-value_2.Parent = AutoTarget
-value_2.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_2.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_2.Position = UDim2.new(-0.000219581649, 0, 0.522047281, 0)
-value_2.Size = UDim2.new(0, 290, 0, 28)
-value_2.Font = Enum.Font.Highway
-value_2.Text = "true"
-value_2.TextColor3 = Color3.new(0.333333, 1, 0)
-value_2.TextSize = 24
-value_2.TextXAlignment = Enum.TextXAlignment.Left
+value.Name = "value"
+value.Parent = AutoTarget
+value.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value.BorderColor3 = Color3.new(0.333333, 1, 0)
+value.Position = UDim2.new(-0.000219581649, 0, 0.522047281, 0)
+value.Size = UDim2.new(0, 290, 0, 28)
+value.Font = Enum.Font.Highway
+value.Text = "true"
+value.TextColor3 = Color3.new(0.333333, 1, 0)
+value.TextSize = 24
+value.TextXAlignment = Enum.TextXAlignment.Left
 
 Target.Name = "Target"
 Target.Parent = ScrollingFrame
@@ -472,17 +441,17 @@ Target.TextSize = 24
 Target.TextXAlignment = Enum.TextXAlignment.Left
 Target.TextYAlignment = Enum.TextYAlignment.Top
 
-value_3.Name = "value"
-value_3.Parent = Target
-value_3.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_3.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_3.Position = UDim2.new(0, 0, 0.53204751, 0)
-value_3.Size = UDim2.new(0, 290, 0, 28)
-value_3.Font = Enum.Font.Highway
-value_3.Text = "Head"
-value_3.TextColor3 = Color3.new(0.333333, 1, 0)
-value_3.TextSize = 24
-value_3.TextXAlignment = Enum.TextXAlignment.Left
+value_2.Name = "value"
+value_2.Parent = Target
+value_2.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_2.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_2.Position = UDim2.new(0, 0, 0.53204751, 0)
+value_2.Size = UDim2.new(0, 290, 0, 28)
+value_2.Font = Enum.Font.Highway
+value_2.Text = "Head"
+value_2.TextColor3 = Color3.new(0.333333, 1, 0)
+value_2.TextSize = 24
+value_2.TextXAlignment = Enum.TextXAlignment.Left
 
 WhitelistFriends.Name = "WhitelistFriends"
 WhitelistFriends.Parent = ScrollingFrame
@@ -499,17 +468,17 @@ WhitelistFriends.TextSize = 24
 WhitelistFriends.TextXAlignment = Enum.TextXAlignment.Left
 WhitelistFriends.TextYAlignment = Enum.TextYAlignment.Top
 
-value_4.Name = "value"
-value_4.Parent = WhitelistFriends
-value_4.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_4.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_4.Position = UDim2.new(0.00591715984, 0, 0.494633496, 0)
-value_4.Size = UDim2.new(0, 290, 0, 28)
-value_4.Font = Enum.Font.Highway
-value_4.Text = "false"
-value_4.TextColor3 = Color3.new(0.333333, 1, 0)
-value_4.TextSize = 24
-value_4.TextXAlignment = Enum.TextXAlignment.Left
+value_3.Name = "value"
+value_3.Parent = WhitelistFriends
+value_3.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_3.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_3.Position = UDim2.new(0.00591715984, 0, 0.494633496, 0)
+value_3.Size = UDim2.new(0, 290, 0, 28)
+value_3.Font = Enum.Font.Highway
+value_3.Text = "false"
+value_3.TextColor3 = Color3.new(0.333333, 1, 0)
+value_3.TextSize = 24
+value_3.TextXAlignment = Enum.TextXAlignment.Left
 
 MaxStuds.Name = "MaxStuds"
 MaxStuds.Parent = ScrollingFrame
@@ -526,19 +495,19 @@ MaxStuds.TextSize = 24
 MaxStuds.TextXAlignment = Enum.TextXAlignment.Left
 MaxStuds.TextYAlignment = Enum.TextYAlignment.Top
 
-value_5.Name = "value"
-value_5.Parent = MaxStuds
-value_5.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_5.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_5.Position = UDim2.new(-0.00595760904, 0, 0.490557313, 0)
-value_5.Size = UDim2.new(0, 290, 0, 28)
-value_5.Font = Enum.Font.Highway
-value_5.PlaceholderColor3 = Color3.new(0.333333, 1, 0)
-value_5.PlaceholderText = "Default is 500"
-value_5.Text = "500"
-value_5.TextColor3 = Color3.new(0.333333, 1, 0)
-value_5.TextSize = 24
-value_5.TextXAlignment = Enum.TextXAlignment.Left
+value_4.Name = "value"
+value_4.Parent = MaxStuds
+value_4.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_4.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_4.Position = UDim2.new(-0.00595760904, 0, 0.490557313, 0)
+value_4.Size = UDim2.new(0, 290, 0, 28)
+value_4.Font = Enum.Font.Highway
+value_4.PlaceholderColor3 = Color3.new(0.333333, 1, 0)
+value_4.PlaceholderText = "Default is 500"
+value_4.Text = "500"
+value_4.TextColor3 = Color3.new(0.333333, 1, 0)
+value_4.TextSize = 24
+value_4.TextXAlignment = Enum.TextXAlignment.Left
 
 OwnTeamWhitelisted.Name = "OwnTeamWhitelisted"
 OwnTeamWhitelisted.Parent = ScrollingFrame
@@ -555,17 +524,17 @@ OwnTeamWhitelisted.TextSize = 24
 OwnTeamWhitelisted.TextXAlignment = Enum.TextXAlignment.Left
 OwnTeamWhitelisted.TextYAlignment = Enum.TextYAlignment.Top
 
-value_6.Name = "value"
-value_6.Parent = OwnTeamWhitelisted
-value_6.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_6.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_6.Position = UDim2.new(4.04492021e-05, 0, 0.544637918, 0)
-value_6.Size = UDim2.new(0, 290, 0, 28)
-value_6.Font = Enum.Font.Highway
-value_6.Text = "true"
-value_6.TextColor3 = Color3.new(0.333333, 1, 0)
-value_6.TextSize = 24
-value_6.TextXAlignment = Enum.TextXAlignment.Left
+value_5.Name = "value"
+value_5.Parent = OwnTeamWhitelisted
+value_5.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_5.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_5.Position = UDim2.new(4.04492021e-05, 0, 0.544637918, 0)
+value_5.Size = UDim2.new(0, 290, 0, 28)
+value_5.Font = Enum.Font.Highway
+value_5.Text = "true"
+value_5.TextColor3 = Color3.new(0.333333, 1, 0)
+value_5.TextSize = 24
+value_5.TextXAlignment = Enum.TextXAlignment.Left
 
 TargetCloserPlayers.Name = "TargetCloserPlayers"
 TargetCloserPlayers.Parent = ScrollingFrame
@@ -582,17 +551,17 @@ TargetCloserPlayers.TextSize = 24
 TargetCloserPlayers.TextXAlignment = Enum.TextXAlignment.Left
 TargetCloserPlayers.TextYAlignment = Enum.TextYAlignment.Top
 
-value_7.Name = "value"
-value_7.Parent = TargetCloserPlayers
-value_7.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_7.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_7.Position = UDim2.new(0.00591715984, 0, 0.234471068, 0)
-value_7.Size = UDim2.new(0, 290, 0, 28)
-value_7.Font = Enum.Font.Highway
-value_7.Text = "true"
-value_7.TextColor3 = Color3.new(0.333333, 1, 0)
-value_7.TextSize = 24
-value_7.TextXAlignment = Enum.TextXAlignment.Left
+value_6.Name = "value"
+value_6.Parent = TargetCloserPlayers
+value_6.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_6.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_6.Position = UDim2.new(0.00591715984, 0, 0.234471068, 0)
+value_6.Size = UDim2.new(0, 290, 0, 28)
+value_6.Font = Enum.Font.Highway
+value_6.Text = "true"
+value_6.TextColor3 = Color3.new(0.333333, 1, 0)
+value_6.TextSize = 24
+value_6.TextXAlignment = Enum.TextXAlignment.Left
 
 About.Name = "About"
 About.Parent = TargetCloserPlayers
@@ -624,17 +593,17 @@ TargetNPCs.TextSize = 24
 TargetNPCs.TextXAlignment = Enum.TextXAlignment.Left
 TargetNPCs.TextYAlignment = Enum.TextYAlignment.Top
 
-value_8.Name = "value"
-value_8.Parent = TargetNPCs
-value_8.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_8.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_8.Position = UDim2.new(0, 0, 0.446332812, 0)
-value_8.Size = UDim2.new(0, 290, 0, 28)
-value_8.Font = Enum.Font.Highway
-value_8.Text = "false"
-value_8.TextColor3 = Color3.new(0.333333, 1, 0)
-value_8.TextSize = 24
-value_8.TextXAlignment = Enum.TextXAlignment.Left
+value_7.Name = "value"
+value_7.Parent = TargetNPCs
+value_7.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_7.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_7.Position = UDim2.new(0, 0, 0.446332812, 0)
+value_7.Size = UDim2.new(0, 290, 0, 28)
+value_7.Font = Enum.Font.Highway
+value_7.Text = "false"
+value_7.TextColor3 = Color3.new(0.333333, 1, 0)
+value_7.TextSize = 24
+value_7.TextXAlignment = Enum.TextXAlignment.Left
 
 IgnorePlayers.Name = "IgnorePlayers"
 IgnorePlayers.Parent = ScrollingFrame
@@ -651,17 +620,17 @@ IgnorePlayers.TextSize = 24
 IgnorePlayers.TextXAlignment = Enum.TextXAlignment.Left
 IgnorePlayers.TextYAlignment = Enum.TextYAlignment.Top
 
-value_9.Name = "value"
-value_9.Parent = IgnorePlayers
-value_9.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_9.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_9.Position = UDim2.new(0, 0, 0.548714161, 0)
-value_9.Size = UDim2.new(0, 290, 0, 28)
-value_9.Font = Enum.Font.Highway
-value_9.Text = "false"
-value_9.TextColor3 = Color3.new(0.333333, 1, 0)
-value_9.TextSize = 24
-value_9.TextXAlignment = Enum.TextXAlignment.Left
+value_8.Name = "value"
+value_8.Parent = IgnorePlayers
+value_8.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_8.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_8.Position = UDim2.new(0, 0, 0.548714161, 0)
+value_8.Size = UDim2.new(0, 290, 0, 28)
+value_8.Font = Enum.Font.Highway
+value_8.Text = "false"
+value_8.TextColor3 = Color3.new(0.333333, 1, 0)
+value_8.TextSize = 24
+value_8.TextXAlignment = Enum.TextXAlignment.Left
 
 GlobalSettingsUI.Name = "GlobalSettingsUI"
 GlobalSettingsUI.Parent = Aimbot
@@ -705,34 +674,6 @@ ScrollingFrame_2.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 UIListLayout_3.Parent = ScrollingFrame_2
 
-AimIntensity.Name = "AimIntensity"
-AimIntensity.Parent = ScrollingFrame_2
-AimIntensity.BackgroundColor3 = Color3.new(0, 0, 0)
-AimIntensity.BackgroundTransparency = 1
-AimIntensity.BorderColor3 = Color3.new(0, 0.666667, 0)
-AimIntensity.BorderSizePixel = 0
-AimIntensity.Size = UDim2.new(0, 169, 0, 59)
-AimIntensity.Font = Enum.Font.Highway
-AimIntensity.Text = "Aim Intensity"
-AimIntensity.TextColor3 = Color3.new(0.333333, 1, 0)
-AimIntensity.TextSize = 24
-AimIntensity.TextXAlignment = Enum.TextXAlignment.Left
-AimIntensity.TextYAlignment = Enum.TextYAlignment.Top
-
-value_10.Name = "value"
-value_10.Parent = AimIntensity
-value_10.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_10.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_10.Position = UDim2.new(8.23433511e-05, 0, 0.520505667, 0)
-value_10.Size = UDim2.new(0, 337, 0, 28)
-value_10.Font = Enum.Font.Highway
-value_10.PlaceholderColor3 = Color3.new(0.333333, 1, 0)
-value_10.PlaceholderText = "Default is 250"
-value_10.Text = "250"
-value_10.TextColor3 = Color3.new(0.333333, 1, 0)
-value_10.TextSize = 24
-value_10.TextXAlignment = Enum.TextXAlignment.Left
-
 AimbotToggle.Name = "AimbotToggle"
 AimbotToggle.Parent = ScrollingFrame_2
 AimbotToggle.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -748,17 +689,17 @@ AimbotToggle.TextSize = 24
 AimbotToggle.TextXAlignment = Enum.TextXAlignment.Left
 AimbotToggle.TextYAlignment = Enum.TextYAlignment.Top
 
-value_11.Name = "value"
-value_11.Parent = AimbotToggle
-value_11.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_11.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_11.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
-value_11.Size = UDim2.new(0, 260, 0, 28)
-value_11.Font = Enum.Font.Highway
-value_11.Text = "Enum.KeyCode.LeftAlt"
-value_11.TextColor3 = Color3.new(0.333333, 1, 0)
-value_11.TextSize = 24
-value_11.TextXAlignment = Enum.TextXAlignment.Left
+value_9.Name = "value"
+value_9.Parent = AimbotToggle
+value_9.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_9.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_9.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
+value_9.Size = UDim2.new(0, 260, 0, 28)
+value_9.Font = Enum.Font.Highway
+value_9.Text = "Enum.KeyCode.LeftAlt"
+value_9.TextColor3 = Color3.new(0.333333, 1, 0)
+value_9.TextSize = 24
+value_9.TextXAlignment = Enum.TextXAlignment.Left
 
 reset.Name = "reset"
 reset.Parent = AimbotToggle
@@ -786,17 +727,17 @@ TargetedPartToggle.TextSize = 24
 TargetedPartToggle.TextXAlignment = Enum.TextXAlignment.Left
 TargetedPartToggle.TextYAlignment = Enum.TextYAlignment.Top
 
-value_12.Name = "value"
-value_12.Parent = TargetedPartToggle
-value_12.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_12.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_12.Position = UDim2.new(0.00591715984, 0, 0.524137616, 0)
-value_12.Size = UDim2.new(0, 258, 0, 28)
-value_12.Font = Enum.Font.Highway
-value_12.Text = "Enum.KeyCode.X"
-value_12.TextColor3 = Color3.new(0.333333, 1, 0)
-value_12.TextSize = 24
-value_12.TextXAlignment = Enum.TextXAlignment.Left
+value_10.Name = "value"
+value_10.Parent = TargetedPartToggle
+value_10.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_10.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_10.Position = UDim2.new(0.00591715984, 0, 0.524137616, 0)
+value_10.Size = UDim2.new(0, 258, 0, 28)
+value_10.Font = Enum.Font.Highway
+value_10.Text = "Enum.KeyCode.X"
+value_10.TextColor3 = Color3.new(0.333333, 1, 0)
+value_10.TextSize = 24
+value_10.TextXAlignment = Enum.TextXAlignment.Left
 
 reset_2.Name = "reset"
 reset_2.Parent = TargetedPartToggle
@@ -824,17 +765,17 @@ RightClickAim.TextSize = 24
 RightClickAim.TextXAlignment = Enum.TextXAlignment.Left
 RightClickAim.TextYAlignment = Enum.TextYAlignment.Top
 
-value_13.Name = "value"
-value_13.Parent = RightClickAim
-value_13.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_13.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_13.Position = UDim2.new(0.00591715984, 0, 0.524137616, 0)
-value_13.Size = UDim2.new(0, 337, 0, 28)
-value_13.Font = Enum.Font.Highway
-value_13.Text = "false"
-value_13.TextColor3 = Color3.new(0.333333, 1, 0)
-value_13.TextSize = 24
-value_13.TextXAlignment = Enum.TextXAlignment.Left
+value_11.Name = "value"
+value_11.Parent = RightClickAim
+value_11.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_11.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_11.Position = UDim2.new(0.00591715984, 0, 0.524137616, 0)
+value_11.Size = UDim2.new(0, 337, 0, 28)
+value_11.Font = Enum.Font.Highway
+value_11.Text = "false"
+value_11.TextColor3 = Color3.new(0.333333, 1, 0)
+value_11.TextSize = 24
+value_11.TextXAlignment = Enum.TextXAlignment.Left
 
 TeamAutofill.Name = "TeamAutofill"
 TeamAutofill.Parent = ScrollingFrame_2
@@ -851,17 +792,17 @@ TeamAutofill.TextSize = 24
 TeamAutofill.TextXAlignment = Enum.TextXAlignment.Left
 TeamAutofill.TextYAlignment = Enum.TextYAlignment.Top
 
-value_14.Name = "value"
-value_14.Parent = TeamAutofill
-value_14.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_14.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_14.Position = UDim2.new(0.00591715984, 0, 0.422470868, 0)
-value_14.Size = UDim2.new(0, 337, 0, 28)
-value_14.Font = Enum.Font.Highway
-value_14.Text = "true"
-value_14.TextColor3 = Color3.new(0.333333, 1, 0)
-value_14.TextSize = 24
-value_14.TextXAlignment = Enum.TextXAlignment.Left
+value_12.Name = "value"
+value_12.Parent = TeamAutofill
+value_12.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_12.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_12.Position = UDim2.new(0.00591715984, 0, 0.422470868, 0)
+value_12.Size = UDim2.new(0, 337, 0, 28)
+value_12.Font = Enum.Font.Highway
+value_12.Text = "true"
+value_12.TextColor3 = Color3.new(0.333333, 1, 0)
+value_12.TextSize = 24
+value_12.TextXAlignment = Enum.TextXAlignment.Left
 
 NPCToggle.Name = "NPCToggle"
 NPCToggle.Parent = ScrollingFrame_2
@@ -878,17 +819,17 @@ NPCToggle.TextSize = 24
 NPCToggle.TextXAlignment = Enum.TextXAlignment.Left
 NPCToggle.TextYAlignment = Enum.TextYAlignment.Top
 
-value_15.Name = "value"
-value_15.Parent = NPCToggle
-value_15.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_15.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_15.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
-value_15.Size = UDim2.new(0, 260, 0, 28)
-value_15.Font = Enum.Font.Highway
-value_15.Text = "none"
-value_15.TextColor3 = Color3.new(0.333333, 1, 0)
-value_15.TextSize = 24
-value_15.TextXAlignment = Enum.TextXAlignment.Left
+value_13.Name = "value"
+value_13.Parent = NPCToggle
+value_13.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_13.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_13.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
+value_13.Size = UDim2.new(0, 260, 0, 28)
+value_13.Font = Enum.Font.Highway
+value_13.Text = "none"
+value_13.TextColor3 = Color3.new(0.333333, 1, 0)
+value_13.TextSize = 24
+value_13.TextXAlignment = Enum.TextXAlignment.Left
 
 reset_3.Name = "reset"
 reset_3.Parent = NPCToggle
@@ -916,17 +857,17 @@ GUIVisibilityToggle.TextSize = 24
 GUIVisibilityToggle.TextXAlignment = Enum.TextXAlignment.Left
 GUIVisibilityToggle.TextYAlignment = Enum.TextYAlignment.Top
 
-value_16.Name = "value"
-value_16.Parent = GUIVisibilityToggle
-value_16.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_16.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_16.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
-value_16.Size = UDim2.new(0, 260, 0, 28)
-value_16.Font = Enum.Font.Highway
-value_16.Text = "none"
-value_16.TextColor3 = Color3.new(0.333333, 1, 0)
-value_16.TextSize = 24
-value_16.TextXAlignment = Enum.TextXAlignment.Left
+value_14.Name = "value"
+value_14.Parent = GUIVisibilityToggle
+value_14.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_14.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_14.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
+value_14.Size = UDim2.new(0, 260, 0, 28)
+value_14.Font = Enum.Font.Highway
+value_14.Text = "none"
+value_14.TextColor3 = Color3.new(0.333333, 1, 0)
+value_14.TextSize = 24
+value_14.TextXAlignment = Enum.TextXAlignment.Left
 
 reset_4.Name = "reset"
 reset_4.Parent = GUIVisibilityToggle
@@ -1097,7 +1038,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_FUNK68_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_UFSJ89_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1110,16 +1051,17 @@ function SCRIPT_FUNK68_FAKESCRIPT() -- Aimbot.Scripts
 		})
 	end
 	
+	local gui = script.Parent
+	local MainFrame = gui.MFrame
+	local wlui = gui.ManagerUI
+	local gamesettings = gui.GameSettingsUI.ScrollingFrame
+	local globalsettings = gui.GlobalSettingsUI.ScrollingFrame
+	local games = gui.GameSettingsUI
+	local globals = gui.GlobalSettingsUI
+	local teamui = gui.TeamUI
+	
 	if not _G.RedsAimbot then
 		_G.RedsAimbot = true
-		local gui = script.Parent
-		local MainFrame = gui.MFrame
-		local wlui = gui.ManagerUI
-		local gamesettings = gui.GameSettingsUI.ScrollingFrame
-		local globalsettings = gui.GlobalSettingsUI.ScrollingFrame
-		local games = gui.GameSettingsUI
-		local globals = gui.GlobalSettingsUI
-		local teamui = gui.TeamUI
 	
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
@@ -1285,7 +1227,6 @@ function SCRIPT_FUNK68_FAKESCRIPT() -- Aimbot.Scripts
 			GameStats.Target = "Head"
 			GameStats.TargetNPCs = false
 			GameStats.AutoTarget = true
-			GameStats.FPEnabled = true
 			GameStats.WhitelistFriends = false
 			GameStats.MaxStuds = 500
 			GameStats.OwnTeamWhitelisted = true
@@ -1297,7 +1238,6 @@ function SCRIPT_FUNK68_FAKESCRIPT() -- Aimbot.Scripts
 			GlobalStats = loadfile("RedsAimbotStats.lua")()
 			local newglobalstats = {}
 			newglobalstats["TeamAutofill"] = true
-			newglobalstats["AimIntensity"] = 250
 			newglobalstats["RightClickAim"] = false
 			if not GlobalStats[game.PlaceId] then
 				gengamestats()
@@ -1332,7 +1272,6 @@ function SCRIPT_FUNK68_FAKESCRIPT() -- Aimbot.Scripts
 			GlobalStats = {}
 			GlobalStats.Keybinds = {}
 			GlobalStats.TeamAutofill = true
-			GlobalStats.AimIntensity = 250
 			gengamestats()
 			GlobalStats.Keybinds.AimbotToggle = Enum.KeyCode.LeftAlt
 			GlobalStats.Keybinds.TargetedPartToggle = Enum.KeyCode.RightAlt
@@ -1598,15 +1537,6 @@ function SCRIPT_FUNK68_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		Changed(globalsettings.AimIntensity.value, "Text", function(n)
-			local num = tonumber(n)
-			if num then
-				GlobalStats.AimIntensity = num
-			else
-				GlobalStats.AimIntensity = 250
-			end
-		end)
-	
 		for i,v in pairs(globalsettings:GetChildren()) do
 				if v:FindFirstChild("reset") then
 					v.reset.MouseButton1Click:connect(function()
@@ -1746,11 +1676,9 @@ function SCRIPT_FUNK68_FAKESCRIPT() -- Aimbot.Scripts
 			if misc.TargetedCharacter then
 				local v, onscreen = workspace.CurrentCamera:WorldToScreenPoint(gettargetpart(misc.TargetedCharacter).Position)
 				if onscreen then
-					local StabilizeNum = GlobalStats.AimIntensity/workspace.CurrentCamera.ViewportSize.Y
-					local x, y = (v.X - m.X)*StabilizeNum, (v.Y - m.Y)*StabilizeNum
 					if misc.IsAimbotOn then
 						if GlobalStats.RightClickAim and RightClick or not GlobalStats.RightClickAim then
-							mousemoverel(x, y)
+							workspace.CurrentCamera.CFrame = CFrame.new(workspace.CurrentCamera.CFrame.Position, gettargetpart(misc.TargetedCharacter).Position)
 						end
 					end
 				else
@@ -1831,18 +1759,14 @@ function SCRIPT_FUNK68_FAKESCRIPT() -- Aimbot.Scripts
 				end)
 		    end
 	
-			if GameStats.FPEnabled then
 				if misc.TargetedCharacter and misc.IsAimbotOn and workspace.CurrentCamera.CameraType ~= Enum.CameraType.Scriptable then
 					plrs.LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
 				else
 					plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
 				end
-			else
-				plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
-			end
 		end)
 	
-		sendnotif("Aimbot Update","Fixed bug where your cursor would get stuck in the center of the screen in certain cases.")
+		sendnotif("Aimbot Update","Made aiming WAY better, removing the AimIntensity and FPEnabled stats.")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
@@ -1996,4 +1920,4 @@ function SCRIPT_FUNK68_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_FUNK68_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_UFSJ89_FAKESCRIPT))
