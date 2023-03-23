@@ -29,11 +29,6 @@ local ropefollow = Instance.new("TextButton")
 local Hotbarautosort = Instance.new("TextButton")
 local flyhack = Instance.new("TextButton")
 local flyhacknum = Instance.new("TextBox")
-local Confirmation = Instance.new("Frame")
-local Warning = Instance.new("TextLabel")
-local Yes = Instance.new("TextButton")
-local No = Instance.new("TextButton")
-local WarningIcon = Instance.new("ImageLabel")
 local AutosortFrame = Instance.new("Frame")
 local ScrollingFrame_2 = Instance.new("ScrollingFrame")
 local UIListLayout = Instance.new("UIListLayout")
@@ -114,7 +109,6 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0.0117647, 0.164706, 0.00392157)
 ScrollingFrame.BorderColor3 = Color3.new(0.333333, 1, 0)
 ScrollingFrame.Position = UDim2.new(0.0169971678, 0, 0.330357075, 0)
 ScrollingFrame.Size = UDim2.new(0, 354, 0, 187)
-ScrollingFrame.CanvasPosition = Vector2.new(0, 208)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 disablelasers.Name = "disablelasers"
@@ -406,61 +400,6 @@ flyhacknum.TextColor3 = Color3.new(0.333333, 1, 1)
 flyhacknum.TextSize = 20
 flyhacknum.TextWrapped = true
 
-Confirmation.Name = "Confirmation"
-Confirmation.Parent = JailbreakGUI
-Confirmation.BackgroundColor3 = Color3.new(0.0117647, 0.164706, 0.00392157)
-Confirmation.BorderColor3 = Color3.new(0.333333, 1, 0)
-Confirmation.Position = UDim2.new(0.459546417, 0, 0.114550553, 0)
-Confirmation.Size = UDim2.new(0, 318, 0, 236)
-Confirmation.Visible = false
-
-Warning.Name = "Warning"
-Warning.Parent = Confirmation
-Warning.BackgroundColor3 = Color3.new(1, 1, 1)
-Warning.BackgroundTransparency = 1
-Warning.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Warning.BorderSizePixel = 0
-Warning.Position = UDim2.new(0.0251572318, 0, 0.169345021, 0)
-Warning.Size = UDim2.new(0, 301, 0, 102)
-Warning.Font = Enum.Font.Unknown
-Warning.Text = "Warning: If your exploit cannot use 'mousemoverel', the aimbot will not work. Proceed?"
-Warning.TextColor3 = Color3.new(0.996078, 0.858824, 0.211765)
-Warning.TextSize = 24
-Warning.TextStrokeColor3 = Color3.new(0.431373, 0.431373, 0.972549)
-Warning.TextWrapped = true
-
-Yes.Name = "Yes"
-Yes.Parent = Confirmation
-Yes.BackgroundColor3 = Color3.new(0.0117647, 0.164706, 0.00392157)
-Yes.BorderColor3 = Color3.new(0.333333, 1, 0)
-Yes.Position = UDim2.new(0.0503144637, 0, 0.631355882, 0)
-Yes.Size = UDim2.new(0, 110, 0, 50)
-Yes.Font = Enum.Font.Unknown
-Yes.Text = "Yes"
-Yes.TextColor3 = Color3.new(0, 0.882353, 0)
-Yes.TextSize = 40
-Yes.TextWrapped = true
-
-No.Name = "No"
-No.Parent = Confirmation
-No.BackgroundColor3 = Color3.new(0.0117647, 0.164706, 0.00392157)
-No.BorderColor3 = Color3.new(0.333333, 1, 0)
-No.Position = UDim2.new(0.597484291, 0, 0.631355882, 0)
-No.Size = UDim2.new(0, 110, 0, 50)
-No.Font = Enum.Font.Unknown
-No.Text = "No"
-No.TextColor3 = Color3.new(1, 0, 0)
-No.TextSize = 40
-No.TextWrapped = true
-
-WarningIcon.Name = "WarningIcon"
-WarningIcon.Parent = Confirmation
-WarningIcon.BackgroundColor3 = Color3.new(1, 1, 1)
-WarningIcon.BackgroundTransparency = 1
-WarningIcon.Position = UDim2.new(0.42764321, 0, 0, 0)
-WarningIcon.Size = UDim2.new(0, 45, 0, 45)
-WarningIcon.Image = "http://www.roblox.com/asset/?id=3369561948"
-
 AutosortFrame.Name = "AutosortFrame"
 AutosortFrame.Parent = JailbreakGUI
 AutosortFrame.BackgroundColor3 = Color3.new(0.0117647, 0.164706, 0.00392157)
@@ -650,12 +589,11 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_BOAB88_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_NTUE85_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
 	local mainframe = mframe.ScrollingFrame
-	local confirm = script.Parent.Confirmation
 	mainframe.UIGridLayout.SortOrder = 0
 	local aframe = script.Parent.AutosortFrame
 	local autosortframe = aframe.ScrollingFrame
@@ -758,7 +696,7 @@ function SCRIPT_BOAB88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("The vehicle auto-lock on exit + unlock on enter is now togglable.")
+			notify("Removed aimbot warning because it's no longer needed, yippee!!")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -831,7 +769,7 @@ function SCRIPT_BOAB88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end)
 	
 			mainframe.aimbot.MouseButton1Click:connect(function()
-				confirm.Visible = true
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/Aimbot.lua"))()
 			end)
 	
 			props = {}
@@ -1109,14 +1047,6 @@ function SCRIPT_BOAB88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						speeds.walkspeed = tonumber(txt)
 					end
 				end)
-			end)
-	
-			confirm.No.MouseButton1Click:connect(function()
-				confirm.Visible = false
-			end)
-			confirm.Yes.MouseButton1Click:connect(function()
-			confirm.Visible = false
-			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/Aimbot.lua"))()
 			end)
 	
 			local RobberyNotifier = false
@@ -1812,4 +1742,4 @@ function SCRIPT_BOAB88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_BOAB88_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_NTUE85_FAKESCRIPT))
