@@ -1300,7 +1300,7 @@ function SCRIPT_JNNL80_FAKESCRIPT() -- Aimbot.Scripts
 			newglobalstats["TeamAutofill"] = true
 			newglobalstats["RightClickAim"] = false
 			newglobalstats["FirstPerson"] = true
-			newglobalstats["TargetThruWalls"] = true
+			newglobalstats["TargetThruWalls"] = false
 			if not GlobalStats[game.PlaceId] then
 				gengamestats()
 			end
