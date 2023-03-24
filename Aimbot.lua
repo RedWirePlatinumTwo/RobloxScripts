@@ -68,10 +68,8 @@ local reset_3 = Instance.new("TextButton")
 local GUIVisibilityToggle = Instance.new("TextLabel")
 local value_14 = Instance.new("TextButton")
 local reset_4 = Instance.new("TextButton")
-local FirstPerson = Instance.new("TextLabel")
-local value_15 = Instance.new("TextButton")
 local TargetThruWalls = Instance.new("TextLabel")
-local value_16 = Instance.new("TextButton")
+local value_15 = Instance.new("TextButton")
 local TeamUI = Instance.new("Frame")
 local WhitelistedTeams = Instance.new("ScrollingFrame")
 local whitelistframe_2 = Instance.new("Frame")
@@ -674,7 +672,6 @@ ScrollingFrame_2.BackgroundColor3 = Color3.new(0, 0, 0)
 ScrollingFrame_2.BorderColor3 = Color3.new(0.333333, 1, 0)
 ScrollingFrame_2.Position = UDim2.new(0, 0, 0.0959752351, 0)
 ScrollingFrame_2.Size = UDim2.new(0, 346, 0, 292)
-ScrollingFrame_2.CanvasPosition = Vector2.new(0, 180)
 ScrollingFrame_2.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 UIListLayout_3.Parent = ScrollingFrame_2
@@ -885,33 +882,6 @@ reset_4.Text = "Reset"
 reset_4.TextColor3 = Color3.new(1, 0, 0)
 reset_4.TextSize = 24
 
-FirstPerson.Name = "FirstPerson"
-FirstPerson.Parent = ScrollingFrame_2
-FirstPerson.BackgroundColor3 = Color3.new(0, 0, 0)
-FirstPerson.BackgroundTransparency = 1
-FirstPerson.BorderColor3 = Color3.new(0, 0.666667, 0)
-FirstPerson.BorderSizePixel = 0
-FirstPerson.Position = UDim2.new(0, 0, 0.824561417, 0)
-FirstPerson.Size = UDim2.new(0, 169, 0, 59)
-FirstPerson.Font = Enum.Font.Highway
-FirstPerson.Text = "First-Person enabled:"
-FirstPerson.TextColor3 = Color3.new(0.333333, 1, 0)
-FirstPerson.TextSize = 24
-FirstPerson.TextXAlignment = Enum.TextXAlignment.Left
-FirstPerson.TextYAlignment = Enum.TextYAlignment.Top
-
-value_15.Name = "value"
-value_15.Parent = FirstPerson
-value_15.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_15.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_15.Position = UDim2.new(0.00591715984, 0, 0.422470868, 0)
-value_15.Size = UDim2.new(0, 337, 0, 28)
-value_15.Font = Enum.Font.Highway
-value_15.Text = "true"
-value_15.TextColor3 = Color3.new(0.333333, 1, 0)
-value_15.TextSize = 24
-value_15.TextXAlignment = Enum.TextXAlignment.Left
-
 TargetThruWalls.Name = "TargetThruWalls"
 TargetThruWalls.Parent = ScrollingFrame_2
 TargetThruWalls.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -927,17 +897,17 @@ TargetThruWalls.TextSize = 24
 TargetThruWalls.TextXAlignment = Enum.TextXAlignment.Left
 TargetThruWalls.TextYAlignment = Enum.TextYAlignment.Top
 
-value_16.Name = "value"
-value_16.Parent = TargetThruWalls
-value_16.BackgroundColor3 = Color3.new(0, 0.333333, 0)
-value_16.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_16.Position = UDim2.new(0.00591715984, 0, 0.422470868, 0)
-value_16.Size = UDim2.new(0, 337, 0, 28)
-value_16.Font = Enum.Font.Highway
-value_16.Text = "true"
-value_16.TextColor3 = Color3.new(0.333333, 1, 0)
-value_16.TextSize = 24
-value_16.TextXAlignment = Enum.TextXAlignment.Left
+value_15.Name = "value"
+value_15.Parent = TargetThruWalls
+value_15.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_15.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_15.Position = UDim2.new(0.00591715984, 0, 0.422470868, 0)
+value_15.Size = UDim2.new(0, 337, 0, 28)
+value_15.Font = Enum.Font.Highway
+value_15.Text = "true"
+value_15.TextColor3 = Color3.new(0.333333, 1, 0)
+value_15.TextSize = 24
+value_15.TextXAlignment = Enum.TextXAlignment.Left
 
 TeamUI.Name = "TeamUI"
 TeamUI.Parent = Aimbot
@@ -1097,7 +1067,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_JNNL80_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_CSKO75_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1299,7 +1269,6 @@ function SCRIPT_JNNL80_FAKESCRIPT() -- Aimbot.Scripts
 			local newglobalstats = {}
 			newglobalstats["TeamAutofill"] = true
 			newglobalstats["RightClickAim"] = false
-			newglobalstats["FirstPerson"] = true
 			newglobalstats["TargetThruWalls"] = false
 			if not GlobalStats[game.PlaceId] then
 				gengamestats()
@@ -1770,9 +1739,6 @@ function SCRIPT_JNNL80_FAKESCRIPT() -- Aimbot.Scripts
 					if misc.IsAimbotOn then
 						if GlobalStats.RightClickAim and RightClick or not GlobalStats.RightClickAim then
 							camera.CFrame = CFrame.new(camera.CFrame.Position, partpos)
-							if not GlobalStats.FirstPerson then
-								lplr.Character.Humanoid.RootPart.CFrame = CFrame.new(lplr.Character.Humanoid.RootPart.Position, partpos)
-							end
 						end
 					end
 				else
@@ -1851,13 +1817,10 @@ function SCRIPT_JNNL80_FAKESCRIPT() -- Aimbot.Scripts
 					end
 					return "stop"
 				end)
-		    end
-			if GlobalStats.FirstPerson then
-				if misc.TargetedCharacter and misc.IsAimbotOn and camera.CameraType ~= Enum.CameraType.Scriptable then
-					plrs.LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
-				else
-					plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
-				end
+			end
+			
+			if misc.TargetedCharacter and misc.IsAimbotOn and camera.CameraType ~= Enum.CameraType.Scriptable then
+				plrs.LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
 			else
 				plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
 			end
@@ -1879,16 +1842,8 @@ function SCRIPT_JNNL80_FAKESCRIPT() -- Aimbot.Scripts
 				else
 					MainFrame.CurrentTarget.Text = v.Name
 				end
-				if not GlobalStats.FirstPerson then
-					lplr.Character.Humanoid.CameraOffset = Vector3.new(2,0,0)
-					game.UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
-				end
 				MainFrame.CurrentTarget.TextColor3 = Color3.new(0,1,0)
 			else
-				if not GlobalStats.FirstPerson then
-					lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
-					game.UserInputService.MouseBehavior = Enum.MouseBehavior.Default
-				end
 				MainFrame.CurrentTarget.Text = "none"
 				MainFrame.CurrentTarget.TextColor3 = Color3.new(1,0,0)
 			end
@@ -2025,4 +1980,4 @@ function SCRIPT_JNNL80_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_JNNL80_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_CSKO75_FAKESCRIPT))
