@@ -1749,7 +1749,7 @@ function SCRIPT_CSKO75_FAKESCRIPT() -- Aimbot.Scripts
 			if m.Target ~= nil then
 			if not GameStats.IgnorePlayers then
 					for i,v in pairs(GetFamily(m.Target)) do
-						if game.Players:FindFirstChild(v.Name) and math.floor(lplr:DistanceFromCharacter(v.Character)) < GameStats.MaxStuds then
+						if game.Players:FindFirstChild(v.Name) and v.Character and math.floor(lplr:DistanceFromCharacter(v.Character)) < GameStats.MaxStuds then
 							targetplayer(game.Players[v.Name])
 						break
 					end
