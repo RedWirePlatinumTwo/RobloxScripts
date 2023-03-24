@@ -1711,7 +1711,7 @@ function SCRIPT_CSKO75_FAKESCRIPT() -- Aimbot.Scripts
 	
 		local function addpart(v)
 			if v:IsA("BasePart") then
-				if v.Transparency == 1 or not v.CanCollide or isnpc(v, true) then
+				if v.Transparency ~= 0 or not v.CanCollide or isnpc(v, true) then
 					table.insert(partstoignore, v)
 				end
 			end
