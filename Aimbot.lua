@@ -1726,9 +1726,9 @@ function SCRIPT_CSKO75_FAKESCRIPT() -- Aimbot.Scripts
 		local function ispartvisible(vpart)
 			local params = RaycastParams.new()
 			params.FilterDescendantsInstances = partstoignore
-			local dir = vpart.Position - lplr.Character.Humanoid.RootPart.Position
+			local dir = vpart.Position - camera.CFrame.Position
 			params.IgnoreWater = true
-			return not workspace:Raycast(lplr.Character.Humanoid.RootPart.Position, dir, params)
+			return not workspace:Raycast(camera.CFrame.Position, dir, params)
 		end
 	
 		local AimbotFunction = game.RunService.RenderStepped:connect(function()
