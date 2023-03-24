@@ -1269,7 +1269,7 @@ function SCRIPT_CSKO75_FAKESCRIPT() -- Aimbot.Scripts
 			local newglobalstats = {}
 			newglobalstats["TeamAutofill"] = true
 			newglobalstats["RightClickAim"] = false
-			newglobalstats["TargetThruWalls"] = false
+			newglobalstats["TargetThruWalls"] = true
 			if not GlobalStats[game.PlaceId] then
 				gengamestats()
 			end
