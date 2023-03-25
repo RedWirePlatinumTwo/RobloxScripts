@@ -1905,7 +1905,7 @@ function SCRIPT_DGNO67_FAKESCRIPT() -- Aimbot.Scripts
 					for i,v in pairs(GetFamily(m.Target)) do
 						local plr = game.Players:FindFirstChild(v.Name)
 						if plr and plr.Character and math.floor(lplr:DistanceFromCharacter(plr.Character.Humanoid.RootPart.Position)) < GameStats.MaxStuds then
-							targetplayer(game.Players[v.Name])
+							targetplayer(plr)
 						break
 					end
 				end
