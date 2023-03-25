@@ -1983,7 +1983,7 @@ function SCRIPT_DGNO67_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","Added aim method and first-person toggle buttons in global settings.")
+		sendnotif("Aimbot Update","Third-person mode now works for both aiming methods instead of just mouse aiming.")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
