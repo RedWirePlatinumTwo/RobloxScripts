@@ -78,7 +78,6 @@ local About_3 = Instance.new("TextLabel")
 local value_17 = Instance.new("TextBox")
 local FirstPersonEnabled = Instance.new("TextLabel")
 local value_18 = Instance.new("TextButton")
-local About_4 = Instance.new("TextLabel")
 local TeamUI = Instance.new("Frame")
 local WhitelistedTeams = Instance.new("ScrollingFrame")
 local whitelistframe_2 = Instance.new("Frame")
@@ -681,6 +680,7 @@ ScrollingFrame_2.BackgroundColor3 = Color3.new(0, 0, 0)
 ScrollingFrame_2.BorderColor3 = Color3.new(0.333333, 1, 0)
 ScrollingFrame_2.Position = UDim2.new(0, 0, 0.0959752351, 0)
 ScrollingFrame_2.Size = UDim2.new(0, 346, 0, 292)
+ScrollingFrame_2.CanvasPosition = Vector2.new(0, 150)
 ScrollingFrame_2.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 UIListLayout_3.Parent = ScrollingFrame_2
@@ -1011,7 +1011,7 @@ FirstPersonEnabled.BackgroundTransparency = 1
 FirstPersonEnabled.BorderColor3 = Color3.new(0, 0.666667, 0)
 FirstPersonEnabled.BorderSizePixel = 0
 FirstPersonEnabled.Position = UDim2.new(0, 0, 0.35958904, 0)
-FirstPersonEnabled.Size = UDim2.new(0, 169, 0, 83)
+FirstPersonEnabled.Size = UDim2.new(0, 169, 0, 60)
 FirstPersonEnabled.Font = Enum.Font.Highway
 FirstPersonEnabled.Text = "First Person enabled:"
 FirstPersonEnabled.TextColor3 = Color3.new(0.333333, 1, 0)
@@ -1023,28 +1023,13 @@ value_18.Name = "value"
 value_18.Parent = FirstPersonEnabled
 value_18.BackgroundColor3 = Color3.new(0, 0.333333, 0)
 value_18.BorderColor3 = Color3.new(0.333333, 1, 0)
-value_18.Position = UDim2.new(0.00591715984, 0, 0.314037144, 0)
+value_18.Position = UDim2.new(0.00591715984, 0, 0.502716422, 0)
 value_18.Size = UDim2.new(0, 337, 0, 28)
 value_18.Font = Enum.Font.Highway
 value_18.Text = "true"
 value_18.TextColor3 = Color3.new(0.333333, 1, 0)
 value_18.TextSize = 24
 value_18.TextXAlignment = Enum.TextXAlignment.Left
-
-About_4.Name = "About"
-About_4.Parent = FirstPersonEnabled
-About_4.BackgroundColor3 = Color3.new(0, 0, 0)
-About_4.BackgroundTransparency = 1
-About_4.BorderColor3 = Color3.new(0, 0.666667, 0)
-About_4.BorderSizePixel = 0
-About_4.Position = UDim2.new(0.00643361127, 0, 0.651386678, 0)
-About_4.Size = UDim2.new(0, 331, 0, 22)
-About_4.Font = Enum.Font.Highway
-About_4.Text = "This will be always on if aiming method is camera."
-About_4.TextColor3 = Color3.new(0.333333, 1, 0)
-About_4.TextScaled = true
-About_4.TextSize = 24
-About_4.TextWrapped = true
 
 TeamUI.Name = "TeamUI"
 TeamUI.Parent = Aimbot
@@ -1204,7 +1189,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_GXCA81_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_DGNO67_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1737,9 +1722,9 @@ function SCRIPT_GXCA81_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end
 		
-	if globalsettings.AimMethod.value.Text == "Mouse" then
-		globalsettings.AimMethod.About.Text = "More universal, less stable."
-	end
+		if globalsettings.AimMethod.value.Text == "Mouse" then
+			globalsettings.AimMethod.About.Text = "More universal, less stable."
+		end
 		globalsettings.AimMethod.value.MouseButton1Click:connect(function()
 			local method = globalsettings.AimMethod
 			if method.value.Text == "Camera" then
@@ -1905,6 +1890,9 @@ function SCRIPT_GXCA81_FAKESCRIPT() -- Aimbot.Scripts
 							else
 								mousemoverel(x,y)
 							end
+							if not GlobalStats.FirstPersonEnabled then
+								lplr.Character.Humanoid.RootPart.CFrame = CFrame.lookAt(lplr.Character.Humanoid.RootPart.Position, (partpos * Vector3.new(1,0,1)) + Vector3.new(0, lplr.Character.Humanoid.RootPart.Position.Y, 0))
+							end
 						end
 					end
 				else
@@ -1984,7 +1972,7 @@ function SCRIPT_GXCA81_FAKESCRIPT() -- Aimbot.Scripts
 					return "stop"
 				end)
 			end
-			if GlobalStats.FirstPersonEnabled or GlobalStats.AimMethod == "Camera" then
+			if GlobalStats.FirstPersonEnabled then
 				if misc.TargetedCharacter and misc.IsAimbotOn and camera.CameraType ~= Enum.CameraType.Scriptable then
 					plrs.LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
 				else
@@ -2011,13 +1999,13 @@ function SCRIPT_GXCA81_FAKESCRIPT() -- Aimbot.Scripts
 				else
 					MainFrame.CurrentTarget.Text = v.Name
 				end
-				if not GlobalStats.FirstPersonEnabled and GlobalStats.AimMethod == "Mouse" then
+				if not GlobalStats.FirstPersonEnabled then
 					lplr.Character.Humanoid.CameraOffset = Vector3.new(2,0,0)
 					game.UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
 				end
 					MainFrame.CurrentTarget.TextColor3 = Color3.new(0,1,0)
 			else
-				if not GlobalStats.FirstPersonEnabled and GlobalStats.AimMethod == "Mouse" then
+				if not GlobalStats.FirstPersonEnabled then
 					lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
 					game.UserInputService.MouseBehavior = Enum.MouseBehavior.Default
 				end
@@ -2157,4 +2145,4 @@ function SCRIPT_GXCA81_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_GXCA81_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_DGNO67_FAKESCRIPT))
