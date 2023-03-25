@@ -70,6 +70,15 @@ local value_14 = Instance.new("TextButton")
 local reset_4 = Instance.new("TextButton")
 local TargetThruWalls = Instance.new("TextLabel")
 local value_15 = Instance.new("TextButton")
+local AimMethod = Instance.new("TextLabel")
+local value_16 = Instance.new("TextButton")
+local About_2 = Instance.new("TextLabel")
+local AimSensitivity = Instance.new("TextLabel")
+local About_3 = Instance.new("TextLabel")
+local value_17 = Instance.new("TextBox")
+local FirstPersonEnabled = Instance.new("TextLabel")
+local value_18 = Instance.new("TextButton")
+local About_4 = Instance.new("TextLabel")
 local TeamUI = Instance.new("Frame")
 local WhitelistedTeams = Instance.new("ScrollingFrame")
 local whitelistframe_2 = Instance.new("Frame")
@@ -909,6 +918,134 @@ value_15.TextColor3 = Color3.new(0.333333, 1, 0)
 value_15.TextSize = 24
 value_15.TextXAlignment = Enum.TextXAlignment.Left
 
+AimMethod.Name = "AimMethod"
+AimMethod.Parent = ScrollingFrame_2
+AimMethod.BackgroundColor3 = Color3.new(0, 0, 0)
+AimMethod.BackgroundTransparency = 1
+AimMethod.BorderColor3 = Color3.new(0, 0.666667, 0)
+AimMethod.BorderSizePixel = 0
+AimMethod.Position = UDim2.new(0, 0, 0.393835604, 0)
+AimMethod.Size = UDim2.new(0, 337, 0, 89)
+AimMethod.Font = Enum.Font.Highway
+AimMethod.Text = "Aiming method:"
+AimMethod.TextColor3 = Color3.new(0.333333, 1, 0)
+AimMethod.TextSize = 24
+AimMethod.TextXAlignment = Enum.TextXAlignment.Left
+AimMethod.TextYAlignment = Enum.TextYAlignment.Top
+
+value_16.Name = "value"
+value_16.Parent = AimMethod
+value_16.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_16.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_16.Position = UDim2.new(0.00294979103, 0, 0.335594594, 0)
+value_16.Size = UDim2.new(0, 336, 0, 28)
+value_16.Font = Enum.Font.Highway
+value_16.Text = "Camera"
+value_16.TextColor3 = Color3.new(0.333333, 1, 0)
+value_16.TextSize = 24
+value_16.TextXAlignment = Enum.TextXAlignment.Left
+
+About_2.Name = "About"
+About_2.Parent = AimMethod
+About_2.BackgroundColor3 = Color3.new(0, 0, 0)
+About_2.BackgroundTransparency = 1
+About_2.BorderColor3 = Color3.new(0, 0.666667, 0)
+About_2.BorderSizePixel = 0
+About_2.Position = UDim2.new(0.000516534899, 0, 0.713926852, 0)
+About_2.Size = UDim2.new(0, 331, 0, 20)
+About_2.Font = Enum.Font.Highway
+About_2.Text = "Less universal, more stable."
+About_2.TextColor3 = Color3.new(0.333333, 1, 0)
+About_2.TextScaled = true
+About_2.TextSize = 24
+About_2.TextWrapped = true
+
+AimSensitivity.Name = "AimSensitivity"
+AimSensitivity.Parent = ScrollingFrame_2
+AimSensitivity.BackgroundColor3 = Color3.new(0, 0, 0)
+AimSensitivity.BackgroundTransparency = 1
+AimSensitivity.BorderColor3 = Color3.new(0, 0.666667, 0)
+AimSensitivity.BorderSizePixel = 0
+AimSensitivity.Position = UDim2.new(0, 0, 0.30479452, 0)
+AimSensitivity.Size = UDim2.new(0, 337, 0, 107)
+AimSensitivity.Font = Enum.Font.Highway
+AimSensitivity.Text = "Aim sensitivity:"
+AimSensitivity.TextColor3 = Color3.new(0.333333, 1, 0)
+AimSensitivity.TextSize = 24
+AimSensitivity.TextXAlignment = Enum.TextXAlignment.Left
+AimSensitivity.TextYAlignment = Enum.TextYAlignment.Top
+
+About_3.Name = "About"
+About_3.Parent = AimSensitivity
+About_3.BackgroundColor3 = Color3.new(0, 0, 0)
+About_3.BackgroundTransparency = 1
+About_3.BorderColor3 = Color3.new(0, 0.666667, 0)
+About_3.BorderSizePixel = 0
+About_3.Position = UDim2.new(0.000516534899, 0, 0.510824025, 0)
+About_3.Size = UDim2.new(0, 331, 0, 44)
+About_3.Font = Enum.Font.Highway
+About_3.Text = "This will only be used if aiming method is mouse. Higher number = possibly better aiming but more shakiness."
+About_3.TextColor3 = Color3.new(0.333333, 1, 0)
+About_3.TextScaled = true
+About_3.TextSize = 24
+About_3.TextWrapped = true
+
+value_17.Name = "value"
+value_17.Parent = AimSensitivity
+value_17.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_17.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_17.Position = UDim2.new(-1.75680034e-05, 0, 0.249141857, 0)
+value_17.Size = UDim2.new(0, 335, 0, 28)
+value_17.Font = Enum.Font.Highway
+value_17.PlaceholderColor3 = Color3.new(0.333333, 1, 0)
+value_17.PlaceholderText = "Default is 50"
+value_17.Text = "50"
+value_17.TextColor3 = Color3.new(0.333333, 1, 0)
+value_17.TextSize = 24
+value_17.TextXAlignment = Enum.TextXAlignment.Left
+
+FirstPersonEnabled.Name = "FirstPersonEnabled"
+FirstPersonEnabled.Parent = ScrollingFrame_2
+FirstPersonEnabled.BackgroundColor3 = Color3.new(0, 0, 0)
+FirstPersonEnabled.BackgroundTransparency = 1
+FirstPersonEnabled.BorderColor3 = Color3.new(0, 0.666667, 0)
+FirstPersonEnabled.BorderSizePixel = 0
+FirstPersonEnabled.Position = UDim2.new(0, 0, 0.35958904, 0)
+FirstPersonEnabled.Size = UDim2.new(0, 169, 0, 83)
+FirstPersonEnabled.Font = Enum.Font.Highway
+FirstPersonEnabled.Text = "First Person enabled:"
+FirstPersonEnabled.TextColor3 = Color3.new(0.333333, 1, 0)
+FirstPersonEnabled.TextSize = 24
+FirstPersonEnabled.TextXAlignment = Enum.TextXAlignment.Left
+FirstPersonEnabled.TextYAlignment = Enum.TextYAlignment.Top
+
+value_18.Name = "value"
+value_18.Parent = FirstPersonEnabled
+value_18.BackgroundColor3 = Color3.new(0, 0.333333, 0)
+value_18.BorderColor3 = Color3.new(0.333333, 1, 0)
+value_18.Position = UDim2.new(0.00591715984, 0, 0.314037144, 0)
+value_18.Size = UDim2.new(0, 337, 0, 28)
+value_18.Font = Enum.Font.Highway
+value_18.Text = "true"
+value_18.TextColor3 = Color3.new(0.333333, 1, 0)
+value_18.TextSize = 24
+value_18.TextXAlignment = Enum.TextXAlignment.Left
+
+About_4.Name = "About"
+About_4.Parent = FirstPersonEnabled
+About_4.BackgroundColor3 = Color3.new(0, 0, 0)
+About_4.BackgroundTransparency = 1
+About_4.BorderColor3 = Color3.new(0, 0.666667, 0)
+About_4.BorderSizePixel = 0
+About_4.Position = UDim2.new(0.00643361127, 0, 0.651386678, 0)
+About_4.Size = UDim2.new(0, 331, 0, 22)
+About_4.Font = Enum.Font.Highway
+About_4.Text = "This will be always on if aiming method is camera."
+About_4.TextColor3 = Color3.new(0.333333, 1, 0)
+About_4.TextScaled = true
+About_4.TextSize = 24
+About_4.TextWrapped = true
+
 TeamUI.Name = "TeamUI"
 TeamUI.Parent = Aimbot
 TeamUI.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -1067,7 +1204,7 @@ SwitchToSettings.TextScaled = true
 SwitchToSettings.TextSize = 24
 SwitchToSettings.TextWrapped = true
 -- Scripts:
-function SCRIPT_CSKO75_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_GXCA81_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1269,7 +1406,10 @@ function SCRIPT_CSKO75_FAKESCRIPT() -- Aimbot.Scripts
 			local newglobalstats = {}
 			newglobalstats["TeamAutofill"] = true
 			newglobalstats["RightClickAim"] = false
-			newglobalstats["TargetThruWalls"] = true
+			newglobalstats["TargetThruWalls"] = false
+			newglobalstats["FirstPersonEnabled"] = true
+			newglobalstats["AimMethod"] = "Camera"
+			newglobalstats["AimSensitivity"] = 50
 			if not GlobalStats[game.PlaceId] then
 				gengamestats()
 			end
@@ -1567,8 +1707,6 @@ function SCRIPT_CSKO75_FAKESCRIPT() -- Aimbot.Scripts
 					GameStats.MaxStuds = 5000
 					gamesettings.MaxStuds.value.Text = "5000"
 				end
-			else 
-				GameStats.MaxStuds = 500
 			end
 		end)
 	
@@ -1598,6 +1736,24 @@ function SCRIPT_CSKO75_FAKESCRIPT() -- Aimbot.Scripts
 				end)
 			end
 		end
+		
+		globalsettings.AimMethod.value.MouseButton1Click:connect(function()
+			local method = globalsettings.AimMethod
+			if method.value.Text == "Camera" then
+				method.value.Text = "Mouse"
+				method.About.Text = "More universal, less stable."
+			else
+				method.value.Text = "Camera"
+				method.About.Text = "Less universal, more stable."
+			end
+			GlobalStats.AimMethod = method.value.Text
+		end)
+		Changed(globalsettings.AimSensitivity.value, "Text", function (txt)
+			local num = tonumber(txt)
+			if num then
+				GlobalStats.AimSensitivity = num
+			end
+		end)
 	
 		for i,v in pairs(teamui:GetChildren()) do
 			if v.ClassName == "TextBox" then
@@ -1733,12 +1889,19 @@ function SCRIPT_CSKO75_FAKESCRIPT() -- Aimbot.Scripts
 	
 		local AimbotFunction = game.RunService.RenderStepped:connect(function()
 			if misc.TargetedCharacter then
-				local partpos = gettargetpart(misc.TargetedCharacter).Position
+				local part = gettargetpart(misc.TargetedCharacter)
+				local partpos = part.Position
 				local v, onscreen = camera:WorldToScreenPoint(partpos)
+				local sens = GlobalStats.AimSensitivity/camera.ViewportSize.Y
+				local x,y = (v.X - m.X)*sens, (v.Y - m.Y)*sens
 				if onscreen then
 					if misc.IsAimbotOn then
 						if GlobalStats.RightClickAim and RightClick or not GlobalStats.RightClickAim then
-							camera.CFrame = CFrame.new(camera.CFrame.Position, partpos)
+							if GlobalStats.AimMethod == "Camera" then
+								camera.CFrame = CFrame.new(camera.CFrame.Position, partpos)
+							else
+								mousemoverel(x,y)
+							end
 						end
 					end
 				else
@@ -1818,9 +1981,12 @@ function SCRIPT_CSKO75_FAKESCRIPT() -- Aimbot.Scripts
 					return "stop"
 				end)
 			end
-			
-			if misc.TargetedCharacter and misc.IsAimbotOn and camera.CameraType ~= Enum.CameraType.Scriptable then
-				plrs.LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
+			if GlobalStats.FirstPersonEnabled or GlobalStats.AimMethod == "Camera" then
+				if misc.TargetedCharacter and misc.IsAimbotOn and camera.CameraType ~= Enum.CameraType.Scriptable then
+					plrs.LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
+				else
+					plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
+				end
 			else
 				plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
 			end
@@ -1842,8 +2008,16 @@ function SCRIPT_CSKO75_FAKESCRIPT() -- Aimbot.Scripts
 				else
 					MainFrame.CurrentTarget.Text = v.Name
 				end
-				MainFrame.CurrentTarget.TextColor3 = Color3.new(0,1,0)
+				if not GlobalStats.FirstPersonEnabled and GlobalStats.AimMethod == "Mouse" then
+					lplr.Character.Humanoid.CameraOffset = Vector3.new(2,0,0)
+					game.UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
+				end
+					MainFrame.CurrentTarget.TextColor3 = Color3.new(0,1,0)
 			else
+				if not GlobalStats.FirstPersonEnabled and GlobalStats.AimMethod == "Mouse" then
+					lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
+					game.UserInputService.MouseBehavior = Enum.MouseBehavior.Default
+				end
 				MainFrame.CurrentTarget.Text = "none"
 				MainFrame.CurrentTarget.TextColor3 = Color3.new(1,0,0)
 			end
@@ -1980,4 +2154,4 @@ function SCRIPT_CSKO75_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_CSKO75_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_GXCA81_FAKESCRIPT))
