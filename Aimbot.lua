@@ -1737,6 +1737,9 @@ function SCRIPT_GXCA81_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end
 		
+	if globalsettings.AimMethod.value.Text == "Mouse" then
+		globalsettings.AimMethod.About.Text = "More universal, less stable."
+	end
 		globalsettings.AimMethod.value.MouseButton1Click:connect(function()
 			local method = globalsettings.AimMethod
 			if method.value.Text == "Camera" then
