@@ -1992,7 +1992,7 @@ function SCRIPT_GXCA81_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","Made aiming WAY better, removing the AimIntensity and FPEnabled stats.")
+		sendnotif("Aimbot Update","Added aim method and first-person toggle buttons in global settings.")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
