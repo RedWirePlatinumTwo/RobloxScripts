@@ -1903,7 +1903,8 @@ function SCRIPT_DGNO67_FAKESCRIPT() -- Aimbot.Scripts
 			if m.Target ~= nil then
 			if not GameStats.IgnorePlayers then
 					for i,v in pairs(GetFamily(m.Target)) do
-						if game.Players:FindFirstChild(v.Name) and game.Players:FindFirstChild(v.Name).Character and math.floor(lplr:DistanceFromCharacter(game.Players:FindFirstChild(v.Name).Character.Humanoid.RootPart.Position)) < GameStats.MaxStuds then
+						local plr = game.Players:FindFirstChild(v.Name)
+						if plr and plr.Character and math.floor(lplr:DistanceFromCharacter(plr.Character.Humanoid.RootPart.Position)) < GameStats.MaxStuds then
 							targetplayer(game.Players[v.Name])
 						break
 					end
