@@ -1942,7 +1942,7 @@ function SCRIPT_CRLF69_FAKESCRIPT() -- Aimbot.Scripts
 			if not GameStats.IgnorePlayers then
 					for i,v in pairs(GetFamily(m.Target)) do
 						local plr = game.Players:FindFirstChild(v.Name)
-						if plr and plr.Character and math.floor(lplr:DistanceFromCharacter(plr.Character.Humanoid.RootPart.Position)) < GameStats.MaxStuds then
+						if plr and plr.Character then
 							targetplayer(plr)
 						break
 					end
