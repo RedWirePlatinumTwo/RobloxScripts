@@ -2022,7 +2022,7 @@ function SCRIPT_CRLF69_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","Added aim method and first-person toggle buttons in global settings.")
+		sendnotif("Aimbot Update","Re-designed gui cause idk")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
