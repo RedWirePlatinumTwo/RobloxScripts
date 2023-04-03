@@ -1227,18 +1227,10 @@ X_3.TextSize = 28
 X_3.TextStrokeTransparency = 0
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_CRLF69_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_WQML85_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
-	
-	local function sendnotif(title, text)
-		game.StarterGui:SetCore("SendNotification", {
-		Title = title;
-		Duration = 10;
-		Text = text;
-		})
-	end
 	
 	local gui = script.Parent
 	local MainFrame = gui.MFrame
@@ -1249,6 +1241,10 @@ function SCRIPT_CRLF69_FAKESCRIPT() -- Aimbot.Scripts
 	local globals = gui.GlobalSettingsUI
 	local teamui = gui.TeamUI
 	local camera = workspace.CurrentCamera
+	
+	local function sendnotif(title, text)
+		game.StarterGui:SetCore("ChatMakeSystemMessage",({["Text"] = "["..title.."]: "..text, ["Color"] = MainFrame.Title.TextColor3}))
+	end
 	
 	if not _G.RedsAimbot then
 		_G.RedsAimbot = true
@@ -2022,7 +2018,7 @@ function SCRIPT_CRLF69_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","Re-designed gui cause idk")
+		sendnotif("Aimbot Update","Changed notification function to system message.")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
@@ -2178,4 +2174,4 @@ function SCRIPT_CRLF69_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_CRLF69_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_WQML85_FAKESCRIPT))
