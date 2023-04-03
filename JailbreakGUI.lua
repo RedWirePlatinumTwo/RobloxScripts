@@ -109,7 +109,6 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0, 0, 0.176471)
 ScrollingFrame.BorderColor3 = Color3.new(0, 0.666667, 1)
 ScrollingFrame.Position = UDim2.new(0.016997071, 0, 0.330357105, 0)
 ScrollingFrame.Size = UDim2.new(0, 393, 0, 187)
-ScrollingFrame.CanvasPosition = Vector2.new(0, 413)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 disablelasers.Name = "disablelasers"
@@ -594,7 +593,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_ZQOY88_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_NFKB78_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -639,16 +638,16 @@ function SCRIPT_ZQOY88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		v.TextColor3 = Color3.new(0.66,0,0)
 		
 		v.MouseButton1Click:connect(function()
-			v.TextColor3 = mframe.speed.TextColor3
+			v.TextColor3 = Color3.fromRGB(85,255,255)
 		end)
 		
 	end
-	
+	 
 	if game.PlaceId == 606849621 then
 		local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
 	
 		local function notify(text)
-			game.StarterGui:SetCore("ChatMakeSystemMessage",({["Text"] = "Red's JB GUI: "..text, ["Color"] = mframe.speed.TextColor3}))
+			game.StarterGui:SetCore("ChatMakeSystemMessage",({["Text"] = "Red's JB GUI: "..text, ["Color"] = mainframe.Parent.BorderColor3}))
 		end
 		if not _G.RedsJBGUI then
 			_G.RedsJBGUI = true
@@ -1079,7 +1078,7 @@ function SCRIPT_ZQOY88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 								if v2.ImageLabel.Image == "rbxassetid://"..id then
 	
 									Changed(v2, "ImageColor3", function(color)
-										if color == mframe.speed.TextColor3 then
+										if color == Color3.fromRGB(85,255,255) then
 											notify("The "..name.." is open for robbery.")
 										end
 									end)
@@ -1571,7 +1570,7 @@ function SCRIPT_ZQOY88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 				
 				if loadout.active then 
-					clone.active.TextColor3 = mframe.speed.TextColor3
+					clone.active.TextColor3 = Color3.fromRGB(85,255,255)
 				end
 				
 				clone.active.MouseButton1Click:connect(function()
@@ -1580,7 +1579,7 @@ function SCRIPT_ZQOY88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				
 				Changed(loadout, "active", function(val)
 					if val then
-						clone.active.TextColor3 = mframe.speed.TextColor3
+						clone.active.TextColor3 = Color3.fromRGB(85,255,255)
 						
 						for i,v in pairs(loadouts) do
 							if v ~= loadout and v.active then
@@ -1772,4 +1771,4 @@ function SCRIPT_ZQOY88_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_ZQOY88_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_NFKB78_FAKESCRIPT))
