@@ -1078,7 +1078,7 @@ function SCRIPT_NFKB78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 								if v2.ImageLabel.Image == "rbxassetid://"..id then
 	
 									Changed(v2, "ImageColor3", function(color)
-										if color == Color3.fromRGB(85,255,255) then
+										if color == Color3.new(0,1,0) then
 											notify("The "..name.." is open for robbery.")
 										end
 									end)
