@@ -593,7 +593,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_UPII69_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_SJYQ90_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -653,6 +653,8 @@ function SCRIPT_UPII69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	for i,v in pairs(togglebuttons) do
 		v.TextColor3 = Color3.new(0.66,0,0)
 		local bool = false
+		local buttontxt = v.Text
+		v.Text = "<b>"..buttontxt.." ("..tostring(bool)..")</b>"
 		
 		v.MouseButton1Click:connect(function()
 			bool = not bool
@@ -661,6 +663,7 @@ function SCRIPT_UPII69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			else
 				v.TextColor3 = Color3.new(0.66,0,0)
 			end
+			v.Text = "<b>"..buttontxt.." ("..tostring(bool)..")</b>"
 		end)
 	end
 	 
@@ -876,27 +879,26 @@ function SCRIPT_UPII69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					TextButton.Visible = props.guitext
 					pointer(Airdrop)
 	
-				local FormatNumber = function(n)
-					local n2 = ""
+					local FormatNumber = function(n)
+						local stringnum = tostring(n)  
+						local str = ""
 	
-					for i = 1, tostring(n):len() do
-					    local v = tostring(n):reverse():sub(i,i)
-					    if i/3 == math.floor(i/3) then
-					        n2 = n2..v..","
-					    else
-					        n2 = n2..v
-					    end
-					end
+						for i = 1, stringnum:len() do
+							local revi = math.abs(i-stringnum:len())
+							str = str..stringnum:sub(i,i)
+							if revi/3 == math.floor(revi/3) then
+								str = str..","
+							end
+						end 
 	
-					local n3 = n2:reverse()
-					if n3:sub(1,1) == "," then
-						n3 = n3:sub(2, n3:len())
+						if str:sub(str:len()) == "," then
+							str = str:sub(1, str:len()-1)
+						end
+						return str
 					end
-					return n3
-				end
 	
 				runservice.RenderStepped:connect(function()
-					TextButton.Text = "<b>Airdrop | Distance: "..FormatNumber(math.floor(lplr:DistanceFromCharacter(Airdrop.Position))).."</b>"
+					TextButton.Text = "Airdrop | Distance: "..FormatNumber(math.floor(lplr:DistanceFromCharacter(Airdrop.Position)))
 				end)
 	
 				end
@@ -908,13 +910,10 @@ function SCRIPT_UPII69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end
 	
 			workspace.ChildAdded:connect(gui)
-			local airdroptxt = mainframe.Airdrop.Text
-			mainframe.Airdrop.Text = "<b>"..airdroptxt.." ("..tostring(props.pointers)..")</b>"
 	
 			mainframe.Airdrop.MouseButton1Click:connect(function()
 				props.pointers = not props.pointers
 				props.guitext = props.pointers
-				mainframe.Airdrop.Text = "<b>"..airdroptxt.." ("..tostring(props.pointers)..")</b>"
 			end)
 	
 			local itemconfig = rstorage.Game.ItemConfig
@@ -1175,15 +1174,12 @@ function SCRIPT_UPII69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 			end)
 	
-			mainframe.gunshoptp.Text = "<b>Gunshop TP ("..tostring(gunshoptp)..")</b>"
-	
 			mainframe.gunshoptp.MouseButton1Click:connect(function()
 				if gunshoptp then
 					gunshoptp = false
 				else
 					gunshoptp = true
 				end
-				mainframe.gunshoptp.Text = "<b>Gunshop TP ("..tostring(gunshoptp)..")</b>"
 			end)
 	
 			local enablefly = false
@@ -1318,8 +1314,8 @@ function SCRIPT_UPII69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					-- end of fly script
 	
 					Changed(speeds, "flyspeed", function(num)
-						if num > 640 then
-							speeds.flyspeed = 640
+						if num > 600 then
+							speeds.flyspeed = 600
 						end
 						if num < 0 then
 							speeds.flyspeed = 0
@@ -1433,8 +1429,6 @@ function SCRIPT_UPII69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			
 			local vmod = false
 			local vmodtoggle = false
-			local locktxt = mainframe.lockonexit.Text
-			mainframe.lockonexit.Text = "<b>"..locktxt.." ("..tostring(vmodtoggle)..")</b>"
 			
 	
 			mainframe.lockonexit.MouseButton1Click:connect(function()
@@ -1471,7 +1465,6 @@ function SCRIPT_UPII69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					notify("Vehicle auto-lock/unlock enabled!")
 				end
 				vmodtoggle = not vmodtoggle
-				mainframe.lockonexit.Text = "<b>"..locktxt.." ("..tostring(vmodtoggle)..")</b>"
 			end)
 			
 			local tazermod = false
@@ -1502,12 +1495,9 @@ function SCRIPT_UPII69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			local ropefollow = false
 			local ropepart = nil
 			local ropenotif = false
-			local ropetxt = mainframe.ropefollow.Text
-			mainframe.ropefollow.Text = "<b>"..ropetxt.." ("..tostring(ropefollow)..")</b>"
 	
 			mainframe.ropefollow.MouseButton1Click:connect(function()
 		        ropefollow = not ropefollow
-				mainframe.ropefollow.Text = "<b>"..ropetxt.." ("..tostring(ropefollow)..")</b>"
 		        if not ropefollow then
 		            ropepart = nil
 		        end
@@ -1758,11 +1748,8 @@ function SCRIPT_UPII69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 			end)
 			
-			local glidetext = mainframe.glidekey.Text
-			mainframe.glidekey.Text = "<b>"..glidetext.." ("..tostring(gtoglide)..")</b>"
 			mainframe.glidekey.MouseButton1Click:connect(function()
 				gtoglide = not gtoglide
-				mainframe.glidekey.Text = "<b>"..glidetext.." ("..tostring(gtoglide)..")</b>"
 			end)
 			
 			para.Parachute = function(...)
@@ -1792,4 +1779,4 @@ function SCRIPT_UPII69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_UPII69_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_SJYQ90_FAKESCRIPT))
