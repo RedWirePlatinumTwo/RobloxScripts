@@ -593,7 +593,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_NFKB78_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_UPII69_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -616,6 +616,13 @@ function SCRIPT_NFKB78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		mainframe.removeragdoll,
 		mainframe.infiniteyeet,
 		mainframe.replaceparachute
+	}
+	local togglebuttons = {
+		mainframe.gunshoptp,
+		mainframe.lockonexit,
+		mainframe.glidekey,
+		mainframe.Airdrop,
+		mainframe.ropefollow
 	}
 	
 	for i,v in pairs(script.Parent:GetDescendants()) do
@@ -641,6 +648,20 @@ function SCRIPT_NFKB78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			v.TextColor3 = Color3.fromRGB(85,255,255)
 		end)
 		
+	end
+	
+	for i,v in pairs(togglebuttons) do
+		v.TextColor3 = Color3.new(0.66,0,0)
+		local bool = false
+		
+		v.MouseButton1Click:connect(function()
+			bool = not bool
+			if bool then
+				v.TextColor3 = Color3.fromRGB(85,255,255)
+			else
+				v.TextColor3 = Color3.new(0.66,0,0)
+			end
+		end)
 	end
 	 
 	if game.PlaceId == 606849621 then
@@ -1771,4 +1792,4 @@ function SCRIPT_NFKB78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_NFKB78_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_UPII69_FAKESCRIPT))
