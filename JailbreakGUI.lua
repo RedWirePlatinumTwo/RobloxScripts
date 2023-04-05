@@ -651,7 +651,7 @@ function SCRIPT_MAGZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	
 	for i,v in pairs(togglebuttons) do
-		v.TextColor3 = Color3.new(0.8,0,0)
+		v.TextColor3 = Color3.new(0.6,0,0.6)
 		local bool = false
 		local buttontxt = v.Text
 		v.Text = "<b>"..buttontxt.." ("..tostring(bool)..")</b>"
@@ -659,9 +659,9 @@ function SCRIPT_MAGZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		v.MouseButton1Click:connect(function()
 			bool = not bool
 			if bool then
-				v.TextColor3 = Color3.fromRGB(110,255,255)
+				v.TextColor3 = Color3.fromRGB(85,255,255)
 			else
-				v.TextColor3 = Color3.new(0.8,0,0)
+				v.TextColor3 = Color3.new(0.6,0,0.6)
 			end
 			v.Text = "<b>"..buttontxt.." ("..tostring(bool)..")</b>"
 		end)
