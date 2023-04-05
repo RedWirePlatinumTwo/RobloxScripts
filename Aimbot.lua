@@ -73,7 +73,7 @@ local value_15 = Instance.new("TextButton")
 local AimMethod = Instance.new("TextLabel")
 local value_16 = Instance.new("TextButton")
 local About_2 = Instance.new("TextLabel")
-local AimSensitivity = Instance.new("TextLabel")
+local MouseSensitivity = Instance.new("TextLabel")
 local About_3 = Instance.new("TextLabel")
 local value_17 = Instance.new("TextBox")
 local FirstPersonEnabled = Instance.new("TextLabel")
@@ -704,6 +704,7 @@ ScrollingFrame_2.BackgroundColor3 = Color3.new(0, 0.176471, 0)
 ScrollingFrame_2.BorderColor3 = Color3.new(0, 0.666667, 0)
 ScrollingFrame_2.Position = UDim2.new(0, 0, 0.0959752351, 0)
 ScrollingFrame_2.Size = UDim2.new(0, 346, 0, 292)
+ScrollingFrame_2.CanvasPosition = Vector2.new(0, 150)
 ScrollingFrame_2.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 UIListLayout_3.Parent = ScrollingFrame_2
@@ -1004,24 +1005,24 @@ About_2.TextSize = 28
 About_2.TextStrokeTransparency = 0
 About_2.TextWrapped = true
 
-AimSensitivity.Name = "AimSensitivity"
-AimSensitivity.Parent = ScrollingFrame_2
-AimSensitivity.BackgroundColor3 = Color3.new(0, 0, 0)
-AimSensitivity.BackgroundTransparency = 1
-AimSensitivity.BorderColor3 = Color3.new(0, 0.666667, 0)
-AimSensitivity.BorderSizePixel = 0
-AimSensitivity.Position = UDim2.new(0, 0, 0.30479452, 0)
-AimSensitivity.Size = UDim2.new(0, 337, 0, 107)
-AimSensitivity.Font = Enum.Font.TitilliumWeb
-AimSensitivity.Text = "Aim sensitivity:"
-AimSensitivity.TextColor3 = Color3.new(0, 0.666667, 0)
-AimSensitivity.TextSize = 28
-AimSensitivity.TextStrokeTransparency = 0
-AimSensitivity.TextXAlignment = Enum.TextXAlignment.Left
-AimSensitivity.TextYAlignment = Enum.TextYAlignment.Top
+MouseSensitivity.Name = "MouseSensitivity"
+MouseSensitivity.Parent = ScrollingFrame_2
+MouseSensitivity.BackgroundColor3 = Color3.new(0, 0, 0)
+MouseSensitivity.BackgroundTransparency = 1
+MouseSensitivity.BorderColor3 = Color3.new(0, 0.666667, 0)
+MouseSensitivity.BorderSizePixel = 0
+MouseSensitivity.Position = UDim2.new(0, 0, 0.30479452, 0)
+MouseSensitivity.Size = UDim2.new(0, 337, 0, 107)
+MouseSensitivity.Font = Enum.Font.TitilliumWeb
+MouseSensitivity.Text = "Mouse sensitivity:"
+MouseSensitivity.TextColor3 = Color3.new(0, 0.666667, 0)
+MouseSensitivity.TextSize = 28
+MouseSensitivity.TextStrokeTransparency = 0
+MouseSensitivity.TextXAlignment = Enum.TextXAlignment.Left
+MouseSensitivity.TextYAlignment = Enum.TextYAlignment.Top
 
 About_3.Name = "About"
-About_3.Parent = AimSensitivity
+About_3.Parent = MouseSensitivity
 About_3.BackgroundColor3 = Color3.new(0, 0, 0)
 About_3.BackgroundTransparency = 1
 About_3.BorderColor3 = Color3.new(0, 0.666667, 0)
@@ -1037,14 +1038,14 @@ About_3.TextStrokeTransparency = 0
 About_3.TextWrapped = true
 
 value_17.Name = "value"
-value_17.Parent = AimSensitivity
+value_17.Parent = MouseSensitivity
 value_17.BackgroundColor3 = Color3.new(0, 0, 0)
 value_17.BorderColor3 = Color3.new(0, 0.666667, 0)
 value_17.Position = UDim2.new(-1.75680034e-05, 0, 0.258487642, 0)
 value_17.Size = UDim2.new(0, 335, 0, 28)
 value_17.Font = Enum.Font.TitilliumWeb
 value_17.PlaceholderColor3 = Color3.new(0, 0.666667, 0)
-value_17.PlaceholderText = "Default is 50"
+value_17.PlaceholderText = "Default is 0.25"
 value_17.Text = "50"
 value_17.TextColor3 = Color3.new(0, 0.666667, 0)
 value_17.TextSize = 28
@@ -1227,7 +1228,7 @@ X_3.TextSize = 28
 X_3.TextStrokeTransparency = 0
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_WQML85_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_CVGQ79_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1427,8 +1428,8 @@ function SCRIPT_WQML85_FAKESCRIPT() -- Aimbot.Scripts
 			newglobalstats["RightClickAim"] = false
 			newglobalstats["TargetThruWalls"] = false
 			newglobalstats["FirstPersonEnabled"] = true
-			newglobalstats["AimMethod"] = "Camera"
-			newglobalstats["AimSensitivity"] = 50
+			newglobalstats["AimMethod"] = "Mouse"
+			newglobalstats["MouseSensitivity"] = 0.25
 			if not GlobalStats[game.PlaceId] then
 				gengamestats()
 			end
@@ -1756,8 +1757,8 @@ function SCRIPT_WQML85_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end
 		
-		if globalsettings.AimMethod.value.Text == "Mouse" then
-			globalsettings.AimMethod.About.Text = "More universal, less stable."
+		if globalsettings.AimMethod.value.Text == "Camera" then
+			globalsettings.AimMethod.About.Text = "Less universal, more stable."
 		end
 		globalsettings.AimMethod.value.MouseButton1Click:connect(function()
 			local method = globalsettings.AimMethod
@@ -1770,10 +1771,14 @@ function SCRIPT_WQML85_FAKESCRIPT() -- Aimbot.Scripts
 			end
 			GlobalStats.AimMethod = method.value.Text
 		end)
-		Changed(globalsettings.AimSensitivity.value, "Text", function (txt)
+		Changed(globalsettings.MouseSensitivity.value, "Text", function (txt)
 			local num = tonumber(txt)
 			if num then
-				GlobalStats.AimSensitivity = num
+				GlobalStats.MouseSensitivity = num
+				if num > 1 then
+					globalsettings.MouseSensitivity.value.Text = "1"
+					GlobalStats.MouseSensitivity = 1
+				end
 			end
 		end)
 	
@@ -1914,8 +1919,7 @@ function SCRIPT_WQML85_FAKESCRIPT() -- Aimbot.Scripts
 				local part = gettargetpart(misc.TargetedCharacter)
 				local partpos = part.Position
 				local v, onscreen = camera:WorldToScreenPoint(partpos)
-				local sens = GlobalStats.AimSensitivity/camera.ViewportSize.Y
-				local x,y = (v.X - m.X)*sens, (v.Y - m.Y)*sens
+				local x,y = (v.X - m.X), (v.Y - m.Y)
 				if onscreen then
 					if misc.IsAimbotOn then
 						if GlobalStats.RightClickAim and RightClick or not GlobalStats.RightClickAim then
@@ -1923,6 +1927,7 @@ function SCRIPT_WQML85_FAKESCRIPT() -- Aimbot.Scripts
 								camera.CFrame = CFrame.new(camera.CFrame.Position, partpos)
 							else
 								mousemoverel(x,y)
+								game.UserInputService.MouseDeltaSensitivity = GlobalStats.MouseSensitivity
 							end
 							if not GlobalStats.FirstPersonEnabled then
 								lplr.Character.Humanoid.RootPart.CFrame = CFrame.lookAt(lplr.Character.Humanoid.RootPart.Position, (partpos * Vector3.new(1,0,1)) + Vector3.new(0, lplr.Character.Humanoid.RootPart.Position.Y, 0))
@@ -1931,7 +1936,10 @@ function SCRIPT_WQML85_FAKESCRIPT() -- Aimbot.Scripts
 					end
 				else
 					deselect()
+					game.UserInputService.MouseDeltaSensitivity = 1
 				end
+			else
+				game.UserInputService.MouseDeltaSensitivity = 1
 			end
 	
 			if m.Target ~= nil then
@@ -2174,4 +2182,4 @@ function SCRIPT_WQML85_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_WQML85_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_CVGQ79_FAKESCRIPT))
