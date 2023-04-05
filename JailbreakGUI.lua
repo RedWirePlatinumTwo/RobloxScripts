@@ -593,7 +593,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_IHRC78_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_QFJN72_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -920,17 +920,20 @@ function SCRIPT_IHRC78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 			local function changegunstats(Table)
 	
-			for i,v in pairs(itemconfig:GetChildren()) do
-				local gun = require(v)
-				if v.Name == "Shotgun" then
-					gun.BulletSpread = 0.02
-				end
+				for i,v in pairs(itemconfig:GetChildren()) do
+					
+					pcall(function()
+						local gun = require(v)
+						if v.Name == "Shotgun" then
+							gun.BulletSpread = 0.02
+						end
 	
-				for index, value in pairs(Table) do
-					gun[index] = value
-				end
+						for index, value in pairs(Table) do
+							gun[index] = value
+						end
+					end)
 	
-			end
+				end
 	
 			end
 			local gunnotif = false
@@ -1796,4 +1799,4 @@ function SCRIPT_IHRC78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_IHRC78_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_QFJN72_FAKESCRIPT))
