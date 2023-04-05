@@ -2026,7 +2026,7 @@ function SCRIPT_CVGQ79_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","Changed notification function to system message.")
+		sendnotif("Aimbot Update","Replaced Aim Sensitivity with Mouse Sensitivity.")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
