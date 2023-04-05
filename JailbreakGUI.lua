@@ -593,7 +593,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_MAGZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_IHRC78_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -1499,7 +1499,11 @@ function SCRIPT_MAGZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			mainframe.ropefollow.MouseButton1Click:connect(function()
 		        ropefollow = not ropefollow
 		        if not ropefollow then
-		            ropepart = nil
+					ropepart = nil
+					local model = require(rstorage.Game.Vehicle).GetLocalVehicleModel()
+					if pcall(function() return model.Winch.RopeConstraint end) then
+						model.Winch.RopeConstraint.Length = 30
+					end
 		        end
 				if not ropenotif then
 					ropenotif = true
@@ -1792,4 +1796,4 @@ function SCRIPT_MAGZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_MAGZ70_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_IHRC78_FAKESCRIPT))
