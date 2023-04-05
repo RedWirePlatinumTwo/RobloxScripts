@@ -593,7 +593,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_SJYQ90_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_MAGZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -651,7 +651,7 @@ function SCRIPT_SJYQ90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	
 	for i,v in pairs(togglebuttons) do
-		v.TextColor3 = Color3.new(0.66,0,0)
+		v.TextColor3 = Color3.new(0.8,0,0)
 		local bool = false
 		local buttontxt = v.Text
 		v.Text = "<b>"..buttontxt.." ("..tostring(bool)..")</b>"
@@ -659,9 +659,9 @@ function SCRIPT_SJYQ90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		v.MouseButton1Click:connect(function()
 			bool = not bool
 			if bool then
-				v.TextColor3 = Color3.fromRGB(85,255,255)
+				v.TextColor3 = Color3.fromRGB(110,255,255)
 			else
-				v.TextColor3 = Color3.new(0.66,0,0)
+				v.TextColor3 = Color3.new(0.8,0,0)
 			end
 			v.Text = "<b>"..buttontxt.." ("..tostring(bool)..")</b>"
 		end)
@@ -723,7 +723,7 @@ function SCRIPT_SJYQ90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Improved the ragdoll removing thing, you can now still use guns after being \"ragdolled\" + added 2 new buttons.")
+			notify("Improved the rope follow part script.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1511,10 +1511,23 @@ function SCRIPT_SJYQ90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			    local model = require(rstorage.Game.Vehicle).GetLocalVehicleModel()
 			    if model and ropefollow and ropepart and ropepart ~= model then
 					if pcall(function() return model.Preset.RopePull end) then
+						local modelrope = model.Winch.RopeConstraint
+						local ropepull = model.Preset.RopePull
 						if ropepart.Parent == workspace.Vehicles then
-							model.Preset.RopePull.CFrame = ropepart.Engine.CFrame
+	
+							if ropepull.AttachedTo.Value then
+								modelrope.Length = math.max(modelrope.Length-(task.wait()*100),30)
+							else
+								modelrope.Length = (model.Engine.Position - ropepart.Engine.Position).Magnitude
+								ropepull.CFrame = ropepart.Engine.CFrame
+							end
 						else
-							model.Preset.RopePull.CFrame = ropepart.MeshPart.CFrame
+							if ropepull.AttachedTo.Value then
+								modelrope.Length = math.max(modelrope.Length-(task.wait()*100),30)
+							else
+								modelrope.Length = (model.Engine.Position - ropepart.MeshPart.Position).Magnitude
+								ropepull.CFrame = ropepart.MeshPart.CFrame
+							end
 						end
 			        end
 			    end
@@ -1779,4 +1792,4 @@ function SCRIPT_SJYQ90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_SJYQ90_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_MAGZ70_FAKESCRIPT))
