@@ -67,10 +67,10 @@ speed.BorderColor3 = Color3.new(0, 0.666667, 1)
 speed.Position = UDim2.new(0.0194970705, 0, 0.138753265, 0)
 speed.Size = UDim2.new(0, 184, 0, 50)
 speed.ZIndex = 33
-speed.Font = Enum.Font.Unknown
+speed.Font = Enum.Font.Ubuntu
 speed.Text = "Speedhack"
 speed.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-speed.TextSize = 18
+speed.TextSize = 20
 speed.TextWrapped = true
 
 Title.Name = "Title"
@@ -81,7 +81,7 @@ Title.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 Title.LayoutOrder = 1
 Title.Position = UDim2.new(0.0169973746, 0, 0, 0)
 Title.Size = UDim2.new(0, 393, 0, 43)
-Title.Font = Enum.Font.Jura
+Title.Font = Enum.Font.Ubuntu
 Title.Text = "RedWire's Jailbreak GUI"
 Title.TextColor3 = Color3.new(0.333333, 0.666667, 1)
 Title.TextSize = 30
@@ -95,7 +95,7 @@ Speednum.BorderColor3 = Color3.new(0, 0.666667, 1)
 Speednum.Position = UDim2.new(0.0189999994, 0, 0.138999999, 0)
 Speednum.Size = UDim2.new(0, 184, 0, 50)
 Speednum.Visible = false
-Speednum.Font = Enum.Font.Unknown
+Speednum.Font = Enum.Font.Ubuntu
 Speednum.PlaceholderColor3 = Color3.new(0.333333, 1, 0.498039)
 Speednum.PlaceholderText = "Walkspeed number"
 Speednum.Text = "30"
@@ -117,10 +117,10 @@ disablelasers.BackgroundColor3 = Color3.new(0, 0, 0.27451)
 disablelasers.BorderColor3 = Color3.new(0, 0.666667, 1)
 disablelasers.Position = UDim2.new(1.23584902, 0, 0.767922103, 0)
 disablelasers.Size = UDim2.new(0, 106, 0, 52)
-disablelasers.Font = Enum.Font.Unknown
+disablelasers.Font = Enum.Font.Ubuntu
 disablelasers.Text = "Disable Lasers"
 disablelasers.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-disablelasers.TextSize = 18
+disablelasers.TextSize = 20
 disablelasers.TextWrapped = true
 
 holdebypass.Name = "holdebypass"
@@ -129,10 +129,10 @@ holdebypass.BackgroundColor3 = Color3.new(0, 0, 0.27451)
 holdebypass.BorderColor3 = Color3.new(0, 0.666667, 1)
 holdebypass.Position = UDim2.new(0.329939932, 0, 0.189644739, 0)
 holdebypass.Size = UDim2.new(0, 106, 0, 52)
-holdebypass.Font = Enum.Font.Unknown
+holdebypass.Font = Enum.Font.Ubuntu
 holdebypass.Text = "Hold E Bypass"
 holdebypass.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-holdebypass.TextSize = 18
+holdebypass.TextSize = 20
 holdebypass.TextWrapped = true
 
 aimbot.Name = "aimbot"
@@ -141,10 +141,10 @@ aimbot.BackgroundColor3 = Color3.new(0, 0, 0.27451)
 aimbot.BorderColor3 = Color3.new(0, 0.666667, 1)
 aimbot.Position = UDim2.new(0, 0, 0.267379671, 0)
 aimbot.Size = UDim2.new(0, 110, 0, 50)
-aimbot.Font = Enum.Font.Unknown
+aimbot.Font = Enum.Font.Ubuntu
 aimbot.Text = "Aimbot"
 aimbot.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-aimbot.TextSize = 18
+aimbot.TextSize = 20
 aimbot.TextWrapped = true
 
 Airdrop.Name = "Airdrop"
@@ -154,10 +154,10 @@ Airdrop.BorderColor3 = Color3.new(0, 0.666667, 1)
 Airdrop.Position = UDim2.new(0, 0, 0.451666713, 0)
 Airdrop.Size = UDim2.new(0, 106, 0, 51)
 Airdrop.ZIndex = -222
-Airdrop.Font = Enum.Font.Unknown
-Airdrop.Text = "Airdrop ESP Toggle"
+Airdrop.Font = Enum.Font.Ubuntu
+Airdrop.Text = "Airdrop ESP"
 Airdrop.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-Airdrop.TextSize = 18
+Airdrop.TextSize = 20
 Airdrop.TextWrapped = true
 
 UIGridLayout.Parent = ScrollingFrame
@@ -170,10 +170,10 @@ modguns.BorderColor3 = Color3.new(0, 0.666667, 1)
 modguns.Position = UDim2.new(0.329939932, 0, 0.451666713, 0)
 modguns.Size = UDim2.new(0, 106, 0, 51)
 modguns.ZIndex = -99
-modguns.Font = Enum.Font.Unknown
+modguns.Font = Enum.Font.Ubuntu
 modguns.Text = "Mod guns"
 modguns.TextColor3 = Color3.new(0, 0.666667, 1)
-modguns.TextSize = 18
+modguns.TextSize = 20
 modguns.TextWrapped = true
 
 GravToggle.Name = "GravToggle"
@@ -183,10 +183,10 @@ GravToggle.BorderColor3 = Color3.new(0, 0.666667, 1)
 GravToggle.Position = UDim2.new(0.668999851, 0, 0.451666713, 0)
 GravToggle.Size = UDim2.new(0, 105, 0, 51)
 GravToggle.ZIndex = 0
-GravToggle.Font = Enum.Font.Unknown
+GravToggle.Font = Enum.Font.Ubuntu
 GravToggle.Text = "Gravity Toggle (196)"
 GravToggle.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-GravToggle.TextSize = 18
+GravToggle.TextSize = 20
 GravToggle.TextWrapped = true
 
 forcedaytime.Name = "forcedaytime"
@@ -196,10 +196,10 @@ forcedaytime.BorderColor3 = Color3.new(0, 0.666667, 1)
 forcedaytime.Position = UDim2.new(0.333333343, 0, 0.710666597, 0)
 forcedaytime.Size = UDim2.new(0, 106, 0, 52)
 forcedaytime.ZIndex = 0
-forcedaytime.Font = Enum.Font.Unknown
+forcedaytime.Font = Enum.Font.Ubuntu
 forcedaytime.Text = "Force Daytime"
 forcedaytime.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-forcedaytime.TextSize = 18
+forcedaytime.TextSize = 20
 forcedaytime.TextWrapped = true
 
 removeragdoll.Name = "removeragdoll"
@@ -207,10 +207,10 @@ removeragdoll.Parent = ScrollingFrame
 removeragdoll.BackgroundColor3 = Color3.new(0, 0, 0.27451)
 removeragdoll.BorderColor3 = Color3.new(0, 0.666667, 1)
 removeragdoll.Size = UDim2.new(0, 115, 0, 47)
-removeragdoll.Font = Enum.Font.Unknown
+removeragdoll.Font = Enum.Font.Ubuntu
 removeragdoll.Text = "Remove Ragdoll"
 removeragdoll.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-removeragdoll.TextSize = 18
+removeragdoll.TextSize = 20
 removeragdoll.TextWrapped = true
 
 RobberyNotifier.Name = "RobberyNotifier"
@@ -219,10 +219,10 @@ RobberyNotifier.BackgroundColor3 = Color3.new(0, 0, 0.27451)
 RobberyNotifier.BorderColor3 = Color3.new(0, 0.666667, 1)
 RobberyNotifier.Position = UDim2.new(0.327883303, 0, 0, 0)
 RobberyNotifier.Size = UDim2.new(0, 117, 0, 47)
-RobberyNotifier.Font = Enum.Font.Unknown
+RobberyNotifier.Font = Enum.Font.Ubuntu
 RobberyNotifier.Text = "Robbery Notifier"
 RobberyNotifier.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-RobberyNotifier.TextSize = 18
+RobberyNotifier.TextSize = 20
 RobberyNotifier.TextWrapped = true
 
 infiniteyeet.Name = "infiniteyeet"
@@ -231,10 +231,10 @@ infiniteyeet.BackgroundColor3 = Color3.new(0, 0, 0.27451)
 infiniteyeet.BorderColor3 = Color3.new(0, 0.666667, 1)
 infiniteyeet.Position = UDim2.new(0.663817644, 0, 0, 0)
 infiniteyeet.Size = UDim2.new(0, 117, 0, 47)
-infiniteyeet.Font = Enum.Font.Unknown
-infiniteyeet.Text = "Inf Yield"
+infiniteyeet.Font = Enum.Font.Ubuntu
+infiniteyeet.Text = "Infinite Yield"
 infiniteyeet.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-infiniteyeet.TextSize = 18
+infiniteyeet.TextSize = 20
 infiniteyeet.TextWrapped = true
 
 gunshoptp.Name = "gunshoptp"
@@ -243,10 +243,10 @@ gunshoptp.BackgroundColor3 = Color3.new(0, 0, 0.27451)
 gunshoptp.BorderColor3 = Color3.new(0, 0.666667, 1)
 gunshoptp.Position = UDim2.new(0, 0, 0.262000024, 0)
 gunshoptp.Size = UDim2.new(0, 117, 0, 47)
-gunshoptp.Font = Enum.Font.Unknown
+gunshoptp.Font = Enum.Font.Ubuntu
 gunshoptp.Text = "Gunshop TP"
 gunshoptp.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-gunshoptp.TextSize = 18
+gunshoptp.TextSize = 20
 gunshoptp.TextWrapped = true
 
 keybypass.Name = "keybypass"
@@ -256,10 +256,10 @@ keybypass.BorderColor3 = Color3.new(0, 0.666667, 1)
 keybypass.Position = UDim2.new(0.333333343, 0, 0.262000024, 0)
 keybypass.Size = UDim2.new(0, 116, 0, 47)
 keybypass.ZIndex = 0
-keybypass.Font = Enum.Font.Unknown
+keybypass.Font = Enum.Font.Ubuntu
 keybypass.Text = "Keycard Bypass"
 keybypass.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-keybypass.TextSize = 18
+keybypass.TextSize = 20
 keybypass.TextWrapped = true
 
 getcode.Name = "getcode"
@@ -269,10 +269,10 @@ getcode.BorderColor3 = Color3.new(0, 0.666667, 1)
 getcode.Position = UDim2.new(0, 0, 0.523438752, 0)
 getcode.Size = UDim2.new(0, 116, 0, 47)
 getcode.ZIndex = 0
-getcode.Font = Enum.Font.Unknown
+getcode.Font = Enum.Font.Ubuntu
 getcode.Text = "Get Casino code"
 getcode.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-getcode.TextSize = 18
+getcode.TextSize = 20
 getcode.TextWrapped = true
 
 deleteradio.Name = "deleteradio"
@@ -282,10 +282,10 @@ deleteradio.BorderColor3 = Color3.new(0, 0.666667, 1)
 deleteradio.Position = UDim2.new(0.333333343, 0, 0.523438752, 0)
 deleteradio.Size = UDim2.new(0, 117, 0, 47)
 deleteradio.ZIndex = -1
-deleteradio.Font = Enum.Font.Unknown
+deleteradio.Font = Enum.Font.Ubuntu
 deleteradio.Text = "Delete Radio Gui (its stupid)"
 deleteradio.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-deleteradio.TextSize = 18
+deleteradio.TextSize = 20
 deleteradio.TextWrapped = true
 
 respawn.Name = "respawn"
@@ -295,10 +295,10 @@ respawn.BorderColor3 = Color3.new(0, 0.666667, 1)
 respawn.Position = UDim2.new(0.667000175, 0, 0.523438752, 0)
 respawn.Size = UDim2.new(0, 116, 0, 47)
 respawn.ZIndex = -1
-respawn.Font = Enum.Font.Unknown
+respawn.Font = Enum.Font.Ubuntu
 respawn.Text = "Respawn"
 respawn.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-respawn.TextSize = 18
+respawn.TextSize = 20
 respawn.TextWrapped = true
 
 lockonexit.Name = "lockonexit"
@@ -308,10 +308,10 @@ lockonexit.BorderColor3 = Color3.new(0, 0.666667, 1)
 lockonexit.Position = UDim2.new(0.667000175, 0, 0.523438752, 0)
 lockonexit.Size = UDim2.new(0, 116, 0, 47)
 lockonexit.ZIndex = -1
-lockonexit.Font = Enum.Font.Unknown
+lockonexit.Font = Enum.Font.Ubuntu
 lockonexit.Text = "Lock on exit + Unlock on enter"
 lockonexit.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-lockonexit.TextSize = 18
+lockonexit.TextSize = 20
 lockonexit.TextWrapped = true
 
 Tazermod.Name = "Tazermod"
@@ -321,10 +321,10 @@ Tazermod.BorderColor3 = Color3.new(0, 0.666667, 1)
 Tazermod.Position = UDim2.new(0, 0, 0.451666713, 0)
 Tazermod.Size = UDim2.new(0, 106, 0, 51)
 Tazermod.ZIndex = -222
-Tazermod.Font = Enum.Font.Unknown
+Tazermod.Font = Enum.Font.Ubuntu
 Tazermod.Text = "Tazer mod"
 Tazermod.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-Tazermod.TextSize = 18
+Tazermod.TextSize = 20
 Tazermod.TextWrapped = true
 
 ropefollow.Name = "ropefollow"
@@ -334,10 +334,10 @@ ropefollow.BorderColor3 = Color3.new(0, 0.666667, 1)
 ropefollow.Position = UDim2.new(0, 0, 0.451666713, 0)
 ropefollow.Size = UDim2.new(0, 106, 0, 51)
 ropefollow.ZIndex = -222
-ropefollow.Font = Enum.Font.Unknown
+ropefollow.Font = Enum.Font.Ubuntu
 ropefollow.Text = "Rope-Follow-Part"
 ropefollow.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-ropefollow.TextSize = 18
+ropefollow.TextSize = 20
 ropefollow.TextWrapped = true
 
 Hotbarautosort.Name = "Hotbarautosort"
@@ -347,10 +347,10 @@ Hotbarautosort.BorderColor3 = Color3.new(0, 0.666667, 1)
 Hotbarautosort.Position = UDim2.new(0, 0, 0.451666713, 0)
 Hotbarautosort.Size = UDim2.new(0, 106, 0, 51)
 Hotbarautosort.ZIndex = -222
-Hotbarautosort.Font = Enum.Font.Unknown
+Hotbarautosort.Font = Enum.Font.Ubuntu
 Hotbarautosort.Text = "Hotbar Auto-sorter"
 Hotbarautosort.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-Hotbarautosort.TextSize = 18
+Hotbarautosort.TextSize = 20
 Hotbarautosort.TextWrapped = true
 
 glidekey.Name = "glidekey"
@@ -360,10 +360,10 @@ glidekey.BorderColor3 = Color3.new(0, 0.666667, 1)
 glidekey.Position = UDim2.new(0, 0, 0.451666713, 0)
 glidekey.Size = UDim2.new(0, 106, 0, 51)
 glidekey.ZIndex = -222
-glidekey.Font = Enum.Font.Unknown
+glidekey.Font = Enum.Font.Ubuntu
 glidekey.Text = "G-to-glide"
 glidekey.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-glidekey.TextSize = 18
+glidekey.TextSize = 20
 glidekey.TextWrapped = true
 
 replaceparachute.Name = "replaceparachute"
@@ -373,10 +373,10 @@ replaceparachute.BorderColor3 = Color3.new(0, 0.666667, 1)
 replaceparachute.Position = UDim2.new(0, 0, 0.451666713, 0)
 replaceparachute.Size = UDim2.new(0, 106, 0, 51)
 replaceparachute.ZIndex = -222
-replaceparachute.Font = Enum.Font.Unknown
+replaceparachute.Font = Enum.Font.Ubuntu
 replaceparachute.Text = "Replace parachute w/ glider"
 replaceparachute.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-replaceparachute.TextSize = 18
+replaceparachute.TextSize = 20
 replaceparachute.TextWrapped = true
 
 flyhack.Name = "flyhack"
@@ -385,10 +385,10 @@ flyhack.BackgroundColor3 = Color3.new(0, 0, 0.27451)
 flyhack.BorderColor3 = Color3.new(0, 0.666667, 1)
 flyhack.Position = UDim2.new(0.491997063, 0, 0.138753265, 0)
 flyhack.Size = UDim2.new(0, 185, 0, 50)
-flyhack.Font = Enum.Font.Unknown
+flyhack.Font = Enum.Font.Ubuntu
 flyhack.Text = "Fly hack (Left CTRL + F)"
 flyhack.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-flyhack.TextSize = 18
+flyhack.TextSize = 20
 flyhack.TextWrapped = true
 
 flyhacknum.Name = "flyhacknum"
@@ -398,7 +398,7 @@ flyhacknum.BorderColor3 = Color3.new(0, 0.666667, 1)
 flyhacknum.Position = UDim2.new(0.492000014, 0, 0.138999999, 0)
 flyhacknum.Size = UDim2.new(0, 185, 0, 50)
 flyhacknum.Visible = false
-flyhacknum.Font = Enum.Font.Unknown
+flyhacknum.Font = Enum.Font.Ubuntu
 flyhacknum.PlaceholderColor3 = Color3.new(0.333333, 1, 1)
 flyhacknum.PlaceholderText = "Fly Speed number"
 flyhacknum.Text = "300"
@@ -440,7 +440,7 @@ Title_2.BackgroundColor3 = Color3.new(0, 0, 0.176471)
 Title_2.BorderColor3 = Color3.new(0, 0.666667, 1)
 Title_2.LayoutOrder = 1
 Title_2.Size = UDim2.new(0, 317, 0, 25)
-Title_2.Font = Enum.Font.Unknown
+Title_2.Font = Enum.Font.Ubuntu
 Title_2.Text = "loadoutname"
 Title_2.TextColor3 = Color3.new(0.333333, 0.666667, 1)
 Title_2.TextScaled = true
@@ -454,7 +454,7 @@ delloadout.BackgroundColor3 = Color3.new(0, 0, 0.27451)
 delloadout.BorderColor3 = Color3.new(0, 0.666667, 1)
 delloadout.Position = UDim2.new(1, 0, -0.0149493404, 0)
 delloadout.Size = UDim2.new(0, 25, 0, 25)
-delloadout.Font = Enum.Font.Unknown
+delloadout.Font = Enum.Font.Ubuntu
 delloadout.Text = "X"
 delloadout.TextColor3 = Color3.new(0.666667, 0, 0)
 delloadout.TextScaled = true
@@ -475,7 +475,7 @@ x.BackgroundColor3 = Color3.new(0, 0, 0.27451)
 x.BorderColor3 = Color3.new(0, 0.666667, 1)
 x.Position = UDim2.new(0.926900625, 0, 0, 0)
 x.Size = UDim2.new(0, 25, 0, 25)
-x.Font = Enum.Font.Unknown
+x.Font = Enum.Font.Ubuntu
 x.Text = "X"
 x.TextColor3 = Color3.new(0.666667, 0, 0)
 x.TextScaled = true
@@ -487,7 +487,7 @@ itemname.Parent = itemframe
 itemname.BackgroundColor3 = Color3.new(0, 0, 0.27451)
 itemname.BorderColor3 = Color3.new(0, 0.666667, 1)
 itemname.Size = UDim2.new(0, 171, 0, 25)
-itemname.Font = Enum.Font.Unknown
+itemname.Font = Enum.Font.Ubuntu
 itemname.PlaceholderText = "Item Name"
 itemname.Text = ""
 itemname.TextColor3 = Color3.new(0.333333, 0.666667, 1)
@@ -501,7 +501,7 @@ slotnum.BackgroundColor3 = Color3.new(0, 0, 0.27451)
 slotnum.BorderColor3 = Color3.new(0, 0.666667, 1)
 slotnum.Position = UDim2.new(0.5, 0, 0, 0)
 slotnum.Size = UDim2.new(0, 146, 0, 25)
-slotnum.Font = Enum.Font.Unknown
+slotnum.Font = Enum.Font.Ubuntu
 slotnum.PlaceholderText = "Slot number"
 slotnum.Text = ""
 slotnum.TextColor3 = Color3.new(0.333333, 0.666667, 1)
@@ -515,7 +515,7 @@ active.BackgroundColor3 = Color3.new(0, 0, 0.27451)
 active.BorderColor3 = Color3.new(0, 0.666667, 1)
 active.Position = UDim2.new(0, 0, 0.25252524, 0)
 active.Size = UDim2.new(0, 342, 0, 25)
-active.Font = Enum.Font.Unknown
+active.Font = Enum.Font.Ubuntu
 active.Text = "Active"
 active.TextColor3 = Color3.new(0.666667, 0, 0)
 active.TextScaled = true
@@ -528,7 +528,7 @@ additem.BackgroundColor3 = Color3.new(0, 0, 0.27451)
 additem.BorderColor3 = Color3.new(0, 0.666667, 1)
 additem.Position = UDim2.new(0, 0, 0.25252524, 0)
 additem.Size = UDim2.new(0, 342, 0, 25)
-additem.Font = Enum.Font.Unknown
+additem.Font = Enum.Font.Ubuntu
 additem.Text = "+ Add Item"
 additem.TextColor3 = Color3.new(0.333333, 1, 1)
 additem.TextScaled = true
@@ -545,7 +545,7 @@ Title_3.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 Title_3.LayoutOrder = 1
 Title_3.Position = UDim2.new(0.0602755435, 0, 0.0149253728, 0)
 Title_3.Size = UDim2.new(0, 352, 0, 30)
-Title_3.Font = Enum.Font.Unknown
+Title_3.Font = Enum.Font.Ubuntu
 Title_3.Text = "Hotbar Auto-Sorter"
 Title_3.TextColor3 = Color3.new(0.333333, 0.666667, 1)
 Title_3.TextSize = 30
@@ -559,7 +559,7 @@ hide.BorderColor3 = Color3.new(0, 0.666667, 1)
 hide.Position = UDim2.new(0.337292314, 0, 0.922172725, 0)
 hide.Size = UDim2.new(0, 129, 0, 26)
 hide.ZIndex = 33
-hide.Font = Enum.Font.Unknown
+hide.Font = Enum.Font.Ubuntu
 hide.Text = "Hide"
 hide.TextColor3 = Color3.new(0.333333, 0.666667, 1)
 hide.TextSize = 28
@@ -572,7 +572,7 @@ addloadout.BorderColor3 = Color3.new(0, 0.666667, 1)
 addloadout.Position = UDim2.new(0.0315795019, 0, 0.803062916, 0)
 addloadout.Size = UDim2.new(0, 168, 0, 25)
 addloadout.ZIndex = 33
-addloadout.Font = Enum.Font.Unknown
+addloadout.Font = Enum.Font.Ubuntu
 addloadout.Text = "Add loadout with name:"
 addloadout.TextColor3 = Color3.new(0.333333, 0.666667, 1)
 addloadout.TextScaled = true
@@ -585,7 +585,7 @@ loadoutname.BackgroundColor3 = Color3.new(0, 0, 0.27451)
 loadoutname.BorderColor3 = Color3.new(0, 0.666667, 1)
 loadoutname.Position = UDim2.new(0.449489921, 0, 0.802994728, 0)
 loadoutname.Size = UDim2.new(0, 206, 0, 25)
-loadoutname.Font = Enum.Font.Unknown
+loadoutname.Font = Enum.Font.Ubuntu
 loadoutname.PlaceholderText = "Loadout Name"
 loadoutname.Text = ""
 loadoutname.TextColor3 = Color3.new(0.333333, 0.666667, 1)
@@ -593,7 +593,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_QFJN72_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_DWGO72_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -614,7 +614,6 @@ function SCRIPT_QFJN72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		mainframe.keybypass,
 		mainframe.modguns,
 		mainframe.removeragdoll,
-		mainframe.infiniteyeet,
 		mainframe.replaceparachute
 	}
 	local togglebuttons = {
@@ -634,11 +633,6 @@ function SCRIPT_QFJN72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			v.Active = true
 			v.Draggable = true
 		end
-		if v.ClassName == "TextBox" or v.ClassName == "TextButton" or v.ClassName == "TextLabel" then
-			v.Font = Enum.Font.Jura
-			v.RichText = true
-			v.Text = "<b>"..v.Text.."</b>"
-		end
 	end
 	
 	for i,v in pairs(oneclickbuttons) do
@@ -654,7 +648,7 @@ function SCRIPT_QFJN72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		v.TextColor3 = Color3.new(0.6,0,0.6)
 		local bool = false
 		local buttontxt = v.Text
-		v.Text = "<b>"..buttontxt.." ("..tostring(bool)..")</b>"
+		v.Text = buttontxt.." ("..tostring(bool)..")"
 		
 		v.MouseButton1Click:connect(function()
 			bool = not bool
@@ -663,7 +657,7 @@ function SCRIPT_QFJN72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			else
 				v.TextColor3 = Color3.new(0.6,0,0.6)
 			end
-			v.Text = "<b>"..buttontxt.." ("..tostring(bool)..")</b>"
+			v.Text = buttontxt.." ("..tostring(bool)..")"
 		end)
 	end
 	 
@@ -711,7 +705,7 @@ function SCRIPT_QFJN72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			local speeds = {}
 			speeds.walkspeed = 30
 			speeds.flyspeed = 300
-			mframe.Speednum.Text = "<b>"..tostring(speeds.walkspeed).."</b>"
+			mframe.Speednum.Text = tostring(speeds.walkspeed)
 	
 			local plrs = game.Players
 			local lplr = plrs.LocalPlayer
@@ -723,7 +717,7 @@ function SCRIPT_QFJN72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Improved the rope follow part script.")
+			notify("Changed GUI font because bolding text was a gigantic fucking mistake.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -781,10 +775,10 @@ function SCRIPT_QFJN72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 			end)
 	
-			mainframe.GravToggle.Text = "<b>Gravity Toggle ("..tostring(math.floor(workspace.Gravity))..")</b>"
+			mainframe.GravToggle.Text = "Gravity Toggle ("..tostring(math.floor(workspace.Gravity))..")"
 	
 			Changed(workspace, "Gravity", function(grav)
-				mainframe.GravToggle.Text = "<b>Gravity Toggle ("..tostring(grav)..")</b>"
+				mainframe.GravToggle.Text = "Gravity Toggle ("..tostring(grav)..")"
 			end)
 	
 			mainframe.GravToggle.MouseButton1Click:connect(function()
@@ -1060,7 +1054,7 @@ function SCRIPT_QFJN72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					if num < 0 then
 						speeds.walkspeed = 0
 					end
-					mframe.Speednum.Text = "<b>"..tostring(speeds.walkspeed).."</b>"
+					mframe.Speednum.Text = tostring(speeds.walkspeed)
 				end)
 				
 				Changed(mframe.Speednum, "Text", function(txt)
@@ -1323,7 +1317,7 @@ function SCRIPT_QFJN72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						if num < 0 then
 							speeds.flyspeed = 0
 						end
-						mframe.flyhacknum.Text = "<b>"..tostring(speeds.flyspeed).."</b>"
+						mframe.flyhacknum.Text = tostring(speeds.flyspeed)
 					end)
 	
 					mframe.flyhacknum.MouseWheelForward:connect(function()
@@ -1385,9 +1379,9 @@ function SCRIPT_QFJN72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 							end
 						end
 					end
-					mainframe.getcode.Text = "<b>"..txt.." (or "..txt:reverse()..")</b>"
+					mainframe.getcode.Text = txt.." (or "..txt:reverse()..")"
 				else
-					mainframe.getcode.Text = "<b>code non-existent</b>"
+					mainframe.getcode.Text = "code non-existent"
 				end
 	
 				delay(5,function()
@@ -1404,7 +1398,7 @@ function SCRIPT_QFJN72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 				if not respawnconfirm then
 					respawnconfirm = true
-					mainframe.respawn.Text = "<b>"..respawntxt.." (you sure?)</b>"
+					mainframe.respawn.Text = respawntxt.." (you sure?)"
 					wait(2)
 					respawnconfirm = false
 					mainframe.respawn.Text = respawntxt
@@ -1585,8 +1579,8 @@ function SCRIPT_QFJN72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				local clone = autosortframe.loadoutframe:Clone()
 				clone.Parent = autosortframe
 				clone.Visible = true
-				clone.Title.Text = "<b>"..name.."</b>"
-				clone.active.Text = "<b>Active ("..tostring(loadout.active)..")</b>"
+				clone.Title.Text = name
+				clone.active.Text = "Active ("..tostring(loadout.active)..")"
 				
 				local function updateloadout()
 					loadout.items = {}
@@ -1621,7 +1615,7 @@ function SCRIPT_QFJN72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					else
 						clone.active.TextColor3 = Color3.new(0.66,0,0)
 					end
-					clone.active.Text = "<b>Active ("..tostring(val)..")</b>"
+					clone.active.Text = "Active ("..tostring(val)..")"
 					saveloadout()
 				end)
 				
@@ -1631,8 +1625,8 @@ function SCRIPT_QFJN72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					local itemclone = clone.itemframe:Clone()
 					itemclone.Parent = clone
 					itemclone.Visible = true
-					itemclone.itemname.Text = "<b>"..txt.."</b>"
-					itemclone.slotnum.Text = "<b>"..txt2.."</b>"
+					itemclone.itemname.Text = txt
+					itemclone.slotnum.Text = txt2
 					itemclone.itemname.FocusLost:connect(updateloadout)
 					itemclone.slotnum.FocusLost:connect(updateloadout)
 	
@@ -1646,7 +1640,7 @@ function SCRIPT_QFJN72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						end
 	
 						if #items2 == 1 then
-							itemclone.itemname.Text = "<b>"..items2[1].."</b>"
+							itemclone.itemname.Text = items2[1]
 						end
 					end)
 	
@@ -1799,4 +1793,4 @@ function SCRIPT_QFJN72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_QFJN72_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_DWGO72_FAKESCRIPT))
