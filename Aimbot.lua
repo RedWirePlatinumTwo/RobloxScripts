@@ -181,7 +181,7 @@ StatusTitle.BackgroundTransparency = 1
 StatusTitle.BorderColor3 = Color3.new(0, 0.666667, 0)
 StatusTitle.BorderSizePixel = 0
 StatusTitle.Position = UDim2.new(0.0076923077, 0, 0.213608399, 0)
-StatusTitle.Size = UDim2.new(0, 135, 0, 29)
+StatusTitle.Size = UDim2.new(0, 128, 0, 29)
 StatusTitle.Font = Enum.Font.TitilliumWeb
 StatusTitle.Text = "Aimbot status:"
 StatusTitle.TextColor3 = Color3.new(0, 0.666667, 0)
@@ -194,17 +194,16 @@ StatusTitle.TextXAlignment = Enum.TextXAlignment.Left
 Status.Name = "Status"
 Status.Parent = MFrame
 Status.BackgroundColor3 = Color3.new(0, 0, 0)
-Status.BackgroundTransparency = 1
 Status.BorderColor3 = Color3.new(0, 0.666667, 0)
 Status.Position = UDim2.new(0.5, 0, 0.214000031, 0)
-Status.Size = UDim2.new(0, 128, 0, 29)
+Status.Size = UDim2.new(0, 130, 0, 29)
 Status.Font = Enum.Font.TitilliumWeb
+Status.LineHeight = 2
 Status.Text = "disabled"
 Status.TextColor3 = Color3.new(0.666667, 0, 0)
 Status.TextSize = 28
 Status.TextStrokeTransparency = 0
 Status.TextWrapped = true
-Status.TextXAlignment = Enum.TextXAlignment.Left
 
 EditGlobalSettings.Name = "EditGlobalSettings"
 EditGlobalSettings.Parent = MFrame
@@ -704,7 +703,6 @@ ScrollingFrame_2.BackgroundColor3 = Color3.new(0, 0.176471, 0)
 ScrollingFrame_2.BorderColor3 = Color3.new(0, 0.666667, 0)
 ScrollingFrame_2.Position = UDim2.new(0, 0, 0.0959752351, 0)
 ScrollingFrame_2.Size = UDim2.new(0, 346, 0, 292)
-ScrollingFrame_2.CanvasPosition = Vector2.new(0, 150)
 ScrollingFrame_2.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 UIListLayout_3.Parent = ScrollingFrame_2
@@ -1228,7 +1226,7 @@ X_3.TextSize = 28
 X_3.TextStrokeTransparency = 0
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_CVGQ79_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_QBDP67_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1965,21 +1963,23 @@ function SCRIPT_CVGQ79_FAKESCRIPT() -- Aimbot.Scripts
 			    local table1 = {}
 			    local PrioritizedPlrsOnScreen = {}
 	
-	            local function addchr(v)
-				local player = plrs:GetPlayerFromCharacter(v)
-					if player and IsNotWhitelisted(player) or not player then
-			    		if v:FindFirstChildOfClass("Humanoid") and v:FindFirstChildOfClass("Humanoid").Health ~= 0 then
-							local targpart = gettargetpart(v)
-			    	        local pos = math.floor(lplr:DistanceFromCharacter(targpart.Position))
-			    	        local _, onscreen = camera:WorldToScreenPoint(targpart.Position)
-			    	        if onscreen and pos < GameStats.MaxStuds and (GlobalStats.TargetThruWalls or not GlobalStats.TargetThruWalls and ispartvisible(targpart)) then
-			    	            table1[v] = pos
-			        			if table.find(PrioritizedPlrs, plrs:GetPlayerFromCharacter(v)) then
-			        				table.insert(PrioritizedPlrsOnScreen, v)
-			        			end
-							end
-			        	end
-					end
+				local function addchr(v)
+					pcall(function()
+						local player = plrs:GetPlayerFromCharacter(v)
+						if player and IsNotWhitelisted(player) or not player then
+				    		if v:FindFirstChildOfClass("Humanoid") and v:FindFirstChildOfClass("Humanoid").Health ~= 0 then
+								local targpart = gettargetpart(v)
+				    	        local pos = math.floor(lplr:DistanceFromCharacter(targpart.Position))
+				    	        local _, onscreen = camera:WorldToScreenPoint(targpart.Position)
+				    	        if onscreen and pos < GameStats.MaxStuds and (GlobalStats.TargetThruWalls or not GlobalStats.TargetThruWalls and ispartvisible(targpart)) then
+				    	            table1[v] = pos
+				        			if table.find(PrioritizedPlrs, plrs:GetPlayerFromCharacter(v)) then
+				        				table.insert(PrioritizedPlrsOnScreen, v)
+				        			end
+								end
+				        	end
+						end
+					end)
 	            end
 	            
 	            if GameStats.TargetNPCs then
@@ -2182,4 +2182,4 @@ function SCRIPT_CVGQ79_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_CVGQ79_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_QBDP67_FAKESCRIPT))
