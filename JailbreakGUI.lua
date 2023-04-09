@@ -79,8 +79,7 @@ Title.BackgroundColor3 = Color3.new(1, 1, 1)
 Title.BackgroundTransparency = 1
 Title.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
 Title.LayoutOrder = 1
-Title.Position = UDim2.new(0.0169973746, 0, 0, 0)
-Title.Size = UDim2.new(0, 393, 0, 43)
+Title.Size = UDim2.new(0, 400, 0, 42)
 Title.Font = Enum.Font.Ubuntu
 Title.Text = "RedWire's Jailbreak GUI"
 Title.TextColor3 = Color3.new(0.333333, 0.666667, 1)
@@ -593,7 +592,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_DWGO72_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_KTSF81_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -717,7 +716,7 @@ function SCRIPT_DWGO72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Changed GUI font because bolding text was a gigantic fucking mistake.")
+			notify("Changed GUI font because bolding text was a gigantic mistake.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1793,4 +1792,4 @@ function SCRIPT_DWGO72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_DWGO72_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_KTSF81_FAKESCRIPT))
