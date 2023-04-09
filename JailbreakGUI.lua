@@ -716,7 +716,7 @@ function SCRIPT_KTSF81_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Changed GUI font because bolding text was a gigantic mistake.")
+			notify("Changed GUI font because bolding text was a gigantic fucking mistake.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
