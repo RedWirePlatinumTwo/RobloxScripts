@@ -664,7 +664,7 @@ function SCRIPT_KTSF81_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
 	
 		local function notify(text)
-			game.StarterGui:SetCore("ChatMakeSystemMessage",({["Text"] = "Red's JB GUI: "..text, ["Color"] = mainframe.Parent.BorderColor3}))
+			game.StarterGui:SetCore("ChatMakeSystemMessage",({["Text"] = "[Red's JB GUI] "..text, ["Color"] = mainframe.Parent.BorderColor3}))
 		end
 		if not _G.RedsJBGUI then
 			_G.RedsJBGUI = true
