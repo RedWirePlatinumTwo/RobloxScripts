@@ -594,7 +594,6 @@ function SCRIPT_CAFB68_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		mainframe.RobberyNotifier,
 		mainframe.Tazermod,
 		mainframe.deleteradio,
-		mainframe.disablelasers,
 		mainframe.forcedaytime,
 		mainframe.holdebypass,
 		mainframe.keybypass,
