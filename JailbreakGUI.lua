@@ -7,7 +7,7 @@ local speed = Instance.new("TextButton")
 local Title = Instance.new("TextLabel")
 local Speednum = Instance.new("TextBox")
 local ScrollingFrame = Instance.new("ScrollingFrame")
-local disablelasers = Instance.new("TextButton")
+local replaceparachute = Instance.new("TextButton")
 local holdebypass = Instance.new("TextButton")
 local aimbot = Instance.new("TextButton")
 local Airdrop = Instance.new("TextButton")
@@ -28,7 +28,6 @@ local Tazermod = Instance.new("TextButton")
 local ropefollow = Instance.new("TextButton")
 local Hotbarautosort = Instance.new("TextButton")
 local glidekey = Instance.new("TextButton")
-local replaceparachute = Instance.new("TextButton")
 local flyhack = Instance.new("TextButton")
 local flyhacknum = Instance.new("TextBox")
 local AutosortFrame = Instance.new("Frame")
@@ -110,17 +109,18 @@ ScrollingFrame.Position = UDim2.new(0.016997071, 0, 0.330357105, 0)
 ScrollingFrame.Size = UDim2.new(0, 393, 0, 187)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
-disablelasers.Name = "disablelasers"
-disablelasers.Parent = ScrollingFrame
-disablelasers.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-disablelasers.BorderColor3 = Color3.new(0, 0.666667, 1)
-disablelasers.Position = UDim2.new(1.23584902, 0, 0.767922103, 0)
-disablelasers.Size = UDim2.new(0, 106, 0, 52)
-disablelasers.Font = Enum.Font.Ubuntu
-disablelasers.Text = "Disable Lasers"
-disablelasers.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-disablelasers.TextSize = 20
-disablelasers.TextWrapped = true
+replaceparachute.Name = "replaceparachute"
+replaceparachute.Parent = ScrollingFrame
+replaceparachute.BackgroundColor3 = Color3.new(0, 0, 0.27451)
+replaceparachute.BorderColor3 = Color3.new(0, 0.666667, 1)
+replaceparachute.Position = UDim2.new(0, 0, 0.451666713, 0)
+replaceparachute.Size = UDim2.new(0, 106, 0, 51)
+replaceparachute.ZIndex = -222
+replaceparachute.Font = Enum.Font.Ubuntu
+replaceparachute.Text = "Replace parachute w/ glider"
+replaceparachute.TextColor3 = Color3.new(0.333333, 0.666667, 1)
+replaceparachute.TextSize = 20
+replaceparachute.TextWrapped = true
 
 holdebypass.Name = "holdebypass"
 holdebypass.Parent = ScrollingFrame
@@ -365,19 +365,6 @@ glidekey.TextColor3 = Color3.new(0.333333, 0.666667, 1)
 glidekey.TextSize = 20
 glidekey.TextWrapped = true
 
-replaceparachute.Name = "replaceparachute"
-replaceparachute.Parent = ScrollingFrame
-replaceparachute.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-replaceparachute.BorderColor3 = Color3.new(0, 0.666667, 1)
-replaceparachute.Position = UDim2.new(0, 0, 0.451666713, 0)
-replaceparachute.Size = UDim2.new(0, 106, 0, 51)
-replaceparachute.ZIndex = -222
-replaceparachute.Font = Enum.Font.Ubuntu
-replaceparachute.Text = "Replace parachute w/ glider"
-replaceparachute.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-replaceparachute.TextSize = 20
-replaceparachute.TextWrapped = true
-
 flyhack.Name = "flyhack"
 flyhack.Parent = MainFrame
 flyhack.BackgroundColor3 = Color3.new(0, 0, 0.27451)
@@ -592,7 +579,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_KTSF81_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_CAFB68_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -716,7 +703,7 @@ function SCRIPT_KTSF81_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Changed GUI font because bolding text was a gigantic fucking mistake.")
+			notify("Temporarily removed the disable lasers button because it fucks up the jewelry store and I don't know how to fix it atm.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -939,60 +926,6 @@ function SCRIPT_KTSF81_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				if not gunnotif then
 				gunnotif = true
 				notify("Removed recoil + all guns fire automatically (also funni grenade spam)")
-				end
-			end)
-	
-			local lasersdisabled = false
-	
-			mainframe.disablelasers.MouseButton1Click:connect(function()
-			if lasersdisabled == false then
-				lasersdisabled = true
-				require(game:GetService("ReplicatedStorage").Game.MilitaryIsland).StopSpin() -- If I don't include this then the dev log will be spammed with SetPrimaryPartCFrame errors
-	
-				local function removeTI(ti)
-					if ti.ClassName == "TouchTransmitter" then
-						local laserdescendant = false
-				
-						for i, fam in pairs(GetFamily(ti)) do
-	
-							local idklmao, notnil = pcall(function()
-								return fam.Parent ~= nil and fam.Parent.Parent ~= nil and fam.Parent.Parent.Parent ~= nil
-							end)
-	
-							if notnil == true then
-								if fam.Parent.Name:lower():match("laser") or fam.Parent.Name:lower():match("camera") or fam.Parent.Parent.Parent.Name == "Floors" then
-									laserdescendant = true
-								break
-								end
-							end
-						end
-	
-						if laserdescendant or ti.Parent.Name == "BarbedWire" or ti.Parent.Name == "Light" then
-							if ti.Parent.Parent and ti.Parent.Parent.Name ~= "WindowEntry" then
-								if ti.Parent.CanCollide == false then
-									ti.Parent:Destroy()
-								end
-	
-								coroutine.resume(coroutine.create(function()
-									repeat
-									ti.Parent.Transparency = 0.6
-									ti.Parent.Color = Color3.new()
-									ti:Destroy()
-									task.wait() until GetFamily(ti)[1] ~= game
-								end))
-	
-							end
-						end
-					end
-				end
-	
-				for i,v in pairs(workspace:GetDescendants()) do
-					removeTI(v)
-				end
-	
-				workspace.DescendantAdded:connect(removeTI)
-	
-				notify("Lasers that are NOT transparent will hurt you.")
 				end
 			end)
 	
@@ -1792,4 +1725,4 @@ function SCRIPT_KTSF81_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_KTSF81_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_CAFB68_FAKESCRIPT))
