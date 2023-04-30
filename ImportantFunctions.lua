@@ -1,6 +1,6 @@
 catchrepeats = {}
 indexreps = {}
-indexs = {}
+indexes = {}
 local reformatstring = function(s)
 	local restring = ""
 	local backkeys = {}
@@ -54,9 +54,9 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 			end
 			
 			if reps > 1 then
-				indexs[name.."_"..reps] = t
+				indexes[t] = name.."_"..reps
 			else
-				indexs[name] = t
+				indexes[t] = name
 			end
 		end
 			name = tostring(name):gsub("%W", "")
@@ -66,9 +66,9 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 			end)
 			
 			if not success then
-				name = "Table"..name
+				name = "Table_"..name
 			end
-			if name:len() == 0 or name == "Tablenil" then
+			if name:len() == 0 or name == "Table_nil" then
 				name = "Table"
 				checkreps()
 				return
@@ -77,20 +77,14 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 	end
 
 	local function getname(t)
-		
-		for i,v in pairs(indexs) do
-			if v == t then
-				return i
-			end
-		end
-		
+		return indexes[t]
 	end
 
 	table.insert(catchrepeats, Table)
 	if not IsInternalTable then
 		catchrepeats = {Table}
 		indexreps = {}
-		indexs = {}
+		indexes = {}
 		setname(Table, TableName)
 		s = "-- Table names:\n"..getname(Table).." = {}"
 		local reps = {}
