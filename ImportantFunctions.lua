@@ -1,6 +1,7 @@
 catchrepeats = {}
 indexreps = {}
 indexes = {}
+totaltables = 0
 local reformatstring = function(s)
 	local restring = ""
 	local backkeys = {}
@@ -38,27 +39,28 @@ local reformatstring = function(s)
 	return restring
 end
 
-getgenv().TableToString = function(Table, TableName, IsInternalTable)
+getgenv().TableToString = function(Table, TableName, simplify, IsInternalTable)
 	local s = ""
 
 	local function setname(t, name)
-		
-		local function checkreps()
-			local reps = 0
-			table.insert(indexreps,name)
-			
-			for i,v in pairs(indexreps) do
-				if v == name then
-					reps = reps + 1
-				end
-			end
-			
-			if reps > 1 then
-				indexes[t] = name.."_"..reps
-			else
-				indexes[t] = name
-			end
-		end
+		if not simplify then
+		    
+    		local function checkreps()
+    			local reps = 0
+    			table.insert(indexreps,name)
+    			
+    			for i,v in pairs(indexreps) do
+    				if v == name then
+    					reps = reps + 1
+    				end
+    			end
+    			
+    			if reps > 1 then
+    				indexes[t] = name.."_"..reps
+    			else
+    				indexes[t] = name
+    			end
+    		end
 			name = tostring(name):gsub("%W", "")
 			
 			local success = pcall(function()
@@ -74,6 +76,11 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 				return
 			end
 			checkreps()
+		else
+		    totaltables = totaltables + 1
+		    indexes[t] = "Table"..totaltables
+		end
+		
 	end
 
 	local function getname(t)
@@ -85,6 +92,7 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 		catchrepeats = {Table}
 		indexreps = {}
 		indexes = {}
+		totaltables = 0
 		setname(Table, TableName)
 		s = "-- Table names:\n"..getname(Table).." = {}"
 		local reps = {}
@@ -131,8 +139,8 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 			end
 			
 			local part1 = ""
-			local part1formatted = Format(i,v,true)
-			local part2 = Format(v,i,true)
+			local part1formatted = Format(i,v,simplify,true)
+			local part2 = Format(v,i,simplify,true)
 			
 			if part2 == "" then
 				part2 = isrecursivetable(v)
@@ -168,7 +176,7 @@ getgenv().TableToString = function(Table, TableName, IsInternalTable)
 		return s
 end
 
-getgenv().Format = function(var, tname, IsInternalTable)
+getgenv().Format = function(var, tname, simplify, IsInternalTable)
 	local st = ""
 	local supportedtypes = {"number", "boolean", "string", "EnumItem", "table", "Instance", "Vector2", "Vector3", "CFrame", "Color3", "BrickColor","Enum","Enums","UDim2","NumberRange"}
         if typeof(var) == "EnumItem" or type(var) == "boolean" then
@@ -185,7 +193,7 @@ getgenv().Format = function(var, tname, IsInternalTable)
             st = "'"..reformatstring(var).."'"
         elseif type(var) == "table" then
             if not table.find(catchrepeats, var) then
-				st = TableToString(var, tname, IsInternalTable)
+				st = TableToString(var, tname, simplify, IsInternalTable)
 			end
 		elseif typeof(var) == "Instance" then
 			st = GetFullName(var)
