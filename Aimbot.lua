@@ -730,7 +730,7 @@ value_9.BorderColor3 = Color3.new(0, 0.666667, 0)
 value_9.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
 value_9.Size = UDim2.new(0, 260, 0, 28)
 value_9.Font = Enum.Font.TitilliumWeb
-value_9.Text = "Enum.KeyCode.LeftAlt"
+value_9.Text = "Enum.KeyCode.CapsLock"
 value_9.TextColor3 = Color3.new(0, 0.666667, 0)
 value_9.TextSize = 28
 value_9.TextStrokeTransparency = 0
@@ -1462,7 +1462,7 @@ function SCRIPT_QBDP67_FAKESCRIPT() -- Aimbot.Scripts
 			GlobalStats.Keybinds = {}
 			GlobalStats.TeamAutofill = true
 			gengamestats()
-			GlobalStats.Keybinds.AimbotToggle = Enum.KeyCode.LeftAlt
+			GlobalStats.Keybinds.AimbotToggle = Enum.KeyCode.
 			GlobalStats.Keybinds.TargetedPartToggle = Enum.KeyCode.RightAlt
 			local newkeybinds = {}
 			newkeybinds["NPCToggle"] = "none"
