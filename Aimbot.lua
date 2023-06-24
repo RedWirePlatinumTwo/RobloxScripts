@@ -1923,6 +1923,7 @@ function SCRIPT_QBDP67_FAKESCRIPT() -- Aimbot.Scripts
 						if GlobalStats.RightClickAim and RightClick or not GlobalStats.RightClickAim then
 							if GlobalStats.AimMethod == "Camera" then
 								camera.CFrame = CFrame.new(camera.CFrame.Position, partpos)
+								game.UserInputService.MouseDeltaSensitivity = 0
 							else
 								mousemoverel(x,y)
 								game.UserInputService.MouseDeltaSensitivity = GlobalStats.MouseSensitivity
