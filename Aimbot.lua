@@ -1462,7 +1462,7 @@ function SCRIPT_QBDP67_FAKESCRIPT() -- Aimbot.Scripts
 			GlobalStats.Keybinds = {}
 			GlobalStats.TeamAutofill = true
 			gengamestats()
-			GlobalStats.Keybinds.AimbotToggle = Enum.KeyCode.
+			GlobalStats.Keybinds.AimbotToggle = Enum.KeyCode.CapsLock
 			GlobalStats.Keybinds.TargetedPartToggle = Enum.KeyCode.RightAlt
 			local newkeybinds = {}
 			newkeybinds["NPCToggle"] = "none"
