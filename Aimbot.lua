@@ -1426,7 +1426,7 @@ function SCRIPT_QBDP67_FAKESCRIPT() -- Aimbot.Scripts
 			newglobalstats["RightClickAim"] = false
 			newglobalstats["TargetThruWalls"] = false
 			newglobalstats["FirstPersonEnabled"] = true
-			newglobalstats["AimMethod"] = "Mouse"
+			newglobalstats["AimMethod"] = "Camera"
 			newglobalstats["MouseSensitivity"] = 0.25
 			if not GlobalStats[game.PlaceId] then
 				gengamestats()
