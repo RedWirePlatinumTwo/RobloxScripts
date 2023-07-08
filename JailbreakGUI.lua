@@ -1428,7 +1428,7 @@ function SCRIPT_CAFB68_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		        ropefollow = not ropefollow
 		        if not ropefollow then
 					ropepart = nil
-					local model = require(rstorage.Game.Vehicle).GetLocalVehicleModel()
+					local model = vehicle.GetLocalVehicleModel()
 					if pcall(function() return model.Winch.RopeConstraint end) then
 						model.Winch.RopeConstraint.Length = 30
 					end
@@ -1440,7 +1440,7 @@ function SCRIPT_CAFB68_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end)
 	
 			runservice.Heartbeat:connect(function()
-			    local model = require(rstorage.Game.Vehicle).GetLocalVehicleModel()
+			    local model = vehicle.GetLocalVehicleModel()
 			    if model and ropefollow and ropepart and ropepart ~= model then
 					if pcall(function() return model.Preset.RopePull end) then
 						local modelrope = model.Winch.RopeConstraint
