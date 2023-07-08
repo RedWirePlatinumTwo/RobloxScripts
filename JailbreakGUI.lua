@@ -1112,7 +1112,7 @@ function SCRIPT_CAFB68_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 			local enablefly = false
 			local uiservice = game.UserInputService
-			local vehicle = require(rstorage.Game.Vehicle)
+			local vehicle = require(rstorage.Vehicle.VehicleUtils)
 			local getmodel = vehicle.GetLocalVehicleModel
 			local getseats = vehicle.getSeats
 			local togglelock = vehicle.toggleLocalLocked
