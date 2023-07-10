@@ -1226,7 +1226,7 @@ X_3.TextSize = 28
 X_3.TextStrokeTransparency = 0
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_QBDP67_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_UFNA79_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1322,24 +1322,43 @@ function SCRIPT_QBDP67_FAKESCRIPT() -- Aimbot.Scripts
 	
 		end
 	
-		local TableChanged = function(Table,f)
+		local reps = {}
+		local TableChanged = function(Table,f,dosubtables,issubtable)
+			if not dosubtables then
+				reps = {}
+			end
+			local function tc(t)
+				for i,v in pairs(t) do
 	
-		    for i,v in pairs(Table) do
+					Changed(t,i,function(...)
+						f(t,i,...)
+					end)
 	
-		        Changed(Table,i,function(...)
-					f(i,...)
+				end
+	
+				TableAdded(t,function(index,value,Time)
+					f(t,index,value,nil,Time)
+	
+					Changed(t,index,function(...)
+						f(t,index,...)
+					end)
+	
 				end)
+			end
 	
-		    end
-	
-		    TableAdded(Table,function(index,value,t)
-		        f(index,value,nil,t)
-	
-		        Changed(Table,index,function(...)
-					f(index,...)
-				end)
-	
-		    end)
+			tc(Table)
+			if dosubtables then
+				for i,v in pairs(Table) do
+					if type(i) == "table" and not table.find(reps, i) then
+						table.insert(reps, i)
+						tc(i)
+					end
+					if type(v) == "table" and not table.find(reps, v) then
+						table.insert(reps, i)
+						tc(i)
+					end
+				end
+			end
 		end
 	
 		local plrs = game.Players
@@ -1424,7 +1443,7 @@ function SCRIPT_QBDP67_FAKESCRIPT() -- Aimbot.Scripts
 			local newglobalstats = {}
 			newglobalstats["TeamAutofill"] = true
 			newglobalstats["RightClickAim"] = false
-			newglobalstats["TargetThruWalls"] = false
+			newglobalstats["TargetThruWalls"] = true
 			newglobalstats["FirstPersonEnabled"] = true
 			newglobalstats["AimMethod"] = "Camera"
 			newglobalstats["MouseSensitivity"] = 0.25
@@ -1508,10 +1527,7 @@ function SCRIPT_QBDP67_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end
 	
-		TableChanged(GlobalStats[game.PlaceId], savesettings)
-		TableChanged(GlobalStats.Keybinds, savesettings)
-		TableChanged(GlobalStats, savesettings)
-		TableChanged(GlobalStats[game.PlaceId].Teams, savesettings)
+		TableChanged(GlobalStats, savesettings, true)
 	
 		local addteamframe = function(ttable)
 			local clone = teamui.WhitelistedTeams.whitelistframe:Clone()
@@ -2027,7 +2043,7 @@ function SCRIPT_QBDP67_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","Replaced Aim Sensitivity with Mouse Sensitivity.")
+		sendnotif("Aimbot Update","Temporarily changed default aim method to camera because byfron ;(((((( (also changed TargetThruWalls to true by default)")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
@@ -2183,4 +2199,4 @@ function SCRIPT_QBDP67_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_QBDP67_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_UFNA79_FAKESCRIPT))
