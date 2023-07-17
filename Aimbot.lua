@@ -1354,8 +1354,8 @@ function SCRIPT_IBAA85_FAKESCRIPT() -- Aimbot.Scripts
 						tc(i)
 					end
 					if type(v) == "table" and not table.find(reps, v) then
-						table.insert(reps, i)
-						tc(i)
+						table.insert(reps, v)
+						tc(v)
 					end
 				end
 			end
