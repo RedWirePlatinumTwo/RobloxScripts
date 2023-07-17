@@ -1226,7 +1226,7 @@ X_3.TextSize = 28
 X_3.TextStrokeTransparency = 0
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_UFNA79_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_IBAA85_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1354,8 +1354,8 @@ function SCRIPT_UFNA79_FAKESCRIPT() -- Aimbot.Scripts
 						tc(i)
 					end
 					if type(v) == "table" and not table.find(reps, v) then
-						table.insert(reps, v)
-						tc(v)
+						table.insert(reps, i)
+						tc(i)
 					end
 				end
 			end
@@ -1950,8 +1950,7 @@ function SCRIPT_UFNA79_FAKESCRIPT() -- Aimbot.Scripts
 						end
 					end
 				else
-					deselect()
-					game.UserInputService.MouseDeltaSensitivity = 1
+					camera.CFrame = CFrame.new(camera.CFrame.Position, partpos)
 				end
 			else
 				game.UserInputService.MouseDeltaSensitivity = 1
@@ -2043,7 +2042,7 @@ function SCRIPT_UFNA79_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","Temporarily changed default aim method to camera because byfron ;(((((( (also changed TargetThruWalls to true by default)")
+		sendnotif("Aimbot Update","Having a target go off-screen will no longer un-target it, instead the camera will re-focus on it.")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
@@ -2199,4 +2198,4 @@ function SCRIPT_UFNA79_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_UFNA79_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_IBAA85_FAKESCRIPT))
