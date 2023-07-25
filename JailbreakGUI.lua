@@ -21,7 +21,7 @@ local infiniteyeet = Instance.new("TextButton")
 local gunshoptp = Instance.new("TextButton")
 local keybypass = Instance.new("TextButton")
 local getcode = Instance.new("TextButton")
-local hideguis = Instance.new("TextButton")
+local delradio = Instance.new("TextButton")
 local respawn = Instance.new("TextButton")
 local lockonexit = Instance.new("TextButton")
 local Tazermod = Instance.new("TextButton")
@@ -107,6 +107,7 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0, 0, 0.176471)
 ScrollingFrame.BorderColor3 = Color3.new(0, 0.666667, 1)
 ScrollingFrame.Position = UDim2.new(0.016997071, 0, 0.330357105, 0)
 ScrollingFrame.Size = UDim2.new(0, 393, 0, 187)
+ScrollingFrame.CanvasPosition = Vector2.new(0, 177.780823)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 replaceparachute.Name = "replaceparachute"
@@ -274,18 +275,18 @@ getcode.TextColor3 = Color3.new(0.333333, 0.666667, 1)
 getcode.TextSize = 20
 getcode.TextWrapped = true
 
-hideguis.Name = "hideguis"
-hideguis.Parent = ScrollingFrame
-hideguis.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-hideguis.BorderColor3 = Color3.new(0, 0.666667, 1)
-hideguis.Position = UDim2.new(0.333333343, 0, 0.523438752, 0)
-hideguis.Size = UDim2.new(0, 117, 0, 47)
-hideguis.ZIndex = -1
-hideguis.Font = Enum.Font.Ubuntu
-hideguis.Text = "Force-Hide Radio GUI + JB Dev Panel"
-hideguis.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-hideguis.TextSize = 20
-hideguis.TextWrapped = true
+delradio.Name = "delradio"
+delradio.Parent = ScrollingFrame
+delradio.BackgroundColor3 = Color3.new(0, 0, 0.27451)
+delradio.BorderColor3 = Color3.new(0, 0.666667, 1)
+delradio.Position = UDim2.new(0.333333343, 0, 0.523438752, 0)
+delradio.Size = UDim2.new(0, 117, 0, 47)
+delradio.ZIndex = -1
+delradio.Font = Enum.Font.Ubuntu
+delradio.Text = "Delete Radio Gui"
+delradio.TextColor3 = Color3.new(0.333333, 0.666667, 1)
+delradio.TextSize = 20
+delradio.TextWrapped = true
 
 respawn.Name = "respawn"
 respawn.Parent = ScrollingFrame
@@ -579,7 +580,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_KLNX78_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_BVPE86_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -593,7 +594,7 @@ function SCRIPT_KLNX78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local oneclickbuttons = {
 	mainframe.RobberyNotifier,
 	mainframe.Tazermod,
-	mainframe.hideguis,
+	mainframe.delradio,
 	mainframe.forcedaytime,
 	mainframe.holdebypass,
 	mainframe.keybypass,
@@ -1336,11 +1337,11 @@ function SCRIPT_KLNX78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end
 		end)
 	
-		local hideradio = false
+		local isdelradio = false
 	
-		mainframe.hideguis.MouseButton1Click:connect(function()
-			if not hideradio then
-				hideradio = true
+		mainframe.delradio.MouseButton1Click:connect(function()
+			if not isdelradio then
+				isdelradio = true
 				
 				runservice.RenderStepped:connect(function()
 					if lplr.PlayerGui:FindFirstChild("RadioGui") then
@@ -1721,4 +1722,4 @@ function SCRIPT_KLNX78_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_KLNX78_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_BVPE86_FAKESCRIPT))
