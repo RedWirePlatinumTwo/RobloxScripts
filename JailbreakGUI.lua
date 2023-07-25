@@ -107,7 +107,6 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0, 0, 0.176471)
 ScrollingFrame.BorderColor3 = Color3.new(0, 0.666667, 1)
 ScrollingFrame.Position = UDim2.new(0.016997071, 0, 0.330357105, 0)
 ScrollingFrame.Size = UDim2.new(0, 393, 0, 187)
-ScrollingFrame.CanvasPosition = Vector2.new(0, 150)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 replaceparachute.Name = "replaceparachute"
@@ -580,7 +579,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_NFSJ81_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_KLNX78_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -703,7 +702,7 @@ function SCRIPT_NFSJ81_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			syn.protect_gui(script.Parent)
 		end
 	
-		notify("Radio GUI + JB dev panel GUI gets hidden instead of deleted to prevent errors.")
+		notify("nvm.")
 		local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 		local function makevisible(plr)
@@ -1345,15 +1344,11 @@ function SCRIPT_NFSJ81_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				
 				runservice.RenderStepped:connect(function()
 					if lplr.PlayerGui:FindFirstChild("RadioGui") then
-						lplr.PlayerGui.RadioGui.Enabled = false
-					end
-					
-					if lplr.PlayerGui.AppUI:FindFirstChild("DevPanel") then
-						lplr.PlayerGui.AppUI.DevPanel.Visible = false
+						lplr.PlayerGui.RadioGui:Destroy()
 					end
 				end)
 	
-				notify("fuck these stupid guis")
+				notify("fuck this stupid gui")
 			end
 		end)
 	
@@ -1726,4 +1721,4 @@ function SCRIPT_NFSJ81_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_NFSJ81_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_KLNX78_FAKESCRIPT))
