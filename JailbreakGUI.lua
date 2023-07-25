@@ -107,6 +107,7 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0, 0, 0.176471)
 ScrollingFrame.BorderColor3 = Color3.new(0, 0.666667, 1)
 ScrollingFrame.Position = UDim2.new(0.016997071, 0, 0.330357105, 0)
 ScrollingFrame.Size = UDim2.new(0, 393, 0, 187)
+ScrollingFrame.CanvasPosition = Vector2.new(0, 150)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 replaceparachute.Name = "replaceparachute"
@@ -282,7 +283,7 @@ deleteradio.Position = UDim2.new(0.333333343, 0, 0.523438752, 0)
 deleteradio.Size = UDim2.new(0, 117, 0, 47)
 deleteradio.ZIndex = -1
 deleteradio.Font = Enum.Font.Ubuntu
-deleteradio.Text = "Delete Radio Gui (its stupid)"
+deleteradio.Text = "Delete Radio + JB Dev panel GUIs"
 deleteradio.TextColor3 = Color3.new(0.333333, 0.666667, 1)
 deleteradio.TextSize = 20
 deleteradio.TextWrapped = true
@@ -579,7 +580,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_CAFB68_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_GYKD72_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -591,240 +592,240 @@ function SCRIPT_CAFB68_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local rstorage = game.ReplicatedStorage
 	local runservice = game["Run Service"]
 	local oneclickbuttons = {
-		mainframe.RobberyNotifier,
-		mainframe.Tazermod,
-		mainframe.deleteradio,
-		mainframe.forcedaytime,
-		mainframe.holdebypass,
-		mainframe.keybypass,
-		mainframe.modguns,
-		mainframe.removeragdoll,
-		mainframe.replaceparachute
+	mainframe.RobberyNotifier,
+	mainframe.Tazermod,
+	mainframe.deleteradio,
+	mainframe.forcedaytime,
+	mainframe.holdebypass,
+	mainframe.keybypass,
+	mainframe.modguns,
+	mainframe.removeragdoll,
+	mainframe.replaceparachute
 	}
 	local togglebuttons = {
-		mainframe.gunshoptp,
-		mainframe.lockonexit,
-		mainframe.glidekey,
-		mainframe.Airdrop,
-		mainframe.ropefollow
+	mainframe.gunshoptp,
+	mainframe.lockonexit,
+	mainframe.glidekey,
+	mainframe.Airdrop,
+	mainframe.ropefollow
 	}
 	
 	for i,v in pairs(script.Parent:GetDescendants()) do
-		if v.ClassName == "ScrollingFrame" then
-			v.AutomaticCanvasSize = 2
-			v.ScrollBarImageColor3 = mainframe.Parent.BorderColor3
-		end
-		if v.ClassName == "Frame" then
-			v.Active = true
-			v.Draggable = true
-		end
+	if v.ClassName == "ScrollingFrame" then
+		v.AutomaticCanvasSize = 2
+		v.ScrollBarImageColor3 = mainframe.Parent.BorderColor3
+	end
+	if v.ClassName == "Frame" then
+		v.Active = true
+		v.Draggable = true
+	end
 	end
 	
 	for i,v in pairs(oneclickbuttons) do
-		v.TextColor3 = Color3.new(0.66,0,0)
-		
-		v.MouseButton1Click:connect(function()
-			v.TextColor3 = Color3.fromRGB(85,255,255)
-		end)
-		
+	v.TextColor3 = Color3.new(0.66,0,0)
+	
+	v.MouseButton1Click:connect(function()
+		v.TextColor3 = Color3.fromRGB(85,255,255)
+	end)
+	
 	end
 	
 	for i,v in pairs(togglebuttons) do
-		v.TextColor3 = Color3.new(0.6,0,0.6)
-		local bool = false
-		local buttontxt = v.Text
-		v.Text = buttontxt.." ("..tostring(bool)..")"
-		
-		v.MouseButton1Click:connect(function()
-			bool = not bool
-			if bool then
-				v.TextColor3 = Color3.fromRGB(85,255,255)
-			else
-				v.TextColor3 = Color3.new(0.6,0,0.6)
-			end
-			v.Text = buttontxt.." ("..tostring(bool)..")"
-		end)
-	end
-	 
-	if game.PlaceId == 606849621 then
-		local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
+	v.TextColor3 = Color3.new(0.6,0,0.6)
+	local bool = false
+	local buttontxt = v.Text
+	v.Text = buttontxt.." ("..tostring(bool)..")"
 	
-		local function notify(text)
-			game.StarterGui:SetCore("ChatMakeSystemMessage",({["Text"] = "[Red's JB GUI] "..text, ["Color"] = mainframe.Parent.BorderColor3}))
+	v.MouseButton1Click:connect(function()
+		bool = not bool
+		if bool then
+			v.TextColor3 = Color3.fromRGB(85,255,255)
+		else
+			v.TextColor3 = Color3.new(0.6,0,0.6)
 		end
-		if not _G.RedsJBGUI then
-			_G.RedsJBGUI = true
-			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
+		v.Text = buttontxt.." ("..tostring(bool)..")"
+	end)
+	end
+	
+	if game.PlaceId == 606849621 then
+	local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
+	
+	local function notify(text)
+		game.StarterGui:SetCore("ChatMakeSystemMessage",({["Text"] = "[Red's JB GUI] "..text, ["Color"] = mainframe.Parent.BorderColor3}))
+	end
+	if not _G.RedsJBGUI then
+		_G.RedsJBGUI = true
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
 	
-			local thread = function(f)
+		local thread = function(f)
 	
-				return coroutine.resume(coroutine.create(function()
-					return f()
-				end))
+			return coroutine.resume(coroutine.create(function()
+				return f()
+			end))
 	
-			end
-	
-	
-			local Changed = function(part, PropertyName, func)
-			    local current = part[PropertyName]
-				local elapsedTime = 0
-				
-			    thread(function()
-			        while true do
-			            repeat elapsedTime = elapsedTime + task.wait() until part[PropertyName] ~= current
-						
-						local v,v2 = thread(function()
-							return func(part[PropertyName], current, elapsedTime)
-						end)
-						
-						if v2 == "stop" then break end
-						elapsedTime = 0
-						current = part[PropertyName]
-					end
-				end)
-				
-			end
+		end
 	
 	
-			local speeds = {}
-			speeds.walkspeed = 30
-			speeds.flyspeed = 300
-			mframe.Speednum.Text = tostring(speeds.walkspeed)
+		local Changed = function(part, PropertyName, func)
+			local current = part[PropertyName]
+			local elapsedTime = 0
 	
-			local plrs = game.Players
-			local lplr = plrs.LocalPlayer
-			local mouse = lplr:GetMouse()
-			local jewel = workspace.Jewelrys:FindFirstChildOfClass("Model")
-			local bank = workspace.Banks:FindFirstChildOfClass("Model")
+			thread(function()
+				while true do
+					repeat elapsedTime = elapsedTime + task.wait() until part[PropertyName] ~= current
 	
-			if syn then
-				syn.protect_gui(script.Parent)
-			end
-	
-			notify("Temporarily removed the disable lasers button because it fucks up the jewelry store and I don't know how to fix it atm.")
-			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
-	
-			local function makevisible(plr)
-				Changed(plr, "Visible", function(v)
-					if not v then
-						plr.Visible = true
-					end
-				end)
-			end
-	
-			for i, plr in pairs(minimap:GetChildren()) do makevisible(plr) end
-	
-			minimap.ChildAdded:connect(makevisible)
-			local plrgui = lplr.PlayerGui
-	
-			local function walcc()
-				runservice.RenderStepped:connect(function()
-					
-					pcall(function()
-						if lplr.Character.Humanoid.WalkSpeed == 0 then
-						    lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
-						end
+					local v,v2 = thread(function()
+						return func(part[PropertyName], current, elapsedTime)
 					end)
-					
-				end)
-			end
 	
-			walcc()
-	
-			lplr.CharacterAdded:connect(function(chr)
-				chr:WaitForChild("Humanoid")
-				walcc()
-			end)
-	
-			Changed(lplr, "Team", function(team)
-				if team == game.Teams.Criminal then
-					local fire = fireclickdetector
-					if fire ~= nil then
-						fire(workspace.ClothingRacks.ClothingRack.Hitbox.ClickDetector)
-					end
+					if v2 == "stop" then break end
+					elapsedTime = 0
+					current = part[PropertyName]
 				end
 			end)
 	
-			local HoldEBypass = false
-			local gunshoptp = false
-			local moduleui = require(rstorage.Module.UI)
+		end
 	
+	
+		local speeds = {}
+		speeds.walkspeed = 30
+		speeds.flyspeed = 300
+		mframe.Speednum.Text = tostring(speeds.walkspeed)
+	
+		local plrs = game.Players
+		local lplr = plrs.LocalPlayer
+		local mouse = lplr:GetMouse()
+		local jewel = workspace.Jewelrys:FindFirstChildOfClass("Model")
+		local bank = workspace.Banks:FindFirstChildOfClass("Model")
+	
+		if syn then
+			syn.protect_gui(script.Parent)
+		end
+	
+		notify("Temporarily removed the disable lasers button because it fucks up the jewelry store and I don't know how to fix it atm.")
+		local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
+	
+		local function makevisible(plr)
+			Changed(plr, "Visible", function(v)
+				if not v then
+					plr.Visible = true
+				end
+			end)
+		end
+	
+		for i, plr in pairs(minimap:GetChildren()) do makevisible(plr) end
+	
+		minimap.ChildAdded:connect(makevisible)
+		local plrgui = lplr.PlayerGui
+	
+		local function walcc()
 			runservice.RenderStepped:connect(function()
 	
-				for i,a in pairs(moduleui.CircleAction.Specs) do
-					if a.Duration ~= false and HoldEBypass and a.Name ~= "Rob" and a.Name ~= "Open Crate" then
-					   a.Timed = false;
+				pcall(function()
+					if lplr.Character.Humanoid.WalkSpeed == 0 then
+						lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
 					end
-				end
-	
-			end)
-	
-			mainframe.GravToggle.Text = "Gravity Toggle ("..tostring(math.floor(workspace.Gravity))..")"
-	
-			Changed(workspace, "Gravity", function(grav)
-				mainframe.GravToggle.Text = "Gravity Toggle ("..tostring(grav)..")"
-			end)
-	
-			mainframe.GravToggle.MouseButton1Click:connect(function()
-				if math.floor(workspace.Gravity) == 196 then
-					workspace.Gravity = 0
-				elseif workspace.Gravity == 0 then
-					workspace.Gravity = 196
-				end
-			end)
-	
-			mainframe.aimbot.MouseButton1Click:connect(function()
-				loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/Aimbot.lua"))()
-			end)
-	
-			props = {}
-			props.guitext = false
-			props.pointers = false
-			local lines = {}
-			local bbguis = {}
-	
-			Changed(props, "guitext", function(val)
-	
-				for i,v in pairs(bbguis) do
-					v.TextButton.Visible = val
-				end
-	
-			end)
-			
-			local function pointer(part)
-				local Line = Drawing.new("Line")
-				table.insert(lines, Line)
-				Line.Color = mainframe.Airdrop.TextColor3
-				Line.Thickness = 2
-				Line.Transparency = 1
-	
-				local pointfunction = runservice.Heartbeat:connect(function()
-					pcall(function()
-						local v = workspace.CurrentCamera:WorldToScreenPoint(lplr.Character.Humanoid.RootPart.Position)
-						local v2, onscreen = workspace.CurrentCamera:WorldToScreenPoint(part.Position)
-						if not onscreen then
-							Line.Visible = false
-						else
-							Line.Visible = props.pointers
-						end
-						local x,y = v.X, v.Y
-						local x2, y2 = v2.X, v2.Y
-						Line.From = Vector2.new(x,y)
-						Line.To = Vector2.new(x2, y2)
-					end)
 				end)
 	
-				coroutine.resume(coroutine.create(function()
-					repeat task.wait() until GetFamily(part)[1] ~= game
-					pointfunction:Disconnect()
-					Line:Remove()
-					table.remove(lines, table.find(lines, Line))
-				end))
+			end)
+		end
 	
+		walcc()
+	
+		lplr.CharacterAdded:connect(function(chr)
+			chr:WaitForChild("Humanoid")
+			walcc()
+		end)
+	
+		Changed(lplr, "Team", function(team)
+			if team == game.Teams.Criminal then
+				local fire = fireclickdetector
+				if fire ~= nil then
+					fire(workspace.ClothingRacks.ClothingRack.Hitbox.ClickDetector)
+				end
+			end
+		end)
+	
+		local HoldEBypass = false
+		local gunshoptp = false
+		local moduleui = require(rstorage.Module.UI)
+	
+		runservice.RenderStepped:connect(function()
+	
+			for i,a in pairs(moduleui.CircleAction.Specs) do
+				if a.Duration ~= false and HoldEBypass and a.Name ~= "Rob" and a.Name ~= "Open Crate" then
+					a.Timed = false;
+				end
 			end
 	
-			local function gui(child)
+		end)
+	
+		mainframe.GravToggle.Text = "Gravity Toggle ("..tostring(math.floor(workspace.Gravity))..")"
+	
+		Changed(workspace, "Gravity", function(grav)
+			mainframe.GravToggle.Text = "Gravity Toggle ("..tostring(grav)..")"
+		end)
+	
+		mainframe.GravToggle.MouseButton1Click:connect(function()
+			if math.floor(workspace.Gravity) == 196 then
+				workspace.Gravity = 0
+			elseif workspace.Gravity == 0 then
+				workspace.Gravity = 196
+			end
+		end)
+	
+		mainframe.aimbot.MouseButton1Click:connect(function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/Aimbot.lua"))()
+		end)
+	
+		props = {}
+		props.guitext = false
+		props.pointers = false
+		local lines = {}
+		local bbguis = {}
+	
+		Changed(props, "guitext", function(val)
+	
+			for i,v in pairs(bbguis) do
+				v.TextButton.Visible = val
+			end
+	
+		end)
+	
+		local function pointer(part)
+			local Line = Drawing.new("Line")
+			table.insert(lines, Line)
+			Line.Color = mainframe.Airdrop.TextColor3
+			Line.Thickness = 2
+			Line.Transparency = 1
+	
+			local pointfunction = runservice.Heartbeat:connect(function()
+				pcall(function()
+					local v = workspace.CurrentCamera:WorldToScreenPoint(lplr.Character.Humanoid.RootPart.Position)
+					local v2, onscreen = workspace.CurrentCamera:WorldToScreenPoint(part.Position)
+					if not onscreen then
+						Line.Visible = false
+					else
+						Line.Visible = props.pointers
+					end
+					local x,y = v.X, v.Y
+					local x2, y2 = v2.X, v2.Y
+					Line.From = Vector2.new(x,y)
+					Line.To = Vector2.new(x2, y2)
+				end)
+			end)
+	
+			coroutine.resume(coroutine.create(function()
+				repeat task.wait() until GetFamily(part)[1] ~= game
+				pointfunction:Disconnect()
+				Line:Remove()
+				table.remove(lines, table.find(lines, Line))
+			end))
+	
+		end
+	
+		local function gui(child)
 	
 			coroutine.resume(coroutine.create(function()
 				if child.Name == "Drop" then
@@ -876,852 +877,863 @@ function SCRIPT_CAFB68_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						return str
 					end
 	
-				runservice.RenderStepped:connect(function()
-					TextButton.Text = "Airdrop | Distance: "..FormatNumber(math.floor(lplr:DistanceFromCharacter(Airdrop.Position)))
-				end)
-	
-				end
-			end))
-			end
-	
-			for i,v in pairs(workspace:GetChildren()) do
-				gui(v)
-			end
-	
-			workspace.ChildAdded:connect(gui)
-	
-			mainframe.Airdrop.MouseButton1Click:connect(function()
-				props.pointers = not props.pointers
-				props.guitext = props.pointers
-			end)
-	
-			local itemconfig = rstorage.Game.ItemConfig
-	
-			local function changegunstats(Table)
-	
-				for i,v in pairs(itemconfig:GetChildren()) do
-					
-					pcall(function()
-						local gun = require(v)
-						if v.Name == "Shotgun" then
-							gun.BulletSpread = 0.02
-						end
-	
-						for index, value in pairs(Table) do
-							gun[index] = value
-						end
+					runservice.RenderStepped:connect(function()
+						TextButton.Text = "Airdrop | Distance: "..FormatNumber(math.floor(lplr:DistanceFromCharacter(Airdrop.Position)))
 					end)
 	
 				end
+			end))
+		end
 	
-			end
-			local gunnotif = false
-			
-			mainframe.modguns.MouseButton1Click:connect(function()
-				changegunstats({["CamShakeMagnitude"] = 0,["FireAuto"] = true})
-				local g = require(rstorage.Game.ItemConfig.Grenade)
-				g.ReloadTime = 0
-				g.FuseTime = 0.8
-				if not gunnotif then
-				gunnotif = true
-				notify("Removed recoil + all guns fire automatically (also funni grenade spam)")
-				end
-			end)
+		for i,v in pairs(workspace:GetChildren()) do
+			gui(v)
+		end
 	
-			mainframe.forcedaytime.MouseButton1Click:connect(function()
-				game.Lighting.ClockTime = 12
-				
-				Changed(game.Lighting, "ClockTime", function()
-					game.Lighting.ClockTime = 12
+		workspace.ChildAdded:connect(gui)
+	
+		mainframe.Airdrop.MouseButton1Click:connect(function()
+			props.pointers = not props.pointers
+			props.guitext = props.pointers
+		end)
+	
+		local itemconfig = rstorage.Game.ItemConfig
+	
+		local function changegunstats(Table)
+	
+			for i,v in pairs(itemconfig:GetChildren()) do
+	
+				pcall(function()
+					local gun = require(v)
+					if v.Name == "Shotgun" then
+						gun.BulletSpread = 0.02
+					end
+	
+					for index, value in pairs(Table) do
+						gun[index] = value
+					end
 				end)
 	
+			end
+	
+		end
+		local gunnotif = false
+	
+		mainframe.modguns.MouseButton1Click:connect(function()
+			changegunstats({["CamShakeMagnitude"] = 0,["FireAuto"] = true})
+			local g = require(rstorage.Game.ItemConfig.Grenade)
+			g.ReloadTime = 0
+			g.FuseTime = 0.8
+			if not gunnotif then
+				gunnotif = true
+				notify("Removed recoil + all guns fire automatically (also funni grenade spam)")
+			end
+		end)
+	
+		mainframe.forcedaytime.MouseButton1Click:connect(function()
+			game.Lighting.ClockTime = 12
+	
+			Changed(game.Lighting, "ClockTime", function()
+				game.Lighting.ClockTime = 12
 			end)
 	
-			mainframe.holdebypass.MouseButton1Click:connect(function()
+		end)
+	
+		mainframe.holdebypass.MouseButton1Click:connect(function()
 			if not HoldEBypass then
 				HoldEBypass = true
 				notify("Hold E Bypass enabled. Sadly cannot be used with the donut shop, gas station, or air drops ;(")
 			end
-			end)
+		end)
 	
-			local SpeedBypass = false
+		local SpeedBypass = false
 	
-			mframe.speed.MouseButton1Click:Connect(function()
-				mframe.speed.Visible = false
-				mframe.Speednum.Visible = true
+		mframe.speed.MouseButton1Click:Connect(function()
+			mframe.speed.Visible = false
+			mframe.Speednum.Visible = true
 	
-				local function speedhack()
+			local function speedhack()
 	
-					runservice.RenderStepped:connect(function()
-						pcall(function()
-							lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
-						end)
+				runservice.RenderStepped:connect(function()
+					pcall(function()
+						lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
 					end)
+				end)
 	
-				end
-					if not SpeedBypass then
-					SpeedBypass = true
+			end
+			if not SpeedBypass then
+				SpeedBypass = true
+				speedhack()
+	
+				lplr.CharacterAdded:connect(function(chr)
+					chr:WaitForChild("Humanoid")
 					speedhack()
-	
-					lplr.CharacterAdded:connect(function(chr)
-						chr:WaitForChild("Humanoid")
-						speedhack()
-					end)
-	
-					notify("To edit your walkspeed, scroll up/down on the number in the textbox (max 150).")
-				end
-	
-				mframe.Speednum.MouseWheelForward:connect(function()
-					speeds.walkspeed = speeds.walkspeed + 5
 				end)
 	
-				mframe.Speednum.MouseWheelBackward:connect(function()
-					speeds.walkspeed = speeds.walkspeed - 5
-				end)
-				Changed(speeds, "walkspeed", function(num)
-					if num > 150 then
-						speeds.walkspeed = 150
-					end
-					if num < 0 then
-						speeds.walkspeed = 0
-					end
-					mframe.Speednum.Text = tostring(speeds.walkspeed)
-				end)
-				
-				Changed(mframe.Speednum, "Text", function(txt)
-					if tonumber(txt) then
-						speeds.walkspeed = tonumber(txt)
-					end
-				end)
+				notify("To edit your walkspeed, scroll up/down on the number in the textbox (max 150).")
+			end
+	
+			mframe.Speednum.MouseWheelForward:connect(function()
+				speeds.walkspeed = speeds.walkspeed + 5
 			end)
 	
-			local RobberyNotifier = false
-			local trainrob = true
+			mframe.Speednum.MouseWheelBackward:connect(function()
+				speeds.walkspeed = speeds.walkspeed - 5
+			end)
+			Changed(speeds, "walkspeed", function(num)
+				if num > 150 then
+					speeds.walkspeed = 150
+				end
+				if num < 0 then
+					speeds.walkspeed = 0
+				end
+				mframe.Speednum.Text = tostring(speeds.walkspeed)
+			end)
 	
-			mainframe.RobberyNotifier.MouseButton1Click:connect(function()
-				if not RobberyNotifier then
-					RobberyNotifier = true
-					local IconIds = {}
-					IconIds["bank truck"] = "6133383545"
-					IconIds["gas station"] = "4643750797"
-					IconIds["donut shop"] = "4643750660"
-					IconIds["museum"] = "4643749917"
-					IconIds["tomb"] = "6896911415"
-					IconIds["casino"] = "9255252609"
-					IconIds["mansion"] = "11831534984"
-					IconIds["power plant"] = "4643749556"
-					IconIds["jewelry"] = "4643749718"
-					IconIds["bank"] = "4643749317"
-					IconIds["cargo train"] = "7301405189"
-					IconIds["cargo plane"]= "7301406769"
-					IconIds["cargo ship"] = "7301406299"
-					IconIds["passenger train"] = "7301405813"
+			Changed(mframe.Speednum, "Text", function(txt)
+				if tonumber(txt) then
+					speeds.walkspeed = tonumber(txt)
+				end
+			end)
+		end)
 	
-					for i,v in pairs(plrgui.WorldMarkersGui:GetChildren()) do
+		local RobberyNotifier = false
+		local trainrob = true
 	
-						for i2, v2 in pairs(v:GetChildren()) do
+		mainframe.RobberyNotifier.MouseButton1Click:connect(function()
+			if not RobberyNotifier then
+				RobberyNotifier = true
+				local IconIds = {}
+				IconIds["bank truck"] = "6133383545"
+				IconIds["gas station"] = "4643750797"
+				IconIds["donut shop"] = "4643750660"
+				IconIds["museum"] = "4643749917"
+				IconIds["tomb"] = "6896911415"
+				IconIds["casino"] = "9255252609"
+				IconIds["mansion"] = "11831534984"
+				IconIds["power plant"] = "4643749556"
+				IconIds["jewelry"] = "4643749718"
+				IconIds["bank"] = "4643749317"
+				IconIds["cargo train"] = "7301405189"
+				IconIds["cargo plane"]= "7301406769"
+				IconIds["cargo ship"] = "7301406299"
+				IconIds["passenger train"] = "7301405813"
 	
-							for name, id in pairs(IconIds) do
+				for i,v in pairs(plrgui.WorldMarkersGui:GetChildren()) do
 	
-								if v2.ImageLabel.Image == "rbxassetid://"..id then
+					for i2, v2 in pairs(v:GetChildren()) do
 	
-									Changed(v2, "ImageColor3", function(color)
-										if color == Color3.new(0,1,0) then
-											notify("The "..name.." is open for robbery.")
-										end
+						for name, id in pairs(IconIds) do
+	
+							if v2.ImageLabel.Image == "rbxassetid://"..id then
+	
+								Changed(v2, "ImageColor3", function(color)
+									if color == Color3.new(0,1,0) then
+										notify("The "..name.." is open for robbery.")
+									end
+								end)
+	
+							end
+	
+						end
+	
+					end
+	
+				end
+	
+				plrgui.WorldMarkersGui.ChildAdded:connect(function(marker)
+					while true do
+						if pcall(function()
+								return marker.ImageLabel.ImageLabel.Image
+							end) then
+							break
+						else
+							task.wait()
+						end
+					end
+					local img = marker.ImageLabel.ImageLabel.Image
+					for i,v in pairs(IconIds) do
+						if img == "rbxassetid://"..v then
+							if i == "cargo train" or i == "passenger train" then
+								if trainrob then
+									notify("The "..i.." has entered the map.")
+									trainrob = false
+	
+									delay(4, function()
+										trainrob = true
 									end)
 	
 								end
-	
-							end
-	
-						end
-	
-					end
-	
-					plrgui.WorldMarkersGui.ChildAdded:connect(function(marker)
-						while true do
-							if pcall(function()
-									return marker.ImageLabel.ImageLabel.Image
-								end) then
-								break
+							elseif i == "cargo ship" then
+								notify("The cargo ship is coming!")
+							elseif i == "cargo plane" then
+								notify("The cargo plane is inbound!")
 							else
-								task.wait()
+								notify("The "..i.." is open for robbery.")
 							end
 						end
-						local img = marker.ImageLabel.ImageLabel.Image
-						for i,v in pairs(IconIds) do
-							if img == "rbxassetid://"..v then
-								if i == "cargo train" or i == "passenger train" then
-									if trainrob then
-										notify("The "..i.." has entered the map.")
-										trainrob = false
-										
-										delay(4, function()
-											trainrob = true
-										end)
+					end
+				end)
 	
-									end
-								elseif i == "cargo ship" then
-									notify("The cargo ship is coming!")
-								elseif i == "cargo plane" then
-									notify("The cargo plane is inbound!")
-								else
-									notify("The "..i.." is open for robbery.")
-								end
+			end
+		end)
+	
+		mainframe.infiniteyeet.MouseButton1Click:connect(function()
+			loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+		end)
+	
+		local ragdollremoved = false
+	
+		mainframe.removeragdoll.MouseButton1Click:connect(function()
+			if not ragdollremoved then
+				ragdollremoved = true
+				require(rstorage.Module.AlexRagdoll).Ragdoll = nil
+				require(rstorage.Game.Falling).StartRagdolling = nil
+				notify("Removed ragdolling. (WARNING: in some cases you will still take fall damage)")
+			end
+		end)
+	
+		runservice.Heartbeat:connect(function()
+	
+			local hrpvalid, hrp = pcall(function()
+				return lplr.Character.Humanoid.RootPart
+			end)
+	
+			if hrpvalid and gunshoptp then
+				hrp.CFrame = CFrame.new() + Vector3.new(418.439, 18, 520)
+			end
+		end)
+	
+		mainframe.gunshoptp.MouseButton1Click:connect(function()
+			if gunshoptp then
+				gunshoptp = false
+			else
+				gunshoptp = true
+			end
+		end)
+	
+		local enablefly = false
+		local uiservice = game.UserInputService
+		local vehicle = require(rstorage.Vehicle.VehicleUtils)
+		local getmodel = vehicle.GetLocalVehicleModel
+		local getseats = vehicle.getSeats
+		local togglelock = vehicle.toggleLocalLocked
+		local onexit = vehicle.OnVehicleJumpExited._handlerListHead
+		local exitfn = onexit._fn
+		local onenter = vehicle.OnVehicleEntered._handlerListHead
+		local enterfn = onenter._fn
+	
+	
+		local function isdriver()
+			local model = getmodel()
+			local driving = false
+			if model then
+				for i,v in pairs(getseats(model)) do
+					if v.Part.Name == "Seat" and v.Player == lplr then
+						driving = true 
+						break
+					end
+				end
+				return driving
+			else
+				return false
+			end
+		end
+	
+		mframe.flyhack.MouseButton1Click:connect(function()
+			mframe.flyhacknum.Visible = true
+			mframe.flyhack.Visible = false
+			if not enablefly then
+				enablefly = true
+				-- actual fly script
+				local flying = false
+				local maxdistance = 100000000000000 --using math.huge makes this script wonky
+				local uiservice = game.UserInputService
+				local mouse = lplr:GetMouse()
+	
+				local function GetVelocity(pos1,pos2,StudsPerSecond)
+					local distance = (pos2 - pos1)
+					local mag = distance.Magnitude
+					return (distance/mag)*StudsPerSecond
+				end
+	
+				local function getkey(keycode)
+					local key = tostring(keycode):lower()
+					local findcode, a = key:find("keycode.")
+					return key:sub(a+1)
+				end
+	
+				local keys = {}
+				local pos = Vector3.new()
+	
+				runservice.Heartbeat:connect(function()
+	
+					pcall(function()
+						local hrp
+						local flyspeed = speeds.flyspeed
+						local invehicle = getmodel()
+						if invehicle and isdriver() then
+							hrp = invehicle.Engine
+						else
+							hrp = lplr.Character.Humanoid.RootPart
+							if flyspeed > 150 then
+								flyspeed = 150
 							end
+						end
+	
+						if flying then
+							local cam = workspace.Camera
+						end
+	
+						local frontoffset = CFrame.new() + Vector3.new(0,0,-maxdistance)
+						local backoffset = CFrame.new() + Vector3.new(0,0,maxdistance)
+						local leftoffset = CFrame.new() + Vector3.new(-maxdistance,0,0)
+						local rightoffset = CFrame.new() + Vector3.new(maxdistance,0,0)
+						local upoffset = CFrame.new() + Vector3.new(0,maxdistance,0)
+						local downoffset = CFrame.new() + Vector3.new(0,-maxdistance,0)
+						local velocity = Vector3.new()
+						if flying then
+							if keys.w_active then
+								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position, flyspeed)
+							end
+							if keys.s_active then
+								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position, flyspeed)
+							end
+							if keys.a_active then
+								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position, flyspeed)
+							end
+							if keys.d_active then
+								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position, flyspeed)
+							end
+							if keys.e_active then
+								velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position, flyspeed)
+							end
+							if keys.q_active then
+								velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position, flyspeed)
+							end
+							hrp.Velocity = velocity
+							hrp.CFrame = CFrame.new(hrp.Position, (workspace.Camera.CFrame*frontoffset).Position)
+						end
+						if flying and not keys.w_active and not keys.a_active and not keys.s_active and not keys.d_active and not keys.q_active and not keys.e_active then
+							hrp.CFrame = CFrame.new(pos, (workspace.Camera.CFrame*frontoffset).Position)
+							hrp.Velocity = Vector3.new()
+							hrp.RotVelocity = Vector3.new()
+						else
+							pos = hrp.Position
 						end
 					end)
 	
-				end
-			end)
-	
-			mainframe.infiniteyeet.MouseButton1Click:connect(function()
-				loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-			end)
-	
-			local ragdollremoved = false
-	
-			mainframe.removeragdoll.MouseButton1Click:connect(function()
-				if not ragdollremoved then
-					ragdollremoved = true
-					require(rstorage.Module.AlexRagdoll).Ragdoll = nil
-					require(rstorage.Game.Falling).StartRagdolling = nil
-					notify("Removed ragdolling. (WARNING: in some cases you will still take fall damage)")
-				end
-			end)
-	
-			runservice.Heartbeat:connect(function()
-	
-				local hrpvalid, hrp = pcall(function()
-					return lplr.Character.Humanoid.RootPart
 				end)
 	
-				if hrpvalid and gunshoptp then
-					hrp.CFrame = CFrame.new() + Vector3.new(418.439, 18, 520)
+				uiservice.InputBegan:connect(function(key,processed)
+					if processed then return end
+					if key.KeyCode == Enum.KeyCode.F and game.UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
+						flying = not flying
+						if flying then
+							lplr.Character.Humanoid.CameraOffset = Vector3.new(2,0,0)
+						else
+							lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
+						end
+					end
+					keys[getkey(key.KeyCode).."_active"] = true
+				end)
+	
+				uiservice.InputEnded:connect(function(key)
+					keys[getkey(key.KeyCode).."_active"] = false
+				end)
+				-- end of fly script
+	
+				Changed(speeds, "flyspeed", function(num)
+					if num > 600 then
+						speeds.flyspeed = 600
+					end
+					if num < 0 then
+						speeds.flyspeed = 0
+					end
+					mframe.flyhacknum.Text = tostring(speeds.flyspeed)
+				end)
+	
+				mframe.flyhacknum.MouseWheelForward:connect(function()
+					speeds.flyspeed = speeds.flyspeed + 20
+				end)
+	
+				mframe.flyhacknum.MouseWheelBackward:connect(function()
+					speeds.flyspeed = speeds.flyspeed - 20
+				end)
+	
+				Changed(mframe.flyhacknum, "Text", function(txt)
+					if tonumber(txt) then
+						speeds.flyspeed = tonumber(txt)
+					end
+				end)
+	
+				notify("Fly hack enabled! Caps at 150 if you're flying without a vehicle.")
+			end
+		end)
+	
+		local keybypass = false
+	
+		mainframe.keybypass.MouseButton1Click:connect(function()
+			if not keybypass then
+				keybypass = true
+				require(rstorage.Game.PlayerUtils).hasKey = function()
+					return true
 				end
-			end)
+				notify("Keycard bypass enabled.")
+			end
+		end)
 	
-			mainframe.gunshoptp.MouseButton1Click:connect(function()
-				if gunshoptp then
-					gunshoptp = false
-				else
-					gunshoptp = true
+		local ctxt = mainframe.getcode.Text
+	
+		mainframe.getcode.MouseButton1Down:connect(function()
+			local codes = workspace.Casino.RobberyDoor.Codes
+			local code
+	
+			for i,v in pairs(codes:GetChildren()) do
+				if v:FindFirstChildOfClass("Part").SurfaceGui.TextLabel.Text ~= "" then
+					code = v
+					break
 				end
-			end)
-	
-			local enablefly = false
-			local uiservice = game.UserInputService
-			local vehicle = require(rstorage.Vehicle.VehicleUtils)
-			local getmodel = vehicle.GetLocalVehicleModel
-			local getseats = vehicle.getSeats
-			local togglelock = vehicle.toggleLocalLocked
-			local onexit = vehicle.OnVehicleJumpExited._handlerListHead
-			local exitfn = onexit._fn
-			local onenter = vehicle.OnVehicleEntered._handlerListHead
-			local enterfn = onenter._fn
-			
-	
-			local function isdriver()
-			    local model = getmodel()
-			    local driving = false
-			    if model then
-			        for i,v in pairs(getseats(model)) do
-			            if v.Part.Name == "Seat" and v.Player == lplr then
-			                driving = true 
-			                break
-			            end
-			        end
-			        return driving
-			    else
-			        return false
-			    end
 			end
 	
-			mframe.flyhack.MouseButton1Click:connect(function()
-				mframe.flyhacknum.Visible = true
-				mframe.flyhack.Visible = false
-				if not enablefly then
-					enablefly = true
-					-- actual fly script
-					local flying = false
-					local maxdistance = 100000000000000 --using math.huge makes this script wonky
-					local uiservice = game.UserInputService
-					local mouse = lplr:GetMouse()
+			local txt = ""
+			if code then
+				local c = {}
 	
-					local function GetVelocity(pos1,pos2,StudsPerSecond)
-						local distance = (pos2 - pos1)
-						local mag = distance.Magnitude
-						return (distance/mag)*StudsPerSecond
-					end
-	
-					local function getkey(keycode)
-						local key = tostring(keycode):lower()
-						local findcode, a = key:find("keycode.")
-						return key:sub(a+1)
-					end
-	
-					local keys = {}
-					local pos = Vector3.new()
-	
-					runservice.Heartbeat:connect(function()
-	
-						pcall(function()
-							local hrp
-							local flyspeed = speeds.flyspeed
-							local invehicle = getmodel()
-								if invehicle and isdriver() then
-									hrp = invehicle.Engine
-								else
-									hrp = lplr.Character.Humanoid.RootPart
-									if flyspeed > 150 then
-										flyspeed = 150
-									end
-								end
-	
-						    if flying then
-						    	local cam = workspace.Camera
-						    end
-	
-							local frontoffset = CFrame.new() + Vector3.new(0,0,-maxdistance)
-							local backoffset = CFrame.new() + Vector3.new(0,0,maxdistance)
-							local leftoffset = CFrame.new() + Vector3.new(-maxdistance,0,0)
-							local rightoffset = CFrame.new() + Vector3.new(maxdistance,0,0)
-							local upoffset = CFrame.new() + Vector3.new(0,maxdistance,0)
-							local downoffset = CFrame.new() + Vector3.new(0,-maxdistance,0)
-							local velocity = Vector3.new()
-						    if flying then
-							    if keys.w_active then
-							        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position, flyspeed)
-							    end
-							    if keys.s_active then
-							        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position, flyspeed)
-							    end
-							    if keys.a_active then
-							        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position, flyspeed)
-							    end
-							    if keys.d_active then
-							        velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position, flyspeed)
-							    end
-							    if keys.e_active then
-							        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position, flyspeed)
-							    end
-							    if keys.q_active then
-							        velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position, flyspeed)
-							    end
-							    hrp.Velocity = velocity
-							    hrp.CFrame = CFrame.new(hrp.Position, (workspace.Camera.CFrame*frontoffset).Position)
-						    end
-						    if flying and not keys.w_active and not keys.a_active and not keys.s_active and not keys.d_active and not keys.q_active and not keys.e_active then
-						        hrp.CFrame = CFrame.new(pos, (workspace.Camera.CFrame*frontoffset).Position)
-						        hrp.Velocity = Vector3.new()
-								hrp.RotVelocity = Vector3.new()
-						    else
-						        pos = hrp.Position
-						    end
-						end)
-	
-					end)
-	
-					uiservice.InputBegan:connect(function(key,processed)
-					if processed then return end
-					    if key.KeyCode == Enum.KeyCode.F and game.UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
-					        flying = not flying
-					        if flying then
-					            lplr.Character.Humanoid.CameraOffset = Vector3.new(2,0,0)
-					        else
-					            lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
-					        end
-					    end
-					    keys[getkey(key.KeyCode).."_active"] = true
-					end)
-	
-					uiservice.InputEnded:connect(function(key)
-					    keys[getkey(key.KeyCode).."_active"] = false
-					end)
-					-- end of fly script
-	
-					Changed(speeds, "flyspeed", function(num)
-						if num > 600 then
-							speeds.flyspeed = 600
-						end
-						if num < 0 then
-							speeds.flyspeed = 0
-						end
-						mframe.flyhacknum.Text = tostring(speeds.flyspeed)
-					end)
-	
-					mframe.flyhacknum.MouseWheelForward:connect(function()
-						speeds.flyspeed = speeds.flyspeed + 20
-					end)
-	
-					mframe.flyhacknum.MouseWheelBackward:connect(function()
-						speeds.flyspeed = speeds.flyspeed - 20
-					end)
-	
-					Changed(mframe.flyhacknum, "Text", function(txt)
-						if tonumber(txt) then
-							speeds.flyspeed = tonumber(txt)
-						end
-					end)
-	
-					notify("Fly hack enabled! Caps at 150 if you're flying without a vehicle.")
+				for i,v in pairs(code:GetChildren()) do
+					table.insert(c, v.Position.Magnitude)
 				end
+	
+				table.sort(c)
+				for i,v in pairs(c) do
+					for i, cpart in pairs(code:GetChildren()) do
+						if v == cpart.Position.Magnitude then
+							txt = txt..cpart.SurfaceGui.TextLabel.Text
+						end
+					end
+				end
+				mainframe.getcode.Text = txt.." (or "..txt:reverse()..")"
+			else
+				mainframe.getcode.Text = "code non-existent"
+			end
+	
+			delay(5,function()
+				mainframe.getcode.Text = ctxt
 			end)
 	
-			local keybypass = false
+		end)
+		local respawnconfirm = false
+		local respawntxt = mainframe.respawn.Text
 	
-			mainframe.keybypass.MouseButton1Click:connect(function()
-				if not keybypass then
-					keybypass = true
-					require(rstorage.Game.PlayerUtils).hasKey = function()
-						return true
-					end
-					notify("Keycard bypass enabled.")
+		mainframe.respawn.MouseButton1Click:connect(function()
+			if respawnconfirm then
+				lplr.Character.Humanoid.Health = 0
+			end
+			if not respawnconfirm then
+				respawnconfirm = true
+				mainframe.respawn.Text = respawntxt.." (you sure?)"
+				wait(2)
+				respawnconfirm = false
+				mainframe.respawn.Text = respawntxt
+			end
+		end)
+	
+		local delradio = false
+	
+		mainframe.deleteradio.MouseButton1Click:connect(function()
+			if not delradio then
+				delradio = true
+				
+				if lplr.PlayerGui:FindFirstChild("RadioGui") then
+					lplr.PlayerGui.RadioGui:Destroy()
 				end
-			end)
-	
-			local ctxt = mainframe.getcode.Text
-	
-			mainframe.getcode.MouseButton1Down:connect(function()
-				local codes = workspace.Casino.RobberyDoor.Codes
-				local code
-	
-				for i,v in pairs(codes:GetChildren()) do
-					if v:FindFirstChildOfClass("Part").SurfaceGui.TextLabel.Text ~= "" then
-					    code = v
-					    break
-					end
-				end
-	
-				local txt = ""
-				if code then
-					local c = {}
-					
-					for i,v in pairs(code:GetChildren()) do
-					    table.insert(c, v.Position.Magnitude)
-					end
-					
-					table.sort(c)
-					for i,v in pairs(c) do
-						for i, cpart in pairs(code:GetChildren()) do
-							if v == cpart.Position.Magnitude then
-								txt = txt..cpart.SurfaceGui.TextLabel.Text
-							end
-						end
-					end
-					mainframe.getcode.Text = txt.." (or "..txt:reverse()..")"
-				else
-					mainframe.getcode.Text = "code non-existent"
+				
+				if lplr.PlayerGui.AppUI:FindFirstChild("DevPanel") then
+					lplr.PlayerGui.AppUI.DevPanel:Destroy()
 				end
 	
-				delay(5,function()
-					mainframe.getcode.Text = ctxt
+				lplr.PlayerGui.ChildAdded:connect(function(c)
+					if c.Name == "RadioGui" then
+						c:Destroy()
+					end
+				end)
+				
+				lplr.PlayerGui.AppUI.ChildAdded:connect(function(c)
+					if c.Name == "DevPanel" then
+						c:Destroy()
+					end
 				end)
 	
-			end)
-			local respawnconfirm = false
-			local respawntxt = mainframe.respawn.Text
-			
-			mainframe.respawn.MouseButton1Click:connect(function()
-				if respawnconfirm then
-					lplr.Character.Humanoid.Health = 0
-				end
-				if not respawnconfirm then
-					respawnconfirm = true
-					mainframe.respawn.Text = respawntxt.." (you sure?)"
-					wait(2)
-					respawnconfirm = false
-					mainframe.respawn.Text = respawntxt
-				end
-			end)
+				notify("fuck these stupid guis")
+			end
+		end)
 	
-			local delradio = false
+		local vmod = false
+		local vmodtoggle = false
 	
-			mainframe.deleteradio.MouseButton1Click:connect(function()
-				if not delradio then
-					delradio = true
-					if lplr.PlayerGui:FindFirstChild("RadioGui") then
-						lplr.PlayerGui.RadioGui:Destroy()
-					end
 	
-					lplr.PlayerGui.ChildAdded:connect(function(c)
-						if c.Name == "RadioGui" then
-							c:Destroy()
-						end
+		mainframe.lockonexit.MouseButton1Click:connect(function()
+			if not vmod then 
+				vmod = true
+	
+				local function iscarlocked()
+					local idk, icon = pcall(function()
+						return lplr.PlayerGui.AppUI.Speedometer.Top.Lock.Icon.Image -- the speedometer thing is destroyed when you exit a vehicle, hence the pcall
 					end)
-	
-				notify("fuck this stupid gui")
+					if idk then
+						return icon ~= "rbxassetid://5928936296"
+					end
 				end
-			end)
-			
-			local vmod = false
-			local vmodtoggle = false
-			
 	
-			mainframe.lockonexit.MouseButton1Click:connect(function()
-				if not vmod then 
-					vmod = true
-	
-					local function iscarlocked()
-					    local idk, icon = pcall(function()
-					        return lplr.PlayerGui.AppUI.Speedometer.Top.Lock.Icon.Image -- the speedometer thing is destroyed when you exit a vehicle, hence the pcall
-					    end)
-					    if idk then
-					        return icon ~= "rbxassetid://5928936296"
-					    end
+				onexit._fn = function(...)
+					if isdriver() and not iscarlocked() and vmodtoggle then
+						togglelock()
 					end
-	
-					onexit._fn = function(...)
-					    if isdriver() and not iscarlocked() and vmodtoggle then
-					        togglelock()
-					    end
-					    return exitfn(...)
-					end
-	
-					onenter._fn = function(...)
-					    coroutine.resume(coroutine.create(function()
-					        repeat task.wait() until getmodel()
-					        task.wait(0.1) -- sometimes it doesn't always work immediately, so this is just to be safe
-					        if isdriver() and iscarlocked() and vmodtoggle then
-					            togglelock()
-					        end
-					    end))
-					    return enterfn(...)
-					end
-	
-					notify("Vehicle auto-lock/unlock enabled!")
+					return exitfn(...)
 				end
-				vmodtoggle = not vmodtoggle
-			end)
-			
-			local tazermod = false
-				
-			mainframe.Tazermod.MouseButton1Click:connect(function()
-				if not tazermod then
-					local function hasval(t, child)
-					    return pcall(function()
-					        return t[child]
-					    end)
-					end
 	
-					for i,v in pairs(getreg()) do
-						if type(v) == "table" then
-							if isreadonly and setreadonly and isreadonly(v) then
-								setreadonly(v, false)
-							end
-							if hasval(v, "ReloadTime") and hasval(v, "ReloadTimeHit") then
-					        	v.ReloadTime = 0
-					        	v.ReloadTimeHit = 0
-							end
+				onenter._fn = function(...)
+					coroutine.resume(coroutine.create(function()
+						repeat task.wait() until getmodel()
+						task.wait(0.1) -- sometimes it doesn't always work immediately, so this is just to be safe
+						if isdriver() and iscarlocked() and vmodtoggle then
+							togglelock()
+						end
+					end))
+					return enterfn(...)
+				end
+	
+				notify("Vehicle auto-lock/unlock enabled!")
+			end
+			vmodtoggle = not vmodtoggle
+		end)
+	
+		local tazermod = false
+	
+		mainframe.Tazermod.MouseButton1Click:connect(function()
+			if not tazermod then
+				local function hasval(t, child)
+					return pcall(function()
+						return t[child]
+					end)
+				end
+	
+				for i,v in pairs(getreg()) do
+					if type(v) == "table" then
+						if isreadonly and setreadonly and isreadonly(v) then
+							setreadonly(v, false)
+						end
+						if hasval(v, "ReloadTime") and hasval(v, "ReloadTimeHit") then
+							v.ReloadTime = 0
+							v.ReloadTimeHit = 0
 						end
 					end
-					notify("Funni tazer")
 				end
-			end)
+				notify("Funni tazer")
+			end
+		end)
 	
-			local ropefollow = false
-			local ropepart = nil
-			local ropenotif = false
+		local ropefollow = false
+		local ropepart = nil
+		local ropenotif = false
 	
-			mainframe.ropefollow.MouseButton1Click:connect(function()
-		        ropefollow = not ropefollow
-		        if not ropefollow then
-					ropepart = nil
-					local model = vehicle.GetLocalVehicleModel()
-					if pcall(function() return model.Winch.RopeConstraint end) then
-						model.Winch.RopeConstraint.Length = 30
-					end
-		        end
-				if not ropenotif then
-					ropenotif = true
-					notify("Click on a vehicle (or cargo plane crate) to follow it with a rope.")
+		mainframe.ropefollow.MouseButton1Click:connect(function()
+			ropefollow = not ropefollow
+			if not ropefollow then
+				ropepart = nil
+				local model = vehicle.GetLocalVehicleModel()
+				if pcall(function() return model.Winch.RopeConstraint end) then
+					model.Winch.RopeConstraint.Length = 30
 				end
-			end)
+			end
+			if not ropenotif then
+				ropenotif = true
+				notify("Click on a vehicle (or cargo plane crate) to follow it with a rope.")
+			end
+		end)
 	
-			runservice.Heartbeat:connect(function()
-			    local model = vehicle.GetLocalVehicleModel()
-			    if model and ropefollow and ropepart and ropepart ~= model then
-					if pcall(function() return model.Preset.RopePull end) then
-						local modelrope = model.Winch.RopeConstraint
-						local ropepull = model.Preset.RopePull
-						if ropepart.Parent == workspace.Vehicles then
+		runservice.Heartbeat:connect(function()
+			local model = vehicle.GetLocalVehicleModel()
+			if model and ropefollow and ropepart and ropepart ~= model then
+				if pcall(function() return model.Preset.RopePull end) then
+					local modelrope = model.Winch.RopeConstraint
+					local ropepull = model.Preset.RopePull
+					if ropepart.Parent == workspace.Vehicles then
 	
-							if ropepull.AttachedTo.Value then
-								modelrope.Length = math.max(modelrope.Length-(task.wait()*100),30)
-							else
-								modelrope.Length = (model.Engine.Position - ropepart.Engine.Position).Magnitude
-								ropepull.CFrame = ropepart.Engine.CFrame
-							end
+						if ropepull.AttachedTo.Value then
+							modelrope.Length = math.max(modelrope.Length-(task.wait()*100),30)
 						else
-							if ropepull.AttachedTo.Value then
-								modelrope.Length = math.max(modelrope.Length-(task.wait()*100),30)
-							else
-								modelrope.Length = (model.Engine.Position - ropepart.MeshPart.Position).Magnitude
-								ropepull.CFrame = ropepart.MeshPart.CFrame
-							end
+							modelrope.Length = (model.Engine.Position - ropepart.Engine.Position).Magnitude
+							ropepull.CFrame = ropepart.Engine.CFrame
 						end
-			        end
-			    end
-			end)
-	
-			mouse.Button1Down:connect(function()
-				local t = mouse.Target
-				if t and ropefollow then
-					local gf = GetFamily(t)
-					if gf[3] == workspace.Vehicles then
-						ropepart = gf[4]
-					elseif gf[3].Name == "CargoShip" and gf[4].Name == "Crates" then
-						ropepart = gf[5]
+					else
+						if ropepull.AttachedTo.Value then
+							modelrope.Length = math.max(modelrope.Length-(task.wait()*100),30)
+						else
+							modelrope.Length = (model.Engine.Position - ropepart.MeshPart.Position).Magnitude
+							ropepull.CFrame = ropepart.MeshPart.CFrame
+						end
 					end
-			    end
-			end)
-			
-			local loadouts
-			local file = "JBLoadouts.lua"
-			if isfile and loadfile then
-				if isfile(file) then
-					loadouts = loadfile(file)()
-				else
-				loadouts = {}
 				end
+			end
+		end)
+	
+		mouse.Button1Down:connect(function()
+			local t = mouse.Target
+			if t and ropefollow then
+				local gf = GetFamily(t)
+				if gf[3] == workspace.Vehicles then
+					ropepart = gf[4]
+				elseif gf[3].Name == "CargoShip" and gf[4].Name == "Crates" then
+					ropepart = gf[5]
+				end
+			end
+		end)
+	
+		local loadouts
+		local file = "JBLoadouts.lua"
+		if isfile and loadfile then
+			if isfile(file) then
+				loadouts = loadfile(file)()
 			else
 				loadouts = {}
 			end
-			local items = {}
-			
-			for i,v in pairs(rstorage.Game.Item:GetChildren()) do 
-				table.insert(items, v.Name)
-			end
-			
-			local function saveloadout()
-				if writefile then
-					writefile(file, TableToString(loadouts, "Loadouts"))
-				end
-			end
-			
-			local function addloadout(name)
-				if not loadouts[name] then
-					loadouts[name] = {}
-					loadouts[name].active = false
-					loadouts[name].items = {}
-				end
-				local loadout = loadouts[name]
-				local clone = autosortframe.loadoutframe:Clone()
-				clone.Parent = autosortframe
-				clone.Visible = true
-				clone.Title.Text = name
-				clone.active.Text = "Active ("..tostring(loadout.active)..")"
-				
-				local function updateloadout()
-					loadout.items = {}
-					
-					for i,v in pairs(clone:GetChildren()) do 
-						if v.Name == "itemframe" and table.find(items, v.itemname.Text) and tonumber(v.slotnum.Text) then
-							loadout.items[v.itemname.Text] = tonumber(v.slotnum.Text)
-						end
-					end
-					
-					saveloadout()
-				end
-				
-				if loadout.active then 
-					clone.active.TextColor3 = Color3.fromRGB(85,255,255)
-				end
-				
-				clone.active.MouseButton1Click:connect(function()
-					loadout.active = not loadout.active
-				end)
-				
-				Changed(loadout, "active", function(val)
-					if val then
-						clone.active.TextColor3 = Color3.fromRGB(85,255,255)
-						
-						for i,v in pairs(loadouts) do
-							if v ~= loadout and v.active then
-								v.active = false
-							end
-						end
-						
-					else
-						clone.active.TextColor3 = Color3.new(0.66,0,0)
-					end
-					clone.active.Text = "Active ("..tostring(val)..")"
-					saveloadout()
-				end)
-				
-				local function additem(txt,txt2)
-					if not txt then txt = "" end
-					if not txt2 then txt2 = "" end
-					local itemclone = clone.itemframe:Clone()
-					itemclone.Parent = clone
-					itemclone.Visible = true
-					itemclone.itemname.Text = txt
-					itemclone.slotnum.Text = txt2
-					itemclone.itemname.FocusLost:connect(updateloadout)
-					itemclone.slotnum.FocusLost:connect(updateloadout)
-	
-					Changed(itemclone.itemname, "Text", function(txt)
-						local items2 = {}
-	
-						for i,v in pairs(items) do
-							if v:lower():sub(1, txt:len()) == txt:lower() then
-								table.insert(items2, v)
-							end
-						end
-	
-						if #items2 == 1 then
-							itemclone.itemname.Text = items2[1]
-						end
-					end)
-	
-					itemclone.x.MouseButton1Click:connect(function()
-						itemclone:Destroy()
-						updateloadout()
-					end)
-					
-				end
-				
-				local valuesort = function(t, func)
-					local revert = {}
-					local vals = {}
-	
-	
-					for i,v in pairs(t) do
-						revert[v] = i
-						table.insert(vals,v)
-					end
-	
-					table.sort(vals)
-	
-					for i,v in pairs(vals) do
-						local f = func(revert[v], v)
-						if f == "stop" then
-							break
-						end
-					end
-	
-				end
-				
-				valuesort(loadout.items, function(i,v)
-					additem(i, tostring(v))
-				end)
-				
-				clone.additem.MouseButton1Click:connect(function()
-					additem()
-				end)
-				
-				clone.Title.delloadout.MouseButton1Click:connect(function()
-					
-					for i,v in pairs(loadouts) do
-						if i == clone.Title.Text then
-							loadouts[i] = nil
-						end
-					end
-					
-					clone:Destroy()
-					saveloadout()
-				end)
-			end
-			
-			for i,v in pairs(loadouts) do
-				addloadout(i)
-			end
-			
-			aframe.addloadout.MouseButton1Click:connect(function()
-				local lname = aframe.loadoutname.Text
-				local namematch = false
-				
-				for i,v in pairs(loadouts) do
-					if i == lname then
-						namematch = true
-						break
-					end
-				end
-				
-				if not namematch then
-					addloadout(lname)
-				end
-			end)
-			
-			aframe.hide.MouseButton1Click:connect(function()
-				aframe.Visible = false
-			end)
-			
-			local hb = require(rstorage.Hotbar.HotbarItemUtils)
-			local setorder = hb.setDisplayOrder
-			local getorder = hb.getDisplayOrder
-	
-			runservice.Heartbeat:connect(function()
-				local loadout
-				for i,v in pairs(loadouts) do
-					if v.active then
-						loadout = v.items
-						break
-					end
-				end
-				if loadout then
-					pcall(function()
-						local folder = lplr.Folder
-						local folitems = folder:GetChildren()
-						for item, pos in pairs(loadout) do
-							for i, item2 in pairs(folitems) do
-								if getorder(item2) == pos and item2.Name ~= item and folder:FindFirstChild(item) then
-									setorder(item2, #folitems+1)
-								end
-								if lplr.Folder:FindFirstChild(item) then
-									setorder(lplr.Folder[item], pos)
-								end
-							end
-						end
-					end)
-				end
-			end)
-			
-			mainframe.Hotbarautosort.MouseButton1Click:connect(function()
-				aframe.Visible = true
-			end)
-			
-			local para = require(rstorage.Game.Paraglide)
-			local gtoglide = false
-			local parachute = para.Parachute
-			
-			uiservice.InputBegan:connect(function(inp, proc)
-				if proc then return end
-				if inp.KeyCode == Enum.KeyCode.G and gtoglide then
-					para.Glider()
-				end
-			end)
-			
-			mainframe.glidekey.MouseButton1Click:connect(function()
-				gtoglide = not gtoglide
-			end)
-			
-			para.Parachute = function(...)
-				if replacechute then
-					return para.Glider(...)
-				else
-					return parachute(...)
-				end
-			end
-			
-			mainframe.replaceparachute.MouseButton1Click:connect(function()
-				replacechute = true
-			end)
-	
 		else
-			notify("Deleting clone gui")
-			wait(0.5)
-			script.Parent:Destroy()
+			loadouts = {}
 		end
+		local items = {}
+	
+		for i,v in pairs(rstorage.Game.Item:GetChildren()) do 
+			table.insert(items, v.Name)
+		end
+	
+		local function saveloadout()
+			if writefile then
+				writefile(file, TableToString(loadouts, "Loadouts"))
+			end
+		end
+	
+		local function addloadout(name)
+			if not loadouts[name] then
+				loadouts[name] = {}
+				loadouts[name].active = false
+				loadouts[name].items = {}
+			end
+			local loadout = loadouts[name]
+			local clone = autosortframe.loadoutframe:Clone()
+			clone.Parent = autosortframe
+			clone.Visible = true
+			clone.Title.Text = name
+			clone.active.Text = "Active ("..tostring(loadout.active)..")"
+	
+			local function updateloadout()
+				loadout.items = {}
+	
+				for i,v in pairs(clone:GetChildren()) do 
+					if v.Name == "itemframe" and table.find(items, v.itemname.Text) and tonumber(v.slotnum.Text) then
+						loadout.items[v.itemname.Text] = tonumber(v.slotnum.Text)
+					end
+				end
+	
+				saveloadout()
+			end
+	
+			if loadout.active then 
+				clone.active.TextColor3 = Color3.fromRGB(85,255,255)
+			end
+	
+			clone.active.MouseButton1Click:connect(function()
+				loadout.active = not loadout.active
+			end)
+	
+			Changed(loadout, "active", function(val)
+				if val then
+					clone.active.TextColor3 = Color3.fromRGB(85,255,255)
+	
+					for i,v in pairs(loadouts) do
+						if v ~= loadout and v.active then
+							v.active = false
+						end
+					end
+	
+				else
+					clone.active.TextColor3 = Color3.new(0.66,0,0)
+				end
+				clone.active.Text = "Active ("..tostring(val)..")"
+				saveloadout()
+			end)
+	
+			local function additem(txt,txt2)
+				if not txt then txt = "" end
+				if not txt2 then txt2 = "" end
+				local itemclone = clone.itemframe:Clone()
+				itemclone.Parent = clone
+				itemclone.Visible = true
+				itemclone.itemname.Text = txt
+				itemclone.slotnum.Text = txt2
+				itemclone.itemname.FocusLost:connect(updateloadout)
+				itemclone.slotnum.FocusLost:connect(updateloadout)
+	
+				Changed(itemclone.itemname, "Text", function(txt)
+					local items2 = {}
+	
+					for i,v in pairs(items) do
+						if v:lower():sub(1, txt:len()) == txt:lower() then
+							table.insert(items2, v)
+						end
+					end
+	
+					if #items2 == 1 then
+						itemclone.itemname.Text = items2[1]
+					end
+				end)
+	
+				itemclone.x.MouseButton1Click:connect(function()
+					itemclone:Destroy()
+					updateloadout()
+				end)
+	
+			end
+	
+			local valuesort = function(t, func)
+				local revert = {}
+				local vals = {}
+	
+	
+				for i,v in pairs(t) do
+					revert[v] = i
+					table.insert(vals,v)
+				end
+	
+				table.sort(vals)
+	
+				for i,v in pairs(vals) do
+					local f = func(revert[v], v)
+					if f == "stop" then
+						break
+					end
+				end
+	
+			end
+	
+			valuesort(loadout.items, function(i,v)
+				additem(i, tostring(v))
+			end)
+	
+			clone.additem.MouseButton1Click:connect(function()
+				additem()
+			end)
+	
+			clone.Title.delloadout.MouseButton1Click:connect(function()
+	
+				for i,v in pairs(loadouts) do
+					if i == clone.Title.Text then
+						loadouts[i] = nil
+					end
+				end
+	
+				clone:Destroy()
+				saveloadout()
+			end)
+		end
+	
+		for i,v in pairs(loadouts) do
+			addloadout(i)
+		end
+	
+		aframe.addloadout.MouseButton1Click:connect(function()
+			local lname = aframe.loadoutname.Text
+			local namematch = false
+	
+			for i,v in pairs(loadouts) do
+				if i == lname then
+					namematch = true
+					break
+				end
+			end
+	
+			if not namematch then
+				addloadout(lname)
+			end
+		end)
+	
+		aframe.hide.MouseButton1Click:connect(function()
+			aframe.Visible = false
+		end)
+	
+		local hb = require(rstorage.Hotbar.HotbarItemUtils)
+		local setorder = hb.setDisplayOrder
+		local getorder = hb.getDisplayOrder
+	
+		runservice.Heartbeat:connect(function()
+			local loadout
+			for i,v in pairs(loadouts) do
+				if v.active then
+					loadout = v.items
+					break
+				end
+			end
+			if loadout then
+				pcall(function()
+					local folder = lplr.Folder
+					local folitems = folder:GetChildren()
+					for item, pos in pairs(loadout) do
+						for i, item2 in pairs(folitems) do
+							if getorder(item2) == pos and item2.Name ~= item and folder:FindFirstChild(item) then
+								setorder(item2, #folitems+1)
+							end
+							if lplr.Folder:FindFirstChild(item) then
+								setorder(lplr.Folder[item], pos)
+							end
+						end
+					end
+				end)
+			end
+		end)
+	
+		mainframe.Hotbarautosort.MouseButton1Click:connect(function()
+			aframe.Visible = true
+		end)
+	
+		local para = require(rstorage.Game.Paraglide)
+		local gtoglide = false
+		local parachute = para.Parachute
+	
+		uiservice.InputBegan:connect(function(inp, proc)
+			if proc then return end
+			if inp.KeyCode == Enum.KeyCode.G and gtoglide then
+				para.Glider()
+			end
+		end)
+	
+		mainframe.glidekey.MouseButton1Click:connect(function()
+			gtoglide = not gtoglide
+		end)
+	
+		para.Parachute = function(...)
+			if replacechute then
+				return para.Glider(...)
+			else
+				return parachute(...)
+			end
+		end
+	
+		mainframe.replaceparachute.MouseButton1Click:connect(function()
+			replacechute = true
+		end)
+	
 	else
-		game.StarterGui:SetCore("SendNotification", {
-		Title = "Jailbreak gui",
-		Text = "this isn't jailbreak smh my head, deleting GUI"
-		})
+		notify("Deleting clone gui")
 		wait(0.5)
 		script.Parent:Destroy()
 	end
+	else
+	game.StarterGui:SetCore("SendNotification", {
+		Title = "Jailbreak gui",
+		Text = "this isn't jailbreak smh my head, deleting GUI"
+	})
+	wait(0.5)
+	script.Parent:Destroy()
+	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_CAFB68_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_GYKD72_FAKESCRIPT))
