@@ -21,7 +21,7 @@ local infiniteyeet = Instance.new("TextButton")
 local gunshoptp = Instance.new("TextButton")
 local keybypass = Instance.new("TextButton")
 local getcode = Instance.new("TextButton")
-local deleteradio = Instance.new("TextButton")
+local hideguis = Instance.new("TextButton")
 local respawn = Instance.new("TextButton")
 local lockonexit = Instance.new("TextButton")
 local Tazermod = Instance.new("TextButton")
@@ -275,18 +275,18 @@ getcode.TextColor3 = Color3.new(0.333333, 0.666667, 1)
 getcode.TextSize = 20
 getcode.TextWrapped = true
 
-deleteradio.Name = "deleteradio"
-deleteradio.Parent = ScrollingFrame
-deleteradio.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-deleteradio.BorderColor3 = Color3.new(0, 0.666667, 1)
-deleteradio.Position = UDim2.new(0.333333343, 0, 0.523438752, 0)
-deleteradio.Size = UDim2.new(0, 117, 0, 47)
-deleteradio.ZIndex = -1
-deleteradio.Font = Enum.Font.Ubuntu
-deleteradio.Text = "Delete Radio + JB Dev panel GUIs"
-deleteradio.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-deleteradio.TextSize = 20
-deleteradio.TextWrapped = true
+hideguis.Name = "hideguis"
+hideguis.Parent = ScrollingFrame
+hideguis.BackgroundColor3 = Color3.new(0, 0, 0.27451)
+hideguis.BorderColor3 = Color3.new(0, 0.666667, 1)
+hideguis.Position = UDim2.new(0.333333343, 0, 0.523438752, 0)
+hideguis.Size = UDim2.new(0, 117, 0, 47)
+hideguis.ZIndex = -1
+hideguis.Font = Enum.Font.Ubuntu
+hideguis.Text = "Force-Hide Radio GUI + JB Dev Panel"
+hideguis.TextColor3 = Color3.new(0.333333, 0.666667, 1)
+hideguis.TextSize = 20
+hideguis.TextWrapped = true
 
 respawn.Name = "respawn"
 respawn.Parent = ScrollingFrame
@@ -580,7 +580,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_GYKD72_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_NFSJ81_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mframe = script.Parent.MainFrame
@@ -594,7 +594,7 @@ function SCRIPT_GYKD72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local oneclickbuttons = {
 	mainframe.RobberyNotifier,
 	mainframe.Tazermod,
-	mainframe.deleteradio,
+	mainframe.hideguis,
 	mainframe.forcedaytime,
 	mainframe.holdebypass,
 	mainframe.keybypass,
@@ -703,7 +703,7 @@ function SCRIPT_GYKD72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			syn.protect_gui(script.Parent)
 		end
 	
-		notify("Delete radio GUI button also deletes the stupid JB dev panel.")
+		notify("Radio GUI + JB dev panel GUI gets hidden instead of deleted to prevent errors.")
 		local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 		local function makevisible(plr)
@@ -1337,29 +1337,19 @@ function SCRIPT_GYKD72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end
 		end)
 	
-		local delradio = false
+		local hideradio = false
 	
-		mainframe.deleteradio.MouseButton1Click:connect(function()
-			if not delradio then
-				delradio = true
+		mainframe.hideguis.MouseButton1Click:connect(function()
+			if not hideradio then
+				hideradio = true
 				
-				if lplr.PlayerGui:FindFirstChild("RadioGui") then
-					lplr.PlayerGui.RadioGui:Destroy()
-				end
-				
-				if lplr.PlayerGui.AppUI:FindFirstChild("DevPanel") then
-					lplr.PlayerGui.AppUI.DevPanel:Destroy()
-				end
-	
-				lplr.PlayerGui.ChildAdded:connect(function(c)
-					if c.Name == "RadioGui" then
-						c:Destroy()
+				runservice.RenderStepped:connect(function()
+					if lplr.PlayerGui:FindFirstChild("RadioGui") then
+						lplr.PlayerGui.RadioGui.Enabled = false
 					end
-				end)
-				
-				lplr.PlayerGui.AppUI.ChildAdded:connect(function(c)
-					if c.Name == "DevPanel" then
-						c:Destroy()
+					
+					if lplr.PlayerGui.AppUI:FindFirstChild("DevPanel") then
+						lplr.PlayerGui.AppUI.DevPanel.Visible = false
 					end
 				end)
 	
@@ -1736,4 +1726,4 @@ function SCRIPT_GYKD72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_GYKD72_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_NFSJ81_FAKESCRIPT))
