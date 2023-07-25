@@ -703,7 +703,7 @@ function SCRIPT_GYKD72_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			syn.protect_gui(script.Parent)
 		end
 	
-		notify("Temporarily removed the disable lasers button because it fucks up the jewelry store and I don't know how to fix it atm.")
+		notify("Delete radio GUI button also deletes the stupid JB dev panel.")
 		local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 		local function makevisible(plr)
