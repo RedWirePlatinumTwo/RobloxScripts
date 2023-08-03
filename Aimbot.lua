@@ -2042,7 +2042,7 @@ function SCRIPT_AVAX76_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","Attempting 2 make it so npcs cant be targeted if spawned in with 0 hp.")
+		sendnotif("Aimbot Update","NPCs cant be targeted if spawned in with 0 hp.")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
