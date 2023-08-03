@@ -1226,7 +1226,7 @@ X_3.TextSize = 28
 X_3.TextStrokeTransparency = 0
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_IBAA85_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_AVAX76_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1885,7 +1885,7 @@ function SCRIPT_IBAA85_FAKESCRIPT() -- Aimbot.Scripts
 	    workspace.DescendantAdded:connect(function(v)
 	        if v.ClassName == "Humanoid" then
 	            if not v.RootPart then repeat task.wait() until v.RootPart end
-		            if not ischaracter(v.Parent) and not table.find(npcs, v.Parent) then
+		            if not ischaracter(v.Parent) and not table.find(npcs, v.Parent) and v.Health > 0 then
 		                table.insert(npcs, v.Parent)
 		            end
 	        end
@@ -2042,7 +2042,7 @@ function SCRIPT_IBAA85_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","Having a target go off-screen will no longer un-target it, instead the camera will re-focus on it.")
+		sendnotif("Aimbot Update","Attempting 2 make it so npcs cant be targeted if spawned in with 0 hp.")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
@@ -2198,4 +2198,4 @@ function SCRIPT_IBAA85_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_IBAA85_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_AVAX76_FAKESCRIPT))
