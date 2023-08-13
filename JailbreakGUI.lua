@@ -633,7 +633,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_GOGF66_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_IQEL83_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -674,10 +674,12 @@ function SCRIPT_GOGF66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 	
 	for i,v in pairs(oneclickbuttons) do
-		v.TextColor3 = Color3.new(0.66,0,0)
+		local box = mainframe["1placeholder"].togglebox:Clone()
+		box.Parent = v
 	
 		v.MouseButton1Click:connect(function()
-			v.TextColor3 = Color3.fromRGB(85,255,255)
+			box.TextColor3 = Color3.fromRGB(0,170,0)
+			box.Text = "✓"
 		end)
 	
 	end
@@ -1460,7 +1462,7 @@ function SCRIPT_GOGF66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 							if isreadonly and setreadonly and isreadonly(v) then
 								setreadonly(v, false)
 							end
-							if hasval(v, "ReloadTime") and hasval(v, "ReloadTimeHit") and type(v["ReloadTime"]) == "number" and type(["ReloadTimeHit"]) == "number" then
+							if hasval(v, "ReloadTime") and hasval(v, "ReloadTimeHit") and type(v.ReloadTime) == "number" and type(v.ReloadTimeHit) == "number" then
 								v.ReloadTime = 0
 								v.ReloadTimeHit = 0
 							end
@@ -1774,4 +1776,4 @@ function SCRIPT_GOGF66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_GOGF66_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_IQEL83_FAKESCRIPT))
