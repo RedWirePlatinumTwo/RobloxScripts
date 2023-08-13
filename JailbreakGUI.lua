@@ -633,7 +633,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_IQEL83_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_ZZUZ76_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -652,7 +652,9 @@ function SCRIPT_IQEL83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	mainframe.keybypass,
 	mainframe.modguns,
 	mainframe.removeragdoll,
-	mainframe.replaceparachute
+	mainframe.replaceparachute,
+	mainframe.aimbot,
+	mainframe.infiniteyeet
 	}
 	local togglebuttons = {
 	mainframe.gunshoptp,
@@ -1043,7 +1045,7 @@ function SCRIPT_IQEL83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					mainframe["1speedv2"].Text = tostring(speeds.walkspeed)
 				end)
 	
-				Changed(mainframe.speedv2, "Text", function(txt)
+				Changed(mainframe["1speedv2"], "Text", function(txt)
 					if tonumber(txt) then
 						speeds.walkspeed = tonumber(txt)
 					end
@@ -1314,7 +1316,7 @@ function SCRIPT_IQEL83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						speeds.flyspeed = speeds.flyspeed - 20
 					end)
 	
-					Changed(mainframe.flyhackv2, "Text", function(txt)
+					Changed(mainframe["1flyhackv2"], "Text", function(txt)
 						if tonumber(txt) then
 							speeds.flyspeed = tonumber(txt)
 						end
@@ -1776,4 +1778,4 @@ function SCRIPT_IQEL83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_IQEL83_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_ZZUZ76_FAKESCRIPT))
