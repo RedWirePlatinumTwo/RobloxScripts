@@ -633,7 +633,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_PQLR77_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_YATP67_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -1155,7 +1155,7 @@ function SCRIPT_PQLR77_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end)
 	
 				if hrpvalid and gunshoptp then
-					hrp.CFrame = CFrame.new() + Vector3.new(418.439, 18, 520)
+					hrp.CFrame = CFrame.new() + Vector3.new(-1124.7, 18.9, -1660.95)
 				end
 			end)
 	
@@ -1778,4 +1778,4 @@ function SCRIPT_PQLR77_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_PQLR77_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_YATP67_FAKESCRIPT))
