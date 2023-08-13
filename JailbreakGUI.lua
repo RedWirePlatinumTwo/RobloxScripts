@@ -633,7 +633,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_YATP67_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_UAPT90_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -759,7 +759,7 @@ function SCRIPT_YATP67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("GUI button re-design test + HOPEFULLY none of the buttons interfere with the recent garage GUI changes, making it unusable.")
+			notify("speedhack and flyhack number buttons no longer make the whole scrolling frame scroll down when trying to edit the values.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1034,7 +1034,14 @@ function SCRIPT_YATP67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 				mainframe["1speedv2"].MouseWheelBackward:connect(function()
 					speeds.walkspeed = speeds.walkspeed - 5
+					mainframe.ScrollingEnabled = false
+					delay(0.2, function()
+						mainframe.ScrollingEnabled = true
+					end)
 				end)
+				
+				
+				
 				Changed(speeds, "walkspeed", function(num)
 					if num > 150 then
 						speeds.walkspeed = 150
@@ -1314,6 +1321,10 @@ function SCRIPT_YATP67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 					mainframe["1flyhackv2"].MouseWheelBackward:connect(function()
 						speeds.flyspeed = speeds.flyspeed - 20
+						mainframe.ScrollingEnabled = false
+						delay(0.2, function()
+							mainframe.ScrollingEnabled = true
+						end)
 					end)
 	
 					Changed(mainframe["1flyhackv2"], "Text", function(txt)
@@ -1778,4 +1789,4 @@ function SCRIPT_YATP67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_YATP67_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_UAPT90_FAKESCRIPT))
