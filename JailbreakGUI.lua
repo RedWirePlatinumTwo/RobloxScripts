@@ -633,7 +633,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_UAPT90_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_GLZE68_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -690,6 +690,7 @@ function SCRIPT_UAPT90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		local bool = false
 		local box = mainframe["1placeholder"].togglebox:Clone()
 		box.Parent = v
+		box.BackgroundColor3 = Color3.fromRGB(85, 0, 127)
 	
 		v.MouseButton1Click:connect(function()
 			bool = not bool
@@ -759,7 +760,7 @@ function SCRIPT_UAPT90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("speedhack and flyhack number buttons no longer make the whole scrolling frame scroll down when trying to edit the values.")
+			notify("Toggleable buttons will have a purple toggle box to seperate it from the one-click buttons.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1789,4 +1790,4 @@ function SCRIPT_UAPT90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_UAPT90_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_GLZE68_FAKESCRIPT))
