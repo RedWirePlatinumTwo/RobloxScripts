@@ -1155,7 +1155,7 @@ function SCRIPT_YATP67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end)
 	
 				if hrpvalid and gunshoptp then
-					hrp.CFrame = CFrame.new() + Vector3.new(-1124.7, 18.9, -1660.95)
+					hrp.CFrame = CFrame.new() + Vector3.new(-1124.7, 18.9, -1660.5)
 				end
 			end)
 	
