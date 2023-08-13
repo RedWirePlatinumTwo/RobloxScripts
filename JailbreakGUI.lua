@@ -633,7 +633,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_ZZUZ76_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_PQLR77_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -852,7 +852,7 @@ function SCRIPT_ZZUZ76_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			local function pointer(part)
 				local Line = Drawing.new("Line")
 				table.insert(lines, Line)
-				Line.Color = mainframe.Airdrop.TextColor3
+				Line.Color = part.Parent.Post.Color
 				Line.Thickness = 2
 				Line.Transparency = 1
 	
@@ -1778,4 +1778,4 @@ function SCRIPT_ZZUZ76_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_ZZUZ76_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_PQLR77_FAKESCRIPT))
