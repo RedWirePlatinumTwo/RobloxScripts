@@ -633,7 +633,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_GLZE68_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_JGPL75_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -1466,9 +1466,10 @@ function SCRIPT_GLZE68_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			mainframe.Tazermod.MouseButton1Click:connect(function()
 				if not tazermod then
 					local function hasval(t, child)
-						return pcall(function()
+						local success, prop = pcall(function()
 							return t[child]
 						end)
+						return success and prop ~= nil
 					end
 	
 					for i,v in pairs(getreg()) do
@@ -1790,4 +1791,4 @@ function SCRIPT_GLZE68_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_GLZE68_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_JGPL75_FAKESCRIPT))
