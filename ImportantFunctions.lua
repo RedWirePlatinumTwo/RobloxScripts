@@ -176,6 +176,8 @@ getgenv().TableToString = function(Table, TableName, simplify, IsInternalTable)
 		return s
 end
 
+getgenv().tabletostring = TableToString
+
 getgenv().Format = function(var, tname, simplify, IsInternalTable)
 	local st = ""
 	local supportedtypes = {"number", "boolean", "string", "EnumItem", "table", "Instance", "Vector2", "Vector3", "CFrame", "Color3", "BrickColor","Enum","Enums","UDim2","NumberRange"}
@@ -208,6 +210,9 @@ getgenv().Format = function(var, tname, simplify, IsInternalTable)
 		end
 	return st
 end
+
+getgenv().format = Format
+
 getgenv().GetFamily = function(ins, reverseorder)
 	local Pathway = {}
 
@@ -340,7 +345,7 @@ end
 local meta 
 meta = hookmetamethod(game,"__namecall",function(Self,...)
 	local method = getnamecallmethod()
-	if getcallingscript() == nil then
+	if checkcaller() then
 		if method == "GetFamily" then
 			return GetFamily(Self,...)
 		elseif method == "GetFullName" then
