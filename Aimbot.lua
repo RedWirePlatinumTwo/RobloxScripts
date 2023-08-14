@@ -1226,7 +1226,7 @@ X_3.TextSize = 28
 X_3.TextStrokeTransparency = 0
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_AVAX76_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_XCJK84_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -2158,7 +2158,7 @@ function SCRIPT_AVAX76_FAKESCRIPT() -- Aimbot.Scripts
 				end)
 	
 			end
-				clone.TextLabel.Text = ins.ClassName..": "..CheckDN(ins)
+				clone.TextLabel.Text = CheckDN(ins)
 				togglefunc(WhitelistedPlrs)
 				togglefunc(PrioritizedPlrs)
 	
@@ -2198,4 +2198,4 @@ function SCRIPT_AVAX76_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_AVAX76_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_XCJK84_FAKESCRIPT))
