@@ -239,7 +239,6 @@ end
 
 getgenv().GetFullName = function(ins)
 	local Pathway = GetFamily(ins)
-	local Services = {'Workspace','RunService','GuiService','Stats','SoundService','NonReplicatedCSGDictionaryService','CSGDictionaryService','LogService','ContentProvider','KeyframeSequenceProvider','Chat','MarketplaceService','Players','PointsService','AdService','NotificationService','ReplicatedFirst','HttpRbxApiService','TweenService','TextService','StudioData','StarterPlayer','StarterPack','StarterGui','CoreGui','LocalizationService','TeleportService','JointsService','CollectionService','PhysicsService','BadgeService','Geometry','FriendService','InsertService','GamePassService','Debris','TimerService','CookiesService','UserInputService','KeyboardService','MouseService','VRService','ContextActionService','ScriptService','AssetService','TouchInputService','BrowserService','AppStorageService','AnalyticsService','ScriptContext','','Selection','MeshContentProvider','Lighting','SolidModelContentProvider','GamepadService','ControllerService','CorePackages','RuntimeScriptService','ABTestService','HttpService','RobloxReplicatedStorage','HapticService','RbxAnalyticsService','NetworkClient','EventIngestService','ChangeHistoryService','Visit','GuidRegistryService','PermissionsService','Teams','ReplicatedStorage','TestService','SocialService','PolicyService','MemStorageService','GroupService','SpawnerService','PathfindingService'}
 
 	local function formatchild(s)
 		local s = reformatstring(s)
@@ -257,7 +256,7 @@ getgenv().GetFullName = function(ins)
 			fns = v.Name
 		else
 			if i == 2 then
-				if table.find(Services, v.ClassName) then
+				if game:FindService(v.ClassName) then
 					fns = fns..":GetService('"..v.ClassName.."')"
 				else
 					fns = fns..formatchild(v.Name)
