@@ -338,6 +338,7 @@ if not customfname then customfname = funcname end
 	else
 		LoggedFunctions[funcparent] = funcname
 		funcparent[funcname] = newfunc
+		print("logging", customfname.."!")
 		return newfunc
 	end
 end
