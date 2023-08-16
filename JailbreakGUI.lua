@@ -32,6 +32,7 @@ local _1flyhackv2 = Instance.new("TextBox")
 local _1speed = Instance.new("TextButton")
 local _1placeholder = Instance.new("TextButton")
 local togglebox = Instance.new("TextLabel")
+local DisableNPCGuns = Instance.new("TextButton")
 local AutosortFrame = Instance.new("Frame")
 local ScrollingFrame_2 = Instance.new("ScrollingFrame")
 local UIListLayout = Instance.new("UIListLayout")
@@ -446,6 +447,20 @@ togglebox.TextSize = 40
 togglebox.TextStrokeTransparency = 0
 togglebox.TextWrapped = true
 
+DisableNPCGuns.Name = "DisableNPCGuns"
+DisableNPCGuns.Parent = ScrollingFrame
+DisableNPCGuns.BackgroundColor3 = Color3.new(0, 0, 0.27451)
+DisableNPCGuns.BorderColor3 = Color3.new(0, 0.666667, 1)
+DisableNPCGuns.Position = UDim2.new(0, 0, 0.451666713, 0)
+DisableNPCGuns.Size = UDim2.new(0, 106, 0, 51)
+DisableNPCGuns.ZIndex = -222
+DisableNPCGuns.Font = Enum.Font.Ubuntu
+DisableNPCGuns.Text = "Disable NPC Guns"
+DisableNPCGuns.TextColor3 = Color3.new(0.333333, 0.666667, 1)
+DisableNPCGuns.TextSize = 20
+DisableNPCGuns.TextWrapped = true
+DisableNPCGuns.TextXAlignment = Enum.TextXAlignment.Left
+
 AutosortFrame.Name = "AutosortFrame"
 AutosortFrame.Parent = JailbreakGUI
 AutosortFrame.BackgroundColor3 = Color3.new(0, 0, 0.176471)
@@ -633,7 +648,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_JGPL75_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_LEAB77_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -654,7 +669,8 @@ function SCRIPT_JGPL75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	mainframe.removeragdoll,
 	mainframe.replaceparachute,
 	mainframe.aimbot,
-	mainframe.infiniteyeet
+	mainframe.infiniteyeet,
+	mainframe.DisableNPCGuns
 	}
 	local togglebuttons = {
 	mainframe.gunshoptp,
@@ -760,7 +776,7 @@ function SCRIPT_JGPL75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Toggleable buttons will have a purple toggle box to seperate it from the one-click buttons.")
+			notify("Added a disable npc guns button! (also fixed tazer mod button showing message multiple times)")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1465,6 +1481,7 @@ function SCRIPT_JGPL75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 			mainframe.Tazermod.MouseButton1Click:connect(function()
 				if not tazermod then
+					tazermod = true
 					local function hasval(t, child)
 						local success, prop = pcall(function()
 							return t[child]
@@ -1775,6 +1792,21 @@ function SCRIPT_JGPL75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			mainframe.replaceparachute.MouseButton1Click:connect(function()
 				replacechute = true
 			end)
+			
+			mainframe.DisableNPCGuns.MouseButton1Click:connect(function()
+				local module = require(rstorage.Game.Item.Gun)
+				local shoot = module.Shoot
+	
+				module.Shoot = function(...)
+					local t = {...}
+					t = t[1]
+					if plrs:FindFirstChild(t.Humanoid.Parent.Name) then
+						return shoot(...)
+					else
+						return
+					end
+				end
+			end)
 	
 		else
 			notify("Deleting clone gui")
@@ -1791,4 +1823,4 @@ function SCRIPT_JGPL75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_JGPL75_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_LEAB77_FAKESCRIPT))
