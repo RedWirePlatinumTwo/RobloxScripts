@@ -1802,8 +1802,6 @@ function SCRIPT_LEAB77_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					t = t[1]
 					if plrs:FindFirstChild(t.Humanoid.Parent.Name) then
 						return shoot(...)
-					else
-						return
 					end
 				end
 			end)
