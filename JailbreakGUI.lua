@@ -648,7 +648,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_GDXX84_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -778,7 +778,6 @@ function SCRIPT_GDXX84_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 			notify("Slightly improved mini-map player dot reveal script + player dots are now revealed on the bigger map.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
-			local minimap2 = lplr.PlayerGui.AppUI.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
 				runservice.Heartbeat:connect(function()
@@ -790,17 +789,25 @@ function SCRIPT_GDXX84_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 			minimap.ChildAdded:connect(makevisible)
 			
-			local function idk(v)
-				if v.ClassName == "ImageLabel" then
-					makevisible(v)
+			lplr.PlayerGui.AppUI.ChildAdded:connect(function(c)
+				if c.Name == "Minimap" then
+					repeat task.wait()
+					until pcall(function() return c.Map.Container.Points end)
+					
+					local minimap2 = c.Map.Container.Points
+					local function idk(v)
+						if v.ClassName == "ImageLabel" then
+							makevisible(v)
+						end
+					end
+					
+					for i,v in pairs(minimap2:GetChildren()) do
+						idk(v)
+					end
+					
+					minimap2.ChildAdded:connect(idk)
 				end
-			end
-			
-			for i,v in pairs(minimap2:GetChildren()) do
-				idk(v)
-			end
-			
-			minimap2.ChildAdded:connect(idk)
+			end)
 	
 			local plrgui = lplr.PlayerGui
 	
@@ -1833,4 +1840,4 @@ function SCRIPT_GDXX84_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_GDXX84_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_VNQN66_FAKESCRIPT))
