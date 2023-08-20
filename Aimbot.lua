@@ -68,16 +68,14 @@ local reset_3 = Instance.new("TextButton")
 local GUIVisibilityToggle = Instance.new("TextLabel")
 local value_14 = Instance.new("TextButton")
 local reset_4 = Instance.new("TextButton")
-local TargetThruWalls = Instance.new("TextLabel")
-local value_15 = Instance.new("TextButton")
 local AimMethod = Instance.new("TextLabel")
-local value_16 = Instance.new("TextButton")
+local value_15 = Instance.new("TextButton")
 local About_2 = Instance.new("TextLabel")
 local MouseSensitivity = Instance.new("TextLabel")
 local About_3 = Instance.new("TextLabel")
-local value_17 = Instance.new("TextBox")
+local value_16 = Instance.new("TextBox")
 local FirstPersonEnabled = Instance.new("TextLabel")
-local value_18 = Instance.new("TextButton")
+local value_17 = Instance.new("TextButton")
 local TeamUI = Instance.new("Frame")
 local WhitelistedTeams = Instance.new("ScrollingFrame")
 local whitelistframe_2 = Instance.new("Frame")
@@ -703,6 +701,7 @@ ScrollingFrame_2.BackgroundColor3 = Color3.new(0, 0.176471, 0)
 ScrollingFrame_2.BorderColor3 = Color3.new(0, 0.666667, 0)
 ScrollingFrame_2.Position = UDim2.new(0, 0, 0.0959752351, 0)
 ScrollingFrame_2.Size = UDim2.new(0, 346, 0, 292)
+ScrollingFrame_2.CanvasPosition = Vector2.new(0, 300)
 ScrollingFrame_2.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 UIListLayout_3.Parent = ScrollingFrame_2
@@ -929,35 +928,6 @@ reset_4.TextColor3 = Color3.new(0.666667, 0, 0)
 reset_4.TextSize = 28
 reset_4.TextStrokeTransparency = 0
 
-TargetThruWalls.Name = "TargetThruWalls"
-TargetThruWalls.Parent = ScrollingFrame_2
-TargetThruWalls.BackgroundColor3 = Color3.new(0, 0, 0)
-TargetThruWalls.BackgroundTransparency = 1
-TargetThruWalls.BorderColor3 = Color3.new(0, 0.666667, 0)
-TargetThruWalls.BorderSizePixel = 0
-TargetThruWalls.Position = UDim2.new(0, 0, 0.824561417, 0)
-TargetThruWalls.Size = UDim2.new(0, 169, 0, 59)
-TargetThruWalls.Font = Enum.Font.TitilliumWeb
-TargetThruWalls.Text = "Target through walls:"
-TargetThruWalls.TextColor3 = Color3.new(0, 0.666667, 0)
-TargetThruWalls.TextSize = 28
-TargetThruWalls.TextStrokeTransparency = 0
-TargetThruWalls.TextXAlignment = Enum.TextXAlignment.Left
-TargetThruWalls.TextYAlignment = Enum.TextYAlignment.Top
-
-value_15.Name = "value"
-value_15.Parent = TargetThruWalls
-value_15.BackgroundColor3 = Color3.new(0, 0, 0)
-value_15.BorderColor3 = Color3.new(0, 0.666667, 0)
-value_15.Position = UDim2.new(0.00591715984, 0, 0.52416575, 0)
-value_15.Size = UDim2.new(0, 337, 0, 28)
-value_15.Font = Enum.Font.TitilliumWeb
-value_15.Text = "true"
-value_15.TextColor3 = Color3.new(0, 0.666667, 0)
-value_15.TextSize = 28
-value_15.TextStrokeTransparency = 0
-value_15.TextXAlignment = Enum.TextXAlignment.Left
-
 AimMethod.Name = "AimMethod"
 AimMethod.Parent = ScrollingFrame_2
 AimMethod.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -974,18 +944,18 @@ AimMethod.TextStrokeTransparency = 0
 AimMethod.TextXAlignment = Enum.TextXAlignment.Left
 AimMethod.TextYAlignment = Enum.TextYAlignment.Top
 
-value_16.Name = "value"
-value_16.Parent = AimMethod
-value_16.BackgroundColor3 = Color3.new(0, 0, 0)
-value_16.BorderColor3 = Color3.new(0, 0.666667, 0)
-value_16.Position = UDim2.new(0.00294979103, 0, 0.335594594, 0)
-value_16.Size = UDim2.new(0, 336, 0, 28)
-value_16.Font = Enum.Font.TitilliumWeb
-value_16.Text = "Camera"
-value_16.TextColor3 = Color3.new(0, 0.666667, 0)
-value_16.TextSize = 28
-value_16.TextStrokeTransparency = 0
-value_16.TextXAlignment = Enum.TextXAlignment.Left
+value_15.Name = "value"
+value_15.Parent = AimMethod
+value_15.BackgroundColor3 = Color3.new(0, 0, 0)
+value_15.BorderColor3 = Color3.new(0, 0.666667, 0)
+value_15.Position = UDim2.new(0.00294979103, 0, 0.335594594, 0)
+value_15.Size = UDim2.new(0, 336, 0, 28)
+value_15.Font = Enum.Font.TitilliumWeb
+value_15.Text = "Camera"
+value_15.TextColor3 = Color3.new(0, 0.666667, 0)
+value_15.TextSize = 28
+value_15.TextStrokeTransparency = 0
+value_15.TextXAlignment = Enum.TextXAlignment.Left
 
 About_2.Name = "About"
 About_2.Parent = AimMethod
@@ -1035,20 +1005,20 @@ About_3.TextSize = 24
 About_3.TextStrokeTransparency = 0
 About_3.TextWrapped = true
 
-value_17.Name = "value"
-value_17.Parent = MouseSensitivity
-value_17.BackgroundColor3 = Color3.new(0, 0, 0)
-value_17.BorderColor3 = Color3.new(0, 0.666667, 0)
-value_17.Position = UDim2.new(-1.75680034e-05, 0, 0.258487642, 0)
-value_17.Size = UDim2.new(0, 335, 0, 28)
-value_17.Font = Enum.Font.TitilliumWeb
-value_17.PlaceholderColor3 = Color3.new(0, 0.666667, 0)
-value_17.PlaceholderText = "Default is 0.25"
-value_17.Text = "0.25"
-value_17.TextColor3 = Color3.new(0, 0.666667, 0)
-value_17.TextSize = 28
-value_17.TextStrokeTransparency = 0
-value_17.TextXAlignment = Enum.TextXAlignment.Left
+value_16.Name = "value"
+value_16.Parent = MouseSensitivity
+value_16.BackgroundColor3 = Color3.new(0, 0, 0)
+value_16.BorderColor3 = Color3.new(0, 0.666667, 0)
+value_16.Position = UDim2.new(-1.75680034e-05, 0, 0.258487642, 0)
+value_16.Size = UDim2.new(0, 335, 0, 28)
+value_16.Font = Enum.Font.TitilliumWeb
+value_16.PlaceholderColor3 = Color3.new(0, 0.666667, 0)
+value_16.PlaceholderText = "Default is 0.25"
+value_16.Text = "0.25"
+value_16.TextColor3 = Color3.new(0, 0.666667, 0)
+value_16.TextSize = 28
+value_16.TextStrokeTransparency = 0
+value_16.TextXAlignment = Enum.TextXAlignment.Left
 
 FirstPersonEnabled.Name = "FirstPersonEnabled"
 FirstPersonEnabled.Parent = ScrollingFrame_2
@@ -1066,18 +1036,18 @@ FirstPersonEnabled.TextStrokeTransparency = 0
 FirstPersonEnabled.TextXAlignment = Enum.TextXAlignment.Left
 FirstPersonEnabled.TextYAlignment = Enum.TextYAlignment.Top
 
-value_18.Name = "value"
-value_18.Parent = FirstPersonEnabled
-value_18.BackgroundColor3 = Color3.new(0, 0, 0)
-value_18.BorderColor3 = Color3.new(0, 0.666667, 0)
-value_18.Position = UDim2.new(0.00591715984, 0, 0.502716422, 0)
-value_18.Size = UDim2.new(0, 337, 0, 28)
-value_18.Font = Enum.Font.TitilliumWeb
-value_18.Text = "true"
-value_18.TextColor3 = Color3.new(0, 0.666667, 0)
-value_18.TextSize = 28
-value_18.TextStrokeTransparency = 0
-value_18.TextXAlignment = Enum.TextXAlignment.Left
+value_17.Name = "value"
+value_17.Parent = FirstPersonEnabled
+value_17.BackgroundColor3 = Color3.new(0, 0, 0)
+value_17.BorderColor3 = Color3.new(0, 0.666667, 0)
+value_17.Position = UDim2.new(0.00591715984, 0, 0.502716422, 0)
+value_17.Size = UDim2.new(0, 337, 0, 28)
+value_17.Font = Enum.Font.TitilliumWeb
+value_17.Text = "true"
+value_17.TextColor3 = Color3.new(0, 0.666667, 0)
+value_17.TextSize = 28
+value_17.TextStrokeTransparency = 0
+value_17.TextXAlignment = Enum.TextXAlignment.Left
 
 TeamUI.Name = "TeamUI"
 TeamUI.Parent = Aimbot
@@ -1226,7 +1196,7 @@ X_3.TextSize = 28
 X_3.TextStrokeTransparency = 0
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_XCJK84_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_MMXK72_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1443,7 +1413,6 @@ function SCRIPT_XCJK84_FAKESCRIPT() -- Aimbot.Scripts
 			local newglobalstats = {}
 			newglobalstats["TeamAutofill"] = true
 			newglobalstats["RightClickAim"] = false
-			newglobalstats["TargetThruWalls"] = true
 			newglobalstats["FirstPersonEnabled"] = true
 			newglobalstats["AimMethod"] = "Camera"
 			newglobalstats["MouseSensitivity"] = 0.25
@@ -1903,30 +1872,6 @@ function SCRIPT_XCJK84_FAKESCRIPT() -- Aimbot.Scripts
 				return chr.Humanoid.RootPart
 			end
 		end
-		
-		local partstoignore = {}
-	
-		local function addpart(v)
-			if v:IsA("BasePart") then
-				if v.Transparency ~= 0 or not v.CanCollide or isnpc(v, true) then
-					table.insert(partstoignore, v)
-				end
-			end
-		end
-	
-		for i,v in pairs(workspace:GetDescendants()) do
-			addpart(v)
-		end
-	
-		workspace.DescendantAdded:connect(addpart)
-	
-		local function ispartvisible(vpart)
-			local params = RaycastParams.new()
-			params.FilterDescendantsInstances = partstoignore
-			local dir = vpart.Position - camera.CFrame.Position
-			params.IgnoreWater = true
-			return not workspace:Raycast(camera.CFrame.Position, dir, params)
-		end
 	
 		local AimbotFunction = game.RunService.RenderStepped:connect(function()
 			if misc.TargetedCharacter then
@@ -1987,7 +1932,7 @@ function SCRIPT_XCJK84_FAKESCRIPT() -- Aimbot.Scripts
 								local targpart = gettargetpart(v)
 				    	        local pos = math.floor(lplr:DistanceFromCharacter(targpart.Position))
 				    	        local _, onscreen = camera:WorldToScreenPoint(targpart.Position)
-				    	        if onscreen and pos < GameStats.MaxStuds and (GlobalStats.TargetThruWalls or not GlobalStats.TargetThruWalls and ispartvisible(targpart)) then
+				    	        if onscreen and pos < GameStats.MaxStuds then
 				    	            table1[v] = pos
 				        			if table.find(PrioritizedPlrs, plrs:GetPlayerFromCharacter(v)) then
 				        				table.insert(PrioritizedPlrsOnScreen, v)
@@ -2042,7 +1987,7 @@ function SCRIPT_XCJK84_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","NPCs cant be targeted if spawned in with 0 hp.")
+		sendnotif("Aimbot Update","Removed wall check because it sucks and is the reason your game lags a bit on execution.")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
@@ -2198,4 +2143,4 @@ function SCRIPT_XCJK84_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_XCJK84_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_MMXK72_FAKESCRIPT))
