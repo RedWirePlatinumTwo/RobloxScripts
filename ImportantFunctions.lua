@@ -275,7 +275,7 @@ LoggedFunctions = {}
 
 getgenv().FunctionLogger = function(funcparent, funcname, customfname)
 if not customfname then customfname = funcname end
-	if funcparent[funcname] == FunctionLogger or funcparent[funcname] == print or funcparent[funcname] == getrenv().print then error("No.") end
+	if funcparent[funcname] == FunctionLogger or funcparent[funcname] == print or funcparent[funcname] == pairs then error("No.") end
 		local oldfunc = funcparent[funcname]
 		if typeof(oldfunc) ~= "function" then error("function expected, got "..typeof(oldfunc)) end
 		
