@@ -1,7 +1,7 @@
-catchrepeats = {}
-indexreps = {}
-indexes = {}
-totaltables = 0
+local catchrepeats = {}
+local indexreps = {}
+local indexes = {}
+local totaltables = 0
 local reformatstring = function(s)
 	local restring = ""
 	local backkeys = {}
@@ -273,9 +273,11 @@ end
 getgenv().LogFunctions = true
 LoggedFunctions = {}
 
+local excludedfunctions = {print, pairs, format, tabletostring, GetFullName, GetFamily, getcallingscript, warn, error}
+
 getgenv().FunctionLogger = function(funcparent, funcname, customfname)
 if not customfname then customfname = funcname end
-	if funcparent[funcname] == FunctionLogger or funcparent[funcname] == print or funcparent[funcname] == pairs then error("No.") end
+	if funcparent[funcname] == FunctionLogger or table.find(excludedfunctions, funcparent[funcname]) then error("No.") end
 		local oldfunc = funcparent[funcname]
 		if typeof(oldfunc) ~= "function" then error("function expected, got "..typeof(oldfunc)) end
 		
