@@ -339,7 +339,18 @@ if not customfname then customfname = funcname end
 		error("This function has already been logged!")
 	else
 		LoggedFunctions[funcparent] = funcname
-		funcparent[funcname] = newfunc
+		if typeof(funcparent) ~= "Instance" then
+			funcparent[funcname] = newfunc
+		else
+			local hook
+			hook = hookmetamethod(game, "__namecall", function(self, ...)
+				if self == funcparent and getnamecallmethod() == funcname then
+					return newfunc(self, ...)
+				else
+					return hook(self, ...)
+				end
+			end)
+		end
 		print("logging", customfname.."!")
 		return newfunc
 	end
