@@ -648,7 +648,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_LEAB77_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_GDXX84_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -776,20 +776,32 @@ function SCRIPT_LEAB77_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Added a disable npc guns button! (also fixed tazer mod button showing message multiple times)")
+			notify("Slightly improved mini-map player dot reveal script + player dots are now revealed on the bigger map.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
+			local minimap2 = lplr.PlayerGui.AppUI.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
-				Changed(plr, "Visible", function(v)
-					if not v then
-						plr.Visible = true
-					end
+				runservice.Heartbeat:connect(function()
+					plr.Visible = true
 				end)
 			end
 	
 			for i, plr in pairs(minimap:GetChildren()) do makevisible(plr) end
 	
 			minimap.ChildAdded:connect(makevisible)
+			
+			local function idk(v)
+				if v.ClassName == "ImageLabel" then
+					makevisible(v)
+				end
+			end
+			
+			for i,v in pairs(minimap2:GetChildren()) do
+				idk(v)
+			end
+			
+			minimap2.ChildAdded:connect(idk)
+	
 			local plrgui = lplr.PlayerGui
 	
 			local function walcc()
@@ -1821,4 +1833,4 @@ function SCRIPT_LEAB77_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_LEAB77_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_GDXX84_FAKESCRIPT))
