@@ -1205,9 +1205,6 @@ function SCRIPT_NRMW67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			local togglelock = vehicle.toggleLocalLocked
 			local onexit = vehicle.OnVehicleJumpExited._handlerListHead
 			local exitfn = onexit._fn
-			local onenter = vehicle.OnVehicleEntered._handlerListHead
-			local enterfn = onenter._fn
-	
 	
 			local function isdriver()
 				local model = getmodel()
