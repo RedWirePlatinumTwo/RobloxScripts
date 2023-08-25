@@ -648,7 +648,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_EMOZ73_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_PPHG69_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -784,7 +784,7 @@ function SCRIPT_EMOZ73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Slightly improved mini-map player dot reveal script + player dots are now revealed on the bigger map.")
+			notify("Hold E bypass + replace parachute is now toggleable, vehicle lock mod now *only* auto-locks your car, and casino code-getting is now automatic.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1799,4 +1799,4 @@ function SCRIPT_EMOZ73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_EMOZ73_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_PPHG69_FAKESCRIPT))
