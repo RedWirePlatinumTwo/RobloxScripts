@@ -784,7 +784,7 @@ function SCRIPT_NRMW67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Hold E bypass + replace parachute is now toggleable, vehicle lock mod now *only* auto-locks your car, and casino code-getting is now automatic.")
+			notify("Replace parachute is now toggleable, vehicle lock mod now *only* auto-locks your car, and casino code-getting is now automatic.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
