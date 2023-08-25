@@ -648,7 +648,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_XCNT74_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_NRMW67_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -1759,19 +1759,18 @@ function SCRIPT_XCNT74_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				gtoglide = not gtoglide
 			end)
 	
-			local h = {}
-			h.replacechute = false
+			local replacechute = false
 			
 			para.Parachute = function(...)
-				if h.replacechute then
+				if replacechute then
 					return para.Glider(...)
 				else
 					return parachute(...)
 				end
 			end
 	
-			onetimefunc(mainframe.replaceparachute.Activated, function()
-				h.replacechute = not h.replacechute
+			mainframe.replaceparachute.Activated:connect(function()
+				replacechute = not replacechute
 			end)
 			
 			mainframe.DisableNPCGuns.Activated:connect(function()
@@ -1802,4 +1801,4 @@ function SCRIPT_XCNT74_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_XCNT74_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_NRMW67_FAKESCRIPT))
