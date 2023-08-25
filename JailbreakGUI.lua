@@ -18,7 +18,7 @@ local RobberyNotifier = Instance.new("TextButton")
 local infiniteyeet = Instance.new("TextButton")
 local gunshoptp = Instance.new("TextButton")
 local keybypass = Instance.new("TextButton")
-local getcode = Instance.new("TextButton")
+local AAAAA = Instance.new("TextButton")
 local delradio = Instance.new("TextButton")
 local respawn = Instance.new("TextButton")
 local lockonexit = Instance.new("TextButton")
@@ -248,19 +248,19 @@ keybypass.TextSize = 20
 keybypass.TextWrapped = true
 keybypass.TextXAlignment = Enum.TextXAlignment.Left
 
-getcode.Name = "getcode"
-getcode.Parent = ScrollingFrame
-getcode.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-getcode.BorderColor3 = Color3.new(0, 0.666667, 1)
-getcode.Position = UDim2.new(0, 0, 0.523438752, 0)
-getcode.Size = UDim2.new(0, 116, 0, 47)
-getcode.ZIndex = 0
-getcode.Font = Enum.Font.Ubuntu
-getcode.Text = "Get Casino code"
-getcode.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-getcode.TextSize = 20
-getcode.TextWrapped = true
-getcode.TextXAlignment = Enum.TextXAlignment.Left
+AAAAA.Name = "AAAAA"
+AAAAA.Parent = ScrollingFrame
+AAAAA.BackgroundColor3 = Color3.new(0, 0, 0.27451)
+AAAAA.BorderColor3 = Color3.new(0, 0.666667, 1)
+AAAAA.Position = UDim2.new(0, 0, 0.523438752, 0)
+AAAAA.Size = UDim2.new(0, 116, 0, 47)
+AAAAA.ZIndex = 0
+AAAAA.Font = Enum.Font.Ubuntu
+AAAAA.Text = "Casino code:"
+AAAAA.TextColor3 = Color3.new(0.333333, 0.666667, 1)
+AAAAA.TextSize = 20
+AAAAA.TextWrapped = true
+AAAAA.TextXAlignment = Enum.TextXAlignment.Left
 
 delradio.Name = "delradio"
 delradio.Parent = ScrollingFrame
@@ -298,7 +298,7 @@ lockonexit.Position = UDim2.new(0.667000175, 0, 0.523438752, 0)
 lockonexit.Size = UDim2.new(0, 116, 0, 47)
 lockonexit.ZIndex = -1
 lockonexit.Font = Enum.Font.Ubuntu
-lockonexit.Text = "Lock on exit + Unlock on enter"
+lockonexit.Text = "Auto-lock vehicle on exit"
 lockonexit.TextColor3 = Color3.new(0.333333, 0.666667, 1)
 lockonexit.TextSize = 20
 lockonexit.TextWrapped = true
@@ -648,7 +648,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_EAXW75_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -663,11 +663,9 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	mainframe.Tazermod,
 	mainframe.delradio,
 	mainframe.forcedaytime,
-	mainframe.holdebypass,
 	mainframe.keybypass,
 	mainframe.modguns,
 	mainframe.removeragdoll,
-	mainframe.replaceparachute,
 	mainframe.aimbot,
 	mainframe.infiniteyeet,
 	mainframe.DisableNPCGuns
@@ -677,8 +675,18 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	mainframe.lockonexit,
 	mainframe.glidekey,
 	mainframe.Airdrop,
-	mainframe.ropefollow
+	mainframe.ropefollow,
+	mainframe.holdebypass,
+	mainframe.replaceparachute
 	}
+	
+	local function onetimefunc(signal, func)
+		local con
+		con = signal:connect(function(...)
+			con:Disconnect()
+			func(...)
+		end)
+	end
 	
 	for i,v in pairs(script.Parent:GetDescendants()) do
 		if v.ClassName == "ScrollingFrame" then
@@ -695,7 +703,7 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		local box = mainframe["1placeholder"].togglebox:Clone()
 		box.Parent = v
 	
-		v.MouseButton1Click:connect(function()
+		onetimefunc(v.Activated, function()
 			box.TextColor3 = Color3.fromRGB(0,170,0)
 			box.Text = "✓"
 		end)
@@ -708,7 +716,7 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		box.Parent = v
 		box.BackgroundColor3 = Color3.fromRGB(85, 0, 127)
 	
-		v.MouseButton1Click:connect(function()
+		v.Activated:connect(function()
 			bool = not bool
 			if bool then
 				box.TextColor3 = Color3.fromRGB(0,170,0)
@@ -846,8 +854,8 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			runservice.RenderStepped:connect(function()
 	
 				for i,a in pairs(moduleui.CircleAction.Specs) do
-					if a.Duration ~= false and HoldEBypass and a.Name ~= "Rob" and a.Name ~= "Open Crate" then
-						a.Timed = false;
+					if a.Duration ~= false and a.Name ~= "Rob" and a.Name ~= "Open Crate" then
+						a.Timed = not HoldEBypass;
 					end
 				end
 	
@@ -859,7 +867,7 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				mainframe.GravToggle.Text = "Gravity Toggle ("..tostring(grav)..")"
 			end)
 	
-			mainframe.GravToggle.MouseButton1Click:connect(function()
+			mainframe.GravToggle.Activated:connect(function()
 				if math.floor(workspace.Gravity) == 196 then
 					workspace.Gravity = 0
 				elseif workspace.Gravity == 0 then
@@ -867,7 +875,7 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 			end)
 	
-			mainframe.aimbot.MouseButton1Click:connect(function()
+			onetimefunc(mainframe.aimbot.Activated, function()
 				loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/Aimbot.lua"))()
 			end)
 	
@@ -983,7 +991,7 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 			workspace.ChildAdded:connect(gui)
 	
-			mainframe.Airdrop.MouseButton1Click:connect(function()
+			mainframe.Airdrop.Activated:connect(function()
 				props.pointers = not props.pointers
 				props.guitext = props.pointers
 			end)
@@ -1008,20 +1016,16 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 	
 			end
-			local gunnotif = false
 	
-			mainframe.modguns.MouseButton1Click:connect(function()
+			onetimefunc(mainframe.modguns.Activated, function()
 				changegunstats({["CamShakeMagnitude"] = 0,["FireAuto"] = true})
 				local g = require(rstorage.Game.ItemConfig.Grenade)
 				g.ReloadTime = 0
 				g.FuseTime = 0.8
-				if not gunnotif then
-					gunnotif = true
-					notify("Removed recoil + all guns fire automatically (also funni grenade spam)")
-				end
+				notify("Removed recoil + all guns fire automatically (also funni grenade spam)")
 			end)
 	
-			mainframe.forcedaytime.MouseButton1Click:connect(function()
+			onetimefunc(mainframe.forcedaytime.Activated, function()
 				game.Lighting.ClockTime = 12
 	
 				Changed(game.Lighting, "ClockTime", function()
@@ -1030,16 +1034,16 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 			end)
 	
-			mainframe.holdebypass.MouseButton1Click:connect(function()
-				if not HoldEBypass then
-					HoldEBypass = true
-					notify("Hold E Bypass enabled. Sadly cannot be used with the donut shop, gas station, or air drops ;(")
-				end
+			mainframe.holdebypass.Activated:connect(function()
+				HoldEBypass = not HoldEBypass
+			end)
+			
+			onetimefunc(holdebypass.Activated, function()
+				notify("Hold E Bypass enabled. Sadly cannot be used with the donut shop, gas station, or air drops ;(")
 			end)
 	
-			local SpeedBypass = false
 	
-			mainframe["1speed"].MouseButton1Click:Connect(function()
+			onetimefunc(mainframe["1speed"].Activated, function()
 				mainframe["1speed"].Visible = false
 				mainframe["1speedv2"].Visible = true
 	
@@ -1052,17 +1056,15 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					end)
 	
 				end
-				if not SpeedBypass then
-					SpeedBypass = true
+				SpeedBypass = true
+				speedhack()
+	
+				lplr.CharacterAdded:connect(function(chr)
+					chr:WaitForChild("Humanoid")
 					speedhack()
+				end)
 	
-					lplr.CharacterAdded:connect(function(chr)
-						chr:WaitForChild("Humanoid")
-						speedhack()
-					end)
-	
-					notify("To edit your walkspeed, scroll up/down on the number in the textbox (max 150).")
-				end
+				notify("To edit your walkspeed, scroll up/down on the number in the textbox (max 150).")
 	
 				mainframe["1speedv2"].MouseWheelForward:connect(function()
 					speeds.walkspeed = speeds.walkspeed + 5
@@ -1095,43 +1097,38 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end)
 			end)
 	
-			local RobberyNotifier = false
 			local trainrob = true
 	
-			mainframe.RobberyNotifier.MouseButton1Click:connect(function()
-				if not RobberyNotifier then
-					RobberyNotifier = true
-					local IconIds = {}
-					IconIds["bank truck"] = "6133383545"
-					IconIds["gas station"] = "4643750797"
-					IconIds["donut shop"] = "4643750660"
-					IconIds["museum"] = "4643749917"
-					IconIds["tomb"] = "6896911415"
-					IconIds["casino"] = "9255252609"
-					IconIds["mansion"] = "11831534984"
-					IconIds["power plant"] = "4643749556"
-					IconIds["jewelry"] = "4643749718"
-					IconIds["bank"] = "4643749317"
-					IconIds["cargo train"] = "7301405189"
-					IconIds["cargo plane"]= "7301406769"
-					IconIds["cargo ship"] = "7301406299"
-					IconIds["passenger train"] = "7301405813"
+			onetimefunc(mainframe.RobberyNotifier.Activated, function()
+				local IconIds = {}
+				IconIds["bank truck"] = "6133383545"
+				IconIds["gas station"] = "4643750797"
+				IconIds["donut shop"] = "4643750660"
+				IconIds["museum"] = "4643749917"
+				IconIds["tomb"] = "6896911415"
+				IconIds["casino"] = "9255252609"
+				IconIds["mansion"] = "11831534984"
+				IconIds["power plant"] = "4643749556"
+				IconIds["jewelry"] = "4643749718"
+				IconIds["bank"] = "4643749317"
+				IconIds["cargo train"] = "7301405189"
+				IconIds["cargo plane"]= "7301406769"
+				IconIds["cargo ship"] = "7301406299"
+				IconIds["passenger train"] = "7301405813"
 	
-					for i,v in pairs(plrgui.WorldMarkersGui:GetChildren()) do
+				for i,v in pairs(plrgui.WorldMarkersGui:GetChildren()) do
 	
-						for i2, v2 in pairs(v:GetChildren()) do
+					for i2, v2 in pairs(v:GetChildren()) do
 	
-							for name, id in pairs(IconIds) do
+						for name, id in pairs(IconIds) do
 	
-								if v2.ImageLabel.Image == "rbxassetid://"..id then
+							if v2.ImageLabel.Image == "rbxassetid://"..id then
 	
-									Changed(v2, "ImageColor3", function(color)
-										if color == Color3.new(0,1,0) then
-											notify("The "..name.." is open for robbery.")
-										end
-									end)
-	
-								end
+								Changed(v2, "ImageColor3", function(color)
+									if color == Color3.new(0,1,0) then
+										notify("The "..name.." is open for robbery.")
+									end
+								end)
 	
 							end
 	
@@ -1139,56 +1136,51 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 					end
 	
-					plrgui.WorldMarkersGui.ChildAdded:connect(function(marker)
-						while true do
-							if pcall(function()
-									return marker.ImageLabel.ImageLabel.Image
-								end) then
-								break
-							else
-								task.wait()
-							end
-						end
-						local img = marker.ImageLabel.ImageLabel.Image
-						for i,v in pairs(IconIds) do
-							if img == "rbxassetid://"..v then
-								if i == "cargo train" or i == "passenger train" then
-									if trainrob then
-										notify("The "..i.." has entered the map.")
-										trainrob = false
-	
-										delay(4, function()
-											trainrob = true
-										end)
-	
-									end
-								elseif i == "cargo ship" then
-									notify("The cargo ship is coming!")
-								elseif i == "cargo plane" then
-									notify("The cargo plane is inbound!")
-								else
-									notify("The "..i.." is open for robbery.")
-								end
-							end
-						end
-					end)
-	
 				end
+	
+				plrgui.WorldMarkersGui.ChildAdded:connect(function(marker)
+					while true do
+						if pcall(function()
+								return marker.ImageLabel.ImageLabel.Image
+							end) then
+							break
+						else
+							task.wait()
+						end
+					end
+					local img = marker.ImageLabel.ImageLabel.Image
+					for i,v in pairs(IconIds) do
+						if img == "rbxassetid://"..v then
+							if i == "cargo train" or i == "passenger train" then
+								if trainrob then
+									notify("The "..i.." has entered the map.")
+									trainrob = false
+	
+									delay(4, function()
+										trainrob = true
+									end)
+	
+								end
+							elseif i == "cargo ship" then
+								notify("The cargo ship is coming!")
+							elseif i == "cargo plane" then
+								notify("The cargo plane is inbound!")
+							else
+								notify("The "..i.." is open for robbery.")
+							end
+						end
+					end
+				end)
 			end)
 	
-			mainframe.infiniteyeet.MouseButton1Click:connect(function()
+			onetimefunc(mainframe.infiniteyeet.Activated, function()
 				loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 			end)
 	
-			local ragdollremoved = false
-	
-			mainframe.removeragdoll.MouseButton1Click:connect(function()
-				if not ragdollremoved then
-					ragdollremoved = true
-					require(rstorage.Module.AlexRagdoll).Ragdoll = nil
-					require(rstorage.Game.Falling).StartRagdolling = nil
-					notify("Removed ragdolling. (WARNING: in some cases you will still take fall damage)")
-				end
+			onetimefunc(mainframe.removeragdoll.Activated, function()
+				require(rstorage.Module.AlexRagdoll).Ragdoll = nil
+				require(rstorage.Game.Falling).StartRagdolling = nil
+				notify("Removed ragdolling. (WARNING: in some cases you will still take fall damage)")
 			end)
 	
 			runservice.Heartbeat:connect(function()
@@ -1202,15 +1194,10 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 			end)
 	
-			mainframe.gunshoptp.MouseButton1Click:connect(function()
-				if gunshoptp then
-					gunshoptp = false
-				else
-					gunshoptp = true
-				end
+			mainframe.gunshoptp.Activated:connect(function()
+				gunshoptp = not gunshoptp
 			end)
 	
-			local enablefly = false
 			local uiservice = game.UserInputService
 			local vehicle = require(rstorage.Vehicle.VehicleUtils)
 			local getmodel = vehicle.GetLocalVehicleModel
@@ -1238,196 +1225,192 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 			end
 	
-			mainframe["1flyhack"].MouseButton1Click:connect(function()
+			onetimefunc(mainframe["1flyhack"].Activated, function()
 				mainframe["1flyhackv2"].Visible = true
 				mainframe["1flyhack"].Visible = false
-				if not enablefly then
-					enablefly = true
-					-- actual fly script
-					local flying = false
-					local maxdistance = 100000000000000 --using math.huge makes this script wonky
-					local uiservice = game.UserInputService
-					local mouse = lplr:GetMouse()
+				-- actual fly script
+				local flying = false
+				local maxdistance = 100000000000000 --using math.huge makes this script wonky
+				local uiservice = game.UserInputService
+				local mouse = lplr:GetMouse()
 	
-					local function GetVelocity(pos1,pos2,StudsPerSecond)
-						local distance = (pos2 - pos1)
-						local mag = distance.Magnitude
-						return (distance/mag)*StudsPerSecond
-					end
-	
-					local function getkey(keycode)
-						local key = tostring(keycode):lower()
-						local findcode, a = key:find("keycode.")
-						return key:sub(a+1)
-					end
-	
-					local keys = {}
-					local pos = Vector3.new()
-	
-					runservice.Heartbeat:connect(function()
-	
-						pcall(function()
-							local hrp
-							local flyspeed = speeds.flyspeed
-							local invehicle = getmodel()
-							if invehicle and isdriver() then
-								hrp = invehicle.Engine
-							else
-								hrp = lplr.Character.Humanoid.RootPart
-								if flyspeed > 150 then
-									flyspeed = 150
-								end
-							end
-	
-							if flying then
-								local cam = workspace.Camera
-							end
-	
-							local frontoffset = CFrame.new() + Vector3.new(0,0,-maxdistance)
-							local backoffset = CFrame.new() + Vector3.new(0,0,maxdistance)
-							local leftoffset = CFrame.new() + Vector3.new(-maxdistance,0,0)
-							local rightoffset = CFrame.new() + Vector3.new(maxdistance,0,0)
-							local upoffset = CFrame.new() + Vector3.new(0,maxdistance,0)
-							local downoffset = CFrame.new() + Vector3.new(0,-maxdistance,0)
-							local velocity = Vector3.new()
-							if flying then
-								if keys.w_active then
-									velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position, flyspeed)
-								end
-								if keys.s_active then
-									velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position, flyspeed)
-								end
-								if keys.a_active then
-									velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position, flyspeed)
-								end
-								if keys.d_active then
-									velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position, flyspeed)
-								end
-								if keys.e_active then
-									velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position, flyspeed)
-								end
-								if keys.q_active then
-									velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position, flyspeed)
-								end
-								hrp.Velocity = velocity
-								hrp.CFrame = CFrame.new(hrp.Position, (workspace.Camera.CFrame*frontoffset).Position)
-							end
-							if flying and not keys.w_active and not keys.a_active and not keys.s_active and not keys.d_active and not keys.q_active and not keys.e_active then
-								hrp.CFrame = CFrame.new(pos, (workspace.Camera.CFrame*frontoffset).Position)
-								hrp.Velocity = Vector3.new()
-								hrp.RotVelocity = Vector3.new()
-							else
-								pos = hrp.Position
-							end
-						end)
-	
-					end)
-	
-					uiservice.InputBegan:connect(function(key,processed)
-						if processed then return end
-						if key.KeyCode == Enum.KeyCode.F and game.UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
-							flying = not flying
-							if flying then
-								lplr.Character.Humanoid.CameraOffset = Vector3.new(2,0,0)
-							else
-								lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
-							end
-						end
-						keys[getkey(key.KeyCode).."_active"] = true
-					end)
-	
-					uiservice.InputEnded:connect(function(key)
-						keys[getkey(key.KeyCode).."_active"] = false
-					end)
-					-- end of fly script
-	
-					Changed(speeds, "flyspeed", function(num)
-						if num > 600 then
-							speeds.flyspeed = 600
-						end
-						if num < 0 then
-							speeds.flyspeed = 0
-						end
-						mainframe["1flyhackv2"].Text = tostring(speeds.flyspeed)
-					end)
-	
-					mainframe["1flyhackv2"].MouseWheelForward:connect(function()
-						speeds.flyspeed = speeds.flyspeed + 20
-					end)
-	
-					mainframe["1flyhackv2"].MouseWheelBackward:connect(function()
-						speeds.flyspeed = speeds.flyspeed - 20
-						mainframe.ScrollingEnabled = false
-						delay(0.2, function()
-							mainframe.ScrollingEnabled = true
-						end)
-					end)
-	
-					Changed(mainframe["1flyhackv2"], "Text", function(txt)
-						if tonumber(txt) then
-							speeds.flyspeed = tonumber(txt)
-						end
-					end)
-	
-					notify("Fly hack enabled! Caps at 150 if you're flying without a vehicle.")
-				end
-			end)
-	
-			local keybypass = false
-	
-			mainframe.keybypass.MouseButton1Click:connect(function()
-				if not keybypass then
-					keybypass = true
-					require(rstorage.Game.PlayerUtils).hasKey = function()
-						return true
-					end
-					notify("Keycard bypass enabled.")
-				end
-			end)
-	
-			local ctxt = mainframe.getcode.Text
-	
-			mainframe.getcode.MouseButton1Down:connect(function()
-				local codes = workspace.Casino.RobberyDoor.Codes
-				local code
-	
-				for i,v in pairs(codes:GetChildren()) do
-					if v:FindFirstChildOfClass("Part").SurfaceGui.TextLabel.Text ~= "" then
-						code = v
-						break
-					end
+				local function GetVelocity(pos1,pos2,StudsPerSecond)
+					local distance = (pos2 - pos1)
+					local mag = distance.Magnitude
+					return (distance/mag)*StudsPerSecond
 				end
 	
-				local txt = ""
-				if code then
-					local c = {}
-	
-					for i,v in pairs(code:GetChildren()) do
-						table.insert(c, v.Position.Magnitude)
-					end
-	
-					table.sort(c)
-					for i,v in pairs(c) do
-						for i, cpart in pairs(code:GetChildren()) do
-							if v == cpart.Position.Magnitude then
-								txt = txt..cpart.SurfaceGui.TextLabel.Text
-							end
-						end
-					end
-					mainframe.getcode.Text = txt.." (or "..txt:reverse()..")"
-				else
-					mainframe.getcode.Text = "code non-existent"
+				local function getkey(keycode)
+					local key = tostring(keycode):lower()
+					local findcode, a = key:find("keycode.")
+					return key:sub(a+1)
 				end
 	
-				delay(5,function()
-					mainframe.getcode.Text = ctxt
+				local keys = {}
+				local pos = Vector3.new()
+	
+				runservice.Heartbeat:connect(function()
+	
+					pcall(function()
+						local hrp
+						local flyspeed = speeds.flyspeed
+						local invehicle = getmodel()
+						if invehicle and isdriver() then
+							hrp = invehicle.Engine
+						else
+							hrp = lplr.Character.Humanoid.RootPart
+							if flyspeed > 150 then
+								flyspeed = 150
+							end
+						end
+	
+						if flying then
+							local cam = workspace.Camera
+						end
+	
+						local frontoffset = CFrame.new() + Vector3.new(0,0,-maxdistance)
+						local backoffset = CFrame.new() + Vector3.new(0,0,maxdistance)
+						local leftoffset = CFrame.new() + Vector3.new(-maxdistance,0,0)
+						local rightoffset = CFrame.new() + Vector3.new(maxdistance,0,0)
+						local upoffset = CFrame.new() + Vector3.new(0,maxdistance,0)
+						local downoffset = CFrame.new() + Vector3.new(0,-maxdistance,0)
+						local velocity = Vector3.new()
+						if flying then
+							if keys.w_active then
+								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position, flyspeed)
+							end
+							if keys.s_active then
+								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position, flyspeed)
+							end
+							if keys.a_active then
+								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position, flyspeed)
+							end
+							if keys.d_active then
+								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position, flyspeed)
+							end
+							if keys.e_active then
+								velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position, flyspeed)
+							end
+							if keys.q_active then
+								velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position, flyspeed)
+							end
+							hrp.Velocity = velocity
+							hrp.CFrame = CFrame.new(hrp.Position, (workspace.Camera.CFrame*frontoffset).Position)
+						end
+						if flying and not keys.w_active and not keys.a_active and not keys.s_active and not keys.d_active and not keys.q_active and not keys.e_active then
+							hrp.CFrame = CFrame.new(pos, (workspace.Camera.CFrame*frontoffset).Position)
+							hrp.Velocity = Vector3.new()
+							hrp.RotVelocity = Vector3.new()
+						else
+							pos = hrp.Position
+						end
+					end)
+	
 				end)
 	
+				uiservice.InputBegan:connect(function(key,processed)
+					if processed then return end
+					if key.KeyCode == Enum.KeyCode.F and game.UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
+						flying = not flying
+						if flying then
+							lplr.Character.Humanoid.CameraOffset = Vector3.new(2,0,0)
+						else
+							lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
+						end
+					end
+					keys[getkey(key.KeyCode).."_active"] = true
+				end)
+	
+				uiservice.InputEnded:connect(function(key)
+					keys[getkey(key.KeyCode).."_active"] = false
+				end)
+				-- end of fly script
+	
+				Changed(speeds, "flyspeed", function(num)
+					if num > 600 then
+						speeds.flyspeed = 600
+					end
+					if num < 0 then
+						speeds.flyspeed = 0
+					end
+					mainframe["1flyhackv2"].Text = tostring(speeds.flyspeed)
+				end)
+	
+				mainframe["1flyhackv2"].MouseWheelForward:connect(function()
+					speeds.flyspeed = speeds.flyspeed + 20
+				end)
+	
+				mainframe["1flyhackv2"].MouseWheelBackward:connect(function()
+					speeds.flyspeed = speeds.flyspeed - 20
+					mainframe.ScrollingEnabled = false
+					delay(0.2, function()
+						mainframe.ScrollingEnabled = true
+					end)
+				end)
+	
+				Changed(mainframe["1flyhackv2"], "Text", function(txt)
+					if tonumber(txt) then
+						speeds.flyspeed = tonumber(txt)
+					end
+				end)
+	
+				notify("Fly hack enabled! Caps at 150 if you're flying without a vehicle.")
+			end)
+	
+	
+			onetimefunc(mainframe.keybypass.Activated, function()
+				require(rstorage.Game.PlayerUtils).hasKey = function()
+					return true
+				end
+			end)
+	
+			local ctxt = mainframe.AAAAA.Text
+	
+			runservice.RenderStepped:connect(function()
+				local success = pcall(function()
+					local codes = workspace.Casino.RobberyDoor.Codes
+					local code
+	
+					for i,v in pairs(codes:GetChildren()) do
+						if v:FindFirstChildOfClass("Part").SurfaceGui.TextLabel.Text ~= "" then
+							code = v
+							break
+						end
+					end
+	
+					local txt = ""
+					if code then
+						local c = {}
+	
+						for i,v in pairs(code:GetChildren()) do
+							table.insert(c, v.Position.Magnitude)
+						end
+	
+						table.sort(c)
+						for i,v in pairs(c) do
+							for i, cpart in pairs(code:GetChildren()) do
+								if v == cpart.Position.Magnitude then
+									txt = txt..cpart.SurfaceGui.TextLabel.Text
+								end
+							end
+						end
+						if txt ~= txt:reverse() then
+							mainframe.AAAAA.Text = ctxt.." "..txt.." (or "..txt:reverse()..")"
+						else
+							mainframe.AAAAA.Text = ctxt.." "..txt
+						end
+					else
+						mainframe.AAAAA.Text = "code non-existent"
+					end
+				end)
+				if not success then
+					mainframe.AAAAA.Text = "casino building isn't loaded in :("
+				end
 			end)
 			local respawnconfirm = false
 			local respawntxt = mainframe.respawn.Text
 	
-			mainframe.respawn.MouseButton1Click:connect(function()
+			mainframe.respawn.Activated:connect(function()
 				if respawnconfirm then
 					lplr.Character.Humanoid.Health = 0
 				end
@@ -1440,27 +1423,21 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 			end)
 	
-			local isdelradio = false
+			onetimefunc(mainframe.delradio.Activated, function()		
+				runservice.RenderStepped:connect(function()
+					if lplr.PlayerGui:FindFirstChild("RadioGui") then
+						lplr.PlayerGui.RadioGui:Destroy()
+					end
+				end)
 	
-			mainframe.delradio.MouseButton1Click:connect(function()
-				if not isdelradio then
-					isdelradio = true
-					
-					runservice.RenderStepped:connect(function()
-						if lplr.PlayerGui:FindFirstChild("RadioGui") then
-							lplr.PlayerGui.RadioGui:Destroy()
-						end
-					end)
-	
-					notify("fuck this stupid gui")
-				end
+				notify("fuck this stupid gui")
 			end)
 	
 			local vmod = false
 			local vmodtoggle = false
 	
 	
-			mainframe.lockonexit.MouseButton1Click:connect(function()
+			mainframe.lockonexit.Activated:connect(function()
 				if not vmod then 
 					vmod = true
 	
@@ -1480,46 +1457,28 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						return exitfn(...)
 					end
 	
-					onenter._fn = function(...)
-						coroutine.resume(coroutine.create(function()
-							repeat task.wait() until getmodel()
-							task.wait(0.1) -- sometimes it doesn't always work immediately, so this is just to be safe
-							if isdriver() and iscarlocked() and vmodtoggle then
-								togglelock()
-							end
-						end))
-						return enterfn(...)
-					end
-	
-					notify("Vehicle auto-lock/unlock enabled!")
 				end
 				vmodtoggle = not vmodtoggle
 			end)
 	
-			local tazermod = false
+			onetimefunc(mainframe.Tazermod.Activated, function()
+				local function hasval(t, child)
+					local success, prop = pcall(function()
+						return t[child]
+					end)
+					return success and prop ~= nil
+				end
 	
-			mainframe.Tazermod.MouseButton1Click:connect(function()
-				if not tazermod then
-					tazermod = true
-					local function hasval(t, child)
-						local success, prop = pcall(function()
-							return t[child]
-						end)
-						return success and prop ~= nil
-					end
-	
-					for i,v in pairs(getreg()) do
-						if type(v) == "table" then
-							if isreadonly and setreadonly and isreadonly(v) then
-								setreadonly(v, false)
-							end
-							if hasval(v, "ReloadTime") and hasval(v, "ReloadTimeHit") and type(v.ReloadTime) == "number" and type(v.ReloadTimeHit) == "number" then
-								v.ReloadTime = 0
-								v.ReloadTimeHit = 0
-							end
+				for i,v in pairs(getreg()) do
+					if type(v) == "table" then
+						if isreadonly and setreadonly and isreadonly(v) then
+							setreadonly(v, false)
+						end
+						if hasval(v, "ReloadTime") and hasval(v, "ReloadTimeHit") and type(v.ReloadTime) == "number" and type(v.ReloadTimeHit) == "number" then
+							v.ReloadTime = 0
+							v.ReloadTimeHit = 0
 						end
 					end
-					notify("Funni tazer")
 				end
 			end)
 	
@@ -1527,7 +1486,7 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			local ropepart = nil
 			local ropenotif = false
 	
-			mainframe.ropefollow.MouseButton1Click:connect(function()
+			mainframe.ropefollow.Activated:connect(function()
 				ropefollow = not ropefollow
 				if not ropefollow then
 					ropepart = nil
@@ -1551,14 +1510,14 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						if ropepart.Parent == workspace.Vehicles then
 	
 							if ropepull.AttachedTo.Value then
-								modelrope.Length = math.max(modelrope.Length-(task.wait()*100),30)
+								modelrope.Length = math.max(modelrope.Length-(task.wait()*100),50)
 							else
 								modelrope.Length = (model.Engine.Position - ropepart.Engine.Position).Magnitude
 								ropepull.CFrame = ropepart.Engine.CFrame
 							end
 						else
 							if ropepull.AttachedTo.Value then
-								modelrope.Length = math.max(modelrope.Length-(task.wait()*100),30)
+								modelrope.Length = math.max(modelrope.Length-(task.wait()*100),50)
 							else
 								modelrope.Length = (model.Engine.Position - ropepart.MeshPart.Position).Magnitude
 								ropepull.CFrame = ropepart.MeshPart.CFrame
@@ -1632,7 +1591,7 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					clone.active.TextColor3 = Color3.fromRGB(85,255,255)
 				end
 	
-				clone.active.MouseButton1Click:connect(function()
+				clone.active.Activated:connect(function()
 					loadout.active = not loadout.active
 				end)
 	
@@ -1678,7 +1637,7 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						end
 					end)
 	
-					itemclone.x.MouseButton1Click:connect(function()
+					itemclone.x.Activated:connect(function()
 						itemclone:Destroy()
 						updateloadout()
 					end)
@@ -1710,11 +1669,11 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					additem(i, tostring(v))
 				end)
 	
-				clone.additem.MouseButton1Click:connect(function()
+				clone.additem.Activated:connect(function()
 					additem()
 				end)
 	
-				clone.Title.delloadout.MouseButton1Click:connect(function()
+				clone.Title.delloadout.Activated:connect(function()
 	
 					for i,v in pairs(loadouts) do
 						if i == clone.Title.Text then
@@ -1731,7 +1690,7 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				addloadout(i)
 			end
 	
-			aframe.addloadout.MouseButton1Click:connect(function()
+			aframe.addloadout.Activated:connect(function()
 				local lname = aframe.loadoutname.Text
 				local namematch = false
 	
@@ -1747,7 +1706,7 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 			end)
 	
-			aframe.hide.MouseButton1Click:connect(function()
+			aframe.hide.Activated:connect(function()
 				aframe.Visible = false
 			end)
 	
@@ -1781,7 +1740,7 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 			end)
 	
-			mainframe.Hotbarautosort.MouseButton1Click:connect(function()
+			mainframe.Hotbarautosort.Activated:connect(function()
 				aframe.Visible = true
 			end)
 	
@@ -1796,7 +1755,7 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 			end)
 	
-			mainframe.glidekey.MouseButton1Click:connect(function()
+			mainframe.glidekey.Activated:connect(function()
 				gtoglide = not gtoglide
 			end)
 	
@@ -1808,11 +1767,11 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 			end
 	
-			mainframe.replaceparachute.MouseButton1Click:connect(function()
-				replacechute = true
+			mainframe.replaceparachute.Activated, function()
+				replacechute = not replacechute
 			end)
 			
-			mainframe.DisableNPCGuns.MouseButton1Click:connect(function()
+			mainframe.DisableNPCGuns.Activated:connect(function()
 				local module = require(rstorage.Game.Item.Gun)
 				local shoot = module.Shoot
 	
@@ -1840,4 +1799,4 @@ function SCRIPT_VNQN66_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_VNQN66_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_EAXW75_FAKESCRIPT))
