@@ -648,7 +648,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_EAXW75_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_EMOZ73_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -1404,7 +1404,7 @@ function SCRIPT_EAXW75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					end
 				end)
 				if not success then
-					mainframe.AAAAA.Text = "casino building isn't loaded in :("
+					mainframe.AAAAA.Text = "Casino building isn't loaded in :("
 				end
 			end)
 			local respawnconfirm = false
@@ -1767,7 +1767,7 @@ function SCRIPT_EAXW75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 			end
 	
-			mainframe.replaceparachute.Activated, function()
+			onetimefunc(mainframe.replaceparachute.Activated, function()
 				replacechute = not replacechute
 			end)
 			
@@ -1799,4 +1799,4 @@ function SCRIPT_EAXW75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_EAXW75_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_EMOZ73_FAKESCRIPT))
