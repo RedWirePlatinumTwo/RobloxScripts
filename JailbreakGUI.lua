@@ -648,7 +648,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_PPHG69_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_XCNT74_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -668,7 +668,8 @@ function SCRIPT_PPHG69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	mainframe.removeragdoll,
 	mainframe.aimbot,
 	mainframe.infiniteyeet,
-	mainframe.DisableNPCGuns
+	mainframe.DisableNPCGuns,
+	mainframe.holdebypass
 	}
 	local togglebuttons = {
 	mainframe.gunshoptp,
@@ -676,7 +677,6 @@ function SCRIPT_PPHG69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	mainframe.glidekey,
 	mainframe.Airdrop,
 	mainframe.ropefollow,
-	mainframe.holdebypass,
 	mainframe.replaceparachute
 	}
 	
@@ -854,8 +854,8 @@ function SCRIPT_PPHG69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			runservice.RenderStepped:connect(function()
 	
 				for i,a in pairs(moduleui.CircleAction.Specs) do
-					if a.Duration ~= false and a.Name ~= "Rob" and a.Name ~= "Open Crate" then
-						a.Timed = not HoldEBypass;
+					if a.Duration ~= false and HoldEBypass and a.Name ~= "Rob" and a.Name ~= "Open Crate" then
+						a.Timed = false;
 					end
 				end
 	
@@ -1034,8 +1034,8 @@ function SCRIPT_PPHG69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 			end)
 	
-			mainframe.holdebypass.Activated:connect(function()
-				HoldEBypass = not HoldEBypass
+			onetimefunc(mainframe.holdebypass.Activated, function()
+				HoldEBypass = true
 			end)
 			
 			onetimefunc(holdebypass.Activated, function()
@@ -1759,8 +1759,11 @@ function SCRIPT_PPHG69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				gtoglide = not gtoglide
 			end)
 	
+			local h = {}
+			h.replacechute = false
+			
 			para.Parachute = function(...)
-				if replacechute then
+				if h.replacechute then
 					return para.Glider(...)
 				else
 					return parachute(...)
@@ -1768,7 +1771,7 @@ function SCRIPT_PPHG69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end
 	
 			onetimefunc(mainframe.replaceparachute.Activated, function()
-				replacechute = not replacechute
+				h.replacechute = not h.replacechute
 			end)
 			
 			mainframe.DisableNPCGuns.Activated:connect(function()
@@ -1799,4 +1802,4 @@ function SCRIPT_PPHG69_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_PPHG69_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_XCNT74_FAKESCRIPT))
