@@ -139,8 +139,8 @@ getgenv().TableToString = function(Table, TableName, simplify, IsInternalTable)
 			end
 			
 			local part1 = ""
-			local part1formatted = Format(i,v,simplify,true)
-			local part2 = Format(v,i,simplify,true)
+			local part1formatted, failed1 = Format(i,v,simplify,true)
+			local part2, failed2 = Format(v,i,simplify,true)
 			
 			if part2 == "" then
 				part2 = isrecursivetable(v)
@@ -162,7 +162,17 @@ getgenv().TableToString = function(Table, TableName, simplify, IsInternalTable)
 			if part1 == "\n"..name.."[]" then
 				part1 = "\n"..name.."["..isrecursivetable(i).."]"
 			end
-			return part1.." = "..part2
+			local failstring = ""
+			if failed1 or failed2 then
+				failstring = " --failed to convert types:"
+				if failed1 then
+					failstring = failstring.." "..typeof(i)
+				end
+				if failed2 then
+					failstring = failstring.." "..typeof(v)
+				end
+			end
+			return part1.." = "..part2..failstring
 			
 		end
 		
@@ -179,6 +189,7 @@ end
 getgenv().tabletostring = TableToString
 
 getgenv().Format = function(var, tname, simplify, IsInternalTable)
+	local failedconversion = false
 	local st = ""
 	local supportedtypes = {"number", "boolean", "string", "EnumItem", "table", "Instance", "Vector2", "Vector3", "CFrame", "Color3", "BrickColor","Enum","Enums","UDim2","NumberRange"}
         if typeof(var) == "EnumItem" or type(var) == "boolean" then
@@ -208,7 +219,10 @@ getgenv().Format = function(var, tname, simplify, IsInternalTable)
 		elseif typeof(var) == "Enums" then
 		st = "Enum"
 		end
-	return st
+		if not table.find(supportedtypes, type(var)) and not table.find(supportedtypes, typeof(var)) then
+			failedconversion = true
+		end
+	return st, failedconversion
 end
 
 getgenv().format = Format
