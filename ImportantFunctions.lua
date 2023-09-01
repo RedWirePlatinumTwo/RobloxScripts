@@ -39,7 +39,7 @@ local reformatstring = function(s)
 	return restring
 end
 
-getgenv().TableToString = function(Table, TableName, simplify, IsInternalTable)
+getgenv().TableToString = function(Table, TableName, simplify, usefailstring, IsInternalTable)
 	local s = ""
 
 	local function setname(t, name)
@@ -139,8 +139,11 @@ getgenv().TableToString = function(Table, TableName, simplify, IsInternalTable)
 			end
 			
 			local part1 = ""
-			local part1formatted, failed1 = Format(i,v,simplify,true)
-			local part2, failed2 = Format(v,i,simplify,true)
+			local ttsargs = {}
+			ttsargs.simplify = simplify
+			ttsargs.usefailstring = usefailstring
+			local part1formatted, failed1 = Format(i,v,ttsargs,true)
+			local part2, failed2 = Format(v,i,ttsargs,true)
 			
 			if part2 == "" then
 				part2 = isrecursivetable(v)
@@ -163,13 +166,19 @@ getgenv().TableToString = function(Table, TableName, simplify, IsInternalTable)
 				part1 = "\n"..name.."["..isrecursivetable(i).."]"
 			end
 			local failstring = ""
-			if failed1 or failed2 then
-				failstring = " --failed to convert types:"
-				if failed1 then
-					failstring = failstring.." "..typeof(i)
-				end
-				if failed2 then
-					failstring = failstring.." "..typeof(v)
+			local failignore = {"function", "RBXScriptConnection", "RBXScriptSignal"}
+			if usefailstring then
+				if failed1 or failed2 then
+					failstring = " --failed to convert types:"
+					if failed1 and not table.find(failignore, typeof(i)) then
+						failstring = failstring.." "..typeof(i)
+					end
+					if failed2 and not table.find(failignore, typeof(v)) then
+						failstring = failstring.." "..typeof(v)
+					end
+					if failstring == " --failed to convert types:" then
+						failstring = ""
+					end
 				end
 			end
 			return part1.." = "..part2..failstring
@@ -188,7 +197,7 @@ end
 
 getgenv().tabletostring = TableToString
 
-getgenv().Format = function(var, tname, simplify, IsInternalTable)
+getgenv().Format = function(var, tname, ttsargs, IsInternalTable)
 	local failedconversion = false
 	local st = ""
 	local supportedtypes = {"number", "boolean", "string", "EnumItem", "table", "Instance", "Vector2", "Vector3", "CFrame", "Color3", "BrickColor","Enum","Enums","UDim2","NumberRange"}
@@ -206,7 +215,7 @@ getgenv().Format = function(var, tname, simplify, IsInternalTable)
             st = "'"..reformatstring(var).."'"
         elseif type(var) == "table" then
             if not table.find(catchrepeats, var) then
-				st = TableToString(var, tname, simplify, IsInternalTable)
+				st = TableToString(var, tname, ttsargs.simplify, ttsargs.usefailstring, IsInternalTable)
 			end
 		elseif typeof(var) == "Instance" then
 			st = GetFullName(var)
