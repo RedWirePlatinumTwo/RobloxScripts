@@ -1507,14 +1507,14 @@ function SCRIPT_NRMW67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						if ropepart.Parent == workspace.Vehicles then
 	
 							if ropepull.AttachedTo.Value then
-								modelrope.Length = math.max(modelrope.Length-(task.wait()*100),50)
+								modelrope.Length = math.max(modelrope.Length-(task.wait()*100),30)
 							else
 								modelrope.Length = (model.Engine.Position - ropepart.Engine.Position).Magnitude
 								ropepull.CFrame = ropepart.Engine.CFrame
 							end
 						else
 							if ropepull.AttachedTo.Value then
-								modelrope.Length = math.max(modelrope.Length-(task.wait()*100),50)
+								modelrope.Length = math.max(modelrope.Length-(task.wait()*100),30)
 							else
 								modelrope.Length = (model.Engine.Position - ropepart.MeshPart.Position).Magnitude
 								ropepull.CFrame = ropepart.MeshPart.CFrame
