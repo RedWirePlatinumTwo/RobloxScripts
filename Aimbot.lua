@@ -1195,7 +1195,7 @@ X_3.TextSize = 28
 X_3.TextStrokeTransparency = 0
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_WCKH83_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_BIIQ76_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1461,6 +1461,8 @@ function SCRIPT_WCKH83_FAKESCRIPT() -- Aimbot.Scripts
 				end
 			end
 		end
+		
+		getgenv().RedsAimbotStats = GlobalStats
 	
 		GameStats = GlobalStats[game.PlaceId]
 		Keybinds = GlobalStats.Keybinds
@@ -2142,4 +2144,4 @@ function SCRIPT_WCKH83_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_WCKH83_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_BIIQ76_FAKESCRIPT))
