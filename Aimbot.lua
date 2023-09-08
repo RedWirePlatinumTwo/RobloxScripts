@@ -1195,7 +1195,7 @@ X_3.TextSize = 28
 X_3.TextStrokeTransparency = 0
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_BIIQ76_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_MHMU83_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1859,7 +1859,14 @@ function SCRIPT_BIIQ76_FAKESCRIPT() -- Aimbot.Scripts
 		                table.insert(npcs, v.Parent)
 		            end
 	        end
-	    end)
+		end)
+		
+		workspace.DescendantRemoving:connect(function(v)
+			local npcfind = table.find(npcs, v)
+			if npcfind then
+				table.remove(npcs, npcfind)
+			end
+		end)
 	
 	    local function gettargetpart(chr)
 	
@@ -1988,7 +1995,7 @@ function SCRIPT_BIIQ76_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","Removed wall check because it sucks and is the reason your game lags a bit on execution.")
+		sendnotif("Aimbot Update","NPCs will no longer be targetable if deleted w/o dying.")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
@@ -2144,4 +2151,4 @@ function SCRIPT_BIIQ76_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_BIIQ76_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_MHMU83_FAKESCRIPT))
