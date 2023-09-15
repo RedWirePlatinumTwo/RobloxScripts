@@ -197,7 +197,7 @@ getgenv().TableToString = function(Table, TableName, simplify, usefailstring, Is
 			s = s.."\n"..stringmethod(i,v)
 		end
 		if not IsInternalTable then
-			s = s.."\nreturn "..name
+			s = s.."\n\nreturn "..name
 		end
 		return s
 end
