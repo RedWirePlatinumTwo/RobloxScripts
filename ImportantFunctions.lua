@@ -185,7 +185,15 @@ getgenv().TableToString = function(Table, TableName, simplify, usefailstring, Is
 			
 		end
 		
+		local extratables = {}
 		for i,v in pairs(Table) do
+			if type(v) ~= "table" then
+				s = s..stringmethod(i,v)
+			else
+				extratables[i] = v
+			end
+		end
+		for i,v in pairs(extratables) do
 			s = s..stringmethod(i,v)
 		end
 		s = s.."\n"
