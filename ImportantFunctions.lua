@@ -194,9 +194,8 @@ getgenv().TableToString = function(Table, TableName, simplify, usefailstring, Is
 			end
 		end
 		for i,v in pairs(extratables) do
-			s = s..stringmethod(i,v)
+			s = s.."\n"..stringmethod(i,v)
 		end
-		s = s.."\n"
 		if not IsInternalTable then
 			s = s.."\nreturn "..name
 		end
