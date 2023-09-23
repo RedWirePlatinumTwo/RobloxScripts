@@ -1195,7 +1195,7 @@ X_3.TextSize = 28
 X_3.TextStrokeTransparency = 0
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_MHMU83_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_SYFK83_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1209,9 +1209,15 @@ function SCRIPT_MHMU83_FAKESCRIPT() -- Aimbot.Scripts
 	local globals = gui.GlobalSettingsUI
 	local teamui = gui.TeamUI
 	local camera = workspace.CurrentCamera
-	
+	local tcservice = game:GetService("TextChatService")
+	makemsg = function(txt)
+	end
 	local function sendnotif(title, text)
-		game.StarterGui:SetCore("ChatMakeSystemMessage",({["Text"] = "["..title.."]: "..text, ["Color"] = MainFrame.Title.TextColor3}))
+		if tcservice.ChatVersion == Enum.ChatVersion.LegacyChatService then
+			game.StarterGui:SetCore("ChatMakeSystemMessage",({["Text"] = "["..title.."]: "..text, ["Color"] = MainFrame.Title.TextColor3}))
+		else
+			tcservice.TextChannels.RBXGeneral:DisplaySystemMessage("["..title.."]: "..text)
+		end
 	end
 	
 	if not _G.RedsAimbot then
@@ -1995,7 +2001,7 @@ function SCRIPT_MHMU83_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","NPCs will no longer be targetable if deleted w/o dying.")
+		sendnotif("Aimbot Update","Updated notif to show up in the new chat GUI (havent done colored text yet)")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
@@ -2151,4 +2157,4 @@ function SCRIPT_MHMU83_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_MHMU83_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_SYFK83_FAKESCRIPT))
