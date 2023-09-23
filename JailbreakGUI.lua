@@ -648,7 +648,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_NRMW67_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_ARQM83_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -730,10 +730,16 @@ function SCRIPT_NRMW67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 	if game.PlaceId == 606849621 then
 		local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
-	
+		local tcservice = game:GetService("TextChatService")
+		
 		local function notify(text)
-			game.StarterGui:SetCore("ChatMakeSystemMessage",({["Text"] = "[Red's JB GUI] "..text, ["Color"] = mainframe.Parent.BorderColor3}))
+			if tcservice.ChatVersion == Enum.ChatVersion.LegacyChatService then
+				game.StarterGui:SetCore("ChatMakeSystemMessage",({["Text"] = "[Red's JB GUI] "..text, ["Color"] = mainframe.Parent.BorderColor3}))
+			else
+				tcservice.TextChannels.RBXGeneral:DisplaySystemMessage("[Red's JB GUI] "..text)
+			end
 		end
+		
 		if not _G.RedsJBGUI then
 			_G.RedsJBGUI = true
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -784,7 +790,7 @@ function SCRIPT_NRMW67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Replace parachute is now toggleable, vehicle lock mod now *only* auto-locks your car, and casino code-getting is now automatic.")
+			notify("Notif text now appears in the new chat gui.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1798,4 +1804,4 @@ function SCRIPT_NRMW67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_NRMW67_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_ARQM83_FAKESCRIPT))
