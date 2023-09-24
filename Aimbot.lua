@@ -1195,7 +1195,7 @@ X_3.TextSize = 28
 X_3.TextStrokeTransparency = 0
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_SYFK83_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_QTHD77_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1213,10 +1213,11 @@ function SCRIPT_SYFK83_FAKESCRIPT() -- Aimbot.Scripts
 	makemsg = function(txt)
 	end
 	local function sendnotif(title, text)
+		text = "<font color = '#"..MainFrame.BorderColor3:ToHex().."'>["..title.."]: "..text.."</font>"
 		if tcservice.ChatVersion == Enum.ChatVersion.LegacyChatService then
-			game.StarterGui:SetCore("ChatMakeSystemMessage",({["Text"] = "["..title.."]: "..text, ["Color"] = MainFrame.Title.TextColor3}))
+			game.StarterGui:SetCore("ChatMakeSystemMessage",({["Text"] = text}))
 		else
-			tcservice.TextChannels.RBXGeneral:DisplaySystemMessage("["..title.."]: "..text)
+			tcservice.TextChannels.RBXGeneral:DisplaySystemMessage(text)
 		end
 	end
 	
@@ -2001,7 +2002,7 @@ function SCRIPT_SYFK83_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","Updated notif to show up in the new chat GUI (havent done colored text yet)")
+		sendnotif("Aimbot Update","Updated notif to show up in the new chat GUI (now with color)")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
@@ -2157,4 +2158,4 @@ function SCRIPT_SYFK83_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_SYFK83_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_QTHD77_FAKESCRIPT))
