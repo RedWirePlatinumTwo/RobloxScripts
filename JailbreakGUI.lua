@@ -648,7 +648,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_ARQM83_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_OSIK73_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -733,10 +733,11 @@ function SCRIPT_ARQM83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		local tcservice = game:GetService("TextChatService")
 		
 		local function notify(text)
+			text = "<font color= '#"..mainframe.BorderColor3:ToHex().."'>[Red's JB GUI] "..text.."</font>"
 			if tcservice.ChatVersion == Enum.ChatVersion.LegacyChatService then
-				game.StarterGui:SetCore("ChatMakeSystemMessage",({["Text"] = "[Red's JB GUI] "..text, ["Color"] = mainframe.Parent.BorderColor3}))
+				game.StarterGui:SetCore("ChatMakeSystemMessage",({["Text"] = text}))
 			else
-				tcservice.TextChannels.RBXGeneral:DisplaySystemMessage("[Red's JB GUI] "..text)
+				tcservice.TextChannels.RBXGeneral:DisplaySystemMessage(text)
 			end
 		end
 		
@@ -790,7 +791,7 @@ function SCRIPT_ARQM83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Notif text now appears in the new chat gui.")
+			notify("Notif text now appears in the new chat gui (and is colored once again).")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1804,4 +1805,4 @@ function SCRIPT_ARQM83_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_ARQM83_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_OSIK73_FAKESCRIPT))
