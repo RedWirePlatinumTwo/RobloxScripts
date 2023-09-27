@@ -33,6 +33,7 @@ local _1speed = Instance.new("TextButton")
 local _1placeholder = Instance.new("TextButton")
 local togglebox = Instance.new("TextLabel")
 local DisableNPCGuns = Instance.new("TextButton")
+local aimpredictor = Instance.new("TextButton")
 local AutosortFrame = Instance.new("Frame")
 local ScrollingFrame_2 = Instance.new("ScrollingFrame")
 local UIListLayout = Instance.new("UIListLayout")
@@ -81,6 +82,7 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0, 0, 0.176471)
 ScrollingFrame.BorderColor3 = Color3.new(0, 0.666667, 1)
 ScrollingFrame.Position = UDim2.new(0.0319970697, 0, 0.171266183, 0)
 ScrollingFrame.Size = UDim2.new(0, 376, 0, 235)
+ScrollingFrame.CanvasPosition = Vector2.new(0, 300)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 replaceparachute.Name = "replaceparachute"
@@ -461,6 +463,20 @@ DisableNPCGuns.TextSize = 20
 DisableNPCGuns.TextWrapped = true
 DisableNPCGuns.TextXAlignment = Enum.TextXAlignment.Left
 
+aimpredictor.Name = "aimpredictor"
+aimpredictor.Parent = ScrollingFrame
+aimpredictor.BackgroundColor3 = Color3.new(0, 0, 0.27451)
+aimpredictor.BorderColor3 = Color3.new(0, 0.666667, 1)
+aimpredictor.Position = UDim2.new(0, 0, 0.267379671, 0)
+aimpredictor.Size = UDim2.new(0, 110, 0, 50)
+aimpredictor.Visible = false
+aimpredictor.Font = Enum.Font.Ubuntu
+aimpredictor.Text = "Aim Predictor"
+aimpredictor.TextColor3 = Color3.new(0.333333, 0.666667, 1)
+aimpredictor.TextSize = 20
+aimpredictor.TextWrapped = true
+aimpredictor.TextXAlignment = Enum.TextXAlignment.Left
+
 AutosortFrame.Name = "AutosortFrame"
 AutosortFrame.Parent = JailbreakGUI
 AutosortFrame.BackgroundColor3 = Color3.new(0, 0, 0.176471)
@@ -648,7 +664,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_OSIK73_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_DRSB74_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -659,25 +675,26 @@ function SCRIPT_OSIK73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	local rstorage = game.ReplicatedStorage
 	local runservice = game["Run Service"]
 	local oneclickbuttons = {
-	mainframe.RobberyNotifier,
-	mainframe.Tazermod,
-	mainframe.delradio,
-	mainframe.forcedaytime,
-	mainframe.keybypass,
-	mainframe.modguns,
-	mainframe.removeragdoll,
-	mainframe.aimbot,
-	mainframe.infiniteyeet,
-	mainframe.DisableNPCGuns,
-	mainframe.holdebypass
+		mainframe.RobberyNotifier,
+		mainframe.Tazermod,
+		mainframe.delradio,
+		mainframe.forcedaytime,
+		mainframe.keybypass,
+		mainframe.modguns,
+		mainframe.removeragdoll,
+		mainframe.aimbot,
+		mainframe.infiniteyeet,
+		mainframe.DisableNPCGuns,
+		mainframe.holdebypass
 	}
 	local togglebuttons = {
-	mainframe.gunshoptp,
-	mainframe.lockonexit,
-	mainframe.glidekey,
-	mainframe.Airdrop,
-	mainframe.ropefollow,
-	mainframe.replaceparachute
+		mainframe.gunshoptp,
+		mainframe.lockonexit,
+		mainframe.glidekey,
+		mainframe.Airdrop,
+		mainframe.ropefollow,
+		mainframe.replaceparachute,
+		mainframe.aimpredictor
 	}
 	
 	local function onetimefunc(signal, func)
@@ -791,7 +808,7 @@ function SCRIPT_OSIK73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Notif text now appears in the new chat gui (and is colored once again).")
+			notify("Added Aim Predictor! Shows when executing the aimbot.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -881,9 +898,43 @@ function SCRIPT_OSIK73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					workspace.Gravity = 196
 				end
 			end)
-	
+			
+			local aimpredict = false
 			onetimefunc(mainframe.aimbot.Activated, function()
 				loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/Aimbot.lua"))()
+				
+				runservice.RenderStepped:connect(function()
+					local misc = RedsAimbotMisc
+					if misc.TargetedCharacter and aimpredict then
+						local tool
+						local speed
+						for i,v in pairs(lplr.Folder:GetChildren()) do
+							local attribute = v:GetAttribute("InventoryItemEquipped")
+							if attribute == true then
+								tool = v.Name
+								break
+							end
+						end
+						if tool then
+							speed = require(rstorage.Game.ItemConfig[tool]).BulletSpeed
+						else
+							vel = Vector3.new()
+						end
+						if speed then
+							local distance = (lplr.Character.Humanoid.RootPart.Position - misc.TargetedCharacter.Humanoid.RootPart.Position).Magnitude
+							misc.aimoffset = (misc.TargetedCharacter.Humanoid.RootPart.Velocity/speed)*distance
+						else
+							misc.aimoffset = Vector3.new()
+						end
+					else
+						misc.aimoffset = Vector3.new()
+					end
+				end)
+				
+				mainframe.aimpredictor.Visible = true
+				mainframe.aimpredictor.Activated:connect(function()
+					aimpredict = not aimpredict
+				end)
 			end)
 	
 			props = {}
@@ -1805,4 +1856,4 @@ function SCRIPT_OSIK73_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_OSIK73_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_DRSB74_FAKESCRIPT))
