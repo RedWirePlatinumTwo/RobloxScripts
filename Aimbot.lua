@@ -1195,7 +1195,7 @@ X_3.TextSize = 28
 X_3.TextStrokeTransparency = 0
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_SIFT83_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_PNTY66_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1900,7 +1900,7 @@ function SCRIPT_SIFT83_FAKESCRIPT() -- Aimbot.Scripts
 					if misc.IsAimbotOn then
 						if GlobalStats.RightClickAim and RightClick or not GlobalStats.RightClickAim then
 							if GlobalStats.AimMethod == "Camera" then
-								camera.CFrame = CFrame.new(camera.CFrame.Position, partpos)
+								camera.CFrame = CFrame.new(camera.CFrame.Position, partpos + misc.aimoffset)
 								game.UserInputService.MouseDeltaSensitivity = 0
 							else
 								mousemoverel(x,y)
@@ -2160,4 +2160,4 @@ function SCRIPT_SIFT83_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_SIFT83_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_PNTY66_FAKESCRIPT))
