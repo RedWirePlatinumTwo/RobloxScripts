@@ -1195,7 +1195,7 @@ X_3.TextSize = 28
 X_3.TextStrokeTransparency = 0
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_QTHD77_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_SIFT83_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1397,6 +1397,7 @@ function SCRIPT_QTHD77_FAKESCRIPT() -- Aimbot.Scripts
 		local misc = {}
 		misc.IsAimbotOn = false
 		misc.TargetedCharacter = nil
+		misc.aimoffset = Vector3.new()
 		local GlobalStats
 		local GameStats
 		local Keybinds
@@ -1470,6 +1471,7 @@ function SCRIPT_QTHD77_FAKESCRIPT() -- Aimbot.Scripts
 		end
 		
 		getgenv().RedsAimbotStats = GlobalStats
+		getgenv().RedsAimbotMisc = misc
 	
 		GameStats = GlobalStats[game.PlaceId]
 		Keybinds = GlobalStats.Keybinds
@@ -1892,7 +1894,7 @@ function SCRIPT_QTHD77_FAKESCRIPT() -- Aimbot.Scripts
 			if misc.TargetedCharacter then
 				local part = gettargetpart(misc.TargetedCharacter)
 				local partpos = part.Position
-				local v, onscreen = camera:WorldToScreenPoint(partpos)
+				local v, onscreen = camera:WorldToScreenPoint(partpos + misc.aimoffset)
 				local x,y = (v.X - m.X), (v.Y - m.Y)
 				if onscreen then
 					if misc.IsAimbotOn then
@@ -2158,4 +2160,4 @@ function SCRIPT_QTHD77_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_QTHD77_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_SIFT83_FAKESCRIPT))
