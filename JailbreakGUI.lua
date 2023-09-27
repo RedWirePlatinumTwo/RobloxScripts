@@ -82,7 +82,6 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0, 0, 0.176471)
 ScrollingFrame.BorderColor3 = Color3.new(0, 0.666667, 1)
 ScrollingFrame.Position = UDim2.new(0.0319970697, 0, 0.171266183, 0)
 ScrollingFrame.Size = UDim2.new(0, 376, 0, 235)
-ScrollingFrame.CanvasPosition = Vector2.new(0, 300)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 replaceparachute.Name = "replaceparachute"
@@ -664,7 +663,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_DRSB74_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_ETWL65_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -903,6 +902,7 @@ function SCRIPT_DRSB74_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			onetimefunc(mainframe.aimbot.Activated, function()
 				loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/Aimbot.lua"))()
 				
+				repeat task.wait() until RedsAimbotMisc
 				runservice.RenderStepped:connect(function()
 					local misc = RedsAimbotMisc
 					if misc.TargetedCharacter and aimpredict then
@@ -918,7 +918,7 @@ function SCRIPT_DRSB74_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						if tool then
 							speed = require(rstorage.Game.ItemConfig[tool]).BulletSpeed
 						else
-							vel = Vector3.new()
+							misc.aimoffset = Vector3.new()
 						end
 						if speed then
 							local distance = (lplr.Character.Humanoid.RootPart.Position - misc.TargetedCharacter.Humanoid.RootPart.Position).Magnitude
@@ -1856,4 +1856,4 @@ function SCRIPT_DRSB74_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_DRSB74_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_ETWL65_FAKESCRIPT))
