@@ -34,6 +34,7 @@ local _1placeholder = Instance.new("TextButton")
 local togglebox = Instance.new("TextLabel")
 local DisableNPCGuns = Instance.new("TextButton")
 local aimpredictor = Instance.new("TextButton")
+local aimtriggerbot = Instance.new("TextButton")
 local AutosortFrame = Instance.new("Frame")
 local ScrollingFrame_2 = Instance.new("ScrollingFrame")
 local UIListLayout = Instance.new("UIListLayout")
@@ -82,6 +83,7 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0, 0, 0.176471)
 ScrollingFrame.BorderColor3 = Color3.new(0, 0.666667, 1)
 ScrollingFrame.Position = UDim2.new(0.0319970697, 0, 0.171266183, 0)
 ScrollingFrame.Size = UDim2.new(0, 376, 0, 235)
+ScrollingFrame.CanvasPosition = Vector2.new(0, 300)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 replaceparachute.Name = "replaceparachute"
@@ -476,6 +478,20 @@ aimpredictor.TextSize = 20
 aimpredictor.TextWrapped = true
 aimpredictor.TextXAlignment = Enum.TextXAlignment.Left
 
+aimtriggerbot.Name = "aimtriggerbot"
+aimtriggerbot.Parent = ScrollingFrame
+aimtriggerbot.BackgroundColor3 = Color3.new(0, 0, 0.27451)
+aimtriggerbot.BorderColor3 = Color3.new(0, 0.666667, 1)
+aimtriggerbot.Position = UDim2.new(0, 0, 0.267379671, 0)
+aimtriggerbot.Size = UDim2.new(0, 110, 0, 50)
+aimtriggerbot.Visible = false
+aimtriggerbot.Font = Enum.Font.Ubuntu
+aimtriggerbot.Text = "Triggerbot"
+aimtriggerbot.TextColor3 = Color3.new(0.333333, 0.666667, 1)
+aimtriggerbot.TextSize = 20
+aimtriggerbot.TextWrapped = true
+aimtriggerbot.TextXAlignment = Enum.TextXAlignment.Left
+
 AutosortFrame.Name = "AutosortFrame"
 AutosortFrame.Parent = JailbreakGUI
 AutosortFrame.BackgroundColor3 = Color3.new(0, 0, 0.176471)
@@ -663,7 +679,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_ETWL65_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_DGWV65_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -693,7 +709,8 @@ function SCRIPT_ETWL65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		mainframe.Airdrop,
 		mainframe.ropefollow,
 		mainframe.replaceparachute,
-		mainframe.aimpredictor
+		mainframe.aimpredictor,
+		mainframe.aimtriggerbot
 	}
 	
 	local function onetimefunc(signal, func)
@@ -807,7 +824,7 @@ function SCRIPT_ETWL65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Added Aim Predictor! Shows when executing the aimbot.")
+			notify("Added Aim Predictor and Triggerbot! Shows when executing the aimbot.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -899,15 +916,18 @@ function SCRIPT_ETWL65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end)
 			
 			local aimpredict = false
+			local triggerbot = false
+			local releaseonuntarget = false
 			onetimefunc(mainframe.aimbot.Activated, function()
 				loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/Aimbot.lua"))()
 				
 				repeat task.wait() until RedsAimbotMisc
 				runservice.RenderStepped:connect(function()
 					local misc = RedsAimbotMisc
-					if misc.TargetedCharacter and aimpredict then
+					if misc.TargetedCharacter then
 						local tool
 						local speed
+						local fireauto
 						for i,v in pairs(lplr.Folder:GetChildren()) do
 							local attribute = v:GetAttribute("InventoryItemEquipped")
 							if attribute == true then
@@ -916,24 +936,45 @@ function SCRIPT_ETWL65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 							end
 						end
 						if tool then
-							speed = require(rstorage.Game.ItemConfig[tool]).BulletSpeed
+							if rstorage.Game.ItemConfig:FindFirstChild(tool) then
+								local gun = require(rstorage.Game.ItemConfig[tool])
+								speed = gun.BulletSpeed
+								fireauto = gun.FireAuto
+							end
 						else
 							misc.aimoffset = Vector3.new()
 						end
-						if speed then
+						if speed and aimpredict then
 							local distance = (lplr.Character.Humanoid.RootPart.Position - misc.TargetedCharacter.Humanoid.RootPart.Position).Magnitude
 							misc.aimoffset = (misc.TargetedCharacter.Humanoid.RootPart.Velocity/speed)*distance
 						else
 							misc.aimoffset = Vector3.new()
 						end
+						if triggerbot then
+							if fireauto then
+								releaseonuntarget = true
+								mouse1press()
+							else
+								mouse1press()
+								mouse1release()
+							end
+						end
 					else
-						misc.aimoffset = Vector3.new()
+						if releaseonuntarget then
+							mouse1release()
+						end
 					end
 				end)
 				
 				mainframe.aimpredictor.Visible = true
+				mainframe.aimtriggerbot.Visible = true
+				
 				mainframe.aimpredictor.Activated:connect(function()
 					aimpredict = not aimpredict
+				end)
+				
+				mainframe.aimtriggerbot.Activated:connect(function()
+					triggerbot = not triggerbot
 				end)
 			end)
 	
@@ -1856,4 +1897,4 @@ function SCRIPT_ETWL65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_ETWL65_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_DGWV65_FAKESCRIPT))
