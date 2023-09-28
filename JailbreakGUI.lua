@@ -962,6 +962,7 @@ function SCRIPT_DGWV65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					else
 						if releaseonuntarget then
 							mouse1release()
+							releaseonuntarget = false
 						end
 					end
 				end)
