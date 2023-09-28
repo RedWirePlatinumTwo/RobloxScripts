@@ -928,6 +928,7 @@ function SCRIPT_DGWV65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						local tool
 						local speed
 						local fireauto
+						local gun
 						for i,v in pairs(lplr.Folder:GetChildren()) do
 							local attribute = v:GetAttribute("InventoryItemEquipped")
 							if attribute == true then
@@ -937,7 +938,7 @@ function SCRIPT_DGWV65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						end
 						if tool then
 							if rstorage.Game.ItemConfig:FindFirstChild(tool) then
-								local gun = require(rstorage.Game.ItemConfig[tool])
+								gun = require(rstorage.Game.ItemConfig[tool])
 								speed = gun.BulletSpeed
 								fireauto = gun.FireAuto
 							end
@@ -951,12 +952,14 @@ function SCRIPT_DGWV65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 							misc.aimoffset = Vector3.new()
 						end
 						if triggerbot then
-							if fireauto then
-								releaseonuntarget = true
-								mouse1press()
-							else
-								mouse1press()
-								mouse1release()
+							if gun then
+								if fireauto then
+									releaseonuntarget = true
+									mouse1press()
+								else
+									mouse1press()
+									mouse1release()
+								end
 							end
 						end
 					else
