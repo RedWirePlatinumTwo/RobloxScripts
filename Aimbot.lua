@@ -1195,7 +1195,7 @@ X_3.TextSize = 28
 X_3.TextStrokeTransparency = 0
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_PNTY66_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_VVWW66_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1244,23 +1244,28 @@ function SCRIPT_PNTY66_FAKESCRIPT() -- Aimbot.Scripts
 		end
 	
 		local Changed = function(part, PropertyName, func)
-		    local current = part[PropertyName]
+			local current = part[PropertyName]
 			local elapsedTime = 0
+			local enabled = true
+			local t = {}
+			t.Stop = function()
+				enabled = false
+			end
+			t.stop = t.Stop
 	
-		    thread(function()
-		        while true do
-		            repeat elapsedTime = elapsedTime + task.wait() until part[PropertyName] ~= current
-	
-					local v,v2 = thread(function()
-		            	return func(part[PropertyName], current, elapsedTime)
-					end)
-	
-					if v2 == "stop" then break end
-					elapsedTime = 0
-		            current = part[PropertyName]
-		    	end
-		    end)
-	
+			thread(function()
+				while enabled do
+					if part[PropertyName] ~= current then
+						thread(function()
+							func(part[PropertyName], current, elapsedTime)
+						end)
+						elapsedTime = 0
+						current = part[PropertyName]
+					end
+					elapsedTime = elapsedTime + task.wait()
+				end
+			end)
+			return t
 		end
 	
 		local tablecount = function(t)
@@ -1270,56 +1275,62 @@ function SCRIPT_PNTY66_FAKESCRIPT() -- Aimbot.Scripts
 		end
 	
 		local TableAdded = function(Table, func)
-		    local count = tablecount(Table)
+			local count = tablecount(Table)
 			local clone = table.clone(Table)
 			local elapsedTime = 0
+			local enabled = true
+			local t = {}
+			t.Stop = function()
+				enabled = false
+			end
+			t.stop = t.Stop
 	
-		    thread(function()
-		        while true do
-		            repeat elapsedTime = elapsedTime + task.wait() until tablecount(Table) ~= count
-					if tablecount(Table) > count then
+			thread(function()
+				while enabled do
+					if tablecount(Table) ~= count then
+						if tablecount(Table) > count then
 	
-			            for i,v in pairs(Table) do
-			                if clone[i] == nil then
-	
-								local v,v2 = thread(function()
-				                    return func(i,v,elapsedTime)
-								end)
-	
-							if v2 == "stop" then break end
-			                end
-			            end
-						elapsedTime = 0
+							for i,v in pairs(Table) do
+								if clone[i] == nil then
+									thread(function()
+										func(i,v,elapsedTime)
+									end)
+								end
+							end
+							elapsedTime = 0
+						end
+						count = tablecount(Table)
+						clone = table.clone(Table)
 					end
-		            count = tablecount(Table)
-					clone = table.clone(Table)
-		   		 end
-		    end)
-	
+					elapsedTime = elapsedTime + task.wait()
+				end
+			end)
+			return t
 		end
 	
 		local reps = {}
 		local TableChanged = function(Table,f,dosubtables,issubtable)
+			local t = {}
+			local funcs = {}
 			if not dosubtables then
 				reps = {}
 			end
 			local function tc(t)
 				for i,v in pairs(t) do
-	
-					Changed(t,i,function(...)
+					local mainchanged = Changed(t,i,function(...)
 						f(t,i,...)
 					end)
-	
+					table.insert(funcs, mainchanged)
 				end
 	
-				TableAdded(t,function(index,value,Time)
+				local added = TableAdded(t,function(index,value,Time)
 					f(t,index,value,nil,Time)
-	
-					Changed(t,index,function(...)
+					local subchanged = Changed(t,index,function(...)
 						f(t,index,...)
 					end)
-	
+					table.insert(funcs, subchanged)
 				end)
+				table.insert(funcs, added)
 			end
 	
 			tc(Table)
@@ -1335,6 +1346,13 @@ function SCRIPT_PNTY66_FAKESCRIPT() -- Aimbot.Scripts
 					end
 				end
 			end
+			t.Stop = function()
+				for i,v in pairs(funcs) do
+					v:Stop()
+				end
+			end
+			t.stop = t.Stop
+			return t
 		end
 	
 		local plrs = game.Players
@@ -2160,4 +2178,4 @@ function SCRIPT_PNTY66_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_PNTY66_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_VVWW66_FAKESCRIPT))
