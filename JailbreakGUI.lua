@@ -83,7 +83,6 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0, 0, 0.176471)
 ScrollingFrame.BorderColor3 = Color3.new(0, 0.666667, 1)
 ScrollingFrame.Position = UDim2.new(0.0319970697, 0, 0.171266183, 0)
 ScrollingFrame.Size = UDim2.new(0, 376, 0, 235)
-ScrollingFrame.CanvasPosition = Vector2.new(0, 300)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 replaceparachute.Name = "replaceparachute"
@@ -679,7 +678,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_DGWV65_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_NGOL90_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -791,21 +790,26 @@ function SCRIPT_DGWV65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			local Changed = function(part, PropertyName, func)
 				local current = part[PropertyName]
 				local elapsedTime = 0
+				local enabled = true
+				local t = {}
+				t.Stop = function()
+					enabled = false
+				end
+				t.stop = t.Stop
 	
 				thread(function()
-					while true do
-						repeat elapsedTime = elapsedTime + task.wait() until part[PropertyName] ~= current
-	
-						local v,v2 = thread(function()
-							return func(part[PropertyName], current, elapsedTime)
-						end)
-	
-						if v2 == "stop" then break end
-						elapsedTime = 0
-						current = part[PropertyName]
+					while enabled do
+						if part[PropertyName] ~= current then
+							thread(function()
+								return func(part[PropertyName], current, elapsedTime)
+							end)
+							elapsedTime = 0
+							current = part[PropertyName]
+						end
+						elapsedTime = elapsedTime + task.wait()
 					end
 				end)
-	
+				return t
 			end
 	
 	
@@ -1901,4 +1905,4 @@ function SCRIPT_DGWV65_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_DGWV65_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_NGOL90_FAKESCRIPT))
