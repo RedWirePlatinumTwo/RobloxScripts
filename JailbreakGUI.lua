@@ -801,7 +801,7 @@ function SCRIPT_NGOL90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					while enabled do
 						if part[PropertyName] ~= current then
 							thread(function()
-								return func(part[PropertyName], current, elapsedTime)
+								func(part[PropertyName], current, elapsedTime)
 							end)
 							elapsedTime = 0
 							current = part[PropertyName]
