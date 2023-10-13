@@ -693,7 +693,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_FGUE67_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_WOSB67_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -1924,6 +1924,12 @@ function SCRIPT_FGUE67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						table.insert(children, c)
 					end
 				end)
+				workspace.ChildRemoved:connect(function(c)
+					local findchild = table.find(children, c)
+					if findchild then
+						table.remove(children, findchild)
+					end
+				end)
 				local shoot = gunmodule.Shoot
 				
 				gunmodule.Shoot = function(...)
@@ -1953,4 +1959,4 @@ function SCRIPT_FGUE67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_FGUE67_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_WOSB67_FAKESCRIPT))
