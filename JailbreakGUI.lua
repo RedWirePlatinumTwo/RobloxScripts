@@ -35,6 +35,7 @@ local togglebox = Instance.new("TextLabel")
 local DisableNPCGuns = Instance.new("TextButton")
 local aimpredictor = Instance.new("TextButton")
 local aimtriggerbot = Instance.new("TextButton")
+local wallhack = Instance.new("TextButton")
 local AutosortFrame = Instance.new("Frame")
 local ScrollingFrame_2 = Instance.new("ScrollingFrame")
 local UIListLayout = Instance.new("UIListLayout")
@@ -83,6 +84,7 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0, 0, 0.176471)
 ScrollingFrame.BorderColor3 = Color3.new(0, 0.666667, 1)
 ScrollingFrame.Position = UDim2.new(0.0319970697, 0, 0.171266183, 0)
 ScrollingFrame.Size = UDim2.new(0, 376, 0, 235)
+ScrollingFrame.CanvasPosition = Vector2.new(0, 720)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 replaceparachute.Name = "replaceparachute"
@@ -491,6 +493,20 @@ aimtriggerbot.TextSize = 20
 aimtriggerbot.TextWrapped = true
 aimtriggerbot.TextXAlignment = Enum.TextXAlignment.Left
 
+wallhack.Name = "wallhack"
+wallhack.Parent = ScrollingFrame
+wallhack.BackgroundColor3 = Color3.new(0, 0, 0.27451)
+wallhack.BorderColor3 = Color3.new(0, 0.666667, 1)
+wallhack.Position = UDim2.new(0, 0, 3.92146373, 0)
+wallhack.Size = UDim2.new(0, 370, 0, 31)
+wallhack.ZIndex = 33
+wallhack.Font = Enum.Font.Ubuntu
+wallhack.Text = "Shoot thru walls"
+wallhack.TextColor3 = Color3.new(0.333333, 0.666667, 1)
+wallhack.TextSize = 20
+wallhack.TextWrapped = true
+wallhack.TextXAlignment = Enum.TextXAlignment.Left
+
 AutosortFrame.Name = "AutosortFrame"
 AutosortFrame.Parent = JailbreakGUI
 AutosortFrame.BackgroundColor3 = Color3.new(0, 0, 0.176471)
@@ -678,7 +694,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_NGOL90_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_MFBW87_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -709,7 +725,8 @@ function SCRIPT_NGOL90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		mainframe.ropefollow,
 		mainframe.replaceparachute,
 		mainframe.aimpredictor,
-		mainframe.aimtriggerbot
+		mainframe.aimtriggerbot,
+		mainframe.wallhack
 	}
 	
 	local function onetimefunc(signal, func)
@@ -828,7 +845,7 @@ function SCRIPT_NGOL90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Added Aim Predictor and Triggerbot! Shows when executing the aimbot.")
+			notify("Added a shoot through walls button :flushed:")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1458,7 +1475,7 @@ function SCRIPT_NGOL90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					end
 				end)
 	
-				notify("Fly hack enabled! Caps at 150 if you're flying without a vehicle.")
+				notify("Fly hack enabled! Caps at 150 if you're flying without a vehicle. Does not work with all vehicles for some reason, no clue why.")
 			end)
 	
 	
@@ -1876,17 +1893,44 @@ function SCRIPT_NGOL90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			mainframe.replaceparachute.Activated:connect(function()
 				replacechute = not replacechute
 			end)
-			
-			mainframe.DisableNPCGuns.Activated:connect(function()
-				local module = require(rstorage.Game.Item.Gun)
-				local shoot = module.Shoot
+			local gunmodule = require(rstorage.Game.Item.Gun)
+			onetimefunc(mainframe.DisableNPCGuns.Activated, function()
+				local shoot = gunmodule.Shoot
 	
-				module.Shoot = function(...)
+				gunmodule.Shoot = function(...)
 					local t = {...}
 					t = t[1]
 					if plrs:FindFirstChild(t.Humanoid.Parent.Name) then
 						return shoot(...)
 					end
+				end
+				notify("NPCs may still shoot if another player is nearby you (server-sided shid)")
+			end)
+			
+			local shootThruWalls = false
+			mainframe.wallhack.Activated:connect(function()
+				shootThruWalls = not shootThruWalls
+			end)
+			
+			onetimefunc(mainframe.wallhack.Activated, function()
+				local children = {}
+				for i,v in pairs(workspace:GetChildren()) do
+					table.insert(children, v)
+				end
+				workspace.ChildAdded:connect(function(c)
+					table.insert(children, c)
+				end)
+				local shoot = gunmodule.Shoot
+				
+				gunmodule.Shoot = function(...)
+					local args = {...}
+					local main = args[1]
+					for i,v in pairs(children) do
+						if not table.find(main.BulletEmitter.IgnoreList, v) and shootThruWalls then
+							table.insert(main.BulletEmitter.IgnoreList, v)
+						end
+					end
+					return shoot(...)
 				end
 			end)
 	
@@ -1905,4 +1949,4 @@ function SCRIPT_NGOL90_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_NGOL90_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_MFBW87_FAKESCRIPT))
