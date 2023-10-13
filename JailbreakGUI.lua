@@ -693,7 +693,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_SHBM71_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_FGUE67_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -1912,12 +1912,17 @@ function SCRIPT_SHBM71_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end)
 			
 			onetimefunc(mainframe.wallhack.Activated, function()
+				local ignore = {"MansionRobbery", "Drop"}
 				local children = {}
 				for i,v in pairs(workspace:GetChildren()) do
-					table.insert(children, v)
+					if not table.find(ignore, v.Name) and not plrs:GetPlayerFromCharacter(v) then
+						table.insert(children, v)
+					end
 				end
 				workspace.ChildAdded:connect(function(c)
-					table.insert(children, c)
+					if not table.find(ignore, c.Name) and not plrs:GetPlayerFromCharacter(c) then
+						table.insert(children, c)
+					end
 				end)
 				local shoot = gunmodule.Shoot
 				
@@ -1948,4 +1953,4 @@ function SCRIPT_SHBM71_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_SHBM71_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_FGUE67_FAKESCRIPT))
