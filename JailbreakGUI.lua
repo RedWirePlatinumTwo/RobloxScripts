@@ -693,7 +693,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_KPFD68_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_ZTDN75_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -1964,18 +1964,27 @@ function SCRIPT_KPFD68_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					end
 				end
 				
+				local function getequippeditem()
+					for i,v in pairs(lplr.Folder:GetChildren()) do
+						if v:GetAttribute("InventoryItemEquipped") == true then
+							return v.Name
+						end
+					end
+				end
+				
 				local shoot = gunmodule.Shoot
 				
 				gunmodule.Shoot = function(...)
 					local args = {...}
 					local main = args[1]
 					for i,v in pairs(children) do
-						if not table.find(main.BulletEmitter.IgnoreList, v) and shootThruWalls and main.Humanoid == lplr.Character.Humanoid then
+						if not table.find(main.BulletEmitter.IgnoreList, v) and shootThruWalls and main.Humanoid == lplr.Character.Humanoid and getequippeditem() ~= "PlasmaPistol" then
 							table.insert(main.BulletEmitter.IgnoreList, v)
 						end
 					end
 					return shoot(...)
 				end
+				notify("Sometimes the plasma pistol will just not hit enemies at all, so the wallhack will not work with that gun specifically")
 			end)
 	
 		else
@@ -1993,4 +2002,4 @@ function SCRIPT_KPFD68_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_KPFD68_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_ZTDN75_FAKESCRIPT))
