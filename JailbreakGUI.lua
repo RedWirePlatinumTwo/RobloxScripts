@@ -693,7 +693,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_WOSB67_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_KPFD68_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -844,7 +844,7 @@ function SCRIPT_WOSB67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Added a shoot through walls button :flushed:")
+			notify("Added a shoot through walls button (improved with npcs and inside mansion)")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1914,22 +1914,56 @@ function SCRIPT_WOSB67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			onetimefunc(mainframe.wallhack.Activated, function()
 				local ignore = {"MansionRobbery", "Drop"}
 				local children = {}
+				
+				local function dropignore(drop)
+					if drop.Name == "Drop" then
+						for i,v in pairs(drop:GetChildren()) do
+							if v.Name ~= "NPCs" then
+								table.insert(children, v)
+							end
+						end
+						local removed
+						removed = workspace.ChildRemoved:connect(function(c)
+							if c == drop then
+								removed:Disconnect()
+								for i,v in pairs(c:GetChildren()) do
+									local tfind = table.find(children, v)
+									if tfind then
+										table.remove(children, tfind)
+									end
+								end
+							end
+						end)
+					end
+				end
+				
 				for i,v in pairs(workspace:GetChildren()) do
 					if not table.find(ignore, v.Name) and not plrs:GetPlayerFromCharacter(v) then
 						table.insert(children, v)
+						dropignore(v)
 					end
 				end
+				
 				workspace.ChildAdded:connect(function(c)
 					if not table.find(ignore, c.Name) and not plrs:GetPlayerFromCharacter(c) then
 						table.insert(children, c)
+						dropignore(c)
 					end
 				end)
+				
 				workspace.ChildRemoved:connect(function(c)
 					local findchild = table.find(children, c)
 					if findchild then
 						table.remove(children, findchild)
 					end
 				end)
+				
+				for i,v in pairs(workspace.MansionRobbery:GetChildren()) do
+					if v.Name ~= "ActiveBoss" and v.Name ~= "GuardsFolder" then
+						table.insert(children, v)
+					end
+				end
+				
 				local shoot = gunmodule.Shoot
 				
 				gunmodule.Shoot = function(...)
@@ -1959,4 +1993,4 @@ function SCRIPT_WOSB67_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_WOSB67_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_KPFD68_FAKESCRIPT))
