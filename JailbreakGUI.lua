@@ -36,6 +36,7 @@ local DisableNPCGuns = Instance.new("TextButton")
 local aimpredictor = Instance.new("TextButton")
 local aimtriggerbot = Instance.new("TextButton")
 local wallhack = Instance.new("TextButton")
+local modshotgun = Instance.new("TextButton")
 local AutosortFrame = Instance.new("Frame")
 local ScrollingFrame_2 = Instance.new("ScrollingFrame")
 local UIListLayout = Instance.new("UIListLayout")
@@ -84,6 +85,7 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0, 0, 0.176471)
 ScrollingFrame.BorderColor3 = Color3.new(0, 0.666667, 1)
 ScrollingFrame.Position = UDim2.new(0.0319970697, 0, 0.171266183, 0)
 ScrollingFrame.Size = UDim2.new(0, 376, 0, 235)
+ScrollingFrame.CanvasPosition = Vector2.new(0, 600)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 replaceparachute.Name = "replaceparachute"
@@ -506,6 +508,21 @@ wallhack.TextSize = 20
 wallhack.TextWrapped = true
 wallhack.TextXAlignment = Enum.TextXAlignment.Left
 
+modshotgun.Name = "modshotgun"
+modshotgun.Parent = ScrollingFrame
+modshotgun.BackgroundColor3 = Color3.new(0, 0, 0.27451)
+modshotgun.BorderColor3 = Color3.new(0, 0.666667, 1)
+modshotgun.Position = UDim2.new(0, 0, 0.523438752, 0)
+modshotgun.Size = UDim2.new(0, 116, 0, 47)
+modshotgun.Visible = false
+modshotgun.ZIndex = 0
+modshotgun.Font = Enum.Font.Ubuntu
+modshotgun.Text = "Reduced spread/single shotgun bullet"
+modshotgun.TextColor3 = Color3.new(0.333333, 0.666667, 1)
+modshotgun.TextSize = 20
+modshotgun.TextWrapped = true
+modshotgun.TextXAlignment = Enum.TextXAlignment.Left
+
 AutosortFrame.Name = "AutosortFrame"
 AutosortFrame.Parent = JailbreakGUI
 AutosortFrame.BackgroundColor3 = Color3.new(0, 0, 0.176471)
@@ -693,7 +710,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_ZTDN75_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_QVOD80_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -703,6 +720,7 @@ function SCRIPT_ZTDN75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	autosortframe.UIListLayout.SortOrder = 0
 	local rstorage = game.ReplicatedStorage
 	local runservice = game["Run Service"]
+	local itemconfig = rstorage.Game.ItemConfig
 	local oneclickbuttons = {
 		mainframe.RobberyNotifier,
 		mainframe.Tazermod,
@@ -725,7 +743,8 @@ function SCRIPT_ZTDN75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		mainframe.replaceparachute,
 		mainframe.aimpredictor,
 		mainframe.aimtriggerbot,
-		mainframe.wallhack
+		mainframe.wallhack,
+		mainframe.modshotgun
 	}
 	
 	local function onetimefunc(signal, func)
@@ -844,7 +863,7 @@ function SCRIPT_ZTDN75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Added a shoot through walls button (improved with npcs and inside mansion)")
+			notify("Added a shotgun bullet spread toggle (shows up after modding guns)")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -957,8 +976,8 @@ function SCRIPT_ZTDN75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 							end
 						end
 						if tool then
-							if rstorage.Game.ItemConfig:FindFirstChild(tool) then
-								gun = require(rstorage.Game.ItemConfig[tool])
+							if itemconfig:FindFirstChild(tool) then
+								gun = require(itemconfig[tool])
 								speed = gun.BulletSpeed
 								fireauto = gun.FireAuto
 							end
@@ -1119,8 +1138,6 @@ function SCRIPT_ZTDN75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				props.guitext = props.pointers
 			end)
 	
-			local itemconfig = rstorage.Game.ItemConfig
-	
 			local function changegunstats(Table)
 	
 				for i,v in pairs(itemconfig:GetChildren()) do
@@ -1142,10 +1159,23 @@ function SCRIPT_ZTDN75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 			onetimefunc(mainframe.modguns.Activated, function()
 				changegunstats({["CamShakeMagnitude"] = 0,["FireAuto"] = true})
-				local g = require(rstorage.Game.ItemConfig.Grenade)
+				local g = require(itemconfig.Grenade)
 				g.ReloadTime = 0
 				g.FuseTime = 0.8
 				notify("Removed recoil + all guns fire automatically (also funni grenade spam)")
+				mainframe.modshotgun.Visible = true
+				local singlebullet = false
+				
+				mainframe.modshotgun.Activated:connect(function()
+					local shotgun = require(itemconfig.Shotgun)
+					singlebullet = not singlebullet
+					if singlebullet then
+						shotgun.BulletSpread = 0
+					else
+						shotgun.BulletSpread = 0.2
+					end
+				end)
+				
 			end)
 	
 			onetimefunc(mainframe.forcedaytime.Activated, function()
@@ -1977,9 +2007,11 @@ function SCRIPT_ZTDN75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				gunmodule.Shoot = function(...)
 					local args = {...}
 					local main = args[1]
-					for i,v in pairs(children) do
-						if not table.find(main.BulletEmitter.IgnoreList, v) and shootThruWalls and main.Humanoid == lplr.Character.Humanoid and getequippeditem() ~= "PlasmaPistol" then
-							table.insert(main.BulletEmitter.IgnoreList, v)
+					if getequippeditem() ~= "PlasmaPistol" then
+						for i,v in pairs(children) do
+							if not table.find(main.BulletEmitter.IgnoreList, v) and shootThruWalls and main.Humanoid == lplr.Character.Humanoid then
+								table.insert(main.BulletEmitter.IgnoreList, v)
+							end
 						end
 					end
 					return shoot(...)
@@ -2002,4 +2034,4 @@ function SCRIPT_ZTDN75_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_ZTDN75_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_QVOD80_FAKESCRIPT))
