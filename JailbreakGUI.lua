@@ -1172,7 +1172,7 @@ function SCRIPT_QVOD80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					if singlebullet then
 						shotgun.BulletSpread = 0
 					else
-						shotgun.BulletSpread = 0.2
+						shotgun.BulletSpread = 0.02
 					end
 				end)
 				
