@@ -47,35 +47,37 @@ local TargetNPCs = Instance.new("TextLabel")
 local value_7 = Instance.new("TextButton")
 local IgnorePlayers = Instance.new("TextLabel")
 local value_8 = Instance.new("TextButton")
+local TargetPrioOnly = Instance.new("TextLabel")
+local value_9 = Instance.new("TextButton")
 local GlobalSettingsUI = Instance.new("Frame")
 local Title_4 = Instance.new("TextLabel")
 local X_2 = Instance.new("TextButton")
 local ScrollingFrame_2 = Instance.new("ScrollingFrame")
 local UIListLayout_3 = Instance.new("UIListLayout")
 local AimbotToggle = Instance.new("TextLabel")
-local value_9 = Instance.new("TextButton")
+local value_10 = Instance.new("TextButton")
 local reset = Instance.new("TextButton")
 local TargetedPartToggle = Instance.new("TextLabel")
-local value_10 = Instance.new("TextButton")
+local value_11 = Instance.new("TextButton")
 local reset_2 = Instance.new("TextButton")
 local RightClickAim = Instance.new("TextLabel")
-local value_11 = Instance.new("TextButton")
-local TeamAutofill = Instance.new("TextLabel")
 local value_12 = Instance.new("TextButton")
-local NPCToggle = Instance.new("TextLabel")
+local TeamAutofill = Instance.new("TextLabel")
 local value_13 = Instance.new("TextButton")
+local NPCToggle = Instance.new("TextLabel")
+local value_14 = Instance.new("TextButton")
 local reset_3 = Instance.new("TextButton")
 local GUIVisibilityToggle = Instance.new("TextLabel")
-local value_14 = Instance.new("TextButton")
+local value_15 = Instance.new("TextButton")
 local reset_4 = Instance.new("TextButton")
 local AimMethod = Instance.new("TextLabel")
-local value_15 = Instance.new("TextButton")
+local value_16 = Instance.new("TextButton")
 local About_2 = Instance.new("TextLabel")
 local MouseSensitivity = Instance.new("TextLabel")
 local About_3 = Instance.new("TextLabel")
-local value_16 = Instance.new("TextBox")
+local value_17 = Instance.new("TextBox")
 local FirstPersonEnabled = Instance.new("TextLabel")
-local value_17 = Instance.new("TextButton")
+local value_18 = Instance.new("TextButton")
 local TeamUI = Instance.new("Frame")
 local WhitelistedTeams = Instance.new("ScrollingFrame")
 local whitelistframe_2 = Instance.new("Frame")
@@ -409,6 +411,7 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0, 0.176471, 0)
 ScrollingFrame.BorderColor3 = Color3.new(0, 0.666667, 0)
 ScrollingFrame.Position = UDim2.new(0, 0, 0.0918695107, 0)
 ScrollingFrame.Size = UDim2.new(0, 338, 0, 310)
+ScrollingFrame.CanvasPosition = Vector2.new(0, 300)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 UIListLayout_2.Parent = ScrollingFrame
@@ -661,6 +664,34 @@ value_8.TextSize = 28
 value_8.TextStrokeTransparency = 0
 value_8.TextXAlignment = Enum.TextXAlignment.Left
 
+TargetPrioOnly.Name = "TargetPrioOnly"
+TargetPrioOnly.Parent = ScrollingFrame
+TargetPrioOnly.BackgroundColor3 = Color3.new(0, 0, 0)
+TargetPrioOnly.BackgroundTransparency = 1
+TargetPrioOnly.BorderColor3 = Color3.new(0, 0.666667, 0)
+TargetPrioOnly.BorderSizePixel = 0
+TargetPrioOnly.Size = UDim2.new(0, 195, 0, 63)
+TargetPrioOnly.Font = Enum.Font.TitilliumWeb
+TargetPrioOnly.Text = "Target ONLY prioritized players:"
+TargetPrioOnly.TextColor3 = Color3.new(0, 0.666667, 0)
+TargetPrioOnly.TextSize = 28
+TargetPrioOnly.TextStrokeTransparency = 0
+TargetPrioOnly.TextXAlignment = Enum.TextXAlignment.Left
+TargetPrioOnly.TextYAlignment = Enum.TextYAlignment.Top
+
+value_9.Name = "value"
+value_9.Parent = TargetPrioOnly
+value_9.BackgroundColor3 = Color3.new(0, 0, 0)
+value_9.BorderColor3 = Color3.new(0, 0.666667, 0)
+value_9.Position = UDim2.new(-0.000219726557, 0, 0.522047281, 0)
+value_9.Size = UDim2.new(0, 326, 0, 28)
+value_9.Font = Enum.Font.TitilliumWeb
+value_9.Text = "false"
+value_9.TextColor3 = Color3.new(0, 0.666667, 0)
+value_9.TextSize = 28
+value_9.TextStrokeTransparency = 0
+value_9.TextXAlignment = Enum.TextXAlignment.Left
+
 GlobalSettingsUI.Name = "GlobalSettingsUI"
 GlobalSettingsUI.Parent = Aimbot
 GlobalSettingsUI.BackgroundColor3 = Color3.new(0, 0.176471, 0)
@@ -721,18 +752,18 @@ AimbotToggle.TextStrokeTransparency = 0
 AimbotToggle.TextXAlignment = Enum.TextXAlignment.Left
 AimbotToggle.TextYAlignment = Enum.TextYAlignment.Top
 
-value_9.Name = "value"
-value_9.Parent = AimbotToggle
-value_9.BackgroundColor3 = Color3.new(0, 0, 0)
-value_9.BorderColor3 = Color3.new(0, 0.666667, 0)
-value_9.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
-value_9.Size = UDim2.new(0, 260, 0, 28)
-value_9.Font = Enum.Font.TitilliumWeb
-value_9.Text = "Enum.KeyCode.CapsLock"
-value_9.TextColor3 = Color3.new(0, 0.666667, 0)
-value_9.TextSize = 28
-value_9.TextStrokeTransparency = 0
-value_9.TextXAlignment = Enum.TextXAlignment.Left
+value_10.Name = "value"
+value_10.Parent = AimbotToggle
+value_10.BackgroundColor3 = Color3.new(0, 0, 0)
+value_10.BorderColor3 = Color3.new(0, 0.666667, 0)
+value_10.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
+value_10.Size = UDim2.new(0, 260, 0, 28)
+value_10.Font = Enum.Font.TitilliumWeb
+value_10.Text = "Enum.KeyCode.CapsLock"
+value_10.TextColor3 = Color3.new(0, 0.666667, 0)
+value_10.TextSize = 28
+value_10.TextStrokeTransparency = 0
+value_10.TextXAlignment = Enum.TextXAlignment.Left
 
 reset.Name = "reset"
 reset.Parent = AimbotToggle
@@ -762,18 +793,18 @@ TargetedPartToggle.TextStrokeTransparency = 0
 TargetedPartToggle.TextXAlignment = Enum.TextXAlignment.Left
 TargetedPartToggle.TextYAlignment = Enum.TextYAlignment.Top
 
-value_10.Name = "value"
-value_10.Parent = TargetedPartToggle
-value_10.BackgroundColor3 = Color3.new(0, 0, 0)
-value_10.BorderColor3 = Color3.new(0, 0.666667, 0)
-value_10.Position = UDim2.new(0.00591715984, 0, 0.524137616, 0)
-value_10.Size = UDim2.new(0, 258, 0, 28)
-value_10.Font = Enum.Font.TitilliumWeb
-value_10.Text = "Enum.KeyCode.X"
-value_10.TextColor3 = Color3.new(0, 0.666667, 0)
-value_10.TextSize = 28
-value_10.TextStrokeTransparency = 0
-value_10.TextXAlignment = Enum.TextXAlignment.Left
+value_11.Name = "value"
+value_11.Parent = TargetedPartToggle
+value_11.BackgroundColor3 = Color3.new(0, 0, 0)
+value_11.BorderColor3 = Color3.new(0, 0.666667, 0)
+value_11.Position = UDim2.new(0.00591715984, 0, 0.524137616, 0)
+value_11.Size = UDim2.new(0, 258, 0, 28)
+value_11.Font = Enum.Font.TitilliumWeb
+value_11.Text = "Enum.KeyCode.X"
+value_11.TextColor3 = Color3.new(0, 0.666667, 0)
+value_11.TextSize = 28
+value_11.TextStrokeTransparency = 0
+value_11.TextXAlignment = Enum.TextXAlignment.Left
 
 reset_2.Name = "reset"
 reset_2.Parent = TargetedPartToggle
@@ -803,18 +834,18 @@ RightClickAim.TextStrokeTransparency = 0
 RightClickAim.TextXAlignment = Enum.TextXAlignment.Left
 RightClickAim.TextYAlignment = Enum.TextYAlignment.Top
 
-value_11.Name = "value"
-value_11.Parent = RightClickAim
-value_11.BackgroundColor3 = Color3.new(0, 0, 0)
-value_11.BorderColor3 = Color3.new(0, 0.666667, 0)
-value_11.Position = UDim2.new(0.00591715984, 0, 0.524137616, 0)
-value_11.Size = UDim2.new(0, 337, 0, 28)
-value_11.Font = Enum.Font.TitilliumWeb
-value_11.Text = "false"
-value_11.TextColor3 = Color3.new(0, 0.666667, 0)
-value_11.TextSize = 28
-value_11.TextStrokeTransparency = 0
-value_11.TextXAlignment = Enum.TextXAlignment.Left
+value_12.Name = "value"
+value_12.Parent = RightClickAim
+value_12.BackgroundColor3 = Color3.new(0, 0, 0)
+value_12.BorderColor3 = Color3.new(0, 0.666667, 0)
+value_12.Position = UDim2.new(0.00591715984, 0, 0.524137616, 0)
+value_12.Size = UDim2.new(0, 337, 0, 28)
+value_12.Font = Enum.Font.TitilliumWeb
+value_12.Text = "false"
+value_12.TextColor3 = Color3.new(0, 0.666667, 0)
+value_12.TextSize = 28
+value_12.TextStrokeTransparency = 0
+value_12.TextXAlignment = Enum.TextXAlignment.Left
 
 TeamAutofill.Name = "TeamAutofill"
 TeamAutofill.Parent = ScrollingFrame_2
@@ -832,18 +863,18 @@ TeamAutofill.TextStrokeTransparency = 0
 TeamAutofill.TextXAlignment = Enum.TextXAlignment.Left
 TeamAutofill.TextYAlignment = Enum.TextYAlignment.Top
 
-value_12.Name = "value"
-value_12.Parent = TeamAutofill
-value_12.BackgroundColor3 = Color3.new(0, 0, 0)
-value_12.BorderColor3 = Color3.new(0, 0.666667, 0)
-value_12.Position = UDim2.new(0.00591715984, 0, 0.52416575, 0)
-value_12.Size = UDim2.new(0, 337, 0, 28)
-value_12.Font = Enum.Font.TitilliumWeb
-value_12.Text = "true"
-value_12.TextColor3 = Color3.new(0, 0.666667, 0)
-value_12.TextSize = 28
-value_12.TextStrokeTransparency = 0
-value_12.TextXAlignment = Enum.TextXAlignment.Left
+value_13.Name = "value"
+value_13.Parent = TeamAutofill
+value_13.BackgroundColor3 = Color3.new(0, 0, 0)
+value_13.BorderColor3 = Color3.new(0, 0.666667, 0)
+value_13.Position = UDim2.new(0.00591715984, 0, 0.52416575, 0)
+value_13.Size = UDim2.new(0, 337, 0, 28)
+value_13.Font = Enum.Font.TitilliumWeb
+value_13.Text = "true"
+value_13.TextColor3 = Color3.new(0, 0.666667, 0)
+value_13.TextSize = 28
+value_13.TextStrokeTransparency = 0
+value_13.TextXAlignment = Enum.TextXAlignment.Left
 
 NPCToggle.Name = "NPCToggle"
 NPCToggle.Parent = ScrollingFrame_2
@@ -861,18 +892,18 @@ NPCToggle.TextStrokeTransparency = 0
 NPCToggle.TextXAlignment = Enum.TextXAlignment.Left
 NPCToggle.TextYAlignment = Enum.TextYAlignment.Top
 
-value_13.Name = "value"
-value_13.Parent = NPCToggle
-value_13.BackgroundColor3 = Color3.new(0, 0, 0)
-value_13.BorderColor3 = Color3.new(0, 0.666667, 0)
-value_13.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
-value_13.Size = UDim2.new(0, 260, 0, 28)
-value_13.Font = Enum.Font.TitilliumWeb
-value_13.Text = "none"
-value_13.TextColor3 = Color3.new(0, 0.666667, 0)
-value_13.TextSize = 28
-value_13.TextStrokeTransparency = 0
-value_13.TextXAlignment = Enum.TextXAlignment.Left
+value_14.Name = "value"
+value_14.Parent = NPCToggle
+value_14.BackgroundColor3 = Color3.new(0, 0, 0)
+value_14.BorderColor3 = Color3.new(0, 0.666667, 0)
+value_14.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
+value_14.Size = UDim2.new(0, 260, 0, 28)
+value_14.Font = Enum.Font.TitilliumWeb
+value_14.Text = "none"
+value_14.TextColor3 = Color3.new(0, 0.666667, 0)
+value_14.TextSize = 28
+value_14.TextStrokeTransparency = 0
+value_14.TextXAlignment = Enum.TextXAlignment.Left
 
 reset_3.Name = "reset"
 reset_3.Parent = NPCToggle
@@ -902,18 +933,18 @@ GUIVisibilityToggle.TextStrokeTransparency = 0
 GUIVisibilityToggle.TextXAlignment = Enum.TextXAlignment.Left
 GUIVisibilityToggle.TextYAlignment = Enum.TextYAlignment.Top
 
-value_14.Name = "value"
-value_14.Parent = GUIVisibilityToggle
-value_14.BackgroundColor3 = Color3.new(0, 0, 0)
-value_14.BorderColor3 = Color3.new(0, 0.666667, 0)
-value_14.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
-value_14.Size = UDim2.new(0, 260, 0, 28)
-value_14.Font = Enum.Font.TitilliumWeb
-value_14.Text = "none"
-value_14.TextColor3 = Color3.new(0, 0.666667, 0)
-value_14.TextSize = 28
-value_14.TextStrokeTransparency = 0
-value_14.TextXAlignment = Enum.TextXAlignment.Left
+value_15.Name = "value"
+value_15.Parent = GUIVisibilityToggle
+value_15.BackgroundColor3 = Color3.new(0, 0, 0)
+value_15.BorderColor3 = Color3.new(0, 0.666667, 0)
+value_15.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
+value_15.Size = UDim2.new(0, 260, 0, 28)
+value_15.Font = Enum.Font.TitilliumWeb
+value_15.Text = "none"
+value_15.TextColor3 = Color3.new(0, 0.666667, 0)
+value_15.TextSize = 28
+value_15.TextStrokeTransparency = 0
+value_15.TextXAlignment = Enum.TextXAlignment.Left
 
 reset_4.Name = "reset"
 reset_4.Parent = GUIVisibilityToggle
@@ -943,18 +974,18 @@ AimMethod.TextStrokeTransparency = 0
 AimMethod.TextXAlignment = Enum.TextXAlignment.Left
 AimMethod.TextYAlignment = Enum.TextYAlignment.Top
 
-value_15.Name = "value"
-value_15.Parent = AimMethod
-value_15.BackgroundColor3 = Color3.new(0, 0, 0)
-value_15.BorderColor3 = Color3.new(0, 0.666667, 0)
-value_15.Position = UDim2.new(0.00294979103, 0, 0.335594594, 0)
-value_15.Size = UDim2.new(0, 336, 0, 28)
-value_15.Font = Enum.Font.TitilliumWeb
-value_15.Text = "Camera"
-value_15.TextColor3 = Color3.new(0, 0.666667, 0)
-value_15.TextSize = 28
-value_15.TextStrokeTransparency = 0
-value_15.TextXAlignment = Enum.TextXAlignment.Left
+value_16.Name = "value"
+value_16.Parent = AimMethod
+value_16.BackgroundColor3 = Color3.new(0, 0, 0)
+value_16.BorderColor3 = Color3.new(0, 0.666667, 0)
+value_16.Position = UDim2.new(0.00294979103, 0, 0.335594594, 0)
+value_16.Size = UDim2.new(0, 336, 0, 28)
+value_16.Font = Enum.Font.TitilliumWeb
+value_16.Text = "Camera"
+value_16.TextColor3 = Color3.new(0, 0.666667, 0)
+value_16.TextSize = 28
+value_16.TextStrokeTransparency = 0
+value_16.TextXAlignment = Enum.TextXAlignment.Left
 
 About_2.Name = "About"
 About_2.Parent = AimMethod
@@ -1004,20 +1035,20 @@ About_3.TextSize = 24
 About_3.TextStrokeTransparency = 0
 About_3.TextWrapped = true
 
-value_16.Name = "value"
-value_16.Parent = MouseSensitivity
-value_16.BackgroundColor3 = Color3.new(0, 0, 0)
-value_16.BorderColor3 = Color3.new(0, 0.666667, 0)
-value_16.Position = UDim2.new(-1.75680034e-05, 0, 0.258487642, 0)
-value_16.Size = UDim2.new(0, 335, 0, 28)
-value_16.Font = Enum.Font.TitilliumWeb
-value_16.PlaceholderColor3 = Color3.new(0, 0.666667, 0)
-value_16.PlaceholderText = "Default is 0.25"
-value_16.Text = "0.25"
-value_16.TextColor3 = Color3.new(0, 0.666667, 0)
-value_16.TextSize = 28
-value_16.TextStrokeTransparency = 0
-value_16.TextXAlignment = Enum.TextXAlignment.Left
+value_17.Name = "value"
+value_17.Parent = MouseSensitivity
+value_17.BackgroundColor3 = Color3.new(0, 0, 0)
+value_17.BorderColor3 = Color3.new(0, 0.666667, 0)
+value_17.Position = UDim2.new(-1.75680034e-05, 0, 0.258487642, 0)
+value_17.Size = UDim2.new(0, 335, 0, 28)
+value_17.Font = Enum.Font.TitilliumWeb
+value_17.PlaceholderColor3 = Color3.new(0, 0.666667, 0)
+value_17.PlaceholderText = "Default is 0.25"
+value_17.Text = "0.25"
+value_17.TextColor3 = Color3.new(0, 0.666667, 0)
+value_17.TextSize = 28
+value_17.TextStrokeTransparency = 0
+value_17.TextXAlignment = Enum.TextXAlignment.Left
 
 FirstPersonEnabled.Name = "FirstPersonEnabled"
 FirstPersonEnabled.Parent = ScrollingFrame_2
@@ -1035,18 +1066,18 @@ FirstPersonEnabled.TextStrokeTransparency = 0
 FirstPersonEnabled.TextXAlignment = Enum.TextXAlignment.Left
 FirstPersonEnabled.TextYAlignment = Enum.TextYAlignment.Top
 
-value_17.Name = "value"
-value_17.Parent = FirstPersonEnabled
-value_17.BackgroundColor3 = Color3.new(0, 0, 0)
-value_17.BorderColor3 = Color3.new(0, 0.666667, 0)
-value_17.Position = UDim2.new(0.00591715984, 0, 0.502716422, 0)
-value_17.Size = UDim2.new(0, 337, 0, 28)
-value_17.Font = Enum.Font.TitilliumWeb
-value_17.Text = "true"
-value_17.TextColor3 = Color3.new(0, 0.666667, 0)
-value_17.TextSize = 28
-value_17.TextStrokeTransparency = 0
-value_17.TextXAlignment = Enum.TextXAlignment.Left
+value_18.Name = "value"
+value_18.Parent = FirstPersonEnabled
+value_18.BackgroundColor3 = Color3.new(0, 0, 0)
+value_18.BorderColor3 = Color3.new(0, 0.666667, 0)
+value_18.Position = UDim2.new(0.00591715984, 0, 0.502716422, 0)
+value_18.Size = UDim2.new(0, 337, 0, 28)
+value_18.Font = Enum.Font.TitilliumWeb
+value_18.Text = "true"
+value_18.TextColor3 = Color3.new(0, 0.666667, 0)
+value_18.TextSize = 28
+value_18.TextStrokeTransparency = 0
+value_18.TextXAlignment = Enum.TextXAlignment.Left
 
 TeamUI.Name = "TeamUI"
 TeamUI.Parent = Aimbot
@@ -1195,7 +1226,7 @@ X_3.TextSize = 28
 X_3.TextStrokeTransparency = 0
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_VVWW66_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_JOBQ72_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1210,6 +1241,7 @@ function SCRIPT_VVWW66_FAKESCRIPT() -- Aimbot.Scripts
 	local teamui = gui.TeamUI
 	local camera = workspace.CurrentCamera
 	local tcservice = game:GetService("TextChatService")
+	local npcs = {}
 	makemsg = function(txt)
 	end
 	local function sendnotif(title, text)
@@ -1360,23 +1392,10 @@ function SCRIPT_VVWW66_FAKESCRIPT() -- Aimbot.Scripts
 		local m = lplr:GetMouse()
 		local RightClick = false
 	
-		local ischaracter = function(part)
-	
-			for i,v in pairs(GetFamily(part)) do
-	
-				for i,plr in pairs(plrs:GetPlayers()) do
-					if plr.Character == v then
-						return v
-					end
-				end
-	
-			end
-		end
-	
 		local isnpc = function(ins)
 	
 			for i,v in pairs(GetFamily(ins,true)) do
-				if v:FindFirstChildOfClass("Humanoid") and v:FindFirstChildOfClass("Humanoid").RootPart and not ischaracter(v) then
+				if v:FindFirstChildOfClass("Humanoid") and v:FindFirstChildOfClass("Humanoid").RootPart and not plrs:GetPlayerFromCharacter(v) and table.find(npcs, v) then
 					return v
 				end
 			end
@@ -1436,11 +1455,11 @@ function SCRIPT_VVWW66_FAKESCRIPT() -- Aimbot.Scripts
 		if isfile and loadfile and isfile("RedsAimbotStats.lua") then
 			GlobalStats = loadfile("RedsAimbotStats.lua")()
 			local newglobalstats = {}
-			newglobalstats["TeamAutofill"] = true
-			newglobalstats["RightClickAim"] = false
-			newglobalstats["FirstPersonEnabled"] = true
-			newglobalstats["AimMethod"] = "Camera"
-			newglobalstats["MouseSensitivity"] = 0.25
+			newglobalstats.TeamAutofill = true
+			newglobalstats.RightClickAim = false
+			newglobalstats.FirstPersonEnabled = true
+			newglobalstats.AimMethod = "Camera"
+			newglobalstats.MouseSensitivity = 0.25
 			if not GlobalStats[game.PlaceId] then
 				gengamestats()
 			end
@@ -1478,8 +1497,8 @@ function SCRIPT_VVWW66_FAKESCRIPT() -- Aimbot.Scripts
 			GlobalStats.Keybinds.AimbotToggle = Enum.KeyCode.CapsLock
 			GlobalStats.Keybinds.TargetedPartToggle = Enum.KeyCode.RightAlt
 			local newkeybinds = {}
-			newkeybinds["NPCToggle"] = "none"
-			newkeybinds["GUIVisibilityToggle"] = "none"
+			newkeybinds.NPCToggle = "none"
+			newkeybinds.GUIVisibilityToggle = "none"
 			
 			for name, default in pairs(newkeybinds) do
 				if GlobalStats.Keybinds[name] == nil then
@@ -1497,10 +1516,11 @@ function SCRIPT_VVWW66_FAKESCRIPT() -- Aimbot.Scripts
 			Keybinds.NPCToggle = "none"
 		end
 		local newgamestats = {}
-		newgamestats["Teams"] = {}
-		newgamestats["TargetNPCs"] = false
-		newgamestats["TargetCloserPlayers"] = true
-		newgamestats["IgnorePlayers"] = false
+		newgamestats.Teams = {}
+		newgamestats.TargetNPCs = false
+		newgamestats.TargetCloserPlayers = true
+		newgamestats.IgnorePlayers = false
+		newgamestats.TargetPrioOnly = false
 		
 		for name, default in pairs(newgamestats) do
 			if GameStats[name] == nil then
@@ -1854,8 +1874,6 @@ function SCRIPT_VVWW66_FAKESCRIPT() -- Aimbot.Scripts
 			teamui.Visible = false
 		end)
 	
-	    local npcs = {}
-	
 	    TableAdded(npcs, function(i, npc)
 	        
 	        Changed(npc.Humanoid, "Health", function(hp)
@@ -1872,18 +1890,32 @@ function SCRIPT_VVWW66_FAKESCRIPT() -- Aimbot.Scripts
 		local function checkpart(v)
 			return not v.CanCollide or v.Transparency == 1
 		end
+		
+		local function isactivenpc(npc)
+			local t = 0
+			local changed
+			local active = false
+			changed = Changed(npc.Humanoid.RootPart, "CFrame", function()
+				active = true
+				changed.Stop()
+			end)
+			repeat t = t + task.wait() until active or t > 0.5
+			if active then
+				table.insert(npcs, npc)
+			end
+		end
 	
 	    for i,v in pairs(workspace:GetDescendants()) do
-	        if v.ClassName == "Humanoid" and v.RootPart and not ischaracter(v.Parent) and not table.find(npcs, v.Parent) then
-	            table.insert(npcs, v.Parent)
+	        if v.ClassName == "Humanoid" and v.RootPart and not plrs:GetPlayerFromCharacter(v.Parent) and not table.find(npcs, v.Parent) then
+	            isactivenpc(v.Parent)
 	       end
 	    end
 	
 	    workspace.DescendantAdded:connect(function(v)
 	        if v.ClassName == "Humanoid" then
 	            if not v.RootPart then repeat task.wait() until v.RootPart end
-		            if not ischaracter(v.Parent) and not table.find(npcs, v.Parent) and v.Health > 0 then
-		                table.insert(npcs, v.Parent)
+		            if not plrs:GetPlayerFromCharacter(v.Parent) and not table.find(npcs, v.Parent) and v.Health > 0 then
+		                isactivenpc(v.Parent)
 		            end
 	        end
 		end)
@@ -1978,11 +2010,12 @@ function SCRIPT_VVWW66_FAKESCRIPT() -- Aimbot.Scripts
 					end)
 	            end
 	            
-	            if GameStats.TargetNPCs then
+	            if GameStats.TargetNPCs and not GameStats.TargetPrioOnly then
 	                for i, npc in pairs(npcs) do
 	                    addchr(npc)
-	               end
-	           end
+	                end
+				end
+				
 	            if not GameStats.IgnorePlayers then
 			   		 for i,v in pairs(plrs:GetPlayers()) do
 			       		 if v ~= lplr and v.Character then
@@ -2004,7 +2037,9 @@ function SCRIPT_VVWW66_FAKESCRIPT() -- Aimbot.Scripts
 				valuesort(table1, function(Char, position)
 					local plr = plrs:GetPlayerFromCharacter(Char)
 					if plr then
-						targetplayer(plr)
+						if table.find(PrioritizedPlrs, plr) and GameStats.TargetPrioOnly or not GameStats.TargetPrioOnly then
+							targetplayer(plr)
+						end
 					else
 						selectcharacter(Char)
 					end
@@ -2022,7 +2057,7 @@ function SCRIPT_VVWW66_FAKESCRIPT() -- Aimbot.Scripts
 			end
 		end)
 	
-		sendnotif("Aimbot Update","Updated notif to show up in the new chat GUI (now with color)")
+		sendnotif("Aimbot Update","Added Target Prioritized Players Only and updated NPC targeting to only choose active/moving NPCs.")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
@@ -2178,4 +2213,4 @@ function SCRIPT_VVWW66_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_VVWW66_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_JOBQ72_FAKESCRIPT))
