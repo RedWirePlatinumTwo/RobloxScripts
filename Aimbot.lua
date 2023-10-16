@@ -1226,7 +1226,7 @@ X_3.TextSize = 28
 X_3.TextStrokeTransparency = 0
 X_3.TextWrapped = true
 -- Scripts:
-function SCRIPT_JOBQ72_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_XDAR79_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1892,17 +1892,19 @@ function SCRIPT_JOBQ72_FAKESCRIPT() -- Aimbot.Scripts
 		end
 		
 		local function isactivenpc(npc)
-			local t = 0
-			local changed
-			local active = false
-			changed = Changed(npc.Humanoid.RootPart, "CFrame", function()
-				active = true
-				changed.Stop()
+			thread(function()
+				local t = 0
+				local changed
+				local active = false
+				changed = Changed(npc.Humanoid.RootPart, "CFrame", function()
+					active = true
+					changed.Stop()
+				end)
+				repeat t = t + task.wait() until active or t > 0.5
+				if active then
+					table.insert(npcs, npc)
+				end
 			end)
-			repeat t = t + task.wait() until active or t > 0.5
-			if active then
-				table.insert(npcs, npc)
-			end
 		end
 	
 	    for i,v in pairs(workspace:GetDescendants()) do
@@ -2213,4 +2215,4 @@ function SCRIPT_JOBQ72_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_JOBQ72_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_XDAR79_FAKESCRIPT))
