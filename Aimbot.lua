@@ -1255,7 +1255,7 @@ globals.TextColor3 = Color3.new(0, 0.666667, 0)
 globals.TextSize = 28
 globals.TextWrapped = true
 -- Scripts:
-function SCRIPT_NFPE68_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_IPYL75_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1505,7 +1505,7 @@ function SCRIPT_NFPE68_FAKESCRIPT() -- Aimbot.Scripts
 				if keybindsettings:FindFirstChild(i) then
 					keybindsettings[i].value.Text = tostring(v)
 				else
-					if GameStats[i] == nil and GlobalStats[i] == nil then
+					if GlobalStats[game.PlaceId][i] == nil and GlobalStats[i] == nil then
 						GlobalStats.Keybinds[i] = nil -- remove out-of-date values
 					end
 				end
@@ -2286,4 +2286,4 @@ function SCRIPT_NFPE68_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_NFPE68_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_IPYL75_FAKESCRIPT))
