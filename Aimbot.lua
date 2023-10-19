@@ -1593,7 +1593,7 @@ function SCRIPT_WTUI70_FAKESCRIPT() -- Aimbot.Scripts
 				clone.Parent = keybindsettings
 				clone.Name = name
 				clone.Text = name.." Toggle:"
-				local val = GlobalStats.Keybinds[name]
+				local val = Keybinds[name]
 				if val == nil then
 					GlobalStats.Keybinds[name] = "none"
 					clone.value.Text = "none"
