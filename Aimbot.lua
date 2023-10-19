@@ -1255,7 +1255,7 @@ globals.TextColor3 = Color3.new(0, 0.666667, 0)
 globals.TextSize = 28
 globals.TextWrapped = true
 -- Scripts:
-function SCRIPT_WTUI70_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_NFPE68_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1286,7 +1286,7 @@ function SCRIPT_WTUI70_FAKESCRIPT() -- Aimbot.Scripts
 	
 	if not _G.RedsAimbot then
 		_G.RedsAimbot = true
-	
+		sendnotif("Aimbot Update","Fixed new keybinds being reset upon rejoining a game (i fucked that up sorry).")
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -1505,7 +1505,9 @@ function SCRIPT_WTUI70_FAKESCRIPT() -- Aimbot.Scripts
 				if keybindsettings:FindFirstChild(i) then
 					keybindsettings[i].value.Text = tostring(v)
 				else
-					GlobalStats.Keybinds[i] = nil -- remove out-of-date values
+					if GameStats[i] == nil and GlobalStats[i] == nil then
+						GlobalStats.Keybinds[i] = nil -- remove out-of-date values
+					end
 				end
 			end
 	
@@ -2115,8 +2117,6 @@ function SCRIPT_WTUI70_FAKESCRIPT() -- Aimbot.Scripts
 				plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
 			end
 		end)
-	
-		sendnotif("Aimbot Update","Added a new keybind system, automatically creating available keybinds to any boolean setting (Target NPCs has been reset to none).")
 		
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
@@ -2286,4 +2286,4 @@ function SCRIPT_WTUI70_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_WTUI70_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_NFPE68_FAKESCRIPT))
