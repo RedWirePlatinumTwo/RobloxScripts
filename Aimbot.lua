@@ -1255,7 +1255,7 @@ globals.TextColor3 = Color3.new(0, 0.666667, 0)
 globals.TextSize = 28
 globals.TextWrapped = true
 -- Scripts:
-function SCRIPT_SEKO81_FAKESCRIPT() -- Aimbot.Scripts 
+function SCRIPT_WTUI70_FAKESCRIPT() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript')
 	script.Parent = Aimbot
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1542,9 +1542,6 @@ function SCRIPT_SEKO81_FAKESCRIPT() -- Aimbot.Scripts
 	
 		GameStats = GlobalStats[game.PlaceId]
 		Keybinds = GlobalStats.Keybinds
-		if not Keybinds.NPCToggle then
-			Keybinds.NPCToggle = "none"
-		end
 		local newgamestats = {}
 		newgamestats.Teams = {}
 		newgamestats.TargetNPCs = false
@@ -2289,4 +2286,4 @@ function SCRIPT_SEKO81_FAKESCRIPT() -- Aimbot.Scripts
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_SEKO81_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_WTUI70_FAKESCRIPT))
