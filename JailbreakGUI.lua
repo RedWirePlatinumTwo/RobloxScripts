@@ -85,7 +85,6 @@ ScrollingFrame.BackgroundColor3 = Color3.new(0, 0, 0.176471)
 ScrollingFrame.BorderColor3 = Color3.new(0, 0.666667, 1)
 ScrollingFrame.Position = UDim2.new(0.0319970697, 0, 0.171266183, 0)
 ScrollingFrame.Size = UDim2.new(0, 376, 0, 235)
-ScrollingFrame.CanvasPosition = Vector2.new(0, 600)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 replaceparachute.Name = "replaceparachute"
@@ -710,7 +709,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_QVOD80_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -863,7 +862,7 @@ function SCRIPT_QVOD80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Added a shotgun bullet spread toggle (shows up after modding guns)")
+			notify("Fixed bank truck robbery notif showing up every 5 mins when it isn't open.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -1319,7 +1318,9 @@ function SCRIPT_QVOD80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 							elseif i == "cargo plane" then
 								notify("The cargo plane is inbound!")
 							else
-								notify("The "..i.." is open for robbery.")
+								if marker.ImageLabel.ImageColor3 == Color3.new(0,1,0) then
+									notify("The "..i.." is open for robbery.")
+								end
 							end
 						end
 					end
@@ -2034,4 +2035,4 @@ function SCRIPT_QVOD80_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_QVOD80_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_RURZ70_FAKESCRIPT))
