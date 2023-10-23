@@ -709,7 +709,7 @@ loadoutname.TextScaled = true
 loadoutname.TextSize = 14
 loadoutname.TextWrapped = true
 -- Scripts:
-function SCRIPT_OKUG85_FAKESCRIPT() -- JailbreakGUI.LocalScript 
+function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript')
 	script.Parent = JailbreakGUI
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -862,7 +862,7 @@ function SCRIPT_OKUG85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 	
-			notify("Improved aim predictor for when a character stands still on a moving object (and fixed bank truck notifications again).")
+			notify("Fixed bank truck robbery notif showing up every 5 mins when it isn't open.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -984,25 +984,8 @@ function SCRIPT_OKUG85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 							misc.aimoffset = Vector3.new()
 						end
 						if speed and aimpredict then
-							local vel2
-							local changed
-							local targetedchr = misc.TargetedCharacter
-							changed = Changed(misc.TargetedCharacter.Humanoid.RootPart, "CFrame", function(new, old)
-								vel2 = (old-new).Position/task.wait()
-								if misc.TargetedCharacter ~= targetedchr then
-									changed.Stop()
-								end
-							end)
 							local distance = (lplr.Character.Humanoid.RootPart.Position - misc.TargetedCharacter.Humanoid.RootPart.Position).Magnitude
-							local vel = misc.TargetedCharacter.Humanoid.RootPart.Velocity
-							if vel.Magnitude < 1 then
-								if vel2 then
-									vel = vel2
-								else
-									vel2 = Vector3.new()
-								end
-							end
-							misc.aimoffset = (vel/speed)*distance
+							misc.aimoffset = (misc.TargetedCharacter.Humanoid.RootPart.Velocity/speed)*distance
 						else
 							misc.aimoffset = Vector3.new()
 						end
@@ -1267,7 +1250,6 @@ function SCRIPT_OKUG85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end)
 	
 			local trainrob = true
-			local banktruck = true
 	
 			onetimefunc(mainframe.RobberyNotifier.Activated, function()
 				local IconIds = {}
@@ -1296,18 +1278,7 @@ function SCRIPT_OKUG85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 								Changed(v2, "ImageColor3", function(color)
 									if color == Color3.new(0,1,0) then
-										if i == "bank truck" then
-											if banktruck then
-												banktruck = false
-												notify("The bank truck is open.")
-											end
-										else
-											notify("The "..i.." is open for robbery.")
-										end
-									else
-										if i == "bank truck" then
-											banktruck = true
-										end
+										notify("The "..name.." is open for robbery.")
 									end
 								end)
 	
@@ -1348,18 +1319,7 @@ function SCRIPT_OKUG85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 								notify("The cargo plane is inbound!")
 							else
 								if marker.ImageLabel.ImageColor3 == Color3.new(0,1,0) then
-									if i == "bank truck" then
-										if banktruck then
-											banktruck = false
-											notify("The bank truck is open.")
-										end
-									else
-										notify("The "..i.." is open for robbery.")
-									end
-								else
-									if i == "bank truck" then
-										banktruck = true
-									end
+									notify("The "..i.." is open for robbery.")
 								end
 							end
 						end
@@ -2075,4 +2035,4 @@ function SCRIPT_OKUG85_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	end
 
 end
-coroutine.resume(coroutine.create(SCRIPT_OKUG85_FAKESCRIPT))
+coroutine.resume(coroutine.create(SCRIPT_RURZ70_FAKESCRIPT))
