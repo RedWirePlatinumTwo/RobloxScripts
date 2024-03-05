@@ -715,7 +715,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function VNAEK_fake_script() -- JailbreakGUI.LocalScript 
+local function VASX_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -934,7 +934,11 @@ local function VNAEK_fake_script() -- JailbreakGUI.LocalScript
 	
 				for i,a in pairs(moduleui.CircleAction.Specs) do
 					local function name()
-						return a.Name:lower()
+						if a.Name then
+							return a.Name:lower()
+						else
+							return ""
+						end
 					end
 					if a.Duration ~= false and HoldEBypass and name() ~= "rob" and name() ~= "open crate" and name():sub(1,4) ~= "grab" and name():sub(1,5) ~= "place" then
 						a.Timed = false;
@@ -2063,4 +2067,4 @@ local function VNAEK_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(VNAEK_fake_script)()
+coroutine.wrap(VASX_fake_script)()
