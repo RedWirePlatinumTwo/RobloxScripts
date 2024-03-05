@@ -1548,7 +1548,7 @@ local function VNAEK_fake_script() -- JailbreakGUI.LocalScript
 			local ctxt = mainframe.AAAAA.Text
 	
 			runservice.RenderStepped:connect(function()
-				if workspace.Casino:FindFirstChild("RobberyDoor") and workspace.Casino.RobberyDoor:FindFirstChild("Codes") then
+				if workspace:FindFirstChild("Casino") and workspace.Casino:FindFirstChild("RobberyDoor") and workspace.Casino.RobberyDoor:FindFirstChild("Codes") then
 					local codes = workspace.Casino.RobberyDoor.Codes
 					local code
 	
