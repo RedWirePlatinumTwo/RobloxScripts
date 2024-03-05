@@ -1,6 +1,8 @@
--- Farewell Infortality.
--- Version: 2.82
+-- Gui to Lua
+-- Version: 3.2
+
 -- Instances:
+
 local JailbreakGUI = Instance.new("ScreenGui")
 local MainFrame = Instance.new("Frame")
 local Title = Instance.new("TextLabel")
@@ -54,90 +56,92 @@ local Title_3 = Instance.new("TextLabel")
 local hide = Instance.new("TextButton")
 local addloadout = Instance.new("TextButton")
 local loadoutname = Instance.new("TextBox")
+
 --Properties:
+
 JailbreakGUI.Name = "JailbreakGUI"
 JailbreakGUI.Parent = game.CoreGui
 JailbreakGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = JailbreakGUI
-MainFrame.BackgroundColor3 = Color3.new(0, 0, 0.176471)
-MainFrame.BorderColor3 = Color3.new(0, 0.666667, 1)
+MainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 45)
+MainFrame.BorderColor3 = Color3.fromRGB(0, 170, 255)
 MainFrame.Position = UDim2.new(0.868116915, -384, 0.0722088963, 10)
 MainFrame.Size = UDim2.new(0, 400, 0, 308)
 
 Title.Name = "Title"
 Title.Parent = MainFrame
-Title.BackgroundColor3 = Color3.new(0, 0, 0.176471)
-Title.BorderColor3 = Color3.new(0.333333, 0.666667, 1)
+Title.BackgroundColor3 = Color3.fromRGB(0, 0, 45)
+Title.BorderColor3 = Color3.fromRGB(85, 170, 255)
 Title.LayoutOrder = 1
 Title.Size = UDim2.new(0, 400, 0, 42)
 Title.Font = Enum.Font.Ubuntu
 Title.Text = "RedWire's Jailbreak GUI"
-Title.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-Title.TextSize = 30
-Title.TextStrokeColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+Title.TextColor3 = Color3.fromRGB(85, 170, 255)
+Title.TextSize = 30.000
+Title.TextStrokeColor3 = Color3.fromRGB(110, 110, 248)
 Title.TextWrapped = true
 
 ScrollingFrame.Parent = MainFrame
 ScrollingFrame.Active = true
-ScrollingFrame.BackgroundColor3 = Color3.new(0, 0, 0.176471)
-ScrollingFrame.BorderColor3 = Color3.new(0, 0.666667, 1)
+ScrollingFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 45)
+ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 170, 255)
 ScrollingFrame.Position = UDim2.new(0.0319970697, 0, 0.171266183, 0)
 ScrollingFrame.Size = UDim2.new(0, 376, 0, 235)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 replaceparachute.Name = "replaceparachute"
 replaceparachute.Parent = ScrollingFrame
-replaceparachute.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-replaceparachute.BorderColor3 = Color3.new(0, 0.666667, 1)
+replaceparachute.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+replaceparachute.BorderColor3 = Color3.fromRGB(0, 170, 255)
 replaceparachute.Position = UDim2.new(0, 0, 0.451666713, 0)
 replaceparachute.Size = UDim2.new(0, 106, 0, 51)
 replaceparachute.ZIndex = -222
 replaceparachute.Font = Enum.Font.Ubuntu
 replaceparachute.Text = "Replace parachute w/ glider"
-replaceparachute.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-replaceparachute.TextSize = 20
+replaceparachute.TextColor3 = Color3.fromRGB(85, 170, 255)
+replaceparachute.TextSize = 20.000
 replaceparachute.TextWrapped = true
 replaceparachute.TextXAlignment = Enum.TextXAlignment.Left
 
 holdebypass.Name = "holdebypass"
 holdebypass.Parent = ScrollingFrame
-holdebypass.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-holdebypass.BorderColor3 = Color3.new(0, 0.666667, 1)
+holdebypass.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+holdebypass.BorderColor3 = Color3.fromRGB(0, 170, 255)
 holdebypass.Position = UDim2.new(0.329939932, 0, 0.189644739, 0)
 holdebypass.Size = UDim2.new(0, 106, 0, 52)
 holdebypass.Font = Enum.Font.Ubuntu
 holdebypass.Text = "Hold E Bypass"
-holdebypass.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-holdebypass.TextSize = 20
+holdebypass.TextColor3 = Color3.fromRGB(85, 170, 255)
+holdebypass.TextSize = 20.000
 holdebypass.TextWrapped = true
 holdebypass.TextXAlignment = Enum.TextXAlignment.Left
 
 aimbot.Name = "aimbot"
 aimbot.Parent = ScrollingFrame
-aimbot.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-aimbot.BorderColor3 = Color3.new(0, 0.666667, 1)
+aimbot.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+aimbot.BorderColor3 = Color3.fromRGB(0, 170, 255)
 aimbot.Position = UDim2.new(0, 0, 0.267379671, 0)
 aimbot.Size = UDim2.new(0, 110, 0, 50)
 aimbot.Font = Enum.Font.Ubuntu
 aimbot.Text = "Aimbot"
-aimbot.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-aimbot.TextSize = 20
+aimbot.TextColor3 = Color3.fromRGB(85, 170, 255)
+aimbot.TextSize = 20.000
 aimbot.TextWrapped = true
 aimbot.TextXAlignment = Enum.TextXAlignment.Left
 
 Airdrop.Name = "Airdrop"
 Airdrop.Parent = ScrollingFrame
-Airdrop.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-Airdrop.BorderColor3 = Color3.new(0, 0.666667, 1)
+Airdrop.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+Airdrop.BorderColor3 = Color3.fromRGB(0, 170, 255)
 Airdrop.Position = UDim2.new(0, 0, 0.451666713, 0)
 Airdrop.Size = UDim2.new(0, 106, 0, 51)
 Airdrop.ZIndex = -222
 Airdrop.Font = Enum.Font.Ubuntu
 Airdrop.Text = "Airdrop ESP"
-Airdrop.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-Airdrop.TextSize = 20
+Airdrop.TextColor3 = Color3.fromRGB(85, 170, 255)
+Airdrop.TextSize = 20.000
 Airdrop.TextWrapped = true
 Airdrop.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -146,394 +150,394 @@ UIGridLayout.CellSize = UDim2.new(0, 360, 0, 35)
 
 modguns.Name = "modguns"
 modguns.Parent = ScrollingFrame
-modguns.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-modguns.BorderColor3 = Color3.new(0, 0.666667, 1)
+modguns.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+modguns.BorderColor3 = Color3.fromRGB(0, 170, 255)
 modguns.Position = UDim2.new(0.0186170209, 0, 2.55319142, 0)
 modguns.Size = UDim2.new(0, 106, 0, 51)
 modguns.ZIndex = -99
 modguns.Font = Enum.Font.Ubuntu
 modguns.Text = "Mod guns"
-modguns.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-modguns.TextSize = 20
+modguns.TextColor3 = Color3.fromRGB(85, 170, 255)
+modguns.TextSize = 20.000
 modguns.TextWrapped = true
 modguns.TextXAlignment = Enum.TextXAlignment.Left
 
 GravToggle.Name = "GravToggle"
 GravToggle.Parent = ScrollingFrame
-GravToggle.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-GravToggle.BorderColor3 = Color3.new(0, 0.666667, 1)
+GravToggle.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+GravToggle.BorderColor3 = Color3.fromRGB(0, 170, 255)
 GravToggle.Position = UDim2.new(0.668999851, 0, 0.451666713, 0)
 GravToggle.Size = UDim2.new(0, 105, 0, 51)
 GravToggle.ZIndex = 0
 GravToggle.Font = Enum.Font.Ubuntu
 GravToggle.Text = "Gravity Toggle (196)"
-GravToggle.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-GravToggle.TextSize = 20
+GravToggle.TextColor3 = Color3.fromRGB(85, 170, 255)
+GravToggle.TextSize = 20.000
 GravToggle.TextWrapped = true
 GravToggle.TextXAlignment = Enum.TextXAlignment.Left
 
 forcedaytime.Name = "forcedaytime"
 forcedaytime.Parent = ScrollingFrame
-forcedaytime.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-forcedaytime.BorderColor3 = Color3.new(0, 0.666667, 1)
+forcedaytime.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+forcedaytime.BorderColor3 = Color3.fromRGB(0, 170, 255)
 forcedaytime.Position = UDim2.new(0.333333343, 0, 0.710666597, 0)
 forcedaytime.Size = UDim2.new(0, 106, 0, 52)
 forcedaytime.ZIndex = 0
 forcedaytime.Font = Enum.Font.Ubuntu
 forcedaytime.Text = "Force Daytime"
-forcedaytime.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-forcedaytime.TextSize = 20
+forcedaytime.TextColor3 = Color3.fromRGB(85, 170, 255)
+forcedaytime.TextSize = 20.000
 forcedaytime.TextWrapped = true
 forcedaytime.TextXAlignment = Enum.TextXAlignment.Left
 
 removeragdoll.Name = "removeragdoll"
 removeragdoll.Parent = ScrollingFrame
-removeragdoll.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-removeragdoll.BorderColor3 = Color3.new(0, 0.666667, 1)
+removeragdoll.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+removeragdoll.BorderColor3 = Color3.fromRGB(0, 170, 255)
 removeragdoll.Position = UDim2.new(0, 0, 2.7021277, 0)
 removeragdoll.Size = UDim2.new(0, 115, 0, 47)
 removeragdoll.Font = Enum.Font.Ubuntu
 removeragdoll.Text = "Remove Ragdoll"
-removeragdoll.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-removeragdoll.TextSize = 20
+removeragdoll.TextColor3 = Color3.fromRGB(85, 170, 255)
+removeragdoll.TextSize = 20.000
 removeragdoll.TextWrapped = true
 removeragdoll.TextXAlignment = Enum.TextXAlignment.Left
 
 RobberyNotifier.Name = "RobberyNotifier"
 RobberyNotifier.Parent = ScrollingFrame
-RobberyNotifier.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-RobberyNotifier.BorderColor3 = Color3.new(0, 0.666667, 1)
+RobberyNotifier.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+RobberyNotifier.BorderColor3 = Color3.fromRGB(0, 170, 255)
 RobberyNotifier.Position = UDim2.new(0.327883303, 0, 0, 0)
 RobberyNotifier.Size = UDim2.new(0, 117, 0, 47)
 RobberyNotifier.Font = Enum.Font.Ubuntu
 RobberyNotifier.Text = "Robbery Notifier"
-RobberyNotifier.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-RobberyNotifier.TextSize = 20
+RobberyNotifier.TextColor3 = Color3.fromRGB(85, 170, 255)
+RobberyNotifier.TextSize = 20.000
 RobberyNotifier.TextWrapped = true
 RobberyNotifier.TextXAlignment = Enum.TextXAlignment.Left
 
 infiniteyeet.Name = "infiniteyeet"
 infiniteyeet.Parent = ScrollingFrame
-infiniteyeet.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-infiniteyeet.BorderColor3 = Color3.new(0, 0.666667, 1)
+infiniteyeet.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+infiniteyeet.BorderColor3 = Color3.fromRGB(0, 170, 255)
 infiniteyeet.Position = UDim2.new(0.663817644, 0, 0, 0)
 infiniteyeet.Size = UDim2.new(0, 117, 0, 47)
 infiniteyeet.Font = Enum.Font.Ubuntu
 infiniteyeet.Text = "Infinite Yield"
-infiniteyeet.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-infiniteyeet.TextSize = 20
+infiniteyeet.TextColor3 = Color3.fromRGB(85, 170, 255)
+infiniteyeet.TextSize = 20.000
 infiniteyeet.TextWrapped = true
 infiniteyeet.TextXAlignment = Enum.TextXAlignment.Left
 
 gunshoptp.Name = "gunshoptp"
 gunshoptp.Parent = ScrollingFrame
-gunshoptp.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-gunshoptp.BorderColor3 = Color3.new(0, 0.666667, 1)
+gunshoptp.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+gunshoptp.BorderColor3 = Color3.fromRGB(0, 170, 255)
 gunshoptp.Position = UDim2.new(0, 0, 0.262000024, 0)
 gunshoptp.Size = UDim2.new(0, 117, 0, 47)
 gunshoptp.Font = Enum.Font.Ubuntu
 gunshoptp.Text = "Gunshop TP"
-gunshoptp.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-gunshoptp.TextSize = 20
+gunshoptp.TextColor3 = Color3.fromRGB(85, 170, 255)
+gunshoptp.TextSize = 20.000
 gunshoptp.TextWrapped = true
 gunshoptp.TextXAlignment = Enum.TextXAlignment.Left
 
 keybypass.Name = "keybypass"
 keybypass.Parent = ScrollingFrame
-keybypass.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-keybypass.BorderColor3 = Color3.new(0, 0.666667, 1)
+keybypass.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+keybypass.BorderColor3 = Color3.fromRGB(0, 170, 255)
 keybypass.Position = UDim2.new(0.333333343, 0, 0.262000024, 0)
 keybypass.Size = UDim2.new(0, 116, 0, 47)
 keybypass.ZIndex = 0
 keybypass.Font = Enum.Font.Ubuntu
 keybypass.Text = "Keycard Bypass"
-keybypass.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-keybypass.TextSize = 20
+keybypass.TextColor3 = Color3.fromRGB(85, 170, 255)
+keybypass.TextSize = 20.000
 keybypass.TextWrapped = true
 keybypass.TextXAlignment = Enum.TextXAlignment.Left
 
 AAAAA.Name = "AAAAA"
 AAAAA.Parent = ScrollingFrame
-AAAAA.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-AAAAA.BorderColor3 = Color3.new(0, 0.666667, 1)
+AAAAA.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+AAAAA.BorderColor3 = Color3.fromRGB(0, 170, 255)
 AAAAA.Position = UDim2.new(0, 0, 0.523438752, 0)
 AAAAA.Size = UDim2.new(0, 116, 0, 47)
 AAAAA.ZIndex = 0
 AAAAA.Font = Enum.Font.Ubuntu
 AAAAA.Text = "Casino code:"
-AAAAA.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-AAAAA.TextSize = 20
+AAAAA.TextColor3 = Color3.fromRGB(85, 170, 255)
+AAAAA.TextSize = 20.000
 AAAAA.TextWrapped = true
 AAAAA.TextXAlignment = Enum.TextXAlignment.Left
 
 delradio.Name = "delradio"
 delradio.Parent = ScrollingFrame
-delradio.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-delradio.BorderColor3 = Color3.new(0, 0.666667, 1)
+delradio.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+delradio.BorderColor3 = Color3.fromRGB(0, 170, 255)
 delradio.Position = UDim2.new(0.333333343, 0, 0.523438752, 0)
 delradio.Size = UDim2.new(0, 117, 0, 47)
 delradio.ZIndex = -1
 delradio.Font = Enum.Font.Ubuntu
 delradio.Text = "Delete Radio Gui"
-delradio.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-delradio.TextSize = 20
+delradio.TextColor3 = Color3.fromRGB(85, 170, 255)
+delradio.TextSize = 20.000
 delradio.TextWrapped = true
 delradio.TextXAlignment = Enum.TextXAlignment.Left
 
 respawn.Name = "respawn"
 respawn.Parent = ScrollingFrame
-respawn.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-respawn.BorderColor3 = Color3.new(0, 0.666667, 1)
+respawn.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+respawn.BorderColor3 = Color3.fromRGB(0, 170, 255)
 respawn.Position = UDim2.new(0.667000175, 0, 0.523438752, 0)
 respawn.Size = UDim2.new(0, 116, 0, 47)
 respawn.ZIndex = -1
 respawn.Font = Enum.Font.Ubuntu
 respawn.Text = "Respawn"
-respawn.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-respawn.TextSize = 20
+respawn.TextColor3 = Color3.fromRGB(85, 170, 255)
+respawn.TextSize = 20.000
 respawn.TextWrapped = true
 respawn.TextXAlignment = Enum.TextXAlignment.Left
 
 lockonexit.Name = "lockonexit"
 lockonexit.Parent = ScrollingFrame
-lockonexit.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-lockonexit.BorderColor3 = Color3.new(0, 0.666667, 1)
+lockonexit.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+lockonexit.BorderColor3 = Color3.fromRGB(0, 170, 255)
 lockonexit.Position = UDim2.new(0.667000175, 0, 0.523438752, 0)
 lockonexit.Size = UDim2.new(0, 116, 0, 47)
 lockonexit.ZIndex = -1
 lockonexit.Font = Enum.Font.Ubuntu
 lockonexit.Text = "Auto-lock vehicle on exit"
-lockonexit.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-lockonexit.TextSize = 20
+lockonexit.TextColor3 = Color3.fromRGB(85, 170, 255)
+lockonexit.TextSize = 20.000
 lockonexit.TextWrapped = true
 lockonexit.TextXAlignment = Enum.TextXAlignment.Left
 
 Tazermod.Name = "Tazermod"
 Tazermod.Parent = ScrollingFrame
-Tazermod.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-Tazermod.BorderColor3 = Color3.new(0, 0.666667, 1)
+Tazermod.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+Tazermod.BorderColor3 = Color3.fromRGB(0, 170, 255)
 Tazermod.Position = UDim2.new(0, 0, 0.451666713, 0)
 Tazermod.Size = UDim2.new(0, 106, 0, 51)
 Tazermod.ZIndex = -222
 Tazermod.Font = Enum.Font.Ubuntu
 Tazermod.Text = "Tazer mod"
-Tazermod.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-Tazermod.TextSize = 20
+Tazermod.TextColor3 = Color3.fromRGB(85, 170, 255)
+Tazermod.TextSize = 20.000
 Tazermod.TextWrapped = true
 Tazermod.TextXAlignment = Enum.TextXAlignment.Left
 
 ropefollow.Name = "ropefollow"
 ropefollow.Parent = ScrollingFrame
-ropefollow.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-ropefollow.BorderColor3 = Color3.new(0, 0.666667, 1)
+ropefollow.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+ropefollow.BorderColor3 = Color3.fromRGB(0, 170, 255)
 ropefollow.Position = UDim2.new(0, 0, 0.451666713, 0)
 ropefollow.Size = UDim2.new(0, 106, 0, 51)
 ropefollow.ZIndex = -222
 ropefollow.Font = Enum.Font.Ubuntu
 ropefollow.Text = "Rope-Follow-Part"
-ropefollow.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-ropefollow.TextSize = 20
+ropefollow.TextColor3 = Color3.fromRGB(85, 170, 255)
+ropefollow.TextSize = 20.000
 ropefollow.TextWrapped = true
 ropefollow.TextXAlignment = Enum.TextXAlignment.Left
 
 Hotbarautosort.Name = "Hotbarautosort"
 Hotbarautosort.Parent = ScrollingFrame
-Hotbarautosort.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-Hotbarautosort.BorderColor3 = Color3.new(0, 0.666667, 1)
+Hotbarautosort.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+Hotbarautosort.BorderColor3 = Color3.fromRGB(0, 170, 255)
 Hotbarautosort.Position = UDim2.new(0, 0, 0.451666713, 0)
 Hotbarautosort.Size = UDim2.new(0, 106, 0, 51)
 Hotbarautosort.ZIndex = -222
 Hotbarautosort.Font = Enum.Font.Ubuntu
 Hotbarautosort.Text = "Hotbar Auto-sorter"
-Hotbarautosort.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-Hotbarautosort.TextSize = 20
+Hotbarautosort.TextColor3 = Color3.fromRGB(85, 170, 255)
+Hotbarautosort.TextSize = 20.000
 Hotbarautosort.TextWrapped = true
 Hotbarautosort.TextXAlignment = Enum.TextXAlignment.Left
 
 glidekey.Name = "glidekey"
 glidekey.Parent = ScrollingFrame
-glidekey.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-glidekey.BorderColor3 = Color3.new(0, 0.666667, 1)
+glidekey.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+glidekey.BorderColor3 = Color3.fromRGB(0, 170, 255)
 glidekey.Position = UDim2.new(0, 0, 0.451666713, 0)
 glidekey.Size = UDim2.new(0, 106, 0, 51)
 glidekey.ZIndex = -222
 glidekey.Font = Enum.Font.Ubuntu
 glidekey.Text = "G-to-glide"
-glidekey.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-glidekey.TextSize = 20
+glidekey.TextColor3 = Color3.fromRGB(85, 170, 255)
+glidekey.TextSize = 20.000
 glidekey.TextWrapped = true
 glidekey.TextXAlignment = Enum.TextXAlignment.Left
 
 _1speedv2.Name = "1speedv2"
 _1speedv2.Parent = ScrollingFrame
-_1speedv2.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-_1speedv2.BorderColor3 = Color3.new(0, 0.666667, 1)
+_1speedv2.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+_1speedv2.BorderColor3 = Color3.fromRGB(0, 170, 255)
 _1speedv2.Position = UDim2.new(0, 0, -0.229946852, 0)
 _1speedv2.Size = UDim2.new(0, 370, 0, 31)
 _1speedv2.Visible = false
 _1speedv2.Font = Enum.Font.Ubuntu
-_1speedv2.PlaceholderColor3 = Color3.new(0.333333, 1, 0.498039)
+_1speedv2.PlaceholderColor3 = Color3.fromRGB(85, 255, 127)
 _1speedv2.PlaceholderText = "Walkspeed number"
 _1speedv2.Text = "30"
-_1speedv2.TextColor3 = Color3.new(0.333333, 1, 0.498039)
-_1speedv2.TextSize = 24
+_1speedv2.TextColor3 = Color3.fromRGB(85, 255, 127)
+_1speedv2.TextSize = 24.000
 _1speedv2.TextWrapped = true
 _1speedv2.TextXAlignment = Enum.TextXAlignment.Left
 
 _1flyhack.Name = "1flyhack"
 _1flyhack.Parent = ScrollingFrame
-_1flyhack.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-_1flyhack.BorderColor3 = Color3.new(0, 0.666667, 1)
+_1flyhack.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+_1flyhack.BorderColor3 = Color3.fromRGB(0, 170, 255)
 _1flyhack.Position = UDim2.new(0, 0, 1.15385723, 0)
 _1flyhack.Size = UDim2.new(0, 370, 0, 31)
 _1flyhack.Font = Enum.Font.Ubuntu
 _1flyhack.Text = "Fly hack (Left CTRL + F)"
-_1flyhack.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-_1flyhack.TextSize = 20
+_1flyhack.TextColor3 = Color3.fromRGB(85, 170, 255)
+_1flyhack.TextSize = 20.000
 _1flyhack.TextWrapped = true
 _1flyhack.TextXAlignment = Enum.TextXAlignment.Left
 
 _1flyhackv2.Name = "1flyhackv2"
 _1flyhackv2.Parent = ScrollingFrame
-_1flyhackv2.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-_1flyhackv2.BorderColor3 = Color3.new(0, 0.666667, 1)
+_1flyhackv2.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+_1flyhackv2.BorderColor3 = Color3.fromRGB(0, 170, 255)
 _1flyhackv2.Position = UDim2.new(0, 0, -0.229946852, 0)
 _1flyhackv2.Size = UDim2.new(0, 370, 0, 31)
 _1flyhackv2.Visible = false
 _1flyhackv2.Font = Enum.Font.Ubuntu
-_1flyhackv2.PlaceholderColor3 = Color3.new(0.333333, 1, 1)
+_1flyhackv2.PlaceholderColor3 = Color3.fromRGB(85, 255, 255)
 _1flyhackv2.PlaceholderText = "Fly Speed number"
 _1flyhackv2.Text = "300"
-_1flyhackv2.TextColor3 = Color3.new(0.333333, 1, 1)
-_1flyhackv2.TextSize = 24
+_1flyhackv2.TextColor3 = Color3.fromRGB(85, 255, 255)
+_1flyhackv2.TextSize = 24.000
 _1flyhackv2.TextWrapped = true
 _1flyhackv2.TextXAlignment = Enum.TextXAlignment.Left
 
 _1speed.Name = "1speed"
 _1speed.Parent = ScrollingFrame
-_1speed.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-_1speed.BorderColor3 = Color3.new(0, 0.666667, 1)
+_1speed.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+_1speed.BorderColor3 = Color3.fromRGB(0, 170, 255)
 _1speed.Position = UDim2.new(0, 0, 3.92146373, 0)
 _1speed.Size = UDim2.new(0, 370, 0, 31)
 _1speed.ZIndex = 33
 _1speed.Font = Enum.Font.Ubuntu
 _1speed.Text = "Speedhack"
-_1speed.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-_1speed.TextSize = 20
+_1speed.TextColor3 = Color3.fromRGB(85, 170, 255)
+_1speed.TextSize = 20.000
 _1speed.TextWrapped = true
 _1speed.TextXAlignment = Enum.TextXAlignment.Left
 
 _1placeholder.Name = "1placeholder"
 _1placeholder.Parent = ScrollingFrame
-_1placeholder.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-_1placeholder.BorderColor3 = Color3.new(0, 0.666667, 1)
+_1placeholder.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+_1placeholder.BorderColor3 = Color3.fromRGB(0, 170, 255)
 _1placeholder.Position = UDim2.new(0, 0, 0.451666713, 0)
 _1placeholder.Size = UDim2.new(0, 106, 0, 51)
 _1placeholder.Visible = false
 _1placeholder.ZIndex = -222
 _1placeholder.Font = Enum.Font.Ubuntu
 _1placeholder.Text = "placeholder frame"
-_1placeholder.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-_1placeholder.TextSize = 20
+_1placeholder.TextColor3 = Color3.fromRGB(85, 170, 255)
+_1placeholder.TextSize = 20.000
 _1placeholder.TextWrapped = true
 _1placeholder.TextXAlignment = Enum.TextXAlignment.Left
 
 togglebox.Name = "togglebox"
 togglebox.Parent = _1placeholder
-togglebox.BackgroundColor3 = Color3.new(0, 0.333333, 0.498039)
-togglebox.BorderColor3 = Color3.new(0.333333, 0.666667, 1)
+togglebox.BackgroundColor3 = Color3.fromRGB(0, 85, 127)
+togglebox.BorderColor3 = Color3.fromRGB(85, 170, 255)
 togglebox.Position = UDim2.new(0.902777791, 0, 0, 0)
 togglebox.Size = UDim2.new(0, 35, 0, 35)
 togglebox.Font = Enum.Font.Ubuntu
 togglebox.Text = "x"
-togglebox.TextColor3 = Color3.new(0.666667, 0, 0)
-togglebox.TextSize = 40
-togglebox.TextStrokeTransparency = 0
+togglebox.TextColor3 = Color3.fromRGB(170, 0, 0)
+togglebox.TextSize = 40.000
+togglebox.TextStrokeTransparency = 0.000
 togglebox.TextWrapped = true
 
 DisableNPCGuns.Name = "DisableNPCGuns"
 DisableNPCGuns.Parent = ScrollingFrame
-DisableNPCGuns.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-DisableNPCGuns.BorderColor3 = Color3.new(0, 0.666667, 1)
+DisableNPCGuns.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+DisableNPCGuns.BorderColor3 = Color3.fromRGB(0, 170, 255)
 DisableNPCGuns.Position = UDim2.new(0, 0, 0.451666713, 0)
 DisableNPCGuns.Size = UDim2.new(0, 106, 0, 51)
 DisableNPCGuns.ZIndex = -222
 DisableNPCGuns.Font = Enum.Font.Ubuntu
 DisableNPCGuns.Text = "Disable NPC Guns"
-DisableNPCGuns.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-DisableNPCGuns.TextSize = 20
+DisableNPCGuns.TextColor3 = Color3.fromRGB(85, 170, 255)
+DisableNPCGuns.TextSize = 20.000
 DisableNPCGuns.TextWrapped = true
 DisableNPCGuns.TextXAlignment = Enum.TextXAlignment.Left
 
 aimpredictor.Name = "aimpredictor"
 aimpredictor.Parent = ScrollingFrame
-aimpredictor.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-aimpredictor.BorderColor3 = Color3.new(0, 0.666667, 1)
+aimpredictor.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+aimpredictor.BorderColor3 = Color3.fromRGB(0, 170, 255)
 aimpredictor.Position = UDim2.new(0, 0, 0.267379671, 0)
 aimpredictor.Size = UDim2.new(0, 110, 0, 50)
 aimpredictor.Visible = false
 aimpredictor.Font = Enum.Font.Ubuntu
 aimpredictor.Text = "Aim Predictor"
-aimpredictor.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-aimpredictor.TextSize = 20
+aimpredictor.TextColor3 = Color3.fromRGB(85, 170, 255)
+aimpredictor.TextSize = 20.000
 aimpredictor.TextWrapped = true
 aimpredictor.TextXAlignment = Enum.TextXAlignment.Left
 
 aimtriggerbot.Name = "aimtriggerbot"
 aimtriggerbot.Parent = ScrollingFrame
-aimtriggerbot.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-aimtriggerbot.BorderColor3 = Color3.new(0, 0.666667, 1)
+aimtriggerbot.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+aimtriggerbot.BorderColor3 = Color3.fromRGB(0, 170, 255)
 aimtriggerbot.Position = UDim2.new(0, 0, 0.267379671, 0)
 aimtriggerbot.Size = UDim2.new(0, 110, 0, 50)
 aimtriggerbot.Visible = false
 aimtriggerbot.Font = Enum.Font.Ubuntu
 aimtriggerbot.Text = "Triggerbot"
-aimtriggerbot.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-aimtriggerbot.TextSize = 20
+aimtriggerbot.TextColor3 = Color3.fromRGB(85, 170, 255)
+aimtriggerbot.TextSize = 20.000
 aimtriggerbot.TextWrapped = true
 aimtriggerbot.TextXAlignment = Enum.TextXAlignment.Left
 
 wallhack.Name = "wallhack"
 wallhack.Parent = ScrollingFrame
-wallhack.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-wallhack.BorderColor3 = Color3.new(0, 0.666667, 1)
+wallhack.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+wallhack.BorderColor3 = Color3.fromRGB(0, 170, 255)
 wallhack.Position = UDim2.new(0, 0, 3.92146373, 0)
 wallhack.Size = UDim2.new(0, 370, 0, 31)
 wallhack.ZIndex = 33
 wallhack.Font = Enum.Font.Ubuntu
 wallhack.Text = "Shoot thru walls"
-wallhack.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-wallhack.TextSize = 20
+wallhack.TextColor3 = Color3.fromRGB(85, 170, 255)
+wallhack.TextSize = 20.000
 wallhack.TextWrapped = true
 wallhack.TextXAlignment = Enum.TextXAlignment.Left
 
 modshotgun.Name = "modshotgun"
 modshotgun.Parent = ScrollingFrame
-modshotgun.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-modshotgun.BorderColor3 = Color3.new(0, 0.666667, 1)
+modshotgun.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+modshotgun.BorderColor3 = Color3.fromRGB(0, 170, 255)
 modshotgun.Position = UDim2.new(0, 0, 0.523438752, 0)
 modshotgun.Size = UDim2.new(0, 116, 0, 47)
 modshotgun.Visible = false
 modshotgun.ZIndex = 0
 modshotgun.Font = Enum.Font.Ubuntu
 modshotgun.Text = "Reduced spread/single shotgun bullet"
-modshotgun.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-modshotgun.TextSize = 20
+modshotgun.TextColor3 = Color3.fromRGB(85, 170, 255)
+modshotgun.TextSize = 20.000
 modshotgun.TextWrapped = true
 modshotgun.TextXAlignment = Enum.TextXAlignment.Left
 
 AutosortFrame.Name = "AutosortFrame"
 AutosortFrame.Parent = JailbreakGUI
-AutosortFrame.BackgroundColor3 = Color3.new(0, 0, 0.176471)
-AutosortFrame.BorderColor3 = Color3.new(0, 0.666667, 1)
+AutosortFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 45)
+AutosortFrame.BorderColor3 = Color3.fromRGB(0, 170, 255)
 AutosortFrame.Position = UDim2.new(0.452254742, 0, 0.0814681426, 0)
 AutosortFrame.Size = UDim2.new(0, 402, 0, 335)
 AutosortFrame.Visible = false
 
 ScrollingFrame_2.Parent = AutosortFrame
 ScrollingFrame_2.Active = true
-ScrollingFrame_2.BackgroundColor3 = Color3.new(0, 0, 0.176471)
-ScrollingFrame_2.BorderColor3 = Color3.new(0, 0.666667, 1)
+ScrollingFrame_2.BackgroundColor3 = Color3.fromRGB(0, 0, 45)
+ScrollingFrame_2.BorderColor3 = Color3.fromRGB(0, 170, 255)
 ScrollingFrame_2.Position = UDim2.new(0.0329122208, 0, 0.127253339, 0)
 ScrollingFrame_2.Size = UDim2.new(0, 375, 0, 215)
 ScrollingFrame_2.CanvasSize = UDim2.new(0, 0, 0, 0)
@@ -544,174 +548,176 @@ UIListLayout.Padding = UDim.new(0, 10)
 loadoutframe.Name = "loadoutframe"
 loadoutframe.Parent = ScrollingFrame_2
 loadoutframe.Active = true
-loadoutframe.BackgroundColor3 = Color3.new(0, 0, 0.176471)
-loadoutframe.BorderColor3 = Color3.new(0, 0.666667, 1)
+loadoutframe.BackgroundColor3 = Color3.fromRGB(0, 0, 45)
+loadoutframe.BorderColor3 = Color3.fromRGB(0, 170, 255)
 loadoutframe.Size = UDim2.new(0, 358, 0, 198)
 loadoutframe.Visible = false
 loadoutframe.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 Title_2.Name = "Title"
 Title_2.Parent = loadoutframe
-Title_2.BackgroundColor3 = Color3.new(0, 0, 0.176471)
-Title_2.BorderColor3 = Color3.new(0, 0.666667, 1)
+Title_2.BackgroundColor3 = Color3.fromRGB(0, 0, 45)
+Title_2.BorderColor3 = Color3.fromRGB(0, 170, 255)
 Title_2.LayoutOrder = 1
 Title_2.Size = UDim2.new(0, 317, 0, 25)
 Title_2.Font = Enum.Font.Ubuntu
 Title_2.Text = "loadoutname"
-Title_2.TextColor3 = Color3.new(0.333333, 0.666667, 1)
+Title_2.TextColor3 = Color3.fromRGB(85, 170, 255)
 Title_2.TextScaled = true
-Title_2.TextSize = 27
-Title_2.TextStrokeColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+Title_2.TextSize = 27.000
+Title_2.TextStrokeColor3 = Color3.fromRGB(110, 110, 248)
 Title_2.TextWrapped = true
 
 delloadout.Name = "delloadout"
 delloadout.Parent = Title_2
-delloadout.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-delloadout.BorderColor3 = Color3.new(0, 0.666667, 1)
+delloadout.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+delloadout.BorderColor3 = Color3.fromRGB(0, 170, 255)
 delloadout.Position = UDim2.new(1, 0, -0.0149493404, 0)
 delloadout.Size = UDim2.new(0, 25, 0, 25)
 delloadout.Font = Enum.Font.Ubuntu
 delloadout.Text = "X"
-delloadout.TextColor3 = Color3.new(0.666667, 0, 0)
+delloadout.TextColor3 = Color3.fromRGB(170, 0, 0)
 delloadout.TextScaled = true
-delloadout.TextSize = 14
+delloadout.TextSize = 14.000
 delloadout.TextWrapped = true
 
 itemframe.Name = "itemframe"
 itemframe.Parent = loadoutframe
-itemframe.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.219608)
-itemframe.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+itemframe.BackgroundColor3 = Color3.fromRGB(24, 24, 56)
+itemframe.BorderColor3 = Color3.fromRGB(110, 110, 248)
 itemframe.Position = UDim2.new(0, 0, 0.378787875, 0)
 itemframe.Size = UDim2.new(0, 342, 0, 25)
 itemframe.Visible = false
 
 x.Name = "x"
 x.Parent = itemframe
-x.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-x.BorderColor3 = Color3.new(0, 0.666667, 1)
+x.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+x.BorderColor3 = Color3.fromRGB(0, 170, 255)
 x.Position = UDim2.new(0.926900625, 0, 0, 0)
 x.Size = UDim2.new(0, 25, 0, 25)
 x.Font = Enum.Font.Ubuntu
 x.Text = "X"
-x.TextColor3 = Color3.new(0.666667, 0, 0)
+x.TextColor3 = Color3.fromRGB(170, 0, 0)
 x.TextScaled = true
-x.TextSize = 14
+x.TextSize = 14.000
 x.TextWrapped = true
 
 itemname.Name = "itemname"
 itemname.Parent = itemframe
-itemname.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-itemname.BorderColor3 = Color3.new(0, 0.666667, 1)
+itemname.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+itemname.BorderColor3 = Color3.fromRGB(0, 170, 255)
 itemname.Size = UDim2.new(0, 171, 0, 25)
 itemname.Font = Enum.Font.Ubuntu
 itemname.PlaceholderText = "Item Name"
 itemname.Text = ""
-itemname.TextColor3 = Color3.new(0.333333, 0.666667, 1)
+itemname.TextColor3 = Color3.fromRGB(85, 170, 255)
 itemname.TextScaled = true
-itemname.TextSize = 14
+itemname.TextSize = 14.000
 itemname.TextWrapped = true
 
 slotnum.Name = "slotnum"
 slotnum.Parent = itemframe
-slotnum.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-slotnum.BorderColor3 = Color3.new(0, 0.666667, 1)
+slotnum.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+slotnum.BorderColor3 = Color3.fromRGB(0, 170, 255)
 slotnum.Position = UDim2.new(0.5, 0, 0, 0)
 slotnum.Size = UDim2.new(0, 146, 0, 25)
 slotnum.Font = Enum.Font.Ubuntu
 slotnum.PlaceholderText = "Slot number"
 slotnum.Text = ""
-slotnum.TextColor3 = Color3.new(0.333333, 0.666667, 1)
+slotnum.TextColor3 = Color3.fromRGB(85, 170, 255)
 slotnum.TextScaled = true
-slotnum.TextSize = 14
+slotnum.TextSize = 14.000
 slotnum.TextWrapped = true
 
 active.Name = "active"
 active.Parent = loadoutframe
-active.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-active.BorderColor3 = Color3.new(0, 0.666667, 1)
+active.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+active.BorderColor3 = Color3.fromRGB(0, 170, 255)
 active.Position = UDim2.new(0, 0, 0.25252524, 0)
 active.Size = UDim2.new(0, 342, 0, 25)
 active.Font = Enum.Font.Ubuntu
 active.Text = "Active"
-active.TextColor3 = Color3.new(0.666667, 0, 0)
+active.TextColor3 = Color3.fromRGB(170, 0, 0)
 active.TextScaled = true
-active.TextSize = 14
+active.TextSize = 14.000
 active.TextWrapped = true
 
 additem.Name = "additem"
 additem.Parent = loadoutframe
-additem.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-additem.BorderColor3 = Color3.new(0, 0.666667, 1)
+additem.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+additem.BorderColor3 = Color3.fromRGB(0, 170, 255)
 additem.Position = UDim2.new(0, 0, 0.25252524, 0)
 additem.Size = UDim2.new(0, 342, 0, 25)
 additem.Font = Enum.Font.Ubuntu
 additem.Text = "+ Add Item"
-additem.TextColor3 = Color3.new(0.333333, 1, 1)
+additem.TextColor3 = Color3.fromRGB(85, 255, 255)
 additem.TextScaled = true
-additem.TextSize = 14
+additem.TextSize = 14.000
 additem.TextWrapped = true
 
 UIListLayout_2.Parent = loadoutframe
 
 Title_3.Name = "Title"
 Title_3.Parent = AutosortFrame
-Title_3.BackgroundColor3 = Color3.new(1, 1, 1)
-Title_3.BackgroundTransparency = 1
-Title_3.BorderColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+Title_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Title_3.BackgroundTransparency = 1.000
+Title_3.BorderColor3 = Color3.fromRGB(110, 110, 248)
 Title_3.LayoutOrder = 1
 Title_3.Position = UDim2.new(0.0602755435, 0, 0.0149253728, 0)
 Title_3.Size = UDim2.new(0, 352, 0, 30)
 Title_3.Font = Enum.Font.Ubuntu
 Title_3.Text = "Hotbar Auto-Sorter"
-Title_3.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-Title_3.TextSize = 30
-Title_3.TextStrokeColor3 = Color3.new(0.431373, 0.431373, 0.972549)
+Title_3.TextColor3 = Color3.fromRGB(85, 170, 255)
+Title_3.TextSize = 30.000
+Title_3.TextStrokeColor3 = Color3.fromRGB(110, 110, 248)
 Title_3.TextWrapped = true
 
 hide.Name = "hide"
 hide.Parent = AutosortFrame
-hide.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-hide.BorderColor3 = Color3.new(0, 0.666667, 1)
+hide.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+hide.BorderColor3 = Color3.fromRGB(0, 170, 255)
 hide.Position = UDim2.new(0.337292314, 0, 0.922172725, 0)
 hide.Size = UDim2.new(0, 129, 0, 26)
 hide.ZIndex = 33
 hide.Font = Enum.Font.Ubuntu
 hide.Text = "Hide"
-hide.TextColor3 = Color3.new(0.333333, 0.666667, 1)
-hide.TextSize = 28
+hide.TextColor3 = Color3.fromRGB(85, 170, 255)
+hide.TextSize = 28.000
 hide.TextWrapped = true
 
 addloadout.Name = "addloadout"
 addloadout.Parent = AutosortFrame
-addloadout.BackgroundColor3 = Color3.new(0, 0, 0.176471)
-addloadout.BorderColor3 = Color3.new(0, 0.666667, 1)
+addloadout.BackgroundColor3 = Color3.fromRGB(0, 0, 45)
+addloadout.BorderColor3 = Color3.fromRGB(0, 170, 255)
 addloadout.Position = UDim2.new(0.0315795019, 0, 0.803062916, 0)
 addloadout.Size = UDim2.new(0, 168, 0, 25)
 addloadout.ZIndex = 33
 addloadout.Font = Enum.Font.Ubuntu
 addloadout.Text = "Add loadout with name:"
-addloadout.TextColor3 = Color3.new(0.333333, 0.666667, 1)
+addloadout.TextColor3 = Color3.fromRGB(85, 170, 255)
 addloadout.TextScaled = true
-addloadout.TextSize = 28
+addloadout.TextSize = 28.000
 addloadout.TextWrapped = true
 
 loadoutname.Name = "loadoutname"
 loadoutname.Parent = AutosortFrame
-loadoutname.BackgroundColor3 = Color3.new(0, 0, 0.27451)
-loadoutname.BorderColor3 = Color3.new(0, 0.666667, 1)
+loadoutname.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+loadoutname.BorderColor3 = Color3.fromRGB(0, 170, 255)
 loadoutname.Position = UDim2.new(0.449489921, 0, 0.802994728, 0)
 loadoutname.Size = UDim2.new(0, 206, 0, 25)
 loadoutname.Font = Enum.Font.Ubuntu
 loadoutname.PlaceholderText = "Loadout Name"
 loadoutname.Text = ""
-loadoutname.TextColor3 = Color3.new(0.333333, 0.666667, 1)
+loadoutname.TextColor3 = Color3.fromRGB(85, 170, 255)
 loadoutname.TextScaled = true
-loadoutname.TextSize = 14
+loadoutname.TextSize = 14.000
 loadoutname.TextWrapped = true
+
 -- Scripts:
-function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript 
-	local script = Instance.new('LocalScript')
-	script.Parent = JailbreakGUI
+
+local function VNAEK_fake_script() -- JailbreakGUI.LocalScript 
+	local script = Instance.new('LocalScript', JailbreakGUI)
+
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
 	mainframe.UIGridLayout.SortOrder = 0
 	local aframe = script.Parent.AutosortFrame
@@ -797,7 +803,7 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	if game.PlaceId == 606849621 then
 		local notif = require(game:GetService("ReplicatedStorage").Game.Notification)
 		local tcservice = game:GetService("TextChatService")
-		
+	
 		local function notify(text)
 			text = "<font color= '#"..mainframe.BorderColor3:ToHex().."'>[Red's JB GUI] "..text.."</font>"
 			if tcservice.ChatVersion == Enum.ChatVersion.LegacyChatService then
@@ -806,9 +812,10 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				tcservice.TextChannels.RBXGeneral:DisplaySystemMessage(text)
 			end
 		end
-		
+	
 		if not _G.RedsJBGUI then
 			_G.RedsJBGUI = true
+			notify("(Hopefully) fixed performance reducing over time by removing most pcall functions.")
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
 	
@@ -861,8 +868,6 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			if syn then
 				syn.protect_gui(script.Parent)
 			end
-	
-			notify("Fixed bank truck robbery notif showing up every 5 mins when it isn't open.")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	
 			local function makevisible(plr)
@@ -874,23 +879,21 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			for i, plr in pairs(minimap:GetChildren()) do makevisible(plr) end
 	
 			minimap.ChildAdded:connect(makevisible)
-			
+	
 			lplr.PlayerGui.AppUI.ChildAdded:connect(function(c)
 				if c.Name == "Minimap" then
-					repeat task.wait()
-					until pcall(function() return c.Map.Container.Points end)
-					
+					c:WaitForChild("Map"):WaitForChild("Container"):WaitForChild("Points")
 					local minimap2 = c.Map.Container.Points
 					local function idk(v)
 						if v.ClassName == "ImageLabel" then
 							makevisible(v)
 						end
 					end
-					
+	
 					for i,v in pairs(minimap2:GetChildren()) do
 						idk(v)
 					end
-					
+	
 					minimap2.ChildAdded:connect(idk)
 				end
 			end)
@@ -899,13 +902,11 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 			local function walcc()
 				runservice.RenderStepped:connect(function()
-	
-					pcall(function()
+					if lplr.Character and lplr.Character:FindFirstChild("Humanoid") then
 						if lplr.Character.Humanoid.WalkSpeed == 0 then
 							lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
 						end
-					end)
-	
+					end
 				end)
 			end
 	
@@ -932,7 +933,10 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			runservice.RenderStepped:connect(function()
 	
 				for i,a in pairs(moduleui.CircleAction.Specs) do
-					if a.Duration ~= false and HoldEBypass and a.Name ~= "Rob" and a.Name ~= "Open Crate" then
+					local function name()
+						return a.Name:lower()
+					end
+					if a.Duration ~= false and HoldEBypass and name() ~= "rob" and name() ~= "open crate" and name():sub(1,4) ~= "grab" and name():sub(1,5) ~= "place" then
 						a.Timed = false;
 					end
 				end
@@ -952,17 +956,19 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					workspace.Gravity = 196
 				end
 			end)
-			
+	
 			local aimpredict = false
 			local triggerbot = false
 			local releaseonuntarget = false
 			onetimefunc(mainframe.aimbot.Activated, function()
 				loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/Aimbot.lua"))()
-				
+	
 				repeat task.wait() until RedsAimbotMisc
+				local vel2 = Vector3.new()
+				local misc = RedsAimbotMisc
 				runservice.RenderStepped:connect(function()
-					local misc = RedsAimbotMisc
 					if misc.TargetedCharacter then
+						local targetedchr = misc.TargetedCharacter
 						local tool
 						local speed
 						local fireauto
@@ -984,8 +990,12 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 							misc.aimoffset = Vector3.new()
 						end
 						if speed and aimpredict then
-							local distance = (lplr.Character.Humanoid.RootPart.Position - misc.TargetedCharacter.Humanoid.RootPart.Position).Magnitude
-							misc.aimoffset = (misc.TargetedCharacter.Humanoid.RootPart.Velocity/speed)*distance
+							local velocity = targetedchr.Humanoid.RootPart.Velocity
+							if velocity.Magnitude < 1 then
+								velocity = vel2
+							end
+							local distance = (lplr.Character.Humanoid.RootPart.Position - targetedchr.Humanoid.RootPart.Position).Magnitude
+							misc.aimoffset = ((velocity-lplr.Character.Humanoid.RootPart.Velocity)/speed)*distance
 						else
 							misc.aimoffset = Vector3.new()
 						end
@@ -1008,13 +1018,26 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					end
 				end)
 				
+				Changed(misc, "TargetedCharacter", function(chr)
+					if chr then
+						local change
+						change = Changed(chr.Humanoid.RootPart, "CFrame", function(new,old)
+							vel2 = (old-new).Position
+							if misc.TargetedCharacter ~= chr then
+								change.Stop()
+								vel2 = Vector3.new()
+							end
+						end)
+					end
+				end)
+	
 				mainframe.aimpredictor.Visible = true
 				mainframe.aimtriggerbot.Visible = true
-				
+	
 				mainframe.aimpredictor.Activated:connect(function()
 					aimpredict = not aimpredict
 				end)
-				
+	
 				mainframe.aimtriggerbot.Activated:connect(function()
 					triggerbot = not triggerbot
 				end)
@@ -1042,7 +1065,7 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				Line.Transparency = 1
 	
 				local pointfunction = runservice.Heartbeat:connect(function()
-					pcall(function()
+					if lplr.Character and lplr.Character:FindFirstChild("Humanoid") and lplr.Character.Humanoid.RootPart then
 						local v = workspace.CurrentCamera:WorldToScreenPoint(lplr.Character.Humanoid.RootPart.Position)
 						local v2, onscreen = workspace.CurrentCamera:WorldToScreenPoint(part.Position)
 						if not onscreen then
@@ -1054,7 +1077,7 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						local x2, y2 = v2.X, v2.Y
 						Line.From = Vector2.new(x,y)
 						Line.To = Vector2.new(x2, y2)
-					end)
+					end
 				end)
 	
 				coroutine.resume(coroutine.create(function()
@@ -1138,9 +1161,7 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end)
 	
 			local function changegunstats(Table)
-	
 				for i,v in pairs(itemconfig:GetChildren()) do
-	
 					pcall(function()
 						local gun = require(v)
 						if v.Name == "Shotgun" then
@@ -1151,9 +1172,7 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 							gun[index] = value
 						end
 					end)
-	
 				end
-	
 			end
 	
 			onetimefunc(mainframe.modguns.Activated, function()
@@ -1164,7 +1183,7 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				notify("Removed recoil + all guns fire automatically (also funni grenade spam)")
 				mainframe.modshotgun.Visible = true
 				local singlebullet = false
-				
+	
 				mainframe.modshotgun.Activated:connect(function()
 					local shotgun = require(itemconfig.Shotgun)
 					singlebullet = not singlebullet
@@ -1174,7 +1193,7 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						shotgun.BulletSpread = 0.02
 					end
 				end)
-				
+	
 			end)
 	
 			onetimefunc(mainframe.forcedaytime.Activated, function()
@@ -1189,9 +1208,9 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			onetimefunc(mainframe.holdebypass.Activated, function()
 				HoldEBypass = true
 			end)
-			
-			onetimefunc(holdebypass.Activated, function()
-				notify("Hold E Bypass enabled. Sadly cannot be used with the donut shop, gas station, or air drops ;(")
+	
+			onetimefunc(mainframe.holdebypass.Activated, function()
+				notify("Hold E Bypass enabled. Cannot be used with the following: donut shop, gas station, passenger train items, air drops, and oil rig dynamite.")
 			end)
 	
 	
@@ -1202,9 +1221,9 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				local function speedhack()
 	
 					runservice.RenderStepped:connect(function()
-						pcall(function()
+						if lplr.Character and lplr.Character:FindFirstChild("Humanoid") then
 							lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
-						end)
+						end
 					end)
 	
 				end
@@ -1229,9 +1248,9 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						mainframe.ScrollingEnabled = true
 					end)
 				end)
-				
-				
-				
+	
+	
+	
 				Changed(speeds, "walkspeed", function(num)
 					if num > 150 then
 						speeds.walkspeed = 150
@@ -1250,6 +1269,7 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end)
 	
 			local trainrob = true
+			local banktruck = true
 	
 			onetimefunc(mainframe.RobberyNotifier.Activated, function()
 				local IconIds = {}
@@ -1278,7 +1298,18 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 								Changed(v2, "ImageColor3", function(color)
 									if color == Color3.new(0,1,0) then
-										notify("The "..name.." is open for robbery.")
+										if name == "bank truck" then
+											if banktruck then
+												banktruck = false
+												notify("The bank truck is open.")
+											end
+										else
+											notify("The "..name.." is open for robbery.")
+										end
+									else 
+										if name == "bank truck" then
+											banktruck = true
+										end
 									end
 								end)
 	
@@ -1291,15 +1322,7 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 	
 				plrgui.WorldMarkersGui.ChildAdded:connect(function(marker)
-					while true do
-						if pcall(function()
-								return marker.ImageLabel.ImageLabel.Image
-							end) then
-							break
-						else
-							task.wait()
-						end
-					end
+					marker:WaitForChild("ImageLabel"):WaitForChild("ImageLabel"):WaitForChild("Image")
 					local img = marker.ImageLabel.ImageLabel.Image
 					for i,v in pairs(IconIds) do
 						if img == "rbxassetid://"..v then
@@ -1319,7 +1342,18 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 								notify("The cargo plane is inbound!")
 							else
 								if marker.ImageLabel.ImageColor3 == Color3.new(0,1,0) then
-									notify("The "..i.." is open for robbery.")
+									if i == "bank truck" then
+										if banktruck then
+											banktruck = false
+											notify("The bank truck is open.")
+										end
+									else
+										notify("The "..i.." is open for robbery.")
+									end
+								else 
+									if i == "bank truck" then
+										banktruck = true
+									end
 								end
 							end
 						end
@@ -1338,13 +1372,11 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end)
 	
 			runservice.Heartbeat:connect(function()
-	
-				local hrpvalid, hrp = pcall(function()
-					return lplr.Character.Humanoid.RootPart
-				end)
-	
-				if hrpvalid and gunshoptp then
-					hrp.CFrame = CFrame.new() + Vector3.new(-1124.7, 18.9, -1660.5)
+				if lplr.Character and lplr.Character:FindFirstChild("Humanoid") and gunshoptp then
+					local hrp = lplr.Character.Humanoid.RootPart
+					if hrp then
+						hrp.CFrame = CFrame.new() + Vector3.new(-1124.7, 18.9, -1660.5)
+					end
 				end
 			end)
 	
@@ -1381,7 +1413,7 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				mainframe["1flyhack"].Visible = false
 				-- actual fly script
 				local flying = false
-				local maxdistance = 100000000000000 --using math.huge makes this script wonky
+				local maxdistance = 100000000000000
 				local uiservice = game.UserInputService
 				local mouse = lplr:GetMouse()
 	
@@ -1401,24 +1433,23 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				local pos = Vector3.new()
 	
 				runservice.Heartbeat:connect(function()
-	
-					pcall(function()
-						local hrp
-						local flyspeed = speeds.flyspeed
-						local invehicle = getmodel()
-						if invehicle and isdriver() then
-							hrp = invehicle.Engine
-						else
+					local hrp
+					local flyspeed = speeds.flyspeed
+					local invehicle = getmodel()
+					if invehicle and isdriver() then
+						hrp = invehicle.Engine
+					else
+						if lplr.Character and lplr.Character:FindFirstChild("Humanoid") and lplr.Character.Humanoid.RootPart then
 							hrp = lplr.Character.Humanoid.RootPart
-							if flyspeed > 150 then
-								flyspeed = 150
-							end
 						end
-	
-						if flying then
-							local cam = workspace.Camera
+						if flyspeed > 150 then
+							flyspeed = 150
 						end
-	
+					end
+					if flying then
+						local cam = workspace.Camera
+					end
+					if hrp then
 						local frontoffset = CFrame.new() + Vector3.new(0,0,-maxdistance)
 						local backoffset = CFrame.new() + Vector3.new(0,0,maxdistance)
 						local leftoffset = CFrame.new() + Vector3.new(-maxdistance,0,0)
@@ -1455,8 +1486,7 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						else
 							pos = hrp.Position
 						end
-					end)
-	
+					end
 				end)
 	
 				uiservice.InputBegan:connect(function(key,processed)
@@ -1518,7 +1548,7 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			local ctxt = mainframe.AAAAA.Text
 	
 			runservice.RenderStepped:connect(function()
-				local success = pcall(function()
+				if workspace.Casino:FindFirstChild("RobberyDoor") and workspace.Casino.RobberyDoor:FindFirstChild("Codes") then
 					local codes = workspace.Casino.RobberyDoor.Codes
 					local code
 	
@@ -1553,8 +1583,7 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					else
 						mainframe.AAAAA.Text = "code non-existent"
 					end
-				end)
-				if not success then
+				else
 					mainframe.AAAAA.Text = "Casino building isn't loaded in :("
 				end
 			end)
@@ -1594,7 +1623,7 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 	
 					local function iscarlocked()
 						local idk, icon = pcall(function()
-							return lplr.PlayerGui.AppUI.Speedometer.Top.Lock.Icon.Image -- the speedometer thing is destroyed when you exit a vehicle, hence the pcall
+							return lplr.PlayerGui.AppUI.Speedometer.Top.Lock.Icon.Image -- the speedometer thing is destroyed when you exit a vehicle
 						end)
 						if idk then
 							return icon ~= "rbxassetid://5928936296"
@@ -1642,7 +1671,7 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				if not ropefollow then
 					ropepart = nil
 					local model = vehicle.GetLocalVehicleModel()
-					if pcall(function() return model.Winch.RopeConstraint end) then
+					if model:FindFirstChild("Winch") and model.Winch:FindFirstChild("RopeConstraint") then
 						model.Winch.RopeConstraint.Length = 30
 					end
 				end
@@ -1655,7 +1684,7 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			runservice.Heartbeat:connect(function()
 				local model = vehicle.GetLocalVehicleModel()
 				if model and ropefollow and ropepart and ropepart ~= model then
-					if pcall(function() return model.Preset.RopePull end) then
+					if model:FindFirstChild("Preset") and model.Preset:FindFirstChild("RopePull") then
 						local modelrope = model.Winch.RopeConstraint
 						local ropepull = model.Preset.RopePull
 						if ropepart.Parent == workspace.Vehicles then
@@ -1874,20 +1903,20 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 					end
 				end
 				if loadout then
-					pcall(function()
-						local folder = lplr.Folder
+					local folder = lplr:FindFirstChild("Folder")
+					if folder then
 						local folitems = folder:GetChildren()
 						for item, pos in pairs(loadout) do
 							for i, item2 in pairs(folitems) do
 								if getorder(item2) == pos and item2.Name ~= item and folder:FindFirstChild(item) then
 									setorder(item2, #folitems+1)
 								end
-								if lplr.Folder:FindFirstChild(item) then
-									setorder(lplr.Folder[item], pos)
+								if folder:FindFirstChild(item) then
+									setorder(folder[item], pos)
 								end
 							end
 						end
-					end)
+					end
 				end
 			end)
 	
@@ -1911,7 +1940,7 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 			end)
 	
 			local replacechute = false
-			
+	
 			para.Parachute = function(...)
 				if replacechute then
 					return para.Glider(...)
@@ -1936,16 +1965,16 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 				end
 				notify("NPCs may still shoot if another player is nearby you (server-sided shid)")
 			end)
-			
+	
 			local shootThruWalls = false
 			mainframe.wallhack.Activated:connect(function()
 				shootThruWalls = not shootThruWalls
 			end)
-			
+	
 			onetimefunc(mainframe.wallhack.Activated, function()
 				local ignore = {"MansionRobbery", "Drop"}
 				local children = {}
-				
+	
 				local function dropignore(drop)
 					if drop.Name == "Drop" then
 						for i,v in pairs(drop:GetChildren()) do
@@ -1967,34 +1996,34 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						end)
 					end
 				end
-				
+	
 				for i,v in pairs(workspace:GetChildren()) do
 					if not table.find(ignore, v.Name) and not plrs:GetPlayerFromCharacter(v) then
 						table.insert(children, v)
 						dropignore(v)
 					end
 				end
-				
+	
 				workspace.ChildAdded:connect(function(c)
 					if not table.find(ignore, c.Name) and not plrs:GetPlayerFromCharacter(c) then
 						table.insert(children, c)
 						dropignore(c)
 					end
 				end)
-				
+	
 				workspace.ChildRemoved:connect(function(c)
 					local findchild = table.find(children, c)
 					if findchild then
 						table.remove(children, findchild)
 					end
 				end)
-				
+	
 				for i,v in pairs(workspace.MansionRobbery:GetChildren()) do
 					if v.Name ~= "ActiveBoss" and v.Name ~= "GuardsFolder" then
 						table.insert(children, v)
 					end
 				end
-				
+	
 				local function getequippeditem()
 					for i,v in pairs(lplr.Folder:GetChildren()) do
 						if v:GetAttribute("InventoryItemEquipped") == true then
@@ -2002,9 +2031,9 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 						end
 					end
 				end
-				
+	
 				local shoot = gunmodule.Shoot
-				
+	
 				gunmodule.Shoot = function(...)
 					local args = {...}
 					local main = args[1]
@@ -2033,6 +2062,5 @@ function SCRIPT_RURZ70_FAKESCRIPT() -- JailbreakGUI.LocalScript
 		wait(0.5)
 		script.Parent:Destroy()
 	end
-
 end
-coroutine.resume(coroutine.create(SCRIPT_RURZ70_FAKESCRIPT))
+coroutine.wrap(VNAEK_fake_script)()
