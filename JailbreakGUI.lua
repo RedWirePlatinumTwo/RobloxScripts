@@ -940,7 +940,7 @@ local function VASX_fake_script() -- JailbreakGUI.LocalScript
 							return ""
 						end
 					end
-					if a.Duration ~= false and HoldEBypass and name() ~= "rob" and name() ~= "open crate" and name():sub(1,4) ~= "grab" and name():sub(1,5) ~= "place" then
+					if a.Duration ~= false and HoldEBypass and name() ~= "rob" and name() ~= "open crate" and name():sub(1,4) ~= "grab" and name() ~= "place tnt" then
 						a.Timed = false;
 					end
 				end
