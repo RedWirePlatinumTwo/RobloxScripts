@@ -39,11 +39,12 @@ local reformatstring = function(s)
 	return restring
 end
 
-getgenv().TableToString = function(Table, TableName, simplify, usefailstring, IsInternalTable)
+getgenv().TableToString = function(Table, TableName, args, IsInternalTable)
 	local s = ""
+	if not args then args = {} end
 
 	local function setname(t, name)
-		if not simplify then
+		if not args.simplify then
 		    
     		local function checkreps()
     			local reps = 0
@@ -139,11 +140,8 @@ getgenv().TableToString = function(Table, TableName, simplify, usefailstring, Is
 			end
 			
 			local part1 = ""
-			local ttsargs = {}
-			ttsargs.simplify = simplify
-			ttsargs.usefailstring = usefailstring
-			local part1formatted, failed1 = Format(i,v,ttsargs,true)
-			local part2, failed2 = Format(v,i,ttsargs,true)
+			local part1formatted, failed1 = Format(i,v,args,true)
+			local part2, failed2 = Format(v,i,args,true)
 			
 			if part2 == "" then
 				part2 = isrecursivetable(v)
@@ -167,18 +165,16 @@ getgenv().TableToString = function(Table, TableName, simplify, usefailstring, Is
 			end
 			local failstring = ""
 			local failignore = {"function", "RBXScriptConnection", "RBXScriptSignal"}
-			if usefailstring then
-				if failed1 or failed2 then
-					failstring = " --failed to convert types:"
-					if failed1 and not table.find(failignore, typeof(i)) then
-						failstring = failstring.." "..typeof(i)
-					end
-					if failed2 and not table.find(failignore, typeof(v)) then
-						failstring = failstring.." "..typeof(v)
-					end
-					if failstring == " --failed to convert types:" then
-						failstring = ""
-					end
+			if failed1 or failed2 then
+				failstring = " --failed to convert types:"
+				if failed1 and not table.find(failignore, typeof(i)) then
+					failstring = failstring.." "..typeof(i)
+				end
+				if failed2 and not table.find(failignore, typeof(v)) then
+					failstring = failstring.." "..typeof(v)
+				end
+				if failstring == " --failed to convert types:" then
+					failstring = ""
 				end
 			end
 			return part1.." = "..part2..failstring
@@ -186,15 +182,27 @@ getgenv().TableToString = function(Table, TableName, simplify, usefailstring, Is
 		end
 		
 		local extratables = {}
+		local function contextcheck(v1, v2, v3)
+			local context = args.contextfunc
+			if context then
+				context = context(v1,v2,v3)
+				if context and context ~= "" then
+					s = s.." --"..context
+				end
+			end
+		end
+		
 		for i,v in pairs(Table) do
 			if type(v) ~= "table" then
 				s = s..stringmethod(i,v)
+				contextcheck(Table,i,v)
 			else
 				extratables[i] = v
 			end
 		end
 		for i,v in pairs(extratables) do
 			s = s.."\n"..stringmethod(i,v)
+			contextcheck(Table,i,v)
 		end
 		if not IsInternalTable then
 			s = s.."\n\nreturn "..name
@@ -222,7 +230,7 @@ getgenv().Format = function(var, tname, ttsargs, IsInternalTable)
             st = "'"..reformatstring(var).."'"
         elseif type(var) == "table" then
             if not table.find(catchrepeats, var) then
-				st = TableToString(var, tname, ttsargs.simplify, ttsargs.usefailstring, IsInternalTable)
+				st = TableToString(var, tname, ttsargs, IsInternalTable)
 			end
 		elseif typeof(var) == "Instance" then
 			st = GetFullName(var)
@@ -381,7 +389,7 @@ if not customfname then customfname = funcname end
 				end
 			end)
 		end
-		print("logging", customfname.."!")
+		print("logging", customfname.."! WARNING: may be detected by anticheat!!")
 		return newfunc
 	end
 end
