@@ -1261,7 +1261,7 @@ globals.TextWrapped = true
 
 -- Scripts:
 
-local function UQLNV_fake_script() -- Aimbot.Scripts 
+local function MQPYVI_fake_script() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1292,7 +1292,7 @@ local function UQLNV_fake_script() -- Aimbot.Scripts
 	
 	if not _G.RedsAimbot then
 		_G.RedsAimbot = true
-		sendnotif("Aimbot Update","Slightly improved performance (hopefully) by removing pcall functions.")
+		sendnotif("Aimbot Update","Attempted to fix issue where some NPCs would be untargetable.")
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -1988,7 +1988,7 @@ local function UQLNV_fake_script() -- Aimbot.Scripts
 		
 		workspace.DescendantRemoving:connect(function(v)
 			local npcfind = table.find(npcs, v)
-			if npcfind then
+			if npcfind and GetFamily(v)[1] ~= game then
 				table.remove(npcs, npcfind)
 			end
 		end)
@@ -2286,4 +2286,4 @@ local function UQLNV_fake_script() -- Aimbot.Scripts
 		gui:Destroy()
 	end
 end
-coroutine.wrap(UQLNV_fake_script)()
+coroutine.wrap(MQPYVI_fake_script)()
