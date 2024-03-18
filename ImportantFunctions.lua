@@ -381,9 +381,12 @@ if not customfname then customfname = funcname end
 			funcparent[funcname] = newfunc
 		else
 			local hook
-			hook = hookfunction(funcparent[funcname], function(...)
-				newfunc(...)
-				return hook(...)
+			hook = hookmetatable(game, "__namecall", function(self, ...)
+				if self == funcparent and getnamecallmethod() == funcname then
+					return newfunc(self, ...)
+				else
+					return hook(self, ...)
+				end
 			end)
 		end
 		print("logging", customfname.."! WARNING: may be detected by anticheat!!")
