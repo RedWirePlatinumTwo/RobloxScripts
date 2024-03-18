@@ -376,7 +376,6 @@ if not customfname then customfname = funcname end
 	if isFunctionLogged then
 		error("This function has already been logged!")
 	else
-		table.insert(LoggedFunctions, {["parent"] = funcparent, ["name"] = funcname})
 		if typeof(funcparent) ~= "Instance" then
 			funcparent[funcname] = newfunc
 		else
@@ -389,6 +388,7 @@ if not customfname then customfname = funcname end
 				end
 			end)
 		end
+		table.insert(LoggedFunctions, {["parent"] = funcparent, ["name"] = funcname})
 		print("logging", customfname.."! WARNING: may be detected by anticheat!!")
 		return newfunc
 	end
