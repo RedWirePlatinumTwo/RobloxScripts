@@ -367,7 +367,7 @@ if not customfname then customfname = funcname end
 		local isFunctionLogged = false
 		
 		for i,v in pairs(LoggedFunctions) do
-			if i == funcparent and v == funcname then
+			if v.parent == funcparent and v.name == funcname then
 				isFunctionLogged = true
 				break
 			end
@@ -376,17 +376,14 @@ if not customfname then customfname = funcname end
 	if isFunctionLogged then
 		error("This function has already been logged!")
 	else
-		LoggedFunctions[funcparent] = funcname
+		table.insert(LoggedFunctions, {["parent"] = funcparent, ["name"] = funcname})
 		if typeof(funcparent) ~= "Instance" then
 			funcparent[funcname] = newfunc
 		else
 			local hook
-			hook = hookmetamethod(game, "__namecall", function(self, ...)
-				if self == funcparent and getnamecallmethod() == funcname then
-					return newfunc(self, ...)
-				else
-					return hook(self, ...)
-				end
+			hook = hookfunction(funcparent[funcname], function(...)
+				newfunc(...)
+				return hook(...)
 			end)
 		end
 		print("logging", customfname.."! WARNING: may be detected by anticheat!!")
