@@ -743,7 +743,7 @@ local function LFXCAXZ_fake_script() -- JailbreakGUI.LocalScript
 		mainframe.gunshoptp,
 		mainframe.lockonexit,
 		mainframe.glidekey,
-		mainframe.Airdrop,
+		mainframe.CrateEsp,
 		mainframe.ropefollow,
 		mainframe.replaceparachute,
 		mainframe.aimpredictor,
