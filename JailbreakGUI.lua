@@ -1139,7 +1139,7 @@ local function LFXCAXZ_fake_script() -- JailbreakGUI.LocalScript
 						end
 	
 						local distancefunc = runservice.RenderStepped:connect(function()
-							TextButton.Text = "Airdrop | Distance: "..FormatNumber(math.floor(lplr:DistanceFromCharacter(Airdrop.Position)))
+							TextButton.Text = "Crate | Distance: "..FormatNumber(math.floor(lplr:DistanceFromCharacter(Airdrop.Position)))
 						end)
 						
 						coroutine.resume(coroutine.create(function()
