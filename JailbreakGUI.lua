@@ -10,7 +10,7 @@ local ScrollingFrame = Instance.new("ScrollingFrame")
 local replaceparachute = Instance.new("TextButton")
 local holdebypass = Instance.new("TextButton")
 local aimbot = Instance.new("TextButton")
-local Airdrop = Instance.new("TextButton")
+local CrateEsp = Instance.new("TextButton")
 local UIGridLayout = Instance.new("UIGridLayout")
 local modguns = Instance.new("TextButton")
 local GravToggle = Instance.new("TextButton")
@@ -131,19 +131,19 @@ aimbot.TextSize = 20.000
 aimbot.TextWrapped = true
 aimbot.TextXAlignment = Enum.TextXAlignment.Left
 
-Airdrop.Name = "Airdrop"
-Airdrop.Parent = ScrollingFrame
-Airdrop.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
-Airdrop.BorderColor3 = Color3.fromRGB(0, 170, 255)
-Airdrop.Position = UDim2.new(0, 0, 0.451666713, 0)
-Airdrop.Size = UDim2.new(0, 106, 0, 51)
-Airdrop.ZIndex = -222
-Airdrop.Font = Enum.Font.Ubuntu
-Airdrop.Text = "Airdrop ESP"
-Airdrop.TextColor3 = Color3.fromRGB(85, 170, 255)
-Airdrop.TextSize = 20.000
-Airdrop.TextWrapped = true
-Airdrop.TextXAlignment = Enum.TextXAlignment.Left
+CrateEsp.Name = "CrateEsp"
+CrateEsp.Parent = ScrollingFrame
+CrateEsp.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+CrateEsp.BorderColor3 = Color3.fromRGB(0, 170, 255)
+CrateEsp.Position = UDim2.new(0, 0, 0.451666713, 0)
+CrateEsp.Size = UDim2.new(0, 106, 0, 51)
+CrateEsp.ZIndex = -222
+CrateEsp.Font = Enum.Font.Ubuntu
+CrateEsp.Text = "Crate ESP"
+CrateEsp.TextColor3 = Color3.fromRGB(85, 170, 255)
+CrateEsp.TextSize = 20.000
+CrateEsp.TextWrapped = true
+CrateEsp.TextXAlignment = Enum.TextXAlignment.Left
 
 UIGridLayout.Parent = ScrollingFrame
 UIGridLayout.CellSize = UDim2.new(0, 360, 0, 35)
@@ -715,7 +715,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function VASX_fake_script() -- JailbreakGUI.LocalScript 
+local function LFXCAXZ_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -815,7 +815,7 @@ local function VASX_fake_script() -- JailbreakGUI.LocalScript
 	
 		if not _G.RedsJBGUI then
 			_G.RedsJBGUI = true
-			notify("(Hopefully) fixed performance reducing over time by removing most pcall functions.")
+			notify("Further improved performance, added oil rig to robbery notifier, and removed something from aim predictor because it kind of sucked lmao")
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
 	
@@ -869,52 +869,51 @@ local function VASX_fake_script() -- JailbreakGUI.LocalScript
 				syn.protect_gui(script.Parent)
 			end
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
-	
-			local function makevisible(plr)
-				runservice.Heartbeat:connect(function()
-					plr.Visible = true
-				end)
-			end
-	
-			for i, plr in pairs(minimap:GetChildren()) do makevisible(plr) end
-	
-			minimap.ChildAdded:connect(makevisible)
+			
+			thread(function()
+				while true do
+					for i, plr in pairs(minimap:GetChildren()) do
+						plr.Visible = true
+					end
+					task.wait()
+				end
+			end)
 	
 			lplr.PlayerGui.AppUI.ChildAdded:connect(function(c)
 				if c.Name == "Minimap" then
 					c:WaitForChild("Map"):WaitForChild("Container"):WaitForChild("Points")
 					local minimap2 = c.Map.Container.Points
-					local function idk(v)
-						if v.ClassName == "ImageLabel" then
-							makevisible(v)
+					local destroyed = false
+					
+					thread(function()
+						while not destroyed do
+							for i,v in pairs(minimap2:GetChildren()) do
+								if v.ClassName == "ImageLabel" then
+									v.Visible = true
+								end
+							end
+							task.wait()
 						end
-					end
-	
-					for i,v in pairs(minimap2:GetChildren()) do
-						idk(v)
-					end
-	
-					minimap2.ChildAdded:connect(idk)
+					end)
+					
+					local removed
+					removed = lplr.PlayerGui.AppUI.ChildRemoved:connect(function(c2)
+						if c == c2 then
+							removed:Disconnect()
+							destroyed = true
+						end
+					end)
 				end
 			end)
 	
 			local plrgui = lplr.PlayerGui
-	
-			local function walcc()
-				runservice.RenderStepped:connect(function()
-					if lplr.Character and lplr.Character:FindFirstChild("Humanoid") then
-						if lplr.Character.Humanoid.WalkSpeed == 0 then
-							lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
-						end
+			
+			runservice.RenderStepped:connect(function()
+				if lplr.Character and lplr.Character:FindFirstChild("Humanoid") then
+					if lplr.Character.Humanoid.WalkSpeed == 0 then
+						lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
 					end
-				end)
-			end
-	
-			walcc()
-	
-			lplr.CharacterAdded:connect(function(chr)
-				chr:WaitForChild("Humanoid")
-				walcc()
+				end
 			end)
 	
 			Changed(lplr, "Team", function(team)
@@ -999,7 +998,7 @@ local function VASX_fake_script() -- JailbreakGUI.LocalScript
 								velocity = vel2
 							end
 							local distance = (lplr.Character.Humanoid.RootPart.Position - targetedchr.Humanoid.RootPart.Position).Magnitude
-							misc.aimoffset = ((velocity-lplr.Character.Humanoid.RootPart.Velocity)/speed)*distance
+							misc.aimoffset = (velocity/speed)*distance
 						else
 							misc.aimoffset = Vector3.new()
 						end
@@ -1100,12 +1099,6 @@ local function VASX_fake_script() -- JailbreakGUI.LocalScript
 						local Airdrop = child:WaitForChild("Root")
 						local BillboardGui = Instance.new("BillboardGui")
 						table.insert(bbguis, BillboardGui)
-	
-						coroutine.resume(coroutine.create(function()
-							repeat task.wait() until GetFamily(child)[1] ~= game
-							table.remove(bbguis, table.find(bbguis, BillboardGui))
-						end))
-	
 						local TextButton = Instance.new("TextButton")
 						--Properties:
 						BillboardGui.Parent = Airdrop
@@ -1145,9 +1138,15 @@ local function VASX_fake_script() -- JailbreakGUI.LocalScript
 							return str
 						end
 	
-						runservice.RenderStepped:connect(function()
+						local distancefunc = runservice.RenderStepped:connect(function()
 							TextButton.Text = "Airdrop | Distance: "..FormatNumber(math.floor(lplr:DistanceFromCharacter(Airdrop.Position)))
 						end)
+						
+						coroutine.resume(coroutine.create(function()
+							repeat task.wait() until GetFamily(child)[1] ~= game
+							table.remove(bbguis, table.find(bbguis, BillboardGui))
+							distancefunc:Disconnect()
+						end))
 	
 					end
 				end))
@@ -1159,7 +1158,7 @@ local function VASX_fake_script() -- JailbreakGUI.LocalScript
 	
 			workspace.ChildAdded:connect(gui)
 	
-			mainframe.Airdrop.Activated:connect(function()
+			mainframe.CrateEsp.Activated:connect(function()
 				props.pointers = not props.pointers
 				props.guitext = props.pointers
 			end)
@@ -1222,21 +1221,10 @@ local function VASX_fake_script() -- JailbreakGUI.LocalScript
 				mainframe["1speed"].Visible = false
 				mainframe["1speedv2"].Visible = true
 	
-				local function speedhack()
-	
-					runservice.RenderStepped:connect(function()
-						if lplr.Character and lplr.Character:FindFirstChild("Humanoid") then
-							lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
-						end
-					end)
-	
-				end
-				SpeedBypass = true
-				speedhack()
-	
-				lplr.CharacterAdded:connect(function(chr)
-					chr:WaitForChild("Humanoid")
-					speedhack()
+				runservice.RenderStepped:connect(function()
+					if lplr.Character and lplr.Character:FindFirstChild("Humanoid") then
+						lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
+					end
 				end)
 	
 				notify("To edit your walkspeed, scroll up/down on the number in the textbox (max 150).")
@@ -1291,6 +1279,7 @@ local function VASX_fake_script() -- JailbreakGUI.LocalScript
 				IconIds["cargo plane"]= "7301406769"
 				IconIds["cargo ship"] = "7301406299"
 				IconIds["passenger train"] = "7301405813"
+				IconIds["oil rig"] = "15617962600"
 	
 				for i,v in pairs(plrgui.WorldMarkersGui:GetChildren()) do
 	
@@ -2067,4 +2056,4 @@ local function VASX_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(VASX_fake_script)()
+coroutine.wrap(LFXCAXZ_fake_script)()
