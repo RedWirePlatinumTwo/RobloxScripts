@@ -864,10 +864,6 @@ local function IFNZ_fake_script() -- JailbreakGUI.LocalScript
 			local mouse = lplr:GetMouse()
 			local jewel = workspace.Jewelrys:FindFirstChildOfClass("Model")
 			local bank = workspace.Banks:FindFirstChildOfClass("Model")
-	
-			if syn then
-				syn.protect_gui(script.Parent)
-			end
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 			
 			thread(function()
