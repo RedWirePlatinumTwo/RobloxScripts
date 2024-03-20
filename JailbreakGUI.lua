@@ -970,55 +970,57 @@ local function IFNZ_fake_script() -- JailbreakGUI.LocalScript
 				local vel2 = Vector3.new()
 				local misc = RedsAimbotMisc
 				runservice.RenderStepped:connect(function()
-					if misc.TargetedCharacter then
-						local targetedchr = misc.TargetedCharacter
-						local tool
-						local speed
-						local fireauto
-						local gun
-						for i,v in pairs(lplr.Folder:GetChildren()) do
-							local attribute = v:GetAttribute("InventoryItemEquipped")
-							if attribute == true then
-								tool = v.Name
-								break
-							end
-						end
-						if tool then
-							if itemconfig:FindFirstChild(tool) then
-								gun = require(itemconfig[tool])
-								speed = gun.BulletSpeed
-								fireauto = gun.FireAuto
-							end
-						else
-							misc.aimoffset = Vector3.new()
-						end
-						if speed and aimpredict then
-							local velocity = targetedchr.Humanoid.RootPart.Velocity
-							if velocity.Magnitude < 1 then
-								velocity = vel2
-							end
-							local distance = (lplr.Character.Humanoid.RootPart.Position - targetedchr.Humanoid.RootPart.Position).Magnitude
-							misc.aimoffset = (velocity/speed)*distance
-						else
-							misc.aimoffset = Vector3.new()
-						end
-						if triggerbot then
-							if gun then
-								if fireauto then
-									releaseonuntarget = true
-									mouse1press()
-								else
-									mouse1press()
-									mouse1release()
+					pcall(function()
+						if misc.TargetedCharacter then
+							local targetedchr = misc.TargetedCharacter
+							local tool
+							local speed
+							local fireauto
+							local gun
+							for i,v in pairs(lplr.Folder:GetChildren()) do
+								local attribute = v:GetAttribute("InventoryItemEquipped")
+								if attribute == true then
+									tool = v.Name
+									break
 								end
 							end
+							if tool then
+								if itemconfig:FindFirstChild(tool) then
+									gun = require(itemconfig[tool])
+									speed = gun.BulletSpeed
+									fireauto = gun.FireAuto
+								end
+							else
+								misc.aimoffset = Vector3.new()
+							end
+							if speed and aimpredict then
+								local velocity = targetedchr.Humanoid.RootPart.Velocity
+								if velocity.Magnitude < 1 then
+									velocity = vel2
+								end
+								local distance = (lplr.Character.Humanoid.RootPart.Position - targetedchr.Humanoid.RootPart.Position).Magnitude
+								misc.aimoffset = (velocity/speed)*distance
+							else
+								misc.aimoffset = Vector3.new()
+							end
+							if triggerbot then
+								if gun then
+									if fireauto then
+										releaseonuntarget = true
+										mouse1press()
+									else
+										mouse1press()
+										mouse1release()
+									end
+								end
+							end
+						else
+							if releaseonuntarget then
+								mouse1release()
+								releaseonuntarget = false
+							end
 						end
-					else
-						if releaseonuntarget then
-							mouse1release()
-							releaseonuntarget = false
-						end
-					end
+					end)
 				end)
 				
 				Changed(misc, "TargetedCharacter", function(chr)
