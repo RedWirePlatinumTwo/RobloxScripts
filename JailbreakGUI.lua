@@ -463,7 +463,7 @@ DisableNPCGuns.Position = UDim2.new(0, 0, 0.451666713, 0)
 DisableNPCGuns.Size = UDim2.new(0, 106, 0, 51)
 DisableNPCGuns.ZIndex = -222
 DisableNPCGuns.Font = Enum.Font.Ubuntu
-DisableNPCGuns.Text = "Disable NPC Guns"
+DisableNPCGuns.Text = "Disable NPC Guns (Client-sided)"
 DisableNPCGuns.TextColor3 = Color3.fromRGB(85, 170, 255)
 DisableNPCGuns.TextSize = 20.000
 DisableNPCGuns.TextWrapped = true
@@ -715,7 +715,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function LFXCAXZ_fake_script() -- JailbreakGUI.LocalScript 
+local function IFNZ_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -1675,29 +1675,31 @@ local function LFXCAXZ_fake_script() -- JailbreakGUI.LocalScript
 			end)
 	
 			runservice.Heartbeat:connect(function()
-				local model = vehicle.GetLocalVehicleModel()
-				if model and ropefollow and ropepart and ropepart ~= model then
-					if model:FindFirstChild("Preset") and model.Preset:FindFirstChild("RopePull") then
-						local modelrope = model.Winch.RopeConstraint
-						local ropepull = model.Preset.RopePull
-						if ropepart.Parent == workspace.Vehicles then
+				pcall(function()
+					local model = vehicle.GetLocalVehicleModel()
+					if model and ropefollow and ropepart and ropepart ~= model then
+						if model:FindFirstChild("Preset") and model.Preset:FindFirstChild("RopePull") then
+							local modelrope = model.Winch.RopeConstraint
+							local ropepull = model.Preset.RopePull
+							if ropepart.Parent == workspace.Vehicles then
 	
-							if ropepull.AttachedTo.Value then
-								modelrope.Length = math.max(modelrope.Length-(task.wait()*100),30)
+								if ropepull.AttachedTo.Value then
+									modelrope.Length = math.max(modelrope.Length-(task.wait()*100),30)
+								else
+									modelrope.Length = (model.Engine.Position - ropepart.Engine.Position).Magnitude
+									ropepull.CFrame = ropepart.Engine.CFrame
+								end
 							else
-								modelrope.Length = (model.Engine.Position - ropepart.Engine.Position).Magnitude
-								ropepull.CFrame = ropepart.Engine.CFrame
-							end
-						else
-							if ropepull.AttachedTo.Value then
-								modelrope.Length = math.max(modelrope.Length-(task.wait()*100),30)
-							else
-								modelrope.Length = (model.Engine.Position - ropepart.MeshPart.Position).Magnitude
-								ropepull.CFrame = ropepart.MeshPart.CFrame
+								if ropepull.AttachedTo.Value then
+									modelrope.Length = math.max(modelrope.Length-(task.wait()*100),30)
+								else
+									modelrope.Length = (model.Engine.Position - ropepart.MeshPart.Position).Magnitude
+									ropepull.CFrame = ropepart.MeshPart.CFrame
+								end
 							end
 						end
 					end
-				end
+				end)
 			end)
 	
 			mouse.Button1Down:connect(function()
@@ -2056,4 +2058,4 @@ local function LFXCAXZ_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(LFXCAXZ_fake_script)()
+coroutine.wrap(IFNZ_fake_script)()
