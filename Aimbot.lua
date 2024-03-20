@@ -1261,7 +1261,7 @@ globals.TextWrapped = true
 
 -- Scripts:
 
-local function MQPYVI_fake_script() -- Aimbot.Scripts 
+local function BRUCTDR_fake_script() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1998,7 +1998,9 @@ local function MQPYVI_fake_script() -- Aimbot.Scripts
 			if p then
 				return p
 			else
-				return chr.Humanoid.RootPart
+				if chr:FindFirstChild("Humanoid") and chr.Humanoid.RootPart then
+					return chr.Humanoid.RootPart
+				end
 			end
 		end
 	
@@ -2286,4 +2288,4 @@ local function MQPYVI_fake_script() -- Aimbot.Scripts
 		gui:Destroy()
 	end
 end
-coroutine.wrap(MQPYVI_fake_script)()
+coroutine.wrap(BRUCTDR_fake_script)()
