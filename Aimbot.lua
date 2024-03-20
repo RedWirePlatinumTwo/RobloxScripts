@@ -1461,11 +1461,6 @@ local function RVFM_fake_script() -- Aimbot.Scripts
 		end
 		
 		local teams = game.Teams
-	
-		if syn then
-			syn.protect_gui(gui)
-		end
-	
 		local WhitelistedPlrs = {}
 		local PrioritizedPlrs = {}
 		local misc = {}
