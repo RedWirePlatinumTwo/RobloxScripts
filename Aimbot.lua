@@ -1261,7 +1261,7 @@ globals.TextWrapped = true
 
 -- Scripts:
 
-local function BRUCTDR_fake_script() -- Aimbot.Scripts 
+local function RVFM_fake_script() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -2007,26 +2007,28 @@ local function BRUCTDR_fake_script() -- Aimbot.Scripts
 		local AimbotFunction = game.RunService.RenderStepped:connect(function()
 			if misc.TargetedCharacter then
 				local part = gettargetpart(misc.TargetedCharacter)
-				local partpos = part.Position
-				local v, onscreen = camera:WorldToScreenPoint(partpos + misc.aimoffset)
-				local x,y = (v.X - m.X), (v.Y - m.Y)
-				if onscreen then
-					if misc.IsAimbotOn then
-						if GlobalStats.RightClickAim and RightClick or not GlobalStats.RightClickAim then
-							if GlobalStats.AimMethod == "Camera" then
-								camera.CFrame = CFrame.new(camera.CFrame.Position, partpos + misc.aimoffset)
-								game.UserInputService.MouseDeltaSensitivity = 0
-							else
-								mousemoverel(x,y)
-								game.UserInputService.MouseDeltaSensitivity = GlobalStats.MouseSensitivity
-							end
-							if not GlobalStats.FirstPersonEnabled then
-								lplr.Character.Humanoid.RootPart.CFrame = CFrame.lookAt(lplr.Character.Humanoid.RootPart.Position, (partpos * Vector3.new(1,0,1)) + Vector3.new(0, lplr.Character.Humanoid.RootPart.Position.Y, 0))
+				if part then
+					local partpos = part.Position
+					local v, onscreen = camera:WorldToScreenPoint(partpos + misc.aimoffset)
+					local x,y = (v.X - m.X), (v.Y - m.Y)
+					if onscreen then
+						if misc.IsAimbotOn then
+							if GlobalStats.RightClickAim and RightClick or not GlobalStats.RightClickAim then
+								if GlobalStats.AimMethod == "Camera" then
+									camera.CFrame = CFrame.new(camera.CFrame.Position, partpos + misc.aimoffset)
+									game.UserInputService.MouseDeltaSensitivity = 0
+								else
+									mousemoverel(x,y)
+									game.UserInputService.MouseDeltaSensitivity = GlobalStats.MouseSensitivity
+								end
+								if not GlobalStats.FirstPersonEnabled then
+									lplr.Character.Humanoid.RootPart.CFrame = CFrame.lookAt(lplr.Character.Humanoid.RootPart.Position, (partpos * Vector3.new(1,0,1)) + Vector3.new(0, lplr.Character.Humanoid.RootPart.Position.Y, 0))
+								end
 							end
 						end
+					else
+						camera.CFrame = CFrame.new(camera.CFrame.Position, partpos)
 					end
-				else
-					camera.CFrame = CFrame.new(camera.CFrame.Position, partpos)
 				end
 			else
 				game.UserInputService.MouseDeltaSensitivity = 1
@@ -2288,4 +2290,4 @@ local function BRUCTDR_fake_script() -- Aimbot.Scripts
 		gui:Destroy()
 	end
 end
-coroutine.wrap(BRUCTDR_fake_script)()
+coroutine.wrap(RVFM_fake_script)()
