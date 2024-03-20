@@ -1279,8 +1279,7 @@ local function RVFM_fake_script() -- Aimbot.Scripts
 	local camera = workspace.CurrentCamera
 	local tcservice = game:GetService("TextChatService")
 	local npcs = {}
-	makemsg = function(txt)
-	end
+
 	local function sendnotif(title, text)
 		text = "<font color = '#"..MainFrame.BorderColor3:ToHex().."'>["..title.."]: "..text.."</font>"
 		if tcservice.ChatVersion == Enum.ChatVersion.LegacyChatService then
