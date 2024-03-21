@@ -715,7 +715,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function MHSMO_fake_script() -- JailbreakGUI.LocalScript 
+local function XQCFF_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -2030,12 +2030,16 @@ local function MHSMO_fake_script() -- JailbreakGUI.LocalScript
 				gunmodule.Shoot = function(...)
 					local args = {...}
 					local main = args[1]
-					if shootThruWalls and main.Humanoid == lplr.Character.Humanoid then
-						main.BulletEmitter.IgnoreList = children
+					if getequippeditem() ~= "PlasmaPistol" then
+						for i,v in pairs(children) do
+							if not table.find(main.BulletEmitter.IgnoreList, v) and shootThruWalls and main.Humanoid == lplr.Character.Humanoid then
+								table.insert(main.BulletEmitter.IgnoreList, v)
+							end
+						end
 					end
 					return shoot(...)
 				end
-				notify("Testing thing with plasma pistol cause uh yeah")
+				notify("Sometimes the plasma pistol will just not hit enemies at all, so the wallhack will not work with that gun specifically")
 			end)
 	
 		else
@@ -2052,4 +2056,4 @@ local function MHSMO_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(MHSMO_fake_script)()
+coroutine.wrap(XQCFF_fake_script)()
