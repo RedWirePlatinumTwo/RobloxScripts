@@ -186,7 +186,7 @@ getgenv().TableToString = function(Table, TableName, args, IsInternalTable)
 			local context = args.contextfunc
 			if context then
 				context = context(v1,v2,v3)
-				if context and context ~= "" then
+				if type(context) == "string" and context ~= "" then
 					s = s.." --"..context
 				end
 			end
@@ -303,7 +303,7 @@ end
 getgenv().LogFunctions = true
 LoggedFunctions = {}
 
-local excludedfunctions = {print, pairs, format, tabletostring, GetFullName, GetFamily, getcallingscript, warn, error}
+local excludedfunctions = {print, pairs, format, tabletostring, getcallingscript, warn, error}
 
 getgenv().FunctionLogger = function(funcparent, funcname, customfname)
 if not customfname then customfname = funcname end
