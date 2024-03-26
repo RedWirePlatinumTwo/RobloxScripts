@@ -351,7 +351,7 @@ if not customfname then customfname = funcname end
 				end
 				
 			end
-			if LogFunctions == true then
+			if LogFunctions then
 				print(str)
 			end
 		    return unpack(returnval)
