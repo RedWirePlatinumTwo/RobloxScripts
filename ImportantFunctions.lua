@@ -252,26 +252,18 @@ end
 getgenv().format = Format
 
 getgenv().GetFamily = function(ins, reverseorder)
-	local Pathway = {}
+	local Pathway = {ins}
+	local par = ins.Parent
 
-	local function _getFamily(v)
-		if v.Parent ~= nil then
-			if reverseorder then
-				table.insert(Pathway, v)
-			else
-				table.insert(Pathway, 1, v)
-			end
-			_getFamily(v.Parent)
+	while par ~= nil do
+		if reverseorder then
+			table.insert(Pathway, par)
 		else
-			if reverseorder then
-				table.insert(Pathway, v)
-			else
-				table.insert(Pathway, 1, v)
-			end
+			table.insert(Pathway, 1, par)
 		end
+		par = par.Parent
 	end
-		
-	_getFamily(ins)
+	
 	return Pathway
 end
 
@@ -380,7 +372,7 @@ if not customfname then customfname = funcname end
 			funcparent[funcname] = newfunc
 		else
 			local hook
-			hook = hookmetatable(game, "__namecall", function(self, ...)
+			hook = hookmetamethod(game, "__namecall", function(self, ...)
 				if self == funcparent and getnamecallmethod() == funcname then
 					return newfunc(self, ...)
 				else
