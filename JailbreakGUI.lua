@@ -715,7 +715,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function XQCFF_fake_script() -- JailbreakGUI.LocalScript 
+local function STSBZP_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -815,7 +815,7 @@ local function XQCFF_fake_script() -- JailbreakGUI.LocalScript
 	
 		if not _G.RedsJBGUI then
 			_G.RedsJBGUI = true
-			notify("Further improved performance, added oil rig to robbery notifier, and removed something from aim predictor because it kind of sucked lmao")
+			notify("Modding guns now allows you to use guns while crawling, using jetpack, etc")
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
 	
@@ -1181,10 +1181,17 @@ local function XQCFF_fake_script() -- JailbreakGUI.LocalScript
 				local g = require(itemconfig.Grenade)
 				g.ReloadTime = 0
 				g.FuseTime = 0.8
-				notify("Removed recoil + all guns fire automatically (also funni grenade spam)")
+				
+				local m = require(rstorage.Inventory.InventoryItemSystem)
+				for i,v in pairs(m._equipConditions) do
+					local old = m._equipConditions[i]
+					m._equipConditions[i] = function(...)
+						return true
+					end
+				end
+				
 				mainframe.modshotgun.Visible = true
 				local singlebullet = false
-	
 				mainframe.modshotgun.Activated:connect(function()
 					local shotgun = require(itemconfig.Shotgun)
 					singlebullet = not singlebullet
@@ -1194,7 +1201,8 @@ local function XQCFF_fake_script() -- JailbreakGUI.LocalScript
 						shotgun.BulletSpread = 0.02
 					end
 				end)
-	
+				
+				notify("Removed recoil + all guns fire automatically (also decreased grenade fuse time)")
 			end)
 	
 			onetimefunc(mainframe.forcedaytime.Activated, function()
@@ -2056,4 +2064,4 @@ local function XQCFF_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(XQCFF_fake_script)()
+coroutine.wrap(STSBZP_fake_script)()
