@@ -715,7 +715,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function STSBZP_fake_script() -- JailbreakGUI.LocalScript 
+local function QPSHH_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -815,7 +815,7 @@ local function STSBZP_fake_script() -- JailbreakGUI.LocalScript
 	
 		if not _G.RedsJBGUI then
 			_G.RedsJBGUI = true
-			notify("Modding guns now allows you to use guns while crawling, using jetpack, etc")
+			notify("Added a slight delay to the triggerbot")
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
 	
@@ -936,8 +936,10 @@ local function STSBZP_fake_script() -- JailbreakGUI.LocalScript
 							return ""
 						end
 					end
-					if a.Duration ~= false and HoldEBypass and name() ~= "rob" and name() ~= "open crate" and name():sub(1,4) ~= "grab" and name() ~= "place tnt" then
-						a.Timed = false;
+					if a.Duration ~= false and HoldEBypass then
+						if name() ~= "rob" and name() ~= "open crate" and name():sub(1,4) ~= "grab" and name() ~= "place tnt" or name() == "grab jewel" then
+							a.Timed = false;
+						end
 					end
 				end
 	
@@ -952,7 +954,7 @@ local function STSBZP_fake_script() -- JailbreakGUI.LocalScript
 			mainframe.GravToggle.Activated:connect(function()
 				if math.floor(workspace.Gravity) == 196 then
 					workspace.Gravity = 0
-				elseif workspace.Gravity == 0 then
+				else
 					workspace.Gravity = 196
 				end
 			end)
@@ -1002,6 +1004,7 @@ local function STSBZP_fake_script() -- JailbreakGUI.LocalScript
 							end
 							if triggerbot then
 								if gun then
+									task.wait(0.1)
 									if fireauto then
 										releaseonuntarget = true
 										mouse1press()
@@ -2065,4 +2068,4 @@ local function STSBZP_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(STSBZP_fake_script)()
+coroutine.wrap(QPSHH_fake_script)()
