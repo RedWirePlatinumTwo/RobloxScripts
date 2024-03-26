@@ -1325,7 +1325,7 @@ local function QPSHH_fake_script() -- JailbreakGUI.LocalScript
 				end
 	
 				plrgui.WorldMarkersGui.ChildAdded:connect(function(marker)
-					marker:WaitForChild("ImageLabel"):WaitForChild("ImageLabel"):WaitForChild("Image")
+					marker:WaitForChild("ImageLabel"):WaitForChild("ImageLabel")
 					local img = marker.ImageLabel.ImageLabel.Image
 					for i,v in pairs(IconIds) do
 						if img == "rbxassetid://"..v then
