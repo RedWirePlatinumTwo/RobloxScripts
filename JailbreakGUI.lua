@@ -865,6 +865,7 @@ local function STSBZP_fake_script() -- JailbreakGUI.LocalScript
 			local jewel = workspace.Jewelrys:FindFirstChildOfClass("Model")
 			local bank = workspace.Banks:FindFirstChildOfClass("Model")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
+			lplr.CameraMaxZoomDistance = 200
 			
 			thread(function()
 				while true do
