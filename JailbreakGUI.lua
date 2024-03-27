@@ -715,7 +715,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function QPSHH_fake_script() -- JailbreakGUI.LocalScript 
+local function DGKXEI_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -815,7 +815,7 @@ local function QPSHH_fake_script() -- JailbreakGUI.LocalScript
 	
 		if not _G.RedsJBGUI then
 			_G.RedsJBGUI = true
-			notify("Added a slight delay to the triggerbot")
+			notify("Fly hack should be able to work with all vehicles... hopefully!!")
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
 	
@@ -1440,7 +1440,7 @@ local function QPSHH_fake_script() -- JailbreakGUI.LocalScript
 					local flyspeed = speeds.flyspeed
 					local invehicle = getmodel()
 					if invehicle and isdriver() then
-						hrp = invehicle.Engine
+						hrp = invehicle.PrimaryPart
 					else
 						if lplr.Character and lplr.Character:FindFirstChild("Humanoid") and lplr.Character.Humanoid.RootPart then
 							hrp = lplr.Character.Humanoid.RootPart
@@ -1696,14 +1696,14 @@ local function QPSHH_fake_script() -- JailbreakGUI.LocalScript
 								if ropepull.AttachedTo.Value then
 									modelrope.Length = math.max(modelrope.Length-(task.wait()*100),30)
 								else
-									modelrope.Length = (model.Engine.Position - ropepart.Engine.Position).Magnitude
-									ropepull.CFrame = ropepart.Engine.CFrame
+									modelrope.Length = (model.PrimaryPart.Position - ropepart.PrimaryPart.Position).Magnitude
+									ropepull.CFrame = ropepart.PrimaryPart.CFrame
 								end
 							else
 								if ropepull.AttachedTo.Value then
 									modelrope.Length = math.max(modelrope.Length-(task.wait()*100),30)
 								else
-									modelrope.Length = (model.Engine.Position - ropepart.MeshPart.Position).Magnitude
+									modelrope.Length = (model.PrimaryPart.Position - ropepart.MeshPart.Position).Magnitude
 									ropepull.CFrame = ropepart.MeshPart.CFrame
 								end
 							end
@@ -2068,4 +2068,4 @@ local function QPSHH_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(QPSHH_fake_script)()
+coroutine.wrap(DGKXEI_fake_script)()
