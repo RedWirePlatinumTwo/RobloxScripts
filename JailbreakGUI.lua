@@ -1538,7 +1538,7 @@ local function DGKXEI_fake_script() -- JailbreakGUI.LocalScript
 					end
 				end)
 	
-				notify("Fly hack enabled! Caps at 150 if you're flying without a vehicle. Does not work with all vehicles for some reason, no clue why.")
+				notify("Fly hack enabled! Caps at 150 if you're flying without a vehicle.")
 			end)
 	
 	
