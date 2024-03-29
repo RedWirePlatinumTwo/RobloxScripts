@@ -715,7 +715,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function MUIIBOY_fake_script() -- JailbreakGUI.LocalScript 
+local function ZYVFWHO_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -1432,6 +1432,21 @@ local function MUIIBOY_fake_script() -- JailbreakGUI.LocalScript
 	
 				local keys = {}
 				local pos = Vector3.new()
+				local vpart = Instance.new("Part", workspace)
+				vpart.Material = Enum.Material.SmoothPlastic
+				vpart.Size = Vector3.new(2,2,2)
+				vpart.Transparency = 1
+				vpart.Anchored = false
+				vpart.CanCollide = false
+				local rope = Instance.new("RopeConstraint", part)
+				rope.Length = 3
+				local function getattachment(p)
+					if not p:FindFirstChild("Attachment") then
+						Instance.new("Attachment", p)
+					end
+					return p.Attachment
+				end
+				rope.Attachment0 = getattachment(vpart)
 	
 				runservice.Heartbeat:connect(function()
 					local hrp
@@ -1447,9 +1462,6 @@ local function MUIIBOY_fake_script() -- JailbreakGUI.LocalScript
 							flyspeed = 150
 						end
 					end
-					if flying then
-						local cam = workspace.Camera
-					end
 					if hrp then
 						local frontoffset = CFrame.new() + Vector3.new(0,0,-maxdistance)
 						local backoffset = CFrame.new() + Vector3.new(0,0,maxdistance)
@@ -1459,6 +1471,7 @@ local function MUIIBOY_fake_script() -- JailbreakGUI.LocalScript
 						local downoffset = CFrame.new() + Vector3.new(0,-maxdistance,0)
 						local velocity = Vector3.new()
 						if flying then
+							hrp.RotVelocity = Vector3.new()
 							if keys.w_active then
 								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position, flyspeed)
 							end
@@ -1478,12 +1491,11 @@ local function MUIIBOY_fake_script() -- JailbreakGUI.LocalScript
 								velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position, flyspeed)
 							end
 							hrp.Velocity = velocity
-							hrp.CFrame = CFrame.new(hrp.Position, (workspace.Camera.CFrame*frontoffset).Position)
+							hrp.CFrame = CFrame.new(hrp.Position, (workspace.CurrentCamera.CFrame*frontoffset).Position)
 						end
 						if flying and not keys.w_active and not keys.a_active and not keys.s_active and not keys.d_active and not keys.q_active and not keys.e_active then
-							hrp.CFrame = CFrame.new(pos, (workspace.Camera.CFrame*frontoffset).Position)
+							hrp.CFrame = CFrame.new(pos, (workspace.CurrentCamera.CFrame*frontoffset).Position)
 							hrp.Velocity = Vector3.new()
-							hrp.RotVelocity = Vector3.new()
 						else
 							pos = hrp.Position
 						end
@@ -2066,4 +2078,4 @@ local function MUIIBOY_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(MUIIBOY_fake_script)()
+coroutine.wrap(ZYVFWHO_fake_script)()
