@@ -715,7 +715,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function DGKXEI_fake_script() -- JailbreakGUI.LocalScript 
+local function MUIIBOY_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -1185,15 +1185,6 @@ local function DGKXEI_fake_script() -- JailbreakGUI.LocalScript
 				local g = require(itemconfig.Grenade)
 				g.ReloadTime = 0
 				g.FuseTime = 0.8
-				
-				local m = require(rstorage.Inventory.InventoryItemSystem)
-				for i,v in pairs(m._equipConditions) do
-					local old = m._equipConditions[i]
-					m._equipConditions[i] = function(...)
-						return true
-					end
-				end
-				
 				mainframe.modshotgun.Visible = true
 				local singlebullet = false
 				mainframe.modshotgun.Activated:connect(function()
@@ -1205,6 +1196,13 @@ local function DGKXEI_fake_script() -- JailbreakGUI.LocalScript
 						shotgun.BulletSpread = 0.02
 					end
 				end)
+				local m = require(rstorage.Inventory.InventoryItemSystem)
+				for i,v in pairs(m._equipConditions) do
+					local old = m._equipConditions[i]
+					m._equipConditions[i] = function(...)
+						return true
+					end
+				end
 				
 				notify("Removed recoil + all guns fire automatically (also decreased grenade fuse time)")
 			end)
@@ -2068,4 +2066,4 @@ local function DGKXEI_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(DGKXEI_fake_script)()
+coroutine.wrap(MUIIBOY_fake_script)()
