@@ -143,7 +143,7 @@ getgenv().TableToString = function(Table, TableName, args, IsInternalTable)
 			local part1formatted, failed1 = Format(i,v,args,true)
 			local part2, failed2 = Format(v,i,args,true)
 			
-			if part2 == "" then
+			if failed2 then
 				part2 = isrecursivetable(v)
 			end
 			
@@ -241,10 +241,10 @@ getgenv().Format = function(var, tname, ttsargs, IsInternalTable)
 		elseif typeof(var) == "Enum" then
 		    st = "Enum."..tostring(var)
 		elseif typeof(var) == "Enums" then
-		st = "Enum"
-		end
-		if not table.find(supportedtypes, type(var)) and not table.find(supportedtypes, typeof(var)) then
+			st = "Enum"
+		else
 			failedconversion = true
+			st = tostring(var)
 		end
 	return st, failedconversion
 end
@@ -315,11 +315,7 @@ if not customfname then customfname = funcname end
 		
 			local function canFormat(thing)
 				if type(thing) ~= "table" then
-					if Format(thing) == "" then
-						return tostring(thing)
-					else
-						return Format(thing)
-					end
+					return Format(thing)
 				else
 					return TableToString(thing)
 				end
