@@ -142,11 +142,9 @@ getgenv().TableToString = function(Table, TableName, args, IsInternalTable)
 			local part1 = ""
 			local part1formatted, failed1 = Format(i,v,args,true)
 			local part2, failed2 = Format(v,i,args,true)
-			
 			if failed2 then
 				part2 = isrecursivetable(v)
 			end
-			
 			if type(i) == "table" then
 				local findwhitespace = part1formatted:find("\n")
 				local tname = ""
@@ -160,7 +158,7 @@ getgenv().TableToString = function(Table, TableName, args, IsInternalTable)
 			else
 				part1 = "\n"..name.."["..part1formatted.."]"
 			end
-			if part1 == "\n"..name.."[]" then
+			if failed1 then
 				part1 = "\n"..name.."["..isrecursivetable(i).."]"
 			end
 			local failstring = ""
