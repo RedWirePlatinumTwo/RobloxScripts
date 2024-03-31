@@ -135,7 +135,7 @@ getgenv().TableToString = function(Table, TableName, args, IsInternalTable)
 				if table.find(catchrepeats,x) then
 					return getname(x)
 				else
-					return x
+					return tostring(x)
 				end
 			end
 			
