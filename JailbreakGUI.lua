@@ -89,6 +89,7 @@ ScrollingFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 45)
 ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 170, 255)
 ScrollingFrame.Position = UDim2.new(0.0319970697, 0, 0.171266183, 0)
 ScrollingFrame.Size = UDim2.new(0, 376, 0, 235)
+ScrollingFrame.CanvasPosition = Vector2.new(0, 600)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 replaceparachute.Name = "replaceparachute"
@@ -517,7 +518,6 @@ modshotgun.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
 modshotgun.BorderColor3 = Color3.fromRGB(0, 170, 255)
 modshotgun.Position = UDim2.new(0, 0, 0.523438752, 0)
 modshotgun.Size = UDim2.new(0, 116, 0, 47)
-modshotgun.Visible = false
 modshotgun.ZIndex = 0
 modshotgun.Font = Enum.Font.Ubuntu
 modshotgun.Text = "Reduced spread/single shotgun bullet"
@@ -715,7 +715,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function ZYVFWHO_fake_script() -- JailbreakGUI.LocalScript 
+local function HKVSK_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -1185,17 +1185,6 @@ local function ZYVFWHO_fake_script() -- JailbreakGUI.LocalScript
 				local g = require(itemconfig.Grenade)
 				g.ReloadTime = 0
 				g.FuseTime = 0.8
-				mainframe.modshotgun.Visible = true
-				local singlebullet = false
-				mainframe.modshotgun.Activated:connect(function()
-					local shotgun = require(itemconfig.Shotgun)
-					singlebullet = not singlebullet
-					if singlebullet then
-						shotgun.BulletSpread = 0
-					else
-						shotgun.BulletSpread = 0.02
-					end
-				end)
 				local m = require(rstorage.Inventory.InventoryItemSystem)
 				for i,v in pairs(m._equipConditions) do
 					local old = m._equipConditions[i]
@@ -1205,6 +1194,17 @@ local function ZYVFWHO_fake_script() -- JailbreakGUI.LocalScript
 				end
 				
 				notify("Removed recoil + all guns fire automatically (also decreased grenade fuse time)")
+			end)
+			
+			local singlebullet = false
+			mainframe.modshotgun.Activated:connect(function()
+				local shotgun = require(itemconfig.Shotgun)
+				singlebullet = not singlebullet
+				if singlebullet then
+					shotgun.BulletSpread = 0
+				else
+					shotgun.BulletSpread = 0.02
+				end
 			end)
 	
 			onetimefunc(mainframe.forcedaytime.Activated, function()
@@ -2078,4 +2078,4 @@ local function ZYVFWHO_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(ZYVFWHO_fake_script)()
+coroutine.wrap(HKVSK_fake_script)()
