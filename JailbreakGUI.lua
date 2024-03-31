@@ -89,7 +89,6 @@ ScrollingFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 45)
 ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 170, 255)
 ScrollingFrame.Position = UDim2.new(0.0319970697, 0, 0.171266183, 0)
 ScrollingFrame.Size = UDim2.new(0, 376, 0, 235)
-ScrollingFrame.CanvasPosition = Vector2.new(0, 600)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 replaceparachute.Name = "replaceparachute"
@@ -715,7 +714,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function HKVSK_fake_script() -- JailbreakGUI.LocalScript 
+local function NSUL_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -937,7 +936,7 @@ local function HKVSK_fake_script() -- JailbreakGUI.LocalScript
 						end
 					end
 					if a.Duration ~= false and HoldEBypass then
-						if name() ~= "rob" and name() ~= "open crate" and name():sub(1,4) ~= "grab" and name() ~= "place tnt" or name() == "grab jewel" then
+						if name() ~= "rob" and name() ~= "open crate" and GetFamily(a.Part)[3] ~= workspace.Trains and name() ~= "place tnt" and name() ~= "disable security" then
 							a.Timed = false;
 						end
 					end
@@ -2078,4 +2077,4 @@ local function HKVSK_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(HKVSK_fake_script)()
+coroutine.wrap(NSUL_fake_script)()
