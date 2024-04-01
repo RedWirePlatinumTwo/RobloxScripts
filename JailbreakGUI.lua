@@ -714,7 +714,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function EIKJQEK_fake_script() -- JailbreakGUI.LocalScript 
+local function MFFMTSA_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -973,18 +973,24 @@ local function EIKJQEK_fake_script() -- JailbreakGUI.LocalScript
 			local moduleui = require(rstorage.Module.UI)
 			
 			local function ebypass(a)
-				local function name()
-					if a.Name then
-						return a.Name:lower()
-					else
-						return ""
+				thread(function()
+					local n = 0
+					while n < 1 do
+						local function name()
+							if a.Name then
+								return a.Name:lower()
+							else
+								return ""
+							end
+						end
+						if a.Duration ~= false and HoldEBypass then
+							if a.Part and name() ~= "rob" and name() ~= "open crate" and GetFamily(a.Part)[3] ~= workspace.Trains and name() ~= "place tnt" and name() ~= "disable security" then
+								a.Timed = false;
+							end
+						end
+						n = n + task.wait()
 					end
-				end
-				if a.Duration ~= false and HoldEBypass then
-					if a.Part and name() ~= "rob" and name() ~= "open crate" and GetFamily(a.Part)[3] ~= workspace.Trains and name() ~= "place tnt" and name() ~= "disable security" then
-						a.Timed = false;
-					end
-				end
+				end)
 			end
 	
 			for i,a in pairs(moduleui.CircleAction.Specs) do
@@ -2128,4 +2134,4 @@ local function EIKJQEK_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(EIKJQEK_fake_script)()
+coroutine.wrap(MFFMTSA_fake_script)()
