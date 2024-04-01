@@ -714,7 +714,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function IVLSE_fake_script() -- JailbreakGUI.LocalScript 
+local function HIMTRN_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -939,7 +939,7 @@ local function IVLSE_fake_script() -- JailbreakGUI.LocalScript
 						local res, parent = pcall(function()
 							return a.Part.Parent.Parent.Parent.Parent
 						end)
-						return res and parent.Name ~= "Trains" or not res
+						return (res and parent.Name ~= "Trains" or a.Part.Parent.Parent.Name ~= "Trains") or not res
 					end
 					if a.Duration ~= false and HoldEBypass then
 						if a.Part and name() ~= "rob" and name() ~= "open crate" and isnottrain() and name() ~= "place tnt" and name() ~= "disable security" then
@@ -2083,4 +2083,4 @@ local function IVLSE_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(IVLSE_fake_script)()
+coroutine.wrap(HIMTRN_fake_script)()
