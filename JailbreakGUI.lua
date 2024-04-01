@@ -60,7 +60,7 @@ local loadoutname = Instance.new("TextBox")
 --Properties:
 
 JailbreakGUI.Name = "JailbreakGUI"
-JailbreakGUI.Parent = game.CoreGui
+JailbreakGUI.Parent = game.Workspace
 JailbreakGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
@@ -714,7 +714,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function HIMTRN_fake_script() -- JailbreakGUI.LocalScript 
+local function QJQTZMD_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -935,14 +935,8 @@ local function HIMTRN_fake_script() -- JailbreakGUI.LocalScript
 							return ""
 						end
 					end
-					local function isnottrain()
-						local res, parent = pcall(function()
-							return a.Part.Parent.Parent.Parent.Parent
-						end)
-						return (res and parent.Name ~= "Trains" or a.Part.Parent.Parent.Name ~= "Trains") or not res
-					end
 					if a.Duration ~= false and HoldEBypass then
-						if a.Part and name() ~= "rob" and name() ~= "open crate" and isnottrain() and name() ~= "place tnt" and name() ~= "disable security" then
+						if a.Part and name() ~= "rob" and name() ~= "open crate" and GetFamily(a.Part)[3] ~= workspace.Trains and name() ~= "place tnt" and name() ~= "disable security" then
 							a.Timed = false;
 						end
 					end
@@ -2083,4 +2077,4 @@ local function HIMTRN_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(HIMTRN_fake_script)()
+coroutine.wrap(QJQTZMD_fake_script)()
