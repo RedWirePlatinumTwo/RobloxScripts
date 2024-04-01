@@ -60,7 +60,7 @@ local loadoutname = Instance.new("TextBox")
 --Properties:
 
 JailbreakGUI.Name = "JailbreakGUI"
-JailbreakGUI.Parent = game.Workspace
+JailbreakGUI.Parent = game.CoreGui
 JailbreakGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
