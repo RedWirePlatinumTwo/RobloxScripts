@@ -714,7 +714,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function GSGXEN_fake_script() -- JailbreakGUI.LocalScript 
+local function GYZIZHR_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -966,35 +966,6 @@ local function GSGXEN_fake_script() -- JailbreakGUI.LocalScript
 						fire(workspace.ClothingRacks.ClothingRack.Hitbox.ClickDetector)
 					end
 				end
-			end)
-	
-			local HoldEBypass = false
-			local gunshoptp = false
-			local moduleui = require(rstorage.Module.UI)
-			
-			local function ebypass(a)
-				local function name()
-					if a.Name then
-						return a.Name:lower()
-					else
-						return ""
-					end
-				end
-				if a.Duration ~= false and HoldEBypass then
-					if a.Part and name() ~= "rob" and name() ~= "open crate" and GetFamily(a.Part)[3] ~= workspace.Trains and name() ~= "place tnt" and name() ~= "disable security" then
-						runservice.Heartbeat:connect(function()
-							a.Timed = false;
-						end)
-					end
-				end
-			end
-	
-			for i,a in pairs(moduleui.CircleAction.Specs) do
-				ebypass(a)
-			end
-			
-			TableAdded(moduleui.CircleAction.Specs, function(index, value)
-				ebypass(value)
 			end)
 	
 			mainframe.GravToggle.Text = "Gravity Toggle ("..tostring(math.floor(workspace.Gravity))..")"
@@ -1269,10 +1240,29 @@ local function GSGXEN_fake_script() -- JailbreakGUI.LocalScript
 			end)
 	
 			onetimefunc(mainframe.holdebypass.Activated, function()
-				HoldEBypass = true
-			end)
-	
-			onetimefunc(mainframe.holdebypass.Activated, function()
+				local moduleui = require(rstorage.Module.UI)
+				
+				local function ebypass(a)
+					local function name()
+						if a.Name then
+							return a.Name:lower()
+						else
+							return ""
+						end
+					end
+					if a.Duration ~= false and a.Part and name() ~= "rob" and name() ~= "open crate" and GetFamily(a.Part)[3] ~= workspace.Trains and name() ~= "place tnt" and name() ~= "disable security" then
+						a.Timed = false;
+					end
+				end
+			
+				for i,a in pairs(moduleui.CircleAction.Specs) do
+					ebypass(a)
+				end
+				
+				TableAdded(moduleui.CircleAction.Specs, function(index, value)
+					ebypass(value)
+				end)
+			
 				notify("Hold E Bypass enabled. Cannot be used with the following: donut shop, gas station, passenger train items, air drops, and oil rig dynamite.")
 			end)
 	
@@ -1423,7 +1413,8 @@ local function GSGXEN_fake_script() -- JailbreakGUI.LocalScript
 				require(rstorage.Game.Falling).StartRagdolling = nil
 				notify("Removed ragdolling. (WARNING: in some cases you will still take fall damage)")
 			end)
-	
+			
+			local gunshoptp = false
 			runservice.Heartbeat:connect(function()
 				if lplr.Character and lplr.Character:FindFirstChild("Humanoid") and gunshoptp then
 					local hrp = lplr.Character.Humanoid.RootPart
@@ -2130,4 +2121,4 @@ local function GSGXEN_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(GSGXEN_fake_script)()
+coroutine.wrap(GYZIZHR_fake_script)()
