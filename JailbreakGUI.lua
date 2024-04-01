@@ -714,7 +714,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function NLFTL_fake_script() -- JailbreakGUI.LocalScript 
+local function IVLSE_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -935,8 +935,14 @@ local function NLFTL_fake_script() -- JailbreakGUI.LocalScript
 							return ""
 						end
 					end
+					local function isnottrain()
+						local res, parent = pcall(function()
+							return a.Part.Parent.Parent.Parent.Parent
+						end)
+						return res and parent.Name ~= "Trains" or not res
+					end
 					if a.Duration ~= false and HoldEBypass then
-						if a.Part and name() ~= "rob" and name() ~= "open crate" and GetFamily(a.Part)[3] ~= workspace.Trains and name() ~= "place tnt" and name() ~= "disable security" then
+						if a.Part and name() ~= "rob" and name() ~= "open crate" and isnottrain() and name() ~= "place tnt" and name() ~= "disable security" then
 							a.Timed = false;
 						end
 					end
@@ -2077,4 +2083,4 @@ local function NLFTL_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(NLFTL_fake_script)()
+coroutine.wrap(IVLSE_fake_script)()
