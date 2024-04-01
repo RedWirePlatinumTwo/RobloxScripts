@@ -714,7 +714,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function QJQTZMD_fake_script() -- JailbreakGUI.LocalScript 
+local function EIKJQEK_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -757,6 +757,53 @@ local function QJQTZMD_fake_script() -- JailbreakGUI.LocalScript
 			con:Disconnect()
 			func(...)
 		end)
+	end
+	
+	local function tablecount(t)
+		local n = 0
+		for i,v in pairs(t) do
+			n = n + 1
+		end
+		return n
+	end
+	
+	local function thread(func)
+		return coroutine.resume(coroutine.create(function()
+			return func()
+		end))
+	end
+	local TableAdded = function(Table, func)
+	    local count = tablecount(Table)
+		local clone = table.clone(Table)
+		local elapsedTime = 0
+		local enabled = true
+		local t = {}
+		t.Stop = function()
+			enabled = false
+		end
+		t.stop = t.Stop
+		
+	    thread(function()
+	        while enabled do
+	            if tablecount(Table) ~= count then
+					if tablecount(Table) > count then
+						
+						for i,v in pairs(Table) do
+							if clone[i] == nil then
+								thread(function()
+									func(i,v,elapsedTime)
+								end)
+							end
+						end
+						elapsedTime = 0
+					end
+					count = tablecount(Table)
+					clone = table.clone(Table)
+				end
+				elapsedTime = elapsedTime + task.wait()
+			end
+	    end)
+		return t
 	end
 	
 	for i,v in pairs(script.Parent:GetDescendants()) do
@@ -814,7 +861,7 @@ local function QJQTZMD_fake_script() -- JailbreakGUI.LocalScript
 	
 		if not _G.RedsJBGUI then
 			_G.RedsJBGUI = true
-			notify("Fly hack should be able to work with all vehicles... hopefully!!")
+			notify("Changed how Hold E bypass in an attempt to improve performance")
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
 	
@@ -924,24 +971,28 @@ local function QJQTZMD_fake_script() -- JailbreakGUI.LocalScript
 			local HoldEBypass = false
 			local gunshoptp = false
 			local moduleui = require(rstorage.Module.UI)
-	
-			runservice.RenderStepped:connect(function()
-	
-				for i,a in pairs(moduleui.CircleAction.Specs) do
-					local function name()
-						if a.Name then
-							return a.Name:lower()
-						else
-							return ""
-						end
-					end
-					if a.Duration ~= false and HoldEBypass then
-						if a.Part and name() ~= "rob" and name() ~= "open crate" and GetFamily(a.Part)[3] ~= workspace.Trains and name() ~= "place tnt" and name() ~= "disable security" then
-							a.Timed = false;
-						end
+			
+			local function ebypass(a)
+				local function name()
+					if a.Name then
+						return a.Name:lower()
+					else
+						return ""
 					end
 				end
+				if a.Duration ~= false and HoldEBypass then
+					if a.Part and name() ~= "rob" and name() ~= "open crate" and GetFamily(a.Part)[3] ~= workspace.Trains and name() ~= "place tnt" and name() ~= "disable security" then
+						a.Timed = false;
+					end
+				end
+			end
 	
+			for i,a in pairs(moduleui.CircleAction.Specs) do
+				ebypass(a)
+			end
+			
+			TableAdded(moduleui.CircleAction.Specs, function(index, value)
+				ebypass(value)
 			end)
 	
 			mainframe.GravToggle.Text = "Gravity Toggle ("..tostring(math.floor(workspace.Gravity))..")"
@@ -2077,4 +2128,4 @@ local function QJQTZMD_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(QJQTZMD_fake_script)()
+coroutine.wrap(EIKJQEK_fake_script)()
