@@ -714,7 +714,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function JKKLOSL_fake_script() -- JailbreakGUI.LocalScript 
+local function FYPFIG_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -1244,20 +1244,19 @@ local function JKKLOSL_fake_script() -- JailbreakGUI.LocalScript
 				local moduleui = require(rstorage.Module.UI)
 				
 				local function ebypass(a)
-					thread(function()
-						local wtime = 0
-						repeat wtime = wtime + task.wait() until a.Part or wtime > 10
-						local function name()
-							if a.Name then
-								return a.Name:lower()
-							else
-								return ""
-							end
+					local function name()
+						if a.Name then
+							return a.Name:lower()
+						else
+							return ""
 						end
-						if a.Duration ~= false and a.Part and name() ~= "rob" and name() ~= "open crate" and GetFamily(a.Part)[3] ~= workspace.Trains and name() ~= "place tnt" and name() ~= "disable security" then
-							a.Timed = false;
-						end
-					end)
+					end
+					local function partcheck()
+						return a.Part and GetFamily(a.Part)[3] ~= workspace.Trains or not a.Part
+					end
+					if a.Duration ~= false and name() ~= "rob" and name() ~= "open crate" and partcheck() and name() ~= "place tnt" and name() ~= "disable security" then
+						a.Timed = false;
+					end
 				end
 			
 				for i,a in pairs(moduleui.CircleAction.Specs) do
@@ -2130,4 +2129,4 @@ local function JKKLOSL_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(JKKLOSL_fake_script)()
+coroutine.wrap(FYPFIG_fake_script)()
