@@ -47,17 +47,10 @@ getgenv().TableToString = function(Table, TableName, args, IsInternalTable)
 		if not args.simplify then
 		    
     		local function checkreps()
-    			local reps = 0
-    			table.insert(indexreps,name)
-    			
-    			for i,v in pairs(indexreps) do
-    				if v == name then
-    					reps = reps + 1
-    				end
-    			end
-    			
-    			if reps > 1 then
-    				indexes[t] = name.."_"..reps
+    			local amount = indexreps[name] or 0
+				indexreps[name] = amount + 1
+    			if (amount + 1) > 1 then
+    				indexes[t] = name.."_"..(amount + 1)
     			else
     				indexes[t] = name
     			end
