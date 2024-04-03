@@ -41,7 +41,7 @@ end
 
 getgenv().TableToString = function(Table, TableName, args, IsInternalTable)
 	local s = ""
-	if not args then args = {} end
+	args = args or {}
 
 	local function setname(t, name)
 		if not args.simplify then
@@ -297,7 +297,7 @@ LoggedFunctions = {}
 local excludedfunctions = {print, pairs, format, tabletostring, getcallingscript, warn, error}
 
 getgenv().FunctionLogger = function(funcparent, funcname, customfname)
-if not customfname then customfname = funcname end
+	customfname = customfname or funcname
 	if funcparent[funcname] == FunctionLogger or table.find(excludedfunctions, funcparent[funcname]) then error("No.") end
 		local oldfunc = funcparent[funcname]
 		if typeof(oldfunc) ~= "function" then error("function expected, got "..typeof(oldfunc)) end
