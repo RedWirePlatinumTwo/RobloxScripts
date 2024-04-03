@@ -1261,7 +1261,7 @@ globals.TextWrapped = true
 
 -- Scripts:
 
-local function RVFM_fake_script() -- Aimbot.Scripts 
+local function UMJRIZZ_fake_script() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1279,7 +1279,7 @@ local function RVFM_fake_script() -- Aimbot.Scripts
 	local camera = workspace.CurrentCamera
 	local tcservice = game:GetService("TextChatService")
 	local npcs = {}
-
+	
 	local function sendnotif(title, text)
 		text = "<font color = '#"..MainFrame.BorderColor3:ToHex().."'>["..title.."]: "..text.."</font>"
 		if tcservice.ChatVersion == Enum.ChatVersion.LegacyChatService then
@@ -1291,7 +1291,7 @@ local function RVFM_fake_script() -- Aimbot.Scripts
 	
 	if not _G.RedsAimbot then
 		_G.RedsAimbot = true
-		sendnotif("Aimbot Update","Attempted to fix issue where some NPCs would be untargetable.")
+		sendnotif("Aimbot Update","Whitelisted or Prioritized players that leave the game and join back will be automatically re-whitelisted or prioritized.")
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -1933,8 +1933,7 @@ local function RVFM_fake_script() -- Aimbot.Scripts
 			teamui.Visible = false
 		end)
 	
-	    TableAdded(npcs, function(i, npc)
-	        
+	    TableAdded(npcs, function(i, npc) 
 	        Changed(npc.Humanoid, "Health", function(hp)
 	            if hp <= 0 then
 	                npcs[i] = nil
@@ -1943,7 +1942,6 @@ local function RVFM_fake_script() -- Aimbot.Scripts
 					end
 	            end
 	        end)
-	        
 	    end)
 		
 		local function checkpart(v)
@@ -1959,16 +1957,14 @@ local function RVFM_fake_script() -- Aimbot.Scripts
 					changed.Stop()
 				end)
 				repeat task.wait() until active
-				if active then
-					table.insert(npcs, npc)
-				end
+				table.insert(npcs, npc)
 			end)
 		end
 	
 	    for i,v in pairs(workspace:GetDescendants()) do
-	        if v.ClassName == "Humanoid" and v.RootPart and not plrs:GetPlayerFromCharacter(v.Parent) and not table.find(npcs, v.Parent) then
+	        if v.ClassName == "Humanoid" and v.RootPart and not plrs:GetPlayerFromCharacter(v.Parent) and not table.find(npcs, v.Parent) and v.Health > 0 then
 	            isactivenpc(v.Parent)
-	       end
+			end
 	    end
 	
 	    workspace.DescendantAdded:connect(function(v)
@@ -2277,6 +2273,23 @@ local function RVFM_fake_script() -- Aimbot.Scripts
 		keys.X.Activated:connect(function()
 			keys.Visible = false
 		end)
+		
+		plrs.PlayerAdded:connect(function(plr)
+			for i,v in pairs(WhitelistedPlrs) do
+				if v.Name == plr.Name then
+					local old = table.find(WhitelistedPlrs, v)
+					table.remove(WhitelistedPlrs, old)
+					table.insert(WhitelistedPlrs, plr)
+				end
+			end
+			for i,v in pairs(PrioritizedPlrs) do
+				if v.Name == plr.Name then
+					local old = table.find(PrioritizedPlrs, v)
+					table.remove(PrioritizedPlrs, old)
+					table.insert(PrioritizedPlrs, plr)
+				end
+			end
+		end)
 	
 	else
 		sendnotif("Aimbot", "You've already executed this. Deleting clone.")
@@ -2284,4 +2297,4 @@ local function RVFM_fake_script() -- Aimbot.Scripts
 		gui:Destroy()
 	end
 end
-coroutine.wrap(RVFM_fake_script)()
+coroutine.wrap(UMJRIZZ_fake_script)()
