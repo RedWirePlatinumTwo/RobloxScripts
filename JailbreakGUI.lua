@@ -714,7 +714,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function APDCLAD_fake_script() -- JailbreakGUI.LocalScript 
+local function JKKLOSL_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -1246,7 +1246,7 @@ local function APDCLAD_fake_script() -- JailbreakGUI.LocalScript
 				local function ebypass(a)
 					thread(function()
 						local wtime = 0
-						repeat wtime = wtime + task.wait() until a.Part or wtime > 20
+						repeat wtime = wtime + task.wait() until a.Part or wtime > 10
 						local function name()
 							if a.Name then
 								return a.Name:lower()
@@ -1615,7 +1615,7 @@ local function APDCLAD_fake_script() -- JailbreakGUI.LocalScript
 					local isopen = workspace.Casino:GetAttribute("CasinoRobberyOpen")
 					
 					if isopen then
-						if mainframe.AAAAA.Text == closedtxt then
+						if mainframe.AAAAA.Text == closedtxt or mainframe.AAAAA.Text == "Casino building isn't loaded in :" then
 							local code
 							for i,v in pairs(codes:GetChildren()) do
 								if v:FindFirstChildOfClass("Part").SurfaceGui.TextLabel.Text ~= "" then
@@ -2130,4 +2130,4 @@ local function APDCLAD_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(APDCLAD_fake_script)()
+coroutine.wrap(JKKLOSL_fake_script)()
