@@ -2280,6 +2280,7 @@ local function UMJRIZZ_fake_script() -- Aimbot.Scripts
 					local old = table.find(WhitelistedPlrs, v)
 					table.remove(WhitelistedPlrs, old)
 					table.insert(WhitelistedPlrs, plr)
+					break
 				end
 			end
 			for i,v in pairs(PrioritizedPlrs) do
@@ -2287,6 +2288,7 @@ local function UMJRIZZ_fake_script() -- Aimbot.Scripts
 					local old = table.find(PrioritizedPlrs, v)
 					table.remove(PrioritizedPlrs, old)
 					table.insert(PrioritizedPlrs, plr)
+					break
 				end
 			end
 		end)
