@@ -714,7 +714,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function GYZIZHR_fake_script() -- JailbreakGUI.LocalScript 
+local function APDCLAD_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -861,7 +861,7 @@ local function GYZIZHR_fake_script() -- JailbreakGUI.LocalScript
 	
 		if not _G.RedsJBGUI then
 			_G.RedsJBGUI = true
-			notify("Changed how Hold E bypass in an attempt to improve performance")
+			notify("(Hopefully) fixed some hold E stuff not working + changed how the casino code-getting works to improve performance.")
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
 	
@@ -1208,13 +1208,14 @@ local function GYZIZHR_fake_script() -- JailbreakGUI.LocalScript
 				local g = require(itemconfig.Grenade)
 				g.ReloadTime = 0
 				g.FuseTime = 0.8
-				local m = require(rstorage.Inventory.InventoryItemSystem)
-				for i,v in pairs(m._equipConditions) do
-					local old = m._equipConditions[i]
-					m._equipConditions[i] = function(...)
-						return true
+				thread(function() -- this causes errors idfk why
+					local m = require(rstorage.Inventory.InventoryItemSystem)
+					for i,v in pairs(m._equipConditions) do
+						m._equipConditions[i] = function(...)
+							return true
+						end
 					end
-				end
+				end)
 				
 				notify("Removed recoil + all guns fire automatically (also decreased grenade fuse time)")
 			end)
@@ -1243,16 +1244,20 @@ local function GYZIZHR_fake_script() -- JailbreakGUI.LocalScript
 				local moduleui = require(rstorage.Module.UI)
 				
 				local function ebypass(a)
-					local function name()
-						if a.Name then
-							return a.Name:lower()
-						else
-							return ""
+					thread(function()
+						local wtime = 0
+						repeat wtime = wtime + task.wait() until a.Part or wtime > 20
+						local function name()
+							if a.Name then
+								return a.Name:lower()
+							else
+								return ""
+							end
 						end
-					end
-					if a.Duration ~= false and a.Part and name() ~= "rob" and name() ~= "open crate" and GetFamily(a.Part)[3] ~= workspace.Trains and name() ~= "place tnt" and name() ~= "disable security" then
-						a.Timed = false;
-					end
+						if a.Duration ~= false and a.Part and name() ~= "rob" and name() ~= "open crate" and GetFamily(a.Part)[3] ~= workspace.Trains and name() ~= "place tnt" and name() ~= "disable security" then
+							a.Timed = false;
+						end
+					end)
 				end
 			
 				for i,a in pairs(moduleui.CircleAction.Specs) do
@@ -1602,42 +1607,46 @@ local function GYZIZHR_fake_script() -- JailbreakGUI.LocalScript
 			end)
 	
 			local ctxt = mainframe.AAAAA.Text
+			local closedtxt = "Casino is currently closed"
 	
 			runservice.RenderStepped:connect(function()
 				if workspace:FindFirstChild("Casino") and workspace.Casino:FindFirstChild("RobberyDoor") and workspace.Casino.RobberyDoor:FindFirstChild("Codes") then
 					local codes = workspace.Casino.RobberyDoor.Codes
-					local code
-	
-					for i,v in pairs(codes:GetChildren()) do
-						if v:FindFirstChildOfClass("Part").SurfaceGui.TextLabel.Text ~= "" then
-							code = v
-							break
-						end
-					end
-	
-					local txt = ""
-					if code then
-						local c = {}
-	
-						for i,v in pairs(code:GetChildren()) do
-							table.insert(c, v.Position.Magnitude)
-						end
-	
-						table.sort(c)
-						for i,v in pairs(c) do
-							for i, cpart in pairs(code:GetChildren()) do
-								if v == cpart.Position.Magnitude then
-									txt = txt..cpart.SurfaceGui.TextLabel.Text
+					local isopen = workspace.Casino:GetAttribute("CasinoRobberyOpen")
+					
+					if isopen then
+						if mainframe.AAAAA.Text == closedtxt then
+							local code
+							for i,v in pairs(codes:GetChildren()) do
+								if v:FindFirstChildOfClass("Part").SurfaceGui.TextLabel.Text ~= "" then
+									code = v
+									break
 								end
 							end
-						end
-						if txt ~= txt:reverse() then
-							mainframe.AAAAA.Text = ctxt.." "..txt.." (or "..txt:reverse()..")"
-						else
-							mainframe.AAAAA.Text = ctxt.." "..txt
+	
+							local txt = ""
+							local c = {}
+	
+							for i,v in pairs(code:GetChildren()) do
+								table.insert(c, v.Position.Magnitude)
+							end
+	
+							table.sort(c)
+							for i,v in pairs(c) do
+								for i, cpart in pairs(code:GetChildren()) do
+									if v == cpart.Position.Magnitude then
+										txt = txt..cpart.SurfaceGui.TextLabel.Text
+									end
+								end
+							end
+							if txt ~= txt:reverse() then
+								mainframe.AAAAA.Text = ctxt.." "..txt.." (or "..txt:reverse()..")"
+							else
+								mainframe.AAAAA.Text = ctxt.." "..txt
+							end
 						end
 					else
-						mainframe.AAAAA.Text = "code non-existent"
+						mainframe.AAAAA.Text = closedtxt
 					end
 				else
 					mainframe.AAAAA.Text = "Casino building isn't loaded in :("
@@ -2121,4 +2130,4 @@ local function GYZIZHR_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(GYZIZHR_fake_script)()
+coroutine.wrap(APDCLAD_fake_script)()
