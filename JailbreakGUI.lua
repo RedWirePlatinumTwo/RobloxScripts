@@ -1615,7 +1615,7 @@ local function JKKLOSL_fake_script() -- JailbreakGUI.LocalScript
 					local isopen = workspace.Casino:GetAttribute("CasinoRobberyOpen")
 					
 					if isopen then
-						if mainframe.AAAAA.Text == closedtxt or mainframe.AAAAA.Text == "Casino building isn't loaded in :" then
+						if mainframe.AAAAA.Text == closedtxt or mainframe.AAAAA.Text == "Casino building isn't loaded in :(" then
 							local code
 							for i,v in pairs(codes:GetChildren()) do
 								if v:FindFirstChildOfClass("Part").SurfaceGui.TextLabel.Text ~= "" then
