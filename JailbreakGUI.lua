@@ -1254,7 +1254,7 @@ local function FYPFIG_fake_script() -- JailbreakGUI.LocalScript
 					local function partcheck()
 						return a.Part and GetFamily(a.Part)[3] ~= workspace.Trains or not a.Part
 					end
-					if a.Duration ~= false and name() ~= "rob" and name() ~= "open crate" and partcheck() and name() ~= "place tnt" and name() ~= "disable security" then
+					if a.Duration and name() ~= "rob" and name() ~= "open crate" and partcheck() and name() ~= "place tnt" and name() ~= "disable security" then
 						a.Timed = false;
 					end
 				end
