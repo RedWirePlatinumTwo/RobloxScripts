@@ -714,7 +714,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function FYPFIG_fake_script() -- JailbreakGUI.LocalScript 
+local function CQRMOS_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -1212,6 +1212,11 @@ local function FYPFIG_fake_script() -- JailbreakGUI.LocalScript
 					local m = require(rstorage.Inventory.InventoryItemSystem)
 					for i,v in pairs(m._equipConditions) do
 						m._equipConditions[i] = function(...)
+							return true
+						end
+					end
+					for i,v in pairs(m._unequipConditions) do
+						m._unequipConditions[i] = function(...)
 							return true
 						end
 					end
@@ -2129,4 +2134,4 @@ local function FYPFIG_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(FYPFIG_fake_script)()
+coroutine.wrap(CQRMOS_fake_script)()
