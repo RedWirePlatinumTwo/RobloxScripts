@@ -861,7 +861,7 @@ local function CQRMOS_fake_script() -- JailbreakGUI.LocalScript
 	
 		if not _G.RedsJBGUI then
 			_G.RedsJBGUI = true
-			notify("(Hopefully) fixed some hold E stuff not working + changed how the casino code-getting works to improve performance.")
+			notify("Modding guns also lets you swap guns when holding something you're supposed to only hold, like the museum bag.")
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
 	
