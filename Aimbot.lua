@@ -1261,7 +1261,7 @@ globals.TextWrapped = true
 
 -- Scripts:
 
-local function UFAFWC_fake_script() -- Aimbot.Scripts 
+local function EQXHRM_fake_script() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1291,7 +1291,7 @@ local function UFAFWC_fake_script() -- Aimbot.Scripts
 	
 	if not _G.RedsAimbot then
 		_G.RedsAimbot = true
-		sendnotif("Aimbot Update","Moved first person enabled option to game settings instead of global.")
+		sendnotif("Aimbot Update","Fixed firstpersonenabled not working (dumb oversight from me) + aim predictor for jailbreak should work without first person.")
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -1481,6 +1481,12 @@ local function UFAFWC_fake_script() -- Aimbot.Scripts
 			GameStats.OwnTeamWhitelisted = true
 			GameStats.Teams = {}
 			GameStats.TargetCloserPlayers = true
+			GameStats.Teams = {}
+			GameStats.TargetNPCs = false
+			GameStats.TargetCloserPlayers = true
+			GameStats.IgnorePlayers = false
+			GameStats.TargetPrioOnly = false
+			GameStats.FirstPersonEnabled = true
 		end
 	
 		if isfile and loadfile and isfile("RedsAimbotStats.lua") then
@@ -2008,10 +2014,10 @@ local function UFAFWC_fake_script() -- Aimbot.Scripts
 									camera.CFrame = CFrame.new(camera.CFrame.Position, partpos + misc.aimoffset)
 									game.UserInputService.MouseDeltaSensitivity = 0
 								else
-									mousemoverel(x,y)
+									mousemoverel(x + misc.aimoffset.X , y + misc.aimoffset.Y)
 									game.UserInputService.MouseDeltaSensitivity = GlobalStats.MouseSensitivity
 								end
-								if not GlobalStats.FirstPersonEnabled then
+								if not GameStats.FirstPersonEnabled then
 									lplr.Character.Humanoid.RootPart.CFrame = CFrame.lookAt(lplr.Character.Humanoid.RootPart.Position, (partpos * Vector3.new(1,0,1)) + Vector3.new(0, lplr.Character.Humanoid.RootPart.Position.Y, 0))
 								end
 							end
@@ -2102,7 +2108,7 @@ local function UFAFWC_fake_script() -- Aimbot.Scripts
 					return "stop"
 				end)
 			end
-			if GlobalStats.FirstPersonEnabled then
+			if GameStats.FirstPersonEnabled then
 				if misc.TargetedCharacter and misc.IsAimbotOn and camera.CameraType ~= Enum.CameraType.Scriptable then
 					plrs.LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
 				else
@@ -2127,13 +2133,13 @@ local function UFAFWC_fake_script() -- Aimbot.Scripts
 				else
 					MainFrame.CurrentTarget.Text = v.Name
 				end
-				if not GlobalStats.FirstPersonEnabled then
+				if not GameStats.FirstPersonEnabled then
 					lplr.Character.Humanoid.CameraOffset = Vector3.new(2,0,0)
 					game.UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
 				end
 					MainFrame.CurrentTarget.TextColor3 = Color3.new(0,0.66,0)
 			else
-				if not GlobalStats.FirstPersonEnabled then
+				if not GameStats.FirstPersonEnabled then
 					lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
 					game.UserInputService.MouseBehavior = Enum.MouseBehavior.Default
 				end
@@ -2299,4 +2305,4 @@ local function UFAFWC_fake_script() -- Aimbot.Scripts
 		gui:Destroy()
 	end
 end
-coroutine.wrap(UFAFWC_fake_script)()
+coroutine.wrap(EQXHRM_fake_script)()
