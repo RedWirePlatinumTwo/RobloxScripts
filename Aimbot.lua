@@ -1494,7 +1494,7 @@ local function EQXHRM_fake_script() -- Aimbot.Scripts
 			local newglobalstats = {}
 			newglobalstats.TeamAutofill = true
 			newglobalstats.RightClickAim = false
-			newglobalstats.AimMethod = "Camera"
+			newglobalstats.AimMethod = "Mouse"
 			newglobalstats.MouseSensitivity = 0.25
 			if not GlobalStats[game.PlaceId] then
 				gengamestats()
