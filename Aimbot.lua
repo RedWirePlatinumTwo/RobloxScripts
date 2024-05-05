@@ -1261,7 +1261,7 @@ globals.TextWrapped = true
 
 -- Scripts:
 
-local function EQXHRM_fake_script() -- Aimbot.Scripts 
+local function YDCVJBN_fake_script() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1940,13 +1940,11 @@ local function EQXHRM_fake_script() -- Aimbot.Scripts
 		end)
 	
 	    TableAdded(npcs, function(i, npc) 
-	        Changed(npc.Humanoid, "Health", function(hp)
-	            if hp <= 0 then
-	                npcs[i] = nil
-					if misc.TargetedCharacter == npc then
-						deselect()
-					end
-	            end
+	        npc.Humanoid.Died:connect(function()
+	            npcs[i] = nil
+				if misc.TargetedCharacter == npc then
+					deselect()
+				end
 	        end)
 	    end)
 		
@@ -2305,4 +2303,4 @@ local function EQXHRM_fake_script() -- Aimbot.Scripts
 		gui:Destroy()
 	end
 end
-coroutine.wrap(EQXHRM_fake_script)()
+coroutine.wrap(YDCVJBN_fake_script)()
