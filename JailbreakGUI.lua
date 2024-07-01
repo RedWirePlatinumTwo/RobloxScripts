@@ -89,6 +89,7 @@ ScrollingFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 45)
 ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 170, 255)
 ScrollingFrame.Position = UDim2.new(0.0319970697, 0, 0.171266183, 0)
 ScrollingFrame.Size = UDim2.new(0, 376, 0, 235)
+ScrollingFrame.CanvasPosition = Vector2.new(0, 600)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 replaceparachute.Name = "replaceparachute"
@@ -714,7 +715,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function CQRMOS_fake_script() -- JailbreakGUI.LocalScript 
+local function ZRHVKAM_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -751,9 +752,9 @@ local function CQRMOS_fake_script() -- JailbreakGUI.LocalScript
 		mainframe.modshotgun
 	}
 	
-	local function onetimefunc(signal, func)
+	local function singleclick(button, func)
 		local con
-		con = signal:connect(function(...)
+		con = button.Activated:connect(function(...)
 			con:Disconnect()
 			func(...)
 		end)
@@ -821,7 +822,7 @@ local function CQRMOS_fake_script() -- JailbreakGUI.LocalScript
 		local box = mainframe["1placeholder"].togglebox:Clone()
 		box.Parent = v
 	
-		onetimefunc(v.Activated, function()
+		singleclick(v, function()
 			box.TextColor3 = Color3.fromRGB(0,170,0)
 			box.Text = "✓"
 		end)
@@ -861,7 +862,7 @@ local function CQRMOS_fake_script() -- JailbreakGUI.LocalScript
 	
 		if not _G.RedsJBGUI then
 			_G.RedsJBGUI = true
-			notify("Modding guns also lets you swap guns when holding something you're supposed to only hold, like the museum bag.")
+			notify("Reverted Hold E bypass to how it was before (using RunService) and attempted to fix the use-guns-always thing not working.")
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
 	
@@ -985,7 +986,7 @@ local function CQRMOS_fake_script() -- JailbreakGUI.LocalScript
 			local aimpredict = false
 			local triggerbot = false
 			local releaseonuntarget = false
-			onetimefunc(mainframe.aimbot.Activated, function()
+			singleclick(mainframe.aimbot, function()
 				loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/Aimbot.lua"))()
 	
 				repeat task.wait() until RedsAimbotMisc
@@ -1203,26 +1204,26 @@ local function CQRMOS_fake_script() -- JailbreakGUI.LocalScript
 				end
 			end
 	
-			onetimefunc(mainframe.modguns.Activated, function()
+			singleclick(mainframe.modguns, function()
 				changegunstats({["CamShakeMagnitude"] = 0,["FireAuto"] = true})
 				local g = require(itemconfig.Grenade)
 				g.ReloadTime = 0
-				g.FuseTime = 0.8
-				thread(function() -- this causes errors idfk why
-					local m = require(rstorage.Inventory.InventoryItemSystem)
-					for i,v in pairs(m._equipConditions) do
-						m._equipConditions[i] = function(...)
-							return true
-						end
-					end
-					for i,v in pairs(m._unequipConditions) do
-						m._unequipConditions[i] = function(...)
-							return true
-						end
-					end
-				end)
-				
+				g.FuseTime = 0
 				notify("Removed recoil + all guns fire automatically (also decreased grenade fuse time)")
+			end)
+			
+			singleclick(mainframe.modguns, function()
+				local m = require(rstorage.Inventory.InventoryItemSystem)
+				for i,v in pairs(m._equipConditions) do
+					m._equipConditions[i] = function(...)
+						return true
+					end
+				end
+				for i,v in pairs(m._unequipConditions) do
+					m._unequipConditions[i] = function(...)
+						return true
+					end
+				end
 			end)
 			
 			local singlebullet = false
@@ -1236,7 +1237,7 @@ local function CQRMOS_fake_script() -- JailbreakGUI.LocalScript
 				end
 			end)
 	
-			onetimefunc(mainframe.forcedaytime.Activated, function()
+			singleclick(mainframe.forcedaytime, function()
 				game.Lighting.ClockTime = 12
 	
 				Changed(game.Lighting, "ClockTime", function()
@@ -1245,38 +1246,29 @@ local function CQRMOS_fake_script() -- JailbreakGUI.LocalScript
 	
 			end)
 	
-			onetimefunc(mainframe.holdebypass.Activated, function()
+			singleclick(mainframe.holdebypass, function()
 				local moduleui = require(rstorage.Module.UI)
-				
-				local function ebypass(a)
-					local function name()
-						if a.Name then
-							return a.Name:lower()
-						else
-							return ""
+			
+				game.RunService.Heartbeat:connect(function()
+					for i,a in pairs(moduleui.CircleAction.Specs) do
+						local function name()
+							if a.Name then
+								return a.Name:lower()
+							else
+								return ""
+							end
+						end
+						if a.Duration and name() ~= "rob" and name() ~= "open crate" and name() ~= "place tnt" and name() ~= "disable security" then
+							a.Timed = false;
 						end
 					end
-					local function partcheck()
-						return a.Part and GetFamily(a.Part)[3] ~= workspace.Trains or not a.Part
-					end
-					if a.Duration and name() ~= "rob" and name() ~= "open crate" and partcheck() and name() ~= "place tnt" and name() ~= "disable security" then
-						a.Timed = false;
-					end
-				end
-			
-				for i,a in pairs(moduleui.CircleAction.Specs) do
-					ebypass(a)
-				end
-				
-				TableAdded(moduleui.CircleAction.Specs, function(index, value)
-					ebypass(value)
 				end)
 			
 				notify("Hold E Bypass enabled. Cannot be used with the following: donut shop, gas station, passenger train items, air drops, and oil rig dynamite.")
 			end)
 	
 	
-			onetimefunc(mainframe["1speed"].Activated, function()
+			singleclick(mainframe["1speed"], function()
 				mainframe["1speed"].Visible = false
 				mainframe["1speedv2"].Visible = true
 	
@@ -1322,7 +1314,7 @@ local function CQRMOS_fake_script() -- JailbreakGUI.LocalScript
 			local trainrob = true
 			local banktruck = true
 	
-			onetimefunc(mainframe.RobberyNotifier.Activated, function()
+			singleclick(mainframe.RobberyNotifier, function()
 				local IconIds = {}
 				IconIds["bank truck"] = "6133383545"
 				IconIds["gas station"] = "4643750797"
@@ -1413,11 +1405,11 @@ local function CQRMOS_fake_script() -- JailbreakGUI.LocalScript
 				end)
 			end)
 	
-			onetimefunc(mainframe.infiniteyeet.Activated, function()
+			singleclick(mainframe.infiniteyeet, function()
 				loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 			end)
 	
-			onetimefunc(mainframe.removeragdoll.Activated, function()
+			singleclick(mainframe.removeragdoll, function()
 				require(rstorage.Module.AlexRagdoll).Ragdoll = nil
 				require(rstorage.Game.Falling).StartRagdolling = nil
 				notify("Removed ragdolling. (WARNING: in some cases you will still take fall damage)")
@@ -1461,7 +1453,7 @@ local function CQRMOS_fake_script() -- JailbreakGUI.LocalScript
 				end
 			end
 	
-			onetimefunc(mainframe["1flyhack"].Activated, function()
+			singleclick(mainframe["1flyhack"], function()
 				mainframe["1flyhackv2"].Visible = true
 				mainframe["1flyhack"].Visible = false
 				-- actual fly script
@@ -1604,7 +1596,7 @@ local function CQRMOS_fake_script() -- JailbreakGUI.LocalScript
 			end)
 	
 	
-			onetimefunc(mainframe.keybypass.Activated, function()
+			singleclick(mainframe.keybypass, function()
 				require(rstorage.Game.PlayerUtils).hasKey = function()
 					return true
 				end
@@ -1672,7 +1664,7 @@ local function CQRMOS_fake_script() -- JailbreakGUI.LocalScript
 				end
 			end)
 	
-			onetimefunc(mainframe.delradio.Activated, function()		
+			singleclick(mainframe.delradio, function()		
 				runservice.RenderStepped:connect(function()
 					if lplr.PlayerGui:FindFirstChild("RadioGui") then
 						lplr.PlayerGui.RadioGui:Destroy()
@@ -1710,7 +1702,7 @@ local function CQRMOS_fake_script() -- JailbreakGUI.LocalScript
 				vmodtoggle = not vmodtoggle
 			end)
 	
-			onetimefunc(mainframe.Tazermod.Activated, function()
+			singleclick(mainframe.Tazermod, function()
 				local function hasval(t, child)
 					local success, prop = pcall(function()
 						return t[child]
@@ -2024,7 +2016,7 @@ local function CQRMOS_fake_script() -- JailbreakGUI.LocalScript
 				replacechute = not replacechute
 			end)
 			local gunmodule = require(rstorage.Game.Item.Gun)
-			onetimefunc(mainframe.DisableNPCGuns.Activated, function()
+			singleclick(mainframe.DisableNPCGuns, function()
 				local shoot = gunmodule.Shoot
 	
 				gunmodule.Shoot = function(...)
@@ -2042,7 +2034,7 @@ local function CQRMOS_fake_script() -- JailbreakGUI.LocalScript
 				shootThruWalls = not shootThruWalls
 			end)
 	
-			onetimefunc(mainframe.wallhack.Activated, function()
+			singleclick(mainframe.wallhack, function()
 				local ignore = {"MansionRobbery", "Drop"}
 				local children = {}
 	
@@ -2134,4 +2126,4 @@ local function CQRMOS_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(CQRMOS_fake_script)()
+coroutine.wrap(ZRHVKAM_fake_script)()
