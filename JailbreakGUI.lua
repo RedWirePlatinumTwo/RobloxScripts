@@ -89,7 +89,6 @@ ScrollingFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 45)
 ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 170, 255)
 ScrollingFrame.Position = UDim2.new(0.0319970697, 0, 0.171266183, 0)
 ScrollingFrame.Size = UDim2.new(0, 376, 0, 235)
-ScrollingFrame.CanvasPosition = Vector2.new(0, 600)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 replaceparachute.Name = "replaceparachute"
@@ -715,7 +714,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function ZRHVKAM_fake_script() -- JailbreakGUI.LocalScript 
+local function WWHB_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -1205,11 +1204,11 @@ local function ZRHVKAM_fake_script() -- JailbreakGUI.LocalScript
 			end
 	
 			singleclick(mainframe.modguns, function()
+				notify("Removed recoil + all guns fire automatically (also decreased grenade fuse time)")
 				changegunstats({["CamShakeMagnitude"] = 0,["FireAuto"] = true})
 				local g = require(itemconfig.Grenade)
 				g.ReloadTime = 0
 				g.FuseTime = 0.8
-				notify("Removed recoil + all guns fire automatically (also decreased grenade fuse time)")
 			end)
 			
 			singleclick(mainframe.modguns, function()
@@ -1958,29 +1957,31 @@ local function ZRHVKAM_fake_script() -- JailbreakGUI.LocalScript
 			local getorder = hb.getDisplayOrder
 	
 			runservice.Heartbeat:connect(function()
-				local loadout
-				for i,v in pairs(loadouts) do
-					if v.active then
-						loadout = v.items
-						break
+				pcall(function()
+					local loadout
+					for i,v in pairs(loadouts) do
+						if v.active then
+							loadout = v.items
+							break
+						end
 					end
-				end
-				if loadout then
-					local folder = lplr:FindFirstChild("Folder")
-					if folder then
-						local folitems = folder:GetChildren()
-						for item, pos in pairs(loadout) do
-							for i, item2 in pairs(folitems) do
-								if getorder(item2) == pos and item2.Name ~= item and folder:FindFirstChild(item) then
-									setorder(item2, #folitems+1)
-								end
-								if folder:FindFirstChild(item) then
-									setorder(folder[item], pos)
+					if loadout then
+						local folder = lplr:FindFirstChild("Folder")
+						if folder then
+							local folitems = folder:GetChildren()
+							for item, pos in pairs(loadout) do
+								for i, item2 in pairs(folitems) do
+									if getorder(item2) == pos and item2.Name ~= item and folder:FindFirstChild(item) then
+										setorder(item2, #folitems+1)
+									end
+									if folder:FindFirstChild(item) then
+										setorder(folder[item], pos)
+									end
 								end
 							end
 						end
 					end
-				end
+				end)
 			end)
 	
 			mainframe.Hotbarautosort.Activated:connect(function()
@@ -2126,4 +2127,4 @@ local function ZRHVKAM_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(ZRHVKAM_fake_script)()
+coroutine.wrap(WWHB_fake_script)()
