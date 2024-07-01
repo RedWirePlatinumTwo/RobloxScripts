@@ -1264,7 +1264,7 @@ local function ZRHVKAM_fake_script() -- JailbreakGUI.LocalScript
 					end
 				end)
 			
-				notify("Hold E Bypass enabled. Cannot be used with the following: donut shop, gas station, passenger train items, air drops, and oil rig dynamite.")
+				notify("Hold E Bypass enabled. Cannot be used with the following: donut shop, gas station, air drops, and oil rig dynamite.")
 			end)
 	
 	
