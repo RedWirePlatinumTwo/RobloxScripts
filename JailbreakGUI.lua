@@ -1876,6 +1876,7 @@ local function WWHB_fake_script() -- JailbreakGUI.LocalScript
 	
 						if #items2 == 1 then
 							itemclone.itemname.Text = items2[1]
+							itemclone.itemname:ReleaseFocus()
 						end
 					end)
 	
