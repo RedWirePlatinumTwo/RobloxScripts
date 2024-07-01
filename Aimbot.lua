@@ -1291,7 +1291,7 @@ local function YDCVJBN_fake_script() -- Aimbot.Scripts
 	
 	if not _G.RedsAimbot then
 		_G.RedsAimbot = true
-		sendnotif("Aimbot Update","Fixed firstpersonenabled not working (dumb oversight from me) + aim predictor for jailbreak should work without first person.")
+		sendnotif("Aimbot Update", "The team autofill will now automatically unfocus the textbox.")
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -1892,6 +1892,7 @@ local function YDCVJBN_fake_script() -- Aimbot.Scripts
 	
 						if #tnames == 1 then
 							v.Text = tnames[1]
+							v:ReleaseFocus()
 						end
 					end
 				end)
