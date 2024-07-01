@@ -1208,7 +1208,7 @@ local function ZRHVKAM_fake_script() -- JailbreakGUI.LocalScript
 				changegunstats({["CamShakeMagnitude"] = 0,["FireAuto"] = true})
 				local g = require(itemconfig.Grenade)
 				g.ReloadTime = 0
-				g.FuseTime = 0
+				g.FuseTime = 0.8
 				notify("Removed recoil + all guns fire automatically (also decreased grenade fuse time)")
 			end)
 			
