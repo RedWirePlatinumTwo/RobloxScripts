@@ -41,7 +41,7 @@ end
 
 getgenv().TableToString = function(Table, TableName, args, IsInternalTable)
 	local s = ""
-	if not args then args = {} end
+	args = args or {}
 
 	local function setname(t, name)
 		if not args.simplify then
