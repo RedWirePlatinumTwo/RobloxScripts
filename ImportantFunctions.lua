@@ -41,7 +41,7 @@ end
 
 getgenv().TableToString = function(Table, TableName, args, IsInternalTable)
 	local s = ""
-	args = args or {}
+	if not args then args = {} end
 
 	local function setname(t, name)
 		if not args.simplify then
@@ -88,7 +88,28 @@ getgenv().TableToString = function(Table, TableName, args, IsInternalTable)
 		indexes = {}
 		totaltables = 0
 		setname(Table, TableName)
-		s = "-- Table names:\n"..getname(Table).." = {}"
+		
+		local getdate = function(dateformat)
+			local timestamp = os.time()
+			local year = os.date("%Y", timestamp)
+			local month = os.date("%m", timestamp)
+			local day = os.date("%d", timestamp)
+			local format = dateformat or {"m","d","y"}
+			local datestamp = ""
+			for i,v in pairs(format) do
+				if v == "y" then
+					datestamp = datestamp..year.."/"
+				elseif v == "m" then
+					datestamp = datestamp..month.."/"
+				else
+					datestamp = datestamp..day.."/"
+				end
+			end
+			datestamp = datestamp:sub(1,datestamp:len()-1)
+			return datestamp
+		end
+
+		s = "-- Created on "..getdate(args.dateformat).."\n-- Table names:\n"..getname(Table).." = {}"
 		local reps = {}
 	 
 		local function definetables(f)
@@ -297,7 +318,7 @@ LoggedFunctions = {}
 local excludedfunctions = {print, pairs, format, tabletostring, getcallingscript, warn, error}
 
 getgenv().FunctionLogger = function(funcparent, funcname, customfname)
-	customfname = customfname or funcname
+if not customfname then customfname = funcname end
 	if funcparent[funcname] == FunctionLogger or table.find(excludedfunctions, funcparent[funcname]) then error("No.") end
 		local oldfunc = funcparent[funcname]
 		if typeof(oldfunc) ~= "function" then error("function expected, got "..typeof(oldfunc)) end
