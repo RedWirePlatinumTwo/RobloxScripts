@@ -714,7 +714,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function WWHB_fake_script() -- JailbreakGUI.LocalScript 
+local function VZSD_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -861,7 +861,7 @@ local function WWHB_fake_script() -- JailbreakGUI.LocalScript
 	
 		if not _G.RedsJBGUI then
 			_G.RedsJBGUI = true
-			notify("Reverted Hold E bypass to how it was before (using RunService) and attempted to fix the use-guns-always thing not working.")
+			notify("Hold E bypass no longer applies to passenger train items because jailbreak stupid.")
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
 	
@@ -1247,6 +1247,7 @@ local function WWHB_fake_script() -- JailbreakGUI.LocalScript
 	
 			singleclick(mainframe.holdebypass, function()
 				local moduleui = require(rstorage.Module.UI)
+				local trainitems = {'Grab documents', 'Grab computer', 'Grab briefcase', 'Grab phone', 'Grab spyglasses', 'Grab Cash'}
 			
 				game.RunService.Heartbeat:connect(function()
 					for i,a in pairs(moduleui.CircleAction.Specs) do
@@ -1257,13 +1258,13 @@ local function WWHB_fake_script() -- JailbreakGUI.LocalScript
 								return ""
 							end
 						end
-						if a.Duration and name() ~= "rob" and name() ~= "open crate" and name() ~= "place tnt" and name() ~= "disable security" then
+						if a.Duration and name() ~= "rob" and name() ~= "open crate" and name() ~= "place tnt" and name() ~= "disable security" and not table.find(trainitems, name()) then
 							a.Timed = false;
 						end
 					end
 				end)
 			
-				notify("Hold E Bypass enabled. Cannot be used with the following: donut shop, gas station, air drops, and oil rig dynamite.")
+				notify("Hold E Bypass enabled. Cannot be used with the following: donut shop, gas station, air drops, passenger train items, and oil rig dynamite.")
 			end)
 	
 	
@@ -2128,4 +2129,4 @@ local function WWHB_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(WWHB_fake_script)()
+coroutine.wrap(VZSD_fake_script)()
