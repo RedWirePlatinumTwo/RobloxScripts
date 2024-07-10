@@ -53,18 +53,18 @@ local TargetPrioOnly = Instance.new("TextLabel")
 local value_9 = Instance.new("TextButton")
 local FirstPersonEnabled = Instance.new("TextLabel")
 local value_10 = Instance.new("TextButton")
+local AimMethod = Instance.new("TextLabel")
+local value_11 = Instance.new("TextButton")
+local About_2 = Instance.new("TextLabel")
 local GlobalSettingsUI = Instance.new("Frame")
 local Title_4 = Instance.new("TextLabel")
 local X_2 = Instance.new("TextButton")
 local ScrollingFrame_2 = Instance.new("ScrollingFrame")
 local UIListLayout_3 = Instance.new("UIListLayout")
 local RightClickAim = Instance.new("TextLabel")
-local value_11 = Instance.new("TextButton")
-local TeamAutofill = Instance.new("TextLabel")
 local value_12 = Instance.new("TextButton")
-local AimMethod = Instance.new("TextLabel")
+local TeamAutofill = Instance.new("TextLabel")
 local value_13 = Instance.new("TextButton")
-local About_2 = Instance.new("TextLabel")
 local MouseSensitivity = Instance.new("TextLabel")
 local About_3 = Instance.new("TextLabel")
 local value_14 = Instance.new("TextBox")
@@ -728,6 +728,51 @@ value_10.TextSize = 28.000
 value_10.TextStrokeTransparency = 0.000
 value_10.TextXAlignment = Enum.TextXAlignment.Left
 
+AimMethod.Name = "AimMethod"
+AimMethod.Parent = ScrollingFrame
+AimMethod.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+AimMethod.BackgroundTransparency = 1.000
+AimMethod.BorderColor3 = Color3.fromRGB(0, 170, 0)
+AimMethod.BorderSizePixel = 0
+AimMethod.Position = UDim2.new(0.0115606934, 0, 0.393835604, 0)
+AimMethod.Size = UDim2.new(0, 337, 0, 89)
+AimMethod.Font = Enum.Font.TitilliumWeb
+AimMethod.Text = "Aiming method:"
+AimMethod.TextColor3 = Color3.fromRGB(0, 170, 0)
+AimMethod.TextSize = 28.000
+AimMethod.TextStrokeTransparency = 0.000
+AimMethod.TextXAlignment = Enum.TextXAlignment.Left
+AimMethod.TextYAlignment = Enum.TextYAlignment.Top
+
+value_11.Name = "value"
+value_11.Parent = AimMethod
+value_11.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_11.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_11.Position = UDim2.new(0.00294979103, 0, 0.335594594, 0)
+value_11.Size = UDim2.new(0, 336, 0, 28)
+value_11.Font = Enum.Font.TitilliumWeb
+value_11.Text = "Camera"
+value_11.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_11.TextSize = 28.000
+value_11.TextStrokeTransparency = 0.000
+value_11.TextXAlignment = Enum.TextXAlignment.Left
+
+About_2.Name = "About"
+About_2.Parent = AimMethod
+About_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+About_2.BackgroundTransparency = 1.000
+About_2.BorderColor3 = Color3.fromRGB(0, 170, 0)
+About_2.BorderSizePixel = 0
+About_2.Position = UDim2.new(0.000516534899, 0, 0.650201321, 0)
+About_2.Size = UDim2.new(0, 331, 0, 25)
+About_2.Font = Enum.Font.TitilliumWeb
+About_2.Text = "Less universal, more stable."
+About_2.TextColor3 = Color3.fromRGB(0, 170, 0)
+About_2.TextScaled = true
+About_2.TextSize = 28.000
+About_2.TextStrokeTransparency = 0.000
+About_2.TextWrapped = true
+
 GlobalSettingsUI.Name = "GlobalSettingsUI"
 GlobalSettingsUI.Parent = Aimbot
 GlobalSettingsUI.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
@@ -788,18 +833,18 @@ RightClickAim.TextStrokeTransparency = 0.000
 RightClickAim.TextXAlignment = Enum.TextXAlignment.Left
 RightClickAim.TextYAlignment = Enum.TextYAlignment.Top
 
-value_11.Name = "value"
-value_11.Parent = RightClickAim
-value_11.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_11.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_11.Position = UDim2.new(0.00591715984, 0, 0.524137616, 0)
-value_11.Size = UDim2.new(0, 337, 0, 28)
-value_11.Font = Enum.Font.TitilliumWeb
-value_11.Text = "false"
-value_11.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_11.TextSize = 28.000
-value_11.TextStrokeTransparency = 0.000
-value_11.TextXAlignment = Enum.TextXAlignment.Left
+value_12.Name = "value"
+value_12.Parent = RightClickAim
+value_12.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_12.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_12.Position = UDim2.new(0.00591715984, 0, 0.524137616, 0)
+value_12.Size = UDim2.new(0, 337, 0, 28)
+value_12.Font = Enum.Font.TitilliumWeb
+value_12.Text = "false"
+value_12.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_12.TextSize = 28.000
+value_12.TextStrokeTransparency = 0.000
+value_12.TextXAlignment = Enum.TextXAlignment.Left
 
 TeamAutofill.Name = "TeamAutofill"
 TeamAutofill.Parent = ScrollingFrame_2
@@ -817,63 +862,18 @@ TeamAutofill.TextStrokeTransparency = 0.000
 TeamAutofill.TextXAlignment = Enum.TextXAlignment.Left
 TeamAutofill.TextYAlignment = Enum.TextYAlignment.Top
 
-value_12.Name = "value"
-value_12.Parent = TeamAutofill
-value_12.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_12.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_12.Position = UDim2.new(0.00591715984, 0, 0.52416575, 0)
-value_12.Size = UDim2.new(0, 337, 0, 28)
-value_12.Font = Enum.Font.TitilliumWeb
-value_12.Text = "true"
-value_12.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_12.TextSize = 28.000
-value_12.TextStrokeTransparency = 0.000
-value_12.TextXAlignment = Enum.TextXAlignment.Left
-
-AimMethod.Name = "AimMethod"
-AimMethod.Parent = ScrollingFrame_2
-AimMethod.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-AimMethod.BackgroundTransparency = 1.000
-AimMethod.BorderColor3 = Color3.fromRGB(0, 170, 0)
-AimMethod.BorderSizePixel = 0
-AimMethod.Position = UDim2.new(0.0115606934, 0, 0.393835604, 0)
-AimMethod.Size = UDim2.new(0, 337, 0, 89)
-AimMethod.Font = Enum.Font.TitilliumWeb
-AimMethod.Text = "Aiming method:"
-AimMethod.TextColor3 = Color3.fromRGB(0, 170, 0)
-AimMethod.TextSize = 28.000
-AimMethod.TextStrokeTransparency = 0.000
-AimMethod.TextXAlignment = Enum.TextXAlignment.Left
-AimMethod.TextYAlignment = Enum.TextYAlignment.Top
-
 value_13.Name = "value"
-value_13.Parent = AimMethod
+value_13.Parent = TeamAutofill
 value_13.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 value_13.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_13.Position = UDim2.new(0.00294979103, 0, 0.335594594, 0)
-value_13.Size = UDim2.new(0, 336, 0, 28)
+value_13.Position = UDim2.new(0.00591715984, 0, 0.52416575, 0)
+value_13.Size = UDim2.new(0, 337, 0, 28)
 value_13.Font = Enum.Font.TitilliumWeb
-value_13.Text = "Camera"
+value_13.Text = "true"
 value_13.TextColor3 = Color3.fromRGB(0, 170, 0)
 value_13.TextSize = 28.000
 value_13.TextStrokeTransparency = 0.000
 value_13.TextXAlignment = Enum.TextXAlignment.Left
-
-About_2.Name = "About"
-About_2.Parent = AimMethod
-About_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-About_2.BackgroundTransparency = 1.000
-About_2.BorderColor3 = Color3.fromRGB(0, 170, 0)
-About_2.BorderSizePixel = 0
-About_2.Position = UDim2.new(0.000516534899, 0, 0.650201321, 0)
-About_2.Size = UDim2.new(0, 331, 0, 25)
-About_2.Font = Enum.Font.TitilliumWeb
-About_2.Text = "Less universal, more stable."
-About_2.TextColor3 = Color3.fromRGB(0, 170, 0)
-About_2.TextScaled = true
-About_2.TextSize = 28.000
-About_2.TextStrokeTransparency = 0.000
-About_2.TextWrapped = true
 
 MouseSensitivity.Name = "MouseSensitivity"
 MouseSensitivity.Parent = ScrollingFrame_2
@@ -1261,7 +1261,7 @@ globals.TextWrapped = true
 
 -- Scripts:
 
-local function YDCVJBN_fake_script() -- Aimbot.Scripts 
+local function GATF_fake_script() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1291,7 +1291,7 @@ local function YDCVJBN_fake_script() -- Aimbot.Scripts
 	
 	if not _G.RedsAimbot then
 		_G.RedsAimbot = true
-		sendnotif("Aimbot Update", "The team autofill will now automatically unfocus the textbox.")
+		sendnotif("Aimbot Update", "The AimMethod global setting is now a game setting, still set to Mouse by default.")
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -1487,6 +1487,7 @@ local function YDCVJBN_fake_script() -- Aimbot.Scripts
 			GameStats.IgnorePlayers = false
 			GameStats.TargetPrioOnly = false
 			GameStats.FirstPersonEnabled = true
+			GameStats.AimMethod = "Mouse"
 		end
 	
 		if isfile and loadfile and isfile("RedsAimbotStats.lua") then
@@ -1494,7 +1495,6 @@ local function YDCVJBN_fake_script() -- Aimbot.Scripts
 			local newglobalstats = {}
 			newglobalstats.TeamAutofill = true
 			newglobalstats.RightClickAim = false
-			newglobalstats.AimMethod = "Mouse"
 			newglobalstats.MouseSensitivity = 0.25
 			if not GlobalStats[game.PlaceId] then
 				gengamestats()
@@ -1556,6 +1556,7 @@ local function YDCVJBN_fake_script() -- Aimbot.Scripts
 		newgamestats.IgnorePlayers = false
 		newgamestats.TargetPrioOnly = false
 		newgamestats.FirstPersonEnabled = true
+		newgamestats.AimMethod = "Mouse"
 		
 		for name, default in pairs(newgamestats) do
 			if GameStats[name] == nil then
@@ -1853,11 +1854,11 @@ local function YDCVJBN_fake_script() -- Aimbot.Scripts
 			end
 		end
 		
-		if globalsettings.AimMethod.value.Text == "Camera" then
-			globalsettings.AimMethod.About.Text = "Less universal, more stable."
+		if gamesettings.AimMethod.value.Text == "Camera" then
+			gamesettings.AimMethod.About.Text = "Less universal, more stable."
 		end
-		globalsettings.AimMethod.value.Activated:connect(function()
-			local method = globalsettings.AimMethod
+		gamesettings.AimMethod.value.Activated:connect(function()
+			local method = gamesettings.AimMethod
 			if method.value.Text == "Camera" then
 				method.value.Text = "Mouse"
 				method.About.Text = "More universal, less stable."
@@ -1865,7 +1866,7 @@ local function YDCVJBN_fake_script() -- Aimbot.Scripts
 				method.value.Text = "Camera"
 				method.About.Text = "Less universal, more stable."
 			end
-			GlobalStats.AimMethod = method.value.Text
+			GameStats.AimMethod = method.value.Text
 		end)
 		Changed(globalsettings.MouseSensitivity.value, "Text", function (txt)
 			local num = tonumber(txt)
@@ -2009,7 +2010,7 @@ local function YDCVJBN_fake_script() -- Aimbot.Scripts
 					if onscreen then
 						if misc.IsAimbotOn then
 							if GlobalStats.RightClickAim and RightClick or not GlobalStats.RightClickAim then
-								if GlobalStats.AimMethod == "Camera" then
+								if GameStats.AimMethod == "Camera" then
 									camera.CFrame = CFrame.new(camera.CFrame.Position, partpos + misc.aimoffset)
 									game.UserInputService.MouseDeltaSensitivity = 0
 								else
@@ -2304,4 +2305,4 @@ local function YDCVJBN_fake_script() -- Aimbot.Scripts
 		gui:Destroy()
 	end
 end
-coroutine.wrap(YDCVJBN_fake_script)()
+coroutine.wrap(GATF_fake_script)()
