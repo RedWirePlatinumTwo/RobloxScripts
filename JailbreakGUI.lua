@@ -750,7 +750,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function MMJEG_fake_script() -- JailbreakGUI.LocalScript 
+local function FRWH_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -1866,6 +1866,13 @@ local function MMJEG_fake_script() -- JailbreakGUI.LocalScript
 				clone.Visible = true
 				clone.Title.Text = name
 				clone.active.Text = "Active ("..tostring(loadout.active)..")"
+				if loadout.active then 
+					clone.active.TextColor3 = Color3.fromRGB(85,255,255)
+				end
+				clone.teamname.team.Text = loadout.teamname
+				if loadout.NOT then 
+					clone.teamname.NOT.TextColor3 = Color3.fromRGB(85,255,255)
+				end
 	
 				local function updateloadout()
 					loadout.items = {}
@@ -1877,10 +1884,6 @@ local function MMJEG_fake_script() -- JailbreakGUI.LocalScript
 					end
 	
 					saveloadouts()
-				end
-	
-				if loadout.active then 
-					clone.active.TextColor3 = Color3.fromRGB(85,255,255)
 				end
 	
 				clone.active.Activated:connect(function()
@@ -2204,4 +2207,4 @@ local function MMJEG_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(MMJEG_fake_script)()
+coroutine.wrap(FRWH_fake_script)()
