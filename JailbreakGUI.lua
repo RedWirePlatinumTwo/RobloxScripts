@@ -52,6 +52,9 @@ local slotnum = Instance.new("TextBox")
 local active = Instance.new("TextButton")
 local additem = Instance.new("TextButton")
 local UIListLayout_2 = Instance.new("UIListLayout")
+local teamname = Instance.new("Frame")
+local NOT = Instance.new("TextButton")
+local team = Instance.new("TextBox")
 local Title_3 = Instance.new("TextLabel")
 local hide = Instance.new("TextButton")
 local addloadout = Instance.new("TextButton")
@@ -529,7 +532,7 @@ AutosortFrame.Name = "AutosortFrame"
 AutosortFrame.Parent = JailbreakGUI
 AutosortFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 45)
 AutosortFrame.BorderColor3 = Color3.fromRGB(0, 170, 255)
-AutosortFrame.Position = UDim2.new(0.452254742, 0, 0.0814681426, 0)
+AutosortFrame.Position = UDim2.new(0.3528229, 0, 0.157118276, 0)
 AutosortFrame.Size = UDim2.new(0, 402, 0, 335)
 AutosortFrame.Visible = false
 
@@ -656,6 +659,39 @@ additem.TextWrapped = true
 
 UIListLayout_2.Parent = loadoutframe
 
+teamname.Name = "teamname"
+teamname.Parent = loadoutframe
+teamname.BackgroundColor3 = Color3.fromRGB(24, 24, 56)
+teamname.BorderColor3 = Color3.fromRGB(110, 110, 248)
+teamname.Position = UDim2.new(0, 0, 0.378787875, 0)
+teamname.Size = UDim2.new(0, 342, 0, 25)
+
+NOT.Name = "NOT"
+NOT.Parent = teamname
+NOT.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+NOT.BorderColor3 = Color3.fromRGB(0, 170, 255)
+NOT.Position = UDim2.new(0.897660792, 0, 0, 0)
+NOT.Size = UDim2.new(0, 35, 0, 25)
+NOT.Font = Enum.Font.Ubuntu
+NOT.Text = "NOT"
+NOT.TextColor3 = Color3.fromRGB(170, 0, 0)
+NOT.TextScaled = true
+NOT.TextSize = 14.000
+NOT.TextWrapped = true
+
+team.Name = "team"
+team.Parent = teamname
+team.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+team.BorderColor3 = Color3.fromRGB(0, 170, 255)
+team.Size = UDim2.new(0, 307, 0, 25)
+team.Font = Enum.Font.Ubuntu
+team.PlaceholderText = "Leave blank for any team"
+team.Text = ""
+team.TextColor3 = Color3.fromRGB(85, 170, 255)
+team.TextScaled = true
+team.TextSize = 14.000
+team.TextWrapped = true
+
 Title_3.Name = "Title"
 Title_3.Parent = AutosortFrame
 Title_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -714,7 +750,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function VZSD_fake_script() -- JailbreakGUI.LocalScript 
+local function MMJEG_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -861,7 +897,7 @@ local function VZSD_fake_script() -- JailbreakGUI.LocalScript
 	
 		if not _G.RedsJBGUI then
 			_G.RedsJBGUI = true
-			notify("Hold E bypass no longer applies to passenger train items because jailbreak stupid.")
+			notify("Re-worked hotbar loadout. Multiple loadouts can be active at a time and added a team check (and a NOT toggle for the team).")
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
 	
@@ -1794,12 +1830,19 @@ local function VZSD_fake_script() -- JailbreakGUI.LocalScript
 				loadouts = {}
 			end
 			local items = {}
+			local teamnames = {}
 	
 			for i,v in pairs(rstorage.Game.Item:GetChildren()) do 
 				table.insert(items, v.Name)
 			end
+			
+			for i,v in pairs(game.Teams:GetTeams()) do
+				if not table.find(teamnames, v.Name) then
+					table.insert(teamnames, v.Name)
+				end
+			end
 	
-			local function saveloadout()
+			local function saveloadouts()
 				if writefile then
 					writefile(file, TableToString(loadouts, "Loadouts"))
 				end
@@ -1810,8 +1853,14 @@ local function VZSD_fake_script() -- JailbreakGUI.LocalScript
 					loadouts[name] = {}
 					loadouts[name].active = false
 					loadouts[name].items = {}
+					loadouts[name].teamname = ""
+					loadouts[name].NOT = false
 				end
 				local loadout = loadouts[name]
+				if not loadout.teamname then
+					loadout.teamname = ""
+					loadout.NOT = false
+				end
 				local clone = autosortframe.loadoutframe:Clone()
 				clone.Parent = autosortframe
 				clone.Visible = true
@@ -1827,7 +1876,7 @@ local function VZSD_fake_script() -- JailbreakGUI.LocalScript
 						end
 					end
 	
-					saveloadout()
+					saveloadouts()
 				end
 	
 				if loadout.active then 
@@ -1841,23 +1890,43 @@ local function VZSD_fake_script() -- JailbreakGUI.LocalScript
 				Changed(loadout, "active", function(val)
 					if val then
 						clone.active.TextColor3 = Color3.fromRGB(85,255,255)
-	
-						for i,v in pairs(loadouts) do
-							if v ~= loadout and v.active then
-								v.active = false
-							end
-						end
-	
 					else
 						clone.active.TextColor3 = Color3.new(0.66,0,0)
 					end
 					clone.active.Text = "Active ("..tostring(val)..")"
-					saveloadout()
+					saveloadouts()
+				end)
+				
+				clone.teamname.NOT.Activated:connect(function()
+					loadout.NOT = not loadout.NOT
+					if loadout.NOT then
+						clone.teamname.NOT.TextColor3 = Color3.fromRGB(85,255,255)
+					else
+						clone.teamname.NOT.TextColor3 = Color3.new(0.66,0,0)
+					end
+					saveloadouts()
+				end)
+				
+				clone.teamname.team.FocusLost:connect(saveloadouts)
+				Changed(clone.teamname.team, "Text", function(txt)
+					local teams2 = {}
+	
+					for i,v in pairs(teamnames) do
+						if v:lower():sub(1, txt:len()) == txt:lower() then
+							table.insert(teams2, v)
+						end
+					end
+	
+					if #teams2 == 1 then
+						clone.teamname.team.Text = teams2[1]
+						loadout.teamname = teams2[1]
+						clone.teamname.team:ReleaseFocus()
+					end
 				end)
 	
 				local function additem(txt,txt2)
-					if not txt then txt = "" end
-					if not txt2 then txt2 = "" end
+					txt = txt or ""
+					txt2 = txt2 or ""
 					local itemclone = clone.itemframe:Clone()
 					itemclone.Parent = clone
 					itemclone.Visible = true
@@ -1913,9 +1982,7 @@ local function VZSD_fake_script() -- JailbreakGUI.LocalScript
 					additem(i, tostring(v))
 				end)
 	
-				clone.additem.Activated:connect(function()
-					additem()
-				end)
+				clone.additem.Activated:connect(additem)
 	
 				clone.Title.delloadout.Activated:connect(function()
 	
@@ -1926,7 +1993,7 @@ local function VZSD_fake_script() -- JailbreakGUI.LocalScript
 					end
 	
 					clone:Destroy()
-					saveloadout()
+					saveloadouts()
 				end)
 			end
 	
@@ -1962,22 +2029,30 @@ local function VZSD_fake_script() -- JailbreakGUI.LocalScript
 				pcall(function()
 					local loadout
 					for i,v in pairs(loadouts) do
-						if v.active then
-							loadout = v.items
-							break
+						local function teamcheck()
+							if v.teamname ~= "" then
+								if v.NOT then
+									return v.teamname ~= lplr.Team.Name
+								else
+									return v.teamname == lplr.Team.Name
+								end
+							else
+								return true
+							end
 						end
-					end
-					if loadout then
-						local folder = lplr:FindFirstChild("Folder")
-						if folder then
-							local folitems = folder:GetChildren()
-							for item, pos in pairs(loadout) do
-								for i, item2 in pairs(folitems) do
-									if getorder(item2) == pos and item2.Name ~= item and folder:FindFirstChild(item) then
-										setorder(item2, #folitems+1)
-									end
-									if folder:FindFirstChild(item) then
-										setorder(folder[item], pos)
+						if v.active and teamcheck() then
+							loadout = v.items
+							local folder = lplr:FindFirstChild("Folder")
+							if folder then
+								local folitems = folder:GetChildren()
+								for item, pos in pairs(loadout) do
+									for i, item2 in pairs(folitems) do
+										if getorder(item2) == pos and item2.Name ~= item and folder:FindFirstChild(item) then
+											setorder(item2, #folitems+1)
+										end
+										if folder:FindFirstChild(item) then
+											setorder(folder[item], pos)
+										end
 									end
 								end
 							end
@@ -2129,4 +2204,4 @@ local function VZSD_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(VZSD_fake_script)()
+coroutine.wrap(MMJEG_fake_script)()
