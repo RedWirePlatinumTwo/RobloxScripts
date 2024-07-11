@@ -1063,7 +1063,7 @@ local function FRWH_fake_script() -- JailbreakGUI.LocalScript
 							end
 							if triggerbot then
 								if gun then
-									task.wait()
+									task.wait(0.05)
 									if fireauto then
 										releaseonuntarget = true
 										mouse1press()
