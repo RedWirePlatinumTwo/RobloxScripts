@@ -104,6 +104,7 @@ respawn.TextStrokeTransparency = 0
 respawn.TextWrapped = true
 -- Scripts:
 function SCRIPT_DJJR70_FAKESCRIPT() -- Megafunobby.LocalScript 
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/getservice%20auto-converter.lua"))()
 	local script = Instance.new('LocalScript')
 	script.Parent = Megafunobby
 	local frame = script.Parent.MainFrame
