@@ -750,16 +750,17 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function FRWH_fake_script() -- JailbreakGUI.LocalScript 
+local function XCTN_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/getservice%20auto-converter.lua"))()
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
 	mainframe.UIGridLayout.SortOrder = 0
 	local aframe = script.Parent.AutosortFrame
 	local autosortframe = aframe.ScrollingFrame
 	autosortframe.UIListLayout.SortOrder = 0
 	local rstorage = game.ReplicatedStorage
-	local runservice = game["Run Service"]
+	local runservice = game.RunService
 	local itemconfig = rstorage.Game.ItemConfig
 	local oneclickbuttons = {
 		mainframe.RobberyNotifier,
@@ -2207,4 +2208,4 @@ local function FRWH_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(FRWH_fake_script)()
+coroutine.wrap(XCTN_fake_script)()
