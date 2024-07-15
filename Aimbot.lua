@@ -1261,9 +1261,10 @@ globals.TextWrapped = true
 
 -- Scripts:
 
-local function GATF_fake_script() -- Aimbot.Scripts 
+local function XHLMEPJ_fake_script() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript', Aimbot)
 
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/getservice%20auto-converter.lua"))()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
 	local gui = script.Parent
@@ -2305,4 +2306,4 @@ local function GATF_fake_script() -- Aimbot.Scripts
 		gui:Destroy()
 	end
 end
-coroutine.wrap(GATF_fake_script)()
+coroutine.wrap(XHLMEPJ_fake_script)()
