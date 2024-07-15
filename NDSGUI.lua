@@ -96,6 +96,7 @@ lobbytp.TextSize = 20
 lobbytp.TextWrapped = true
 -- Scripts:
 function SCRIPT_YBCO67_FAKESCRIPT() -- RedWiresNDSGUI.LocalScript 
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/getservice%20auto-converter.lua"))()
 	local script = Instance.new('LocalScript')
 	script.Parent = RedWiresNDSGUI
 	local mframe = script.Parent.MainFrame
