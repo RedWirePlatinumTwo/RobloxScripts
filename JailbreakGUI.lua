@@ -750,7 +750,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function XCTN_fake_script() -- JailbreakGUI.LocalScript 
+local function SYWYE_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/getservice%20auto-converter.lua"))()
@@ -1284,7 +1284,17 @@ local function XCTN_fake_script() -- JailbreakGUI.LocalScript
 	
 			singleclick(mainframe.holdebypass, function()
 				local moduleui = require(rstorage.Module.UI)
-				local trainitems = {'Grab documents', 'Grab computer', 'Grab briefcase', 'Grab phone', 'Grab spyglasses', 'Grab Cash'}
+				local nameavoid = {"grab documents",
+					"grab computer",
+					"grab briefcase",
+					"grab phone",
+					"grab spyglasses",
+					"grab Cash",
+					"rob",
+					"open crate",
+					"place tnt",
+					"disable security"
+				}
 			
 				game.RunService.Heartbeat:connect(function()
 					for i,a in pairs(moduleui.CircleAction.Specs) do
@@ -1295,8 +1305,8 @@ local function XCTN_fake_script() -- JailbreakGUI.LocalScript
 								return ""
 							end
 						end
-						if a.Duration and name() ~= "rob" and name() ~= "open crate" and name() ~= "place tnt" and name() ~= "disable security" and not table.find(trainitems, name()) then
-							a.Timed = false;
+						if a.Duration and not table.find(nameavoid, name()) then
+							a.Timed = false
 						end
 					end
 				end)
@@ -2208,4 +2218,4 @@ local function XCTN_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(XCTN_fake_script)()
+coroutine.wrap(SYWYE_fake_script)()
