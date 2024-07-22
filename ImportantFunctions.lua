@@ -239,7 +239,7 @@ getgenv().Format = function(var, tname, ttsargs, IsInternalTable)
 				st = tostring(var)
 			end
         elseif type(var) == "string" then
-            st = "'"..reformatstring(var).."'"
+            st = "\""..reformatstring(var).."\""
         elseif type(var) == "table" then
             if not table.find(catchrepeats, var) then
 				st = TableToString(var, tname, ttsargs, IsInternalTable)
