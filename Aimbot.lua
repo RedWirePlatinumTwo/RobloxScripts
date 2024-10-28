@@ -1261,7 +1261,7 @@ globals.TextWrapped = true
 
 -- Scripts:
 
-local function XHLMEPJ_fake_script() -- Aimbot.Scripts 
+local function EFHUV_fake_script() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/getservice%20auto-converter.lua"))()
@@ -1292,7 +1292,7 @@ local function XHLMEPJ_fake_script() -- Aimbot.Scripts
 	
 	if not _G.RedsAimbot then
 		_G.RedsAimbot = true
-		sendnotif("Aimbot Update", "The AimMethod global setting is now a game setting, still set to Mouse by default.")
+		sendnotif("Aimbot Update", "The MouseSensitivity thing no longer changes MouseDeltaSensitivity, making the aimbot slightly more hidden.")
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -2015,8 +2015,7 @@ local function XHLMEPJ_fake_script() -- Aimbot.Scripts
 									camera.CFrame = CFrame.new(camera.CFrame.Position, partpos + misc.aimoffset)
 									game.UserInputService.MouseDeltaSensitivity = 0
 								else
-									mousemoverel(x + misc.aimoffset.X , y + misc.aimoffset.Y)
-									game.UserInputService.MouseDeltaSensitivity = GlobalStats.MouseSensitivity
+									mousemoverel((x + misc.aimoffset.X) * GlobalStats.MouseSensitivity, (y + misc.aimoffset.Y) * GlobalStats.MouseSensitivity)
 								end
 								if not GameStats.FirstPersonEnabled then
 									lplr.Character.Humanoid.RootPart.CFrame = CFrame.lookAt(lplr.Character.Humanoid.RootPart.Position, (partpos * Vector3.new(1,0,1)) + Vector3.new(0, lplr.Character.Humanoid.RootPart.Position.Y, 0))
@@ -2306,4 +2305,4 @@ local function XHLMEPJ_fake_script() -- Aimbot.Scripts
 		gui:Destroy()
 	end
 end
-coroutine.wrap(XHLMEPJ_fake_script)()
+coroutine.wrap(EFHUV_fake_script)()
