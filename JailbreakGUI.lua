@@ -750,7 +750,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function OQPLYGM_fake_script() -- JailbreakGUI.LocalScript 
+local function PPJTVA_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/getservice%20auto-converter.lua"))()
@@ -1566,6 +1566,7 @@ local function OQPLYGM_fake_script() -- JailbreakGUI.LocalScript
 							if keyDown(Enum.KeyCode.Q) then
 								velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position,flyspeed)
 							end
+							hrp.Velocity = velocity
 							hrp.CFrame = CFrame.new(hrp.Position, (workspace.CurrentCamera.CFrame*frontoffset).Position)
 						end
 						if flying and not keyDown(Enum.KeyCode.W) and not keyDown(Enum.KeyCode.A) and not keyDown(Enum.KeyCode.S) and not keyDown(Enum.KeyCode.D) and not keyDown(Enum.KeyCode.Q) and not keyDown(Enum.KeyCode.E) then
@@ -2197,4 +2198,4 @@ local function OQPLYGM_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(OQPLYGM_fake_script)()
+coroutine.wrap(PPJTVA_fake_script)()
