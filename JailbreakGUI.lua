@@ -750,7 +750,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function SYWYE_fake_script() -- JailbreakGUI.LocalScript 
+local function OQPLYGM_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/getservice%20auto-converter.lua"))()
@@ -898,7 +898,7 @@ local function SYWYE_fake_script() -- JailbreakGUI.LocalScript
 	
 		if not _G.RedsJBGUI then
 			_G.RedsJBGUI = true
-			notify("Re-worked hotbar loadout. Multiple loadouts can be active at a time and added a team check (and a NOT toggle for the team).")
+			notify("Plasma shotgun is now excluded from wallhack + other changes.")
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
 	
@@ -1241,7 +1241,7 @@ local function SYWYE_fake_script() -- JailbreakGUI.LocalScript
 			end
 	
 			singleclick(mainframe.modguns, function()
-				notify("Removed recoil + all guns fire automatically (also decreased grenade fuse time)")
+				notify("Removed recoil, all guns fire automatically, decreased grenade fuse time, and guns can almost always be used (ex: crouching, holding tomb gem)")
 				changegunstats({["CamShakeMagnitude"] = 0,["FireAuto"] = true})
 				local g = require(itemconfig.Grenade)
 				g.ReloadTime = 0
@@ -1505,9 +1505,8 @@ local function SYWYE_fake_script() -- JailbreakGUI.LocalScript
 				mainframe["1flyhack"].Visible = false
 				-- actual fly script
 				local flying = false
-				local maxdistance = 100000000000000
 				local uiservice = game.UserInputService
-				local mouse = lplr:GetMouse()
+				local pos = Vector3.new()
 	
 				local function GetVelocity(pos1,pos2,StudsPerSecond)
 					local distance = (pos2 - pos1)
@@ -1515,33 +1514,14 @@ local function SYWYE_fake_script() -- JailbreakGUI.LocalScript
 					return (distance/mag)*StudsPerSecond
 				end
 	
-				local function getkey(keycode)
-					local key = tostring(keycode):lower()
-					local findcode, a = key:find("keycode.")
-					return key:sub(a+1)
+				local function keyDown(keycode)
+					return uiservice:IsKeyDown(keycode) and not uiservice:GetFocusedTextBox()
 				end
-	
-				local keys = {}
-				local pos = Vector3.new()
-				local vpart = Instance.new("Part", workspace)
-				vpart.Material = Enum.Material.SmoothPlastic
-				vpart.Size = Vector3.new(2,2,2)
-				vpart.Transparency = 1
-				vpart.Anchored = false
-				vpart.CanCollide = false
-				local rope = Instance.new("RopeConstraint", part)
-				rope.Length = 3
-				local function getattachment(p)
-					if not p:FindFirstChild("Attachment") then
-						Instance.new("Attachment", p)
-					end
-					return p.Attachment
-				end
-				rope.Attachment0 = getattachment(vpart)
 	
 				runservice.Heartbeat:connect(function()
 					local hrp
 					local flyspeed = speeds.flyspeed
+					local maxdistance = flyspeed * 2
 					local invehicle = getmodel()
 					if invehicle and isdriver() then
 						hrp = invehicle.PrimaryPart
@@ -1563,28 +1543,32 @@ local function SYWYE_fake_script() -- JailbreakGUI.LocalScript
 						local velocity = Vector3.new()
 						if flying then
 							hrp.RotVelocity = Vector3.new()
-							if keys.w_active then
-								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position, flyspeed)
+							if keyDown(Enum.KeyCode.W) then
+								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position,flyspeed)
 							end
-							if keys.s_active then
-								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position, flyspeed)
+	
+							if keyDown(Enum.KeyCode.S) then
+								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position,flyspeed)
 							end
-							if keys.a_active then
-								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position, flyspeed)
+	
+							if keyDown(Enum.KeyCode.A) then
+								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position,flyspeed)
 							end
-							if keys.d_active then
-								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position, flyspeed)
+	
+							if keyDown(Enum.KeyCode.D) then
+								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position,flyspeed)
 							end
-							if keys.e_active then
-								velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position, flyspeed)
+	
+							if keyDown(Enum.KeyCode.E) then
+								velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position,flyspeed)
 							end
-							if keys.q_active then
-								velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position, flyspeed)
+	
+							if keyDown(Enum.KeyCode.Q) then
+								velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position,flyspeed)
 							end
-							hrp.Velocity = velocity
 							hrp.CFrame = CFrame.new(hrp.Position, (workspace.CurrentCamera.CFrame*frontoffset).Position)
 						end
-						if flying and not keys.w_active and not keys.a_active and not keys.s_active and not keys.d_active and not keys.q_active and not keys.e_active then
+						if flying and not keyDown(Enum.KeyCode.W) and not keyDown(Enum.KeyCode.A) and not keyDown(Enum.KeyCode.S) and not keyDown(Enum.KeyCode.D) and not keyDown(Enum.KeyCode.Q) and not keyDown(Enum.KeyCode.E) then
 							hrp.CFrame = CFrame.new(pos, (workspace.CurrentCamera.CFrame*frontoffset).Position)
 							hrp.Velocity = Vector3.new()
 						else
@@ -1603,11 +1587,6 @@ local function SYWYE_fake_script() -- JailbreakGUI.LocalScript
 							lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
 						end
 					end
-					keys[getkey(key.KeyCode).."_active"] = true
-				end)
-	
-				uiservice.InputEnded:connect(function(key)
-					keys[getkey(key.KeyCode).."_active"] = false
 				end)
 				-- end of fly script
 	
@@ -2192,7 +2171,7 @@ local function SYWYE_fake_script() -- JailbreakGUI.LocalScript
 				gunmodule.Shoot = function(...)
 					local args = {...}
 					local main = args[1]
-					if getequippeditem() ~= "PlasmaPistol" then
+					if getequippeditem() ~= "PlasmaPistol" and getequippeditem() ~= "PlasmaShotgun" then
 						for i,v in pairs(children) do
 							if not table.find(main.BulletEmitter.IgnoreList, v) and shootThruWalls and main.Humanoid == lplr.Character.Humanoid then
 								table.insert(main.BulletEmitter.IgnoreList, v)
@@ -2201,7 +2180,7 @@ local function SYWYE_fake_script() -- JailbreakGUI.LocalScript
 					end
 					return shoot(...)
 				end
-				notify("Sometimes the plasma pistol will just not hit enemies at all, so the wallhack will not work with that gun specifically")
+				notify("The plasma pistol (and plasma shotgun) will just not hit enemies at all if shooting through walls, so the wallhack will not work with those guns specifically")
 			end)
 	
 		else
@@ -2218,4 +2197,4 @@ local function SYWYE_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(SYWYE_fake_script)()
+coroutine.wrap(OQPLYGM_fake_script)()
