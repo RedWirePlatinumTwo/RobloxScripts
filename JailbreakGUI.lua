@@ -750,7 +750,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function PPJTVA_fake_script() -- JailbreakGUI.LocalScript 
+local function MMHT_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/getservice%20auto-converter.lua"))()
@@ -2158,11 +2158,22 @@ local function PPJTVA_fake_script() -- JailbreakGUI.LocalScript
 						table.insert(children, v)
 					end
 				end
+				
+				local equippeditems = {}
+				local hook
+				hook = hookmetamethod(game, "__namecall", function(self, ...)
+					if self.Name == "InventoryEquipRemote" and getnamecallmethod() == "FireServer" and self.Parent.Parent == lplr.Folder then
+						local equipped = {...}
+						equipped = equipped[1]
+						equippeditems[self.Parent.Name] = equipped
+					end
+					return hook(self, ...)
+				end)
 	
 				local function getequippeditem()
-					for i,v in pairs(lplr.Folder:GetChildren()) do
-						if v:GetAttribute("InventoryItemEquipped") == true then
-							return v.Name
+					for i,v in pairs(equippeditems) do
+						if v then
+							return i
 						end
 					end
 				end
@@ -2198,4 +2209,4 @@ local function PPJTVA_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(PPJTVA_fake_script)()
+coroutine.wrap(MMHT_fake_script)()
