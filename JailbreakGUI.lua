@@ -750,7 +750,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function MMHT_fake_script() -- JailbreakGUI.LocalScript 
+local function BZWQK_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/getservice%20auto-converter.lua"))()
@@ -841,6 +841,25 @@ local function MMHT_fake_script() -- JailbreakGUI.LocalScript
 			end
 	    end)
 		return t
+	end
+	
+	local equippeditems = {}
+	local hook
+	hook = hookmetamethod(game, "__namecall", function(self, ...)
+		if self.Name == "InventoryEquipRemote" and getnamecallmethod() == "FireServer" and self.Parent.Parent == lplr.Folder then
+			local equipped = {...}
+			equipped = equipped[1]
+			equippeditems[self.Parent.Name] = equipped
+		end
+		return hook(self, ...)
+	end)
+	
+	local function getEquippedItem()
+		for i,v in pairs(equippeditems) do
+			if v then
+				return i
+			end
+		end
 	end
 	
 	for i,v in pairs(script.Parent:GetDescendants()) do
@@ -1032,17 +1051,10 @@ local function MMHT_fake_script() -- JailbreakGUI.LocalScript
 					pcall(function()
 						if misc.TargetedCharacter then
 							local targetedchr = misc.TargetedCharacter
-							local tool
+							local tool = getEquippedItem()
 							local speed
 							local fireauto
 							local gun
-							for i,v in pairs(lplr.Folder:GetChildren()) do
-								local attribute = v:GetAttribute("InventoryItemEquipped")
-								if attribute == true then
-									tool = v.Name
-									break
-								end
-							end
 							if tool then
 								if itemconfig:FindFirstChild(tool) then
 									gun = require(itemconfig[tool])
@@ -2158,32 +2170,13 @@ local function MMHT_fake_script() -- JailbreakGUI.LocalScript
 						table.insert(children, v)
 					end
 				end
-				
-				local equippeditems = {}
-				local hook
-				hook = hookmetamethod(game, "__namecall", function(self, ...)
-					if self.Name == "InventoryEquipRemote" and getnamecallmethod() == "FireServer" and self.Parent.Parent == lplr.Folder then
-						local equipped = {...}
-						equipped = equipped[1]
-						equippeditems[self.Parent.Name] = equipped
-					end
-					return hook(self, ...)
-				end)
-	
-				local function getequippeditem()
-					for i,v in pairs(equippeditems) do
-						if v then
-							return i
-						end
-					end
-				end
 	
 				local shoot = gunmodule.Shoot
 	
 				gunmodule.Shoot = function(...)
 					local args = {...}
 					local main = args[1]
-					if getequippeditem() ~= "PlasmaPistol" and getequippeditem() ~= "PlasmaShotgun" then
+					if getEquippedItem() ~= "PlasmaPistol" and getEquippedItem() ~= "PlasmaShotgun" then
 						for i,v in pairs(children) do
 							if not table.find(main.BulletEmitter.IgnoreList, v) and shootThruWalls and main.Humanoid == lplr.Character.Humanoid then
 								table.insert(main.BulletEmitter.IgnoreList, v)
@@ -2209,4 +2202,4 @@ local function MMHT_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(MMHT_fake_script)()
+coroutine.wrap(BZWQK_fake_script)()
