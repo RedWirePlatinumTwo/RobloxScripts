@@ -128,7 +128,7 @@ local function YBDS_fake_script() -- Megafunobby.LocalScript
 				end
 			end)
 	
-		local skip = plrgui.HUB.Groundbar.SKIPS
+		local skip = plrgui.HUD.Groundbar.SKIPS
 		skip.RemainT.Text = "SKIPS LEFT : yes"
 		plrgui.Note.Contents.Info_Skip:Destroy()
 	
