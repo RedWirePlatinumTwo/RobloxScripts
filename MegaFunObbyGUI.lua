@@ -77,10 +77,11 @@ stageskip.BorderColor3 = Color3.fromRGB(85, 85, 255)
 stageskip.Position = UDim2.new(0.0266959202, 0, 0.651538432, 0)
 stageskip.Size = UDim2.new(0, 100, 0, 50)
 stageskip.Font = Enum.Font.Ubuntu
-stageskip.Text = "Skip Stage"
+stageskip.Text = "Skip All Stages"
 stageskip.TextColor3 = Color3.fromRGB(85, 85, 255)
 stageskip.TextSize = 20.000
 stageskip.TextStrokeTransparency = 0.000
+stageskip.TextWrapped = true
 
 delkill.Name = "delkill"
 delkill.Parent = MainFrame
