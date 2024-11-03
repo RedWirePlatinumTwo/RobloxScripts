@@ -110,7 +110,7 @@ respawn.TextWrapped = true
 
 -- Scripts:
 
-local function YBDS_fake_script() -- Megafunobby.LocalScript 
+local function HQESHLR_fake_script() -- Megafunobby.LocalScript 
 	local script = Instance.new('LocalScript', Megafunobby)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/getservice%20auto-converter.lua"))()
@@ -130,9 +130,10 @@ local function YBDS_fake_script() -- Megafunobby.LocalScript
 	
 		local skip = plrgui.HUD.Groundbar.SKIPS
 		skip.RemainT.Text = "SKIPS LEFT : yes"
-		plrgui.Note.Contents.Info_Skip:Destroy()
-	
-		skip.SELECT.MouseButton1Click:connect(function()
+		local skipclone = skip:Clone()
+		skipclone.Parent = skip.Parent
+		skip:Destroy()
+		skipclone.Activated:connect(function()
 			lplr.Character.HumanoidRootPart.CFrame = workspace.stages[lplr.leaderstats.Stage.Value + 1].CFrame
 		end)
 	
@@ -143,7 +144,7 @@ local function YBDS_fake_script() -- Megafunobby.LocalScript
 		f:Destroy()
 		skips.Text = "Skips Left: yes"
 	
-		skips.MouseButton1Click:connect(function()
+		skips.Activated:connect(function()
 			lplr.Character.HumanoidRootPart.CFrame = workspace.stages[lplr.leaderstats.Stage.Value + 1].CFrame
 		end)
 	
@@ -152,11 +153,11 @@ local function YBDS_fake_script() -- Megafunobby.LocalScript
 		script.Parent:Destroy()
 		return
 	end
-	frame.respawn.MouseButton1Click:connect(function()
+	frame.respawn.Activated:connect(function()
 		game.Players.LocalPlayer.Character.Humanoid.Health = 0
 	end)
 	
-	frame.delkill.MouseButton1Click:connect(function()
+	frame.delkill.Activated:connect(function()
 		for i, kill in ipairs(workspace.kill:GetChildren()) do
 			if kill:IsA("BasePart") and kill.Transparency ~= 1 then
 				kill:Destroy()
@@ -172,7 +173,7 @@ local function YBDS_fake_script() -- Megafunobby.LocalScript
 			frame.Endstage.Text = string.match(namestring,"%d+")
 		end
 	
-	frame.stageskip.MouseButton1Click:connect(function()
+	frame.stageskip.Activated:connect(function()
 	local start = tonumber(frame.Currentstage.Text)
 	local End = tonumber(frame.Endstage.Text)
 		if start ~= End then
@@ -190,4 +191,4 @@ local function YBDS_fake_script() -- Megafunobby.LocalScript
 		frame.Currentstage.Text = tostring(stage.Value)
 	end)
 end
-coroutine.wrap(YBDS_fake_script)()
+coroutine.wrap(HQESHLR_fake_script)()
