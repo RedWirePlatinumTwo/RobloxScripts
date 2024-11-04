@@ -139,7 +139,7 @@ local function HQESHLR_fake_script() -- Megafunobby.LocalScript
 		end)
 	
 	elseif game.PlaceId == 982130670 then
-		local f = plrgui.HUD.skipsLabel
+		local f = plrgui.HUD.skipsLabel.TextButton
 		local skips = f:Clone()
 		skips.Parent = f.Parent
 		f:Destroy()
