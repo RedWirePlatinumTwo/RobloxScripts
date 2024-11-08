@@ -296,7 +296,11 @@ getgenv().GetFullName = function(ins)
 	
 	for i,v in pairs(Pathway) do
 		if i == 1 then
-			fns = v.Name
+			if v == game then
+				fns = "game"
+			else
+				fns = v.Name
+			end
 		else
 			if i == 2 then
 				if table.find(Services, v.ClassName) then
