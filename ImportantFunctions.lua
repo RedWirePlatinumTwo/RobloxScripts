@@ -285,7 +285,7 @@ getgenv().GetFullName = function(ins)
 	local function formatchild(s)
 		local s = reformatstring(s)
 		if s:find("%A") then
-			return "['"..s.."']"
+			return "[\""..s.."\"]"
 		else
 			return "."..s
 		end
@@ -304,7 +304,7 @@ getgenv().GetFullName = function(ins)
 		else
 			if i == 2 then
 				if table.find(Services, v.ClassName) then
-					fns = fns..":GetService('"..v.ClassName.."')"
+					fns = fns..":GetService(\""..v.ClassName.."\")"
 				else
 					fns = fns..formatchild(v.Name)
 				end
