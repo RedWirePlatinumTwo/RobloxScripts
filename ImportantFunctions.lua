@@ -176,7 +176,7 @@ getgenv().TableToString = function(Table, TableName, args, IsInternalTable)
 				part1 = "\n"..name.."["..isrecursivetable(i).."]"
 			end
 			local failstring = ""
-			local failignore = {"function", "RBXScriptConnection", "RBXScriptSignal"}
+			local failignore = {"function", "RBXScriptConnection", "RBXScriptSignal", "table"}
 			if failed1 or failed2 then
 				failstring = " --failed to convert types:"
 				if failed1 and not table.find(failignore, typeof(i)) then
@@ -243,6 +243,8 @@ getgenv().Format = function(var, tname, ttsargs, IsInternalTable)
         elseif type(var) == "table" then
             if not table.find(catchrepeats, var) then
 				st = TableToString(var, tname, ttsargs, IsInternalTable)
+			else
+				failedconversion = true
 			end
 		elseif typeof(var) == "Instance" then
 			st = GetFullName(var)
