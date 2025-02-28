@@ -101,7 +101,7 @@ local globals = Instance.new("TextButton")
 --Properties:
 
 Aimbot.Name = "Aimbot"
-Aimbot.Parent = game.CoreGui
+Aimbot.Parent = game:GetService("CoreGui")
 Aimbot.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MFrame.Name = "MFrame"
@@ -1263,8 +1263,6 @@ globals.TextWrapped = true
 
 local function EFHUV_fake_script() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript', Aimbot)
-
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/getservice%20auto-converter.lua"))()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
 	local gui = script.Parent
@@ -1284,7 +1282,7 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 	local function sendnotif(title, text)
 		text = "<font color = '#"..MainFrame.BorderColor3:ToHex().."'>["..title.."]: "..text.."</font>"
 		if tcservice.ChatVersion == Enum.ChatVersion.LegacyChatService then
-			game.StarterGui:SetCore("ChatMakeSystemMessage",({["Text"] = text}))
+			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",({["Text"] = text}))
 		else
 			tcservice.TextChannels.RBXGeneral:DisplaySystemMessage(text)
 		end
@@ -1424,7 +1422,7 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 			return t
 		end
 	
-		local plrs = game.Players
+		local plrs = game:GetService("Players")
 		local lplr = plrs.LocalPlayer
 		local m = lplr:GetMouse()
 		local RightClick = false
@@ -1460,7 +1458,7 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 	
 		end
 		
-		local teams = game.Teams
+		local teams = game:GetService("Teams")
 		local WhitelistedPlrs = {}
 		local PrioritizedPlrs = {}
 		local misc = {}
@@ -1752,7 +1750,7 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 		repeat task.wait() until chr:FindFirstChild("Torso") or chr:FindFirstChild("UpperTorso")
 		local Torso = chr:FindFirstChild("Torso") or chr:FindFirstChild("UpperTorso")
 	
-		game.UserInputService.InputBegan:connect(function(key,processed)
+		game:GetService("UserInputService").InputBegan:connect(function(key,processed)
 		if processed then return end
 			local keycode = key.KeyCode
 			if keycode == Keybinds.TargetedPartToggle then
@@ -1847,7 +1845,7 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 				v.value.Activated:connect(function()
 					GlobalStats.Keybinds[v.Name] = "none"
 					v.value.Text = "Press any key"
-					local key = game.UserInputService.InputBegan:Wait()
+					local key = game:GetService("UserInputService").InputBegan:Wait()
 					task.wait()
 					GlobalStats.Keybinds[v.Name] = key.KeyCode
 					v.value.Text = tostring(key.KeyCode)
@@ -2001,7 +1999,7 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 			end
 		end
 	
-		local AimbotFunction = game.RunService.RenderStepped:connect(function()
+		local AimbotFunction = game:GetService("RunService").RenderStepped:connect(function()
 			if misc.TargetedCharacter then
 				local part = gettargetpart(misc.TargetedCharacter)
 				if part then
@@ -2013,7 +2011,7 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 							if GlobalStats.RightClickAim and RightClick or not GlobalStats.RightClickAim then
 								if GameStats.AimMethod == "Camera" then
 									camera.CFrame = CFrame.new(camera.CFrame.Position, partpos + misc.aimoffset)
-									game.UserInputService.MouseDeltaSensitivity = 0
+									game:GetService("UserInputService").MouseDeltaSensitivity = 0
 								else
 									mousemoverel((x + misc.aimoffset.X) * GlobalStats.MouseSensitivity, (y + misc.aimoffset.Y) * GlobalStats.MouseSensitivity)
 								end
@@ -2027,13 +2025,13 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 					end
 				end
 			else
-				game.UserInputService.MouseDeltaSensitivity = 1
+				game:GetService("UserInputService").MouseDeltaSensitivity = 1
 			end
 	
 			if m.Target ~= nil then
 			if not GameStats.IgnorePlayers then
 					for i,v in pairs(GetFamily(m.Target)) do
-						local plr = game.Players:FindFirstChild(v.Name)
+						local plr = game:GetService("Players"):FindFirstChild(v.Name)
 						if plr and plr.Character then
 							targetplayer(plr)
 						break
@@ -2127,7 +2125,7 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 	
 		Changed(misc, "TargetedCharacter", function(v)
 			if v then
-				local player = game.Players:GetPlayerFromCharacter(v)
+				local player = game:GetService("Players"):GetPlayerFromCharacter(v)
 				if player then
 					MainFrame.CurrentTarget.Text = CheckDN(player)
 				else
@@ -2135,13 +2133,13 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 				end
 				if not GameStats.FirstPersonEnabled then
 					lplr.Character.Humanoid.CameraOffset = Vector3.new(2,0,0)
-					game.UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
+					game:GetService("UserInputService").MouseBehavior = Enum.MouseBehavior.LockCenter
 				end
 					MainFrame.CurrentTarget.TextColor3 = Color3.new(0,0.66,0)
 			else
 				if not GameStats.FirstPersonEnabled then
 					lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
-					game.UserInputService.MouseBehavior = Enum.MouseBehavior.Default
+					game:GetService("UserInputService").MouseBehavior = Enum.MouseBehavior.Default
 				end
 				MainFrame.CurrentTarget.Text = "none"
 				MainFrame.CurrentTarget.TextColor3 = Color3.new(0.66,0,0)
@@ -2238,7 +2236,7 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 				togglefunc(PrioritizedPlrs)
 	
 				coroutine.resume(coroutine.create(function()
-					repeat task.wait() until not game.Players:FindFirstChild(ins.Name)
+					repeat task.wait() until not game:GetService("Players"):FindFirstChild(ins.Name)
 					clone:Destroy()
 				end))
 	
