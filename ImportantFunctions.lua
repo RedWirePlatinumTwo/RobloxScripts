@@ -399,19 +399,3 @@ if not customfname then customfname = funcname end
 		return newfunc
 	end
 end
-
-local meta 
-meta = hookmetamethod(game,"__namecall",function(Self,...)
-	local method = getnamecallmethod()
-	if checkcaller() then
-		if method == "GetFamily" then
-			return GetFamily(Self,...)
-		elseif method == "GetFullName" then
-			return GetFullName(Self)
-		else
-			return meta(Self,...)
-		end
-	else
-		return meta(Self,...)
-	end
-end)
