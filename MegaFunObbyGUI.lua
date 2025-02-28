@@ -114,7 +114,6 @@ respawn.TextWrapped = true
 local function HQESHLR_fake_script() -- Megafunobby.LocalScript 
 	local script = Instance.new('LocalScript', Megafunobby)
 
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/getservice%20auto-converter.lua"))()
 	local frame = script.Parent.MainFrame
 	frame.Active = true
 	frame.Draggable = true
