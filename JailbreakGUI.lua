@@ -878,7 +878,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 	
 		singleclick(v, function()
 			box.TextColor3 = Color3.fromRGB(0,170,0)
-			box.Text = "âœ“"
+			box.Text = "✓"
 		end)
 	
 	end
