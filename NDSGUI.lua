@@ -11,7 +11,7 @@ local Admin = Instance.new("TextButton")
 local lobbytp = Instance.new("TextButton")
 --Properties:
 RedWiresNDSGUI.Name = "RedWiresNDSGUI"
-RedWiresNDSGUI.Parent = game.CoreGui
+RedWiresNDSGUI.Parent = game:GetService("CoreGui")
 RedWiresNDSGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
@@ -101,18 +101,18 @@ function SCRIPT_YBCO67_FAKESCRIPT() -- RedWiresNDSGUI.LocalScript
 	script.Parent = RedWiresNDSGUI
 	local mframe = script.Parent.MainFrame
 	mframe.Draggable = true
-	local lplr = game.Players.LocalPlayer
+	local lplr = game:GetService("Players").LocalPlayer
 	
 	mframe.Admin.MouseButton1Click:connect(function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 	end)
 	
 	mframe.lobbytp.MouseButton1Click:connect(function()
-		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-290, 178, 379)
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-290, 178, 379)
 	end)
 	
 	mframe.ChatDisaster.MouseButton1Click:connect(function()
-		game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("The disaster for this match is: ".. game.Players.LocalPlayer.Character.SurvivalTag.Value, "All")
+		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("The disaster for this match is: ".. game.Players.LocalPlayer.Character.SurvivalTag.Value, "All")
 	end)
 	
 	mframe.Falldamageremove.MouseButton1Click:connect(function()
