@@ -15,7 +15,7 @@ local key = Instance.new("TextLabel")
 local toggle = Instance.new("TextLabel")
 --Properties:
 AutoKeyClicker.Name = "AutoKeyClicker"
-AutoKeyClicker.Parent = game.CoreGui
+AutoKeyClicker.Parent = game:GetService("CoreGui")
 AutoKeyClicker.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Mainframe.Name = "Mainframe"
