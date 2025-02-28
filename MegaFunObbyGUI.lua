@@ -15,7 +15,7 @@ local respawn = Instance.new("TextButton")
 --Properties:
 
 Megafunobby.Name = "Megafunobby"
-Megafunobby.Parent = game.CoreGui
+Megafunobby.Parent = game:GetService("CoreGui")
 Megafunobby.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
@@ -118,14 +118,14 @@ local function HQESHLR_fake_script() -- Megafunobby.LocalScript
 	local frame = script.Parent.MainFrame
 	frame.Active = true
 	frame.Draggable = true
-	local lplr = game.Players.LocalPlayer
+	local lplr = game:GetService("Players").LocalPlayer
 	local plrgui = lplr.PlayerGui
 	
 	if game.PlaceId == 12996397 then
 	
 			plrgui.Chat.Frame.Changed:connect(function()
 				if plrgui.Chat.Frame.Visible ~= true then
-					game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
+					game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
 				end
 			end)
 	
@@ -155,7 +155,7 @@ local function HQESHLR_fake_script() -- Megafunobby.LocalScript
 		return
 	end
 	frame.respawn.Activated:connect(function()
-		game.Players.LocalPlayer.Character.Humanoid.Health = 0
+		game:GetService("Players").LocalPlayer.Character.Humanoid.Health = 0
 	end)
 	
 	frame.delkill.Activated:connect(function()
@@ -180,13 +180,13 @@ local function HQESHLR_fake_script() -- Megafunobby.LocalScript
 		if start ~= End then
 		start = start + 1
 			for i = start, End do
-				lplr.Character.HumanoidRootPart.CFrame = game.Workspace.stages[i].CFrame
+				lplr.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").stages[i].CFrame
 				repeat task.wait() until lplr.leaderstats.Stage.Value == i
 			end
 		end
 	end)
 	
-	local stage = game.Players.LocalPlayer.leaderstats.Stage
+	local stage = game:GetService("Players").LocalPlayer.leaderstats.Stage
 	frame.Currentstage.Text = tostring(stage.Value)
 	stage.Changed:connect(function()
 		frame.Currentstage.Text = tostring(stage.Value)
