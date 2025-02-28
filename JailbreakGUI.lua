@@ -63,7 +63,7 @@ local loadoutname = Instance.new("TextBox")
 --Properties:
 
 JailbreakGUI.Name = "JailbreakGUI"
-JailbreakGUI.Parent = game.CoreGui
+JailbreakGUI.Parent = game:GetService("CoreGui")
 JailbreakGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
@@ -752,15 +752,14 @@ loadoutname.TextWrapped = true
 
 local function BZWQK_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
-
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/getservice%20auto-converter.lua"))()
+	
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
 	mainframe.UIGridLayout.SortOrder = 0
 	local aframe = script.Parent.AutosortFrame
 	local autosortframe = aframe.ScrollingFrame
 	autosortframe.UIListLayout.SortOrder = 0
-	local rstorage = game.ReplicatedStorage
-	local runservice = game.RunService
+	local rstorage = game:GetService("ReplicatedStorage")
+	local runservice = game:GetService("RunService")
 	local itemconfig = rstorage.Game.ItemConfig
 	local oneclickbuttons = {
 		mainframe.RobberyNotifier,
@@ -879,7 +878,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 	
 		singleclick(v, function()
 			box.TextColor3 = Color3.fromRGB(0,170,0)
-			box.Text = "✓"
+			box.Text = "âœ“"
 		end)
 	
 	end
@@ -894,7 +893,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 			bool = not bool
 			if bool then
 				box.TextColor3 = Color3.fromRGB(0,170,0)
-				box.Text = "✓"
+				box.Text = "âœ“"
 			else
 				box.TextColor3 = Color3.fromRGB(170,0,0)
 				box.Text = "x"
@@ -909,7 +908,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 		local function notify(text)
 			text = "<font color= '#"..mainframe.BorderColor3:ToHex().."'>[Red's JB GUI] "..text.."</font>"
 			if tcservice.ChatVersion == Enum.ChatVersion.LegacyChatService then
-				game.StarterGui:SetCore("ChatMakeSystemMessage",({["Text"] = text}))
+				game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",({["Text"] = text}))
 			else
 				tcservice.TextChannels.RBXGeneral:DisplaySystemMessage(text)
 			end
@@ -961,7 +960,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 			speeds.flyspeed = 300
 			mainframe["1speedv2"].Text = tostring(speeds.walkspeed)
 	
-			local plrs = game.Players
+			local plrs = game:GetService("Players")
 			local lplr = plrs.LocalPlayer
 			local mouse = lplr:GetMouse()
 			local jewel = workspace.Jewelrys:FindFirstChildOfClass("Model")
@@ -1016,7 +1015,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 			end)
 	
 			Changed(lplr, "Team", function(team)
-				if team == game.Teams.Criminal then
+				if team == game:GetService("Teams").Criminal then
 					local fire = fireclickdetector
 					if fire ~= nil then
 						fire(workspace.ClothingRacks.ClothingRack.Hitbox.ClickDetector)
@@ -1286,10 +1285,10 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 			end)
 	
 			singleclick(mainframe.forcedaytime, function()
-				game.Lighting.ClockTime = 12
+				game:GetService("Lighting").ClockTime = 12
 	
-				Changed(game.Lighting, "ClockTime", function()
-					game.Lighting.ClockTime = 12
+				Changed(game:GetService("Lighting"), "ClockTime", function()
+					game:GetService("Lighting").ClockTime = 12
 				end)
 	
 			end)
@@ -1308,7 +1307,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 					"disable security"
 				}
 			
-				game.RunService.Heartbeat:connect(function()
+				game:GetService("RunService").Heartbeat:connect(function()
 					for i,a in pairs(moduleui.CircleAction.Specs) do
 						local function name()
 							if a.Name then
@@ -1488,7 +1487,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 				gunshoptp = not gunshoptp
 			end)
 	
-			local uiservice = game.UserInputService
+			local uiservice = game:GetService("UserInputService")
 			local vehicle = require(rstorage.Vehicle.VehicleUtils)
 			local getmodel = vehicle.GetLocalVehicleModel
 			local getseats = vehicle.getSeats
@@ -1517,7 +1516,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 				mainframe["1flyhack"].Visible = false
 				-- actual fly script
 				local flying = false
-				local uiservice = game.UserInputService
+				local uiservice = game:GetService("UserInputService")
 				local pos = Vector3.new()
 	
 				local function GetVelocity(pos1,pos2,StudsPerSecond)
@@ -1592,7 +1591,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 	
 				uiservice.InputBegan:connect(function(key,processed)
 					if processed then return end
-					if key.KeyCode == Enum.KeyCode.F and game.UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
+					if key.KeyCode == Enum.KeyCode.F and game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then
 						flying = not flying
 						if flying then
 							lplr.Character.Humanoid.CameraOffset = Vector3.new(2,0,0)
@@ -1839,7 +1838,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 				table.insert(items, v.Name)
 			end
 			
-			for i,v in pairs(game.Teams:GetTeams()) do
+			for i,v in pairs(game:GetService("Teams"):GetTeams()) do
 				if not table.find(teamnames, v.Name) then
 					table.insert(teamnames, v.Name)
 				end
@@ -2194,7 +2193,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 			script.Parent:Destroy()
 		end
 	else
-		game.StarterGui:SetCore("SendNotification", {
+		game:GetService("StarterGui"):SetCore("SendNotification", {
 			Title = "Jailbreak gui",
 			Text = "this isn't jailbreak smh my head, deleting GUI"
 		})
