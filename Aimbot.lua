@@ -1291,8 +1291,6 @@ local function ULPIWS_fake_script() -- Aimbot.Scripts
 	
 	if not RedsAimbot then
 		getgenv().RedsAimbot = {}
-		getgenv().RedsAimbot.GlobalStats = GlobalStats
-		getgenv().RedsAimbot.Misc = misc
 		sendnotif("Aimbot Update", "Re-vamped save file system, data is now stored in workspace/RedsAimbot. Old save files are auto-converted.")
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
@@ -1557,6 +1555,8 @@ local function ULPIWS_fake_script() -- Aimbot.Scripts
 			GameStats = createGameStats()
 		end
 		Keybinds = getOrCreate(GlobalStats, "Keybinds")
+		getgenv().RedsAimbot.GlobalStats = GlobalStats
+		getgenv().RedsAimbot.Misc = misc
 		
 		for i,v in pairs(Keybinds) do
 			if keybindsettings:FindFirstChild(i) then
