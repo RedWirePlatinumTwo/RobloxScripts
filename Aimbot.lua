@@ -1478,11 +1478,8 @@ local function ULPIWS_fake_script() -- Aimbot.Scripts
 			newgamestats.WhitelistFriends = false
 			newgamestats.MaxStuds = 500
 			newgamestats.OwnTeamWhitelisted = true
-			newgamestats.Teams = {}
 			newgamestats.TargetCloserPlayers = true
 			newgamestats.Teams = {}
-			newgamestats.TargetNPCs = false
-			newgamestats.TargetCloserPlayers = true
 			newgamestats.IgnorePlayers = false
 			newgamestats.TargetPrioOnly = false
 			newgamestats.FirstPersonEnabled = true
@@ -1499,6 +1496,15 @@ local function ULPIWS_fake_script() -- Aimbot.Scripts
 			newglobalstats.Keybinds.AimbotToggle = Enum.KeyCode.CapsLock
 			newglobalstats.Keybinds.TargetedPartToggle = Enum.KeyCode.RightAlt
 			newglobalstats.Keybinds.GUIVisibilityToggle = "none"
+			local function addkeybinds(table)
+				for name,value in pairs(table) do
+					if type(value) == "boolean" then
+						newglobalstats.Keybinds[name] = "none"
+					end
+				end
+			end
+			addkeybinds(createGameStats())
+			addkeybinds(newglobalstats)
 			return newglobalstats
 		end
 		
@@ -1506,11 +1512,12 @@ local function ULPIWS_fake_script() -- Aimbot.Scripts
 			if tbl[value] == nil then
 				if tbl == GameStats then
 					tbl[value] = createGameStats()[value]
-					return tbl[value]
-				else
+				elseif tbl == GlobalStats then
 					tbl[value] = createGlobalStats()[value]
-					return tbl[value]
+				elseif tbl == Keybinds then
+					tbl[value] = createGlobalStats().Keybinds[value]
 				end
+				return tbl[value]
 			else
 				return tbl[value]
 			end
@@ -1519,6 +1526,15 @@ local function ULPIWS_fake_script() -- Aimbot.Scripts
 		local function setOrCreate(tbl, value, newvalue)
 			getOrCreate(tbl, value)
 			tbl[value] = newvalue
+		end
+
+		local function clearOldValues(t)
+			local tableref = (if t == GameStats then createGameStats() else createGlobalStats())
+			for i,v in pairs(t) do
+				if tableref[i] == nil then
+					t[i] = nil
+				end
+			end
 		end
 	
 		if isfile("RedsAimbot/GlobalStats.lua") then
@@ -1557,6 +1573,10 @@ local function ULPIWS_fake_script() -- Aimbot.Scripts
 		Keybinds = getOrCreate(GlobalStats, "Keybinds")
 		getgenv().RedsAimbot.GlobalStats = GlobalStats
 		getgenv().RedsAimbot.Misc = misc
+		getgenv().RedsAimbot.GameStats = GameStats
+
+		clearOldValues(GameStats)
+		clearOldValues(GlobalStats)
 		
 		for i,v in pairs(Keybinds) do
 			if keybindsettings:FindFirstChild(i) then
@@ -1600,17 +1620,14 @@ local function ULPIWS_fake_script() -- Aimbot.Scripts
 	
 		end
 	
-		local function addkeybind(t, name)
-			if type(t[name]) == "boolean" then
-				local clone = keybindsettings.AimbotToggle:Clone()
-				clone.Parent = keybindsettings
-				clone.Name = name
-				clone.Text = name.." Toggle:"
-				local val = Keybinds[name]
-				if val == nil then
-					Keybinds[name] = "none"
-					clone.value.Text = "none"
-				else
+		local function addkeybindtogui(t)
+			for name, val in pairs(t) do
+				if type(val) == "boolean" then
+					local clone = keybindsettings.AimbotToggle:Clone()
+					clone.Parent = keybindsettings
+					clone.Name = name
+					clone.Text = name.." Toggle:"
+					local val = getOrCreate(Keybinds, name)
 					clone.value.Text = tostring(val)
 				end
 			end
@@ -1620,13 +1637,8 @@ local function ULPIWS_fake_script() -- Aimbot.Scripts
 			addteamframe(v)
 		end
 	
-		for i,v in pairs(GameStats) do 
-			addkeybind(GameStats, i)
-		end
-	
-		for i,v in pairs(GlobalStats) do
-			addkeybind(GlobalStats, i)
-		end
+		addkeybindtogui(GameStats)
+		addkeybindtogui(GlobalStats)
 	
 		local deselect = function()
 			misc.TargetedCharacter = nil
