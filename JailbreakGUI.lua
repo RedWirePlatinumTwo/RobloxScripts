@@ -1043,9 +1043,9 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 			singleclick(mainframe.aimbot, function()
 				loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/Aimbot.lua"))()
 	
-				repeat task.wait() until RedsAimbotMisc
+				repeat task.wait() until RedsAimbot
 				local vel2 = Vector3.new()
-				local misc = RedsAimbotMisc
+				local misc = RedsAimbot.Misc
 				runservice.RenderStepped:connect(function()
 					pcall(function()
 						if misc.TargetedCharacter then
