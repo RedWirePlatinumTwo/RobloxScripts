@@ -1261,8 +1261,9 @@ globals.TextWrapped = true
 
 -- Scripts:
 
-local function EFHUV_fake_script() -- Aimbot.Scripts 
+local function ULPIWS_fake_script() -- Aimbot.Scripts 
 	local script = Instance.new('LocalScript', Aimbot)
+
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
 	local gui = script.Parent
@@ -1288,9 +1289,11 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 		end
 	end
 	
-	if not _G.RedsAimbot then
-		_G.RedsAimbot = true
-		sendnotif("Aimbot Update", "The MouseSensitivity thing no longer changes MouseDeltaSensitivity, making the aimbot slightly more hidden.")
+	if not RedsAimbot then
+		getgenv().RedsAimbot = {}
+		getgenv().RedsAimbot.GlobalStats = GlobalStats
+		getgenv().RedsAimbot.Misc = misc
+		sendnotif("Aimbot Update", "Re-vamped save file system, data is now stored in workspace/RedsAimbot. Old save files are auto-converted.")
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -1336,9 +1339,9 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 		end
 	
 		local tablecount = function(t)
-		local n = 0
-		for i,v in pairs(t) do n = n + 1 end
-		return n
+			local n = 0
+			for i,v in pairs(t) do n = n + 1 end
+			return n
 		end
 	
 		local TableAdded = function(Table, func)
@@ -1436,7 +1439,7 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 			end
 	
 		end
-		
+	
 		local valuesort = function(t, func)
 			local revert = {}
 			local vals = {}
@@ -1457,7 +1460,7 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 			end
 	
 		end
-		
+	
 		local teams = game:GetService("Teams")
 		local WhitelistedPlrs = {}
 		local PrioritizedPlrs = {}
@@ -1469,117 +1472,119 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 		local GameStats
 		local Keybinds
 	
-		local function gengamestats()
-			GlobalStats[game.PlaceId] = {}
-			GameStats = GlobalStats[game.PlaceId]
-			GameStats.Target = "Head"
-			GameStats.TargetNPCs = false
-			GameStats.AutoTarget = true
-			GameStats.WhitelistFriends = false
-			GameStats.MaxStuds = 500
-			GameStats.OwnTeamWhitelisted = true
-			GameStats.Teams = {}
-			GameStats.TargetCloserPlayers = true
-			GameStats.Teams = {}
-			GameStats.TargetNPCs = false
-			GameStats.TargetCloserPlayers = true
-			GameStats.IgnorePlayers = false
-			GameStats.TargetPrioOnly = false
-			GameStats.FirstPersonEnabled = true
-			GameStats.AimMethod = "Mouse"
+		local function createGameStats()
+			local newgamestats = {}
+			newgamestats.Target = "Head"
+			newgamestats.TargetNPCs = false
+			newgamestats.AutoTarget = true
+			newgamestats.WhitelistFriends = false
+			newgamestats.MaxStuds = 500
+			newgamestats.OwnTeamWhitelisted = true
+			newgamestats.Teams = {}
+			newgamestats.TargetCloserPlayers = true
+			newgamestats.Teams = {}
+			newgamestats.TargetNPCs = false
+			newgamestats.TargetCloserPlayers = true
+			newgamestats.IgnorePlayers = false
+			newgamestats.TargetPrioOnly = false
+			newgamestats.FirstPersonEnabled = true
+			newgamestats.AimMethod = "Mouse"
+			return newgamestats
 		end
-	
-		if isfile and loadfile and isfile("RedsAimbotStats.lua") then
-			GlobalStats = loadfile("RedsAimbotStats.lua")()
+		
+		local function createGlobalStats()
 			local newglobalstats = {}
 			newglobalstats.TeamAutofill = true
 			newglobalstats.RightClickAim = false
 			newglobalstats.MouseSensitivity = 0.25
-			if not GlobalStats[game.PlaceId] then
-				gengamestats()
-			end
-			
-			for name, default in pairs(newglobalstats) do
-				if GlobalStats[name] == nil then
-					GlobalStats[name] = default
-				end
-			end
-			
-			for i,v in pairs(GlobalStats.Keybinds) do
-				if keybindsettings:FindFirstChild(i) then
-					keybindsettings[i].value.Text = tostring(v)
+			newglobalstats.Keybinds = {}
+			newglobalstats.Keybinds.AimbotToggle = Enum.KeyCode.CapsLock
+			newglobalstats.Keybinds.TargetedPartToggle = Enum.KeyCode.RightAlt
+			newglobalstats.Keybinds.GUIVisibilityToggle = "none"
+			return newglobalstats
+		end
+		
+		local function getOrCreate(tbl, value)
+			if tbl[value] == nil then
+				if tbl == GameStats then
+					tbl[value] = createGameStats()[value]
+					return tbl[value]
 				else
-					if GlobalStats[game.PlaceId][i] == nil and GlobalStats[i] == nil then
-						GlobalStats.Keybinds[i] = nil -- remove out-of-date values
-					end
+					tbl[value] = createGlobalStats()[value]
+					return tbl[value]
 				end
-			end
-	
-			for i,v in pairs(GlobalStats) do 
-				if type(v) ~= "table" then
-					if globalsettings:FindFirstChild(i) then
-						globalsettings[i].value.Text = tostring(v)
-					else
-						GlobalStats[i] = nil -- remove out-of-date values
-					end
-				end
-			end
-	
-			globalsettings.TeamAutofill.value.Text = tostring(GlobalStats.TeamAutofill)
-		else
-			GlobalStats = {}
-			GlobalStats.Keybinds = {}
-			GlobalStats.TeamAutofill = true
-			gengamestats()
-			GlobalStats.Keybinds.AimbotToggle = Enum.KeyCode.CapsLock
-			GlobalStats.Keybinds.TargetedPartToggle = Enum.KeyCode.RightAlt
-			local newkeybinds = {}
-			newkeybinds.GUIVisibilityToggle = "none"
-			
-			for name, default in pairs(newkeybinds) do
-				if GlobalStats.Keybinds[name] == nil then
-					GlobalStats.Keybinds[name] = default
-				end
+			else
+				return tbl[value]
 			end
 		end
 		
-		getgenv().RedsAimbotStats = GlobalStats
-		getgenv().RedsAimbotMisc = misc
+		local function setOrCreate(tbl, value, newvalue)
+			getOrCreate(tbl, value)
+			tbl[value] = newvalue
+		end
 	
-		GameStats = GlobalStats[game.PlaceId]
-		Keybinds = GlobalStats.Keybinds
-		local newgamestats = {}
-		newgamestats.Teams = {}
-		newgamestats.TargetNPCs = false
-		newgamestats.TargetCloserPlayers = true
-		newgamestats.IgnorePlayers = false
-		newgamestats.TargetPrioOnly = false
-		newgamestats.FirstPersonEnabled = true
-		newgamestats.AimMethod = "Mouse"
+		if isfile("RedsAimbot/GlobalStats.lua") then
+			
+			GlobalStats = loadfile("RedsAimbot/GlobalStats.lua")()
+			if not isfile("RedsAimbot/Games/"..game.PlaceId..".lua") then
+				GameStats = createGameStats()
+			else
+				GameStats = loadfile("RedsAimbot/Games/"..game.PlaceId..".lua")()
+			end
+			
+		elseif isfile("RedsAimbotStats.lua") then -- replace old save file
+			
+			local globalclone = loadfile("RedsAimbotStats.lua")()
+			makefolder("RedsAimbot/Games")
+			local gamestats = {}
+			for index, val in pairs(globalclone) do
+				if type(index) == "number" then
+					gamestats[index] = val
+					globalclone[index] = nil
+				end
+			end
+			writefile("RedsAimbot/GlobalStats.lua", TableToString(globalclone, "GlobalStats"))
+			for i,v in pairs(gamestats) do
+				writefile("RedsAimbot/Games/"..i..".lua", TableToString(v, "GameStats"))
+			end
+			delfile("RedsAimbotStats.lua")
+			GlobalStats = globalclone
+			GameStats = gamestats[game.PlaceId] or createGameStats()
+			
+		else
+			makefolder("RedsAimbot/Games")
+			GlobalStats = createGlobalStats()
+			GameStats = createGameStats()
+		end
+		Keybinds = getOrCreate(GlobalStats, "Keybinds")
 		
-		for name, default in pairs(newgamestats) do
-			if GameStats[name] == nil then
-				GameStats[name] = default
+		for i,v in pairs(Keybinds) do
+			if keybindsettings:FindFirstChild(i) then
+				keybindsettings[i].value.Text = tostring(v)
+			end
+		end
+	
+		for i,v in pairs(GlobalStats) do 
+			if type(v) ~= "table" and globalsettings:FindFirstChild(i) then
+				globalsettings[i].value.Text = tostring(v)
 			end
 		end
 	
 		for i,v in pairs(GameStats) do
-			if type(v) ~= "table" then
-				if gamesettings:FindFirstChild(i) then
-					gamesettings[i].value.Text = tostring(v)
-				else
-					GameStats[i] = nil -- remove out of date values
-				end
+			if type(v) ~= "table" and gamesettings:FindFirstChild(i) then
+				gamesettings[i].value.Text = tostring(v)
 			end
 		end
 	
 		local function savesettings()
 			if writefile then
-				writefile("RedsAimbotStats.lua", TableToString(GlobalStats, "AimbotStats"))
+				writefile("RedsAimbot/GlobalStats.lua", TableToString(GlobalStats, "GlobalStats"))
+				writefile("RedsAimbot/Games/"..game.PlaceId..".lua", TableToString(GameStats, "GameStats"))
 			end
 		end
 	
 		TableChanged(GlobalStats, savesettings, true)
+		TableChanged(GameStats, savesettings, true)
 	
 		local addteamframe = function(ttable)
 			local clone = teamui.WhitelistedTeams.whitelistframe:Clone()
@@ -1589,12 +1594,12 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 	
 			clone.undo.Activated:connect(function()
 				clone:Destroy()
-				local tfind = table.find(GameStats.Teams,ttable)
-				table.remove(GameStats.Teams,tfind)
+				local tfind = table.find(getOrCreate(GameStats, "Teams"),ttable)
+				table.remove(getOrCreate(GameStats, "Teams"),tfind)
 			end)
 	
 		end
-		
+	
 		local function addkeybind(t, name)
 			if type(t[name]) == "boolean" then
 				local clone = keybindsettings.AimbotToggle:Clone()
@@ -1603,7 +1608,7 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 				clone.Text = name.." Toggle:"
 				local val = Keybinds[name]
 				if val == nil then
-					GlobalStats.Keybinds[name] = "none"
+					Keybinds[name] = "none"
 					clone.value.Text = "none"
 				else
 					clone.value.Text = tostring(val)
@@ -1611,14 +1616,14 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 			end
 		end
 	
-		for i,v in pairs(GameStats.Teams) do
+		for i,v in pairs(getOrCreate(GameStats, "Teams")) do
 			addteamframe(v)
 		end
-		
+	
 		for i,v in pairs(GameStats) do 
 			addkeybind(GameStats, i)
 		end
-		
+	
 		for i,v in pairs(GlobalStats) do
 			addkeybind(GlobalStats, i)
 		end
@@ -1630,12 +1635,12 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 		m.Button2Down:connect(function()
 			RightClick = true
 		end)
-		
+	
 		m.Button2Up:connect(function()
 			RightClick = false
-		if GlobalStats.RightClickAim and misc.TargetedCharacter then
-			deselect()
-		end
+			if getOrCreate(GlobalStats, "RightClickAim") and misc.TargetedCharacter then
+				deselect()
+			end
 		end)
 		local function Died(player)
 			thread(function()
@@ -1652,15 +1657,15 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 	
 				end
 	
-			OnDeath(player.Character)
-			player.CharacterAdded:connect(OnDeath)
+				OnDeath(player.Character)
+				player.CharacterAdded:connect(OnDeath)
 	
-			player.CharacterRemoving:connect(function(chr)
-				if misc.TargetedCharacter == chr then
-					deselect()
-				end
+				player.CharacterRemoving:connect(function(chr)
+					if misc.TargetedCharacter == chr then
+						deselect()
+					end
+				end)
 			end)
-		end)
 		end
 	
 		for i,v in pairs(plrs:GetPlayers()) do Died(v) end
@@ -1680,7 +1685,7 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 			local function isteamwhitelisted()
 				local wl = false
 	
-				for i,ttable in pairs(GameStats.Teams) do
+				for i,ttable in pairs(getOrCreate(GameStats, "Teams")) do
 					if teams:FindFirstChild(ttable.team1) and teams:FindFirstChild(ttable.team2) then
 						if lplr.Team.Name == ttable.team1 and plr.Team.Name == ttable.team2 then
 							wl = true
@@ -1692,20 +1697,20 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 				return wl
 			end
 	
-			    if lplr.Team then
-					if GameStats.OwnTeamWhitelisted then
-						return plr.Team ~= lplr.Team and not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
-					else
-						return not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
-			    	end
+			if lplr.Team then
+				if getOrCreate(GameStats, "OwnTeamWhitelisted") then
+					return plr.Team ~= lplr.Team and not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
 				else
-					return not table.find(WhitelistedPlrs, plr)
+					return not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
 				end
+			else
+				return not table.find(WhitelistedPlrs, plr)
+			end
 		end
 	
 		local function selectcharacter(chr)
-			if GlobalStats.RightClickAim and RightClick or not GlobalStats.RightClickAim then
-				if misc.IsAimbotOn and not misc.TargetedCharacter and not GameStats.TargetCloserPlayers or GameStats.TargetCloserPlayers and misc.IsAimbotOn then
+			if getOrCreate(GlobalStats, "RightClickAim") and RightClick or not getOrCreate(GlobalStats, "RightClickAim") then
+				if misc.IsAimbotOn and not misc.TargetedCharacter and not getOrCreate(GameStats, "TargetCloserPlayers") or getOrCreate(GameStats, "TargetCloserPlayers") and misc.IsAimbotOn then
 					local isprio
 					local isprio2
 					if misc.TargetedCharacter then
@@ -1751,13 +1756,13 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 		local Torso = chr:FindFirstChild("Torso") or chr:FindFirstChild("UpperTorso")
 	
 		game:GetService("UserInputService").InputBegan:connect(function(key,processed)
-		if processed then return end
+			if processed then return end
 			local keycode = key.KeyCode
 			if keycode == Keybinds.TargetedPartToggle then
-				if GameStats.Target == "Torso" or GameStats.Target == "UpperTorso" then
-					GameStats.Target = "Head"
+				if getOrCreate(GameStats, "Target") == "Torso" or getOrCreate(GameStats, "Target") == "UpperTorso" then
+					setOrCreate(GameStats, "Target", "Head")
 				else
-					GameStats.Target = Torso.Name
+					setOrCreate(GameStats, "Target", Torso.Name)
 				end
 			end
 			if keycode == Keybinds.AimbotToggle then
@@ -1802,25 +1807,18 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 		end
 	
 		gamesettings.Target.value.Activated:connect(function()
-			if GameStats.Target == "Head" then
-				GameStats.Target = Torso.Name
+			if getOrCreate(GameStats, "Target") == "Head" then
+				setOrCreate(GameStats, "Target", Torso.Name)
 			else
-				GameStats.Target = "Head"
+				setOrCreate(GameStats, "Target", "Head")
 			end
-		end)
-	
-		Changed(GameStats,"Target",function(val)
-			gamesettings.Target.value.Text = val
 		end)
 	
 		Changed(gamesettings.MaxStuds.value, "Text", function(n)
 			local num = tonumber(n)
 			if num then
-				GameStats.MaxStuds = num
-				if num > 5000 then
-					GameStats.MaxStuds = 5000
-					gamesettings.MaxStuds.value.Text = "5000"
-				end
+				num = math.clamp(num,0,5000)
+				setOrCreate(GameStats, "MaxStuds", num)
 			end
 		end)
 	
@@ -1834,25 +1832,25 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 				end)
 			end
 		end
-		
+	
 		for i,v in pairs(keybindsettings:getChildren()) do 
 			if v:FindFirstChild("reset") then
 				v.reset.Activated:connect(function()
-					GlobalStats.Keybinds[v.Name] = "none"
+					Keybinds[v.Name] = "none"
 					v.value.Text = "none"
 				end)
-				
+	
 				v.value.Activated:connect(function()
-					GlobalStats.Keybinds[v.Name] = "none"
+					Keybinds[v.Name] = "none"
 					v.value.Text = "Press any key"
 					local key = game:GetService("UserInputService").InputBegan:Wait()
 					task.wait()
-					GlobalStats.Keybinds[v.Name] = key.KeyCode
+					Keybinds[v.Name] = key.KeyCode
 					v.value.Text = tostring(key.KeyCode)
 				end)
 			end
 		end
-		
+	
 		if gamesettings.AimMethod.value.Text == "Camera" then
 			gamesettings.AimMethod.About.Text = "Less universal, more stable."
 		end
@@ -1865,25 +1863,22 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 				method.value.Text = "Camera"
 				method.About.Text = "Less universal, more stable."
 			end
-			GameStats.AimMethod = method.value.Text
+			setOrCreate(GameStats, "AimMethod", method.value.Text)
 		end)
 		Changed(globalsettings.MouseSensitivity.value, "Text", function (txt)
 			local num = tonumber(txt)
 			if num then
-				GlobalStats.MouseSensitivity = num
-				if num > 1 then
-					globalsettings.MouseSensitivity.value.Text = "1"
-					GlobalStats.MouseSensitivity = 1
-				end
+				num = math.clamp(num,0,1)
+				setOrCreate(GlobalStats, "MouseSensitivity", num)
 			end
 		end)
 	
 		for i,v in pairs(teamui:GetChildren()) do
 			if v.ClassName == "TextBox" then
 				Changed(v, "Text", function(txt)
-					if GlobalStats.TeamAutofill then
+					if getOrCreate(GlobalStats, "TeamAutofill") then
 						local tnames = {}
-			
+	
 						for i,v in pairs(teams:GetTeams()) do
 							if v.Name:lower():sub(1,txt:len()) == txt:lower() and not table.find(tnames,v.Name) then
 								table.insert(tnames,v.Name)
@@ -1906,14 +1901,14 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 				teamui.WLTeam.Text = txt
 				wait(2)
 				teamui.WLTeam.Text = wlmsg
-				end
+			end
 	
 			local team1 = teamui.yourteam.Text
 			local team2 = teamui.whitelistteam.Text
 			if teams:FindFirstChild(team1) and teams:FindFirstChild(team2) then
 				local canadd = true
 	
-				for i, teamtable in pairs(GameStats.Teams) do
+				for i, teamtable in pairs(getOrCreate(GameStats, "Teams")) do
 					if teamtable.team1 == team1 and teamtable.team2 == team2 then
 						canadd = false
 						break
@@ -1922,7 +1917,7 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 	
 				if canadd then
 					local newtable = {["team1"] = team1 ,["team2"] = team2}
-					table.insert(GameStats.Teams, newtable)
+					table.insert(getOrCreate(GameStats, "Teams"), newtable)
 					addteamframe(newtable)
 				else
 					updatetxt("This already exists")
@@ -1940,19 +1935,19 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 			teamui.Visible = false
 		end)
 	
-	    TableAdded(npcs, function(i, npc) 
-	        npc.Humanoid.Died:connect(function()
-	            npcs[i] = nil
+		TableAdded(npcs, function(i, npc) 
+			npc.Humanoid.Died:connect(function()
+				npcs[i] = nil
 				if misc.TargetedCharacter == npc then
 					deselect()
 				end
-	        end)
-	    end)
-		
+			end)
+		end)
+	
 		local function checkpart(v)
 			return not v.CanCollide or v.Transparency == 1
 		end
-		
+	
 		local function isactivenpc(npc)
 			thread(function()
 				local changed
@@ -1966,21 +1961,21 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 			end)
 		end
 	
-	    for i,v in pairs(workspace:GetDescendants()) do
-	        if v.ClassName == "Humanoid" and v.RootPart and not plrs:GetPlayerFromCharacter(v.Parent) and not table.find(npcs, v.Parent) and v.Health > 0 then
-	            isactivenpc(v.Parent)
+		for i,v in pairs(workspace:GetDescendants()) do
+			if v.ClassName == "Humanoid" and v.RootPart and not plrs:GetPlayerFromCharacter(v.Parent) and not table.find(npcs, v.Parent) and v.Health > 0 then
+				isactivenpc(v.Parent)
 			end
-	    end
+		end
 	
-	    workspace.DescendantAdded:connect(function(v)
-	        if v.ClassName == "Humanoid" then
-	            if not v.RootPart then repeat task.wait() until v.RootPart end
-		            if not plrs:GetPlayerFromCharacter(v.Parent) and not table.find(npcs, v.Parent) and v.Health > 0 then
-		                isactivenpc(v.Parent)
-		            end
-	        end
+		workspace.DescendantAdded:connect(function(v)
+			if v.ClassName == "Humanoid" then
+				if not v.RootPart then repeat task.wait() until v.RootPart end
+				if not plrs:GetPlayerFromCharacter(v.Parent) and not table.find(npcs, v.Parent) and v.Health > 0 then
+					isactivenpc(v.Parent)
+				end
+			end
 		end)
-		
+	
 		workspace.DescendantRemoving:connect(function(v)
 			local npcfind = table.find(npcs, v)
 			if npcfind and GetFamily(v)[1] ~= game then
@@ -1988,8 +1983,8 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 			end
 		end)
 	
-	    local function gettargetpart(chr)
-			local p = chr:FindFirstChild(GameStats.Target)
+		local function gettargetpart(chr)
+			local p = chr:FindFirstChild(getOrCreate(GameStats, "Target"))
 			if p then
 				return p
 			else
@@ -2008,14 +2003,14 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 					local x,y = (v.X - m.X), (v.Y - m.Y)
 					if onscreen then
 						if misc.IsAimbotOn then
-							if GlobalStats.RightClickAim and RightClick or not GlobalStats.RightClickAim then
-								if GameStats.AimMethod == "Camera" then
+							if getOrCreate(GlobalStats, "RightClickAim") and RightClick or not getOrCreate(GlobalStats, "RightClickAim") then
+								if getOrCreate(GameStats, "AimMethod") == "Camera" then
 									camera.CFrame = CFrame.new(camera.CFrame.Position, partpos + misc.aimoffset)
 									game:GetService("UserInputService").MouseDeltaSensitivity = 0
 								else
-									mousemoverel((x + misc.aimoffset.X) * GlobalStats.MouseSensitivity, (y + misc.aimoffset.Y) * GlobalStats.MouseSensitivity)
+									mousemoverel((x + misc.aimoffset.X) * getOrCreate(GlobalStats, "MouseSensitivity"), (y + misc.aimoffset.Y) * getOrCreate(GlobalStats, "MouseSensitivity"))
 								end
-								if not GameStats.FirstPersonEnabled then
+								if not getOrCreate(GameStats, "FirstPersonEnabled") then
 									lplr.Character.Humanoid.RootPart.CFrame = CFrame.lookAt(lplr.Character.Humanoid.RootPart.Position, (partpos * Vector3.new(1,0,1)) + Vector3.new(0, lplr.Character.Humanoid.RootPart.Position.Y, 0))
 								end
 							end
@@ -2029,58 +2024,58 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 			end
 	
 			if m.Target ~= nil then
-			if not GameStats.IgnorePlayers then
+				if not getOrCreate(GameStats, "IgnorePlayers") then
 					for i,v in pairs(GetFamily(m.Target)) do
 						local plr = game:GetService("Players"):FindFirstChild(v.Name)
 						if plr and plr.Character then
 							targetplayer(plr)
-						break
+							break
+						end
 					end
 				end
-			end
 	
-			if GameStats.TargetNPCs then
-				local npc = isnpc(m.Target)
+				if getOrCreate(GameStats, "TargetNPCs") then
+					local npc = isnpc(m.Target)
 					if npc and npc.Humanoid.Health > 0 then
 						selectcharacter(npc)
 					end
 				end
 			end
 	
-			if GameStats.AutoTarget then
-			    local table1 = {}
-			    local PrioritizedPlrsOnScreen = {}
+			if getOrCreate(GameStats, "AutoTarget") then
+				local table1 = {}
+				local PrioritizedPlrsOnScreen = {}
 	
 				local function addchr(v)
 					local player = plrs:GetPlayerFromCharacter(v)
 					if player and IsNotWhitelisted(player) or not player then
-			    		if v:FindFirstChildOfClass("Humanoid") and v:FindFirstChildOfClass("Humanoid").Health ~= 0 then
+						if v:FindFirstChildOfClass("Humanoid") and v:FindFirstChildOfClass("Humanoid").Health ~= 0 then
 							local targpart = gettargetpart(v)
 							if targpart then
-				    	        local pos = math.floor(lplr:DistanceFromCharacter(targpart.Position))
-				    	        local _, onscreen = camera:WorldToScreenPoint(targpart.Position)
-				    	        if onscreen and pos < GameStats.MaxStuds then
-				    	            table1[v] = pos
-				        			if table.find(PrioritizedPlrs, plrs:GetPlayerFromCharacter(v)) then
-				        				table.insert(PrioritizedPlrsOnScreen, v)
-				        			end
+								local pos = math.floor(lplr:DistanceFromCharacter(targpart.Position))
+								local _, onscreen = camera:WorldToScreenPoint(targpart.Position)
+								if onscreen and pos < getOrCreate(GameStats, "MaxStuds") then
+									table1[v] = pos
+									if table.find(PrioritizedPlrs, plrs:GetPlayerFromCharacter(v)) then
+										table.insert(PrioritizedPlrsOnScreen, v)
+									end
 								end
 							end
-			        	end
+						end
 					end
-	            end
-	            
-	            if GameStats.TargetNPCs and not GameStats.TargetPrioOnly then
-	                for i, npc in pairs(npcs) do
-	                    addchr(npc)
-	                end
 				end
-				
-	            if not GameStats.IgnorePlayers then
-			   		 for i,v in pairs(plrs:GetPlayers()) do
-			       		 if v ~= lplr and v.Character then
-		            		addchr(v.Character)
-		            	end
+	
+				if getOrCreate(GameStats, "TargetNPCs") and not getOrCreate(GameStats, "TargetPrioOnly") then
+					for i, npc in pairs(npcs) do
+						addchr(npc)
+					end
+				end
+	
+				if not getOrCreate(GameStats, "IgnorePlayers") then
+					for i,v in pairs(plrs:GetPlayers()) do
+						if v ~= lplr and v.Character then
+							addchr(v.Character)
+						end
 					end
 				end
 	
@@ -2097,7 +2092,7 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 				valuesort(table1, function(Char, position)
 					local plr = plrs:GetPlayerFromCharacter(Char)
 					if plr then
-						if table.find(PrioritizedPlrs, plr) and GameStats.TargetPrioOnly or not GameStats.TargetPrioOnly then
+						if table.find(PrioritizedPlrs, plr) and getOrCreate(GameStats, "TargetPrioOnly") or not getOrCreate(GameStats, "TargetPrioOnly") then
 							targetplayer(plr)
 						end
 					else
@@ -2106,7 +2101,7 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 					return "stop"
 				end)
 			end
-			if GameStats.FirstPersonEnabled then
+			if getOrCreate(GameStats, "FirstPersonEnabled") then
 				if misc.TargetedCharacter and misc.IsAimbotOn and camera.CameraType ~= Enum.CameraType.Scriptable then
 					plrs.LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
 				else
@@ -2116,7 +2111,7 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 				plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
 			end
 		end)
-		
+	
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
 				deselect()
@@ -2131,13 +2126,13 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 				else
 					MainFrame.CurrentTarget.Text = v.Name
 				end
-				if not GameStats.FirstPersonEnabled then
+				if not getOrCreate(GameStats, "FirstPersonEnabled") then
 					lplr.Character.Humanoid.CameraOffset = Vector3.new(2,0,0)
 					game:GetService("UserInputService").MouseBehavior = Enum.MouseBehavior.LockCenter
 				end
-					MainFrame.CurrentTarget.TextColor3 = Color3.new(0,0.66,0)
+				MainFrame.CurrentTarget.TextColor3 = Color3.new(0,0.66,0)
 			else
-				if not GameStats.FirstPersonEnabled then
+				if not getOrCreate(GameStats, "FirstPersonEnabled") then
 					lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
 					game:GetService("UserInputService").MouseBehavior = Enum.MouseBehavior.Default
 				end
@@ -2190,13 +2185,13 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 	
 			local function togglefunc(Table)
 				local button
-					if Table == PrioritizedPlrs then
-						button = clone.PriorityToggle
-					else
-						button = clone.WhitelistToggle
-					end
+				if Table == PrioritizedPlrs then
+					button = clone.PriorityToggle
+				else
+					button = clone.WhitelistToggle
+				end
 	
-				if ins.ClassName == "Player" and GameStats.WhitelistFriends and lplr:IsFriendsWith(ins.UserId) and Table == WhitelistedPlrs then
+				if ins.ClassName == "Player" and getOrCreate(GameStats, "WhitelistFriends") and lplr:IsFriendsWith(ins.UserId) and Table == WhitelistedPlrs then
 					button.TextColor3 = Color3.new(0,0.66,0)
 					button.Text = "Yes"
 					table.insert(WhitelistedPlrs, ins)
@@ -2208,19 +2203,19 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 						button.Text = "Yes"
 						table.insert(Table,ins)
 	
-					if Table == PrioritizedPlrs and clone.WhitelistToggle.Text == "Yes" then
-						clone.WhitelistToggle.Text = "No"
-						clone.WhitelistToggle.TextColor3 = Color3.new(0.66,0,0)
-						local wlistplr = table.find(WhitelistedPlrs, ins)
-						table.remove(WhitelistedPlrs, wlistplr)
-					end
+						if Table == PrioritizedPlrs and clone.WhitelistToggle.Text == "Yes" then
+							clone.WhitelistToggle.Text = "No"
+							clone.WhitelistToggle.TextColor3 = Color3.new(0.66,0,0)
+							local wlistplr = table.find(WhitelistedPlrs, ins)
+							table.remove(WhitelistedPlrs, wlistplr)
+						end
 	
-					if Table == WhitelistedPlrs and clone.PriorityToggle.Text == "Yes" then
-						clone.PriorityToggle.Text = "No"
-						clone.PriorityToggle.TextColor3 = Color3.new(0.66,0,0)
-						local prioplr = table.find(PrioritizedPlrs, ins)
-						table.remove(PrioritizedPlrs, prioplr)
-					end
+						if Table == WhitelistedPlrs and clone.PriorityToggle.Text == "Yes" then
+							clone.PriorityToggle.Text = "No"
+							clone.PriorityToggle.TextColor3 = Color3.new(0.66,0,0)
+							local prioplr = table.find(PrioritizedPlrs, ins)
+							table.remove(PrioritizedPlrs, prioplr)
+						end
 	
 					else
 						button.TextColor3 = Color3.new(0.66,0,0)
@@ -2231,14 +2226,14 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 				end)
 	
 			end
-				clone.TextLabel.Text = CheckDN(ins)
-				togglefunc(WhitelistedPlrs)
-				togglefunc(PrioritizedPlrs)
+			clone.TextLabel.Text = CheckDN(ins)
+			togglefunc(WhitelistedPlrs)
+			togglefunc(PrioritizedPlrs)
 	
-				coroutine.resume(coroutine.create(function()
-					repeat task.wait() until not game:GetService("Players"):FindFirstChild(ins.Name)
-					clone:Destroy()
-				end))
+			coroutine.resume(coroutine.create(function()
+				repeat task.wait() until not game:GetService("Players"):FindFirstChild(ins.Name)
+				clone:Destroy()
+			end))
 	
 		end
 	
@@ -2256,28 +2251,28 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 				if v.ClassName == "Frame" and v ~= wlframe then
 					if v.TextLabel.Text:lower():match(txt:lower()) then
 						v.Visible = true
-				else
-					v.Visible = false
+					else
+						v.Visible = false
 					end
 				end
 			end
 	
 		end)
-		
+	
 		globals.keybinds.Activated:connect(function()
 			keys.Visible = true	
 			globals.Visible = false
 		end)
-		
+	
 		keys.globals.Activated:connect(function()
 			keys.Visible = false
 			globals.Visible = true
 		end)
-		
+	
 		keys.X.Activated:connect(function()
 			keys.Visible = false
 		end)
-		
+	
 		plrs.PlayerAdded:connect(function(plr)
 			for i,v in pairs(WhitelistedPlrs) do
 				if v.Name == plr.Name then
@@ -2303,4 +2298,4 @@ local function EFHUV_fake_script() -- Aimbot.Scripts
 		gui:Destroy()
 	end
 end
-coroutine.wrap(EFHUV_fake_script)()
+coroutine.wrap(ULPIWS_fake_script)()
