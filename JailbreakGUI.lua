@@ -1061,7 +1061,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 									fireauto = gun.FireAuto
 								end
 							else
-								misc.aimoffset = Vector3.new()
+								misc.AimOffset = Vector3.new()
 							end
 							if speed and aimpredict then
 								local velocity = targetedchr.Humanoid.RootPart.Velocity
@@ -1069,9 +1069,9 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 									velocity = vel2
 								end
 								local distance = (lplr.Character.Humanoid.RootPart.Position - targetedchr.Humanoid.RootPart.Position).Magnitude
-								misc.aimoffset = (velocity/speed)*distance
+								misc.AimOffset = (velocity/speed)*distance
 							else
-								misc.aimoffset = Vector3.new()
+								misc.AimOffset = Vector3.new()
 							end
 							if triggerbot then
 								if gun then
