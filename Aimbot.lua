@@ -101,7 +101,7 @@ local globals = Instance.new("TextButton")
 --Properties:
 
 Aimbot.Name = "Aimbot"
-Aimbot.Parent = game:GetService("CoreGui")
+Aimbot.Parent = game.CoreGui
 Aimbot.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MFrame.Name = "MFrame"
@@ -1261,7 +1261,7 @@ globals.TextWrapped = true
 
 -- Scripts:
 
-local function ULPIWS_fake_script() -- Aimbot.Scripts 
+local function JLQM_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1465,7 +1465,7 @@ local function ULPIWS_fake_script() -- Aimbot.Scripts
 		local misc = {}
 		misc.IsAimbotOn = false
 		misc.TargetedCharacter = nil
-		misc.aimoffset = Vector3.new()
+		misc.AimOffset = Vector3.new()
 		local GlobalStats
 		local GameStats
 		local Keybinds
@@ -1486,7 +1486,7 @@ local function ULPIWS_fake_script() -- Aimbot.Scripts
 			newgamestats.AimMethod = "Mouse"
 			return newgamestats
 		end
-		
+	
 		local function createGlobalStats()
 			local newglobalstats = {}
 			newglobalstats.TeamAutofill = true
@@ -1507,7 +1507,7 @@ local function ULPIWS_fake_script() -- Aimbot.Scripts
 			addkeybinds(newglobalstats)
 			return newglobalstats
 		end
-		
+	
 		local function getOrCreate(tbl, value)
 			if tbl[value] == nil then
 				if tbl == GameStats then
@@ -1522,12 +1522,12 @@ local function ULPIWS_fake_script() -- Aimbot.Scripts
 				return tbl[value]
 			end
 		end
-		
+	
 		local function setOrCreate(tbl, value, newvalue)
 			getOrCreate(tbl, value)
 			tbl[value] = newvalue
 		end
-
+	
 		local function clearOldValues(t)
 			local tableref = (if t == GameStats then createGameStats() else createGlobalStats())
 			for i,v in pairs(t) do
@@ -1538,16 +1538,16 @@ local function ULPIWS_fake_script() -- Aimbot.Scripts
 		end
 	
 		if isfile("RedsAimbot/GlobalStats.lua") then
-			
+	
 			GlobalStats = loadfile("RedsAimbot/GlobalStats.lua")()
 			if not isfile("RedsAimbot/Games/"..game.PlaceId..".lua") then
 				GameStats = createGameStats()
 			else
 				GameStats = loadfile("RedsAimbot/Games/"..game.PlaceId..".lua")()
 			end
-			
+	
 		elseif isfile("RedsAimbotStats.lua") then -- replace old save file
-			
+	
 			local globalclone = loadfile("RedsAimbotStats.lua")()
 			makefolder("RedsAimbot/Games")
 			local gamestats = {}
@@ -1564,7 +1564,7 @@ local function ULPIWS_fake_script() -- Aimbot.Scripts
 			delfile("RedsAimbotStats.lua")
 			GlobalStats = globalclone
 			GameStats = gamestats[game.PlaceId] or createGameStats()
-			
+	
 		else
 			makefolder("RedsAimbot/Games")
 			GlobalStats = createGlobalStats()
@@ -1574,10 +1574,10 @@ local function ULPIWS_fake_script() -- Aimbot.Scripts
 		getgenv().RedsAimbot.GlobalStats = GlobalStats
 		getgenv().RedsAimbot.Misc = misc
 		getgenv().RedsAimbot.GameStats = GameStats
-
+	
 		clearOldValues(GameStats)
 		clearOldValues(GlobalStats)
-		
+	
 		for i,v in pairs(Keybinds) do
 			if keybindsettings:FindFirstChild(i) then
 				keybindsettings[i].value.Text = tostring(v)
@@ -2011,16 +2011,16 @@ local function ULPIWS_fake_script() -- Aimbot.Scripts
 				local part = gettargetpart(misc.TargetedCharacter)
 				if part then
 					local partpos = part.Position
-					local v, onscreen = camera:WorldToScreenPoint(partpos + misc.aimoffset)
+					local v, onscreen = camera:WorldToScreenPoint(partpos + misc.AimOffset)
 					local x,y = (v.X - m.X), (v.Y - m.Y)
 					if onscreen then
 						if misc.IsAimbotOn then
 							if getOrCreate(GlobalStats, "RightClickAim") and RightClick or not getOrCreate(GlobalStats, "RightClickAim") then
 								if getOrCreate(GameStats, "AimMethod") == "Camera" then
-									camera.CFrame = CFrame.new(camera.CFrame.Position, partpos + misc.aimoffset)
+									camera.CFrame = CFrame.new(camera.CFrame.Position, partpos + misc.AimOffset)
 									game:GetService("UserInputService").MouseDeltaSensitivity = 0
 								else
-									mousemoverel((x + misc.aimoffset.X) * getOrCreate(GlobalStats, "MouseSensitivity"), (y + misc.aimoffset.Y) * getOrCreate(GlobalStats, "MouseSensitivity"))
+									mousemoverel((x + misc.AimOffset.X) * getOrCreate(GlobalStats, "MouseSensitivity"), (y + misc.AimOffset.Y) * getOrCreate(GlobalStats, "MouseSensitivity"))
 								end
 								if not getOrCreate(GameStats, "FirstPersonEnabled") then
 									lplr.Character.Humanoid.RootPart.CFrame = CFrame.lookAt(lplr.Character.Humanoid.RootPart.Position, (partpos * Vector3.new(1,0,1)) + Vector3.new(0, lplr.Character.Humanoid.RootPart.Position.Y, 0))
@@ -2310,4 +2310,4 @@ local function ULPIWS_fake_script() -- Aimbot.Scripts
 		gui:Destroy()
 	end
 end
-coroutine.wrap(ULPIWS_fake_script)()
+coroutine.wrap(JLQM_fake_script)()
