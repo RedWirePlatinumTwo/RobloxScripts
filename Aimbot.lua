@@ -27,47 +27,27 @@ local Title_2 = Instance.new("TextLabel")
 local whitelistlable = Instance.new("TextLabel")
 local prioritylable = Instance.new("TextLabel")
 local typelabel = Instance.new("TextLabel")
-local GameSettingsUI = Instance.new("Frame")
+local CustomTargetingUI = Instance.new("Frame")
 local Title_3 = Instance.new("TextLabel")
-local X = Instance.new("TextButton")
+local add = Instance.new("TextButton")
+local back = Instance.new("TextButton")
 local ScrollingFrame = Instance.new("ScrollingFrame")
 local UIListLayout_2 = Instance.new("UIListLayout")
-local AutoTarget = Instance.new("TextLabel")
-local value = Instance.new("TextButton")
-local Target = Instance.new("TextLabel")
-local value_2 = Instance.new("TextButton")
-local WhitelistFriends = Instance.new("TextLabel")
-local value_3 = Instance.new("TextButton")
-local MaxStuds = Instance.new("TextLabel")
-local value_4 = Instance.new("TextBox")
-local OwnTeamWhitelisted = Instance.new("TextLabel")
-local value_5 = Instance.new("TextButton")
-local TargetCloserPlayers = Instance.new("TextLabel")
-local value_6 = Instance.new("TextButton")
-local About = Instance.new("TextLabel")
-local TargetNPCs = Instance.new("TextLabel")
-local value_7 = Instance.new("TextButton")
-local IgnorePlayers = Instance.new("TextLabel")
-local value_8 = Instance.new("TextButton")
-local TargetPrioOnly = Instance.new("TextLabel")
-local value_9 = Instance.new("TextButton")
-local FirstPersonEnabled = Instance.new("TextLabel")
-local value_10 = Instance.new("TextButton")
-local AimMethod = Instance.new("TextLabel")
-local value_11 = Instance.new("TextButton")
-local About_2 = Instance.new("TextLabel")
+local Condition = Instance.new("TextLabel")
+local value = Instance.new("TextBox")
+local about = Instance.new("TextButton")
 local GlobalSettingsUI = Instance.new("Frame")
 local Title_4 = Instance.new("TextLabel")
-local X_2 = Instance.new("TextButton")
+local X = Instance.new("TextButton")
 local ScrollingFrame_2 = Instance.new("ScrollingFrame")
 local UIListLayout_3 = Instance.new("UIListLayout")
 local RightClickAim = Instance.new("TextLabel")
-local value_12 = Instance.new("TextButton")
+local value_2 = Instance.new("TextButton")
 local TeamAutofill = Instance.new("TextLabel")
-local value_13 = Instance.new("TextButton")
+local value_3 = Instance.new("TextButton")
 local MouseSensitivity = Instance.new("TextLabel")
-local About_3 = Instance.new("TextLabel")
-local value_14 = Instance.new("TextBox")
+local About = Instance.new("TextLabel")
+local value_4 = Instance.new("TextBox")
 local keybinds = Instance.new("TextButton")
 local TeamUI = Instance.new("Frame")
 local WhitelistedTeams = Instance.new("ScrollingFrame")
@@ -81,22 +61,52 @@ local yourteam = Instance.new("TextBox")
 local label1 = Instance.new("TextLabel")
 local label2 = Instance.new("TextLabel")
 local Title_5 = Instance.new("TextLabel")
-local X_3 = Instance.new("TextButton")
+local X_2 = Instance.new("TextButton")
 local KeybindsUI = Instance.new("Frame")
 local Title_6 = Instance.new("TextLabel")
-local X_4 = Instance.new("TextButton")
+local X_3 = Instance.new("TextButton")
 local ScrollingFrame_3 = Instance.new("ScrollingFrame")
 local UIListLayout_5 = Instance.new("UIListLayout")
 local AimbotToggle = Instance.new("TextLabel")
-local value_15 = Instance.new("TextButton")
+local value_5 = Instance.new("TextButton")
 local reset = Instance.new("TextButton")
 local TargetedPartToggle = Instance.new("TextLabel")
-local value_16 = Instance.new("TextButton")
+local value_6 = Instance.new("TextButton")
 local reset_2 = Instance.new("TextButton")
 local GUIVisibilityToggle = Instance.new("TextLabel")
-local value_17 = Instance.new("TextButton")
+local value_7 = Instance.new("TextButton")
 local reset_3 = Instance.new("TextButton")
 local globals = Instance.new("TextButton")
+local GameSettingsUI = Instance.new("Frame")
+local Title_7 = Instance.new("TextLabel")
+local X_4 = Instance.new("TextButton")
+local ScrollingFrame_4 = Instance.new("ScrollingFrame")
+local UIListLayout_6 = Instance.new("UIListLayout")
+local AutoTarget = Instance.new("TextLabel")
+local value_8 = Instance.new("TextButton")
+local Target = Instance.new("TextLabel")
+local value_9 = Instance.new("TextButton")
+local WhitelistFriends = Instance.new("TextLabel")
+local value_10 = Instance.new("TextButton")
+local MaxStuds = Instance.new("TextLabel")
+local value_11 = Instance.new("TextBox")
+local OwnTeamWhitelisted = Instance.new("TextLabel")
+local value_12 = Instance.new("TextButton")
+local TargetCloserPlayers = Instance.new("TextLabel")
+local value_13 = Instance.new("TextButton")
+local About_2 = Instance.new("TextLabel")
+local TargetNPCs = Instance.new("TextLabel")
+local value_14 = Instance.new("TextButton")
+local IgnorePlayers = Instance.new("TextLabel")
+local value_15 = Instance.new("TextButton")
+local TargetPrioOnly = Instance.new("TextLabel")
+local value_16 = Instance.new("TextButton")
+local FirstPersonEnabled = Instance.new("TextLabel")
+local value_17 = Instance.new("TextButton")
+local AimMethod = Instance.new("TextLabel")
+local value_18 = Instance.new("TextButton")
+local About_3 = Instance.new("TextLabel")
+local customtargetcons = Instance.new("TextButton")
 
 --Properties:
 
@@ -320,7 +330,7 @@ searchbar.BorderColor3 = Color3.fromRGB(0, 170, 0)
 searchbar.Position = UDim2.new(0, 0, 0.111524165, 0)
 searchbar.Size = UDim2.new(0, 459, 0, 33)
 searchbar.Font = Enum.Font.TitilliumWeb
-searchbar.PlaceholderColor3 = Color3.fromRGB(0, 170, 0)
+searchbar.PlaceholderColor3 = Color3.fromRGB(0, 100, 0)
 searchbar.PlaceholderText = "Filter Scrolling Frame results"
 searchbar.Text = ""
 searchbar.TextColor3 = Color3.fromRGB(0, 170, 0)
@@ -379,399 +389,108 @@ typelabel.TextSize = 24.000
 typelabel.TextStrokeTransparency = 0.000
 typelabel.TextWrapped = true
 
-GameSettingsUI.Name = "GameSettingsUI"
-GameSettingsUI.Parent = Aimbot
-GameSettingsUI.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
-GameSettingsUI.BorderColor3 = Color3.fromRGB(0, 170, 0)
-GameSettingsUI.Position = UDim2.new(0.479687512, 0, 0.17027837, 0)
-GameSettingsUI.Size = UDim2.new(0, 338, 0, 342)
-GameSettingsUI.Visible = false
+CustomTargetingUI.Name = "CustomTargetingUI"
+CustomTargetingUI.Parent = Aimbot
+CustomTargetingUI.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
+CustomTargetingUI.BorderColor3 = Color3.fromRGB(0, 170, 0)
+CustomTargetingUI.Position = UDim2.new(0.58417803, 0, 0.280467957, 0)
+CustomTargetingUI.Size = UDim2.new(0, 338, 0, 342)
+CustomTargetingUI.Visible = false
 
 Title_3.Name = "Title"
-Title_3.Parent = GameSettingsUI
+Title_3.Parent = CustomTargetingUI
 Title_3.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
 Title_3.BorderColor3 = Color3.fromRGB(0, 170, 0)
-Title_3.Position = UDim2.new(0, 0, 6.75937554e-05, 0)
+Title_3.Position = UDim2.new(0, 0, 0.00299157039, 0)
 Title_3.Size = UDim2.new(0, 291, 0, 31)
 Title_3.Font = Enum.Font.TitilliumWeb
-Title_3.Text = "Game Settings"
+Title_3.Text = "Custom Targeting"
 Title_3.TextColor3 = Color3.fromRGB(0, 170, 0)
 Title_3.TextSize = 32.000
 Title_3.TextStrokeTransparency = 0.000
 Title_3.TextWrapped = true
 
-X.Name = "X"
-X.Parent = GameSettingsUI
-X.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-X.BorderColor3 = Color3.fromRGB(0, 170, 0)
-X.Position = UDim2.new(0.863685906, 0, 0, 0)
-X.Size = UDim2.new(0, 46, 0, 32)
-X.Font = Enum.Font.TitilliumWeb
-X.Text = "Close"
-X.TextColor3 = Color3.fromRGB(170, 0, 0)
-X.TextSize = 28.000
-X.TextStrokeTransparency = 0.000
-X.TextWrapped = true
+add.Name = "add"
+add.Parent = CustomTargetingUI
+add.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+add.BorderColor3 = Color3.fromRGB(0, 170, 0)
+add.Position = UDim2.new(0.313390076, 0, 0.0965588689, 0)
+add.Size = UDim2.new(0, 125, 0, 26)
+add.Font = Enum.Font.TitilliumWeb
+add.Text = "Add Condition"
+add.TextColor3 = Color3.fromRGB(0, 170, 0)
+add.TextSize = 28.000
+add.TextStrokeTransparency = 0.000
+add.TextWrapped = true
 
-ScrollingFrame.Parent = GameSettingsUI
+back.Name = "back"
+back.Parent = CustomTargetingUI
+back.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+back.BorderColor3 = Color3.fromRGB(0, 170, 0)
+back.Position = UDim2.new(0.198224857, 0, 0.917465806, 0)
+back.Size = UDim2.new(0, 188, 0, 28)
+back.Font = Enum.Font.TitilliumWeb
+back.Text = "Back to game settings"
+back.TextColor3 = Color3.fromRGB(0, 170, 0)
+back.TextSize = 28.000
+back.TextStrokeTransparency = 0.000
+
+ScrollingFrame.Parent = CustomTargetingUI
 ScrollingFrame.Active = true
 ScrollingFrame.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
 ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 170, 0)
-ScrollingFrame.Position = UDim2.new(0, 0, 0.0918695107, 0)
-ScrollingFrame.Size = UDim2.new(0, 338, 0, 310)
+ScrollingFrame.Position = UDim2.new(0, 0, 0.173740849, 0)
+ScrollingFrame.Size = UDim2.new(0, 338, 0, 253)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 UIListLayout_2.Parent = ScrollingFrame
 
-AutoTarget.Name = "AutoTarget"
-AutoTarget.Parent = ScrollingFrame
-AutoTarget.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-AutoTarget.BackgroundTransparency = 1.000
-AutoTarget.BorderColor3 = Color3.fromRGB(0, 170, 0)
-AutoTarget.BorderSizePixel = 0
-AutoTarget.Size = UDim2.new(0, 195, 0, 63)
-AutoTarget.Font = Enum.Font.TitilliumWeb
-AutoTarget.Text = "Auto-Targeting Enabled:"
-AutoTarget.TextColor3 = Color3.fromRGB(0, 170, 0)
-AutoTarget.TextSize = 28.000
-AutoTarget.TextStrokeTransparency = 0.000
-AutoTarget.TextXAlignment = Enum.TextXAlignment.Left
-AutoTarget.TextYAlignment = Enum.TextYAlignment.Top
+Condition.Name = "Condition"
+Condition.Parent = ScrollingFrame
+Condition.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Condition.BackgroundTransparency = 1.000
+Condition.BorderColor3 = Color3.fromRGB(0, 170, 0)
+Condition.BorderSizePixel = 0
+Condition.Size = UDim2.new(0, 338, 0, 73)
+Condition.Visible = false
+Condition.Font = Enum.Font.TitilliumWeb
+Condition.Text = "Condition:"
+Condition.TextColor3 = Color3.fromRGB(0, 170, 0)
+Condition.TextSize = 28.000
+Condition.TextStrokeTransparency = 0.000
+Condition.TextXAlignment = Enum.TextXAlignment.Left
+Condition.TextYAlignment = Enum.TextYAlignment.Top
 
 value.Name = "value"
-value.Parent = AutoTarget
+value.Parent = Condition
 value.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 value.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value.Position = UDim2.new(-0.000219726557, 0, 0.522047281, 0)
-value.Size = UDim2.new(0, 326, 0, 28)
+value.Position = UDim2.new(-0.00595760904, 0, 0.364886552, 0)
+value.Size = UDim2.new(0, 326, 0, 46)
+value.ClearTextOnFocus = false
 value.Font = Enum.Font.TitilliumWeb
-value.Text = "true"
+value.PlaceholderColor3 = Color3.fromRGB(0, 100, 0)
+value.PlaceholderText = "TargetCharacter.Humanoid.Health < 10"
+value.Text = ""
 value.TextColor3 = Color3.fromRGB(0, 170, 0)
+value.TextScaled = true
 value.TextSize = 28.000
 value.TextStrokeTransparency = 0.000
-value.TextXAlignment = Enum.TextXAlignment.Left
+value.TextWrapped = true
+value.TextYAlignment = Enum.TextYAlignment.Top
 
-Target.Name = "Target"
-Target.Parent = ScrollingFrame
-Target.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Target.BackgroundTransparency = 1.000
-Target.BorderColor3 = Color3.fromRGB(0, 170, 0)
-Target.BorderSizePixel = 0
-Target.Position = UDim2.new(0, 0, 0.474509805, 0)
-Target.Size = UDim2.new(0, 169, 0, 63)
-Target.Font = Enum.Font.TitilliumWeb
-Target.Text = "Targeted Part:"
-Target.TextColor3 = Color3.fromRGB(0, 170, 0)
-Target.TextSize = 28.000
-Target.TextStrokeTransparency = 0.000
-Target.TextXAlignment = Enum.TextXAlignment.Left
-Target.TextYAlignment = Enum.TextYAlignment.Top
-
-value_2.Name = "value"
-value_2.Parent = Target
-value_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_2.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_2.Position = UDim2.new(0, 0, 0.532047331, 0)
-value_2.Size = UDim2.new(0, 325, 0, 28)
-value_2.Font = Enum.Font.TitilliumWeb
-value_2.Text = "Head"
-value_2.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_2.TextSize = 28.000
-value_2.TextStrokeTransparency = 0.000
-value_2.TextXAlignment = Enum.TextXAlignment.Left
-
-WhitelistFriends.Name = "WhitelistFriends"
-WhitelistFriends.Parent = ScrollingFrame
-WhitelistFriends.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-WhitelistFriends.BackgroundTransparency = 1.000
-WhitelistFriends.BorderColor3 = Color3.fromRGB(0, 170, 0)
-WhitelistFriends.BorderSizePixel = 0
-WhitelistFriends.Position = UDim2.new(0, 0, 0.752941191, 0)
-WhitelistFriends.Size = UDim2.new(0, 169, 0, 63)
-WhitelistFriends.Font = Enum.Font.TitilliumWeb
-WhitelistFriends.Text = "Whitelist Friends:"
-WhitelistFriends.TextColor3 = Color3.fromRGB(0, 170, 0)
-WhitelistFriends.TextSize = 28.000
-WhitelistFriends.TextStrokeTransparency = 0.000
-WhitelistFriends.TextXAlignment = Enum.TextXAlignment.Left
-WhitelistFriends.TextYAlignment = Enum.TextYAlignment.Top
-
-value_3.Name = "value"
-value_3.Parent = WhitelistFriends
-value_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_3.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_3.Position = UDim2.new(0.00591715984, 0, 0.542252779, 0)
-value_3.Size = UDim2.new(0, 324, 0, 28)
-value_3.Font = Enum.Font.TitilliumWeb
-value_3.Text = "false"
-value_3.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_3.TextSize = 28.000
-value_3.TextStrokeTransparency = 0.000
-value_3.TextXAlignment = Enum.TextXAlignment.Left
-
-MaxStuds.Name = "MaxStuds"
-MaxStuds.Parent = ScrollingFrame
-MaxStuds.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-MaxStuds.BackgroundTransparency = 1.000
-MaxStuds.BorderColor3 = Color3.fromRGB(0, 170, 0)
-MaxStuds.BorderSizePixel = 0
-MaxStuds.Position = UDim2.new(0, 0, 0.474509805, 0)
-MaxStuds.Size = UDim2.new(0, 169, 0, 63)
-MaxStuds.Font = Enum.Font.TitilliumWeb
-MaxStuds.Text = "Auto-Target max studs:"
-MaxStuds.TextColor3 = Color3.fromRGB(0, 170, 0)
-MaxStuds.TextSize = 28.000
-MaxStuds.TextStrokeTransparency = 0.000
-MaxStuds.TextXAlignment = Enum.TextXAlignment.Left
-MaxStuds.TextYAlignment = Enum.TextYAlignment.Top
-
-value_4.Name = "value"
-value_4.Parent = MaxStuds
-value_4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_4.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_4.Position = UDim2.new(-0.00595760904, 0, 0.490557462, 0)
-value_4.Size = UDim2.new(0, 326, 0, 28)
-value_4.Font = Enum.Font.TitilliumWeb
-value_4.PlaceholderColor3 = Color3.fromRGB(0, 170, 0)
-value_4.PlaceholderText = "Default is 500"
-value_4.Text = "500"
-value_4.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_4.TextSize = 28.000
-value_4.TextStrokeTransparency = 0.000
-value_4.TextXAlignment = Enum.TextXAlignment.Left
-
-OwnTeamWhitelisted.Name = "OwnTeamWhitelisted"
-OwnTeamWhitelisted.Parent = ScrollingFrame
-OwnTeamWhitelisted.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-OwnTeamWhitelisted.BackgroundTransparency = 1.000
-OwnTeamWhitelisted.BorderColor3 = Color3.fromRGB(0, 170, 0)
-OwnTeamWhitelisted.BorderSizePixel = 0
-OwnTeamWhitelisted.Position = UDim2.new(0, 0, 0.58431375, 0)
-OwnTeamWhitelisted.Size = UDim2.new(0, 169, 0, 63)
-OwnTeamWhitelisted.Font = Enum.Font.TitilliumWeb
-OwnTeamWhitelisted.Text = "Whitelist own team:"
-OwnTeamWhitelisted.TextColor3 = Color3.fromRGB(0, 170, 0)
-OwnTeamWhitelisted.TextSize = 28.000
-OwnTeamWhitelisted.TextStrokeTransparency = 0.000
-OwnTeamWhitelisted.TextXAlignment = Enum.TextXAlignment.Left
-OwnTeamWhitelisted.TextYAlignment = Enum.TextYAlignment.Top
-
-value_5.Name = "value"
-value_5.Parent = OwnTeamWhitelisted
-value_5.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_5.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_5.Position = UDim2.new(4.0449333e-05, 0, 0.544638038, 0)
-value_5.Size = UDim2.new(0, 324, 0, 28)
-value_5.Font = Enum.Font.TitilliumWeb
-value_5.Text = "true"
-value_5.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_5.TextSize = 28.000
-value_5.TextStrokeTransparency = 0.000
-value_5.TextXAlignment = Enum.TextXAlignment.Left
-
-TargetCloserPlayers.Name = "TargetCloserPlayers"
-TargetCloserPlayers.Parent = ScrollingFrame
-TargetCloserPlayers.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-TargetCloserPlayers.BackgroundTransparency = 1.000
-TargetCloserPlayers.BorderColor3 = Color3.fromRGB(0, 170, 0)
-TargetCloserPlayers.BorderSizePixel = 0
-TargetCloserPlayers.Position = UDim2.new(0, 0, 0.216439918, 0)
-TargetCloserPlayers.Size = UDim2.new(0, 169, 0, 116)
-TargetCloserPlayers.Font = Enum.Font.TitilliumWeb
-TargetCloserPlayers.Text = "Target Closer Players:"
-TargetCloserPlayers.TextColor3 = Color3.fromRGB(0, 170, 0)
-TargetCloserPlayers.TextSize = 28.000
-TargetCloserPlayers.TextStrokeTransparency = 0.000
-TargetCloserPlayers.TextXAlignment = Enum.TextXAlignment.Left
-TargetCloserPlayers.TextYAlignment = Enum.TextYAlignment.Top
-
-value_6.Name = "value"
-value_6.Parent = TargetCloserPlayers
-value_6.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_6.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_6.Position = UDim2.new(0.00591715984, 0, 0.243091717, 0)
-value_6.Size = UDim2.new(0, 324, 0, 28)
-value_6.Font = Enum.Font.TitilliumWeb
-value_6.Text = "true"
-value_6.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_6.TextSize = 28.000
-value_6.TextStrokeTransparency = 0.000
-value_6.TextXAlignment = Enum.TextXAlignment.Left
-
-About.Name = "About"
-About.Parent = TargetCloserPlayers
-About.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-About.BackgroundTransparency = 1.000
-About.BorderColor3 = Color3.fromRGB(0, 170, 0)
-About.BorderSizePixel = 0
-About.Position = UDim2.new(0.00351909199, 0, 0.502846539, 0)
-About.Size = UDim2.new(0, 325, 0, 60)
-About.Font = Enum.Font.TitilliumWeb
-About.Text = "If enabled, targets can swap with players closer to you. If disabled, targets will only swap if dead. Prioritized players will only swap with other prioritized players."
-About.TextColor3 = Color3.fromRGB(0, 170, 0)
-About.TextSize = 20.000
-About.TextStrokeTransparency = 0.000
-About.TextWrapped = true
-
-TargetNPCs.Name = "TargetNPCs"
-TargetNPCs.Parent = ScrollingFrame
-TargetNPCs.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-TargetNPCs.BackgroundTransparency = 1.000
-TargetNPCs.BorderColor3 = Color3.fromRGB(0, 170, 0)
-TargetNPCs.BorderSizePixel = 0
-TargetNPCs.Position = UDim2.new(-0.00591715984, 0, 0.45863381, 0)
-TargetNPCs.Size = UDim2.new(0, 169, 0, 63)
-TargetNPCs.Font = Enum.Font.TitilliumWeb
-TargetNPCs.Text = "Target NPCs:"
-TargetNPCs.TextColor3 = Color3.fromRGB(0, 170, 0)
-TargetNPCs.TextSize = 28.000
-TargetNPCs.TextStrokeTransparency = 0.000
-TargetNPCs.TextXAlignment = Enum.TextXAlignment.Left
-TargetNPCs.TextYAlignment = Enum.TextYAlignment.Top
-
-value_7.Name = "value"
-value_7.Parent = TargetNPCs
-value_7.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_7.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_7.Position = UDim2.new(0, 0, 0.446332663, 0)
-value_7.Size = UDim2.new(0, 325, 0, 28)
-value_7.Font = Enum.Font.TitilliumWeb
-value_7.Text = "false"
-value_7.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_7.TextSize = 28.000
-value_7.TextStrokeTransparency = 0.000
-value_7.TextXAlignment = Enum.TextXAlignment.Left
-
-IgnorePlayers.Name = "IgnorePlayers"
-IgnorePlayers.Parent = ScrollingFrame
-IgnorePlayers.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-IgnorePlayers.BackgroundTransparency = 1.000
-IgnorePlayers.BorderColor3 = Color3.fromRGB(0, 170, 0)
-IgnorePlayers.BorderSizePixel = 0
-IgnorePlayers.Position = UDim2.new(0, 0, 0.247058824, 0)
-IgnorePlayers.Size = UDim2.new(0, 169, 0, 63)
-IgnorePlayers.Font = Enum.Font.TitilliumWeb
-IgnorePlayers.Text = "Ignore Players:"
-IgnorePlayers.TextColor3 = Color3.fromRGB(0, 170, 0)
-IgnorePlayers.TextSize = 28.000
-IgnorePlayers.TextStrokeTransparency = 0.000
-IgnorePlayers.TextXAlignment = Enum.TextXAlignment.Left
-IgnorePlayers.TextYAlignment = Enum.TextYAlignment.Top
-
-value_8.Name = "value"
-value_8.Parent = IgnorePlayers
-value_8.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_8.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_8.Position = UDim2.new(0, 0, 0.54871428, 0)
-value_8.Size = UDim2.new(0, 325, 0, 28)
-value_8.Font = Enum.Font.TitilliumWeb
-value_8.Text = "false"
-value_8.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_8.TextSize = 28.000
-value_8.TextStrokeTransparency = 0.000
-value_8.TextXAlignment = Enum.TextXAlignment.Left
-
-TargetPrioOnly.Name = "TargetPrioOnly"
-TargetPrioOnly.Parent = ScrollingFrame
-TargetPrioOnly.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-TargetPrioOnly.BackgroundTransparency = 1.000
-TargetPrioOnly.BorderColor3 = Color3.fromRGB(0, 170, 0)
-TargetPrioOnly.BorderSizePixel = 0
-TargetPrioOnly.Size = UDim2.new(0, 195, 0, 63)
-TargetPrioOnly.Font = Enum.Font.TitilliumWeb
-TargetPrioOnly.Text = "Target ONLY prioritized players:"
-TargetPrioOnly.TextColor3 = Color3.fromRGB(0, 170, 0)
-TargetPrioOnly.TextSize = 28.000
-TargetPrioOnly.TextStrokeTransparency = 0.000
-TargetPrioOnly.TextXAlignment = Enum.TextXAlignment.Left
-TargetPrioOnly.TextYAlignment = Enum.TextYAlignment.Top
-
-value_9.Name = "value"
-value_9.Parent = TargetPrioOnly
-value_9.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_9.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_9.Position = UDim2.new(-0.000219726557, 0, 0.522047281, 0)
-value_9.Size = UDim2.new(0, 326, 0, 28)
-value_9.Font = Enum.Font.TitilliumWeb
-value_9.Text = "false"
-value_9.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_9.TextSize = 28.000
-value_9.TextStrokeTransparency = 0.000
-value_9.TextXAlignment = Enum.TextXAlignment.Left
-
-FirstPersonEnabled.Name = "FirstPersonEnabled"
-FirstPersonEnabled.Parent = ScrollingFrame
-FirstPersonEnabled.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-FirstPersonEnabled.BackgroundTransparency = 1.000
-FirstPersonEnabled.BorderColor3 = Color3.fromRGB(0, 170, 0)
-FirstPersonEnabled.BorderSizePixel = 0
-FirstPersonEnabled.Position = UDim2.new(0, 0, 0.35958904, 0)
-FirstPersonEnabled.Size = UDim2.new(0, 169, 0, 60)
-FirstPersonEnabled.Font = Enum.Font.TitilliumWeb
-FirstPersonEnabled.Text = "First Person enabled:"
-FirstPersonEnabled.TextColor3 = Color3.fromRGB(0, 170, 0)
-FirstPersonEnabled.TextSize = 28.000
-FirstPersonEnabled.TextStrokeTransparency = 0.000
-FirstPersonEnabled.TextXAlignment = Enum.TextXAlignment.Left
-FirstPersonEnabled.TextYAlignment = Enum.TextYAlignment.Top
-
-value_10.Name = "value"
-value_10.Parent = FirstPersonEnabled
-value_10.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_10.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_10.Position = UDim2.new(0.00591715984, 0, 0.502716422, 0)
-value_10.Size = UDim2.new(0, 337, 0, 28)
-value_10.Font = Enum.Font.TitilliumWeb
-value_10.Text = "true"
-value_10.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_10.TextSize = 28.000
-value_10.TextStrokeTransparency = 0.000
-value_10.TextXAlignment = Enum.TextXAlignment.Left
-
-AimMethod.Name = "AimMethod"
-AimMethod.Parent = ScrollingFrame
-AimMethod.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-AimMethod.BackgroundTransparency = 1.000
-AimMethod.BorderColor3 = Color3.fromRGB(0, 170, 0)
-AimMethod.BorderSizePixel = 0
-AimMethod.Position = UDim2.new(0.0115606934, 0, 0.393835604, 0)
-AimMethod.Size = UDim2.new(0, 337, 0, 89)
-AimMethod.Font = Enum.Font.TitilliumWeb
-AimMethod.Text = "Aiming method:"
-AimMethod.TextColor3 = Color3.fromRGB(0, 170, 0)
-AimMethod.TextSize = 28.000
-AimMethod.TextStrokeTransparency = 0.000
-AimMethod.TextXAlignment = Enum.TextXAlignment.Left
-AimMethod.TextYAlignment = Enum.TextYAlignment.Top
-
-value_11.Name = "value"
-value_11.Parent = AimMethod
-value_11.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_11.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_11.Position = UDim2.new(0.00294979103, 0, 0.335594594, 0)
-value_11.Size = UDim2.new(0, 336, 0, 28)
-value_11.Font = Enum.Font.TitilliumWeb
-value_11.Text = "Camera"
-value_11.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_11.TextSize = 28.000
-value_11.TextStrokeTransparency = 0.000
-value_11.TextXAlignment = Enum.TextXAlignment.Left
-
-About_2.Name = "About"
-About_2.Parent = AimMethod
-About_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-About_2.BackgroundTransparency = 1.000
-About_2.BorderColor3 = Color3.fromRGB(0, 170, 0)
-About_2.BorderSizePixel = 0
-About_2.Position = UDim2.new(0.000516534899, 0, 0.650201321, 0)
-About_2.Size = UDim2.new(0, 331, 0, 25)
-About_2.Font = Enum.Font.TitilliumWeb
-About_2.Text = "Less universal, more stable."
-About_2.TextColor3 = Color3.fromRGB(0, 170, 0)
-About_2.TextScaled = true
-About_2.TextSize = 28.000
-About_2.TextStrokeTransparency = 0.000
-About_2.TextWrapped = true
+about.Name = "about"
+about.Parent = CustomTargetingUI
+about.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+about.BorderColor3 = Color3.fromRGB(0, 170, 0)
+about.Position = UDim2.new(0.860946774, 0, 0.0029916151, 0)
+about.Size = UDim2.new(0, 46, 0, 31)
+about.Font = Enum.Font.TitilliumWeb
+about.Text = "?"
+about.TextColor3 = Color3.fromRGB(0, 170, 0)
+about.TextSize = 28.000
+about.TextStrokeTransparency = 0.000
+about.TextWrapped = true
 
 GlobalSettingsUI.Name = "GlobalSettingsUI"
 GlobalSettingsUI.Parent = Aimbot
@@ -794,18 +513,18 @@ Title_4.TextSize = 32.000
 Title_4.TextStrokeTransparency = 0.000
 Title_4.TextWrapped = true
 
-X_2.Name = "X"
-X_2.Parent = GlobalSettingsUI
-X_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-X_2.BorderColor3 = Color3.fromRGB(0, 170, 0)
-X_2.Position = UDim2.new(0.866863608, 0, 0, 0)
-X_2.Size = UDim2.new(0, 46, 0, 31)
-X_2.Font = Enum.Font.TitilliumWeb
-X_2.Text = "Close"
-X_2.TextColor3 = Color3.fromRGB(170, 0, 0)
-X_2.TextSize = 28.000
-X_2.TextStrokeTransparency = 0.000
-X_2.TextWrapped = true
+X.Name = "X"
+X.Parent = GlobalSettingsUI
+X.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+X.BorderColor3 = Color3.fromRGB(0, 170, 0)
+X.Position = UDim2.new(0.866863608, 0, 0, 0)
+X.Size = UDim2.new(0, 46, 0, 31)
+X.Font = Enum.Font.TitilliumWeb
+X.Text = "Close"
+X.TextColor3 = Color3.fromRGB(170, 0, 0)
+X.TextSize = 28.000
+X.TextStrokeTransparency = 0.000
+X.TextWrapped = true
 
 ScrollingFrame_2.Parent = GlobalSettingsUI
 ScrollingFrame_2.Active = true
@@ -833,18 +552,18 @@ RightClickAim.TextStrokeTransparency = 0.000
 RightClickAim.TextXAlignment = Enum.TextXAlignment.Left
 RightClickAim.TextYAlignment = Enum.TextYAlignment.Top
 
-value_12.Name = "value"
-value_12.Parent = RightClickAim
-value_12.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_12.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_12.Position = UDim2.new(0.00591715984, 0, 0.524137616, 0)
-value_12.Size = UDim2.new(0, 337, 0, 28)
-value_12.Font = Enum.Font.TitilliumWeb
-value_12.Text = "false"
-value_12.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_12.TextSize = 28.000
-value_12.TextStrokeTransparency = 0.000
-value_12.TextXAlignment = Enum.TextXAlignment.Left
+value_2.Name = "value"
+value_2.Parent = RightClickAim
+value_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_2.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_2.Position = UDim2.new(0.00591715984, 0, 0.524137616, 0)
+value_2.Size = UDim2.new(0, 337, 0, 28)
+value_2.Font = Enum.Font.TitilliumWeb
+value_2.Text = "false"
+value_2.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_2.TextSize = 28.000
+value_2.TextStrokeTransparency = 0.000
+value_2.TextXAlignment = Enum.TextXAlignment.Left
 
 TeamAutofill.Name = "TeamAutofill"
 TeamAutofill.Parent = ScrollingFrame_2
@@ -862,18 +581,18 @@ TeamAutofill.TextStrokeTransparency = 0.000
 TeamAutofill.TextXAlignment = Enum.TextXAlignment.Left
 TeamAutofill.TextYAlignment = Enum.TextYAlignment.Top
 
-value_13.Name = "value"
-value_13.Parent = TeamAutofill
-value_13.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_13.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_13.Position = UDim2.new(0.00591715984, 0, 0.52416575, 0)
-value_13.Size = UDim2.new(0, 337, 0, 28)
-value_13.Font = Enum.Font.TitilliumWeb
-value_13.Text = "true"
-value_13.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_13.TextSize = 28.000
-value_13.TextStrokeTransparency = 0.000
-value_13.TextXAlignment = Enum.TextXAlignment.Left
+value_3.Name = "value"
+value_3.Parent = TeamAutofill
+value_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_3.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_3.Position = UDim2.new(0.00591715984, 0, 0.52416575, 0)
+value_3.Size = UDim2.new(0, 337, 0, 28)
+value_3.Font = Enum.Font.TitilliumWeb
+value_3.Text = "true"
+value_3.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_3.TextSize = 28.000
+value_3.TextStrokeTransparency = 0.000
+value_3.TextXAlignment = Enum.TextXAlignment.Left
 
 MouseSensitivity.Name = "MouseSensitivity"
 MouseSensitivity.Parent = ScrollingFrame_2
@@ -891,36 +610,36 @@ MouseSensitivity.TextStrokeTransparency = 0.000
 MouseSensitivity.TextXAlignment = Enum.TextXAlignment.Left
 MouseSensitivity.TextYAlignment = Enum.TextYAlignment.Top
 
-About_3.Name = "About"
-About_3.Parent = MouseSensitivity
-About_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-About_3.BackgroundTransparency = 1.000
-About_3.BorderColor3 = Color3.fromRGB(0, 170, 0)
-About_3.BorderSizePixel = 0
-About_3.Position = UDim2.new(0.00296735903, 0, 0.557552993, 0)
-About_3.Size = UDim2.new(0, 330, 0, 44)
-About_3.Font = Enum.Font.TitilliumWeb
-About_3.Text = "This will only be used if aiming method is mouse. Higher number = possibly better aiming but more shakiness."
-About_3.TextColor3 = Color3.fromRGB(0, 170, 0)
-About_3.TextScaled = true
-About_3.TextSize = 24.000
-About_3.TextStrokeTransparency = 0.000
-About_3.TextWrapped = true
+About.Name = "About"
+About.Parent = MouseSensitivity
+About.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+About.BackgroundTransparency = 1.000
+About.BorderColor3 = Color3.fromRGB(0, 170, 0)
+About.BorderSizePixel = 0
+About.Position = UDim2.new(0.00296735903, 0, 0.557552993, 0)
+About.Size = UDim2.new(0, 330, 0, 44)
+About.Font = Enum.Font.TitilliumWeb
+About.Text = "This will only be used if aiming method is mouse. Higher number = possibly better aiming but more shakiness."
+About.TextColor3 = Color3.fromRGB(0, 170, 0)
+About.TextScaled = true
+About.TextSize = 24.000
+About.TextStrokeTransparency = 0.000
+About.TextWrapped = true
 
-value_14.Name = "value"
-value_14.Parent = MouseSensitivity
-value_14.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_14.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_14.Position = UDim2.new(-1.75680034e-05, 0, 0.258487642, 0)
-value_14.Size = UDim2.new(0, 335, 0, 28)
-value_14.Font = Enum.Font.TitilliumWeb
-value_14.PlaceholderColor3 = Color3.fromRGB(0, 170, 0)
-value_14.PlaceholderText = "Default is 0.25"
-value_14.Text = "0.25"
-value_14.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_14.TextSize = 28.000
-value_14.TextStrokeTransparency = 0.000
-value_14.TextXAlignment = Enum.TextXAlignment.Left
+value_4.Name = "value"
+value_4.Parent = MouseSensitivity
+value_4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_4.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_4.Position = UDim2.new(-1.75680034e-05, 0, 0.258487642, 0)
+value_4.Size = UDim2.new(0, 335, 0, 28)
+value_4.Font = Enum.Font.TitilliumWeb
+value_4.PlaceholderColor3 = Color3.fromRGB(0, 100, 0)
+value_4.PlaceholderText = "Default is 0.25"
+value_4.Text = "0.25"
+value_4.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_4.TextSize = 28.000
+value_4.TextStrokeTransparency = 0.000
+value_4.TextXAlignment = Enum.TextXAlignment.Left
 
 keybinds.Name = "keybinds"
 keybinds.Parent = GlobalSettingsUI
@@ -1003,7 +722,7 @@ whitelistteam.BorderColor3 = Color3.fromRGB(0, 170, 0)
 whitelistteam.Position = UDim2.new(0.485556245, 0, 0.227746367, 0)
 whitelistteam.Size = UDim2.new(0, 178, 0, 28)
 whitelistteam.Font = Enum.Font.TitilliumWeb
-whitelistteam.PlaceholderColor3 = Color3.fromRGB(0, 170, 0)
+whitelistteam.PlaceholderColor3 = Color3.fromRGB(0, 100, 0)
 whitelistteam.PlaceholderText = "Team to whitelist"
 whitelistteam.Text = ""
 whitelistteam.TextColor3 = Color3.fromRGB(0, 170, 0)
@@ -1018,7 +737,7 @@ yourteam.BorderColor3 = Color3.fromRGB(0, 170, 0)
 yourteam.Position = UDim2.new(0.485556185, 0, 0.120595686, 0)
 yourteam.Size = UDim2.new(0, 178, 0, 28)
 yourteam.Font = Enum.Font.TitilliumWeb
-yourteam.PlaceholderColor3 = Color3.fromRGB(0, 170, 0)
+yourteam.PlaceholderColor3 = Color3.fromRGB(0, 100, 0)
 yourteam.PlaceholderText = "Your team"
 yourteam.Text = ""
 yourteam.TextColor3 = Color3.fromRGB(0, 170, 0)
@@ -1068,18 +787,18 @@ Title_5.TextSize = 30.000
 Title_5.TextStrokeTransparency = 0.000
 Title_5.TextWrapped = true
 
-X_3.Name = "X"
-X_3.Parent = TeamUI
-X_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-X_3.BorderColor3 = Color3.fromRGB(0, 170, 0)
-X_3.Position = UDim2.new(0.874868035, 0, 0, 0)
-X_3.Size = UDim2.new(0, 46, 0, 31)
-X_3.Font = Enum.Font.TitilliumWeb
-X_3.Text = "Close"
-X_3.TextColor3 = Color3.fromRGB(170, 0, 0)
-X_3.TextSize = 28.000
-X_3.TextStrokeTransparency = 0.000
-X_3.TextWrapped = true
+X_2.Name = "X"
+X_2.Parent = TeamUI
+X_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+X_2.BorderColor3 = Color3.fromRGB(0, 170, 0)
+X_2.Position = UDim2.new(0.874868035, 0, 0, 0)
+X_2.Size = UDim2.new(0, 46, 0, 31)
+X_2.Font = Enum.Font.TitilliumWeb
+X_2.Text = "Close"
+X_2.TextColor3 = Color3.fromRGB(170, 0, 0)
+X_2.TextSize = 28.000
+X_2.TextStrokeTransparency = 0.000
+X_2.TextWrapped = true
 
 KeybindsUI.Name = "KeybindsUI"
 KeybindsUI.Parent = Aimbot
@@ -1101,18 +820,18 @@ Title_6.TextSize = 32.000
 Title_6.TextStrokeTransparency = 0.000
 Title_6.TextWrapped = true
 
-X_4.Name = "X"
-X_4.Parent = KeybindsUI
-X_4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-X_4.BorderColor3 = Color3.fromRGB(0, 170, 0)
-X_4.Position = UDim2.new(0.866863608, 0, 0, 0)
-X_4.Size = UDim2.new(0, 46, 0, 31)
-X_4.Font = Enum.Font.TitilliumWeb
-X_4.Text = "Close"
-X_4.TextColor3 = Color3.fromRGB(170, 0, 0)
-X_4.TextSize = 28.000
-X_4.TextStrokeTransparency = 0.000
-X_4.TextWrapped = true
+X_3.Name = "X"
+X_3.Parent = KeybindsUI
+X_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+X_3.BorderColor3 = Color3.fromRGB(0, 170, 0)
+X_3.Position = UDim2.new(0.866863608, 0, 0, 0)
+X_3.Size = UDim2.new(0, 46, 0, 31)
+X_3.Font = Enum.Font.TitilliumWeb
+X_3.Text = "Close"
+X_3.TextColor3 = Color3.fromRGB(170, 0, 0)
+X_3.TextSize = 28.000
+X_3.TextStrokeTransparency = 0.000
+X_3.TextWrapped = true
 
 ScrollingFrame_3.Parent = KeybindsUI
 ScrollingFrame_3.Active = true
@@ -1140,18 +859,18 @@ AimbotToggle.TextStrokeTransparency = 0.000
 AimbotToggle.TextXAlignment = Enum.TextXAlignment.Left
 AimbotToggle.TextYAlignment = Enum.TextYAlignment.Top
 
-value_15.Name = "value"
-value_15.Parent = AimbotToggle
-value_15.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_15.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_15.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
-value_15.Size = UDim2.new(0, 260, 0, 28)
-value_15.Font = Enum.Font.TitilliumWeb
-value_15.Text = "Enum.KeyCode.CapsLock"
-value_15.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_15.TextSize = 28.000
-value_15.TextStrokeTransparency = 0.000
-value_15.TextXAlignment = Enum.TextXAlignment.Left
+value_5.Name = "value"
+value_5.Parent = AimbotToggle
+value_5.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_5.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_5.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
+value_5.Size = UDim2.new(0, 260, 0, 28)
+value_5.Font = Enum.Font.TitilliumWeb
+value_5.Text = "Enum.KeyCode.CapsLock"
+value_5.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_5.TextSize = 28.000
+value_5.TextStrokeTransparency = 0.000
+value_5.TextXAlignment = Enum.TextXAlignment.Left
 
 reset.Name = "reset"
 reset.Parent = AimbotToggle
@@ -1181,18 +900,18 @@ TargetedPartToggle.TextStrokeTransparency = 0.000
 TargetedPartToggle.TextXAlignment = Enum.TextXAlignment.Left
 TargetedPartToggle.TextYAlignment = Enum.TextYAlignment.Top
 
-value_16.Name = "value"
-value_16.Parent = TargetedPartToggle
-value_16.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_16.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_16.Position = UDim2.new(0.00591715984, 0, 0.524137616, 0)
-value_16.Size = UDim2.new(0, 258, 0, 28)
-value_16.Font = Enum.Font.TitilliumWeb
-value_16.Text = "Enum.KeyCode.X"
-value_16.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_16.TextSize = 28.000
-value_16.TextStrokeTransparency = 0.000
-value_16.TextXAlignment = Enum.TextXAlignment.Left
+value_6.Name = "value"
+value_6.Parent = TargetedPartToggle
+value_6.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_6.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_6.Position = UDim2.new(0.00591715984, 0, 0.524137616, 0)
+value_6.Size = UDim2.new(0, 258, 0, 28)
+value_6.Font = Enum.Font.TitilliumWeb
+value_6.Text = "Enum.KeyCode.X"
+value_6.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_6.TextSize = 28.000
+value_6.TextStrokeTransparency = 0.000
+value_6.TextXAlignment = Enum.TextXAlignment.Left
 
 reset_2.Name = "reset"
 reset_2.Parent = TargetedPartToggle
@@ -1222,18 +941,18 @@ GUIVisibilityToggle.TextStrokeTransparency = 0.000
 GUIVisibilityToggle.TextXAlignment = Enum.TextXAlignment.Left
 GUIVisibilityToggle.TextYAlignment = Enum.TextYAlignment.Top
 
-value_17.Name = "value"
-value_17.Parent = GUIVisibilityToggle
-value_17.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_17.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_17.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
-value_17.Size = UDim2.new(0, 260, 0, 28)
-value_17.Font = Enum.Font.TitilliumWeb
-value_17.Text = "none"
-value_17.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_17.TextSize = 28.000
-value_17.TextStrokeTransparency = 0.000
-value_17.TextXAlignment = Enum.TextXAlignment.Left
+value_7.Name = "value"
+value_7.Parent = GUIVisibilityToggle
+value_7.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_7.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_7.Position = UDim2.new(-0.00591715984, 0, 0.490240097, 0)
+value_7.Size = UDim2.new(0, 260, 0, 28)
+value_7.Font = Enum.Font.TitilliumWeb
+value_7.Text = "none"
+value_7.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_7.TextSize = 28.000
+value_7.TextStrokeTransparency = 0.000
+value_7.TextXAlignment = Enum.TextXAlignment.Left
 
 reset_3.Name = "reset"
 reset_3.Parent = GUIVisibilityToggle
@@ -1259,9 +978,415 @@ globals.TextColor3 = Color3.fromRGB(0, 170, 0)
 globals.TextSize = 28.000
 globals.TextWrapped = true
 
+GameSettingsUI.Name = "GameSettingsUI"
+GameSettingsUI.Parent = Aimbot
+GameSettingsUI.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
+GameSettingsUI.BorderColor3 = Color3.fromRGB(0, 170, 0)
+GameSettingsUI.Position = UDim2.new(0.479687512, 0, 0.17027837, 0)
+GameSettingsUI.Size = UDim2.new(0, 338, 0, 342)
+GameSettingsUI.Visible = false
+
+Title_7.Name = "Title"
+Title_7.Parent = GameSettingsUI
+Title_7.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
+Title_7.BorderColor3 = Color3.fromRGB(0, 170, 0)
+Title_7.Position = UDim2.new(0, 0, 6.75937554e-05, 0)
+Title_7.Size = UDim2.new(0, 291, 0, 31)
+Title_7.Font = Enum.Font.TitilliumWeb
+Title_7.Text = "Game Settings"
+Title_7.TextColor3 = Color3.fromRGB(0, 170, 0)
+Title_7.TextSize = 32.000
+Title_7.TextStrokeTransparency = 0.000
+Title_7.TextWrapped = true
+
+X_4.Name = "X"
+X_4.Parent = GameSettingsUI
+X_4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+X_4.BorderColor3 = Color3.fromRGB(0, 170, 0)
+X_4.Position = UDim2.new(0.863685906, 0, 0, 0)
+X_4.Size = UDim2.new(0, 46, 0, 32)
+X_4.Font = Enum.Font.TitilliumWeb
+X_4.Text = "Close"
+X_4.TextColor3 = Color3.fromRGB(170, 0, 0)
+X_4.TextSize = 28.000
+X_4.TextStrokeTransparency = 0.000
+X_4.TextWrapped = true
+
+ScrollingFrame_4.Parent = GameSettingsUI
+ScrollingFrame_4.Active = true
+ScrollingFrame_4.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
+ScrollingFrame_4.BorderColor3 = Color3.fromRGB(0, 170, 0)
+ScrollingFrame_4.Position = UDim2.new(0, 0, 0.0918695107, 0)
+ScrollingFrame_4.Size = UDim2.new(0, 338, 0, 273)
+ScrollingFrame_4.CanvasSize = UDim2.new(0, 0, 0, 0)
+
+UIListLayout_6.Parent = ScrollingFrame_4
+
+AutoTarget.Name = "AutoTarget"
+AutoTarget.Parent = ScrollingFrame_4
+AutoTarget.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+AutoTarget.BackgroundTransparency = 1.000
+AutoTarget.BorderColor3 = Color3.fromRGB(0, 170, 0)
+AutoTarget.BorderSizePixel = 0
+AutoTarget.Size = UDim2.new(0, 195, 0, 63)
+AutoTarget.Font = Enum.Font.TitilliumWeb
+AutoTarget.Text = "Auto-Targeting Enabled:"
+AutoTarget.TextColor3 = Color3.fromRGB(0, 170, 0)
+AutoTarget.TextSize = 28.000
+AutoTarget.TextStrokeTransparency = 0.000
+AutoTarget.TextXAlignment = Enum.TextXAlignment.Left
+AutoTarget.TextYAlignment = Enum.TextYAlignment.Top
+
+value_8.Name = "value"
+value_8.Parent = AutoTarget
+value_8.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_8.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_8.Position = UDim2.new(-0.000219726557, 0, 0.522047281, 0)
+value_8.Size = UDim2.new(0, 326, 0, 28)
+value_8.Font = Enum.Font.TitilliumWeb
+value_8.Text = "true"
+value_8.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_8.TextSize = 28.000
+value_8.TextStrokeTransparency = 0.000
+value_8.TextXAlignment = Enum.TextXAlignment.Left
+
+Target.Name = "Target"
+Target.Parent = ScrollingFrame_4
+Target.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Target.BackgroundTransparency = 1.000
+Target.BorderColor3 = Color3.fromRGB(0, 170, 0)
+Target.BorderSizePixel = 0
+Target.Position = UDim2.new(0, 0, 0.474509805, 0)
+Target.Size = UDim2.new(0, 169, 0, 63)
+Target.Font = Enum.Font.TitilliumWeb
+Target.Text = "Targeted Part:"
+Target.TextColor3 = Color3.fromRGB(0, 170, 0)
+Target.TextSize = 28.000
+Target.TextStrokeTransparency = 0.000
+Target.TextXAlignment = Enum.TextXAlignment.Left
+Target.TextYAlignment = Enum.TextYAlignment.Top
+
+value_9.Name = "value"
+value_9.Parent = Target
+value_9.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_9.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_9.Position = UDim2.new(0, 0, 0.532047331, 0)
+value_9.Size = UDim2.new(0, 325, 0, 28)
+value_9.Font = Enum.Font.TitilliumWeb
+value_9.Text = "Head"
+value_9.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_9.TextSize = 28.000
+value_9.TextStrokeTransparency = 0.000
+value_9.TextXAlignment = Enum.TextXAlignment.Left
+
+WhitelistFriends.Name = "WhitelistFriends"
+WhitelistFriends.Parent = ScrollingFrame_4
+WhitelistFriends.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+WhitelistFriends.BackgroundTransparency = 1.000
+WhitelistFriends.BorderColor3 = Color3.fromRGB(0, 170, 0)
+WhitelistFriends.BorderSizePixel = 0
+WhitelistFriends.Position = UDim2.new(0, 0, 0.752941191, 0)
+WhitelistFriends.Size = UDim2.new(0, 169, 0, 63)
+WhitelistFriends.Font = Enum.Font.TitilliumWeb
+WhitelistFriends.Text = "Whitelist Friends:"
+WhitelistFriends.TextColor3 = Color3.fromRGB(0, 170, 0)
+WhitelistFriends.TextSize = 28.000
+WhitelistFriends.TextStrokeTransparency = 0.000
+WhitelistFriends.TextXAlignment = Enum.TextXAlignment.Left
+WhitelistFriends.TextYAlignment = Enum.TextYAlignment.Top
+
+value_10.Name = "value"
+value_10.Parent = WhitelistFriends
+value_10.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_10.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_10.Position = UDim2.new(0.00591715984, 0, 0.542252779, 0)
+value_10.Size = UDim2.new(0, 324, 0, 28)
+value_10.Font = Enum.Font.TitilliumWeb
+value_10.Text = "false"
+value_10.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_10.TextSize = 28.000
+value_10.TextStrokeTransparency = 0.000
+value_10.TextXAlignment = Enum.TextXAlignment.Left
+
+MaxStuds.Name = "MaxStuds"
+MaxStuds.Parent = ScrollingFrame_4
+MaxStuds.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+MaxStuds.BackgroundTransparency = 1.000
+MaxStuds.BorderColor3 = Color3.fromRGB(0, 170, 0)
+MaxStuds.BorderSizePixel = 0
+MaxStuds.Position = UDim2.new(0, 0, 0.474509805, 0)
+MaxStuds.Size = UDim2.new(0, 169, 0, 63)
+MaxStuds.Font = Enum.Font.TitilliumWeb
+MaxStuds.Text = "Auto-Target max studs:"
+MaxStuds.TextColor3 = Color3.fromRGB(0, 170, 0)
+MaxStuds.TextSize = 28.000
+MaxStuds.TextStrokeTransparency = 0.000
+MaxStuds.TextXAlignment = Enum.TextXAlignment.Left
+MaxStuds.TextYAlignment = Enum.TextYAlignment.Top
+
+value_11.Name = "value"
+value_11.Parent = MaxStuds
+value_11.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_11.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_11.Position = UDim2.new(-0.00595760904, 0, 0.490557462, 0)
+value_11.Size = UDim2.new(0, 326, 0, 28)
+value_11.Font = Enum.Font.TitilliumWeb
+value_11.PlaceholderColor3 = Color3.fromRGB(0, 100, 0)
+value_11.PlaceholderText = "Default is 500"
+value_11.Text = ""
+value_11.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_11.TextSize = 28.000
+value_11.TextStrokeTransparency = 0.000
+value_11.TextXAlignment = Enum.TextXAlignment.Left
+
+OwnTeamWhitelisted.Name = "OwnTeamWhitelisted"
+OwnTeamWhitelisted.Parent = ScrollingFrame_4
+OwnTeamWhitelisted.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+OwnTeamWhitelisted.BackgroundTransparency = 1.000
+OwnTeamWhitelisted.BorderColor3 = Color3.fromRGB(0, 170, 0)
+OwnTeamWhitelisted.BorderSizePixel = 0
+OwnTeamWhitelisted.Position = UDim2.new(0, 0, 0.58431375, 0)
+OwnTeamWhitelisted.Size = UDim2.new(0, 169, 0, 63)
+OwnTeamWhitelisted.Font = Enum.Font.TitilliumWeb
+OwnTeamWhitelisted.Text = "Whitelist own team:"
+OwnTeamWhitelisted.TextColor3 = Color3.fromRGB(0, 170, 0)
+OwnTeamWhitelisted.TextSize = 28.000
+OwnTeamWhitelisted.TextStrokeTransparency = 0.000
+OwnTeamWhitelisted.TextXAlignment = Enum.TextXAlignment.Left
+OwnTeamWhitelisted.TextYAlignment = Enum.TextYAlignment.Top
+
+value_12.Name = "value"
+value_12.Parent = OwnTeamWhitelisted
+value_12.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_12.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_12.Position = UDim2.new(4.0449333e-05, 0, 0.544638038, 0)
+value_12.Size = UDim2.new(0, 324, 0, 28)
+value_12.Font = Enum.Font.TitilliumWeb
+value_12.Text = "true"
+value_12.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_12.TextSize = 28.000
+value_12.TextStrokeTransparency = 0.000
+value_12.TextXAlignment = Enum.TextXAlignment.Left
+
+TargetCloserPlayers.Name = "TargetCloserPlayers"
+TargetCloserPlayers.Parent = ScrollingFrame_4
+TargetCloserPlayers.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TargetCloserPlayers.BackgroundTransparency = 1.000
+TargetCloserPlayers.BorderColor3 = Color3.fromRGB(0, 170, 0)
+TargetCloserPlayers.BorderSizePixel = 0
+TargetCloserPlayers.Position = UDim2.new(0, 0, 0.216439918, 0)
+TargetCloserPlayers.Size = UDim2.new(0, 169, 0, 116)
+TargetCloserPlayers.Font = Enum.Font.TitilliumWeb
+TargetCloserPlayers.Text = "Target Closer Players:"
+TargetCloserPlayers.TextColor3 = Color3.fromRGB(0, 170, 0)
+TargetCloserPlayers.TextSize = 28.000
+TargetCloserPlayers.TextStrokeTransparency = 0.000
+TargetCloserPlayers.TextXAlignment = Enum.TextXAlignment.Left
+TargetCloserPlayers.TextYAlignment = Enum.TextYAlignment.Top
+
+value_13.Name = "value"
+value_13.Parent = TargetCloserPlayers
+value_13.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_13.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_13.Position = UDim2.new(0.00591715984, 0, 0.243091717, 0)
+value_13.Size = UDim2.new(0, 324, 0, 28)
+value_13.Font = Enum.Font.TitilliumWeb
+value_13.Text = "true"
+value_13.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_13.TextSize = 28.000
+value_13.TextStrokeTransparency = 0.000
+value_13.TextXAlignment = Enum.TextXAlignment.Left
+
+About_2.Name = "About"
+About_2.Parent = TargetCloserPlayers
+About_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+About_2.BackgroundTransparency = 1.000
+About_2.BorderColor3 = Color3.fromRGB(0, 170, 0)
+About_2.BorderSizePixel = 0
+About_2.Position = UDim2.new(0.00351909199, 0, 0.502846539, 0)
+About_2.Size = UDim2.new(0, 325, 0, 60)
+About_2.Font = Enum.Font.TitilliumWeb
+About_2.Text = "If enabled, targets can swap with players closer to you. If disabled, targets will only swap if dead. Prioritized players will only swap with other prioritized players."
+About_2.TextColor3 = Color3.fromRGB(0, 170, 0)
+About_2.TextSize = 20.000
+About_2.TextStrokeTransparency = 0.000
+About_2.TextWrapped = true
+
+TargetNPCs.Name = "TargetNPCs"
+TargetNPCs.Parent = ScrollingFrame_4
+TargetNPCs.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TargetNPCs.BackgroundTransparency = 1.000
+TargetNPCs.BorderColor3 = Color3.fromRGB(0, 170, 0)
+TargetNPCs.BorderSizePixel = 0
+TargetNPCs.Position = UDim2.new(-0.00591715984, 0, 0.45863381, 0)
+TargetNPCs.Size = UDim2.new(0, 169, 0, 63)
+TargetNPCs.Font = Enum.Font.TitilliumWeb
+TargetNPCs.Text = "Target NPCs:"
+TargetNPCs.TextColor3 = Color3.fromRGB(0, 170, 0)
+TargetNPCs.TextSize = 28.000
+TargetNPCs.TextStrokeTransparency = 0.000
+TargetNPCs.TextXAlignment = Enum.TextXAlignment.Left
+TargetNPCs.TextYAlignment = Enum.TextYAlignment.Top
+
+value_14.Name = "value"
+value_14.Parent = TargetNPCs
+value_14.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_14.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_14.Position = UDim2.new(0, 0, 0.446332663, 0)
+value_14.Size = UDim2.new(0, 325, 0, 28)
+value_14.Font = Enum.Font.TitilliumWeb
+value_14.Text = "false"
+value_14.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_14.TextSize = 28.000
+value_14.TextStrokeTransparency = 0.000
+value_14.TextXAlignment = Enum.TextXAlignment.Left
+
+IgnorePlayers.Name = "IgnorePlayers"
+IgnorePlayers.Parent = ScrollingFrame_4
+IgnorePlayers.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+IgnorePlayers.BackgroundTransparency = 1.000
+IgnorePlayers.BorderColor3 = Color3.fromRGB(0, 170, 0)
+IgnorePlayers.BorderSizePixel = 0
+IgnorePlayers.Position = UDim2.new(0, 0, 0.247058824, 0)
+IgnorePlayers.Size = UDim2.new(0, 169, 0, 63)
+IgnorePlayers.Font = Enum.Font.TitilliumWeb
+IgnorePlayers.Text = "Ignore Players:"
+IgnorePlayers.TextColor3 = Color3.fromRGB(0, 170, 0)
+IgnorePlayers.TextSize = 28.000
+IgnorePlayers.TextStrokeTransparency = 0.000
+IgnorePlayers.TextXAlignment = Enum.TextXAlignment.Left
+IgnorePlayers.TextYAlignment = Enum.TextYAlignment.Top
+
+value_15.Name = "value"
+value_15.Parent = IgnorePlayers
+value_15.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_15.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_15.Position = UDim2.new(0, 0, 0.54871428, 0)
+value_15.Size = UDim2.new(0, 325, 0, 28)
+value_15.Font = Enum.Font.TitilliumWeb
+value_15.Text = "false"
+value_15.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_15.TextSize = 28.000
+value_15.TextStrokeTransparency = 0.000
+value_15.TextXAlignment = Enum.TextXAlignment.Left
+
+TargetPrioOnly.Name = "TargetPrioOnly"
+TargetPrioOnly.Parent = ScrollingFrame_4
+TargetPrioOnly.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TargetPrioOnly.BackgroundTransparency = 1.000
+TargetPrioOnly.BorderColor3 = Color3.fromRGB(0, 170, 0)
+TargetPrioOnly.BorderSizePixel = 0
+TargetPrioOnly.Size = UDim2.new(0, 195, 0, 63)
+TargetPrioOnly.Font = Enum.Font.TitilliumWeb
+TargetPrioOnly.Text = "Target ONLY prioritized players:"
+TargetPrioOnly.TextColor3 = Color3.fromRGB(0, 170, 0)
+TargetPrioOnly.TextSize = 28.000
+TargetPrioOnly.TextStrokeTransparency = 0.000
+TargetPrioOnly.TextXAlignment = Enum.TextXAlignment.Left
+TargetPrioOnly.TextYAlignment = Enum.TextYAlignment.Top
+
+value_16.Name = "value"
+value_16.Parent = TargetPrioOnly
+value_16.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_16.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_16.Position = UDim2.new(-0.000219726557, 0, 0.522047281, 0)
+value_16.Size = UDim2.new(0, 326, 0, 28)
+value_16.Font = Enum.Font.TitilliumWeb
+value_16.Text = "false"
+value_16.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_16.TextSize = 28.000
+value_16.TextStrokeTransparency = 0.000
+value_16.TextXAlignment = Enum.TextXAlignment.Left
+
+FirstPersonEnabled.Name = "FirstPersonEnabled"
+FirstPersonEnabled.Parent = ScrollingFrame_4
+FirstPersonEnabled.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+FirstPersonEnabled.BackgroundTransparency = 1.000
+FirstPersonEnabled.BorderColor3 = Color3.fromRGB(0, 170, 0)
+FirstPersonEnabled.BorderSizePixel = 0
+FirstPersonEnabled.Position = UDim2.new(0, 0, 0.35958904, 0)
+FirstPersonEnabled.Size = UDim2.new(0, 169, 0, 60)
+FirstPersonEnabled.Font = Enum.Font.TitilliumWeb
+FirstPersonEnabled.Text = "First Person enabled:"
+FirstPersonEnabled.TextColor3 = Color3.fromRGB(0, 170, 0)
+FirstPersonEnabled.TextSize = 28.000
+FirstPersonEnabled.TextStrokeTransparency = 0.000
+FirstPersonEnabled.TextXAlignment = Enum.TextXAlignment.Left
+FirstPersonEnabled.TextYAlignment = Enum.TextYAlignment.Top
+
+value_17.Name = "value"
+value_17.Parent = FirstPersonEnabled
+value_17.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_17.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_17.Position = UDim2.new(0.00591715984, 0, 0.502716422, 0)
+value_17.Size = UDim2.new(0, 337, 0, 28)
+value_17.Font = Enum.Font.TitilliumWeb
+value_17.Text = "true"
+value_17.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_17.TextSize = 28.000
+value_17.TextStrokeTransparency = 0.000
+value_17.TextXAlignment = Enum.TextXAlignment.Left
+
+AimMethod.Name = "AimMethod"
+AimMethod.Parent = ScrollingFrame_4
+AimMethod.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+AimMethod.BackgroundTransparency = 1.000
+AimMethod.BorderColor3 = Color3.fromRGB(0, 170, 0)
+AimMethod.BorderSizePixel = 0
+AimMethod.Position = UDim2.new(0.0115606934, 0, 0.393835604, 0)
+AimMethod.Size = UDim2.new(0, 337, 0, 89)
+AimMethod.Font = Enum.Font.TitilliumWeb
+AimMethod.Text = "Aiming method:"
+AimMethod.TextColor3 = Color3.fromRGB(0, 170, 0)
+AimMethod.TextSize = 28.000
+AimMethod.TextStrokeTransparency = 0.000
+AimMethod.TextXAlignment = Enum.TextXAlignment.Left
+AimMethod.TextYAlignment = Enum.TextYAlignment.Top
+
+value_18.Name = "value"
+value_18.Parent = AimMethod
+value_18.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_18.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_18.Position = UDim2.new(0.00294979103, 0, 0.335594594, 0)
+value_18.Size = UDim2.new(0, 336, 0, 28)
+value_18.Font = Enum.Font.TitilliumWeb
+value_18.Text = "Camera"
+value_18.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_18.TextSize = 28.000
+value_18.TextStrokeTransparency = 0.000
+value_18.TextXAlignment = Enum.TextXAlignment.Left
+
+About_3.Name = "About"
+About_3.Parent = AimMethod
+About_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+About_3.BackgroundTransparency = 1.000
+About_3.BorderColor3 = Color3.fromRGB(0, 170, 0)
+About_3.BorderSizePixel = 0
+About_3.Position = UDim2.new(0.000516534899, 0, 0.650201321, 0)
+About_3.Size = UDim2.new(0, 331, 0, 25)
+About_3.Font = Enum.Font.TitilliumWeb
+About_3.Text = "Less universal, more stable."
+About_3.TextColor3 = Color3.fromRGB(0, 170, 0)
+About_3.TextScaled = true
+About_3.TextSize = 28.000
+About_3.TextStrokeTransparency = 0.000
+About_3.TextWrapped = true
+
+customtargetcons.Name = "customtargetcons"
+customtargetcons.Parent = GameSettingsUI
+customtargetcons.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+customtargetcons.BorderColor3 = Color3.fromRGB(0, 170, 0)
+customtargetcons.Position = UDim2.new(0.136094674, 0, 0.902846038, 0)
+customtargetcons.Size = UDim2.new(0, 234, 0, 28)
+customtargetcons.Font = Enum.Font.TitilliumWeb
+customtargetcons.Text = "Custom Targeting Conditions"
+customtargetcons.TextColor3 = Color3.fromRGB(0, 170, 0)
+customtargetcons.TextSize = 28.000
+customtargetcons.TextStrokeTransparency = 0.000
+
 -- Scripts:
 
-local function JLQM_fake_script() -- Aimbot.LocalScript 
+local function XVNRAAB_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1277,6 +1402,7 @@ local function JLQM_fake_script() -- Aimbot.LocalScript
 	local keys = gui.KeybindsUI
 	local teamui = gui.TeamUI
 	local camera = workspace.CurrentCamera
+	local targetingui = gui.CustomTargetingUI
 	local tcservice = game:GetService("TextChatService")
 	local npcs = {}
 	
@@ -1291,7 +1417,7 @@ local function JLQM_fake_script() -- Aimbot.LocalScript
 	
 	if not RedsAimbot then
 		getgenv().RedsAimbot = {}
-		sendnotif("Aimbot Update", "Re-vamped save file system, data is now stored in workspace/RedsAimbot. Old save files are auto-converted.")
+		sendnotif("Aimbot Update", "Added Custom Targeting Conditions under game settings. Textbox placeholder text is also now darkened.")
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -1303,7 +1429,7 @@ local function JLQM_fake_script() -- Aimbot.LocalScript
 			end
 		end
 	
-		local thread = function(f)
+		local function thread(f)
 	
 			return coroutine.resume(coroutine.create(function()
 				return f()
@@ -1311,7 +1437,7 @@ local function JLQM_fake_script() -- Aimbot.LocalScript
 	
 		end
 	
-		local Changed = function(part, PropertyName, func)
+		local function Changed(part, PropertyName, func)
 			local current = part[PropertyName]
 			local elapsedTime = 0
 			local enabled = true
@@ -1336,13 +1462,13 @@ local function JLQM_fake_script() -- Aimbot.LocalScript
 			return t
 		end
 	
-		local tablecount = function(t)
+		local function tablecount(t)
 			local n = 0
 			for i,v in pairs(t) do n = n + 1 end
 			return n
 		end
 	
-		local TableAdded = function(Table, func)
+		local function TableAdded(Table, func)
 			local count = tablecount(Table)
 			local clone = table.clone(Table)
 			local elapsedTime = 0
@@ -1377,7 +1503,7 @@ local function JLQM_fake_script() -- Aimbot.LocalScript
 		end
 	
 		local reps = {}
-		local TableChanged = function(Table,f,dosubtables,issubtable)
+		local function TableChanged(Table,f,dosubtables,issubtable)
 			local t = {}
 			local funcs = {}
 			if not dosubtables then
@@ -1428,7 +1554,7 @@ local function JLQM_fake_script() -- Aimbot.LocalScript
 		local m = lplr:GetMouse()
 		local RightClick = false
 	
-		local isnpc = function(ins)
+		local function isnpc(ins)
 	
 			for i,v in pairs(GetFamily(ins,true)) do
 				if v:FindFirstChildOfClass("Humanoid") and v:FindFirstChildOfClass("Humanoid").RootPart and not plrs:GetPlayerFromCharacter(v) and table.find(npcs, v) then
@@ -1438,7 +1564,7 @@ local function JLQM_fake_script() -- Aimbot.LocalScript
 	
 		end
 	
-		local valuesort = function(t, func)
+		local function valuesort(t, func)
 			local revert = {}
 			local vals = {}
 	
@@ -1484,6 +1610,7 @@ local function JLQM_fake_script() -- Aimbot.LocalScript
 			newgamestats.TargetPrioOnly = false
 			newgamestats.FirstPersonEnabled = true
 			newgamestats.AimMethod = "Mouse"
+			newgamestats.CustomTargetConditions = {}
 			return newgamestats
 		end
 	
@@ -1535,6 +1662,18 @@ local function JLQM_fake_script() -- Aimbot.LocalScript
 					t[i] = nil
 				end
 			end
+		end
+		
+		local cond = targetingui.ScrollingFrame.Condition
+		local function addGUICondition(index)
+			local txt = getOrCreate(GameStats, "CustomTargetConditions")[index] or ""
+			local clone = cond:Clone()
+			clone.Parent = cond.Parent
+			clone.Visible = true
+			clone.value.Text = txt
+			clone.value.FocusLost:connect(function()
+				getOrCreate(GameStats, "CustomTargetConditions")[index] = clone.value.Text
+			end)
 		end
 	
 		if isfile("RedsAimbot/GlobalStats.lua") then
@@ -1606,7 +1745,7 @@ local function JLQM_fake_script() -- Aimbot.LocalScript
 		TableChanged(GlobalStats, savesettings, true)
 		TableChanged(GameStats, savesettings, true)
 	
-		local addteamframe = function(ttable)
+		local function addteamframe(ttable)
 			local clone = teamui.WhitelistedTeams.whitelistframe:Clone()
 			clone.Parent = teamui.WhitelistedTeams
 			clone.TextLabel.Text = "["..ttable.team2.."] will be ignored when on ["..ttable.team1.."]"
@@ -1636,11 +1775,24 @@ local function JLQM_fake_script() -- Aimbot.LocalScript
 		for i,v in pairs(getOrCreate(GameStats, "Teams")) do
 			addteamframe(v)
 		end
+		local function gameConditionCheck(id, condition)
+			if game.PlaceId == id and not table.find(getOrCreate(GameStats, "CustomTargetConditions"), condition) then
+				table.insert(getOrCreate(GameStats, "CustomTargetConditions"), condition)
+				local msg = "Auto-added targeting condition for game ID "..tostring(id)
+				sendnotif("Custom Targeting", msg)
+				print(msg)
+			end
+		end
+		gameConditionCheck(286090429, "not TargetCharacter:FindFirstChild(\"Cam\")")
+		gameConditionCheck(2788229376, "not TargetCharacter.BodyEffects[\"K.O\"].Value")
+		for i,v in pairs(getOrCreate(GameStats, "CustomTargetConditions")) do
+			addGUICondition(i)
+		end
 	
 		addkeybindtogui(GameStats)
 		addkeybindtogui(GlobalStats)
 	
-		local deselect = function()
+		local function deselect()
 			misc.TargetedCharacter = nil
 		end
 	
@@ -1719,29 +1871,35 @@ local function JLQM_fake_script() -- Aimbot.LocalScript
 				return not table.find(WhitelistedPlrs, plr)
 			end
 		end
+		
+		local function meetsConditions(chr)
+			local conditionsmet = true
+			local plrFromChr = plrs:GetPlayerFromCharacter(chr)
+			for i, condition in pairs(getOrCreate(GameStats, "CustomTargetConditions")) do
+				local scriptSuccess, conditionMet = pcall(function()
+					if condition:find("TargetPlayer") and not plrFromChr then
+						return true -- auto-pass in-case an NPC is being targeted
+					else
+						return loadstring("return "..condition:gsub("TargetCharacter", GetFullName(chr)):gsub("TargetPlayer", GetFullName(plrFromChr)))()
+					end
+				end)
+				conditionsmet = conditionsmet and scriptSuccess and conditionMet
+			end
+			return conditionsmet
+		end
 	
 		local function selectcharacter(chr)
 			if getOrCreate(GlobalStats, "RightClickAim") and RightClick or not getOrCreate(GlobalStats, "RightClickAim") then
 				if misc.IsAimbotOn and not misc.TargetedCharacter and not getOrCreate(GameStats, "TargetCloserPlayers") or getOrCreate(GameStats, "TargetCloserPlayers") and misc.IsAimbotOn then
 					local isprio
 					local isprio2
+					local plrFromChr = plrs:GetPlayerFromCharacter(chr)
 					if misc.TargetedCharacter then
-						local plr = plrs:GetPlayerFromCharacter(misc.TargetedCharacter)
-						local plr2 = plrs:GetPlayerFromCharacter(chr)
-						isprio = table.find(PrioritizedPlrs, plr) ~= nil
-						isprio2 = table.find(PrioritizedPlrs, plr2) ~= nil
+						isprio = table.find(PrioritizedPlrs, plrs:GetPlayerFromCharacter(misc.TargetedCharacter)) ~= nil
+						isprio2 = table.find(PrioritizedPlrs, plrFromChr) ~= nil
 					end
-					if not isprio or isprio2 then	
+					if (not isprio or isprio2) and meetsConditions(chr) then	
 						misc.TargetedCharacter = chr
-						if game.PlaceId == 286090429 then
-							chr.ChildAdded:connect(function(c)
-								if c.Name == "Cam" and misc.TargetedCharacter == chr then
-									chr.Humanoid.Health = 0
-									chr.ChildRemoved:Wait()
-									chr.Humanoid.Health = 100
-								end
-							end)
-						end
 					end
 				end
 			end
@@ -1763,9 +1921,9 @@ local function JLQM_fake_script() -- Aimbot.LocalScript
 		end
 	
 		local chr = lplr.Character
+		local Torso
 	
-		repeat task.wait() until chr:FindFirstChild("Torso") or chr:FindFirstChild("UpperTorso")
-		local Torso = chr:FindFirstChild("Torso") or chr:FindFirstChild("UpperTorso")
+		repeat Torso = chr:FindFirstChild("Torso") or chr:FindFirstChild("UpperTorso") task.wait() until Torso
 	
 		game:GetService("UserInputService").InputBegan:connect(function(key,processed)
 			if processed then return end
@@ -1824,6 +1982,7 @@ local function JLQM_fake_script() -- Aimbot.LocalScript
 			else
 				setOrCreate(GameStats, "Target", "Head")
 			end
+			gamesettings.Target.value.Text = getOrCreate(GameStats, "Target")
 		end)
 	
 		Changed(gamesettings.MaxStuds.value, "Text", function(n)
@@ -2030,6 +2189,9 @@ local function JLQM_fake_script() -- Aimbot.LocalScript
 					else
 						camera.CFrame = CFrame.new(camera.CFrame.Position, partpos)
 					end
+				end
+				if not meetsConditions(misc.TargetedCharacter) then
+					deselect()
 				end
 			else
 				game:GetService("UserInputService").MouseDeltaSensitivity = 1
@@ -2303,6 +2465,26 @@ local function JLQM_fake_script() -- Aimbot.LocalScript
 				end
 			end
 		end)
+		
+		targetingui.add.Activated:connect(function()
+			addGUICondition(#getOrCreate(GameStats, "CustomTargetConditions")+1)
+		end)
+		
+		targetingui.back.Activated:connect(function()
+			targetingui.Visible = false
+			games.Visible = true
+		end)
+		
+		targetingui.about.Activated:connect(function()
+			local abouttxt = "When all of the conditions in this game return true, you may target someone. If any of these return false, you can't.\nKeywords to refer to your targets character/player is: TargetCharacter and TargetPlayer."
+			print(abouttxt)
+			sendnotif("Custom Targeting", abouttxt)
+		end)
+		
+		games.customtargetcons.Activated:connect(function()
+			targetingui.Visible = true
+			games.Visible = false
+		end)
 	
 	else
 		sendnotif("Aimbot", "You've already executed this. Deleting clone.")
@@ -2310,4 +2492,4 @@ local function JLQM_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(JLQM_fake_script)()
+coroutine.wrap(XVNRAAB_fake_script)()
