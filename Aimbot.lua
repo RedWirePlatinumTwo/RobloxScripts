@@ -1386,7 +1386,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function XVNRAAB_fake_script() -- Aimbot.LocalScript 
+local function GLZHG_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1411,7 +1411,7 @@ local function XVNRAAB_fake_script() -- Aimbot.LocalScript
 		if tcservice.ChatVersion == Enum.ChatVersion.LegacyChatService then
 			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",({["Text"] = text}))
 		else
-			tcservice.TextChannels.RBXGeneral:DisplaySystemMessage(text)
+			tcservice.TextChannels:FindFirstChildOfClass("TextChannel"):DisplaySystemMessage(text)
 		end
 	end
 	
@@ -1884,6 +1884,9 @@ local function XVNRAAB_fake_script() -- Aimbot.LocalScript
 					end
 				end)
 				conditionsmet = conditionsmet and scriptSuccess and conditionMet
+				if not conditionsmet then
+					break
+				end
 			end
 			return conditionsmet
 		end
@@ -2492,4 +2495,4 @@ local function XVNRAAB_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(XVNRAAB_fake_script)()
+coroutine.wrap(GLZHG_fake_script)()
