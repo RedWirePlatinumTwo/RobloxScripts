@@ -1877,8 +1877,8 @@ local function GLZHG_fake_script() -- Aimbot.LocalScript
 			local plrFromChr = plrs:GetPlayerFromCharacter(chr)
 			for i, condition in pairs(getOrCreate(GameStats, "CustomTargetConditions")) do
 				local scriptSuccess, conditionMet = pcall(function()
-					if condition:find("TargetPlayer") and not plrFromChr then
-						return true -- auto-pass in-case an NPC is being targeted
+					if condition:find("TargetPlayer") and not plrFromChr or condition == "" then
+						return true
 					else
 						return loadstring("return "..condition:gsub("TargetCharacter", GetFullName(chr)):gsub("TargetPlayer", GetFullName(plrFromChr)))()
 					end
