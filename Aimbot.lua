@@ -2426,11 +2426,7 @@ local function WISTFH_fake_script() -- Aimbot.LocalScript
 	
 			for i,v in pairs(wlui.WhitelistedInstances:GetChildren()) do
 				if v.ClassName == "Frame" and v ~= wlframe then
-					if v.TextLabel.Text:lower():match(txt:lower()) then
-						v.Visible = true
-					else
-						v.Visible = false
-					end
+					v.Visible = v.TextLabel.Text:lower():match(txt:lower())
 				end
 			end
 	
