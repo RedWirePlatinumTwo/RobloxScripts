@@ -1424,7 +1424,7 @@ local function WISTFH_fake_script() -- Aimbot.LocalScript
 				v.Active = true
 			end
 			if v.ClassName == "ScrollingFrame" then
-				v.AutomaticCanvasSize = 2
+				v.AutomaticCanvasSize = Enum.AutomaticSize.Y
 				v.ScrollBarImageColor3 = Color3.new(0,0.66,0)
 			end
 		end
