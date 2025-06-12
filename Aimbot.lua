@@ -1386,7 +1386,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function GLZHG_fake_script() -- Aimbot.LocalScript 
+local function WISTFH_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1417,7 +1417,7 @@ local function GLZHG_fake_script() -- Aimbot.LocalScript
 	
 	if not RedsAimbot then
 		getgenv().RedsAimbot = {}
-		sendnotif("Aimbot Update", "Added Custom Targeting Conditions under game settings. Textbox placeholder text is also now darkened.")
+		sendnotif("Aimbot Update", "Added Custom Targeting Conditions under game settings. Textbox placeholder text is also now darkened. (Also improved targeting for custom targeting conditions)")
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -1901,7 +1901,7 @@ local function GLZHG_fake_script() -- Aimbot.LocalScript
 						isprio = table.find(PrioritizedPlrs, plrs:GetPlayerFromCharacter(misc.TargetedCharacter)) ~= nil
 						isprio2 = table.find(PrioritizedPlrs, plrFromChr) ~= nil
 					end
-					if (not isprio or isprio2) and meetsConditions(chr) then	
+					if not isprio or isprio2 then	
 						misc.TargetedCharacter = chr
 					end
 				end
@@ -1913,7 +1913,7 @@ local function GLZHG_fake_script() -- Aimbot.LocalScript
 			if player.Character then
 				humanoid = player.Character:FindFirstChildOfClass("Humanoid")
 			end
-			if player ~= lplr and humanoid and IsNotWhitelisted(player) and humanoid.Health ~= 0 then
+			if player ~= lplr and humanoid and IsNotWhitelisted(player) and humanoid.Health > 0 then
 				selectcharacter(player.Character)
 			end
 		end
@@ -2204,7 +2204,7 @@ local function GLZHG_fake_script() -- Aimbot.LocalScript
 				if not getOrCreate(GameStats, "IgnorePlayers") then
 					for i,v in pairs(GetFamily(m.Target)) do
 						local plr = game:GetService("Players"):FindFirstChild(v.Name)
-						if plr and plr.Character then
+						if plr and plr.Character and meetsConditions(plr.Character) then
 							targetplayer(plr)
 							break
 						end
@@ -2213,7 +2213,7 @@ local function GLZHG_fake_script() -- Aimbot.LocalScript
 	
 				if getOrCreate(GameStats, "TargetNPCs") then
 					local npc = isnpc(m.Target)
-					if npc and npc.Humanoid.Health > 0 then
+					if npc and npc.Humanoid.Health > 0 and meetsConditions(npc) then
 						selectcharacter(npc)
 					end
 				end
@@ -2226,7 +2226,7 @@ local function GLZHG_fake_script() -- Aimbot.LocalScript
 				local function addchr(v)
 					local player = plrs:GetPlayerFromCharacter(v)
 					if player and IsNotWhitelisted(player) or not player then
-						if v:FindFirstChildOfClass("Humanoid") and v:FindFirstChildOfClass("Humanoid").Health ~= 0 then
+						if v:FindFirstChildOfClass("Humanoid") and v:FindFirstChildOfClass("Humanoid").Health > 0 and meetsConditions(v) then
 							local targpart = gettargetpart(v)
 							if targpart then
 								local pos = math.floor(lplr:DistanceFromCharacter(targpart.Position))
@@ -2495,4 +2495,4 @@ local function GLZHG_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(GLZHG_fake_script)()
+coroutine.wrap(WISTFH_fake_script)()
