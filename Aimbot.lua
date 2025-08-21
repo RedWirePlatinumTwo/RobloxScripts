@@ -1018,6 +1018,7 @@ ScrollingFrame_4.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
 ScrollingFrame_4.BorderColor3 = Color3.fromRGB(0, 170, 0)
 ScrollingFrame_4.Position = UDim2.new(0, 0, 0.0918695107, 0)
 ScrollingFrame_4.Size = UDim2.new(0, 338, 0, 273)
+ScrollingFrame_4.SizeConstraint = Enum.SizeConstraint.RelativeYY
 ScrollingFrame_4.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 UIListLayout_6.Parent = ScrollingFrame_4
@@ -1174,8 +1175,8 @@ TargetCloserPlayers.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 TargetCloserPlayers.BackgroundTransparency = 1.000
 TargetCloserPlayers.BorderColor3 = Color3.fromRGB(0, 170, 0)
 TargetCloserPlayers.BorderSizePixel = 0
-TargetCloserPlayers.Position = UDim2.new(0, 0, 0.216439918, 0)
-TargetCloserPlayers.Size = UDim2.new(0, 169, 0, 116)
+TargetCloserPlayers.Position = UDim2.new(0, 0, 0.161172166, 0)
+TargetCloserPlayers.Size = UDim2.new(0, 169, 0, 137)
 TargetCloserPlayers.Font = Enum.Font.TitilliumWeb
 TargetCloserPlayers.Text = "Target Closer Players:"
 TargetCloserPlayers.TextColor3 = Color3.fromRGB(0, 170, 0)
@@ -1203,10 +1204,10 @@ About_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 About_2.BackgroundTransparency = 1.000
 About_2.BorderColor3 = Color3.fromRGB(0, 170, 0)
 About_2.BorderSizePixel = 0
-About_2.Position = UDim2.new(0.00351909199, 0, 0.502846539, 0)
-About_2.Size = UDim2.new(0, 325, 0, 60)
+About_2.Position = UDim2.new(-0.00239806762, 0, 0.444452435, 0)
+About_2.Size = UDim2.new(0, 325, 0, 85)
 About_2.Font = Enum.Font.TitilliumWeb
-About_2.Text = "If enabled, targets can swap with players closer to you. If disabled, targets will only swap if dead. Prioritized players will only swap with other prioritized players."
+About_2.Text = "If enabled, targets can swap with players closer to you. If disabled, targets will only swap if dead (Or if any custom targeting condition returns false). Prioritized players will only swap with other prioritized players."
 About_2.TextColor3 = Color3.fromRGB(0, 170, 0)
 About_2.TextSize = 20.000
 About_2.TextStrokeTransparency = 0.000
@@ -1386,7 +1387,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function WISTFH_fake_script() -- Aimbot.LocalScript 
+local function YRXZIK_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1417,7 +1418,7 @@ local function WISTFH_fake_script() -- Aimbot.LocalScript
 	
 	if not RedsAimbot then
 		getgenv().RedsAimbot = {}
-		sendnotif("Aimbot Update", "Added Custom Targeting Conditions under game settings. Textbox placeholder text is also now darkened. (Also improved targeting for custom targeting conditions)")
+		sendnotif("Aimbot Update", "Having target prioritized only but not having anyone prioritized will have aimbot target like normal + other minor changes.")
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -1662,6 +1663,11 @@ local function WISTFH_fake_script() -- Aimbot.LocalScript
 					t[i] = nil
 				end
 			end
+		end
+		
+		local function priorityCheck(plr)
+			local priorOnly = getOrCreate(GameStats, "TargetPrioOnly")
+			return (table.find(PrioritizedPlrs, plr) and priorOnly) or not priorOnly or #PrioritizedPlrs == 0
 		end
 		
 		local cond = targetingui.ScrollingFrame.Condition
@@ -2204,7 +2210,7 @@ local function WISTFH_fake_script() -- Aimbot.LocalScript
 				if not getOrCreate(GameStats, "IgnorePlayers") then
 					for i,v in pairs(GetFamily(m.Target)) do
 						local plr = game:GetService("Players"):FindFirstChild(v.Name)
-						if plr and plr.Character and meetsConditions(plr.Character) then
+						if plr and plr.Character and meetsConditions(plr.Character) and priorityCheck(plr) then
 							targetplayer(plr)
 							break
 						end
@@ -2242,7 +2248,7 @@ local function WISTFH_fake_script() -- Aimbot.LocalScript
 					end
 				end
 	
-				if getOrCreate(GameStats, "TargetNPCs") and not getOrCreate(GameStats, "TargetPrioOnly") then
+				if getOrCreate(GameStats, "TargetNPCs") and (not getOrCreate(GameStats, "TargetPrioOnly") or #PrioritizedPlrs == 0) then
 					for i, npc in pairs(npcs) do
 						addchr(npc)
 					end
@@ -2268,10 +2274,8 @@ local function WISTFH_fake_script() -- Aimbot.LocalScript
 	
 				valuesort(table1, function(Char, position)
 					local plr = plrs:GetPlayerFromCharacter(Char)
-					if plr then
-						if table.find(PrioritizedPlrs, plr) and getOrCreate(GameStats, "TargetPrioOnly") or not getOrCreate(GameStats, "TargetPrioOnly") then
-							targetplayer(plr)
-						end
+					if plr and priorityCheck(plr) then
+						targetplayer(plr)
 					else
 						selectcharacter(Char)
 					end
@@ -2491,4 +2495,4 @@ local function WISTFH_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(WISTFH_fake_script)()
+coroutine.wrap(YRXZIK_fake_script)()
