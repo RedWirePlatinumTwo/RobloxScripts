@@ -1408,6 +1408,7 @@ local function YRXZIK_fake_script() -- Aimbot.LocalScript
 	local npcs = {}
 	
 	local function sendnotif(title, text)
+		print(title..":", text)
 		text = "<font color = '#"..MainFrame.BorderColor3:ToHex().."'>["..title.."]: "..text.."</font>"
 		if tcservice.ChatVersion == Enum.ChatVersion.LegacyChatService then
 			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",({["Text"] = text}))
