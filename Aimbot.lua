@@ -1787,7 +1787,6 @@ local function YRXZIK_fake_script() -- Aimbot.LocalScript
 				table.insert(getOrCreate(GameStats, "CustomTargetConditions"), condition)
 				local msg = "Auto-added targeting condition for game ID "..tostring(id)
 				sendnotif("Custom Targeting", msg)
-				print(msg)
 			end
 		end
 		gameConditionCheck(286090429, "not TargetCharacter:FindFirstChild(\"Cam\")")
