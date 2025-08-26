@@ -1410,7 +1410,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function ADVEAPO_fake_script() -- Aimbot.LocalScript 
+local function HRMRPPZ_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1444,9 +1444,10 @@ local function ADVEAPO_fake_script() -- Aimbot.LocalScript
 	if not RedsAimbot then
 		getgenv().RedsAimbot = {}
 		sendnotif("Aimbot Update", [[Changes 8/26/25:
-		- Removed RightClickAim
-		- Improved Keybind system. Keybinds can now have 2 adjustable keys where both need to be pressed, and an option for whether it should be toggleable or held to activate.
-		- Slightly changed the player list in the Manager UI. No longer says "DisplayName: " as that was pretty useless.]])
+	- Removed RightClickAim
+	- Improved Keybind system. Keybinds can now have 2 adjustable keys where both need to be pressed, and an option for whether it should be toggleable or held to activate.
+	- Slightly changed the player list in the Manager UI. No longer says "DisplayName: " as that was pretty useless.
+	- Fixed Targeting Prioritized Plrs *only* not working properly as of adding priorityCheck to the script]])
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -1616,6 +1617,8 @@ local function ADVEAPO_fake_script() -- Aimbot.LocalScript
 		local teams = game:GetService("Teams")
 		local WhitelistedPlrs = {}
 		local PrioritizedPlrs = {}
+		local WhitelistedPlrsOld = {}
+		local PrioritizedPlrsOld = {}
 		local misc = {}
 		misc.IsAimbotOn = false
 		misc.TargetedCharacter = nil
@@ -2343,7 +2346,7 @@ local function ADVEAPO_fake_script() -- Aimbot.LocalScript
 					end
 				end
 	
-				if #PrioritizedPlrsOnScreen ~= 0 then
+				if #PrioritizedPlrsOnScreen ~= 0 and ((#PrioritizedPlrs ~= 0 and getOrCreate(GameStats, "TargetPrioOnly")) or not getOrCreate(GameStats, "TargetPrioOnly")) then
 	
 					for chr, pos in pairs(table1) do
 						if not table.find(PrioritizedPlrsOnScreen, chr) then
@@ -2377,6 +2380,16 @@ local function ADVEAPO_fake_script() -- Aimbot.LocalScript
 		plrs.PlayerRemoving:connect(function(plr)
 			if plr.Character and plr.Character == misc.TargetedCharacter then
 				deselect()
+			end
+			local wasPrior = table.find(PrioritizedPlrs, plr)
+			local wasWL = table.find(WhitelistedPlrs, plr)
+			if wasPrior then
+				table.remove(PrioritizedPlrs, wasPrior)
+				table.insert(PrioritizedPlrsOld, plr.Name)
+			end
+			if wasWL then
+				table.remove(WhitelistedPlrs, wasWL)
+				table.insert(WhitelistedPlrsOld, plr.Name)
 			end
 		end)
 	
@@ -2532,21 +2545,15 @@ local function ADVEAPO_fake_script() -- Aimbot.LocalScript
 		end)
 	
 		plrs.PlayerAdded:connect(function(plr)
-			for i,v in pairs(WhitelistedPlrs) do
-				if v.Name == plr.Name then
-					local old = table.find(WhitelistedPlrs, v)
-					table.remove(WhitelistedPlrs, old)
-					table.insert(WhitelistedPlrs, plr)
-					break
-				end
+			local oldWL = table.find(WhitelistedPlrsOld, plr.Name)
+			local oldPrior = table.find(PrioritizedPlrsOld, plr.Name)
+			if oldWL then
+				table.remove(WhitelistedPlrsOld, oldWL)
+				table.insert(WhitelistedPlrs, plr)
 			end
-			for i,v in pairs(PrioritizedPlrs) do
-				if v.Name == plr.Name then
-					local old = table.find(PrioritizedPlrs, v)
-					table.remove(PrioritizedPlrs, old)
-					table.insert(PrioritizedPlrs, plr)
-					break
-				end
+			if oldPrior then
+				table.remove(PrioritizedPlrsOld, oldPrior)
+				table.insert(PrioritizedPlrs, plr)
 			end
 		end)
 		
@@ -2576,4 +2583,4 @@ local function ADVEAPO_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(ADVEAPO_fake_script)()
+coroutine.wrap(HRMRPPZ_fake_script)()
