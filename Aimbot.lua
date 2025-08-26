@@ -2346,7 +2346,7 @@ local function HRMRPPZ_fake_script() -- Aimbot.LocalScript
 					end
 				end
 	
-				if #PrioritizedPlrsOnScreen ~= 0 and ((#PrioritizedPlrs ~= 0 and getOrCreate(GameStats, "TargetPrioOnly")) or not getOrCreate(GameStats, "TargetPrioOnly")) then
+				if #PrioritizedPlrsOnScreen ~= 0 or (#PrioritizedPlrs ~= 0 and getOrCreate(GameStats, "TargetPrioOnly")) then
 	
 					for chr, pos in pairs(table1) do
 						if not table.find(PrioritizedPlrsOnScreen, chr) then
