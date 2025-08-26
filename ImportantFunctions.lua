@@ -234,7 +234,7 @@ getgenv().Format = function(var, tname, ttsargs, IsInternalTable)
 			if var == math.huge then
 				st = "math.huge"
 			elseif var == math.huge * -1 then
-				st = "math.huge * -1"
+				st = "-math.huge"
 			else
 				st = tostring(var)
 			end
