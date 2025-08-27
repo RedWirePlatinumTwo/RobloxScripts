@@ -108,6 +108,8 @@ local value_13 = Instance.new("TextButton")
 local AimMethod = Instance.new("TextLabel")
 local value_14 = Instance.new("TextButton")
 local About_3 = Instance.new("TextLabel")
+local TargetOffScreen = Instance.new("TextLabel")
+local value_15 = Instance.new("TextButton")
 local customtargetcons = Instance.new("TextButton")
 
 --Properties:
@@ -1396,6 +1398,34 @@ About_3.TextSize = 28.000
 About_3.TextStrokeTransparency = 0.000
 About_3.TextWrapped = true
 
+TargetOffScreen.Name = "TargetOffScreen"
+TargetOffScreen.Parent = ScrollingFrame_4
+TargetOffScreen.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TargetOffScreen.BackgroundTransparency = 1.000
+TargetOffScreen.BorderColor3 = Color3.fromRGB(0, 170, 0)
+TargetOffScreen.BorderSizePixel = 0
+TargetOffScreen.Size = UDim2.new(0, 195, 0, 63)
+TargetOffScreen.Font = Enum.Font.TitilliumWeb
+TargetOffScreen.Text = "Auto-Targeting Enabled:"
+TargetOffScreen.TextColor3 = Color3.fromRGB(0, 170, 0)
+TargetOffScreen.TextSize = 28.000
+TargetOffScreen.TextStrokeTransparency = 0.000
+TargetOffScreen.TextXAlignment = Enum.TextXAlignment.Left
+TargetOffScreen.TextYAlignment = Enum.TextYAlignment.Top
+
+value_15.Name = "value"
+value_15.Parent = TargetOffScreen
+value_15.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_15.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_15.Position = UDim2.new(-0.000219726557, 0, 0.522047281, 0)
+value_15.Size = UDim2.new(0, 326, 0, 28)
+value_15.Font = Enum.Font.TitilliumWeb
+value_15.Text = "false"
+value_15.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_15.TextSize = 28.000
+value_15.TextStrokeTransparency = 0.000
+value_15.TextXAlignment = Enum.TextXAlignment.Left
+
 customtargetcons.Name = "customtargetcons"
 customtargetcons.Parent = GameSettingsUI
 customtargetcons.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -1410,7 +1440,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function HRMRPPZ_fake_script() -- Aimbot.LocalScript 
+local function SMYYF_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1443,11 +1473,8 @@ local function HRMRPPZ_fake_script() -- Aimbot.LocalScript
 	
 	if not RedsAimbot then
 		getgenv().RedsAimbot = {}
-		sendnotif("Aimbot Update", [[Changes 8/26/25:
-	- Removed RightClickAim
-	- Improved Keybind system. Keybinds can now have 2 adjustable keys where both need to be pressed, and an option for whether it should be toggleable or held to activate.
-	- Slightly changed the player list in the Manager UI. No longer says "DisplayName: " as that was pretty useless.
-	- Fixed Targeting Prioritized Plrs *only* not working properly as of adding priorityCheck to the script]])
+		sendnotif("Aimbot Update", [[Changes 8/27/25:
+	- Addded TargetOffScreen setting in game settings. False by default.]])
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -1642,6 +1669,7 @@ local function HRMRPPZ_fake_script() -- Aimbot.LocalScript
 			newgamestats.FirstPersonEnabled = true
 			newgamestats.AimMethod = "Mouse"
 			newgamestats.CustomTargetConditions = {}
+			newgamestats.TargetOffScreen = false
 			return newgamestats
 		end
 	
@@ -2321,7 +2349,7 @@ local function HRMRPPZ_fake_script() -- Aimbot.LocalScript
 							if targpart then
 								local pos = math.floor(lplr:DistanceFromCharacter(targpart.Position))
 								local _, onscreen = camera:WorldToScreenPoint(targpart.Position)
-								if onscreen and pos < getOrCreate(GameStats, "MaxStuds") then
+								if (onscreen or getOrCreate(GameStats, "TargetOffScreen")) and pos < getOrCreate(GameStats, "MaxStuds") then
 									table1[v] = pos
 									if table.find(PrioritizedPlrs, plrs:GetPlayerFromCharacter(v)) then
 										table.insert(PrioritizedPlrsOnScreen, v)
@@ -2583,4 +2611,4 @@ local function HRMRPPZ_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(HRMRPPZ_fake_script)()
+coroutine.wrap(SMYYF_fake_script)()
