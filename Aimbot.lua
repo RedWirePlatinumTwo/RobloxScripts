@@ -1440,7 +1440,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function SMYYF_fake_script() -- Aimbot.LocalScript 
+local function PJWNG_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -2494,10 +2494,14 @@ local function SMYYF_fake_script() -- Aimbot.LocalScript
 					button = clone.WhitelistToggle
 				end
 	
-				if ins.ClassName == "Player" and getOrCreate(GameStats, "WhitelistFriends") and lplr:IsFriendsWith(ins.UserId) and Table == WhitelistedPlrs then
+				if getOrCreate(GameStats, "WhitelistFriends") and lplr:IsFriendsWith(ins.UserId) and Table == WhitelistedPlrs and not table.find(Table, ins) then
 					button.TextColor3 = Color3.new(0,0.66,0)
 					button.Text = "Yes"
-					table.insert(WhitelistedPlrs, ins)
+					table.insert(Table, ins)
+				end
+				if table.find(Table, ins) and Table == PrioritizedPlrs then
+					button.TextColor3 = Color3.new(0,0.66,0)
+					button.Text = "Yes"
 				end
 	
 				button.Activated:connect(function()
@@ -2533,10 +2537,10 @@ local function SMYYF_fake_script() -- Aimbot.LocalScript
 			togglefunc(WhitelistedPlrs)
 			togglefunc(PrioritizedPlrs)
 	
-			coroutine.resume(coroutine.create(function()
+			thread(function()
 				repeat task.wait() until not game:GetService("Players"):FindFirstChild(ins.Name)
 				clone:Destroy()
-			end))
+			end)
 	
 		end
 	
@@ -2545,8 +2549,6 @@ local function SMYYF_fake_script() -- Aimbot.LocalScript
 				AddtoList(plr)
 			end
 		end
-	
-		plrs.PlayerAdded:connect(AddtoList)
 	
 		Changed(wlui.searchbar, "Text", function(txt)
 	
@@ -2583,6 +2585,7 @@ local function SMYYF_fake_script() -- Aimbot.LocalScript
 				table.remove(PrioritizedPlrsOld, oldPrior)
 				table.insert(PrioritizedPlrs, plr)
 			end
+			AddtoList(plr)
 		end)
 		
 		targetingui.add.Activated:connect(function()
@@ -2611,4 +2614,4 @@ local function SMYYF_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(SMYYF_fake_script)()
+coroutine.wrap(PJWNG_fake_script)()
