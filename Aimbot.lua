@@ -1440,7 +1440,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function PJWNG_fake_script() -- Aimbot.LocalScript 
+local function PAYSSN_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -2054,7 +2054,7 @@ local function PJWNG_fake_script() -- Aimbot.LocalScript
 	
 		for i,v in pairs(gamesettings:GetChildren()) do
 			if v:FindFirstChild("value") then
-				if type(GameStats[v.Name]) == "boolean" then
+				if type(getOrCreate(GameStats, v.Name)) == "boolean" then
 					v.value.Activated:connect(function()
 						GameStats[v.Name] = not GameStats[v.Name]
 					end)
@@ -2083,7 +2083,7 @@ local function PJWNG_fake_script() -- Aimbot.LocalScript
 		end)
 	
 		for i,v in pairs(globalsettings:GetChildren()) do
-			if type(GlobalStats[v.Name]) == "boolean" then
+			if type(getOrCreate(GlobalStats, v.Name)) == "boolean" then
 				v.value.Activated:connect(function()
 					GlobalStats[v.Name] = not GlobalStats[v.Name]
 				end)
@@ -2614,4 +2614,4 @@ local function PJWNG_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(PJWNG_fake_script)()
+coroutine.wrap(PAYSSN_fake_script)()
