@@ -1470,7 +1470,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function EZBWQI_fake_script() -- Aimbot.LocalScript 
+local function SZPULDE_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -2268,11 +2268,29 @@ local function EZBWQI_fake_script() -- Aimbot.LocalScript
 			end)
 		end
 	
+		local queryindex
+		local querynewindex
+		local queriedParts = {}
+		queryindex = hookmetamethod(game, "__index", function(self, name)
+			if name == "CanQuery" and self:IsA("BasePart") and not checkcaller() and queriedParts[self] ~= nil then
+				return queriedParts[self]
+			else
+				return queryindex(self, name)
+			end
+		end)
+		querynewindex = hookmetamethod(game, "__newindex", function(self, val, newval)
+			if val == "CanQuery" and self:IsA("BasePart") and not checkcaller() and queriedParts[self] ~= nil and type(newval) == "boolean" then
+				queriedParts[self] = newval
+			else
+				return querynewindex(self, val, newval)
+			end
+		end)
 		for i,v in pairs(workspace:GetDescendants()) do
 			if v.ClassName == "Humanoid" and v.RootPart and not plrs:GetPlayerFromCharacter(v.Parent) and not table.find(npcs, v.Parent) and v.Health > 0 then
 				isactivenpc(v.Parent)
 			end
 			if v:IsA("BasePart") and not v.CanCollide then
+				queriedParts[v] = true
 				v.CanQuery = false
 			end
 		end
@@ -2285,6 +2303,7 @@ local function EZBWQI_fake_script() -- Aimbot.LocalScript
 				end
 			end
 			if v:IsA("BasePart") and not v.CanCollide then
+				queriedParts[v] = true
 				v.CanQuery = false
 			end
 		end)
@@ -2670,4 +2689,4 @@ local function EZBWQI_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(EZBWQI_fake_script)()
+coroutine.wrap(SZPULDE_fake_script)()
