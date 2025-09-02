@@ -63,7 +63,7 @@ local loadoutname = Instance.new("TextBox")
 --Properties:
 
 JailbreakGUI.Name = "JailbreakGUI"
-JailbreakGUI.Parent = game:GetService("CoreGui")
+JailbreakGUI.Parent = game.CoreGui
 JailbreakGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
@@ -750,9 +750,9 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function BZWQK_fake_script() -- JailbreakGUI.LocalScript 
+local function JRNHRT_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
-	
+
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
 	mainframe.UIGridLayout.SortOrder = 0
 	local aframe = script.Parent.AutosortFrame
@@ -809,7 +809,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 		end))
 	end
 	local TableAdded = function(Table, func)
-	    local count = tablecount(Table)
+		local count = tablecount(Table)
 		local clone = table.clone(Table)
 		local elapsedTime = 0
 		local enabled = true
@@ -818,12 +818,12 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 			enabled = false
 		end
 		t.stop = t.Stop
-		
-	    thread(function()
-	        while enabled do
-	            if tablecount(Table) ~= count then
+	
+		thread(function()
+			while enabled do
+				if tablecount(Table) ~= count then
 					if tablecount(Table) > count then
-						
+	
 						for i,v in pairs(Table) do
 							if clone[i] == nil then
 								thread(function()
@@ -838,7 +838,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 				end
 				elapsedTime = elapsedTime + task.wait()
 			end
-	    end)
+		end)
 		return t
 	end
 	
@@ -893,7 +893,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 			bool = not bool
 			if bool then
 				box.TextColor3 = Color3.fromRGB(0,170,0)
-				box.Text = "âœ“"
+				box.Text = "✓"
 			else
 				box.TextColor3 = Color3.fromRGB(170,0,0)
 				box.Text = "x"
@@ -967,7 +967,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 			local bank = workspace.Banks:FindFirstChildOfClass("Model")
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 			lplr.CameraMaxZoomDistance = 200
-			
+	
 			thread(function()
 				while true do
 					for i, plr in pairs(minimap:GetChildren()) do
@@ -982,7 +982,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 					c:WaitForChild("Map"):WaitForChild("Container"):WaitForChild("Points")
 					local minimap2 = c.Map.Container.Points
 					local destroyed = false
-					
+	
 					thread(function()
 						while not destroyed do
 							for i,v in pairs(minimap2:GetChildren()) do
@@ -993,7 +993,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 							task.wait()
 						end
 					end)
-					
+	
 					local removed
 					removed = lplr.PlayerGui.AppUI.ChildRemoved:connect(function(c2)
 						if c == c2 then
@@ -1005,7 +1005,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 			end)
 	
 			local plrgui = lplr.PlayerGui
-			
+	
 			runservice.RenderStepped:connect(function()
 				if lplr.Character and lplr.Character:FindFirstChild("Humanoid") then
 					if lplr.Character.Humanoid.WalkSpeed == 0 then
@@ -1093,7 +1093,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 						end
 					end)
 				end)
-				
+	
 				Changed(misc, "TargetedCharacter", function(chr)
 					if chr then
 						local change
@@ -1214,7 +1214,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 						local distancefunc = runservice.RenderStepped:connect(function()
 							TextButton.Text = "Crate | Distance: "..FormatNumber(math.floor(lplr:DistanceFromCharacter(Airdrop.Position)))
 						end)
-						
+	
 						coroutine.resume(coroutine.create(function()
 							repeat task.wait() until GetFamily(child)[1] ~= game
 							table.remove(bbguis, table.find(bbguis, BillboardGui))
@@ -1258,7 +1258,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 				g.ReloadTime = 0
 				g.FuseTime = 0.8
 			end)
-			
+	
 			singleclick(mainframe.modguns, function()
 				local m = require(rstorage.Inventory.InventoryItemSystem)
 				for i,v in pairs(m._equipConditions) do
@@ -1272,7 +1272,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 					end
 				end
 			end)
-			
+	
 			local singlebullet = false
 			mainframe.modshotgun.Activated:connect(function()
 				local shotgun = require(itemconfig.Shotgun)
@@ -1306,7 +1306,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 					"place tnt",
 					"disable security"
 				}
-			
+	
 				game:GetService("RunService").Heartbeat:connect(function()
 					for i,a in pairs(moduleui.CircleAction.Specs) do
 						local function name()
@@ -1321,7 +1321,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 						end
 					end
 				end)
-			
+	
 				notify("Hold E Bypass enabled. Cannot be used with the following: donut shop, gas station, air drops, passenger train items, and oil rig dynamite.")
 			end)
 	
@@ -1472,7 +1472,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 				require(rstorage.Game.Falling).StartRagdolling = nil
 				notify("Removed ragdolling. (WARNING: in some cases you will still take fall damage)")
 			end)
-			
+	
 			local gunshoptp = false
 			runservice.Heartbeat:connect(function()
 				if lplr.Character and lplr.Character:FindFirstChild("Humanoid") and gunshoptp then
@@ -1569,14 +1569,6 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 							if keyDown(Enum.KeyCode.D) then
 								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position,flyspeed)
 							end
-	
-							if keyDown(Enum.KeyCode.E) then
-								velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position,flyspeed)
-							end
-	
-							if keyDown(Enum.KeyCode.Q) then
-								velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position,flyspeed)
-							end
 							hrp.Velocity = velocity
 							hrp.CFrame = CFrame.new(hrp.Position, (workspace.CurrentCamera.CFrame*frontoffset).Position)
 						end
@@ -1647,7 +1639,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 				if workspace:FindFirstChild("Casino") and workspace.Casino:FindFirstChild("RobberyDoor") and workspace.Casino.RobberyDoor:FindFirstChild("Codes") then
 					local codes = workspace.Casino.RobberyDoor.Codes
 					local isopen = workspace.Casino:GetAttribute("CasinoRobberyOpen")
-					
+	
 					if isopen then
 						if mainframe.AAAAA.Text == closedtxt or mainframe.AAAAA.Text == "Casino building isn't loaded in :(" then
 							local code
@@ -1837,7 +1829,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 			for i,v in pairs(rstorage.Game.Item:GetChildren()) do 
 				table.insert(items, v.Name)
 			end
-			
+	
 			for i,v in pairs(game:GetService("Teams"):GetTeams()) do
 				if not table.find(teamnames, v.Name) then
 					table.insert(teamnames, v.Name)
@@ -1901,7 +1893,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 					clone.active.Text = "Active ("..tostring(val)..")"
 					saveloadouts()
 				end)
-				
+	
 				clone.teamname.NOT.Activated:connect(function()
 					loadout.NOT = not loadout.NOT
 					if loadout.NOT then
@@ -1911,7 +1903,7 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 					end
 					saveloadouts()
 				end)
-				
+	
 				clone.teamname.team.FocusLost:connect(saveloadouts)
 				Changed(clone.teamname.team, "Text", function(txt)
 					local teams2 = {}
@@ -2201,4 +2193,4 @@ local function BZWQK_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(BZWQK_fake_script)()
+coroutine.wrap(JRNHRT_fake_script)()
