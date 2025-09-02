@@ -110,6 +110,8 @@ local value_14 = Instance.new("TextButton")
 local About_3 = Instance.new("TextLabel")
 local TargetOffScreen = Instance.new("TextLabel")
 local value_15 = Instance.new("TextButton")
+local EnableRaycasting = Instance.new("TextLabel")
+local value_16 = Instance.new("TextButton")
 local customtargetcons = Instance.new("TextButton")
 
 --Properties:
@@ -1426,6 +1428,34 @@ value_15.TextSize = 28.000
 value_15.TextStrokeTransparency = 0.000
 value_15.TextXAlignment = Enum.TextXAlignment.Left
 
+EnableRaycasting.Name = "EnableRaycasting"
+EnableRaycasting.Parent = ScrollingFrame_4
+EnableRaycasting.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+EnableRaycasting.BackgroundTransparency = 1.000
+EnableRaycasting.BorderColor3 = Color3.fromRGB(0, 170, 0)
+EnableRaycasting.BorderSizePixel = 0
+EnableRaycasting.Size = UDim2.new(0, 195, 0, 63)
+EnableRaycasting.Font = Enum.Font.TitilliumWeb
+EnableRaycasting.Text = "Enable Raycasting:"
+EnableRaycasting.TextColor3 = Color3.fromRGB(0, 170, 0)
+EnableRaycasting.TextSize = 28.000
+EnableRaycasting.TextStrokeTransparency = 0.000
+EnableRaycasting.TextXAlignment = Enum.TextXAlignment.Left
+EnableRaycasting.TextYAlignment = Enum.TextYAlignment.Top
+
+value_16.Name = "value"
+value_16.Parent = EnableRaycasting
+value_16.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_16.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_16.Position = UDim2.new(-0.000219726557, 0, 0.522047281, 0)
+value_16.Size = UDim2.new(0, 326, 0, 28)
+value_16.Font = Enum.Font.TitilliumWeb
+value_16.Text = "true"
+value_16.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_16.TextSize = 28.000
+value_16.TextStrokeTransparency = 0.000
+value_16.TextXAlignment = Enum.TextXAlignment.Left
+
 customtargetcons.Name = "customtargetcons"
 customtargetcons.Parent = GameSettingsUI
 customtargetcons.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -1440,7 +1470,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function PAYSSN_fake_script() -- Aimbot.LocalScript 
+local function EZBWQI_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1460,6 +1490,7 @@ local function PAYSSN_fake_script() -- Aimbot.LocalScript
 	local tcservice = game:GetService("TextChatService")
 	local npcs = {}
 	local uiservice = game:GetService("UserInputService")
+	local chrs = {}
 	
 	local function sendnotif(title, text)
 		print(title..":", text)
@@ -1473,8 +1504,9 @@ local function PAYSSN_fake_script() -- Aimbot.LocalScript
 	
 	if not RedsAimbot then
 		getgenv().RedsAimbot = {}
-		sendnotif("Aimbot Update", [[Changes 8/27/25:
-	- Addded TargetOffScreen setting in game settings. False by default.]])
+		sendnotif("Aimbot Update", [[Changes 9/1/25:
+	- Added Enable Raycasting in game options (for like the 3rd time, but its different this time)
+	- Simplified the GameStats targeting thing to either switch to Head or HumanoidRootPart.]])
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -1620,10 +1652,9 @@ local function PAYSSN_fake_script() -- Aimbot.LocalScript
 	
 		end
 	
-		local function valuesort(t, func)
+		function valuesort(t, func)
 			local revert = {}
 			local vals = {}
-	
 	
 			for i,v in pairs(t) do
 				revert[v] = i
@@ -1631,14 +1662,12 @@ local function PAYSSN_fake_script() -- Aimbot.LocalScript
 			end
 	
 			table.sort(vals)
-	
 			for i,v in pairs(vals) do
-				local f = func(revert[v], v)
-				if f == "stop" then
+				local retVal = func(revert[v], v)
+				if retVal ~= nil then
 					break
 				end
 			end
-	
 		end
 	
 		local teams = game:GetService("Teams")
@@ -1670,6 +1699,7 @@ local function PAYSSN_fake_script() -- Aimbot.LocalScript
 			newgamestats.AimMethod = "Mouse"
 			newgamestats.CustomTargetConditions = {}
 			newgamestats.TargetOffScreen = false
+			newgamestats.EnableRaycasting = true
 			return newgamestats
 		end
 	
@@ -1726,7 +1756,7 @@ local function PAYSSN_fake_script() -- Aimbot.LocalScript
 		end
 	
 		local function clearOldValues(t)
-			local tableref = (if t == GameStats then createGameStats() else createGlobalStats())
+			local tableref = (if t == GameStats then createGameStats() elseif t == GlobalStats then createGlobalStats() else createGlobalStats().Keybinds)
 			for i,v in pairs(t) do
 				if tableref[i] == nil then
 					t[i] = nil
@@ -1791,6 +1821,7 @@ local function PAYSSN_fake_script() -- Aimbot.LocalScript
 	
 		clearOldValues(GameStats)
 		clearOldValues(GlobalStats)
+		clearOldValues(Keybinds)
 		
 		local function updateKeybindTable(index, bindInfo)
 			if typeof(bindInfo) == "EnumItem" or typeof(bindInfo) == "string" then
@@ -2006,11 +2037,6 @@ local function PAYSSN_fake_script() -- Aimbot.LocalScript
 			sendnotif("Aimbot", "spawn in the game for this to work")
 			lplr.CharacterAdded:Wait()
 		end
-	
-		local chr = lplr.Character
-		local Torso
-	
-		repeat Torso = chr:FindFirstChild("Torso") or chr:FindFirstChild("UpperTorso") task.wait() until Torso
 		
 		local function isKeyActivated(bindInfo, shouldToggle)
 			local function keyDown(keycode)
@@ -2026,10 +2052,10 @@ local function PAYSSN_fake_script() -- Aimbot.LocalScript
 		uiservice.InputBegan:connect(function(key,processed)
 			if processed then return end
 			if isKeyActivated(Keybinds.TargetedPartToggle, true) then
-				if getOrCreate(GameStats, "Target") == "Torso" or getOrCreate(GameStats, "Target") == "UpperTorso" then
-					setOrCreate(GameStats, "Target", "Head")
+				if getOrCreate(GameStats, "Target") == "Head" then
+					setOrCreate(GameStats, "Target", "HumanoidRootPart")
 				else
-					setOrCreate(GameStats, "Target", Torso.Name)
+					setOrCreate(GameStats, "Target", "Head")
 				end
 			end
 			if isKeyActivated(Keybinds.AimbotToggle, true) then
@@ -2067,7 +2093,7 @@ local function PAYSSN_fake_script() -- Aimbot.LocalScript
 	
 		gamesettings.Target.value.Activated:connect(function()
 			if getOrCreate(GameStats, "Target") == "Head" then
-				setOrCreate(GameStats, "Target", Torso.Name)
+				setOrCreate(GameStats, "Target", "HumanoidRootPart")
 			else
 				setOrCreate(GameStats, "Target", "Head")
 			end
@@ -2246,6 +2272,9 @@ local function PAYSSN_fake_script() -- Aimbot.LocalScript
 			if v.ClassName == "Humanoid" and v.RootPart and not plrs:GetPlayerFromCharacter(v.Parent) and not table.find(npcs, v.Parent) and v.Health > 0 then
 				isactivenpc(v.Parent)
 			end
+			if v:IsA("BasePart") and not v.CanCollide then
+				v.CanQuery = false
+			end
 		end
 	
 		workspace.DescendantAdded:connect(function(v)
@@ -2255,6 +2284,9 @@ local function PAYSSN_fake_script() -- Aimbot.LocalScript
 					isactivenpc(v.Parent)
 				end
 			end
+			if v:IsA("BasePart") and not v.CanCollide then
+				v.CanQuery = false
+			end
 		end)
 	
 		workspace.DescendantRemoving:connect(function(v)
@@ -2263,6 +2295,26 @@ local function PAYSSN_fake_script() -- Aimbot.LocalScript
 				table.remove(npcs, npcfind)
 			end
 		end)
+		
+		local function addchrtotable(plr)
+			if plr.Character then
+				table.insert(chrs, plr.Character)
+			end
+			plr.CharacterAdded:connect(function(chr)
+				table.insert(chrs, chr)
+			end)
+			plr.CharacterRemoving:connect(function(chr)
+				local chrfind = table.find(chrs, chr)
+				if chrfind then
+					table.remove(chrs, chrfind)
+				end
+			end)
+		end
+		
+		for i,v in pairs(plrs:GetPlayers()) do
+			addchrtotable(v)
+		end
+		plrs.PlayerAdded:connect(addchrtotable)
 	
 		local function gettargetpart(chr)
 			local p = chr:FindFirstChild(getOrCreate(GameStats, "Target"))
@@ -2349,7 +2401,11 @@ local function PAYSSN_fake_script() -- Aimbot.LocalScript
 							if targpart then
 								local pos = math.floor(lplr:DistanceFromCharacter(targpart.Position))
 								local _, onscreen = camera:WorldToScreenPoint(targpart.Position)
-								if (onscreen or getOrCreate(GameStats, "TargetOffScreen")) and pos < getOrCreate(GameStats, "MaxStuds") then
+								local rayparams = RaycastParams.new()
+								rayparams.FilterDescendantsInstances = chrs
+								rayparams.IgnoreWater = true
+								local raycast = workspace:Raycast(lplr.Character.Head.Position, targpart.Position - lplr.Character.Head.Position, rayparams)
+								if (not raycast and getOrCreate(GameStats, "EnableRaycasting") or not getOrCreate(GameStats, "EnableRaycasting") and (onscreen or getOrCreate(GameStats, "TargetOffScreen")) and pos < getOrCreate(GameStats, "MaxStuds")) then
 									table1[v] = pos
 									if table.find(PrioritizedPlrs, plrs:GetPlayerFromCharacter(v)) then
 										table.insert(PrioritizedPlrsOnScreen, v)
@@ -2388,10 +2444,10 @@ local function PAYSSN_fake_script() -- Aimbot.LocalScript
 					local plr = plrs:GetPlayerFromCharacter(Char)
 					if plr and priorityCheck(plr) then
 						targetplayer(plr)
-					else
+					elseif not plr then
 						selectcharacter(Char)
 					end
-					return "stop"
+					return 1
 				end)
 			end
 			if getOrCreate(GameStats, "FirstPersonEnabled") then
@@ -2614,4 +2670,4 @@ local function PAYSSN_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(PAYSSN_fake_script)()
+coroutine.wrap(EZBWQI_fake_script)()
