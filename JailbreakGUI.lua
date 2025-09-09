@@ -39,6 +39,7 @@ local aimpredictor = Instance.new("TextButton")
 local aimtriggerbot = Instance.new("TextButton")
 local wallhack = Instance.new("TextButton")
 local modshotgun = Instance.new("TextButton")
+local _1flyupdown = Instance.new("TextButton")
 local AutosortFrame = Instance.new("Frame")
 local ScrollingFrame_2 = Instance.new("ScrollingFrame")
 local UIListLayout = Instance.new("UIListLayout")
@@ -528,6 +529,20 @@ modshotgun.TextSize = 20.000
 modshotgun.TextWrapped = true
 modshotgun.TextXAlignment = Enum.TextXAlignment.Left
 
+_1flyupdown.Name = "1flyupdown"
+_1flyupdown.Parent = ScrollingFrame
+_1flyupdown.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+_1flyupdown.BorderColor3 = Color3.fromRGB(0, 170, 255)
+_1flyupdown.Position = UDim2.new(0, 0, 1.15385723, 0)
+_1flyupdown.Size = UDim2.new(0, 370, 0, 31)
+_1flyupdown.Visible = false
+_1flyupdown.Font = Enum.Font.Ubuntu
+_1flyupdown.Text = "Enable E + Q fly keys:"
+_1flyupdown.TextColor3 = Color3.fromRGB(85, 170, 255)
+_1flyupdown.TextSize = 20.000
+_1flyupdown.TextWrapped = true
+_1flyupdown.TextXAlignment = Enum.TextXAlignment.Left
+
 AutosortFrame.Name = "AutosortFrame"
 AutosortFrame.Parent = JailbreakGUI
 AutosortFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 45)
@@ -750,7 +765,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function JRNHRT_fake_script() -- JailbreakGUI.LocalScript 
+local function SKKHM_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -784,7 +799,8 @@ local function JRNHRT_fake_script() -- JailbreakGUI.LocalScript
 		mainframe.aimpredictor,
 		mainframe.aimtriggerbot,
 		mainframe.wallhack,
-		mainframe.modshotgun
+		mainframe.modshotgun,
+		mainframe["1flyupdown"]
 	}
 	
 	local function singleclick(button, func)
@@ -955,10 +971,11 @@ local function JRNHRT_fake_script() -- JailbreakGUI.LocalScript
 			end
 	
 	
-			local speeds = {}
-			speeds.walkspeed = 30
-			speeds.flyspeed = 300
-			mainframe["1speedv2"].Text = tostring(speeds.walkspeed)
+			local stats = {}
+			stats.walkspeed = 30
+			stats.flyspeed = 300
+			stats.flyupdown = false
+			mainframe["1speedv2"].Text = tostring(stats.walkspeed)
 	
 			local plrs = game:GetService("Players")
 			local lplr = plrs.LocalPlayer
@@ -1009,7 +1026,7 @@ local function JRNHRT_fake_script() -- JailbreakGUI.LocalScript
 			runservice.RenderStepped:connect(function()
 				if lplr.Character and lplr.Character:FindFirstChild("Humanoid") then
 					if lplr.Character.Humanoid.WalkSpeed == 0 then
-						lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
+						lplr.Character.Humanoid.WalkSpeed = stats.walkspeed
 					end
 				end
 			end)
@@ -1332,18 +1349,18 @@ local function JRNHRT_fake_script() -- JailbreakGUI.LocalScript
 	
 				runservice.RenderStepped:connect(function()
 					if lplr.Character and lplr.Character:FindFirstChild("Humanoid") then
-						lplr.Character.Humanoid.WalkSpeed = speeds.walkspeed
+						lplr.Character.Humanoid.WalkSpeed = stats.walkspeed
 					end
 				end)
 	
 				notify("To edit your walkspeed, scroll up/down on the number in the textbox (max 150).")
 	
 				mainframe["1speedv2"].MouseWheelForward:connect(function()
-					speeds.walkspeed = speeds.walkspeed + 5
+					stats.walkspeed = stats.walkspeed + 5
 				end)
 	
 				mainframe["1speedv2"].MouseWheelBackward:connect(function()
-					speeds.walkspeed = speeds.walkspeed - 5
+					stats.walkspeed = stats.walkspeed - 5
 					mainframe.ScrollingEnabled = false
 					delay(0.2, function()
 						mainframe.ScrollingEnabled = true
@@ -1352,19 +1369,19 @@ local function JRNHRT_fake_script() -- JailbreakGUI.LocalScript
 	
 	
 	
-				Changed(speeds, "walkspeed", function(num)
+				Changed(stats, "walkspeed", function(num)
 					if num > 150 then
-						speeds.walkspeed = 150
+						stats.walkspeed = 150
 					end
 					if num < 0 then
-						speeds.walkspeed = 0
+						stats.walkspeed = 0
 					end
-					mainframe["1speedv2"].Text = tostring(speeds.walkspeed)
+					mainframe["1speedv2"].Text = tostring(stats.walkspeed)
 				end)
 	
 				Changed(mainframe["1speedv2"], "Text", function(txt)
 					if tonumber(txt) then
-						speeds.walkspeed = tonumber(txt)
+						stats.walkspeed = tonumber(txt)
 					end
 				end)
 			end)
@@ -1514,6 +1531,7 @@ local function JRNHRT_fake_script() -- JailbreakGUI.LocalScript
 			singleclick(mainframe["1flyhack"], function()
 				mainframe["1flyhackv2"].Visible = true
 				mainframe["1flyhack"].Visible = false
+				mainframe["1flyupdown"].Visible = true
 				-- actual fly script
 				local flying = false
 				local uiservice = game:GetService("UserInputService")
@@ -1531,7 +1549,7 @@ local function JRNHRT_fake_script() -- JailbreakGUI.LocalScript
 	
 				runservice.Heartbeat:connect(function()
 					local hrp
-					local flyspeed = speeds.flyspeed
+					local flyspeed = stats.flyspeed
 					local maxdistance = flyspeed * 2
 					local invehicle = getmodel()
 					if invehicle and isdriver() then
@@ -1569,6 +1587,13 @@ local function JRNHRT_fake_script() -- JailbreakGUI.LocalScript
 							if keyDown(Enum.KeyCode.D) then
 								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position,flyspeed)
 							end
+							if keyDown(Enum.KeyCode.E) and stats.flyupdown then
+								velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position,flyspeed)
+							end
+	
+							if keyDown(Enum.KeyCode.Q) and stats.flyupdown then
+								velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position,flyspeed)
+							end
 							hrp.Velocity = velocity
 							hrp.CFrame = CFrame.new(hrp.Position, (workspace.CurrentCamera.CFrame*frontoffset).Position)
 						end
@@ -1594,22 +1619,22 @@ local function JRNHRT_fake_script() -- JailbreakGUI.LocalScript
 				end)
 				-- end of fly script
 	
-				Changed(speeds, "flyspeed", function(num)
+				Changed(stats, "flyspeed", function(num)
 					if num > 600 then
-						speeds.flyspeed = 600
+						stats.flyspeed = 600
 					end
 					if num < 0 then
-						speeds.flyspeed = 0
+						stats.flyspeed = 0
 					end
-					mainframe["1flyhackv2"].Text = tostring(speeds.flyspeed)
+					mainframe["1flyhackv2"].Text = tostring(stats.flyspeed)
 				end)
 	
 				mainframe["1flyhackv2"].MouseWheelForward:connect(function()
-					speeds.flyspeed = speeds.flyspeed + 20
+					stats.flyspeed = stats.flyspeed + 20
 				end)
 	
 				mainframe["1flyhackv2"].MouseWheelBackward:connect(function()
-					speeds.flyspeed = speeds.flyspeed - 20
+					stats.flyspeed = stats.flyspeed - 20
 					mainframe.ScrollingEnabled = false
 					delay(0.2, function()
 						mainframe.ScrollingEnabled = true
@@ -1618,7 +1643,7 @@ local function JRNHRT_fake_script() -- JailbreakGUI.LocalScript
 	
 				Changed(mainframe["1flyhackv2"], "Text", function(txt)
 					if tonumber(txt) then
-						speeds.flyspeed = tonumber(txt)
+						stats.flyspeed = tonumber(txt)
 					end
 				end)
 	
@@ -2178,6 +2203,10 @@ local function JRNHRT_fake_script() -- JailbreakGUI.LocalScript
 				end
 				notify("The plasma pistol (and plasma shotgun) will just not hit enemies at all if shooting through walls, so the wallhack will not work with those guns specifically")
 			end)
+			
+			mainframe["1flyupdown"].Activated:connect(function()
+				stats.flyupdown = not stats.flyupdown
+			end)
 	
 		else
 			notify("Deleting clone gui")
@@ -2193,4 +2222,4 @@ local function JRNHRT_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(JRNHRT_fake_script)()
+coroutine.wrap(SKKHM_fake_script)()
