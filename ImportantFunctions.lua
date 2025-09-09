@@ -391,17 +391,13 @@ if not customfname then customfname = funcname end
 	if isFunctionLogged then
 		error("This function has already been logged!")
 	else
-		if typeof(funcparent) ~= "Instance" then
-			funcparent[funcname] = newfunc
-		else
-			local hook
-			hook = hookfunction(funcparent[funcname], function(self, ...)
-				if self == funcparent then
-					newfunc(self, ...)
-				end
-				return hook(self, ...)
-			end)
-		end
+		local hook
+		hook = hookfunction(funcparent[funcname], function(self, ...)
+			if self == funcparent then
+				newfunc(self, ...)
+			end
+			return hook(self, ...)
+		end)
 		table.insert(LoggedFunctions, {["parent"] = funcparent, ["name"] = funcname})
 		print("logging", customfname.."!")
 		return newfunc
