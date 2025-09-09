@@ -233,7 +233,7 @@ end
 
 getgenv().tabletostring = TableToString
 
-getgenv().Format = function(var, tname, ttsargs, IsInternalTable)
+getgenv().Format = function(var, ...)
 	local failedconversion = false
 	local st = ""
 	local supportedtypes = {"number", "boolean", "string", "EnumItem", "table", "Instance", "Vector2", "Vector3", "CFrame", "Color3", "BrickColor","Enum","Enums","UDim2","NumberRange"}
@@ -251,7 +251,7 @@ getgenv().Format = function(var, tname, ttsargs, IsInternalTable)
             st = "\""..reformatstring(var).."\""
         elseif type(var) == "table" then
             if not table.find(catchrepeats, var) then
-				st = TableToString(var, tname, ttsargs, IsInternalTable)
+				st = TableToString(var, ...)
 			else
 				failedconversion = true
 			end
