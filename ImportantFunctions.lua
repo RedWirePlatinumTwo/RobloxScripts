@@ -178,6 +178,9 @@ getgenv().TableToString = function(Table, TableName, args, IsInternalTable)
 			local failstring = ""
 			local failignore = {"function", "RBXScriptConnection", "RBXScriptSignal", "table"}
 			if failed1 or failed2 then
+				if args.ignoreunsupported then
+					return ""
+				end
 				failstring = " --failed to convert types:"
 				if failed1 and not table.find(failignore, typeof(i)) then
 					failstring = failstring.." "..typeof(i)
@@ -204,13 +207,19 @@ getgenv().TableToString = function(Table, TableName, args, IsInternalTable)
 			end
 		end
 		
+		local customvals = args.customvalues(Table) or {}
 		for i,v in pairs(Table) do
 			if type(v) ~= "table" then
-				s = s..stringmethod(i,v)
+				if customvals[i] == nil then
+					s = s..stringmethod(i,v)
+				end
 				contextcheck(Table,i,v)
 			else
 				extratables[i] = v
 			end
+		end
+		for index, val in pairs(customvals) do
+			s = s.."\n"..name.."["..Format(index).."] = "..tostring(val):gsub("\n", " "):gsub(" +", " ")
 		end
 		for i,v in pairs(extratables) do
 			s = s.."\n"..stringmethod(i,v)
