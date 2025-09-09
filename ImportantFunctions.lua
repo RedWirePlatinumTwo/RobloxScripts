@@ -219,7 +219,7 @@ getgenv().TableToString = function(Table, TableName, args, IsInternalTable)
 			end
 		end
 		for index, val in pairs(customvals) do
-			s = s.."\n"..name.."["..Format(index).."] = "..tostring(val):gsub("\n", " "):gsub(" +", " ")
+			s = s.."\n"..name.."["..Format(index).."] = "..tostring(val)
 		end
 		for i,v in pairs(extratables) do
 			s = s.."\n"..stringmethod(i,v)
@@ -395,16 +395,15 @@ if not customfname then customfname = funcname end
 			funcparent[funcname] = newfunc
 		else
 			local hook
-			hook = hookmetamethod(game, "__namecall", function(self, ...)
-				if self == funcparent and getnamecallmethod() == funcname then
-					return newfunc(self, ...)
-				else
-					return hook(self, ...)
+			hook = hookfunction(funcparent[funcname], function(self, ...)
+				if self == funcparent then
+					newfunc(self, ...)
 				end
+				return hook(self, ...)
 			end)
 		end
 		table.insert(LoggedFunctions, {["parent"] = funcparent, ["name"] = funcname})
-		print("logging", customfname.."! WARNING: may be detected by anticheat!!")
+		print("logging", customfname.."!")
 		return newfunc
 	end
 end
