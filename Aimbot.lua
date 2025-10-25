@@ -1470,7 +1470,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function SZPULDE_fake_script() -- Aimbot.LocalScript 
+local function FAJY_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1504,9 +1504,8 @@ local function SZPULDE_fake_script() -- Aimbot.LocalScript
 	
 	if not RedsAimbot then
 		getgenv().RedsAimbot = {}
-		sendnotif("Aimbot Update", [[Changes 9/1/25:
-	- Added Enable Raycasting in game options (for like the 3rd time, but its different this time)
-	- Simplified the GameStats targeting thing to either switch to Head or HumanoidRootPart.]])
+		sendnotif("Aimbot Update", [[Changes 10/25/25:
+	- Avoided setting CanQuery to false for some parts that have a ClickDetector set to them]])
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -2289,7 +2288,7 @@ local function SZPULDE_fake_script() -- Aimbot.LocalScript
 			if v.ClassName == "Humanoid" and v.RootPart and not plrs:GetPlayerFromCharacter(v.Parent) and not table.find(npcs, v.Parent) and v.Health > 0 then
 				isactivenpc(v.Parent)
 			end
-			if v:IsA("BasePart") and not v.CanCollide then
+			if v:IsA("BasePart") and not v.CanCollide and not v.Parent:FindFirstChildOfClass("ClickDetector") then
 				queriedParts[v] = true
 				v.CanQuery = false
 			end
@@ -2302,7 +2301,7 @@ local function SZPULDE_fake_script() -- Aimbot.LocalScript
 					isactivenpc(v.Parent)
 				end
 			end
-			if v:IsA("BasePart") and not v.CanCollide then
+			if v:IsA("BasePart") and not v.CanCollide and not v.Parent:FindFirstChildOfClass("ClickDetector") then
 				queriedParts[v] = true
 				v.CanQuery = false
 			end
@@ -2689,4 +2688,4 @@ local function SZPULDE_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(SZPULDE_fake_script)()
+coroutine.wrap(FAJY_fake_script)()
