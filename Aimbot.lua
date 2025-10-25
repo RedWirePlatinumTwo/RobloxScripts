@@ -1470,7 +1470,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function FAJY_fake_script() -- Aimbot.LocalScript 
+local function YSZID_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -2284,14 +2284,18 @@ local function FAJY_fake_script() -- Aimbot.LocalScript
 				return querynewindex(self, val, newval)
 			end
 		end)
+		
+		local function setQueryChecker(part)
+			if part:IsA("BasePart") and not part.CanCollide and not part.Parent:FindFirstChildOfClass("ClickDetector") and not part:FindFirstChildOfClass("ClickDetector") then
+				queriedParts[part] = true
+				part.CanQuery = false
+			end
+		end
 		for i,v in pairs(workspace:GetDescendants()) do
 			if v.ClassName == "Humanoid" and v.RootPart and not plrs:GetPlayerFromCharacter(v.Parent) and not table.find(npcs, v.Parent) and v.Health > 0 then
 				isactivenpc(v.Parent)
 			end
-			if v:IsA("BasePart") and not v.CanCollide and not v.Parent:FindFirstChildOfClass("ClickDetector") then
-				queriedParts[v] = true
-				v.CanQuery = false
-			end
+			setQueryChecker(v)
 		end
 	
 		workspace.DescendantAdded:connect(function(v)
@@ -2301,10 +2305,7 @@ local function FAJY_fake_script() -- Aimbot.LocalScript
 					isactivenpc(v.Parent)
 				end
 			end
-			if v:IsA("BasePart") and not v.CanCollide and not v.Parent:FindFirstChildOfClass("ClickDetector") then
-				queriedParts[v] = true
-				v.CanQuery = false
-			end
+			setQueryChecker(v)
 		end)
 	
 		workspace.DescendantRemoving:connect(function(v)
@@ -2688,4 +2689,4 @@ local function FAJY_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(FAJY_fake_script)()
+coroutine.wrap(YSZID_fake_script)()
