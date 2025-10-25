@@ -23,7 +23,7 @@ local keybypass = Instance.new("TextButton")
 local AAAAA = Instance.new("TextButton")
 local delradio = Instance.new("TextButton")
 local respawn = Instance.new("TextButton")
-local lockonexit = Instance.new("TextButton")
+local _1flyupdown = Instance.new("TextButton")
 local Tazermod = Instance.new("TextButton")
 local ropefollow = Instance.new("TextButton")
 local Hotbarautosort = Instance.new("TextButton")
@@ -39,7 +39,6 @@ local aimpredictor = Instance.new("TextButton")
 local aimtriggerbot = Instance.new("TextButton")
 local wallhack = Instance.new("TextButton")
 local modshotgun = Instance.new("TextButton")
-local _1flyupdown = Instance.new("TextButton")
 local AutosortFrame = Instance.new("Frame")
 local ScrollingFrame_2 = Instance.new("ScrollingFrame")
 local UIListLayout = Instance.new("UIListLayout")
@@ -302,19 +301,19 @@ respawn.TextSize = 20.000
 respawn.TextWrapped = true
 respawn.TextXAlignment = Enum.TextXAlignment.Left
 
-lockonexit.Name = "lockonexit"
-lockonexit.Parent = ScrollingFrame
-lockonexit.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
-lockonexit.BorderColor3 = Color3.fromRGB(0, 170, 255)
-lockonexit.Position = UDim2.new(0.667000175, 0, 0.523438752, 0)
-lockonexit.Size = UDim2.new(0, 116, 0, 47)
-lockonexit.ZIndex = -1
-lockonexit.Font = Enum.Font.Ubuntu
-lockonexit.Text = "Auto-lock vehicle on exit"
-lockonexit.TextColor3 = Color3.fromRGB(85, 170, 255)
-lockonexit.TextSize = 20.000
-lockonexit.TextWrapped = true
-lockonexit.TextXAlignment = Enum.TextXAlignment.Left
+_1flyupdown.Name = "1flyupdown"
+_1flyupdown.Parent = ScrollingFrame
+_1flyupdown.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
+_1flyupdown.BorderColor3 = Color3.fromRGB(0, 170, 255)
+_1flyupdown.Position = UDim2.new(0, 0, 1.15385723, 0)
+_1flyupdown.Size = UDim2.new(0, 370, 0, 31)
+_1flyupdown.Visible = false
+_1flyupdown.Font = Enum.Font.Ubuntu
+_1flyupdown.Text = "Enable E + Q fly keys:"
+_1flyupdown.TextColor3 = Color3.fromRGB(85, 170, 255)
+_1flyupdown.TextSize = 20.000
+_1flyupdown.TextWrapped = true
+_1flyupdown.TextXAlignment = Enum.TextXAlignment.Left
 
 Tazermod.Name = "Tazermod"
 Tazermod.Parent = ScrollingFrame
@@ -528,20 +527,6 @@ modshotgun.TextColor3 = Color3.fromRGB(85, 170, 255)
 modshotgun.TextSize = 20.000
 modshotgun.TextWrapped = true
 modshotgun.TextXAlignment = Enum.TextXAlignment.Left
-
-_1flyupdown.Name = "1flyupdown"
-_1flyupdown.Parent = ScrollingFrame
-_1flyupdown.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
-_1flyupdown.BorderColor3 = Color3.fromRGB(0, 170, 255)
-_1flyupdown.Position = UDim2.new(0, 0, 1.15385723, 0)
-_1flyupdown.Size = UDim2.new(0, 370, 0, 31)
-_1flyupdown.Visible = false
-_1flyupdown.Font = Enum.Font.Ubuntu
-_1flyupdown.Text = "Enable E + Q fly keys:"
-_1flyupdown.TextColor3 = Color3.fromRGB(85, 170, 255)
-_1flyupdown.TextSize = 20.000
-_1flyupdown.TextWrapped = true
-_1flyupdown.TextXAlignment = Enum.TextXAlignment.Left
 
 AutosortFrame.Name = "AutosortFrame"
 AutosortFrame.Parent = JailbreakGUI
@@ -765,7 +750,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function SKKHM_fake_script() -- JailbreakGUI.LocalScript 
+local function AHIR_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -791,7 +776,6 @@ local function SKKHM_fake_script() -- JailbreakGUI.LocalScript
 	}
 	local togglebuttons = {
 		mainframe.gunshoptp,
-		mainframe.lockonexit,
 		mainframe.glidekey,
 		mainframe.CrateEsp,
 		mainframe.ropefollow,
@@ -932,7 +916,7 @@ local function SKKHM_fake_script() -- JailbreakGUI.LocalScript
 	
 		if not _G.RedsJBGUI then
 			_G.RedsJBGUI = true
-			notify("Plasma shotgun is now excluded from wallhack + other changes.")
+			notify("Removed lock vehicle on exit button as its now part of the main game.")
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
 	
@@ -1508,9 +1492,6 @@ local function SKKHM_fake_script() -- JailbreakGUI.LocalScript
 			local vehicle = require(rstorage.Vehicle.VehicleUtils)
 			local getmodel = vehicle.GetLocalVehicleModel
 			local getseats = vehicle.getSeats
-			local togglelock = vehicle.toggleLocalLocked
-			local onexit = vehicle.OnVehicleJumpExited._handlerListHead
-			local exitfn = onexit._fn
 	
 			local function isdriver()
 				local model = getmodel()
@@ -1727,34 +1708,6 @@ local function SKKHM_fake_script() -- JailbreakGUI.LocalScript
 				end)
 	
 				notify("fuck this stupid gui")
-			end)
-	
-			local vmod = false
-			local vmodtoggle = false
-	
-	
-			mainframe.lockonexit.Activated:connect(function()
-				if not vmod then 
-					vmod = true
-	
-					local function iscarlocked()
-						local idk, icon = pcall(function()
-							return lplr.PlayerGui.AppUI.Speedometer.Top.Lock.Icon.Image -- the speedometer thing is destroyed when you exit a vehicle
-						end)
-						if idk then
-							return icon ~= "rbxassetid://5928936296"
-						end
-					end
-	
-					onexit._fn = function(...)
-						if isdriver() and not iscarlocked() and vmodtoggle then
-							togglelock()
-						end
-						return exitfn(...)
-					end
-	
-				end
-				vmodtoggle = not vmodtoggle
 			end)
 	
 			singleclick(mainframe.Tazermod, function()
@@ -2222,4 +2175,4 @@ local function SKKHM_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(SKKHM_fake_script)()
+coroutine.wrap(AHIR_fake_script)()
