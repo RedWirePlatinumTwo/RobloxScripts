@@ -198,12 +198,9 @@ getgenv().TableToString = function(Table, TableName, args, IsInternalTable)
 		
 		local extratables = {}
 		local function contextcheck(v1, v2, v3)
-			local context = args.contextfunc
-			if context then
-				context = context(v1,v2,v3)
-				if type(context) == "string" and context ~= "" then
-					s = s.." --"..context
-				end
+			local context = args.contextfunc and args.contextfunc(v1, v2, v3) or function() end
+			if type(context) == "string" and context ~= "" then
+				s = s.." --"..context
 			end
 		end
 		
