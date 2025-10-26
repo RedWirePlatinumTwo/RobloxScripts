@@ -207,7 +207,7 @@ getgenv().TableToString = function(Table, TableName, args, IsInternalTable)
 			end
 		end
 		
-		local customvals = args.customvalues(Table) or {}
+		local customvals = args.customvalues and args.customvalues(Table) or {}
 		for i,v in pairs(Table) do
 			if type(v) ~= "table" then
 				if customvals[i] == nil then
