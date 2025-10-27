@@ -2392,7 +2392,7 @@ local function QVGLXS_fake_script() -- Aimbot.LocalScript
 			if m.Target ~= nil then
 				if not getOrCreate(GameStats, "IgnorePlayers") then
 					for i,v in pairs(GetFamily(m.Target)) do
-						local plr = game:GetService("Players"):GetPlayerFromCharacter(m.Target)
+						local plr = game:GetService("Players"):GetPlayerFromCharacter(v)
 						if plr and plr.Character and meetsConditions(plr.Character) and priorityCheck(plr) then
 							targetplayer(plr)
 							break
