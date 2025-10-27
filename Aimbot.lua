@@ -1470,7 +1470,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function YSZID_fake_script() -- Aimbot.LocalScript 
+local function QVGLXS_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1504,8 +1504,8 @@ local function YSZID_fake_script() -- Aimbot.LocalScript
 	
 	if not RedsAimbot then
 		getgenv().RedsAimbot = {}
-		sendnotif("Aimbot Update", [[Changes 10/25/25:
-	- Avoided setting CanQuery to false for some parts that have a ClickDetector set to them]])
+		sendnotif("Aimbot Update", [[Changes 10/27/25:
+	- Improved manual targeting to check to use PlayerFromCharacter instead of FindFirstChild]])
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -2392,7 +2392,7 @@ local function YSZID_fake_script() -- Aimbot.LocalScript
 			if m.Target ~= nil then
 				if not getOrCreate(GameStats, "IgnorePlayers") then
 					for i,v in pairs(GetFamily(m.Target)) do
-						local plr = game:GetService("Players"):FindFirstChild(v.Name)
+						local plr = game:GetService("Players"):GetPlayerFromCharacter(m.Target)
 						if plr and plr.Character and meetsConditions(plr.Character) and priorityCheck(plr) then
 							targetplayer(plr)
 							break
@@ -2689,4 +2689,4 @@ local function YSZID_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(YSZID_fake_script)()
+coroutine.wrap(QVGLXS_fake_script)()
