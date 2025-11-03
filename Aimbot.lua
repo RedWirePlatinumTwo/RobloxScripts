@@ -1470,7 +1470,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function VFCV_fake_script() -- Aimbot.LocalScript 
+local function UOJWK_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1591,40 +1591,44 @@ local function VFCV_fake_script() -- Aimbot.LocalScript
 		end
 	
 		local reps = {}
-		local function TableChanged(Table,f,dosubtables,issubtable)
+		local TableChanged = function(Table, f, dosubtables, issubtable)
 			local t = {}
 			local funcs = {}
 			if not dosubtables then
 				reps = {}
 			end
-			local function tc(t)
+			local function tblChanged(t)
 				for i,v in pairs(t) do
-					local mainchanged = Changed(t,i,function(...)
-						f(t,i,...)
+					local mainchanged = Changed(t, i, function(...)
+						f(t, i, ...)
 					end)
 					table.insert(funcs, mainchanged)
 				end
 	
-				local added = TableAdded(t,function(index,value,Time)
-					f(t,index,value,nil,Time)
-					local subchanged = Changed(t,index,function(...)
-						f(t,index,...)
+				local added = TableAdded(t, function(index, value, ...)
+					f(t, index, value, nil, ...)
+					if typeof(value) == "table" and not table.find(reps, value) then
+						table.insert(reps, value)
+						tblChanged(value)
+					end
+					local subchanged = Changed(t, index, function(...)
+						f(t, index, ...)
 					end)
 					table.insert(funcs, subchanged)
 				end)
 				table.insert(funcs, added)
 			end
 	
-			tc(Table)
+			tblChanged(Table)
 			if dosubtables then
 				for i,v in pairs(Table) do
 					if type(i) == "table" and not table.find(reps, i) then
 						table.insert(reps, i)
-						tc(i)
+						tblChanged(i)
 					end
 					if type(v) == "table" and not table.find(reps, v) then
 						table.insert(reps, v)
-						tc(v)
+						tblChanged(v)
 					end
 				end
 			end
@@ -2690,4 +2694,4 @@ local function VFCV_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(VFCV_fake_script)()
+coroutine.wrap(UOJWK_fake_script)()
