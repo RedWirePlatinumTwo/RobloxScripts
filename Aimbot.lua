@@ -1470,7 +1470,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function VACGNWK_fake_script() -- Aimbot.LocalScript 
+local function VFCV_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1829,7 +1829,15 @@ local function VACGNWK_fake_script() -- Aimbot.LocalScript
 		
 		local function updateKeybindInstance(instance, bindInfo)
 			local function updateKey(index)
-				instance["value"..index].Text = if typeof(bindInfo["Key"..index]) == "EnumItem" then bindInfo["Key"..index].Name else bindInfo["Key"..index]
+				local k = bindInfo["Key"..index]
+				local ins = instance["value"..index]
+				if typeof(k) == "EnumItem" then
+					ins.Text = k.Name
+				elseif typeof(k) == "string" then
+					ins.Text = k
+				else
+					ins.Text = "none"
+				end
 			end
 			updateKey(1)
 			updateKey(2)
@@ -2682,4 +2690,4 @@ local function VACGNWK_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(VACGNWK_fake_script)()
+coroutine.wrap(VFCV_fake_script)()
