@@ -1591,7 +1591,7 @@ local function UOJWK_fake_script() -- Aimbot.LocalScript
 		end
 	
 		local reps = {}
-		local TableChanged = function(Table, f, dosubtables, issubtable)
+		local TableChanged = function(Table, f, dosubtables)
 			local t = {}
 			local funcs = {}
 			if not dosubtables then
