@@ -1470,7 +1470,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function QVGLXS_fake_script() -- Aimbot.LocalScript 
+local function VACGNWK_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -1709,22 +1709,16 @@ local function QVGLXS_fake_script() -- Aimbot.LocalScript
 			newglobalstats.Keybinds = {}
 			newglobalstats.Keybinds.AimbotToggle = {}
 			newglobalstats.Keybinds.AimbotToggle.Key1 = Enum.KeyCode.CapsLock
-			newglobalstats.Keybinds.AimbotToggle.Key2 = "none"
 			newglobalstats.Keybinds.AimbotToggle.Toggle = true
 			newglobalstats.Keybinds.TargetedPartToggle = {}
 			newglobalstats.Keybinds.TargetedPartToggle.Key1 = Enum.KeyCode.RightAlt
-			newglobalstats.Keybinds.TargetedPartToggle.Key2 = "none"
 			newglobalstats.Keybinds.TargetedPartToggle.Toggle = true
 			newglobalstats.Keybinds.GUIVisibilityToggle = {}
-			newglobalstats.Keybinds.GUIVisibilityToggle.Key1 = "none"
-			newglobalstats.Keybinds.GUIVisibilityToggle.Key2 = "none"
 			newglobalstats.Keybinds.GUIVisibilityToggle.Toggle = true
 			local function addkeybinds(table)
 				for name,value in pairs(table) do
 					if type(value) == "boolean" then
 						newglobalstats.Keybinds[name] = {}
-						newglobalstats.Keybinds[name].Key1 = "none"
-						newglobalstats.Keybinds[name].Key2 = "none"
 						newglobalstats.Keybinds[name].Toggle = true
 					end
 				end
@@ -1826,7 +1820,6 @@ local function QVGLXS_fake_script() -- Aimbot.LocalScript
 			if typeof(bindInfo) == "EnumItem" or typeof(bindInfo) == "string" then
 				local t = {}
 				t.Key1 = bindInfo
-				t.Key2 = "none"
 				t.Toggle = true
 				bindInfo = t
 				Keybinds[index] = bindInfo
@@ -2039,10 +2032,10 @@ local function QVGLXS_fake_script() -- Aimbot.LocalScript
 		
 		local function isKeyActivated(bindInfo, shouldToggle)
 			local function keyDown(keycode)
-				if keycode == "none" then return true end
+				if typeof(keycode) ~= "EnumItem" then return true end
 				return uiservice:IsKeyDown(keycode) and not uiservice:GetFocusedTextBox()
 			end
-			if bindInfo.Key1 == "none" and bindInfo.Key2 == "none" then
+			if typeof(bindInfo.Key1) ~= "EnumItem" and typeof(bindInfo.Key2) ~= "EnumItem" then
 				return false
 			end
 			return keyDown(bindInfo.Key1) and keyDown(bindInfo.Key2) and ((bindInfo.Toggle and shouldToggle) or (not bindInfo.Toggle and not shouldToggle))
@@ -2121,8 +2114,8 @@ local function QVGLXS_fake_script() -- Aimbot.LocalScript
 		for i,v in pairs(keybindsettings:getChildren()) do 
 			if v:FindFirstChild("reset") then
 				v.reset.Activated:connect(function()
-					Keybinds[v.Name].Key1 = "none"
-					Keybinds[v.Name].Key2 = "none"
+					Keybinds[v.Name].Key1 = nil
+					Keybinds[v.Name].Key2 = nil
 					Keybinds[v.Name].Toggle = true
 					v.value1.Text = "none"
 					v.value2.Text = "none"
@@ -2132,7 +2125,7 @@ local function QVGLXS_fake_script() -- Aimbot.LocalScript
 				end)
 	
 				local function changeKeybind(index)
-					Keybinds[v.Name]["Key"..index] = "none"
+					Keybinds[v.Name]["Key"..index] = nil
 					v["value"..index].Text = "Press any key"
 					local key = uiservice.InputBegan:Wait()
 					task.wait()
@@ -2689,4 +2682,4 @@ local function QVGLXS_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(QVGLXS_fake_script)()
+coroutine.wrap(VACGNWK_fake_script)()
