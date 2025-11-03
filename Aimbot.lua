@@ -1470,7 +1470,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function UOJWK_fake_script() -- Aimbot.LocalScript 
+local function KMQXOD_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -2131,6 +2131,7 @@ local function UOJWK_fake_script() -- Aimbot.LocalScript
 					Keybinds[v.Name].Toggle = true
 					v.value1.Text = "none"
 					v.value2.Text = "none"
+					savesettings()
 					if v:FindFirstChild("keybindtype") then
 						v.keybindtype.Text = "Keybind type: Toggle"
 					end
@@ -2143,6 +2144,7 @@ local function UOJWK_fake_script() -- Aimbot.LocalScript
 					task.wait()
 					Keybinds[v.Name]["Key"..index] = key.KeyCode
 					v["value"..index].Text = key.KeyCode.Name
+					savesettings()
 				end
 				
 				v.value1.Activated:connect(function()
@@ -2694,4 +2696,4 @@ local function UOJWK_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(UOJWK_fake_script)()
+coroutine.wrap(KMQXOD_fake_script)()
