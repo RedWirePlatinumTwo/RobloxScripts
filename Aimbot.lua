@@ -2780,7 +2780,7 @@ local function OVBEE_fake_script() -- Aimbot.LocalScript
 		end)
 	
 		targetingui.about.Activated:connect(function()
-			local abouttxt = "When all of the conditions in this game return true, you may target someone. If any of these return false, you can't.\nKeywords to refer to your targets character/player is: TargetCharacter and targetPlr."
+			local abouttxt = "When all of the conditions in this game return true, you may target someone. If any of these return false, you can't.\nKeywords to refer to your targets character/player is: TargetCharacter and TargetPlayer."
 			print(abouttxt)
 			sendNotif("Custom Targeting", abouttxt)
 		end)
