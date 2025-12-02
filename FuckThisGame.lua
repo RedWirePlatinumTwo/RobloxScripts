@@ -25,9 +25,9 @@ generalgamefucker.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 mainframe.Name = "mainframe"
 mainframe.Parent = generalgamefucker
+mainframe.Active = true
 mainframe.BackgroundColor3 = Color3.fromRGB(0, 85, 127)
 mainframe.BorderColor3 = Color3.fromRGB(0, 0, 127)
-mainframe.Active = true
 mainframe.Draggable = true
 mainframe.Position = UDim2.new(0.7152493, -352, 0.448029727, -132)
 mainframe.Size = UDim2.new(0, 320, 0, 271)
@@ -179,16 +179,101 @@ focusonchr.TextWrapped = true
 
 -- Scripts:
 
-local function QEKSO_fake_script() -- generalgamefucker.LocalScript 
+local function VWRAM_fake_script() -- generalgamefucker.LocalScript 
 	local script = Instance.new('LocalScript', generalgamefucker)
 
 	local mainframe = script.Parent.mainframe
 	local lplr = game:GetService("Players").LocalPlayer
 	mainframe.Draggable = true
+	local uiservice = game:GetService("UserInputService")
+	local runservice = game:GetService("RunService")
+	local plrs = game:GetService("Players")
+	local tcservice = game:GetService("TextChatService")
 	
 	local numbers = {}
 	numbers.ws = 30
 	numbers.jump = 50
+	
+	local thread = function(f)
+		return coroutine.resume(coroutine.create(function()
+			return f()
+		end))
+	end
+	
+	local Changed = function(part, PropertyName, func)
+		local current = part[PropertyName]
+		local elapsedTime = 0
+		local enabled = true
+		local t = {}
+		t.Stop = function()
+			enabled = false
+		end
+		t.stop = t.Stop
+	
+		thread(function()
+			while enabled do
+				if part[PropertyName] ~= current then
+					thread(function()
+						func(part[PropertyName], current, elapsedTime)
+					end)
+					elapsedTime = 0
+					current = part[PropertyName]
+				end
+				elapsedTime = elapsedTime + task.wait()
+			end
+		end)
+		return t
+	end
+	
+	local GetFamily = function(ins, reverseorder)
+		local Pathway = {ins}
+		local par = ins.Parent
+	
+		while par ~= nil do
+			if reverseorder then
+				table.insert(Pathway, par)
+			else
+				table.insert(Pathway, 1, par)
+			end
+			par = par.Parent
+		end
+	
+		return Pathway
+	end
+	
+	local ischaracter = function(ins)
+		if ins == nil then return end
+		for i,v in pairs(GetFamily(ins)) do
+			local plr = plrs:GetPlayerFromCharacter(v)
+			if plr then
+				return v
+			end
+		end
+	end
+	
+	local playerChatted = function(plr, func)
+		if plr ~= lplr then
+			return tcservice.MessageReceived:Connect(function(msgInstance)
+				repeat task.wait() until msgInstance.TextSource
+				if msgInstance.TextSource.UserId == plr.UserId then
+					func(msgInstance.Text:gsub("<[^>]+>", ""))
+				end
+			end)
+		else
+			return tcservice.SendingMessage:Connect(function(msgInstance)
+				func(msgInstance.Text:gsub("<[^>]+>", ""))
+			end)
+		end
+	end
+	
+	local altmessage = function(message, func)
+		return playerChatted(lplr, function(msg)
+			if msg:lower():sub(1,message:len()) == message:lower() then
+				func(msg)
+			end
+		end)
+	end
+	
 	
 	local function speedhack()
 	
@@ -260,17 +345,17 @@ local function QEKSO_fake_script() -- generalgamefucker.LocalScript
 		local keytoggle = true
 		local updown = true
 		local pos = Vector3.new()
-
+	
 		local function GetVelocity(pos1,pos2,StudsPerSecond)
 			local distance = (pos2 - pos1)
 			local mag = distance.Magnitude
 			return (distance/mag)*StudsPerSecond
 		end
-
+	
 		local function keyDown(keycode)
 			return uiservice:IsKeyDown(keycode) and not uiservice:GetFocusedTextBox()
 		end
-
+	
 		game:GetService("RunService").Heartbeat:connect(function(tick)
 			local maxdistance = flyspeed * 2
 			if lplr.Character and lplr.Character:FindFirstChild("Humanoid") and lplr.Character.Humanoid.RootPart then
@@ -287,34 +372,34 @@ local function QEKSO_fake_script() -- generalgamefucker.LocalScript
 					if keyDown(Enum.KeyCode.W) then
 						velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position,flyspeed)
 					end
-					
+	
 					if keyDown(Enum.KeyCode.S) then
 						velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position,flyspeed)
 					end
-					
+	
 					if keyDown(Enum.KeyCode.A) then
 						velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position,flyspeed)
 					end
-					
+	
 					if keyDown(Enum.KeyCode.D) then
 						velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position,flyspeed)
 					end
-					
+	
 					if keyDown(Enum.KeyCode.E) and updown then
 						velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position,flyspeed)
 					end
-					
+	
 					if keyDown(Enum.KeyCode.Q) and updown then
 						velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position,flyspeed)
 					end
-					
+	
 					if not cframefly then
 						hrp.Velocity = velocity
-					 else
-					 hrp.Velocity = Vector3.new()
-					 hrp.CFrame = hrp.CFrame + (velocity*tick)
+					else
+						hrp.Velocity = Vector3.new()
+						hrp.CFrame = hrp.CFrame + (velocity*tick)
 					end
-					 hrp.CFrame = CFrame.new(hrp.Position, (workspace.CurrentCamera.CFrame*frontoffset).Position)
+					hrp.CFrame = CFrame.new(hrp.Position, (workspace.CurrentCamera.CFrame*frontoffset).Position)
 				end
 				if flying and not keyDown(Enum.KeyCode.W) and not keyDown(Enum.KeyCode.A) and not keyDown(Enum.KeyCode.S) and not keyDown(Enum.KeyCode.D) and not keyDown(Enum.KeyCode.Q) and not keyDown(Enum.KeyCode.E) then
 					hrp.CFrame = CFrame.new(pos, (workspace.CurrentCamera.CFrame*frontoffset).Position)
@@ -324,9 +409,9 @@ local function QEKSO_fake_script() -- generalgamefucker.LocalScript
 				end
 			end
 		end)
-
+	
 		uiservice.InputBegan:connect(function(key,processed)
-		if processed then return end
+			if processed then return end
 			if key.KeyCode == Enum.KeyCode.F and game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then
 				flying = not flying
 				if flying then
@@ -344,20 +429,20 @@ local function QEKSO_fake_script() -- generalgamefucker.LocalScript
 				flyspeed = flyspeed + 50
 			end
 		end)
-
+	
 		altmessage("tfly", function()
-		cframefly = not cframefly
-		print("cframefly is now", cframefly)
+			cframefly = not cframefly
+			print("cframefly is now", cframefly)
 		end)
-
+	
 		altmessage("flyspeed", function(msg)
 			flyspeed = msg:match("%d+")
 		end)
-
+	
 		altmessage("flykeybind", function()
 			keytoggle = not keytoggle
 		end)
-
+	
 		altmessage("flyupdown", function()
 			updown = not updown
 		end)
@@ -408,4 +493,4 @@ local function QEKSO_fake_script() -- generalgamefucker.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(QEKSO_fake_script)()
+coroutine.wrap(VWRAM_fake_script)()
