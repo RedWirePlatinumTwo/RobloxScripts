@@ -1514,7 +1514,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function XWCTCLV_fake_script() -- Aimbot.LocalScript 
+local function SDNDXOT_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	local gui = script.Parent
@@ -1888,7 +1888,9 @@ local function XWCTCLV_fake_script() -- Aimbot.LocalScript
 					end
 				end
 				themeCheck("BorderColor3", getOrDefault(Theme, "Border"))
-				themeCheck("BackgroundColor3", getOrDefault(Theme, "Background"))
+				if v.Name ~= "colorDisplay" then
+					themeCheck("BackgroundColor3", getOrDefault(Theme, "Background"))
+				end
 				if v.Name ~= "X" and not table.find(toggleTxt, v) then
 					themeCheck("TextColor3", getOrDefault(Theme, "Text"))
 				end
@@ -2826,4 +2828,4 @@ local function XWCTCLV_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(XWCTCLV_fake_script)()
+coroutine.wrap(SDNDXOT_fake_script)()
