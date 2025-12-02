@@ -2798,6 +2798,7 @@ local function OVBEE_fake_script() -- Aimbot.LocalScript
 		for name, color in pairs(Theme) do
 			local clone = themeTemplate:Clone()
 			clone.Parent = globalsettings
+			clone.Visible = true
 			clone.Name = "Theme"..name
 			clone.Text = clone.Name
 			local defaultColor = createGlobalStats().Theme[name]
