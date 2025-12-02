@@ -646,9 +646,9 @@ colorDisplay.Parent = ThemeTemplate
 colorDisplay.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 colorDisplay.BorderColor3 = Color3.fromRGB(0, 0, 0)
 colorDisplay.BorderSizePixel = 0
-colorDisplay.Position = UDim2.new(1.06508875, 0, 0.123379461, 0)
-colorDisplay.Size = UDim2.new(0, 151, 0, 17)
-colorDisplay.Visible = false
+colorDisplay.Position = UDim2.new(1.06500006, 0, 0.578000009, 0)
+colorDisplay.Size = UDim2.new(0, 151, 0, 20)
+colorDisplay.ZIndex = 2
 
 value_4.Name = "value"
 value_4.Parent = ThemeTemplate
@@ -658,7 +658,7 @@ value_4.Position = UDim2.new(0.00589946331, 0, 0.512724817, 0)
 value_4.Size = UDim2.new(0, 335, 0, 28)
 value_4.Font = Enum.Font.TitilliumWeb
 value_4.PlaceholderColor3 = Color3.fromRGB(0, 100, 0)
-value_4.PlaceholderText = "0, 0, 0"
+value_4.PlaceholderText = "255, 255, 255"
 value_4.Text = ""
 value_4.TextColor3 = Color3.fromRGB(0, 170, 0)
 value_4.TextSize = 28.000
@@ -1514,7 +1514,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function OVBEE_fake_script() -- Aimbot.LocalScript 
+local function XWCTCLV_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	local gui = script.Parent
@@ -2826,4 +2826,4 @@ local function OVBEE_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(OVBEE_fake_script)()
+coroutine.wrap(XWCTCLV_fake_script)()
