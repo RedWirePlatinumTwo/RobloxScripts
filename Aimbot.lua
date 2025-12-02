@@ -46,6 +46,9 @@ local value_2 = Instance.new("TextButton")
 local MouseSensitivity = Instance.new("TextLabel")
 local About = Instance.new("TextLabel")
 local value_3 = Instance.new("TextBox")
+local ThemeTemplate = Instance.new("TextLabel")
+local colorDisplay = Instance.new("Frame")
+local value_4 = Instance.new("TextBox")
 local keybinds = Instance.new("TextButton")
 local TeamUI = Instance.new("Frame")
 local WhitelistedTeams = Instance.new("ScrollingFrame")
@@ -85,33 +88,33 @@ local X_4 = Instance.new("TextButton")
 local ScrollingFrame_4 = Instance.new("ScrollingFrame")
 local UIListLayout_6 = Instance.new("UIListLayout")
 local AutoTarget = Instance.new("TextLabel")
-local value_4 = Instance.new("TextButton")
-local Target = Instance.new("TextLabel")
 local value_5 = Instance.new("TextButton")
-local WhitelistFriends = Instance.new("TextLabel")
+local Target = Instance.new("TextLabel")
 local value_6 = Instance.new("TextButton")
+local WhitelistFriends = Instance.new("TextLabel")
+local value_7 = Instance.new("TextButton")
 local MaxStuds = Instance.new("TextLabel")
-local value_7 = Instance.new("TextBox")
+local value_8 = Instance.new("TextBox")
 local OwnTeamWhitelisted = Instance.new("TextLabel")
-local value_8 = Instance.new("TextButton")
-local TargetCloserPlayers = Instance.new("TextLabel")
 local value_9 = Instance.new("TextButton")
+local TargetCloserPlayers = Instance.new("TextLabel")
+local value_10 = Instance.new("TextButton")
 local About_2 = Instance.new("TextLabel")
 local TargetNPCs = Instance.new("TextLabel")
-local value_10 = Instance.new("TextButton")
-local IgnorePlayers = Instance.new("TextLabel")
 local value_11 = Instance.new("TextButton")
-local TargetPrioOnly = Instance.new("TextLabel")
+local IgnorePlayers = Instance.new("TextLabel")
 local value_12 = Instance.new("TextButton")
-local FirstPersonEnabled = Instance.new("TextLabel")
+local TargetPrioOnly = Instance.new("TextLabel")
 local value_13 = Instance.new("TextButton")
-local AimMethod = Instance.new("TextLabel")
+local FirstPersonEnabled = Instance.new("TextLabel")
 local value_14 = Instance.new("TextButton")
+local AimMethod = Instance.new("TextLabel")
+local value_15 = Instance.new("TextButton")
 local About_3 = Instance.new("TextLabel")
 local TargetOffScreen = Instance.new("TextLabel")
-local value_15 = Instance.new("TextButton")
-local EnableRaycasting = Instance.new("TextLabel")
 local value_16 = Instance.new("TextButton")
+local EnableRaycasting = Instance.new("TextLabel")
+local value_17 = Instance.new("TextButton")
 local customtargetcons = Instance.new("TextButton")
 
 --Properties:
@@ -621,6 +624,46 @@ value_3.TextSize = 28.000
 value_3.TextStrokeTransparency = 0.000
 value_3.TextXAlignment = Enum.TextXAlignment.Left
 
+ThemeTemplate.Name = "ThemeTemplate"
+ThemeTemplate.Parent = ScrollingFrame_2
+ThemeTemplate.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ThemeTemplate.BackgroundTransparency = 1.000
+ThemeTemplate.BorderColor3 = Color3.fromRGB(0, 170, 0)
+ThemeTemplate.BorderSizePixel = 0
+ThemeTemplate.Position = UDim2.new(0, 0, 0.824561417, 0)
+ThemeTemplate.Size = UDim2.new(0, 169, 0, 59)
+ThemeTemplate.Font = Enum.Font.TitilliumWeb
+ThemeTemplate.Text = "Autofill Team Names:"
+ThemeTemplate.TextColor3 = Color3.fromRGB(0, 170, 0)
+ThemeTemplate.TextSize = 28.000
+ThemeTemplate.TextStrokeTransparency = 0.000
+ThemeTemplate.TextXAlignment = Enum.TextXAlignment.Left
+ThemeTemplate.TextYAlignment = Enum.TextYAlignment.Top
+
+colorDisplay.Name = "colorDisplay"
+colorDisplay.Parent = ThemeTemplate
+colorDisplay.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+colorDisplay.BorderColor3 = Color3.fromRGB(0, 0, 0)
+colorDisplay.BorderSizePixel = 0
+colorDisplay.Position = UDim2.new(1.06508875, 0, 0.123379461, 0)
+colorDisplay.Size = UDim2.new(0, 151, 0, 17)
+colorDisplay.Visible = false
+
+value_4.Name = "value"
+value_4.Parent = ThemeTemplate
+value_4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_4.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_4.Position = UDim2.new(0.00589946331, 0, 0.512724817, 0)
+value_4.Size = UDim2.new(0, 335, 0, 28)
+value_4.Font = Enum.Font.TitilliumWeb
+value_4.PlaceholderColor3 = Color3.fromRGB(0, 100, 0)
+value_4.PlaceholderText = "0, 0, 0"
+value_4.Text = ""
+value_4.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_4.TextSize = 28.000
+value_4.TextStrokeTransparency = 0.000
+value_4.TextXAlignment = Enum.TextXAlignment.Left
+
 keybinds.Name = "keybinds"
 keybinds.Parent = GlobalSettingsUI
 keybinds.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -1065,18 +1108,18 @@ AutoTarget.TextStrokeTransparency = 0.000
 AutoTarget.TextXAlignment = Enum.TextXAlignment.Left
 AutoTarget.TextYAlignment = Enum.TextYAlignment.Top
 
-value_4.Name = "value"
-value_4.Parent = AutoTarget
-value_4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_4.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_4.Position = UDim2.new(-0.000219726557, 0, 0.522047281, 0)
-value_4.Size = UDim2.new(0, 326, 0, 28)
-value_4.Font = Enum.Font.TitilliumWeb
-value_4.Text = "true"
-value_4.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_4.TextSize = 28.000
-value_4.TextStrokeTransparency = 0.000
-value_4.TextXAlignment = Enum.TextXAlignment.Left
+value_5.Name = "value"
+value_5.Parent = AutoTarget
+value_5.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_5.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_5.Position = UDim2.new(-0.000219726557, 0, 0.522047281, 0)
+value_5.Size = UDim2.new(0, 326, 0, 28)
+value_5.Font = Enum.Font.TitilliumWeb
+value_5.Text = "true"
+value_5.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_5.TextSize = 28.000
+value_5.TextStrokeTransparency = 0.000
+value_5.TextXAlignment = Enum.TextXAlignment.Left
 
 Target.Name = "Target"
 Target.Parent = ScrollingFrame_4
@@ -1094,18 +1137,18 @@ Target.TextStrokeTransparency = 0.000
 Target.TextXAlignment = Enum.TextXAlignment.Left
 Target.TextYAlignment = Enum.TextYAlignment.Top
 
-value_5.Name = "value"
-value_5.Parent = Target
-value_5.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_5.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_5.Position = UDim2.new(0, 0, 0.532047331, 0)
-value_5.Size = UDim2.new(0, 325, 0, 28)
-value_5.Font = Enum.Font.TitilliumWeb
-value_5.Text = "Head"
-value_5.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_5.TextSize = 28.000
-value_5.TextStrokeTransparency = 0.000
-value_5.TextXAlignment = Enum.TextXAlignment.Left
+value_6.Name = "value"
+value_6.Parent = Target
+value_6.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_6.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_6.Position = UDim2.new(0, 0, 0.532047331, 0)
+value_6.Size = UDim2.new(0, 325, 0, 28)
+value_6.Font = Enum.Font.TitilliumWeb
+value_6.Text = "Head"
+value_6.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_6.TextSize = 28.000
+value_6.TextStrokeTransparency = 0.000
+value_6.TextXAlignment = Enum.TextXAlignment.Left
 
 WhitelistFriends.Name = "WhitelistFriends"
 WhitelistFriends.Parent = ScrollingFrame_4
@@ -1123,18 +1166,18 @@ WhitelistFriends.TextStrokeTransparency = 0.000
 WhitelistFriends.TextXAlignment = Enum.TextXAlignment.Left
 WhitelistFriends.TextYAlignment = Enum.TextYAlignment.Top
 
-value_6.Name = "value"
-value_6.Parent = WhitelistFriends
-value_6.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_6.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_6.Position = UDim2.new(0.00591715984, 0, 0.542252779, 0)
-value_6.Size = UDim2.new(0, 324, 0, 28)
-value_6.Font = Enum.Font.TitilliumWeb
-value_6.Text = "false"
-value_6.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_6.TextSize = 28.000
-value_6.TextStrokeTransparency = 0.000
-value_6.TextXAlignment = Enum.TextXAlignment.Left
+value_7.Name = "value"
+value_7.Parent = WhitelistFriends
+value_7.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_7.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_7.Position = UDim2.new(0.00591715984, 0, 0.542252779, 0)
+value_7.Size = UDim2.new(0, 324, 0, 28)
+value_7.Font = Enum.Font.TitilliumWeb
+value_7.Text = "false"
+value_7.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_7.TextSize = 28.000
+value_7.TextStrokeTransparency = 0.000
+value_7.TextXAlignment = Enum.TextXAlignment.Left
 
 MaxStuds.Name = "MaxStuds"
 MaxStuds.Parent = ScrollingFrame_4
@@ -1152,20 +1195,20 @@ MaxStuds.TextStrokeTransparency = 0.000
 MaxStuds.TextXAlignment = Enum.TextXAlignment.Left
 MaxStuds.TextYAlignment = Enum.TextYAlignment.Top
 
-value_7.Name = "value"
-value_7.Parent = MaxStuds
-value_7.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_7.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_7.Position = UDim2.new(-0.00595760904, 0, 0.490557462, 0)
-value_7.Size = UDim2.new(0, 326, 0, 28)
-value_7.Font = Enum.Font.TitilliumWeb
-value_7.PlaceholderColor3 = Color3.fromRGB(0, 100, 0)
-value_7.PlaceholderText = "Default is 500"
-value_7.Text = ""
-value_7.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_7.TextSize = 28.000
-value_7.TextStrokeTransparency = 0.000
-value_7.TextXAlignment = Enum.TextXAlignment.Left
+value_8.Name = "value"
+value_8.Parent = MaxStuds
+value_8.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_8.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_8.Position = UDim2.new(-0.00595760904, 0, 0.490557462, 0)
+value_8.Size = UDim2.new(0, 326, 0, 28)
+value_8.Font = Enum.Font.TitilliumWeb
+value_8.PlaceholderColor3 = Color3.fromRGB(0, 100, 0)
+value_8.PlaceholderText = "Default is 500"
+value_8.Text = ""
+value_8.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_8.TextSize = 28.000
+value_8.TextStrokeTransparency = 0.000
+value_8.TextXAlignment = Enum.TextXAlignment.Left
 
 OwnTeamWhitelisted.Name = "OwnTeamWhitelisted"
 OwnTeamWhitelisted.Parent = ScrollingFrame_4
@@ -1183,18 +1226,18 @@ OwnTeamWhitelisted.TextStrokeTransparency = 0.000
 OwnTeamWhitelisted.TextXAlignment = Enum.TextXAlignment.Left
 OwnTeamWhitelisted.TextYAlignment = Enum.TextYAlignment.Top
 
-value_8.Name = "value"
-value_8.Parent = OwnTeamWhitelisted
-value_8.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_8.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_8.Position = UDim2.new(4.0449333e-05, 0, 0.544638038, 0)
-value_8.Size = UDim2.new(0, 324, 0, 28)
-value_8.Font = Enum.Font.TitilliumWeb
-value_8.Text = "true"
-value_8.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_8.TextSize = 28.000
-value_8.TextStrokeTransparency = 0.000
-value_8.TextXAlignment = Enum.TextXAlignment.Left
+value_9.Name = "value"
+value_9.Parent = OwnTeamWhitelisted
+value_9.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_9.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_9.Position = UDim2.new(4.0449333e-05, 0, 0.544638038, 0)
+value_9.Size = UDim2.new(0, 324, 0, 28)
+value_9.Font = Enum.Font.TitilliumWeb
+value_9.Text = "true"
+value_9.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_9.TextSize = 28.000
+value_9.TextStrokeTransparency = 0.000
+value_9.TextXAlignment = Enum.TextXAlignment.Left
 
 TargetCloserPlayers.Name = "TargetCloserPlayers"
 TargetCloserPlayers.Parent = ScrollingFrame_4
@@ -1212,18 +1255,18 @@ TargetCloserPlayers.TextStrokeTransparency = 0.000
 TargetCloserPlayers.TextXAlignment = Enum.TextXAlignment.Left
 TargetCloserPlayers.TextYAlignment = Enum.TextYAlignment.Top
 
-value_9.Name = "value"
-value_9.Parent = TargetCloserPlayers
-value_9.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_9.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_9.Position = UDim2.new(0.00591715984, 0, 0.243091717, 0)
-value_9.Size = UDim2.new(0, 324, 0, 28)
-value_9.Font = Enum.Font.TitilliumWeb
-value_9.Text = "true"
-value_9.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_9.TextSize = 28.000
-value_9.TextStrokeTransparency = 0.000
-value_9.TextXAlignment = Enum.TextXAlignment.Left
+value_10.Name = "value"
+value_10.Parent = TargetCloserPlayers
+value_10.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_10.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_10.Position = UDim2.new(0.00591715984, 0, 0.243091717, 0)
+value_10.Size = UDim2.new(0, 324, 0, 28)
+value_10.Font = Enum.Font.TitilliumWeb
+value_10.Text = "true"
+value_10.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_10.TextSize = 28.000
+value_10.TextStrokeTransparency = 0.000
+value_10.TextXAlignment = Enum.TextXAlignment.Left
 
 About_2.Name = "About"
 About_2.Parent = TargetCloserPlayers
@@ -1256,18 +1299,18 @@ TargetNPCs.TextStrokeTransparency = 0.000
 TargetNPCs.TextXAlignment = Enum.TextXAlignment.Left
 TargetNPCs.TextYAlignment = Enum.TextYAlignment.Top
 
-value_10.Name = "value"
-value_10.Parent = TargetNPCs
-value_10.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_10.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_10.Position = UDim2.new(0, 0, 0.446332663, 0)
-value_10.Size = UDim2.new(0, 325, 0, 28)
-value_10.Font = Enum.Font.TitilliumWeb
-value_10.Text = "false"
-value_10.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_10.TextSize = 28.000
-value_10.TextStrokeTransparency = 0.000
-value_10.TextXAlignment = Enum.TextXAlignment.Left
+value_11.Name = "value"
+value_11.Parent = TargetNPCs
+value_11.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_11.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_11.Position = UDim2.new(0, 0, 0.446332663, 0)
+value_11.Size = UDim2.new(0, 325, 0, 28)
+value_11.Font = Enum.Font.TitilliumWeb
+value_11.Text = "false"
+value_11.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_11.TextSize = 28.000
+value_11.TextStrokeTransparency = 0.000
+value_11.TextXAlignment = Enum.TextXAlignment.Left
 
 IgnorePlayers.Name = "IgnorePlayers"
 IgnorePlayers.Parent = ScrollingFrame_4
@@ -1285,18 +1328,18 @@ IgnorePlayers.TextStrokeTransparency = 0.000
 IgnorePlayers.TextXAlignment = Enum.TextXAlignment.Left
 IgnorePlayers.TextYAlignment = Enum.TextYAlignment.Top
 
-value_11.Name = "value"
-value_11.Parent = IgnorePlayers
-value_11.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_11.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_11.Position = UDim2.new(0, 0, 0.54871428, 0)
-value_11.Size = UDim2.new(0, 325, 0, 28)
-value_11.Font = Enum.Font.TitilliumWeb
-value_11.Text = "false"
-value_11.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_11.TextSize = 28.000
-value_11.TextStrokeTransparency = 0.000
-value_11.TextXAlignment = Enum.TextXAlignment.Left
+value_12.Name = "value"
+value_12.Parent = IgnorePlayers
+value_12.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_12.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_12.Position = UDim2.new(0, 0, 0.54871428, 0)
+value_12.Size = UDim2.new(0, 325, 0, 28)
+value_12.Font = Enum.Font.TitilliumWeb
+value_12.Text = "false"
+value_12.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_12.TextSize = 28.000
+value_12.TextStrokeTransparency = 0.000
+value_12.TextXAlignment = Enum.TextXAlignment.Left
 
 TargetPrioOnly.Name = "TargetPrioOnly"
 TargetPrioOnly.Parent = ScrollingFrame_4
@@ -1313,18 +1356,18 @@ TargetPrioOnly.TextStrokeTransparency = 0.000
 TargetPrioOnly.TextXAlignment = Enum.TextXAlignment.Left
 TargetPrioOnly.TextYAlignment = Enum.TextYAlignment.Top
 
-value_12.Name = "value"
-value_12.Parent = TargetPrioOnly
-value_12.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_12.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_12.Position = UDim2.new(-0.000219726557, 0, 0.522047281, 0)
-value_12.Size = UDim2.new(0, 326, 0, 28)
-value_12.Font = Enum.Font.TitilliumWeb
-value_12.Text = "false"
-value_12.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_12.TextSize = 28.000
-value_12.TextStrokeTransparency = 0.000
-value_12.TextXAlignment = Enum.TextXAlignment.Left
+value_13.Name = "value"
+value_13.Parent = TargetPrioOnly
+value_13.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_13.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_13.Position = UDim2.new(-0.000219726557, 0, 0.522047281, 0)
+value_13.Size = UDim2.new(0, 326, 0, 28)
+value_13.Font = Enum.Font.TitilliumWeb
+value_13.Text = "false"
+value_13.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_13.TextSize = 28.000
+value_13.TextStrokeTransparency = 0.000
+value_13.TextXAlignment = Enum.TextXAlignment.Left
 
 FirstPersonEnabled.Name = "FirstPersonEnabled"
 FirstPersonEnabled.Parent = ScrollingFrame_4
@@ -1342,18 +1385,18 @@ FirstPersonEnabled.TextStrokeTransparency = 0.000
 FirstPersonEnabled.TextXAlignment = Enum.TextXAlignment.Left
 FirstPersonEnabled.TextYAlignment = Enum.TextYAlignment.Top
 
-value_13.Name = "value"
-value_13.Parent = FirstPersonEnabled
-value_13.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_13.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_13.Position = UDim2.new(0.00591715984, 0, 0.502716422, 0)
-value_13.Size = UDim2.new(0, 337, 0, 28)
-value_13.Font = Enum.Font.TitilliumWeb
-value_13.Text = "true"
-value_13.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_13.TextSize = 28.000
-value_13.TextStrokeTransparency = 0.000
-value_13.TextXAlignment = Enum.TextXAlignment.Left
+value_14.Name = "value"
+value_14.Parent = FirstPersonEnabled
+value_14.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_14.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_14.Position = UDim2.new(0.00591715984, 0, 0.502716422, 0)
+value_14.Size = UDim2.new(0, 337, 0, 28)
+value_14.Font = Enum.Font.TitilliumWeb
+value_14.Text = "true"
+value_14.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_14.TextSize = 28.000
+value_14.TextStrokeTransparency = 0.000
+value_14.TextXAlignment = Enum.TextXAlignment.Left
 
 AimMethod.Name = "AimMethod"
 AimMethod.Parent = ScrollingFrame_4
@@ -1371,18 +1414,18 @@ AimMethod.TextStrokeTransparency = 0.000
 AimMethod.TextXAlignment = Enum.TextXAlignment.Left
 AimMethod.TextYAlignment = Enum.TextYAlignment.Top
 
-value_14.Name = "value"
-value_14.Parent = AimMethod
-value_14.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_14.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_14.Position = UDim2.new(0.00294979103, 0, 0.335594594, 0)
-value_14.Size = UDim2.new(0, 336, 0, 28)
-value_14.Font = Enum.Font.TitilliumWeb
-value_14.Text = "Camera"
-value_14.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_14.TextSize = 28.000
-value_14.TextStrokeTransparency = 0.000
-value_14.TextXAlignment = Enum.TextXAlignment.Left
+value_15.Name = "value"
+value_15.Parent = AimMethod
+value_15.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_15.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_15.Position = UDim2.new(0.00294979103, 0, 0.335594594, 0)
+value_15.Size = UDim2.new(0, 336, 0, 28)
+value_15.Font = Enum.Font.TitilliumWeb
+value_15.Text = "Camera"
+value_15.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_15.TextSize = 28.000
+value_15.TextStrokeTransparency = 0.000
+value_15.TextXAlignment = Enum.TextXAlignment.Left
 
 About_3.Name = "About"
 About_3.Parent = AimMethod
@@ -1415,18 +1458,18 @@ TargetOffScreen.TextStrokeTransparency = 0.000
 TargetOffScreen.TextXAlignment = Enum.TextXAlignment.Left
 TargetOffScreen.TextYAlignment = Enum.TextYAlignment.Top
 
-value_15.Name = "value"
-value_15.Parent = TargetOffScreen
-value_15.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_15.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_15.Position = UDim2.new(-0.000219726557, 0, 0.522047281, 0)
-value_15.Size = UDim2.new(0, 326, 0, 28)
-value_15.Font = Enum.Font.TitilliumWeb
-value_15.Text = "false"
-value_15.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_15.TextSize = 28.000
-value_15.TextStrokeTransparency = 0.000
-value_15.TextXAlignment = Enum.TextXAlignment.Left
+value_16.Name = "value"
+value_16.Parent = TargetOffScreen
+value_16.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_16.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_16.Position = UDim2.new(-0.000219726557, 0, 0.522047281, 0)
+value_16.Size = UDim2.new(0, 326, 0, 28)
+value_16.Font = Enum.Font.TitilliumWeb
+value_16.Text = "false"
+value_16.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_16.TextSize = 28.000
+value_16.TextStrokeTransparency = 0.000
+value_16.TextXAlignment = Enum.TextXAlignment.Left
 
 EnableRaycasting.Name = "EnableRaycasting"
 EnableRaycasting.Parent = ScrollingFrame_4
@@ -1443,18 +1486,18 @@ EnableRaycasting.TextStrokeTransparency = 0.000
 EnableRaycasting.TextXAlignment = Enum.TextXAlignment.Left
 EnableRaycasting.TextYAlignment = Enum.TextYAlignment.Top
 
-value_16.Name = "value"
-value_16.Parent = EnableRaycasting
-value_16.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-value_16.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_16.Position = UDim2.new(-0.000219726557, 0, 0.522047281, 0)
-value_16.Size = UDim2.new(0, 326, 0, 28)
-value_16.Font = Enum.Font.TitilliumWeb
-value_16.Text = "true"
-value_16.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_16.TextSize = 28.000
-value_16.TextStrokeTransparency = 0.000
-value_16.TextXAlignment = Enum.TextXAlignment.Left
+value_17.Name = "value"
+value_17.Parent = EnableRaycasting
+value_17.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+value_17.BorderColor3 = Color3.fromRGB(0, 170, 0)
+value_17.Position = UDim2.new(-0.000219726557, 0, 0.522047281, 0)
+value_17.Size = UDim2.new(0, 326, 0, 28)
+value_17.Font = Enum.Font.TitilliumWeb
+value_17.Text = "true"
+value_17.TextColor3 = Color3.fromRGB(0, 170, 0)
+value_17.TextSize = 28.000
+value_17.TextStrokeTransparency = 0.000
+value_17.TextXAlignment = Enum.TextXAlignment.Left
 
 customtargetcons.Name = "customtargetcons"
 customtargetcons.Parent = GameSettingsUI
@@ -1470,11 +1513,9 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function KMQXOD_fake_script() -- Aimbot.LocalScript 
+local function IHHTRYE_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
-	
 	local gui = script.Parent
 	local MainFrame = gui.MFrame
 	local wlui = gui.ManagerUI
@@ -1491,8 +1532,12 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 	local npcs = {}
 	local uiservice = game:GetService("UserInputService")
 	local chrs = {}
+	local toggleTxt = {
+		[MainFrame.CurrentTarget] = false,
+		[MainFrame.Status] = false
+	}
 	
-	local function sendnotif(title, text)
+	local function sendNotif(title, text)
 		print(title..":", text)
 		text = "<font color = '#"..MainFrame.BorderColor3:ToHex().."'>["..title.."]: "..text.."</font>"
 		if tcservice.ChatVersion == Enum.ChatVersion.LegacyChatService then
@@ -1504,8 +1549,8 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 	
 	if not RedsAimbot then
 		getgenv().RedsAimbot = {}
-		sendnotif("Aimbot Update", [[Changes 10/27/25:
-	- Improved manual targeting to check to use PlayerFromCharacter instead of FindFirstChild]])
+		sendNotif("Aimbot Update", [[Changes 12/1/25:
+		- Added theme customization in global settings]])
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -1513,7 +1558,6 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 			end
 			if v.ClassName == "ScrollingFrame" then
 				v.AutomaticCanvasSize = Enum.AutomaticSize.Y
-				v.ScrollBarImageColor3 = Color3.new(0,0.66,0)
 			end
 		end
 	
@@ -1655,7 +1699,7 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 	
 		end
 	
-		function valuesort(t, func)
+		local function valuesort(t, func)
 			local revert = {}
 			local vals = {}
 	
@@ -1672,6 +1716,10 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 				end
 			end
 		end
+		
+		local function has(ins, propName)
+			return pcall(function() return ins[propName] end)
+		end
 	
 		local teams = game:GetService("Teams")
 		local WhitelistedPlrs = {}
@@ -1685,54 +1733,67 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 		local GlobalStats
 		local GameStats
 		local Keybinds
+		local Theme
 	
 		local function createGameStats()
-			local newgamestats = {}
-			newgamestats.Target = "Head"
-			newgamestats.TargetNPCs = false
-			newgamestats.AutoTarget = true
-			newgamestats.WhitelistFriends = false
-			newgamestats.MaxStuds = 500
-			newgamestats.OwnTeamWhitelisted = true
-			newgamestats.TargetCloserPlayers = true
-			newgamestats.Teams = {}
-			newgamestats.IgnorePlayers = false
-			newgamestats.TargetPrioOnly = false
-			newgamestats.FirstPersonEnabled = true
-			newgamestats.AimMethod = "Mouse"
-			newgamestats.CustomTargetConditions = {}
-			newgamestats.TargetOffScreen = false
-			newgamestats.EnableRaycasting = true
-			return newgamestats
+			local newGameStats = {}
+			newGameStats.Target = "Head"
+			newGameStats.TargetNPCs = false
+			newGameStats.AutoTarget = true
+			newGameStats.WhitelistFriends = false
+			newGameStats.MaxStuds = 500
+			newGameStats.OwnTeamWhitelisted = true
+			newGameStats.TargetCloserPlayers = true
+			newGameStats.Teams = {}
+			newGameStats.IgnorePlayers = false
+			newGameStats.TargetPrioOnly = false
+			newGameStats.FirstPersonEnabled = true
+			newGameStats.AimMethod = "Mouse"
+			newGameStats.CustomTargetConditions = {}
+			newGameStats.TargetOffScreen = false
+			newGameStats.EnableRaycasting = true
+			return newGameStats
 		end
 	
 		local function createGlobalStats()
-			local newglobalstats = {}
-			newglobalstats.TeamAutofill = true
-			newglobalstats.MouseSensitivity = 0.25
-			newglobalstats.Keybinds = {}
-			newglobalstats.Keybinds.AimbotToggle = {}
-			newglobalstats.Keybinds.AimbotToggle.Key1 = Enum.KeyCode.CapsLock
-			newglobalstats.Keybinds.AimbotToggle.Toggle = true
-			newglobalstats.Keybinds.TargetedPartToggle = {}
-			newglobalstats.Keybinds.TargetedPartToggle.Key1 = Enum.KeyCode.RightAlt
-			newglobalstats.Keybinds.TargetedPartToggle.Toggle = true
-			newglobalstats.Keybinds.GUIVisibilityToggle = {}
-			newglobalstats.Keybinds.GUIVisibilityToggle.Toggle = true
+			local newGlobalStats = {}
+			newGlobalStats.TeamAutofill = true
+			newGlobalStats.MouseSensitivity = 0.25
+			newGlobalStats.Keybinds = {}
+			local binds = newGlobalStats.Keybinds
+			binds.AimbotToggle = {}
+			binds.AimbotToggle.Key1 = Enum.KeyCode.CapsLock
+			binds.AimbotToggle.Toggle = true
+			binds.TargetedPartToggle = {}
+			binds.TargetedPartToggle.Key1 = Enum.KeyCode.RightAlt
+			binds.TargetedPartToggle.Toggle = true
+			binds.GUIVisibilityToggle = {}
+			binds.GUIVisibilityToggle.Toggle = true
 			local function addkeybinds(table)
 				for name,value in pairs(table) do
 					if type(value) == "boolean" then
-						newglobalstats.Keybinds[name] = {}
-						newglobalstats.Keybinds[name].Toggle = true
+						binds[name] = {}
+						binds[name].Toggle = true
 					end
 				end
 			end
 			addkeybinds(createGameStats())
-			addkeybinds(newglobalstats)
-			return newglobalstats
+			addkeybinds(newGlobalStats)
+			newGlobalStats.Theme = {}
+			local theme = newGlobalStats.Theme
+			theme.Yes = Color3.fromRGB(0, 170, 0)
+			theme.No = Color3.fromRGB(170, 0, 0)
+			theme.Border = theme.Yes
+			theme.Background = Color3.fromRGB(0, 45, 0)
+			theme.Text = theme.Yes
+			theme.TextStroke = Color3.fromRGB(0, 0, 0)
+			theme.ButtonBackground = Color3.fromRGB(0, 0, 0)
+			theme.PlaceholderText = Color3.fromRGB(0, 100, 0)
+			theme.ScrollBar = theme.Yes
+			return newGlobalStats
 		end
 	
-		local function getOrCreate(tbl, value)
+		local function getOrDefault(tbl, value)
 			if tbl[value] == nil then
 				if tbl == GameStats then
 					tbl[value] = createGameStats()[value]
@@ -1740,16 +1801,13 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 					tbl[value] = createGlobalStats()[value]
 				elseif tbl == Keybinds then
 					tbl[value] = createGlobalStats().Keybinds[value]
+				elseif tbl == Theme then
+					tbl[value] = createGlobalStats().Theme[value]
 				end
 				return tbl[value]
 			else
 				return tbl[value]
 			end
-		end
-	
-		local function setOrCreate(tbl, value, newvalue)
-			getOrCreate(tbl, value)
-			tbl[value] = newvalue
 		end
 	
 		local function clearOldValues(t)
@@ -1760,21 +1818,21 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 				end
 			end
 		end
-		
+	
 		local function priorityCheck(plr)
-			local priorOnly = getOrCreate(GameStats, "TargetPrioOnly")
+			local priorOnly = getOrDefault(GameStats, "TargetPrioOnly")
 			return (table.find(PrioritizedPlrs, plr) and priorOnly) or not priorOnly or #PrioritizedPlrs == 0
 		end
-		
+	
 		local cond = targetingui.ScrollingFrame.Condition
 		local function addGUICondition(index)
-			local txt = getOrCreate(GameStats, "CustomTargetConditions")[index] or ""
+			local txt = getOrDefault(GameStats, "CustomTargetConditions")[index] or ""
 			local clone = cond:Clone()
 			clone.Parent = cond.Parent
 			clone.Visible = true
 			clone.value.Text = txt
 			clone.value.FocusLost:connect(function()
-				getOrCreate(GameStats, "CustomTargetConditions")[index] = clone.value.Text
+				getOrDefault(GameStats, "CustomTargetConditions")[index] = clone.value.Text
 			end)
 		end
 	
@@ -1811,7 +1869,8 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 			GlobalStats = createGlobalStats()
 			GameStats = createGameStats()
 		end
-		Keybinds = getOrCreate(GlobalStats, "Keybinds")
+		Keybinds = getOrDefault(GlobalStats, "Keybinds")
+		Theme = getOrDefault(GlobalStats, "Theme")
 		getgenv().RedsAimbot.GlobalStats = GlobalStats
 		getgenv().RedsAimbot.Misc = misc
 		getgenv().RedsAimbot.GameStats = GameStats
@@ -1819,7 +1878,36 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 		clearOldValues(GameStats)
 		clearOldValues(GlobalStats)
 		clearOldValues(Keybinds)
-		
+	
+		local function applyTheme()
+			for i,v in pairs(gui:GetDescendants()) do
+				local function themeCheck(propName, color)
+					if has(v, propName) then
+						v[propName] = color
+					end
+				end
+				themeCheck("BorderColor3", getOrDefault(Theme, "Border"))
+				themeCheck("BackgroundColor3", getOrDefault(Theme, "Background"))
+				if v.Name ~= "X" and not table.find(toggleTxt, v) then
+					themeCheck("TextColor3", getOrDefault(Theme, "Text"))
+				end
+				for ins, val in pairs(toggleTxt) do
+					ins.TextColor3 = if val then getOrDefault(Theme, "Yes") else getOrDefault(Theme, "No")
+				end
+				if v.Name == "X" then
+					v.TextColor3 = getOrDefault(Theme, "No")
+				end
+				themeCheck("TextStrokeColor3", getOrDefault(Theme, "TextStroke"))
+				themeCheck("ScrollBarImageColor3", getOrDefault(Theme, "ScrollBar"))
+				if v.ClassName == "TextButton" or v.ClassName == "TextBox" then
+					v.BackgroundColor3 = getOrDefault(Theme, "ButtonBackground")
+				end
+				if v.ClassName == "TextBox" then
+					v.PlaceholderColor3 = getOrDefault(Theme, "PlaceholderText")
+				end
+			end
+		end
+		applyTheme()
 		local function updateKeybindTable(index, bindInfo)
 			if typeof(bindInfo) == "EnumItem" or typeof(bindInfo) == "string" then
 				local t = {}
@@ -1830,7 +1918,7 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 			end
 			return bindInfo
 		end
-		
+	
 		local function updateKeybindInstance(instance, bindInfo)
 			local function updateKey(index)
 				local k = bindInfo["Key"..index]
@@ -1869,15 +1957,15 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 			end
 		end
 	
-		local function savesettings()
+		local function saveSettings()
 			writefile("RedsAimbot/GlobalStats.lua", TableToString(GlobalStats, "GlobalStats"))
 			writefile("RedsAimbot/Games/"..game.PlaceId..".lua", TableToString(GameStats, "GameStats"))
 		end
 	
-		TableChanged(GlobalStats, savesettings, true)
-		TableChanged(GameStats, savesettings, true)
+		TableChanged(GlobalStats, saveSettings, true)
+		TableChanged(GameStats, saveSettings, true)
 	
-		local function addteamframe(ttable)
+		local function addTeamFrame(ttable)
 			local clone = teamui.WhitelistedTeams.whitelistframe:Clone()
 			clone.Parent = teamui.WhitelistedTeams
 			clone.TextLabel.Text = "["..ttable.team2.."] will be ignored when on ["..ttable.team1.."]"
@@ -1885,8 +1973,8 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 	
 			clone.undo.Activated:connect(function()
 				clone:Destroy()
-				local tfind = table.find(getOrCreate(GameStats, "Teams"),ttable)
-				table.remove(getOrCreate(GameStats, "Teams"),tfind)
+				local tfind = table.find(getOrDefault(GameStats, "Teams"),ttable)
+				table.remove(getOrDefault(GameStats, "Teams"),tfind)
 			end)
 	
 		end
@@ -1898,25 +1986,25 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 					clone.Parent = keybindsettings
 					clone.Name = name
 					clone.Text = name.." Keybind:"
-					local keybind = updateKeybindTable(name, getOrCreate(Keybinds, name))
+					local keybind = updateKeybindTable(name, getOrDefault(Keybinds, name))
 					updateKeybindInstance(clone, keybind)
 				end
 			end
 		end
 	
-		for i,v in pairs(getOrCreate(GameStats, "Teams")) do
-			addteamframe(v)
+		for i,v in pairs(getOrDefault(GameStats, "Teams")) do
+			addTeamFrame(v)
 		end
 		local function gameConditionCheck(id, condition)
-			if game.PlaceId == id and not table.find(getOrCreate(GameStats, "CustomTargetConditions"), condition) then
-				table.insert(getOrCreate(GameStats, "CustomTargetConditions"), condition)
+			if game.PlaceId == id and not table.find(getOrDefault(GameStats, "CustomTargetConditions"), condition) then
+				table.insert(getOrDefault(GameStats, "CustomTargetConditions"), condition)
 				local msg = "Auto-added targeting condition for game ID "..tostring(id)
-				sendnotif("Custom Targeting", msg)
+				sendNotif("Custom Targeting", msg)
 			end
 		end
 		gameConditionCheck(286090429, "not TargetCharacter:FindFirstChild(\"Cam\")")
 		gameConditionCheck(2788229376, "not TargetCharacter.BodyEffects[\"K.O\"].Value")
-		for i,v in pairs(getOrCreate(GameStats, "CustomTargetConditions")) do
+		for i,v in pairs(getOrDefault(GameStats, "CustomTargetConditions")) do
 			addGUICondition(i)
 		end
 	
@@ -1970,7 +2058,7 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 			local function isteamwhitelisted()
 				local wl = false
 	
-				for i,ttable in pairs(getOrCreate(GameStats, "Teams")) do
+				for i,ttable in pairs(getOrDefault(GameStats, "Teams")) do
 					if teams:FindFirstChild(ttable.team1) and teams:FindFirstChild(ttable.team2) then
 						if lplr.Team.Name == ttable.team1 and plr.Team.Name == ttable.team2 then
 							wl = true
@@ -1983,7 +2071,7 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 			end
 	
 			if lplr.Team then
-				if getOrCreate(GameStats, "OwnTeamWhitelisted") then
+				if getOrDefault(GameStats, "OwnTeamWhitelisted") then
 					return plr.Team ~= lplr.Team and not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
 				else
 					return not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
@@ -1992,11 +2080,11 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 				return not table.find(WhitelistedPlrs, plr)
 			end
 		end
-		
+	
 		local function meetsConditions(chr)
 			local conditionsmet = true
 			local plrFromChr = plrs:GetPlayerFromCharacter(chr)
-			for i, condition in pairs(getOrCreate(GameStats, "CustomTargetConditions")) do
+			for i, condition in pairs(getOrDefault(GameStats, "CustomTargetConditions")) do
 				local scriptSuccess, conditionMet = pcall(function()
 					if condition:find("TargetPlayer") and not plrFromChr or condition == "" then
 						return true
@@ -2012,8 +2100,8 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 			return conditionsmet
 		end
 	
-		local function selectcharacter(chr)
-			if misc.IsAimbotOn and not misc.TargetedCharacter and not getOrCreate(GameStats, "TargetCloserPlayers") or getOrCreate(GameStats, "TargetCloserPlayers") and misc.IsAimbotOn then
+		local function selectChr(chr)
+			if misc.IsAimbotOn and not misc.TargetedCharacter and not getOrDefault(GameStats, "TargetCloserPlayers") or getOrDefault(GameStats, "TargetCloserPlayers") and misc.IsAimbotOn then
 				local isprio
 				local isprio2
 				local plrFromChr = plrs:GetPlayerFromCharacter(chr)
@@ -2027,21 +2115,21 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 			end
 		end
 	
-		local function targetplayer(player)
+		local function targetPlr(player)
 			local humanoid
 			if player.Character then
 				humanoid = player.Character:FindFirstChildOfClass("Humanoid")
 			end
 			if player ~= lplr and humanoid and IsNotWhitelisted(player) and humanoid.Health > 0 then
-				selectcharacter(player.Character)
+				selectChr(player.Character)
 			end
 		end
 	
 		if not lplr.Character then
-			sendnotif("Aimbot", "spawn in the game for this to work")
+			sendNotif("Aimbot", "spawn in the game for this to work")
 			lplr.CharacterAdded:Wait()
 		end
-		
+	
 		local function isKeyActivated(bindInfo, shouldToggle)
 			local function keyDown(keycode)
 				if typeof(keycode) ~= "EnumItem" then return true end
@@ -2056,10 +2144,10 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 		uiservice.InputBegan:connect(function(key,processed)
 			if processed then return end
 			if isKeyActivated(Keybinds.TargetedPartToggle, true) then
-				if getOrCreate(GameStats, "Target") == "Head" then
-					setOrCreate(GameStats, "Target", "HumanoidRootPart")
+				if getOrDefault(GameStats, "Target") == "Head" then
+					GameStats.Target = "HumanoidRootPart"
 				else
-					setOrCreate(GameStats, "Target", "Head")
+					GameStats.Target = "Head"
 				end
 			end
 			if isKeyActivated(Keybinds.AimbotToggle, true) then
@@ -2084,7 +2172,7 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 	
 		for i,v in pairs(gamesettings:GetChildren()) do
 			if v:FindFirstChild("value") then
-				if type(getOrCreate(GameStats, v.Name)) == "boolean" then
+				if type(getOrDefault(GameStats, v.Name)) == "boolean" then
 					v.value.Activated:connect(function()
 						GameStats[v.Name] = not GameStats[v.Name]
 					end)
@@ -2096,24 +2184,24 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 		end
 	
 		gamesettings.Target.value.Activated:connect(function()
-			if getOrCreate(GameStats, "Target") == "Head" then
-				setOrCreate(GameStats, "Target", "HumanoidRootPart")
+			if getOrDefault(GameStats, "Target") == "Head" then
+				GameStats.Target = "HumanoidRootPart"
 			else
-				setOrCreate(GameStats, "Target", "Head")
+				GameStats.Target = "Head"
 			end
-			gamesettings.Target.value.Text = getOrCreate(GameStats, "Target")
+			gamesettings.Target.value.Text = getOrDefault(GameStats, "Target")
 		end)
 	
 		Changed(gamesettings.MaxStuds.value, "Text", function(n)
 			local num = tonumber(n)
 			if num then
 				num = math.clamp(num,0,5000)
-				setOrCreate(GameStats, "MaxStuds", num)
+				GameStats.MaxStuds = num
 			end
 		end)
 	
 		for i,v in pairs(globalsettings:GetChildren()) do
-			if type(getOrCreate(GlobalStats, v.Name)) == "boolean" then
+			if type(getOrDefault(GlobalStats, v.Name)) == "boolean" then
 				v.value.Activated:connect(function()
 					GlobalStats[v.Name] = not GlobalStats[v.Name]
 				end)
@@ -2131,7 +2219,7 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 					Keybinds[v.Name].Toggle = true
 					v.value1.Text = "none"
 					v.value2.Text = "none"
-					savesettings()
+					saveSettings()
 					if v:FindFirstChild("keybindtype") then
 						v.keybindtype.Text = "Keybind type: Toggle"
 					end
@@ -2144,17 +2232,17 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 					task.wait()
 					Keybinds[v.Name]["Key"..index] = key.KeyCode
 					v["value"..index].Text = key.KeyCode.Name
-					savesettings()
+					saveSettings()
 				end
-				
+	
 				v.value1.Activated:connect(function()
 					changeKeybind(1)
 				end)
-				
+	
 				v.value2.Activated:connect(function()
 					changeKeybind(2)
 				end)
-				
+	
 				if v:FindFirstChild("keybindtype") then
 					v.keybindtype.Activated:connect(function()
 						Keybinds[v.Name].Toggle = not Keybinds[v.Name].Toggle
@@ -2176,20 +2264,20 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 				method.value.Text = "Camera"
 				method.About.Text = "Less universal, more stable."
 			end
-			setOrCreate(GameStats, "AimMethod", method.value.Text)
+			GameStats.AimMethod = method.value.Text
 		end)
 		Changed(globalsettings.MouseSensitivity.value, "Text", function (txt)
 			local num = tonumber(txt)
 			if num then
 				num = math.clamp(num,0,1)
-				setOrCreate(GlobalStats, "MouseSensitivity", num)
+				GlobalStats.MouseSensitivity = num
 			end
 		end)
 	
 		for i,v in pairs(teamui:GetChildren()) do
 			if v.ClassName == "TextBox" then
 				Changed(v, "Text", function(txt)
-					if getOrCreate(GlobalStats, "TeamAutofill") then
+					if getOrDefault(GlobalStats, "TeamAutofill") then
 						local tnames = {}
 	
 						for i,v in pairs(teams:GetTeams()) do
@@ -2221,7 +2309,7 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 			if teams:FindFirstChild(team1) and teams:FindFirstChild(team2) then
 				local canadd = true
 	
-				for i, teamtable in pairs(getOrCreate(GameStats, "Teams")) do
+				for i, teamtable in pairs(getOrDefault(GameStats, "Teams")) do
 					if teamtable.team1 == team1 and teamtable.team2 == team2 then
 						canadd = false
 						break
@@ -2230,8 +2318,8 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 	
 				if canadd then
 					local newtable = {["team1"] = team1 ,["team2"] = team2}
-					table.insert(getOrCreate(GameStats, "Teams"), newtable)
-					addteamframe(newtable)
+					table.insert(getOrDefault(GameStats, "Teams"), newtable)
+					addTeamFrame(newtable)
 				else
 					updatetxt("This already exists")
 				end
@@ -2291,7 +2379,7 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 				return querynewindex(self, val, newval)
 			end
 		end)
-		
+	
 		local function setQueryChecker(part)
 			if part:IsA("BasePart") and not part.CanCollide and not part.Parent:FindFirstChildOfClass("ClickDetector") and not part:FindFirstChildOfClass("ClickDetector") then
 				queriedParts[part] = true
@@ -2321,7 +2409,7 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 				table.remove(npcs, npcfind)
 			end
 		end)
-		
+	
 		local function addchrtotable(plr)
 			if plr.Character then
 				table.insert(chrs, plr.Character)
@@ -2336,14 +2424,14 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 				end
 			end)
 		end
-		
+	
 		for i,v in pairs(plrs:GetPlayers()) do
 			addchrtotable(v)
 		end
 		plrs.PlayerAdded:connect(addchrtotable)
 	
 		local function gettargetpart(chr)
-			local p = chr:FindFirstChild(getOrCreate(GameStats, "Target"))
+			local p = chr:FindFirstChild(getOrDefault(GameStats, "Target"))
 			if p then
 				return p
 			else
@@ -2362,13 +2450,13 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 					local x,y = (v.X - m.X), (v.Y - m.Y)
 					if onscreen then
 						if misc.IsAimbotOn then
-							if getOrCreate(GameStats, "AimMethod") == "Camera" then
+							if getOrDefault(GameStats, "AimMethod") == "Camera" then
 								camera.CFrame = CFrame.new(camera.CFrame.Position, partpos + misc.AimOffset)
 								uiservice.MouseDeltaSensitivity = 0
 							else
-								mousemoverel((x + misc.AimOffset.X) * getOrCreate(GlobalStats, "MouseSensitivity"), (y + misc.AimOffset.Y) * getOrCreate(GlobalStats, "MouseSensitivity"))
+								mousemoverel((x + misc.AimOffset.X) * getOrDefault(GlobalStats, "MouseSensitivity"), (y + misc.AimOffset.Y) * getOrDefault(GlobalStats, "MouseSensitivity"))
 							end
-							if not getOrCreate(GameStats, "FirstPersonEnabled") then
+							if not getOrDefault(GameStats, "FirstPersonEnabled") then
 								lplr.Character.Humanoid.RootPart.CFrame = CFrame.lookAt(lplr.Character.Humanoid.RootPart.Position, (partpos * Vector3.new(1,0,1)) + Vector3.new(0, lplr.Character.Humanoid.RootPart.Position.Y, 0))
 							end
 						end
@@ -2382,11 +2470,11 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 			else
 				uiservice.MouseDeltaSensitivity = 1
 			end
-			
+	
 			if not Keybinds.AimbotToggle.Toggle then
 				misc.IsAimbotOn = isKeyActivated(Keybinds.AimbotToggle)
 			end
-			
+	
 			for i,v in pairs(Keybinds) do
 				if GameStats[i] ~= nil and not v.Toggle then
 					GameStats[i] = isKeyActivated(Keybinds[i])
@@ -2397,25 +2485,25 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 			end
 	
 			if m.Target ~= nil then
-				if not getOrCreate(GameStats, "IgnorePlayers") then
+				if not getOrDefault(GameStats, "IgnorePlayers") then
 					for i,v in pairs(GetFamily(m.Target)) do
 						local plr = game:GetService("Players"):GetPlayerFromCharacter(v)
 						if plr and plr.Character and meetsConditions(plr.Character) and priorityCheck(plr) then
-							targetplayer(plr)
+							targetPlr(plr)
 							break
 						end
 					end
 				end
 	
-				if getOrCreate(GameStats, "TargetNPCs") then
+				if getOrDefault(GameStats, "TargetNPCs") then
 					local npc = isnpc(m.Target)
 					if npc and npc.Humanoid.Health > 0 and meetsConditions(npc) then
-						selectcharacter(npc)
+						selectChr(npc)
 					end
 				end
 			end
 	
-			if getOrCreate(GameStats, "AutoTarget") then
+			if getOrDefault(GameStats, "AutoTarget") then
 				local table1 = {}
 				local PrioritizedPlrsOnScreen = {}
 	
@@ -2431,7 +2519,7 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 								rayparams.FilterDescendantsInstances = chrs
 								rayparams.IgnoreWater = true
 								local raycast = workspace:Raycast(lplr.Character.Head.Position, targpart.Position - lplr.Character.Head.Position, rayparams)
-								if (not raycast and getOrCreate(GameStats, "EnableRaycasting") or not getOrCreate(GameStats, "EnableRaycasting") and (onscreen or getOrCreate(GameStats, "TargetOffScreen")) and pos < getOrCreate(GameStats, "MaxStuds")) then
+								if (not raycast and getOrDefault(GameStats, "EnableRaycasting") or not getOrDefault(GameStats, "EnableRaycasting") and (onscreen or getOrDefault(GameStats, "TargetOffScreen")) and pos < getOrDefault(GameStats, "MaxStuds")) then
 									table1[v] = pos
 									if table.find(PrioritizedPlrs, plrs:GetPlayerFromCharacter(v)) then
 										table.insert(PrioritizedPlrsOnScreen, v)
@@ -2442,13 +2530,13 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 					end
 				end
 	
-				if getOrCreate(GameStats, "TargetNPCs") and (not getOrCreate(GameStats, "TargetPrioOnly") or #PrioritizedPlrs == 0) then
+				if getOrDefault(GameStats, "TargetNPCs") and (not getOrDefault(GameStats, "TargetPrioOnly") or #PrioritizedPlrs == 0) then
 					for i, npc in pairs(npcs) do
 						addchr(npc)
 					end
 				end
 	
-				if not getOrCreate(GameStats, "IgnorePlayers") then
+				if not getOrDefault(GameStats, "IgnorePlayers") then
 					for i,v in pairs(plrs:GetPlayers()) do
 						if v ~= lplr and v.Character then
 							addchr(v.Character)
@@ -2456,7 +2544,7 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 					end
 				end
 	
-				if #PrioritizedPlrsOnScreen ~= 0 or (#PrioritizedPlrs ~= 0 and getOrCreate(GameStats, "TargetPrioOnly")) then
+				if #PrioritizedPlrsOnScreen ~= 0 or (#PrioritizedPlrs ~= 0 and getOrDefault(GameStats, "TargetPrioOnly")) then
 	
 					for chr, pos in pairs(table1) do
 						if not table.find(PrioritizedPlrsOnScreen, chr) then
@@ -2469,14 +2557,14 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 				valuesort(table1, function(Char, position)
 					local plr = plrs:GetPlayerFromCharacter(Char)
 					if plr and priorityCheck(plr) then
-						targetplayer(plr)
+						targetPlr(plr)
 					elseif not plr then
-						selectcharacter(Char)
+						selectChr(Char)
 					end
 					return 1
 				end)
 			end
-			if getOrCreate(GameStats, "FirstPersonEnabled") then
+			if getOrDefault(GameStats, "FirstPersonEnabled") then
 				if misc.TargetedCharacter and misc.IsAimbotOn and camera.CameraType ~= Enum.CameraType.Scriptable then
 					plrs.LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
 				else
@@ -2511,18 +2599,20 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 				else
 					MainFrame.CurrentTarget.Text = v.Name
 				end
-				if not getOrCreate(GameStats, "FirstPersonEnabled") then
+				if not getOrDefault(GameStats, "FirstPersonEnabled") then
 					lplr.Character.Humanoid.CameraOffset = Vector3.new(2,0,0)
 					uiservice.MouseBehavior = Enum.MouseBehavior.LockCenter
 				end
-				MainFrame.CurrentTarget.TextColor3 = Color3.new(0,0.66,0)
+				MainFrame.CurrentTarget.TextColor3 = getOrDefault(Theme, "Yes")
+				toggleTxt[MainFrame.CurrentTarget] = true
 			else
-				if not getOrCreate(GameStats, "FirstPersonEnabled") then
+				if not getOrDefault(GameStats, "FirstPersonEnabled") then
 					lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
 					uiservice.MouseBehavior = Enum.MouseBehavior.Default
 				end
 				MainFrame.CurrentTarget.Text = "none"
-				MainFrame.CurrentTarget.TextColor3 = Color3.new(0.66,0,0)
+				MainFrame.CurrentTarget.TextColor3 = getOrDefault(Theme, "No")
+				toggleTxt[MainFrame.CurrentTarget] = false
 			end
 		end)
 	
@@ -2544,11 +2634,13 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 	
 		Changed(misc, "IsAimbotOn", function(v)
 			if v == false then
-				MainFrame.Status.TextColor3 = Color3.new(0.66,0,0)
+				MainFrame.Status.TextColor3 = getOrDefault(Theme, "No")
+				toggleTxt[MainFrame.Status] = false
 				MainFrame.Status.Text = "disabled"
 				deselect()
 			else
-				MainFrame.Status.TextColor3 = Color3.new(0,0.66,0)
+				MainFrame.Status.TextColor3 = getOrDefault(Theme, "Yes")
+				toggleTxt[MainFrame.Status] = true
 				MainFrame.Status.Text = "enabled"
 			end
 		end)
@@ -2575,39 +2667,46 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 				else
 					button = clone.WhitelistToggle
 				end
+				toggleTxt[button] = false
 	
-				if getOrCreate(GameStats, "WhitelistFriends") and lplr:IsFriendsWith(ins.UserId) and Table == WhitelistedPlrs and not table.find(Table, ins) then
-					button.TextColor3 = Color3.new(0,0.66,0)
+				if getOrDefault(GameStats, "WhitelistFriends") and lplr:IsFriendsWith(ins.UserId) and Table == WhitelistedPlrs and not table.find(Table, ins) then
+					button.TextColor3 = getOrDefault(Theme, "Yes")
+					toggleTxt[button] = true
 					button.Text = "Yes"
 					table.insert(Table, ins)
 				end
 				if table.find(Table, ins) and Table == PrioritizedPlrs then
-					button.TextColor3 = Color3.new(0,0.66,0)
+					button.TextColor3 = getOrDefault(Theme, "Yes")
+					toggleTxt[button] = true
 					button.Text = "Yes"
 				end
 	
 				button.Activated:connect(function()
 					if button.Text == "No" then
-						button.TextColor3 = Color3.new(0,0.66,0)
+						button.TextColor3 = getOrDefault(Theme, "Yes")
+						toggleTxt[button] = true
 						button.Text = "Yes"
 						table.insert(Table,ins)
 	
 						if Table == PrioritizedPlrs and clone.WhitelistToggle.Text == "Yes" then
 							clone.WhitelistToggle.Text = "No"
-							clone.WhitelistToggle.TextColor3 = Color3.new(0.66,0,0)
+							clone.WhitelistToggle.TextColor3 = getOrDefault(Theme, "No")
+							toggleTxt[clone.WhitelistToggle] = false
 							local wlistplr = table.find(WhitelistedPlrs, ins)
 							table.remove(WhitelistedPlrs, wlistplr)
 						end
 	
 						if Table == WhitelistedPlrs and clone.PriorityToggle.Text == "Yes" then
 							clone.PriorityToggle.Text = "No"
-							clone.PriorityToggle.TextColor3 = Color3.new(0.66,0,0)
+							clone.PriorityToggle.TextColor3 = getOrDefault(Theme, "No")
+							toggleTxt[clone.PriorityToggle] = false
 							local prioplr = table.find(PrioritizedPlrs, ins)
 							table.remove(PrioritizedPlrs, prioplr)
 						end
 	
 					else
-						button.TextColor3 = Color3.new(0.66,0,0)
+						button.TextColor3 = getOrDefault(Theme, "No")
+						toggleTxt[button] = false
 						button.Text = "No"
 						local removeins = table.find(Table, ins)
 						table.remove(Table,removeins)
@@ -2669,31 +2768,60 @@ local function KMQXOD_fake_script() -- Aimbot.LocalScript
 			end
 			AddtoList(plr)
 		end)
-		
+	
 		targetingui.add.Activated:connect(function()
-			addGUICondition(#getOrCreate(GameStats, "CustomTargetConditions")+1)
+			addGUICondition(#getOrDefault(GameStats, "CustomTargetConditions")+1)
 		end)
-		
+	
 		targetingui.back.Activated:connect(function()
 			targetingui.Visible = false
 			games.Visible = true
 		end)
-		
+	
 		targetingui.about.Activated:connect(function()
-			local abouttxt = "When all of the conditions in this game return true, you may target someone. If any of these return false, you can't.\nKeywords to refer to your targets character/player is: TargetCharacter and TargetPlayer."
+			local abouttxt = "When all of the conditions in this game return true, you may target someone. If any of these return false, you can't.\nKeywords to refer to your targets character/player is: TargetCharacter and targetPlr."
 			print(abouttxt)
-			sendnotif("Custom Targeting", abouttxt)
+			sendNotif("Custom Targeting", abouttxt)
 		end)
-		
+	
 		games.customtargetcons.Activated:connect(function()
 			targetingui.Visible = true
 			games.Visible = false
 		end)
+		
+		local function Color3ToString(c3)
+			return tostring(math.round(c3.R*255))..", "..tostring(math.round(c3.G*255))..", "..tostring(math.round(c3.B*255))
+		end
 	
+		local themeTemplate = globalsettings.ThemeTemplate
+		for name, color in pairs(Theme) do
+			local clone = themeTemplate:Clone()
+			clone.Parent = globalsettings
+			clone.Name = "Theme"..name
+			clone.Text = name
+			local defaultColor = createGlobalStats().Theme[name]
+			clone.value.PlaceholderText = Color3ToString(defaultColor)
+			clone.value.Text = Color3ToString(color)
+			clone.colorDisplay.BackgroundColor3 = color
+			clone.value.FocusLost:connect(function()
+				local success, col3 = pcall(function()
+					return loadstring("return Color3.fromRGB("..clone.value.Text..")")()
+				end)
+				if success then
+					Theme[name] = col3
+					clone.colorDisplay.BackgroundColor3 = col3
+				else
+					clone.value.Text = clone.value.PlaceholderText
+					Theme[name] = defaultColor
+					clone.colorDisplay.BackgroundColor3 = Theme[name]
+				end
+				applyTheme()
+			end)
+		end
 	else
-		sendnotif("Aimbot", "You've already executed this. Deleting clone.")
+		sendNotif("Aimbot", "You've already executed this. Deleting clone.")
 		task.wait(0.2)
 		gui:Destroy()
 	end
 end
-coroutine.wrap(KMQXOD_fake_script)()
+coroutine.wrap(IHHTRYE_fake_script)()
