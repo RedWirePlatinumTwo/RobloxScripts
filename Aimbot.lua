@@ -1568,8 +1568,8 @@ local function YMXLRU_fake_script() -- Aimbot.LocalScript
 	
 	if not RedsAimbot then
 		getgenv().RedsAimbot = {}
-		sendNotif("Aimbot Update", [[Changes 12/1/25:
-		- Added theme customization in global settings]])
+		sendNotif("Aimbot Update", [[Changes 12/2/25:
+		- Added RightClick & LeftClick support for keybind system]])
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
