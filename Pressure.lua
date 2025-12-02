@@ -10,14 +10,13 @@ local brighten = Instance.new("TextButton")
 local styxkiller = Instance.new("TextButton")
 local highlight = Instance.new("TextButton")
 local nodeifier = Instance.new("TextButton")
-local disabledmg = Instance.new("TextButton")
 local eyefestkiller = Instance.new("TextButton")
 local locatekeys = Instance.new("TextButton")
 
 --Properties:
 
 RedsPressureGui.Name = "RedsPressureGui"
-RedsPressureGui.Parent = game:GetService("CoreGui")
+RedsPressureGui.Parent = game.CoreGui
 RedsPressureGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 mainframe.Name = "mainframe"
@@ -26,8 +25,8 @@ mainframe.Active = true
 mainframe.BackgroundColor3 = Color3.fromRGB(0, 25, 36)
 mainframe.BorderColor3 = Color3.fromRGB(0, 85, 127)
 mainframe.Draggable = true
-mainframe.Position = UDim2.new(0.445318609, 0, 0.32938388, 0)
-mainframe.Size = UDim2.new(0, 342, 0, 374)
+mainframe.Position = UDim2.new(0.445318609, 2, 0.32938391, -84)
+mainframe.Size = UDim2.new(0, 342, 0, 301)
 
 title.Name = "title"
 title.Parent = mainframe
@@ -50,7 +49,7 @@ brighten.Name = "brighten"
 brighten.Parent = mainframe
 brighten.BackgroundColor3 = Color3.fromRGB(0, 48, 68)
 brighten.BorderColor3 = Color3.fromRGB(0, 85, 127)
-brighten.Position = UDim2.new(0, 0, 0.203533962, 0)
+brighten.Position = UDim2.new(0, 0, 0.239248216, 0)
 brighten.Size = UDim2.new(0, 153, 0, 61)
 brighten.Font = Enum.Font.Michroma
 brighten.Text = "Brighten Rooms"
@@ -64,7 +63,7 @@ styxkiller.Name = "styxkiller"
 styxkiller.Parent = mainframe
 styxkiller.BackgroundColor3 = Color3.fromRGB(0, 48, 68)
 styxkiller.BorderColor3 = Color3.fromRGB(0, 85, 127)
-styxkiller.Position = UDim2.new(0.552631557, 0, 0.203533962, 0)
+styxkiller.Position = UDim2.new(0.552631557, 0, 0.236756593, 0)
 styxkiller.Size = UDim2.new(0, 153, 0, 61)
 styxkiller.Font = Enum.Font.Michroma
 styxkiller.Text = "Remove Styx"
@@ -78,7 +77,7 @@ highlight.Name = "highlight"
 highlight.Parent = mainframe
 highlight.BackgroundColor3 = Color3.fromRGB(0, 48, 68)
 highlight.BorderColor3 = Color3.fromRGB(0, 85, 127)
-highlight.Position = UDim2.new(0, 0, 0.594322026, 0)
+highlight.Position = UDim2.new(0, 0, 0.748723924, 0)
 highlight.Size = UDim2.new(0, 153, 0, 61)
 highlight.Font = Enum.Font.Michroma
 highlight.Text = "Highlight Exits + Void Lockers"
@@ -92,7 +91,7 @@ nodeifier.Name = "nodeifier"
 nodeifier.Parent = mainframe
 nodeifier.BackgroundColor3 = Color3.fromRGB(0, 48, 68)
 nodeifier.BorderColor3 = Color3.fromRGB(0, 85, 127)
-nodeifier.Position = UDim2.new(0.552631557, 0, 0.394777507, 0)
+nodeifier.Position = UDim2.new(0.552631557, 0, 0.492285848, 0)
 nodeifier.Size = UDim2.new(0, 153, 0, 61)
 nodeifier.Font = Enum.Font.Michroma
 nodeifier.Text = "Node Monster Notifier"
@@ -102,25 +101,11 @@ nodeifier.TextStrokeColor3 = Color3.fromRGB(0, 170, 255)
 nodeifier.TextStrokeTransparency = 0.000
 nodeifier.TextWrapped = true
 
-disabledmg.Name = "disabledmg"
-disabledmg.Parent = mainframe
-disabledmg.BackgroundColor3 = Color3.fromRGB(0, 48, 68)
-disabledmg.BorderColor3 = Color3.fromRGB(0, 85, 127)
-disabledmg.Position = UDim2.new(0, 0, 0.394777507, 0)
-disabledmg.Size = UDim2.new(0, 153, 0, 61)
-disabledmg.Font = Enum.Font.Michroma
-disabledmg.Text = "Disable Damage"
-disabledmg.TextColor3 = Color3.fromRGB(0, 85, 127)
-disabledmg.TextSize = 20.000
-disabledmg.TextStrokeColor3 = Color3.fromRGB(0, 170, 255)
-disabledmg.TextStrokeTransparency = 0.000
-disabledmg.TextWrapped = true
-
 eyefestkiller.Name = "eyefestkiller"
 eyefestkiller.Parent = mainframe
 eyefestkiller.BackgroundColor3 = Color3.fromRGB(0, 48, 68)
 eyefestkiller.BorderColor3 = Color3.fromRGB(0, 85, 127)
-eyefestkiller.Position = UDim2.new(0.552631557, 0, 0.594322026, 0)
+eyefestkiller.Position = UDim2.new(0.552631557, 0, 0.748723924, 0)
 eyefestkiller.Size = UDim2.new(0, 153, 0, 61)
 eyefestkiller.Font = Enum.Font.Michroma
 eyefestkiller.Text = "Funny Eyefestation Thing"
@@ -134,7 +119,7 @@ locatekeys.Name = "locatekeys"
 locatekeys.Parent = mainframe
 locatekeys.BackgroundColor3 = Color3.fromRGB(0, 48, 68)
 locatekeys.BorderColor3 = Color3.fromRGB(0, 85, 127)
-locatekeys.Position = UDim2.new(0.274853796, 0, 0.791769266, 0)
+locatekeys.Position = UDim2.new(0, 0, 0.494453311, 0)
 locatekeys.Size = UDim2.new(0, 153, 0, 61)
 locatekeys.Font = Enum.Font.Michroma
 locatekeys.Text = "Locate Keycards"
@@ -146,11 +131,12 @@ locatekeys.TextWrapped = true
 
 -- Scripts:
 
-local function DXHPZ_fake_script() -- RedsPressureGui.LocalScript 
+local function HPQHZ_fake_script() -- RedsPressureGui.LocalScript 
 	local script = Instance.new('LocalScript', RedsPressureGui)
 
 	local mainframe = script.Parent.mainframe
 	mainframe.Draggable = true
+	local runservice = game:GetService("RunService")
 	
 	local function singleclick(button, func)
 		local con
@@ -168,6 +154,81 @@ local function DXHPZ_fake_script() -- RedsPressureGui.LocalScript
 		end
 		wait(4)
 		hint:Destroy()
+	end
+	
+	local thread = function(f)
+		return coroutine.resume(coroutine.create(function()
+			return f()
+		end))
+	end
+	
+	local function playsound(soundid, parent)
+		local pos, tpEvent
+		parent = parent or game
+		if typeof(parent) == "Vector3" or (typeof(parent) == "Instance" and parent:IsA("BasePart")) then
+			pos = Instance.new("Part", game)
+			pos.Transparency = 1
+			pos.CanCollide = false
+			pos.Anchored = true
+			pos.Size = Vector3.new()
+			tpEvent = runservice.RenderStepped:connect(function()
+				pos.Position = if typeof(parent) == "Vector3" then parent else parent.Position
+			end)
+		end
+		local s = Instance.new("Sound", pos or parent)
+		if not replacesound then
+			s.SoundId = soundid
+		else
+			s.SoundId = replacesound
+		end
+		s.Volume = 1
+		s:Play()
+		repeat task.wait() until s.TimePosition ~= 0 -- Waits until the sound actually starts playing
+	
+		thread(function()
+			repeat task.wait() until s.TimePosition == 0
+			if not s.Looped then
+				s:Destroy()
+				if pos then
+					pos:Destroy()
+					tpEvent:Disconnect()
+				end
+			end
+		end)
+	
+		return s
+	end
+	
+	local playsfx = function(soundid, parent)
+		return playsound("rbxassetid://"..tostring(soundid), parent)
+	end
+	
+	local playcustomsfx = function(soundid, parent)
+		return playsound(getcustomasset("sounds\\"..soundid), parent)
+	end
+	
+	local bbgui = function(child, txt)
+		txt = txt or ""
+		local BillboardGui = Instance.new("BillboardGui")
+		local TextButton = Instance.new("TextButton")
+		--Properties:
+		BillboardGui.Parent = child
+		BillboardGui.Active = true
+		BillboardGui.AlwaysOnTop = true
+		BillboardGui.LightInfluence = 1
+		BillboardGui.Size = UDim2.new(0, 200, 0, 50)
+		BillboardGui.StudsOffset = Vector3.new(0, 2, 0)
+	
+		TextButton.Parent = BillboardGui
+		TextButton.BackgroundColor3 = Color3.new(1, 1, 1)
+		TextButton.BackgroundTransparency = 1
+		TextButton.Size = UDim2.new(0, 200, 0, 50)
+		TextButton.Font = Enum.Font.SourceSansBold
+		TextButton.Text = txt
+		TextButton.TextColor3 = Color3.new(1, 1, 1)
+		TextButton.TextSize = 22
+		TextButton.TextStrokeTransparency = 0
+		return BillboardGui
 	end
 	
 	singleclick(mainframe.highlight, function()
@@ -241,17 +302,10 @@ local function DXHPZ_fake_script() -- RedsPressureGui.LocalScript
 				eyefest.Face.EyefestHurt:GetPropertyChangedSignal("Playing"):Connect(function()
 					if eyefest.Face.EyefestHurt.Playing then
 						task.wait(0.5)
-						if playcustomsfx then
+						if isfile("sounds\\explosion.mp3") then
 							playcustomsfx("explosion.mp3")
 						else
-							local sound = Instance.new("Sound", workspace)
-							sound.SoundId = "rbxassetid://"..tostring(7172658577)
-							sound:Play()
-							repeat task.wait() until sound.TimePosition ~= 0
-							coroutine.resume(coroutine.create(function()
-								task.wait(sound.TimeLength)
-								sound:Destroy()
-							end))
+							playsfx(7172658577)
 						end
 						eyefest:Destroy()
 					end
@@ -278,4 +332,4 @@ local function DXHPZ_fake_script() -- RedsPressureGui.LocalScript
 		workspace.DescendantAdded:connect(locatekey)
 	end)
 end
-coroutine.wrap(DXHPZ_fake_script)()
+coroutine.wrap(HPQHZ_fake_script)()
