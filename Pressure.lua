@@ -287,13 +287,6 @@ local function HPQHZ_fake_script() -- RedsPressureGui.LocalScript
 		end)
 	end)
 	
-	singleclick(mainframe.disabledmg, function()
-		local client = require(game:GetService("Players").LocalPlayer.PlayerGui.Main.Client.MainClient)
-		client.LocalDamage.TakeDamage = function() end
-		client.Health.TakeDamage = function() end
-		hint("You can still die if you're inside a void locker for long enough")
-	end)
-	
 	singleclick(mainframe.eyefestkiller, function()
 		local function killeyefest(room)
 			coroutine.resume(coroutine.create(function()
@@ -333,3 +326,4 @@ local function HPQHZ_fake_script() -- RedsPressureGui.LocalScript
 	end)
 end
 coroutine.wrap(HPQHZ_fake_script)()
+
