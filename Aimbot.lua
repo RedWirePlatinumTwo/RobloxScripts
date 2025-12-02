@@ -634,7 +634,7 @@ ThemeTemplate.Position = UDim2.new(0, 0, 0.824561417, 0)
 ThemeTemplate.Size = UDim2.new(0, 169, 0, 59)
 ThemeTemplate.Visible = false
 ThemeTemplate.Font = Enum.Font.TitilliumWeb
-ThemeTemplate.Text = "Autofill Team Names:"
+ThemeTemplate.Text = "ThemeTemplate:"
 ThemeTemplate.TextColor3 = Color3.fromRGB(0, 170, 0)
 ThemeTemplate.TextSize = 28.000
 ThemeTemplate.TextStrokeTransparency = 0.000
@@ -1514,7 +1514,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function SDNDXOT_fake_script() -- Aimbot.LocalScript 
+local function YMXLRU_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	local gui = script.Parent
@@ -1537,10 +1537,28 @@ local function SDNDXOT_fake_script() -- Aimbot.LocalScript
 		[MainFrame.CurrentTarget] = false,
 		[MainFrame.Status] = false
 	}
+	local plrs = game:GetService("Players")
+	local lplr = plrs.LocalPlayer
+	local m = lplr:GetMouse()
+	local RightClick = false
+	local LeftClick = false
+	
+	m.Button1Down:connect(function()
+		LeftClick = true
+	end)
+	m.Button1Up:connect(function()
+		LeftClick = false
+	end)
+	m.Button2Down:connect(function()
+		RightClick = true
+	end)
+	m.Button2Up:connect(function()
+		RightClick = false
+	end)
 	
 	local function sendNotif(title, text)
 		print(title..":", text)
-		text = "<font color = '#"..MainFrame.BorderColor3:ToHex().."'>["..title.."]: "..text.."</font>"
+		text = ("<font color = '#%s'>[%s]: %s</font>"):format(MainFrame.BorderColor3:ToHex(), title, text)
 		if tcservice.ChatVersion == Enum.ChatVersion.LegacyChatService then
 			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",({["Text"] = text}))
 		else
@@ -1686,10 +1704,6 @@ local function SDNDXOT_fake_script() -- Aimbot.LocalScript
 			return t
 		end
 	
-		local plrs = game:GetService("Players")
-		local lplr = plrs.LocalPlayer
-		local m = lplr:GetMouse()
-	
 		local function isnpc(ins)
 	
 			for i,v in pairs(GetFamily(ins,true)) do
@@ -1720,6 +1734,10 @@ local function SDNDXOT_fake_script() -- Aimbot.LocalScript
 		
 		local function has(ins, propName)
 			return pcall(function() return ins[propName] end)
+		end
+		
+		local function isValidKey(k)
+			return typeof(k) == "EnumItem" or k == "LeftClick" or k == "RightClick"
 		end
 	
 		local teams = game:GetService("Teams")
@@ -1840,10 +1858,10 @@ local function SDNDXOT_fake_script() -- Aimbot.LocalScript
 		if isfile("RedsAimbot/GlobalStats.lua") then
 	
 			GlobalStats = loadfile("RedsAimbot/GlobalStats.lua")()
-			if not isfile("RedsAimbot/Games/"..game.PlaceId..".lua") then
+			if not isfile(("RedsAimbot/Games/%d.lua"):format(game.PlaceId)) then
 				GameStats = createGameStats()
 			else
-				GameStats = loadfile("RedsAimbot/Games/"..game.PlaceId..".lua")()
+				GameStats = loadfile(("RedsAimbot/Games/%d.lua"):format(game.PlaceId))()
 			end
 	
 		elseif isfile("RedsAimbotStats.lua") then -- replace old save file
@@ -1852,18 +1870,18 @@ local function SDNDXOT_fake_script() -- Aimbot.LocalScript
 			makefolder("RedsAimbot/Games")
 			local gamestats = {}
 			for index, val in pairs(globalclone) do
-				if type(index) == "number" then
+				if type(index) == "number" then  --separate placeId from old globalstats save into new save file
 					gamestats[index] = val
 					globalclone[index] = nil
 				end
 			end
 			writefile("RedsAimbot/GlobalStats.lua", TableToString(globalclone, "GlobalStats"))
-			for i,v in pairs(gamestats) do
-				writefile("RedsAimbot/Games/"..i..".lua", TableToString(v, "GameStats"))
+			for placeId, gameData in pairs(gamestats) do --write contents of game save data into new file
+				writefile(("RedsAimbot/Games/%d.lua"):format(placeId), TableToString(gameData, "GameStats")) -- store file as PlaceId.lua
 			end
-			delfile("RedsAimbotStats.lua")
+			delfile("RedsAimbotStats.lua") --rip bozo
 			GlobalStats = globalclone
-			GameStats = gamestats[game.PlaceId] or createGameStats()
+			GameStats = gamestats[game.PlaceId] or createGameStats() --get existing game data or create data from default stats
 	
 		else
 			makefolder("RedsAimbot/Games")
@@ -1942,7 +1960,7 @@ local function SDNDXOT_fake_script() -- Aimbot.LocalScript
 		end
 	
 		for i, bindInfo in pairs(Keybinds) do
-			bindInfo = updateKeybindTable(i, bindInfo)
+			bindInfo = updateKeybindTable(i, bindInfo) --check if bindInfo is a plain Enum keycode or string, then convert it to table with Key1, Key2, and Toggle
 			if keybindsettings:FindFirstChild(i) then
 				updateKeybindInstance(keybindsettings[i], bindInfo)
 			end
@@ -1962,7 +1980,7 @@ local function SDNDXOT_fake_script() -- Aimbot.LocalScript
 	
 		local function saveSettings()
 			writefile("RedsAimbot/GlobalStats.lua", TableToString(GlobalStats, "GlobalStats"))
-			writefile("RedsAimbot/Games/"..game.PlaceId..".lua", TableToString(GameStats, "GameStats"))
+			writefile(("RedsAimbot/Games/%d.lua"):format(game.PlaceId), TableToString(GameStats, "GameStats"))
 		end
 	
 		TableChanged(GlobalStats, saveSettings, true)
@@ -1971,7 +1989,7 @@ local function SDNDXOT_fake_script() -- Aimbot.LocalScript
 		local function addTeamFrame(ttable)
 			local clone = teamui.WhitelistedTeams.whitelistframe:Clone()
 			clone.Parent = teamui.WhitelistedTeams
-			clone.TextLabel.Text = "["..ttable.team2.."] will be ignored when on ["..ttable.team1.."]"
+			clone.TextLabel.Text = ("[%s] will be ignored when on [%s]"):format(ttable.team2, ttable.team1)
 			clone.Visible = true
 	
 			clone.undo.Activated:connect(function()
@@ -2052,7 +2070,7 @@ local function SDNDXOT_fake_script() -- Aimbot.LocalScript
 			if plr.DisplayName == plr.Name then
 				return plr.Name
 			else
-				return plr.Name.." ("..plr.DisplayName..")"
+				return ("%s (%s)"):format(plr.DisplayName, plr.Name)
 			end
 		end
 	
@@ -2135,10 +2153,16 @@ local function SDNDXOT_fake_script() -- Aimbot.LocalScript
 	
 		local function isKeyActivated(bindInfo, shouldToggle)
 			local function keyDown(keycode)
-				if typeof(keycode) ~= "EnumItem" then return true end
-				return uiservice:IsKeyDown(keycode) and not uiservice:GetFocusedTextBox()
+				if not isValidKey(keycode) then return true end
+				if keycode == "LeftClick" then
+					return LeftClick and not uiservice:GetFocusedTextBox()
+				elseif keycode == "RightClick" then
+					return RightClick and not uiservice:GetFocusedTextBox()
+				else
+					return uiservice:IsKeyDown(keycode) and not uiservice:GetFocusedTextBox()
+				end
 			end
-			if typeof(bindInfo.Key1) ~= "EnumItem" and typeof(bindInfo.Key2) ~= "EnumItem" then
+			if not isValidKey(bindInfo.Key1) and not isValidKey(bindInfo.Key2) then
 				return false
 			end
 			return keyDown(bindInfo.Key1) and keyDown(bindInfo.Key2) and ((bindInfo.Toggle and shouldToggle) or (not bindInfo.Toggle and not shouldToggle))
@@ -2233,8 +2257,16 @@ local function SDNDXOT_fake_script() -- Aimbot.LocalScript
 					v["value"..index].Text = "Press any key"
 					local key = uiservice.InputBegan:Wait()
 					task.wait()
-					Keybinds[v.Name]["Key"..index] = key.KeyCode
-					v["value"..index].Text = key.KeyCode.Name
+					if LeftClick then
+						Keybinds[v.Name]["Key"..index] = "LeftClick"
+						v["value"..index].Text = "LeftClick"
+					elseif RightClick then
+						Keybinds[v.Name]["Key"..index] = "RightClick"
+						v["value"..index].Text = "RightClick"
+					else
+						Keybinds[v.Name]["Key"..index] = key.KeyCode
+						v["value"..index].Text = key.KeyCode.Name
+					end
 					saveSettings()
 				end
 	
@@ -2250,6 +2282,7 @@ local function SDNDXOT_fake_script() -- Aimbot.LocalScript
 					v.keybindtype.Activated:connect(function()
 						Keybinds[v.Name].Toggle = not Keybinds[v.Name].Toggle
 						updateKeybindInstance(v, Keybinds[v.Name])
+						saveSettings()
 					end)
 				end
 			end
@@ -2793,7 +2826,7 @@ local function SDNDXOT_fake_script() -- Aimbot.LocalScript
 		end)
 		
 		local function Color3ToString(c3)
-			return tostring(math.round(c3.R*255))..", "..tostring(math.round(c3.G*255))..", "..tostring(math.round(c3.B*255))
+			return ("%d, %d, %d"):format(math.round(c3.R*255), math.round(c3.G*255), math.round(c3.B*255))
 		end
 	
 		local themeTemplate = globalsettings.ThemeTemplate
@@ -2809,7 +2842,7 @@ local function SDNDXOT_fake_script() -- Aimbot.LocalScript
 			clone.colorDisplay.BackgroundColor3 = color
 			clone.value.FocusLost:connect(function()
 				local success, col3 = pcall(function()
-					return loadstring("return Color3.fromRGB("..clone.value.Text..")")()
+					return loadstring(("return Color3.fromRGB(%s)"):format(clone.value.Text))()
 				end)
 				if success then
 					Theme[name] = col3
@@ -2828,4 +2861,4 @@ local function SDNDXOT_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(SDNDXOT_fake_script)()
+coroutine.wrap(YMXLRU_fake_script)()
