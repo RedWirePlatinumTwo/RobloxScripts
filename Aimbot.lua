@@ -632,6 +632,7 @@ ThemeTemplate.BorderColor3 = Color3.fromRGB(0, 170, 0)
 ThemeTemplate.BorderSizePixel = 0
 ThemeTemplate.Position = UDim2.new(0, 0, 0.824561417, 0)
 ThemeTemplate.Size = UDim2.new(0, 169, 0, 59)
+ThemeTemplate.Visible = false
 ThemeTemplate.Font = Enum.Font.TitilliumWeb
 ThemeTemplate.Text = "Autofill Team Names:"
 ThemeTemplate.TextColor3 = Color3.fromRGB(0, 170, 0)
@@ -1513,7 +1514,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function IHHTRYE_fake_script() -- Aimbot.LocalScript 
+local function OVBEE_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	local gui = script.Parent
@@ -2798,7 +2799,7 @@ local function IHHTRYE_fake_script() -- Aimbot.LocalScript
 			local clone = themeTemplate:Clone()
 			clone.Parent = globalsettings
 			clone.Name = "Theme"..name
-			clone.Text = name
+			clone.Text = clone.Name
 			local defaultColor = createGlobalStats().Theme[name]
 			clone.value.PlaceholderText = Color3ToString(defaultColor)
 			clone.value.Text = Color3ToString(color)
@@ -2824,4 +2825,4 @@ local function IHHTRYE_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(IHHTRYE_fake_script)()
+coroutine.wrap(OVBEE_fake_script)()
