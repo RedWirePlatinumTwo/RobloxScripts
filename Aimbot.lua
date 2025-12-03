@@ -1514,7 +1514,7 @@ customtargetcons.TextStrokeTransparency = 0.000
 
 -- Scripts:
 
-local function YMXLRU_fake_script() -- Aimbot.LocalScript 
+local function CXWGQAH_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	local gui = script.Parent
@@ -1580,14 +1580,6 @@ local function YMXLRU_fake_script() -- Aimbot.LocalScript
 			end
 		end
 	
-		local function thread(f)
-	
-			return coroutine.resume(coroutine.create(function()
-				return f()
-			end))
-	
-		end
-	
 		local function Changed(part, PropertyName, func)
 			local current = part[PropertyName]
 			local elapsedTime = 0
@@ -1598,10 +1590,10 @@ local function YMXLRU_fake_script() -- Aimbot.LocalScript
 			end
 			t.stop = t.Stop
 	
-			thread(function()
+			task.spawn(function()
 				while enabled do
 					if part[PropertyName] ~= current then
-						thread(function()
+						task.spawn(function()
 							func(part[PropertyName], current, elapsedTime)
 						end)
 						elapsedTime = 0
@@ -1630,14 +1622,14 @@ local function YMXLRU_fake_script() -- Aimbot.LocalScript
 			end
 			t.stop = t.Stop
 	
-			thread(function()
+			task.spawn(function()
 				while enabled do
 					if tablecount(Table) ~= count then
 						if tablecount(Table) > count then
 	
 							for i,v in pairs(Table) do
 								if clone[i] == nil then
-									thread(function()
+									task.spawn(function()
 										func(i,v,elapsedTime)
 									end)
 								end
@@ -2037,7 +2029,7 @@ local function YMXLRU_fake_script() -- Aimbot.LocalScript
 		end
 	
 		local function Died(player)
-			thread(function()
+			task.spawn(function()
 				if not player.Character then player.CharacterAdded:Wait() end
 	
 				local function OnDeath(chr)
@@ -2386,7 +2378,7 @@ local function YMXLRU_fake_script() -- Aimbot.LocalScript
 		end
 	
 		local function isactivenpc(npc)
-			thread(function()
+			task.spawn(function()
 				local changed
 				local active = false
 				changed = Changed(npc.Humanoid.RootPart, "CFrame", function()
@@ -2754,7 +2746,7 @@ local function YMXLRU_fake_script() -- Aimbot.LocalScript
 			togglefunc(WhitelistedPlrs)
 			togglefunc(PrioritizedPlrs)
 	
-			thread(function()
+			task.spawn(function()
 				repeat task.wait() until not game:GetService("Players"):FindFirstChild(ins.Name)
 				clone:Destroy()
 			end)
@@ -2861,4 +2853,4 @@ local function YMXLRU_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(YMXLRU_fake_script)()
+coroutine.wrap(CXWGQAH_fake_script)()
