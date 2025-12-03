@@ -83,10 +83,10 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function NHMW_fake_script() -- MainFrame.LocalScript 
-	local script = Instance.new('LocalScript', MainFrame)
+local function ZRTJ_fake_script() -- DaShop.LocalScript 
+	local script = Instance.new('LocalScript', DaShop)
 
-	local mainframe = script.Parent
+	local mainframe = script.Parent.MainFrame
 	mainframe.ShopScroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
 	mainframe.Active = true
 	mainframe.Draggable = true
@@ -157,16 +157,16 @@ local function NHMW_fake_script() -- MainFrame.LocalScript
 				canClick = false
 				local hrp = lplr.Character.Humanoid.RootPart
 				local origCf = hrp.CFrame
-                task.spawn(function()
-                    while not canClick do
-                        hrp.CFrame = shopitem.Head.CFrame + Vector3.new(0, -3, 0)
-                        fireclickdetector(shopitem.ClickDetector)
-                        task.wait()
-                    end
-                end)
+				task.spawn(function()
+					while not canClick do
+						hrp.CFrame = shopitem.Head.CFrame + Vector3.new(0, -3, 0)
+						fireclickdetector(shopitem.ClickDetector)
+						task.wait()
+					end
+				end)
 				lplr.PlayerGui.MainScreenGui.ChildAdded:Wait()
 				hrp.CFrame = origCf
-                canClick = true
+				canClick = true
 			end
 		end)
 	end
@@ -193,4 +193,4 @@ local function NHMW_fake_script() -- MainFrame.LocalScript
 		end
 	end)
 end
-coroutine.wrap(NHMW_fake_script)()
+coroutine.wrap(ZRTJ_fake_script)()
