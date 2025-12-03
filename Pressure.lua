@@ -131,7 +131,7 @@ locatekeys.TextWrapped = true
 
 -- Scripts:
 
-local function HPQHZ_fake_script() -- RedsPressureGui.LocalScript 
+local function YTIEATU_fake_script() -- RedsPressureGui.LocalScript 
 	local script = Instance.new('LocalScript', RedsPressureGui)
 
 	local mainframe = script.Parent.mainframe
@@ -154,12 +154,6 @@ local function HPQHZ_fake_script() -- RedsPressureGui.LocalScript
 		end
 		wait(4)
 		hint:Destroy()
-	end
-	
-	local thread = function(f)
-		return coroutine.resume(coroutine.create(function()
-			return f()
-		end))
 	end
 	
 	local function playsound(soundid, parent)
@@ -185,7 +179,7 @@ local function HPQHZ_fake_script() -- RedsPressureGui.LocalScript
 		s:Play()
 		repeat task.wait() until s.TimePosition ~= 0 -- Waits until the sound actually starts playing
 	
-		thread(function()
+		task.spawn(function()
 			repeat task.wait() until s.TimePosition == 0
 			if not s.Looped then
 				s:Destroy()
@@ -325,5 +319,4 @@ local function HPQHZ_fake_script() -- RedsPressureGui.LocalScript
 		workspace.DescendantAdded:connect(locatekey)
 	end)
 end
-coroutine.wrap(HPQHZ_fake_script)()
-
+coroutine.wrap(YTIEATU_fake_script)()
