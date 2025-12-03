@@ -750,7 +750,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function AHIR_fake_script() -- JailbreakGUI.LocalScript 
+local function DLFZZN_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -803,11 +803,6 @@ local function AHIR_fake_script() -- JailbreakGUI.LocalScript
 		return n
 	end
 	
-	local function thread(func)
-		return coroutine.resume(coroutine.create(function()
-			return func()
-		end))
-	end
 	local TableAdded = function(Table, func)
 		local count = tablecount(Table)
 		local clone = table.clone(Table)
@@ -819,14 +814,14 @@ local function AHIR_fake_script() -- JailbreakGUI.LocalScript
 		end
 		t.stop = t.Stop
 	
-		thread(function()
+		task.spawn(function()
 			while enabled do
 				if tablecount(Table) ~= count then
 					if tablecount(Table) > count then
 	
 						for i,v in pairs(Table) do
 							if clone[i] == nil then
-								thread(function()
+								task.spawn(function()
 									func(i,v,elapsedTime)
 								end)
 							end
@@ -919,16 +914,6 @@ local function AHIR_fake_script() -- JailbreakGUI.LocalScript
 			notify("Removed lock vehicle on exit button as its now part of the main game.")
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
-	
-			local thread = function(f)
-	
-				return coroutine.resume(coroutine.create(function()
-					return f()
-				end))
-	
-			end
-	
-	
 			local Changed = function(part, PropertyName, func)
 				local current = part[PropertyName]
 				local elapsedTime = 0
@@ -939,10 +924,10 @@ local function AHIR_fake_script() -- JailbreakGUI.LocalScript
 				end
 				t.stop = t.Stop
 	
-				thread(function()
+				task.spawn(function()
 					while enabled do
 						if part[PropertyName] ~= current then
-							thread(function()
+							task.spawn(function()
 								func(part[PropertyName], current, elapsedTime)
 							end)
 							elapsedTime = 0
@@ -969,7 +954,7 @@ local function AHIR_fake_script() -- JailbreakGUI.LocalScript
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 			lplr.CameraMaxZoomDistance = 200
 	
-			thread(function()
+			task.spawn(function()
 				while true do
 					for i, plr in pairs(minimap:GetChildren()) do
 						plr.Visible = true
@@ -984,7 +969,7 @@ local function AHIR_fake_script() -- JailbreakGUI.LocalScript
 					local minimap2 = c.Map.Container.Points
 					local destroyed = false
 	
-					thread(function()
+					task.spawn(function()
 						while not destroyed do
 							for i,v in pairs(minimap2:GetChildren()) do
 								if v.ClassName == "ImageLabel" then
@@ -2175,4 +2160,4 @@ local function AHIR_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(AHIR_fake_script)()
+coroutine.wrap(DLFZZN_fake_script)()
