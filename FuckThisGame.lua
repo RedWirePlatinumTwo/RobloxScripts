@@ -179,7 +179,7 @@ focusonchr.TextWrapped = true
 
 -- Scripts:
 
-local function VWRAM_fake_script() -- generalgamefucker.LocalScript 
+local function AMAZ_fake_script() -- generalgamefucker.LocalScript 
 	local script = Instance.new('LocalScript', generalgamefucker)
 
 	local mainframe = script.Parent.mainframe
@@ -194,12 +194,6 @@ local function VWRAM_fake_script() -- generalgamefucker.LocalScript
 	numbers.ws = 30
 	numbers.jump = 50
 	
-	local thread = function(f)
-		return coroutine.resume(coroutine.create(function()
-			return f()
-		end))
-	end
-	
 	local Changed = function(part, PropertyName, func)
 		local current = part[PropertyName]
 		local elapsedTime = 0
@@ -210,10 +204,10 @@ local function VWRAM_fake_script() -- generalgamefucker.LocalScript
 		end
 		t.stop = t.Stop
 	
-		thread(function()
+		task.spawn(function()
 			while enabled do
 				if part[PropertyName] ~= current then
-					thread(function()
+					task.spawn(function()
 						func(part[PropertyName], current, elapsedTime)
 					end)
 					elapsedTime = 0
@@ -493,4 +487,4 @@ local function VWRAM_fake_script() -- generalgamefucker.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(VWRAM_fake_script)()
+coroutine.wrap(AMAZ_fake_script)()
