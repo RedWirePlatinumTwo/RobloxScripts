@@ -1030,7 +1030,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function CUVT_fake_script() -- Aimbot.LocalScript 
+local function SNALEXR_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	local gui = script.Parent
@@ -1622,8 +1622,9 @@ local function CUVT_fake_script() -- Aimbot.LocalScript
 							if cooldown == 0 then
 								guiPos[v.Name] = v.Position
 							end
+						else
+							task.wait()
 						end
-						task.wait()
 					end
 				end)
 			end
@@ -2439,4 +2440,4 @@ local function CUVT_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(CUVT_fake_script)()
+coroutine.wrap(SNALEXR_fake_script)()
