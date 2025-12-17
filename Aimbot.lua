@@ -3,7 +3,7 @@
 
 -- Instances:
 
-local Aimbot = Instance.new("ScreenGui")
+local RedwiresAimbot = Instance.new("ScreenGui")
 local MFrame = Instance.new("Frame")
 local Title = Instance.new("TextLabel")
 local CurrentTargetTitle = Instance.new("TextLabel")
@@ -88,12 +88,12 @@ local Contents = Instance.new("TextLabel")
 
 --Properties:
 
-Aimbot.Name = "Aimbot"
-Aimbot.Parent = game.CoreGui
-Aimbot.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+RedwiresAimbot.Name = "RedwiresAimbot"
+RedwiresAimbot.Parent = game.CoreGui
+RedwiresAimbot.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MFrame.Name = "MFrame"
-MFrame.Parent = Aimbot
+MFrame.Parent = RedwiresAimbot
 MFrame.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
 MFrame.BorderColor3 = Color3.fromRGB(0, 170, 0)
 MFrame.Position = UDim2.new(0.345656514, 0, 0.488820165, 0)
@@ -226,7 +226,7 @@ SwitchToTeam.TextSize = 24.000
 SwitchToTeam.TextWrapped = true
 
 ManagerUI.Name = "ManagerUI"
-ManagerUI.Parent = Aimbot
+ManagerUI.Parent = RedwiresAimbot
 ManagerUI.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
 ManagerUI.BorderColor3 = Color3.fromRGB(0, 170, 0)
 ManagerUI.BorderSizePixel = 2
@@ -371,7 +371,7 @@ typelabel.TextStrokeTransparency = 0.000
 typelabel.TextWrapped = true
 
 GlobalSettingsUI.Name = "GlobalSettingsUI"
-GlobalSettingsUI.Parent = Aimbot
+GlobalSettingsUI.Parent = RedwiresAimbot
 GlobalSettingsUI.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
 GlobalSettingsUI.BorderColor3 = Color3.fromRGB(0, 170, 0)
 GlobalSettingsUI.Position = UDim2.new(0.55347693, 0, 0.230392128, 0)
@@ -468,7 +468,7 @@ keybinds.TextSize = 28.000
 keybinds.TextWrapped = true
 
 TeamUI.Name = "TeamUI"
-TeamUI.Parent = Aimbot
+TeamUI.Parent = RedwiresAimbot
 TeamUI.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
 TeamUI.BorderColor3 = Color3.fromRGB(0, 170, 0)
 TeamUI.Position = UDim2.new(0.453125, 0, 0.233331263, 0)
@@ -615,7 +615,7 @@ X_2.TextStrokeTransparency = 0.000
 X_2.TextWrapped = true
 
 KeybindsUI.Name = "KeybindsUI"
-KeybindsUI.Parent = Aimbot
+KeybindsUI.Parent = RedwiresAimbot
 KeybindsUI.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
 KeybindsUI.BorderColor3 = Color3.fromRGB(0, 170, 0)
 KeybindsUI.Position = UDim2.new(0.552746475, 0, 0.230392128, 0)
@@ -735,7 +735,7 @@ globals.TextSize = 28.000
 globals.TextWrapped = true
 
 GameSettingsUI.Name = "GameSettingsUI"
-GameSettingsUI.Parent = Aimbot
+GameSettingsUI.Parent = RedwiresAimbot
 GameSettingsUI.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
 GameSettingsUI.BorderColor3 = Color3.fromRGB(0, 170, 0)
 GameSettingsUI.Position = UDim2.new(0.479687512, 0, 0.17027837, 0)
@@ -877,7 +877,7 @@ customtargetcons.TextSize = 28.000
 customtargetcons.TextStrokeTransparency = 0.000
 
 CustomTargetingUI.Name = "CustomTargetingUI"
-CustomTargetingUI.Parent = Aimbot
+CustomTargetingUI.Parent = RedwiresAimbot
 CustomTargetingUI.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
 CustomTargetingUI.BorderColor3 = Color3.fromRGB(0, 170, 0)
 CustomTargetingUI.Position = UDim2.new(0.58417803, 0, 0.280467957, 0)
@@ -980,7 +980,7 @@ about_3.TextStrokeTransparency = 0.000
 about_3.TextWrapped = true
 
 Message.Name = "Message"
-Message.Parent = Aimbot
+Message.Parent = RedwiresAimbot
 Message.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
 Message.BorderColor3 = Color3.fromRGB(0, 170, 0)
 Message.Position = UDim2.new(0.389464587, 0, 0.308411211, 0)
@@ -1030,8 +1030,8 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function POKBZLH_fake_script() -- Aimbot.LocalScript 
-	local script = Instance.new('LocalScript', Aimbot)
+local function YFMI_fake_script() -- RedwiresAimbot.LocalScript 
+	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
 	local MainFrame = gui.MFrame
@@ -1254,6 +1254,10 @@ local function POKBZLH_fake_script() -- Aimbot.LocalScript
 		local function isValidKey(k)
 			return typeof(k) == "EnumItem" or k == "LeftClick" or k == "RightClick"
 		end
+		
+		Changed(workspace, "CurrentCamera", function(cam)
+			camera = cam
+		end)
 	
 		local teams = game:GetService("Teams")
 		local WhitelistedPlrs = {}
@@ -1602,7 +1606,7 @@ local function POKBZLH_fake_script() -- Aimbot.LocalScript
 					v.Position = guiPos[v.Name]
 				else
 					if v.Name == "Message" then
-						local vp = workspace.CurrentCamera.ViewportSize
+						local vp = camera.ViewportSize
 						v.Position = UDim2.new(0, vp.X / 2 - v.Size.X.Offset / 2, 0, vp.Y / 2 - v.Size.Y.Offset / 2) --place Message in center of screen
 					end
 				end
@@ -2435,4 +2439,4 @@ local function POKBZLH_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(POKBZLH_fake_script)()
+coroutine.wrap(YFMI_fake_script)()
