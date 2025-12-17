@@ -81,7 +81,7 @@ local UIListLayout_6 = Instance.new("UIListLayout")
 local Condition = Instance.new("TextLabel")
 local value_4 = Instance.new("TextBox")
 local about_3 = Instance.new("TextButton")
-local MsgTemplate = Instance.new("Frame")
+local Message = Instance.new("Frame")
 local Title_8 = Instance.new("TextLabel")
 local X_5 = Instance.new("TextButton")
 local Contents = Instance.new("TextLabel")
@@ -979,16 +979,16 @@ about_3.TextSize = 28.000
 about_3.TextStrokeTransparency = 0.000
 about_3.TextWrapped = true
 
-MsgTemplate.Name = "MsgTemplate"
-MsgTemplate.Parent = Aimbot
-MsgTemplate.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
-MsgTemplate.BorderColor3 = Color3.fromRGB(0, 170, 0)
-MsgTemplate.Position = UDim2.new(0.389464587, 0, 0.308411211, 0)
-MsgTemplate.Size = UDim2.new(0, 338, 0, 268)
-MsgTemplate.Visible = false
+Message.Name = "Message"
+Message.Parent = Aimbot
+Message.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
+Message.BorderColor3 = Color3.fromRGB(0, 170, 0)
+Message.Position = UDim2.new(0.389464587, 0, 0.308411211, 0)
+Message.Size = UDim2.new(0, 338, 0, 268)
+Message.Visible = false
 
 Title_8.Name = "Title"
-Title_8.Parent = MsgTemplate
+Title_8.Parent = Message
 Title_8.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
 Title_8.BorderColor3 = Color3.fromRGB(0, 170, 0)
 Title_8.Position = UDim2.new(0, 0, 0.00299151987, 0)
@@ -1001,7 +1001,7 @@ Title_8.TextStrokeTransparency = 0.000
 Title_8.TextWrapped = true
 
 X_5.Name = "X"
-X_5.Parent = MsgTemplate
+X_5.Parent = Message
 X_5.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 X_5.BorderColor3 = Color3.fromRGB(0, 170, 0)
 X_5.Position = UDim2.new(0.342899114, 0, 0.884247303, 0)
@@ -1014,7 +1014,7 @@ X_5.TextStrokeTransparency = 0.000
 X_5.TextWrapped = true
 
 Contents.Name = "Contents"
-Contents.Parent = MsgTemplate
+Contents.Parent = Message
 Contents.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
 Contents.BackgroundTransparency = 1.000
 Contents.BorderColor3 = Color3.fromRGB(0, 170, 0)
@@ -1030,7 +1030,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function SNALEXR_fake_script() -- Aimbot.LocalScript 
+local function POKBZLH_fake_script() -- Aimbot.LocalScript 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	local gui = script.Parent
@@ -1446,21 +1446,11 @@ local function SNALEXR_fake_script() -- Aimbot.LocalScript
 			return name..":"
 		end
 		
-		local function createMsg(contents, title)
-			local msgFrame
-			if gui:FindFirstChild("Message") then
-				msgFrame = gui.Message
-			else
-				msgFrame = gui.MsgTemplate:Clone()
-				msgFrame.Parent = gui
-				msgFrame.Name = "Message"
-			end
+		local function updateMsg(contents, title)
+			local msgFrame msgFrame = gui.Message
 			msgFrame.Visible = true
 			msgFrame.Title.Text = title or msgFrame.Title.Text
 			msgFrame.Contents.Text = contents
-			msgFrame.X.Activated:connect(function()
-				msgFrame:Destroy()
-			end)
 		end
 		
 		local function createTemplate(tbl, propName)
@@ -1490,7 +1480,7 @@ local function SNALEXR_fake_script() -- Aimbot.LocalScript
 			if clone then
 				local function onAbout(msg, title)
 					clone.about.Activated:connect(function()
-						createMsg(msg, title)
+						updateMsg(msg, title)
 					end)
 				end
 				if propName == "AimMethod" then
@@ -1505,7 +1495,7 @@ local function SNALEXR_fake_script() -- Aimbot.LocalScript
 					)
 				elseif propName == "TargetPrioOnly" then
 					onAbout(
-						"If enabled AND if there are any players marked as Prioritized in player settings, the targeting system will ignore anyone that isn't on your priorizitation list. If either the setting is disabled or no one is prioritized, the target system functions as normal."
+						"If enabled AND if there are any players marked as Prioritized in player settings, the targeting system will ignore anyone that isn't on your prioritization list. If either the setting is disabled or no one is prioritized, the target system functions as normal."
 					)
 				elseif propName == "TeamAutofill" then
 					onAbout(
@@ -1607,9 +1597,14 @@ local function SNALEXR_fake_script() -- Aimbot.LocalScript
 		
 		for i, v in pairs(gui:GetChildren()) do
 			if v.ClassName == "Frame" then
-				local guiPos = getOrDefault(GameStats, "GUIPositions")
+				local guiPos = getOrDefault(GameStats, "GUIPositions") -- note to self: this DOES NOT go in gui:GetDescendants() BECAUSE of it checking GameStats
 				if guiPos[v.Name] then
 					v.Position = guiPos[v.Name]
+				else
+					if v.Name == "Message" then
+						local vp = workspace.CurrentCamera.ViewportSize
+						v.Position = UDim2.new(0, vp.X / 2 - v.Size.X.Offset / 2, 0, vp.Y / 2 - v.Size.Y.Offset / 2) --place Message in center of screen
+					end
 				end
 				local cooldown = 0
 				Changed(v, "Position", function(pos)
@@ -1658,7 +1653,7 @@ local function SNALEXR_fake_script() -- Aimbot.LocalScript
 		local function gameConditionCheck(id, condition)
 			if game.PlaceId == id and not table.find(getOrDefault(GameStats, "CustomTargetConditions"), condition) then
 				table.insert(getOrDefault(GameStats, "CustomTargetConditions"), condition)
-				createMsg(("Auto-added targeting condition for game ID %d:\n%s"):format(id, condition), "Custom Targeting")
+				updateMsg(("Auto-added targeting condition for game ID %d:\n%s"):format(id, condition), "Custom Targeting")
 			end
 		end
 		gameConditionCheck(286090429, "not TargetCharacter:FindFirstChild(\"Cam\")")
@@ -1833,7 +1828,7 @@ local function SNALEXR_fake_script() -- Aimbot.LocalScript
 		end
 	
 		if not lplr.Character then
-			createMsg("You've gots 2 spawn in da game for aimbot to work")
+			updateMsg("You've gots 2 spawn in da game for aimbot to work")
 			lplr.CharacterAdded:Wait()
 		end
 	
@@ -2393,7 +2388,7 @@ local function SNALEXR_fake_script() -- Aimbot.LocalScript
 		end)
 	
 		targetingui.about.Activated:connect(function()
-			createMsg(
+			updateMsg(
 				"When all of the conditions in this game return true, you may target someone. If any of these return false, you can't.\nKeywords to refer to your targets character/player is: TargetCharacter and TargetPlayer.",
 				"Custom Targeting"
 			)
@@ -2440,4 +2435,4 @@ local function SNALEXR_fake_script() -- Aimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(SNALEXR_fake_script)()
+coroutine.wrap(POKBZLH_fake_script)()
