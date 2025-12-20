@@ -83,7 +83,7 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function ZRTJ_fake_script() -- DaShop.LocalScript 
+local function BETNQ_fake_script() -- DaShop.LocalScript 
 	local script = Instance.new('LocalScript', DaShop)
 
 	local mainframe = script.Parent.MainFrame
@@ -95,6 +95,15 @@ local function ZRTJ_fake_script() -- DaShop.LocalScript
 	local lplr = game:GetService("Players").LocalPlayer
 	local runservice = game:GetService("RunService")
 	
+	local thread = function(f, ...)
+		local co = coroutine.create(f)
+		local ok, err = coroutine.resume(co, ...)
+		if not ok then
+			warn(err)
+		end
+		return co
+	end
+	
 	local function Changed(part, PropertyName, func)
 		local current = part[PropertyName]
 		local elapsedTime = 0
@@ -105,10 +114,10 @@ local function ZRTJ_fake_script() -- DaShop.LocalScript
 		end
 		t.stop = t.Stop
 	
-		task.spawn(function()
+		thread(function()
 			while enabled do
 				if part[PropertyName] ~= current then
-					task.spawn(function()
+					thread(function()
 						func(part[PropertyName], current, elapsedTime)
 					end)
 					elapsedTime = 0
@@ -157,7 +166,7 @@ local function ZRTJ_fake_script() -- DaShop.LocalScript
 				canClick = false
 				local hrp = lplr.Character.Humanoid.RootPart
 				local origCf = hrp.CFrame
-				task.spawn(function()
+				thread(function()
 					while not canClick do
 						hrp.CFrame = shopitem.Head.CFrame + Vector3.new(0, -3, 0)
 						fireclickdetector(shopitem.ClickDetector)
@@ -193,4 +202,4 @@ local function ZRTJ_fake_script() -- DaShop.LocalScript
 		end
 	end)
 end
-coroutine.wrap(ZRTJ_fake_script)()
+coroutine.wrap(BETNQ_fake_script)()
