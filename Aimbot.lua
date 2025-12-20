@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function YFPJ_fake_script() -- RedwiresAimbot.LocalScript 
+local function LHFF_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1113,8 +1113,13 @@ local function YFPJ_fake_script() -- RedwiresAimbot.LocalScript
 			end
 		end
 	
-		local function thread(f)
-			return coroutine.resume(coroutine.create(f))
+		local function thread(f, ...)
+			local co = coroutine.create(f)
+			local ok, err = coroutine.resume(co, ...)
+			if not ok then
+				warn(err)
+			end
+			return co
 		end
 		
 		local function Changed(part, PropertyName, func)
@@ -2496,4 +2501,4 @@ local function YFPJ_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(YFPJ_fake_script)()
+coroutine.wrap(LHFF_fake_script)()
