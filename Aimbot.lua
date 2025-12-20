@@ -71,6 +71,7 @@ local about = Instance.new("TextButton")
 local TextBoxTemplate = Instance.new("TextLabel")
 local value_3 = Instance.new("TextBox")
 local about_2 = Instance.new("TextButton")
+local slider = Instance.new("ScrollingFrame")
 local customtargetcons = Instance.new("TextButton")
 local CustomTargetingUI = Instance.new("Frame")
 local Title_7 = Instance.new("TextLabel")
@@ -841,28 +842,38 @@ value_3.Name = "value"
 value_3.Parent = TextBoxTemplate
 value_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 value_3.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_3.Position = UDim2.new(0, 0, 0.490557462, 0)
-value_3.Size = UDim2.new(0, 347, 0, 28)
+value_3.Position = UDim2.new(0.645533144, 0, 0.0302400142, 0)
+value_3.Size = UDim2.new(0, 85, 0, 28)
 value_3.Font = Enum.Font.TitilliumWeb
 value_3.PlaceholderColor3 = Color3.fromRGB(0, 100, 0)
-value_3.PlaceholderText = "Insert default value here"
+value_3.PlaceholderText = "500"
 value_3.Text = ""
 value_3.TextColor3 = Color3.fromRGB(0, 170, 0)
 value_3.TextSize = 28.000
 value_3.TextStrokeTransparency = 0.000
-value_3.TextXAlignment = Enum.TextXAlignment.Left
 
 about_2.Name = "about"
 about_2.Parent = TextBoxTemplate
 about_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 about_2.BorderColor3 = Color3.fromRGB(0, 170, 0)
-about_2.Position = UDim2.new(0.890489936, 0, 0.490301222, 0)
+about_2.Position = UDim2.new(0.890489936, 0, 0.0299837627, 0)
 about_2.Size = UDim2.new(0, 28, 0, 28)
 about_2.Font = Enum.Font.TitilliumWeb
 about_2.Text = "?"
 about_2.TextColor3 = Color3.fromRGB(0, 170, 0)
 about_2.TextSize = 28.000
 about_2.TextStrokeTransparency = 0.000
+
+slider.Name = "slider"
+slider.Parent = TextBoxTemplate
+slider.Active = true
+slider.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+slider.BorderColor3 = Color3.fromRGB(0, 170, 0)
+slider.Position = UDim2.new(0, 0, 0.474684447, 0)
+slider.Size = UDim2.new(0, 347, 0, 28)
+slider.SizeConstraint = Enum.SizeConstraint.RelativeYY
+slider.CanvasSize = UDim2.new(2, 0, 0, 0)
+slider.ScrollBarThickness = 28
 
 customtargetcons.Name = "customtargetcons"
 customtargetcons.Parent = GameSettingsUI
@@ -1030,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function YFMI_fake_script() -- RedwiresAimbot.LocalScript 
+local function NHTIOA_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1084,10 +1095,9 @@ local function YFMI_fake_script() -- RedwiresAimbot.LocalScript
 	
 	if not RedsAimbot then
 		getgenv().RedsAimbot = {}
-		sendNotif("R.U.A. Update", [[Changes 12/16/25:
-	- More script optimizations
-	- Added "about" text button for certain setting instances
-	- GUI positions will now save per-game]])
+		sendNotif("R.U.A. Update", [[Changes 12/20/25:
+	- Prevent MaxStuds and MouseSensitivity changes both writing to MaxStuds (woops)
+	- Added sliders for number values]])
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -1122,7 +1132,7 @@ local function YFMI_fake_script() -- RedwiresAimbot.LocalScript
 						elapsedTime = 0
 						current = part[PropertyName]
 					end
-					elapsedTime = elapsedTime + task.wait()
+					elapsedTime += task.wait()
 				end
 			end)
 			return t
@@ -1130,7 +1140,7 @@ local function YFMI_fake_script() -- RedwiresAimbot.LocalScript
 	
 		local function tablecount(t)
 			local n = 0
-			for i,v in pairs(t) do n = n + 1 end
+			for i,v in pairs(t) do n += 1 end
 			return n
 		end
 	
@@ -1162,7 +1172,7 @@ local function YFMI_fake_script() -- RedwiresAimbot.LocalScript
 						count = tablecount(Table)
 						clone = table.clone(Table)
 					end
-					elapsedTime = elapsedTime + task.wait()
+					elapsedTime += task.wait()
 				end
 			end)
 			return t
@@ -1258,6 +1268,27 @@ local function YFMI_fake_script() -- RedwiresAimbot.LocalScript
 		Changed(workspace, "CurrentCamera", function(cam)
 			camera = cam
 		end)
+		
+		local function setupCooldown(onFinish)
+			local cooldown = 0
+			task.spawn(function()
+				while true do
+					if cooldown > 0 then
+						cooldown = math.max(cooldown - task.wait(), 0)
+						if cooldown == 0 then
+							onFinish()
+						end
+					else
+						task.wait()
+					end
+				end
+			end)
+			local t = {}
+			t.reset = function()
+				cooldown = 0.25
+			end
+			return t
+		end
 	
 		local teams = game:GetService("Teams")
 		local WhitelistedPlrs = {}
@@ -1396,11 +1427,9 @@ local function YFMI_fake_script() -- RedwiresAimbot.LocalScript
 			local globalclone = loadfile("RedsAimbotStats.lua")()
 			makefolder("RedsAimbot/Games")
 			local gamestats = {}
-			for index, val in pairs(globalclone) do
-				if type(index) == "number" then  --separate placeId from old globalstats save into new save file
-					gamestats[index] = val
-					globalclone[index] = nil
-				end
+			for index, val in ipairs(globalclone) do
+				gamestats[index] = val
+				globalclone[index] = nil
 			end
 			writefile("RedsAimbot/GlobalStats.lua", TableToString(globalclone, "GlobalStats"))
 			for placeId, gameData in pairs(gamestats) do --write contents of game save data into new file
@@ -1421,6 +1450,7 @@ local function YFMI_fake_script() -- RedwiresAimbot.LocalScript
 		getgenv().RedsAimbot.Misc = misc
 		getgenv().RedsAimbot.GameStats = GameStats
 		local txtBoxTemp = gameSettings.TextBoxTemplate
+		txtBoxTemp.slider.ScrollingDirection = Enum.ScrollingDirection.X
 		local txtButtonTemp = gameSettings.TextButtonTemplate
 		
 		local statDisplayNames = {
@@ -1431,6 +1461,10 @@ local function YFMI_fake_script() -- RedwiresAimbot.LocalScript
 			["TargetPrioOnly"] = "Target ONLY Prioritized Players (if any)",
 			["TargetOffScreen"] = "Allow Off-Screen Auto-Targeting",
 			["TargetNPCs"] = "Target NPCs"
+		}
+		local numLimits = {
+			["MouseSensitivity"] = {0.1, 1},
+			["MaxStuds"] = {50, 5000}
 		}
 		
 		local function createName(propName)
@@ -1472,13 +1506,32 @@ local function YFMI_fake_script() -- RedwiresAimbot.LocalScript
 				end
 			elseif typeof(val) == "number" then
 				clone = txtBoxTemp:Clone()
-				clone.value.FocusLost:connect(function()
+				local limits = numLimits[propName]
+				local min = limits[1]
+				local max = limits[2]
+				local multi = max - min
+				local function saveNumberValue()
 					local num = tonumber(clone.value.Text)
 					if num then
-						num = math.clamp(num, 0, if propName == "MaxStuds" then 5000 else 1)
-						GameStats.MaxStuds = num
+						num = math.clamp(num, min, max)
+						tbl[propName] = num
 						clone.value.Text = tostring(num)
+					else
+						clone.value.Text = tostring(tbl[propName])
 					end
+				end
+				clone.value.FocusLost:connect(saveNumberValue)
+				if propName == "MouseSensitivity" then
+					clone.slider.CanvasSize = UDim2.new(1.9, 0, 0, 0) -- remember to always add 1 to make the slider actually scrollable
+				else
+					clone.slider.CanvasSize = UDim2.new(5.99, 0, 0, 0)
+				end
+				local scrollRange = clone.slider.AbsoluteCanvasSize.X - clone.slider.Size.X.Offset
+				clone.slider.CanvasPosition = Vector2.new(((val - min) / multi) * scrollRange, 0) -- adjust slider to current value position
+				local sliderCooldown = setupCooldown(saveNumberValue)
+				Changed(clone.slider, "CanvasPosition", function(pos)
+					clone.value.Text =  ("%.3f"):format(((pos.X / scrollRange) * multi) + min)
+					sliderCooldown.reset()
 				end)
 			end
 			if clone then
@@ -1515,7 +1568,7 @@ local function YFMI_fake_script() -- RedwiresAimbot.LocalScript
 				clone.Text = createName(propName)
 				clone.value.Text = tostring(val)
 				if clone.value.ClassName == "TextBox" then
-					clone.value.PlaceholderText = ("Default: %d"):format(createGameStats()[propName] or createGlobalStats()[propName])
+					clone.value.PlaceholderText = tostring(createGameStats()[propName] or createGlobalStats()[propName])
 				end
 			end
 		end
@@ -1610,21 +1663,11 @@ local function YFMI_fake_script() -- RedwiresAimbot.LocalScript
 						v.Position = UDim2.new(0, vp.X / 2 - v.Size.X.Offset / 2, 0, vp.Y / 2 - v.Size.Y.Offset / 2) --place Message in center of screen
 					end
 				end
-				local cooldown = 0
-				Changed(v, "Position", function(pos)
-					cooldown = 0.25
+				local cooldown = setupCooldown(function()
+					guiPos[v.Name] = v.Position
 				end)
-				task.spawn(function()
-					while true do
-						if cooldown > 0 then
-							cooldown = math.max(cooldown - task.wait(), 0)
-							if cooldown == 0 then
-								guiPos[v.Name] = v.Position
-							end
-						else
-							task.wait()
-						end
-					end
+				Changed(v, "Position", function(pos)
+					cooldown.reset()
 				end)
 			end
 		end
@@ -1976,7 +2019,6 @@ local function YFMI_fake_script() -- RedwiresAimbot.LocalScript
 				table.insert(npcs, npc)
 			end)
 		end
-	
 		local queryindex
 		local querynewindex
 		local queriedParts = {}
@@ -2439,4 +2481,4 @@ local function YFMI_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(YFMI_fake_script)()
+coroutine.wrap(NHTIOA_fake_script)()
