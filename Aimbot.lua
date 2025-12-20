@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function NHTIOA_fake_script() -- RedwiresAimbot.LocalScript 
+local function YFPJ_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1113,6 +1113,10 @@ local function NHTIOA_fake_script() -- RedwiresAimbot.LocalScript
 			end
 		end
 	
+		local function thread(f)
+			return coroutine.resume(coroutine.create(f))
+		end
+		
 		local function Changed(part, PropertyName, func)
 			local current = part[PropertyName]
 			local elapsedTime = 0
@@ -1123,10 +1127,10 @@ local function NHTIOA_fake_script() -- RedwiresAimbot.LocalScript
 			end
 			t.stop = t.Stop
 	
-			task.spawn(function()
+			thread(function()
 				while enabled do
 					if part[PropertyName] ~= current then
-						task.spawn(function()
+						thread(function()
 							func(part[PropertyName], current, elapsedTime)
 						end)
 						elapsedTime = 0
@@ -1155,14 +1159,14 @@ local function NHTIOA_fake_script() -- RedwiresAimbot.LocalScript
 			end
 			t.stop = t.Stop
 	
-			task.spawn(function()
+			thread(function()
 				while enabled do
 					if tablecount(Table) ~= count then
 						if tablecount(Table) > count then
 	
 							for i,v in pairs(Table) do
 								if clone[i] == nil then
-									task.spawn(function()
+									thread(function()
 										func(i,v,elapsedTime)
 									end)
 								end
@@ -1271,7 +1275,7 @@ local function NHTIOA_fake_script() -- RedwiresAimbot.LocalScript
 		
 		local function setupCooldown(onFinish)
 			local cooldown = 0
-			task.spawn(function()
+			thread(function()
 				while true do
 					if cooldown > 0 then
 						cooldown = math.max(cooldown - task.wait(), 0)
@@ -1510,26 +1514,37 @@ local function NHTIOA_fake_script() -- RedwiresAimbot.LocalScript
 				local min = limits[1]
 				local max = limits[2]
 				local multi = max - min
-				local function saveNumberValue()
-					local num = tonumber(clone.value.Text)
-					if num then
-						num = math.clamp(num, min, max)
-						tbl[propName] = num
-						clone.value.Text = tostring(num)
-					else
-						clone.value.Text = tostring(tbl[propName])
-					end
-				end
-				clone.value.FocusLost:connect(saveNumberValue)
 				if propName == "MouseSensitivity" then
 					clone.slider.CanvasSize = UDim2.new(1.9, 0, 0, 0) -- remember to always add 1 to make the slider actually scrollable
 				else
 					clone.slider.CanvasSize = UDim2.new(5.99, 0, 0, 0)
 				end
 				local scrollRange = clone.slider.AbsoluteCanvasSize.X - clone.slider.Size.X.Offset
-				clone.slider.CanvasPosition = Vector2.new(((val - min) / multi) * scrollRange, 0) -- adjust slider to current value position
+				local internalSet = false
+				local function updateSlider(value)
+					internalSet = true
+					clone.slider.CanvasPosition = Vector2.new(((value - min) / multi) * scrollRange, 0)
+					internalSet = false
+				end
+				updateSlider(val)
+				
+				local function saveNumberValue()
+					local num = tonumber(clone.value.Text)
+					if num then
+						num = math.clamp(num, min, max)
+						tbl[propName] = num
+						clone.value.Text = tostring(num)
+						updateSlider(num)
+					else
+						clone.value.Text = tostring(tbl[propName])
+					end
+				end
+				
+				clone.value.FocusLost:connect(saveNumberValue)
 				local sliderCooldown = setupCooldown(saveNumberValue)
+				
 				Changed(clone.slider, "CanvasPosition", function(pos)
+					if internalSet then return end
 					clone.value.Text =  ("%.3f"):format(((pos.X / scrollRange) * multi) + min)
 					sliderCooldown.reset()
 				end)
@@ -1627,7 +1642,7 @@ local function NHTIOA_fake_script() -- RedwiresAimbot.LocalScript
 				end
 				themeCheck("TextStrokeColor3", getOrDefault(Theme, "TextStroke"))
 				themeCheck("ScrollBarImageColor3", getOrDefault(Theme, "ScrollBar"))
-				if v.ClassName == "TextButton" or v.ClassName == "TextBox" then
+				if v.ClassName == "TextButton" or v.ClassName == "TextBox" or v.Name == "slider" then
 					v.BackgroundColor3 = getOrDefault(Theme, "ButtonBackground")
 				end
 				if v.ClassName == "TextBox" then
@@ -1765,7 +1780,7 @@ local function NHTIOA_fake_script() -- RedwiresAimbot.LocalScript
 		end
 	
 		local function Died(player)
-			task.spawn(function()
+			thread(function()
 				if not player.Character then player.CharacterAdded:Wait() end
 	
 				local function OnDeath(chr)
@@ -2008,7 +2023,7 @@ local function NHTIOA_fake_script() -- RedwiresAimbot.LocalScript
 		end
 	
 		local function isactivenpc(npc)
-			task.spawn(function()
+			thread(function()
 				local changed
 				local active = false
 				changed = Changed(npc.Humanoid.RootPart, "CFrame", function()
@@ -2377,7 +2392,7 @@ local function NHTIOA_fake_script() -- RedwiresAimbot.LocalScript
 			togglefunc(WhitelistedPlrs)
 			togglefunc(PrioritizedPlrs)
 	
-			task.spawn(function()
+			thread(function()
 				repeat task.wait() until not game:GetService("Players"):FindFirstChild(ins.Name)
 				clone:Destroy()
 			end)
@@ -2481,4 +2496,4 @@ local function NHTIOA_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(NHTIOA_fake_script)()
+coroutine.wrap(YFPJ_fake_script)()
