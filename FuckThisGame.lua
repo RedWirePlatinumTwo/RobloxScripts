@@ -179,7 +179,7 @@ focusonchr.TextWrapped = true
 
 -- Scripts:
 
-local function AMAZ_fake_script() -- generalgamefucker.LocalScript 
+local function RFEUB_fake_script() -- generalgamefucker.LocalScript 
 	local script = Instance.new('LocalScript', generalgamefucker)
 
 	local mainframe = script.Parent.mainframe
@@ -194,6 +194,15 @@ local function AMAZ_fake_script() -- generalgamefucker.LocalScript
 	numbers.ws = 30
 	numbers.jump = 50
 	
+	local thread = function(f, ...)
+		local co = coroutine.create(f)
+		local ok, err = coroutine.resume(co, ...)
+		if not ok then
+			warn(err)
+		end
+		return co
+	end
+	
 	local Changed = function(part, PropertyName, func)
 		local current = part[PropertyName]
 		local elapsedTime = 0
@@ -204,10 +213,10 @@ local function AMAZ_fake_script() -- generalgamefucker.LocalScript
 		end
 		t.stop = t.Stop
 	
-		task.spawn(function()
+		thread(function()
 			while enabled do
 				if part[PropertyName] ~= current then
-					task.spawn(function()
+					thread(function()
 						func(part[PropertyName], current, elapsedTime)
 					end)
 					elapsedTime = 0
@@ -487,4 +496,4 @@ local function AMAZ_fake_script() -- generalgamefucker.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(AMAZ_fake_script)()
+coroutine.wrap(RFEUB_fake_script)()
