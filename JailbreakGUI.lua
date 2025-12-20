@@ -11,7 +11,6 @@ local replaceparachute = Instance.new("TextButton")
 local holdebypass = Instance.new("TextButton")
 local aimbot = Instance.new("TextButton")
 local CrateEsp = Instance.new("TextButton")
-local UIGridLayout = Instance.new("UIGridLayout")
 local modguns = Instance.new("TextButton")
 local GravToggle = Instance.new("TextButton")
 local forcedaytime = Instance.new("TextButton")
@@ -39,6 +38,7 @@ local aimpredictor = Instance.new("TextButton")
 local aimtriggerbot = Instance.new("TextButton")
 local wallhack = Instance.new("TextButton")
 local modshotgun = Instance.new("TextButton")
+local UIGridLayout = Instance.new("UIGridLayout")
 local AutosortFrame = Instance.new("Frame")
 local ScrollingFrame_2 = Instance.new("ScrollingFrame")
 local UIListLayout = Instance.new("UIListLayout")
@@ -147,9 +147,6 @@ CrateEsp.TextColor3 = Color3.fromRGB(85, 170, 255)
 CrateEsp.TextSize = 20.000
 CrateEsp.TextWrapped = true
 CrateEsp.TextXAlignment = Enum.TextXAlignment.Left
-
-UIGridLayout.Parent = ScrollingFrame
-UIGridLayout.CellSize = UDim2.new(0, 360, 0, 35)
 
 modguns.Name = "modguns"
 modguns.Parent = ScrollingFrame
@@ -528,6 +525,9 @@ modshotgun.TextSize = 20.000
 modshotgun.TextWrapped = true
 modshotgun.TextXAlignment = Enum.TextXAlignment.Left
 
+UIGridLayout.Parent = ScrollingFrame
+UIGridLayout.CellSize = UDim2.new(0, 360, 0, 35)
+
 AutosortFrame.Name = "AutosortFrame"
 AutosortFrame.Parent = JailbreakGUI
 AutosortFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 45)
@@ -750,7 +750,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function DLFZZN_fake_script() -- JailbreakGUI.LocalScript 
+local function CZMHX_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -803,6 +803,15 @@ local function DLFZZN_fake_script() -- JailbreakGUI.LocalScript
 		return n
 	end
 	
+	local thread = function(f, ...)
+		local co = coroutine.create(f)
+		local ok, err = coroutine.resume(co, ...)
+		if not ok then
+			warn(err)
+		end
+		return co
+	end
+	
 	local TableAdded = function(Table, func)
 		local count = tablecount(Table)
 		local clone = table.clone(Table)
@@ -814,14 +823,14 @@ local function DLFZZN_fake_script() -- JailbreakGUI.LocalScript
 		end
 		t.stop = t.Stop
 	
-		task.spawn(function()
+		thread(function()
 			while enabled do
 				if tablecount(Table) ~= count then
 					if tablecount(Table) > count then
 	
 						for i,v in pairs(Table) do
 							if clone[i] == nil then
-								task.spawn(function()
+								thread(function()
 									func(i,v,elapsedTime)
 								end)
 							end
@@ -924,10 +933,10 @@ local function DLFZZN_fake_script() -- JailbreakGUI.LocalScript
 				end
 				t.stop = t.Stop
 	
-				task.spawn(function()
+				thread(function()
 					while enabled do
 						if part[PropertyName] ~= current then
-							task.spawn(function()
+							thread(function()
 								func(part[PropertyName], current, elapsedTime)
 							end)
 							elapsedTime = 0
@@ -954,7 +963,7 @@ local function DLFZZN_fake_script() -- JailbreakGUI.LocalScript
 			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 			lplr.CameraMaxZoomDistance = 200
 	
-			task.spawn(function()
+			thread(function()
 				while true do
 					for i, plr in pairs(minimap:GetChildren()) do
 						plr.Visible = true
@@ -969,7 +978,7 @@ local function DLFZZN_fake_script() -- JailbreakGUI.LocalScript
 					local minimap2 = c.Map.Container.Points
 					local destroyed = false
 	
-					task.spawn(function()
+					thread(function()
 						while not destroyed do
 							for i,v in pairs(minimap2:GetChildren()) do
 								if v.ClassName == "ImageLabel" then
@@ -2160,4 +2169,4 @@ local function DLFZZN_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(DLFZZN_fake_script)()
+coroutine.wrap(CZMHX_fake_script)()
