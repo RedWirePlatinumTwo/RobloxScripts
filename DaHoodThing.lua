@@ -83,7 +83,7 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function BETNQ_fake_script() -- DaShop.LocalScript 
+local function VHXCAU_fake_script() -- DaShop.LocalScript 
 	local script = Instance.new('LocalScript', DaShop)
 
 	local mainframe = script.Parent.MainFrame
@@ -123,7 +123,7 @@ local function BETNQ_fake_script() -- DaShop.LocalScript
 					elapsedTime = 0
 					current = part[PropertyName]
 				end
-				elapsedTime = elapsedTime + task.wait()
+				elapsedTime += task.wait()
 			end
 		end)
 		return t
@@ -152,13 +152,14 @@ local function BETNQ_fake_script() -- DaShop.LocalScript
 		clone.Text = shopitem.Name
 		local canClick = true
 		clone.Activated:connect(function()
+			local nameToFind = name:gsub(" Ammo", "")
 			for i,v in pairs(lplr.Backpack:GetChildren()) do
-				if v.Name:find(name) then
+				if v.Name:find(nameToFind) then
 					return
 				end
 			end
 			for i,v in pairs(lplr.Character:GetChildren()) do
-				if v.Name:find(name) then
+				if v.Name:find(nameToFind) then
 					return
 				end
 			end
@@ -202,4 +203,4 @@ local function BETNQ_fake_script() -- DaShop.LocalScript
 		end
 	end)
 end
-coroutine.wrap(BETNQ_fake_script)()
+coroutine.wrap(VHXCAU_fake_script)()
