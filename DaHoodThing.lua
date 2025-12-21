@@ -83,7 +83,7 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function VHXCAU_fake_script() -- DaShop.LocalScript 
+local function FNFTWJ_fake_script() -- DaShop.LocalScript 
 	local script = Instance.new('LocalScript', DaShop)
 
 	local mainframe = script.Parent.MainFrame
@@ -145,23 +145,25 @@ local function VHXCAU_fake_script() -- DaShop.LocalScript
 	end
 	
 	local basebutton = mainframe.ShopScroll.ShopItem
-	local function addShopItem(shopitem, name)
+	local function addShopItem(index)
 		local clone = basebutton:Clone()
 		clone.Parent = basebutton.Parent
 		clone.Visible = true
-		clone.Text = shopitem.Name
+		local shopItem = shopItems[index].Instance
+		clone.Text = shopItem.Name
 		local canClick = true
 		clone.Activated:connect(function()
-			local nameToFind = name:gsub(" Ammo", "")
-			for i,v in pairs(lplr.Backpack:GetChildren()) do
-				if v.Name:find(nameToFind) then
-					return
+			local function checkForItem(ins)
+				local nameToFind = index:gsub(" Ammo", "")
+				for i,v in pairs(ins:GetChildren()) do
+					if v.Name:find(nameToFind) then
+						return
+					end
 				end
 			end
-			for i,v in pairs(lplr.Character:GetChildren()) do
-				if v.Name:find(nameToFind) then
-					return
-				end
+			checkForItem(lplr.Backpack)
+			if lplr.Character then
+				checkForItem(lplr.Character)
 			end
 			if canClick then
 				canClick = false
@@ -169,8 +171,8 @@ local function VHXCAU_fake_script() -- DaShop.LocalScript
 				local origCf = hrp.CFrame
 				thread(function()
 					while not canClick do
-						hrp.CFrame = shopitem.Head.CFrame + Vector3.new(0, -3, 0)
-						fireclickdetector(shopitem.ClickDetector)
+						hrp.CFrame = shopItem.Head.CFrame + Vector3.new(0, -3, 0)
+						fireclickdetector(shopItem.ClickDetector)
 						task.wait()
 					end
 				end)
@@ -182,7 +184,7 @@ local function VHXCAU_fake_script() -- DaShop.LocalScript
 	end
 	
 	for i,v in pairs(shopItems) do
-		addShopItem(v.Instance, i)
+		addShopItem(i)
 	end
 	
 	Changed(mainframe.Filter, "Text", function(txt)
@@ -203,4 +205,4 @@ local function VHXCAU_fake_script() -- DaShop.LocalScript
 		end
 	end)
 end
-coroutine.wrap(VHXCAU_fake_script)()
+coroutine.wrap(FNFTWJ_fake_script)()
