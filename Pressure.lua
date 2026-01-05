@@ -131,7 +131,7 @@ locatekeys.TextWrapped = true
 
 -- Scripts:
 
-local function TQKDLG_fake_script() -- RedsPressureGui.LocalScript 
+local function TWBOIN_fake_script() -- RedsPressureGui.LocalScript 
 	local script = Instance.new('LocalScript', RedsPressureGui)
 
 	local mainframe = script.Parent.mainframe
@@ -317,8 +317,14 @@ local function TQKDLG_fake_script() -- RedsPressureGui.LocalScript
 	
 	singleclick(mainframe.locatekeys, function()
 		local function locatekey(obj)
+			local gui
 			if obj.Name:lower():find("keycard_object") then
-				local gui = bbgui(obj, obj.Parent.Name)
+				gui = bbgui(obj, obj.Parent.Name)
+			end
+			if obj.Name:lower():find("passwordpaper") then
+				gui = bbgui(obj.ProxyPart, obj.Parent.Name)
+			end
+			if gui then
 				gui.StudsOffset = Vector3.new()
 			end
 		end
@@ -328,4 +334,4 @@ local function TQKDLG_fake_script() -- RedsPressureGui.LocalScript
 		workspace.DescendantAdded:connect(locatekey)
 	end)
 end
-coroutine.wrap(TQKDLG_fake_script)()
+coroutine.wrap(TWBOIN_fake_script)()
