@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function LHFF_fake_script() -- RedwiresAimbot.LocalScript 
+local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1203,7 +1203,10 @@ local function LHFF_fake_script() -- RedwiresAimbot.LocalScript
 				end
 	
 				local added = TableAdded(t, function(index, value, ...)
-					f(t, index, value, nil, ...)
+					local args = {...}
+					thread(function()
+						f(t, index, value, nil, unpack(args))
+					end)
 					if typeof(value) == "table" and not table.find(reps, value) then
 						table.insert(reps, value)
 						tblChanged(value)
@@ -2501,4 +2504,4 @@ local function LHFF_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(LHFF_fake_script)()
+coroutine.wrap(FKYJYV_fake_script)()
