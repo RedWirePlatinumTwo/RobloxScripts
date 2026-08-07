@@ -84,7 +84,7 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function EFSKWWL_fake_script() -- DaShop.LocalScript 
+local function FFIYMQ_fake_script() -- DaShop.LocalScript 
 	local script = Instance.new('LocalScript', DaShop)
 
 	local mainframe = script.Parent.MainFrame
@@ -154,29 +154,24 @@ local function EFSKWWL_fake_script() -- DaShop.LocalScript
 		clone.Text = shopItem.Name
 		local canClick = true
 		clone.Activated:connect(function()
-			local function shouldBuyItem(inventory)
-				if index:find("Ammo") then
-					local hasGun = false
-					for i,v in pairs(inventory:GetChildren()) do
-						if v.Name:find(index:gsub(" Ammo", "")) then
-							hasGun = true
-							break
-						end
-					end
-					return hasGun
-				else
-					local hasItem = false
-					for i,v in pairs(inventory:GetChildren()) do
-						if v.Name:find(index) then
-							hasItem = true
-							break
-						end
-					end
-					return hasItem
+			local toolNames = {}
+			for i,v in pairs(lplr.Backpack:GetChildren()) do
+				if v:IsA("Tool") then
+					table.insert(toolNames, v.Name)
 				end
 			end
-			if not shouldBuyItem(lplr.Backpack) then return end
-			if lplr.Character and not shouldBuyItem(lplr.Character) then return end
+			if lplr.Character then
+				for i,v in pairs(lplr.Character:GetChildren()) do
+					if v:IsA("Tool") then
+						table.insert(toolNames, v.Name)
+					end
+				end
+			end
+			if index:find("Ammo") then
+				if not table.find(toolNames, index:gsub(" Ammo", "")) then return end --do nothing if u dont got gun
+			else
+				if table.find(toolNames, index) then return end --do nothing if u already have the item
+			end
 			if canClick then
 				canClick = false
 				local hrp = lplr.Character.Humanoid.RootPart
@@ -217,4 +212,4 @@ local function EFSKWWL_fake_script() -- DaShop.LocalScript
 		end
 	end)
 end
-coroutine.wrap(EFSKWWL_fake_script)()
+coroutine.wrap(FFIYMQ_fake_script)()
