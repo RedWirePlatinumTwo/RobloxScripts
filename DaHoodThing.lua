@@ -73,6 +73,7 @@ Filter.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Filter.Position = UDim2.new(0.0488599353, 0, 0.139682546, 0)
 Filter.Size = UDim2.new(0, 277, 0, 38)
 Filter.Font = Enum.Font.SourceSans
+Filter.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
 Filter.PlaceholderText = "Filter text"
 Filter.Text = ""
 Filter.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -83,7 +84,7 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function FNFTWJ_fake_script() -- DaShop.LocalScript 
+local function NUVNTZ_fake_script() -- DaShop.LocalScript 
 	local script = Instance.new('LocalScript', DaShop)
 
 	local mainframe = script.Parent.MainFrame
@@ -157,13 +158,13 @@ local function FNFTWJ_fake_script() -- DaShop.LocalScript
 				local nameToFind = index:gsub(" Ammo", "")
 				for i,v in pairs(ins:GetChildren()) do
 					if v.Name:find(nameToFind) then
-						return
+						return true
 					end
 				end
 			end
-			checkForItem(lplr.Backpack)
+			if checkForItem(lplr.Backpack) then return end
 			if lplr.Character then
-				checkForItem(lplr.Character)
+				if checkForItem(lplr.Character) then return end
 			end
 			if canClick then
 				canClick = false
@@ -205,4 +206,4 @@ local function FNFTWJ_fake_script() -- DaShop.LocalScript
 		end
 	end)
 end
-coroutine.wrap(FNFTWJ_fake_script)()
+coroutine.wrap(NUVNTZ_fake_script)()
