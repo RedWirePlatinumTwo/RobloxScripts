@@ -155,7 +155,7 @@ local function BXFZDSY_fake_script() -- DaShop.LocalScript
 		clone.Parent = basebutton.Parent
 		clone.Visible = true
 		local shopItem = shopItems[index].Instance
-		clone.Text = index
+		clone.Text = shopItem.Name
 		local canClick = true
 		clone.Activated:connect(function()
 			local toolNames = {}
