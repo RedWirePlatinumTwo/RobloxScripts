@@ -84,7 +84,7 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function FFIYMQ_fake_script() -- DaShop.LocalScript 
+local function ACRKWSF_fake_script() -- DaShop.LocalScript 
 	local script = Instance.new('LocalScript', DaShop)
 
 	local mainframe = script.Parent.MainFrame
@@ -133,14 +133,14 @@ local function FFIYMQ_fake_script() -- DaShop.LocalScript
 	local shopItems = {}
 	for i, shopitem in pairs(workspace.Ignored.Shop:GetChildren()) do
 		pcall(function()
-			local name = shopitem.Name:gsub(" ", "")
-			name = name:sub(name:find("%[")+1, name:find("%]")-1)
+			local name = shopitem.Name
 			local price = (shopItems[name] and shopItems[name].Price) or 0
-			local price2 = tonumber(shopitem.Name:match("%d+"))
+			local price2 = tonumber(name:match("%d+"))
 			if price2 < price or price == 0 and shopitem:FindFirstChild("Head") and shopitem:FindFirstChild("ClickDetector") then
-				shopItems[name] = {}
-				shopItems[name].Price = price2
-				shopItems[name].Instance = shopitem
+				shopItems[name] = {
+					Price = price2,
+					Instance = shopitem
+				}
 			end
 		end)
 	end
@@ -151,7 +151,7 @@ local function FFIYMQ_fake_script() -- DaShop.LocalScript
 		clone.Parent = basebutton.Parent
 		clone.Visible = true
 		local shopItem = shopItems[index].Instance
-		clone.Text = shopItem.Name
+		clone.Text = index
 		local canClick = true
 		clone.Activated:connect(function()
 			local toolNames = {}
@@ -212,4 +212,4 @@ local function FFIYMQ_fake_script() -- DaShop.LocalScript
 		end
 	end)
 end
-coroutine.wrap(FFIYMQ_fake_script)()
+coroutine.wrap(ACRKWSF_fake_script)()
