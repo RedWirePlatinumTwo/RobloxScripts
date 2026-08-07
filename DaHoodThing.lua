@@ -84,7 +84,7 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function NUVNTZ_fake_script() -- DaShop.LocalScript 
+local function EFSKWWL_fake_script() -- DaShop.LocalScript 
 	local script = Instance.new('LocalScript', DaShop)
 
 	local mainframe = script.Parent.MainFrame
@@ -154,18 +154,29 @@ local function NUVNTZ_fake_script() -- DaShop.LocalScript
 		clone.Text = shopItem.Name
 		local canClick = true
 		clone.Activated:connect(function()
-			local function checkForItem(ins)
-				local nameToFind = index:gsub(" Ammo", "")
-				for i,v in pairs(ins:GetChildren()) do
-					if v.Name:find(nameToFind) then
-						return true
+			local function shouldBuyItem(inventory)
+				if index:find("Ammo") then
+					local hasGun = false
+					for i,v in pairs(inventory:GetChildren()) do
+						if v.Name:find(index:gsub(" Ammo", "")) then
+							hasGun = true
+							break
+						end
 					end
+					return hasGun
+				else
+					local hasItem = false
+					for i,v in pairs(inventory:GetChildren()) do
+						if v.Name:find(index) then
+							hasItem = true
+							break
+						end
+					end
+					return hasItem
 				end
 			end
-			if checkForItem(lplr.Backpack) then return end
-			if lplr.Character then
-				if checkForItem(lplr.Character) then return end
-			end
+			if not shouldBuyItem(lplr.Backpack) then return end
+			if lplr.Character and not shouldBuyItem(lplr.Character) then return end
 			if canClick then
 				canClick = false
 				local hrp = lplr.Character.Humanoid.RootPart
@@ -206,4 +217,4 @@ local function NUVNTZ_fake_script() -- DaShop.LocalScript
 		end
 	end)
 end
-coroutine.wrap(NUVNTZ_fake_script)()
+coroutine.wrap(EFSKWWL_fake_script)()
