@@ -84,7 +84,7 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function BXFZDSY_fake_script() -- DaShop.LocalScript 
+local function LNPXNR_fake_script() -- DaShop.LocalScript 
 	local script = Instance.new('LocalScript', DaShop)
 
 	local mainframe = script.Parent.MainFrame
@@ -131,7 +131,8 @@ local function BXFZDSY_fake_script() -- DaShop.LocalScript
 	end
 	
 	local function trimName(txt)
-		return txt:gsub(" ", ""):sub(txt:find("%[")+1, txt:find("%]")-1)
+		txt = txt:gsub(" ", "")
+		return txt:sub(txt:find("%[")+1, txt:find("%]")-1)
 	end
 	
 	local shopItems = {}
@@ -161,20 +162,24 @@ local function BXFZDSY_fake_script() -- DaShop.LocalScript
 			local toolNames = {}
 			for i,v in pairs(lplr.Backpack:GetChildren()) do
 				if v:IsA("Tool") then
-					table.insert(toolNames, trimName(v.Name))
+					pcall(function()
+						table.insert(toolNames, trimName(v.Name))
+					end)
 				end
 			end
 			if lplr.Character then
 				for i,v in pairs(lplr.Character:GetChildren()) do
 					if v:IsA("Tool") then
-						table.insert(toolNames, trimName(v.Name))
+						pcall(function()
+							table.insert(toolNames, trimName(v.Name))
+						end)
 					end
 				end
 			end
 			if index:find("Ammo") then
 				if not table.find(toolNames, index:gsub("Ammo", "")) then return end --do nothing if u dont got gun
 			else
-				if table.find(toolNames,index) then return end --do nothing if u already have the item
+				if table.find(toolNames, index) then return end --do nothing if u already have the item
 			end
 			if canClick then
 				canClick = false
@@ -216,4 +221,4 @@ local function BXFZDSY_fake_script() -- DaShop.LocalScript
 		end
 	end)
 end
-coroutine.wrap(BXFZDSY_fake_script)()
+coroutine.wrap(LNPXNR_fake_script)()
