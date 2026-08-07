@@ -84,7 +84,7 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function GUMN_fake_script() -- DaShop.LocalScript 
+local function SWRDFH_fake_script() -- DaShop.LocalScript 
 	local script = Instance.new('LocalScript', DaShop)
 
 	local mainframe = script.Parent.MainFrame
@@ -180,6 +180,8 @@ local function GUMN_fake_script() -- DaShop.LocalScript
 			else
 				if table.find(toolNames, index) then return end --do nothing if u already have the item
 			end
+			local money = tonumber((lplr.PlayerGui.MainScreenGui.MoneyText.Text:gsub("%D", "")))
+			if money < shopItems[index].Price then return end --do nothing if u dont have enough money
 			if canClick then
 				canClick = false
 				local hrp = lplr.Character.Humanoid.RootPart
@@ -220,4 +222,4 @@ local function GUMN_fake_script() -- DaShop.LocalScript
 		end
 	end)
 end
-coroutine.wrap(GUMN_fake_script)()
+coroutine.wrap(SWRDFH_fake_script)()
