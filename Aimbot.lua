@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function LCAKAH_fake_script() -- RedwiresAimbot.LocalScript 
+local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1876,7 +1876,8 @@ local function LCAKAH_fake_script() -- RedwiresAimbot.LocalScript
 					if condition:find("TargetPlayer") and not plrFromChr or condition == "" then
 						return true
 					else
-						return loadstring("return "..condition:gsub("TargetCharacter", GetFullName(chr)):gsub("TargetPlayer", GetFullName(plrFromChr)))()
+						local conditionFunction = loadstring("return function(TargetCharacter, TargetPlayer) return "..condition.." end")()
+						return conditionFunction(chr, plrFromChr)
 					end
 				end)
 				conditionsmet = conditionsmet and scriptSuccess and conditionMet
@@ -2520,4 +2521,4 @@ local function LCAKAH_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(LCAKAH_fake_script)()
+coroutine.wrap(QCNVO_fake_script)()
