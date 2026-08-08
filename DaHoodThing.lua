@@ -84,7 +84,7 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function SWRDFH_fake_script() -- DaShop.LocalScript 
+local function GVOMP_fake_script() -- DaShop.LocalScript 
 	local script = Instance.new('LocalScript', DaShop)
 
 	local mainframe = script.Parent.MainFrame
@@ -150,11 +150,11 @@ local function SWRDFH_fake_script() -- DaShop.LocalScript
 	end
 	
 	local basebutton = mainframe.ShopScroll.ShopItem
-	local function addShopItem(index)
+	for index, data in pairs(shopItems) do
 		local clone = basebutton:Clone()
 		clone.Parent = basebutton.Parent
 		clone.Visible = true
-		local shopItem = shopItems[index].Instance
+		local shopItem = data.Instance
 		clone.Text = shopItem.Name
 		local canClick = true
 		clone.Activated:connect(function()
@@ -180,8 +180,7 @@ local function SWRDFH_fake_script() -- DaShop.LocalScript
 			else
 				if table.find(toolNames, index) then return end --do nothing if u already have the item
 			end
-			local money = tonumber((lplr.PlayerGui.MainScreenGui.MoneyText.Text:gsub("%D", "")))
-			if money < shopItems[index].Price then return end --do nothing if u dont have enough money
+			if tonumber((lplr.PlayerGui.MainScreenGui.MoneyText.Text:gsub("%D", ""))) < data.Price then return end --do nothing if u dont have enough money
 			if canClick then
 				canClick = false
 				local hrp = lplr.Character.Humanoid.RootPart
@@ -198,10 +197,6 @@ local function SWRDFH_fake_script() -- DaShop.LocalScript
 				canClick = true
 			end
 		end)
-	end
-	
-	for i,v in pairs(shopItems) do
-		addShopItem(i)
 	end
 	
 	Changed(mainframe.Filter, "Text", function(txt)
@@ -222,4 +217,4 @@ local function SWRDFH_fake_script() -- DaShop.LocalScript
 		end
 	end)
 end
-coroutine.wrap(SWRDFH_fake_script)()
+coroutine.wrap(GVOMP_fake_script)()
