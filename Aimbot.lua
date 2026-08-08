@@ -1969,7 +1969,6 @@ local function LCAKAH_fake_script() -- RedwiresAimbot.LocalScript
 			else
 				GameStats.Target = "Head"
 			end
-			gameSettings.Target.value.Text = getOrDefault(GameStats, "Target")
 		end)
 	
 		gameSettings.AimMethod.value.Activated:connect(function()
