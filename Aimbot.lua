@@ -1685,6 +1685,7 @@ local function LCAKAH_fake_script() -- RedwiresAimbot.LocalScript
 		for index, value in pairs(createGameStats()) do
 			if index == "Target" and value == "HumanoidRootPart" then
 				GameStats.Target = "Torso"
+				value = "Torso"
 			end
 			createTemplate(GameStats, index)
 		end
