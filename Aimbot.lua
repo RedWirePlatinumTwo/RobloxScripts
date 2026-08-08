@@ -1796,13 +1796,6 @@ local function TFQAKBW_fake_script() -- RedwiresAimbot.LocalScript
 				saveSettings()
 			end)
 		end
-		
-		for i, bindInfo in pairs(Keybinds) do
-			bindInfo = updateKeybindTable(i, bindInfo) --check if bindInfo is a plain Enum keycode or string, then convert it to table with Key1, Key2, and Toggle
-			if keybindSettings:FindFirstChild(i) then
-				updateKeybindInstance(keybindSettings[i], bindInfo)
-			end
-		end
 	
 		local function deselect()
 			misc.TargetedCharacter = nil
