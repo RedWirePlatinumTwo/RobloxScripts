@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript 
+local function TFQAKBW_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1093,11 +1093,16 @@ local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript
 		end
 	end
 	
+	local function changeNotes(...)
+		return table.concat({...}, "\n - ")
+	end
 	if not RedsAimbot then
 		getgenv().RedsAimbot = {}
-		sendNotif("R.U.A. Update", [[Changes 12/20/25:
-	- Prevent MaxStuds and MouseSensitivity changes both writing to MaxStuds (woops)
-	- Added sliders for number values]])
+		sendNotif(changeNotes("Red's Universal Aimbot (8/8/26):",
+			"GameStats Target value will sync properly with keybind presses",
+			"Keybinds list will properly set the values to saved data",
+			"Changed the Targeted Part toggle back to Head/Torso. This time, it'll be a per-player check if it should pick Torso or UpperTorso"
+		))
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -1336,6 +1341,16 @@ local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript
 			newGameStats.GUIPositions = {}
 			return newGameStats
 		end
+		
+		local boolsAllowed = {
+			"TargetNPCs",
+			"AutoTarget",
+			"TargetCloserPlayers",
+			"TargetPrioOnly",
+			"FirstPersonEnabled",
+			"TargetOffScreen",
+			"EnableRaycasting"
+		}
 	
 		local function createGlobalStats()
 			local newGlobalStats = {}
@@ -1351,16 +1366,15 @@ local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript
 			binds.TargetedPartToggle.Toggle = true
 			binds.GUIVisibilityToggle = {}
 			binds.GUIVisibilityToggle.Toggle = true
-			local function addKeybinds(table)
-				for name,value in pairs(table) do
-					if type(value) == "boolean" then
+			local function addKeybinds(tbl)
+				for name, value in pairs(tbl) do
+					if type(value) == "boolean" and table.find(boolsAllowed, name) then
 						binds[name] = {}
 						binds[name].Toggle = true
 					end
 				end
 			end
 			addKeybinds(createGameStats())
-			addKeybinds(newGlobalStats)
 			newGlobalStats.Theme = {}
 			local theme = newGlobalStats.Theme
 			theme.Yes = Color3.fromRGB(0, 170, 0)
@@ -1470,16 +1484,20 @@ local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript
 			["Target"] = "Targeted Part",
 			["AutoTarget"] = "Auto-Targeting Enabled",
 			["MaxStuds"] = "Auto-Target Max Distance",
-			["TargetPrioOnly"] = "Target ONLY Prioritized Players (if any)",
+			["TargetPrioOnly"] = "Target ONLY Prioritized Players",
 			["TargetOffScreen"] = "Allow Off-Screen Auto-Targeting",
-			["TargetNPCs"] = "Target NPCs"
+			["TargetNPCs"] = "Target NPCs",
+			["GUIVisibilityToggle"] = "GUI Visibility Toggle"
 		}
 		local numLimits = {
 			["MouseSensitivity"] = {0.1, 1},
 			["MaxStuds"] = {50, 5000}
 		}
 		
-		local function createName(propName)
+		local function createName(propName, keybindSuffix)
+			local function suffixCheck(txt)
+				return (if keybindSuffix then txt.." Keybind" else txt)..":"
+			end
 			local name = ""
 			if not statDisplayNames[propName] then
 				for i = 1, propName:len() do
@@ -1491,9 +1509,9 @@ local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript
 					end
 				end
 			else
-				return statDisplayNames[propName]..":"
+				return suffixCheck(statDisplayNames[propName])
 			end
-			return name..":"
+			return suffixCheck(name)
 		end
 		
 		local function updateMsg(contents, title)
@@ -1597,7 +1615,7 @@ local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript
 		end
 		
 		local function updateKeybindTable(index, bindInfo)
-			if typeof(bindInfo) == "EnumItem" or typeof(bindInfo) == "string" then
+			if typeof(bindInfo) ~= "table" then
 				local t = {}
 				t.Key1 = bindInfo
 				t.Toggle = true
@@ -1660,18 +1678,14 @@ local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript
 		end
 		applyTheme()
 	
-		for i, bindInfo in pairs(Keybinds) do
-			bindInfo = updateKeybindTable(i, bindInfo) --check if bindInfo is a plain Enum keycode or string, then convert it to table with Key1, Key2, and Toggle
-			if keybindSettings:FindFirstChild(i) then
-				updateKeybindInstance(keybindSettings[i], bindInfo)
-			end
-		end
-	
 		for index, value in pairs(createGlobalStats()) do 
 			createTemplate(GlobalStats, index)
 		end
 	
 		for index, value in pairs(createGameStats()) do
+			if index == "Target" and value == "HumanoidRootPart" then
+				GameStats.Target = "Torso"
+			end
 			createTemplate(GameStats, index)
 		end
 		
@@ -1732,13 +1746,13 @@ local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript
 			addGUICondition(i)
 		end
 		
-		for index, value in pairs(createGlobalStats().Keybinds) do 
+		for index, defaultValue in pairs(createGlobalStats().Keybinds) do 
 			local v = keybindSettings.KeybindTemplate:Clone()
 			v.Parent = keybindSettings
 			v.Name = index
 			v.Visible = true
-			v.Text = createName(index.." Keybind")
-			local keybind = updateKeybindTable(index, value)
+			v.Text = createName(index, true)
+			local keybind = updateKeybindTable(index, Keybinds[index] or defaultValue)
 			updateKeybindInstance(v, keybind)
 			v.reset.Activated:connect(function()
 				Keybinds[index].Key1 = nil
@@ -1781,6 +1795,13 @@ local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript
 				updateKeybindInstance(v, Keybinds[v.Name])
 				saveSettings()
 			end)
+		end
+		
+		for i, bindInfo in pairs(Keybinds) do
+			bindInfo = updateKeybindTable(i, bindInfo) --check if bindInfo is a plain Enum keycode or string, then convert it to table with Key1, Key2, and Toggle
+			if keybindSettings:FindFirstChild(i) then
+				updateKeybindInstance(keybindSettings[i], bindInfo)
+			end
 		end
 	
 		local function deselect()
@@ -1923,7 +1944,7 @@ local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript
 			if processed then return end
 			if isKeyActivated(getOrDefault(Keybinds, "TargetedPartToggle"), true) then
 				if getOrDefault(GameStats, "Target") == "Head" then
-					GameStats.Target = "HumanoidRootPart"
+					GameStats.Target = "Torso"
 				else
 					GameStats.Target = "Head"
 				end
@@ -1943,10 +1964,14 @@ local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript
 				end
 			end
 		end)
+		
+		Changed(GameStats, "Target", function(txt)
+			gameSettings.Target.value.Text = txt
+		end)
 	
 		gameSettings.Target.value.Activated:connect(function()
 			if getOrDefault(GameStats, "Target") == "Head" then
-				GameStats.Target = "HumanoidRootPart"
+				GameStats.Target = "Torso"
 			else
 				GameStats.Target = "Head"
 			end
@@ -2030,7 +2055,7 @@ local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript
 			return not v.CanCollide or v.Transparency == 1
 		end
 	
-		local function isactivenpc(npc)
+		local function isActiveNPC(npc)
 			thread(function()
 				local changed
 				local active = false
@@ -2068,7 +2093,7 @@ local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript
 		end
 		for i,v in pairs(workspace:GetDescendants()) do
 			if v.ClassName == "Humanoid" and v.RootPart and not plrs:GetPlayerFromCharacter(v.Parent) and not table.find(npcs, v.Parent) and v.Health > 0 then
-				isactivenpc(v.Parent)
+				isActiveNPC(v.Parent)
 			end
 			setQueryChecker(v)
 		end
@@ -2077,7 +2102,7 @@ local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript
 			if v.ClassName == "Humanoid" then
 				if not v.RootPart then repeat task.wait() until v.RootPart end
 				if not plrs:GetPlayerFromCharacter(v.Parent) and not table.find(npcs, v.Parent) and v.Health > 0 then
-					isactivenpc(v.Parent)
+					isActiveNPC(v.Parent)
 				end
 			end
 			setQueryChecker(v)
@@ -2090,7 +2115,7 @@ local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript
 			end
 		end)
 	
-		local function addchrtotable(plr)
+		local function addChrToTable(plr)
 			if plr.Character then
 				table.insert(chrs, plr.Character)
 			end
@@ -2106,23 +2131,21 @@ local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript
 		end
 	
 		for i,v in pairs(plrs:GetPlayers()) do
-			addchrtotable(v)
+			addChrToTable(v)
 		end
-		plrs.PlayerAdded:connect(addchrtotable)
+		plrs.PlayerAdded:connect(addChrToTable)
 	
-		local function gettargetpart(chr)
-			local p = chr:FindFirstChild(getOrDefault(GameStats, "Target"))
-			if p then
-				return p
+		local function getTargetPart(chr)
+			local targetType = getOrDefault(GameStats, "Target")
+			if targetType == "Head" then
+				return chr:FindFirstChild(targetType) or chr.HumanoidRootPart
 			else
-				if chr:FindFirstChild("Humanoid") and chr.Humanoid.RootPart then
-					return chr.Humanoid.RootPart
-				end
+				return chr:FindFirstChild(targetType) or chr:FindFirstChild("UpperTorso") or chr.HumanoidRootPart
 			end
 		end
 		local AimbotFunction = game:GetService("RunService").RenderStepped:connect(function()
 			if misc.TargetedCharacter then
-				local part = gettargetpart(misc.TargetedCharacter)
+				local part = getTargetPart(misc.TargetedCharacter)
 				if part then
 					local partpos = part.Position
 					local v, onscreen = camera:WorldToScreenPoint(partpos + misc.AimOffset)
@@ -2186,14 +2209,14 @@ local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript
 				local table1 = {}
 				local PrioritizedPlrsOnScreen = {}
 	
-				local function addchr(v)
+				local function addChr(v)
 					local player = plrs:GetPlayerFromCharacter(v)
 					if player and IsNotWhitelisted(player) or not player then
 						if v:FindFirstChildOfClass("Humanoid")
 							and lplr.Character and lplr.Character:FindFirstChild("Head")
 							and v:FindFirstChildOfClass("Humanoid").Health > 0
 							and meetsConditions(v) then
-							local targpart = gettargetpart(v)
+							local targpart = getTargetPart(v)
 							if targpart then
 								local pos = math.floor(lplr:DistanceFromCharacter(targpart.Position))
 								local _, onscreen = camera:WorldToScreenPoint(targpart.Position)
@@ -2214,14 +2237,14 @@ local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript
 	
 				if getOrDefault(GameStats, "TargetNPCs") and (not getOrDefault(GameStats, "TargetPrioOnly") or #PrioritizedPlrs == 0) then
 					for i, npc in pairs(npcs) do
-						addchr(npc)
+						addChr(npc)
 					end
 				end
 	
 				if not getOrDefault(GameStats, "IgnorePlayers") then
 					for i,v in pairs(plrs:GetPlayers()) do
 						if v ~= lplr and v.Character then
-							addchr(v.Character)
+							addChr(v.Character)
 						end
 					end
 				end
@@ -2504,4 +2527,4 @@ local function FKYJYV_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(FKYJYV_fake_script)()
+coroutine.wrap(TFQAKBW_fake_script)()
