@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function TFQAKBW_fake_script() -- RedwiresAimbot.LocalScript 
+local function LCAKAH_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1094,11 +1094,11 @@ local function TFQAKBW_fake_script() -- RedwiresAimbot.LocalScript
 	end
 	
 	local function changeNotes(...)
-		return table.concat({...}, "\n - ")
+		return table.concat({"", ...}, "\n - ")
 	end
 	if not RedsAimbot then
 		getgenv().RedsAimbot = {}
-		sendNotif(changeNotes("Red's Universal Aimbot (8/8/26):",
+		sendNotif("Red's Universal Aimbot (8/8/26):", changeNotes(
 			"GameStats Target value will sync properly with keybind presses",
 			"Keybinds list will properly set the values to saved data",
 			"Changed the Targeted Part toggle back to Head/Torso. This time, it'll be a per-player check if it should pick Torso or UpperTorso"
@@ -2520,4 +2520,4 @@ local function TFQAKBW_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(TFQAKBW_fake_script)()
+coroutine.wrap(LCAKAH_fake_script)()
