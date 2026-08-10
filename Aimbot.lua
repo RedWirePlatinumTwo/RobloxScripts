@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript 
+local function KHOJW_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1098,9 +1098,9 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 	end
 	if not RedsAimbot then
 		getgenv().RedsAimbot = {}
-		sendNotif("Red's Universal Aimbot (8/8/26):", changeNotes(
-			"GameStats Target value will sync properly with keybind presses",
-			"Keybinds list will properly set the values to saved data",
+		sendNotif("Red's Universal Aimbot (8/8/26)", changeNotes(
+			"GameStats Target value will sync properly on keybind press",
+			"Keybind UI instances will properly set its values to saved data",
 			"Changed the Targeted Part toggle back to Head/Torso. This time, it'll be a per-player check if it should pick Torso or UpperTorso"
 		))
 		for i,v in pairs(gui:GetDescendants()) do
@@ -1322,24 +1322,24 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 		local Theme
 	
 		local function createGameStats()
-			local newGameStats = {}
-			newGameStats.Target = "Head"
-			newGameStats.TargetNPCs = false
-			newGameStats.AutoTarget = true
-			newGameStats.WhitelistFriends = false
-			newGameStats.MaxStuds = 500
-			newGameStats.OwnTeamWhitelisted = true
-			newGameStats.TargetCloserPlayers = true
-			newGameStats.Teams = {}
-			newGameStats.IgnorePlayers = false
-			newGameStats.TargetPrioOnly = false
-			newGameStats.FirstPersonEnabled = true
-			newGameStats.AimMethod = "Mouse"
-			newGameStats.CustomTargetConditions = {}
-			newGameStats.TargetOffScreen = false
-			newGameStats.EnableRaycasting = true
-			newGameStats.GUIPositions = {}
-			return newGameStats
+			return {
+				Target = "Head",
+				TargetNPCs = false,
+				AutoTarget = true,
+				WhitelistFriends = false,
+				MaxStuds = 500,
+				OwnTeamWhitelisted = true,
+				TargetCloserPlayers = true,
+				Teams = {},
+				IgnorePlayers = false,
+				TargetPrioOnly = false,
+				FirstPersonEnabled = true,
+				AimMethod = "Mouse",
+				CustomTargetConditions = {},
+				TargetOffScreen = false,
+				EnableRaycasting = true,
+				GUIPositions = {}
+			}
 		end
 		
 		local boolsAllowed = {
@@ -1353,19 +1353,23 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 		}
 	
 		local function createGlobalStats()
-			local newGlobalStats = {}
-			newGlobalStats.TeamAutofill = true
-			newGlobalStats.MouseSensitivity = 0.25
+			local newGlobalStats = {
+				TeamAutofill = true,
+				MouseSensitivity = 0.25
+			}
 			newGlobalStats.Keybinds = {}
 			local binds = newGlobalStats.Keybinds
-			binds.AimbotToggle = {}
-			binds.AimbotToggle.Key1 = Enum.KeyCode.CapsLock
-			binds.AimbotToggle.Toggle = true
-			binds.TargetedPartToggle = {}
-			binds.TargetedPartToggle.Key1 = Enum.KeyCode.RightAlt
-			binds.TargetedPartToggle.Toggle = true
-			binds.GUIVisibilityToggle = {}
-			binds.GUIVisibilityToggle.Toggle = true
+			binds.AimbotToggle = {
+				Key1 = Enum.KeyCode.CapsLock,
+				Toggle = true
+			}
+			binds.TargetedPartToggle = {
+				Key1 = Enum.KeyCode.RightAlt,
+				Toggle = true
+			}
+			binds.GUIVisibilityToggle = {
+				Toggle = true
+			}
 			local function addKeybinds(tbl)
 				for name, value in pairs(tbl) do
 					if type(value) == "boolean" and table.find(boolsAllowed, name) then
@@ -1375,21 +1379,22 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 				end
 			end
 			addKeybinds(createGameStats())
-			newGlobalStats.Theme = {}
-			local theme = newGlobalStats.Theme
-			theme.Yes = Color3.fromRGB(0, 170, 0)
-			theme.No = Color3.fromRGB(170, 0, 0)
-			theme.Border = theme.Yes
-			theme.Background = Color3.fromRGB(0, 45, 0)
-			theme.Text = theme.Yes
-			theme.TextStroke = Color3.fromRGB(0, 0, 0)
-			theme.ButtonBackground = Color3.fromRGB(0, 0, 0)
-			theme.PlaceholderText = Color3.fromRGB(0, 100, 0)
-			theme.ScrollBar = theme.Yes
+			local themeYes = Color3.fromRGB(0, 170, 0)
+			newGlobalStats.Theme = {
+				Yes = themeYes,
+				No = Color3.fromRGB(170, 0, 0),
+				Border = themeYes,
+				Background = Color3.fromRGB(0, 45, 0),
+				Text = themeYes,
+				TextStroke = Color3.fromRGB(0, 0, 0),
+				ButtonBackground = Color3.fromRGB(0, 0, 0),
+				PlaceholderText = Color3.fromRGB(0, 100, 0),
+				ScrollBar = themeYes
+			}
 			return newGlobalStats
 		end
 	
-		local function getOrDefault(tbl, value)
+		local function getOrCreate(tbl, value)
 			if tbl[value] == nil then
 				if tbl == GameStats then
 					tbl[value] = createGameStats()[value]
@@ -1423,19 +1428,19 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 		end
 	
 		local function priorityCheck(plr)
-			local priorOnly = getOrDefault(GameStats, "TargetPrioOnly")
+			local priorOnly = getOrCreate(GameStats, "TargetPrioOnly")
 			return (table.find(PrioritizedPlrs, plr) and priorOnly) or not priorOnly or #PrioritizedPlrs == 0
 		end
 	
 		local cond = targetingui.ScrollingFrame.Condition
 		local function addGUICondition(index)
-			local txt = getOrDefault(GameStats, "CustomTargetConditions")[index] or ""
+			local txt = getOrCreate(GameStats, "CustomTargetConditions")[index] or ""
 			local clone = cond:Clone()
 			clone.Parent = cond.Parent
 			clone.Visible = true
 			clone.value.Text = txt
 			clone.value.FocusLost:connect(function()
-				getOrDefault(GameStats, "CustomTargetConditions")[index] = clone.value.Text
+				getOrCreate(GameStats, "CustomTargetConditions")[index] = clone.value.Text
 			end)
 		end
 	
@@ -1470,8 +1475,8 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 			GlobalStats = createGlobalStats()
 			GameStats = createGameStats()
 		end
-		Keybinds = getOrDefault(GlobalStats, "Keybinds")
-		Theme = getOrDefault(GlobalStats, "Theme")
+		Keybinds = getOrCreate(GlobalStats, "Keybinds")
+		Theme = getOrCreate(GlobalStats, "Theme")
 		getgenv().RedsAimbot.GlobalStats = GlobalStats
 		getgenv().RedsAimbot.Misc = misc
 		getgenv().RedsAimbot.GameStats = GameStats
@@ -1522,7 +1527,7 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 		end
 		
 		local function createTemplate(tbl, propName)
-			local val = getOrDefault(tbl, propName)
+			local val = getOrCreate(tbl, propName)
 			local clone
 			if typeof(val) == "boolean" or typeof(val) == "string" then
 				clone = txtButtonTemp:Clone()
@@ -1613,17 +1618,6 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 				end
 			end
 		end
-		
-		local function updateKeybindTable(index, bindInfo)
-			if typeof(bindInfo) ~= "table" then
-				local t = {}
-				t.Key1 = bindInfo
-				t.Toggle = true
-				bindInfo = t
-				Keybinds[index] = bindInfo
-			end
-			return bindInfo
-		end
 	
 		local function updateKeybindInstance(instance, bindInfo)
 			local function updateKey(index)
@@ -1653,26 +1647,26 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 						v[propName] = color
 					end
 				end
-				themeCheck("BorderColor3", getOrDefault(Theme, "Border"))
+				themeCheck("BorderColor3", getOrCreate(Theme, "Border"))
 				if v.Name ~= "colorDisplay" then
-					themeCheck("BackgroundColor3", getOrDefault(Theme, "Background"))
+					themeCheck("BackgroundColor3", getOrCreate(Theme, "Background"))
 				end
 				if v.Name ~= "X" and not table.find(toggleTxt, v) then
-					themeCheck("TextColor3", getOrDefault(Theme, "Text"))
+					themeCheck("TextColor3", getOrCreate(Theme, "Text"))
 				end
 				for ins, val in pairs(toggleTxt) do
-					ins.TextColor3 = if val then getOrDefault(Theme, "Yes") else getOrDefault(Theme, "No")
+					ins.TextColor3 = if val then getOrCreate(Theme, "Yes") else getOrCreate(Theme, "No")
 				end
 				if v.Name == "X" then
-					v.TextColor3 = getOrDefault(Theme, "No")
+					v.TextColor3 = getOrCreate(Theme, "No")
 				end
-				themeCheck("TextStrokeColor3", getOrDefault(Theme, "TextStroke"))
-				themeCheck("ScrollBarImageColor3", getOrDefault(Theme, "ScrollBar"))
+				themeCheck("TextStrokeColor3", getOrCreate(Theme, "TextStroke"))
+				themeCheck("ScrollBarImageColor3", getOrCreate(Theme, "ScrollBar"))
 				if v.ClassName == "TextButton" or v.ClassName == "TextBox" or v.Name == "slider" then
-					v.BackgroundColor3 = getOrDefault(Theme, "ButtonBackground")
+					v.BackgroundColor3 = getOrCreate(Theme, "ButtonBackground")
 				end
 				if v.ClassName == "TextBox" then
-					v.PlaceholderColor3 = getOrDefault(Theme, "PlaceholderText")
+					v.PlaceholderColor3 = getOrCreate(Theme, "PlaceholderText")
 				end
 			end
 		end
@@ -1692,7 +1686,7 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 		
 		for i, v in pairs(gui:GetChildren()) do
 			if v.ClassName == "Frame" then
-				local guiPos = getOrDefault(GameStats, "GUIPositions") -- note to self: this DOES NOT go in gui:GetDescendants() BECAUSE of it checking GameStats
+				local guiPos = getOrCreate(GameStats, "GUIPositions") -- note to self: this DOES NOT go in gui:GetDescendants() BECAUSE of it checking GameStats
 				if guiPos[v.Name] then
 					v.Position = guiPos[v.Name]
 				else
@@ -1726,24 +1720,24 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 	
 			clone.undo.Activated:connect(function()
 				clone:Destroy()
-				local tfind = table.find(getOrDefault(GameStats, "Teams"),ttable)
-				table.remove(getOrDefault(GameStats, "Teams"),tfind)
+				local tfind = table.find(getOrCreate(GameStats, "Teams"),ttable)
+				table.remove(getOrCreate(GameStats, "Teams"),tfind)
 			end)
 	
 		end
 	
-		for i,v in pairs(getOrDefault(GameStats, "Teams")) do
+		for i,v in pairs(getOrCreate(GameStats, "Teams")) do
 			addTeamFrame(v)
 		end
 		local function gameConditionCheck(id, condition)
-			if game.PlaceId == id and not table.find(getOrDefault(GameStats, "CustomTargetConditions"), condition) then
-				table.insert(getOrDefault(GameStats, "CustomTargetConditions"), condition)
+			if game.PlaceId == id and not table.find(getOrCreate(GameStats, "CustomTargetConditions"), condition) then
+				table.insert(getOrCreate(GameStats, "CustomTargetConditions"), condition)
 				updateMsg(("Auto-added targeting condition for game ID %d:\n%s"):format(id, condition), "Custom Targeting")
 			end
 		end
 		gameConditionCheck(286090429, "not TargetCharacter:FindFirstChild(\"Cam\")")
 		gameConditionCheck(2788229376, "not TargetCharacter.BodyEffects[\"K.O\"].Value")
-		for i,v in pairs(getOrDefault(GameStats, "CustomTargetConditions")) do
+		for i,v in pairs(getOrCreate(GameStats, "CustomTargetConditions")) do
 			addGUICondition(i)
 		end
 		
@@ -1753,7 +1747,15 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 			v.Name = index
 			v.Visible = true
 			v.Text = createName(index, true)
-			local keybind = updateKeybindTable(index, Keybinds[index] or defaultValue)
+			local keybind = getOrCreate(Keybinds, index)
+			if typeof(keybind) ~= "table" then
+				local t = {
+					Key1 = keybind,
+					Toggle = true
+				}
+				keybind = t
+				Keybinds[index] = keybind
+			end
 			updateKeybindInstance(v, keybind)
 			v.reset.Activated:connect(function()
 				Keybinds[index].Key1 = nil
@@ -1845,7 +1847,7 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 			local function isteamwhitelisted()
 				local wl = false
 	
-				for i,ttable in pairs(getOrDefault(GameStats, "Teams")) do
+				for i,ttable in pairs(getOrCreate(GameStats, "Teams")) do
 					if teams:FindFirstChild(ttable.team1) and teams:FindFirstChild(ttable.team2) then
 						if lplr.Team.Name == ttable.team1 and plr.Team.Name == ttable.team2 then
 							wl = true
@@ -1858,7 +1860,7 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 			end
 	
 			if lplr.Team then
-				if getOrDefault(GameStats, "OwnTeamWhitelisted") then
+				if getOrCreate(GameStats, "OwnTeamWhitelisted") then
 					return plr.Team ~= lplr.Team and not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
 				else
 					return not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
@@ -1871,7 +1873,7 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 		local function meetsConditions(chr)
 			local conditionsmet = true
 			local plrFromChr = plrs:GetPlayerFromCharacter(chr)
-			for i, condition in pairs(getOrDefault(GameStats, "CustomTargetConditions")) do
+			for i, condition in pairs(getOrCreate(GameStats, "CustomTargetConditions")) do
 				local scriptSuccess, conditionMet = pcall(function()
 					if condition:find("TargetPlayer") and not plrFromChr or condition == "" then
 						return true
@@ -1889,7 +1891,7 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 		end
 	
 		local function selectChr(chr)
-			if misc.IsAimbotOn and not misc.TargetedCharacter and not getOrDefault(GameStats, "TargetCloserPlayers") or getOrDefault(GameStats, "TargetCloserPlayers") and misc.IsAimbotOn then
+			if misc.IsAimbotOn and not misc.TargetedCharacter and not getOrCreate(GameStats, "TargetCloserPlayers") or getOrCreate(GameStats, "TargetCloserPlayers") and misc.IsAimbotOn then
 				local isprio
 				local isprio2
 				local plrFromChr = plrs:GetPlayerFromCharacter(chr)
@@ -1937,17 +1939,17 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 	
 		uiservice.InputBegan:connect(function(key,processed)
 			if processed then return end
-			if isKeyActivated(getOrDefault(Keybinds, "TargetedPartToggle"), true) then
-				if getOrDefault(GameStats, "Target") == "Head" then
+			if isKeyActivated(getOrCreate(Keybinds, "TargetedPartToggle"), true) then
+				if getOrCreate(GameStats, "Target") == "Head" then
 					GameStats.Target = "Torso"
 				else
 					GameStats.Target = "Head"
 				end
 			end
-			if isKeyActivated(getOrDefault(Keybinds, "AimbotToggle"), true) then
+			if isKeyActivated(getOrCreate(Keybinds, "AimbotToggle"), true) then
 				misc.IsAimbotOn = not misc.IsAimbotOn
 			end
-			if isKeyActivated(getOrDefault(Keybinds, "GUIVisibilityToggle"), true) then
+			if isKeyActivated(getOrCreate(Keybinds, "GUIVisibilityToggle"), true) then
 				gui.Enabled = not gui.Enabled
 			end
 			for i,v in pairs(Keybinds) do
@@ -1965,7 +1967,7 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 		end)
 	
 		gameSettings.Target.value.Activated:connect(function()
-			if getOrDefault(GameStats, "Target") == "Head" then
+			if getOrCreate(GameStats, "Target") == "Head" then
 				GameStats.Target = "Torso"
 			else
 				GameStats.Target = "Head"
@@ -1985,7 +1987,7 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 		for i,v in pairs(teamui:GetChildren()) do
 			if v.ClassName == "TextBox" then
 				Changed(v, "Text", function(txt)
-					if getOrDefault(GlobalStats, "TeamAutofill") then
+					if getOrCreate(GlobalStats, "TeamAutofill") then
 						local tnames = {}
 	
 						for i,v in pairs(teams:GetTeams()) do
@@ -2017,7 +2019,7 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 			if teams:FindFirstChild(team1) and teams:FindFirstChild(team2) then
 				local canadd = true
 	
-				for i, teamtable in pairs(getOrDefault(GameStats, "Teams")) do
+				for i, teamtable in pairs(getOrCreate(GameStats, "Teams")) do
 					if teamtable.team1 == team1 and teamtable.team2 == team2 then
 						canadd = false
 						break
@@ -2026,7 +2028,7 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 	
 				if canadd then
 					local newtable = {["team1"] = team1 ,["team2"] = team2}
-					table.insert(getOrDefault(GameStats, "Teams"), newtable)
+					table.insert(getOrCreate(GameStats, "Teams"), newtable)
 					addTeamFrame(newtable)
 				else
 					updatetxt("This already exists")
@@ -2130,12 +2132,10 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 		plrs.PlayerAdded:connect(addChrToTable)
 	
 		local function getTargetPart(chr)
-			local targetType = getOrDefault(GameStats, "Target")
-			if targetType == "Head" then
-				return chr:FindFirstChild(targetType) or chr.HumanoidRootPart
-			else
-				return chr:FindFirstChild(targetType) or chr:FindFirstChild("UpperTorso") or chr.HumanoidRootPart
-			end
+			local targetType = getOrCreate(GameStats, "Target")
+			return chr:FindFirstChild(targetType)
+				or (if targetType == "Torso" then chr:FindFirstChild("UpperTorso") else nil)
+				or chr.HumanoidRootPart
 		end
 		local AimbotFunction = game:GetService("RunService").RenderStepped:connect(function()
 			if misc.TargetedCharacter then
@@ -2146,13 +2146,13 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 					local x,y = (v.X - m.X), (v.Y - m.Y)
 					if onscreen then
 						if misc.IsAimbotOn then
-							if getOrDefault(GameStats, "AimMethod") == "Camera" then
+							if getOrCreate(GameStats, "AimMethod") == "Camera" then
 								camera.CFrame = CFrame.new(camera.CFrame.Position, partpos + misc.AimOffset)
 								uiservice.MouseDeltaSensitivity = 0
 							else
-								mousemoverel((x + misc.AimOffset.X) * getOrDefault(GlobalStats, "MouseSensitivity"), (y + misc.AimOffset.Y) * getOrDefault(GlobalStats, "MouseSensitivity"))
+								mousemoverel((x + misc.AimOffset.X) * getOrCreate(GlobalStats, "MouseSensitivity"), (y + misc.AimOffset.Y) * getOrCreate(GlobalStats, "MouseSensitivity"))
 							end
-							if not getOrDefault(GameStats, "FirstPersonEnabled") then
+							if not getOrCreate(GameStats, "FirstPersonEnabled") then
 								lplr.Character.Humanoid.RootPart.CFrame = CFrame.lookAt(lplr.Character.Humanoid.RootPart.Position, (partpos * Vector3.new(1,0,1)) + Vector3.new(0, lplr.Character.Humanoid.RootPart.Position.Y, 0))
 							end
 						end
@@ -2167,7 +2167,7 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 				uiservice.MouseDeltaSensitivity = 1
 			end
 	
-			if not getOrDefault(Keybinds, "AimbotToggle").Toggle then
+			if not getOrCreate(Keybinds, "AimbotToggle").Toggle then
 				misc.IsAimbotOn = isKeyActivated(Keybinds.AimbotToggle)
 			end
 	
@@ -2181,7 +2181,7 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 			end
 	
 			if m.Target ~= nil then
-				if not getOrDefault(GameStats, "IgnorePlayers") then
+				if not getOrCreate(GameStats, "IgnorePlayers") then
 					for i,v in pairs(GetFamily(m.Target)) do
 						local plr = game:GetService("Players"):GetPlayerFromCharacter(v)
 						if plr and plr.Character and meetsConditions(plr.Character) and priorityCheck(plr) then
@@ -2191,7 +2191,7 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 					end
 				end
 	
-				if getOrDefault(GameStats, "TargetNPCs") then
+				if getOrCreate(GameStats, "TargetNPCs") then
 					local npc = isnpc(m.Target)
 					if npc and npc.Humanoid.Health > 0 and meetsConditions(npc) then
 						selectChr(npc)
@@ -2199,7 +2199,7 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 				end
 			end
 	
-			if getOrDefault(GameStats, "AutoTarget") then
+			if getOrCreate(GameStats, "AutoTarget") then
 				local table1 = {}
 				local PrioritizedPlrsOnScreen = {}
 	
@@ -2218,7 +2218,7 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 								rayparams.FilterDescendantsInstances = chrs
 								rayparams.IgnoreWater = true
 								local raycast = workspace:Raycast(lplr.Character.Head.Position, targpart.Position - lplr.Character.Head.Position, rayparams)
-								if (not raycast and getOrDefault(GameStats, "EnableRaycasting") or not getOrDefault(GameStats, "EnableRaycasting") and (onscreen or getOrDefault(GameStats, "TargetOffScreen")) and pos < getOrDefault(GameStats, "MaxStuds")) then
+								if (not raycast and getOrCreate(GameStats, "EnableRaycasting") or not getOrCreate(GameStats, "EnableRaycasting") and (onscreen or getOrCreate(GameStats, "TargetOffScreen")) and pos < getOrCreate(GameStats, "MaxStuds")) then
 									table1[v] = pos
 									if table.find(PrioritizedPlrs, plrs:GetPlayerFromCharacter(v)) then
 										table.insert(PrioritizedPlrsOnScreen, v)
@@ -2229,13 +2229,13 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 					end
 				end
 	
-				if getOrDefault(GameStats, "TargetNPCs") and (not getOrDefault(GameStats, "TargetPrioOnly") or #PrioritizedPlrs == 0) then
+				if getOrCreate(GameStats, "TargetNPCs") and (not getOrCreate(GameStats, "TargetPrioOnly") or #PrioritizedPlrs == 0) then
 					for i, npc in pairs(npcs) do
 						addChr(npc)
 					end
 				end
 	
-				if not getOrDefault(GameStats, "IgnorePlayers") then
+				if not getOrCreate(GameStats, "IgnorePlayers") then
 					for i,v in pairs(plrs:GetPlayers()) do
 						if v ~= lplr and v.Character then
 							addChr(v.Character)
@@ -2243,7 +2243,7 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 					end
 				end
 	
-				if #PrioritizedPlrsOnScreen ~= 0 or (#PrioritizedPlrs ~= 0 and getOrDefault(GameStats, "TargetPrioOnly")) then
+				if #PrioritizedPlrsOnScreen ~= 0 or (#PrioritizedPlrs ~= 0 and getOrCreate(GameStats, "TargetPrioOnly")) then
 	
 					for chr, pos in pairs(table1) do
 						if not table.find(PrioritizedPlrsOnScreen, chr) then
@@ -2263,7 +2263,7 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 					return 1
 				end)
 			end
-			if getOrDefault(GameStats, "FirstPersonEnabled") then
+			if getOrCreate(GameStats, "FirstPersonEnabled") then
 				if misc.TargetedCharacter and misc.IsAimbotOn and camera.CameraType ~= Enum.CameraType.Scriptable then
 					plrs.LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
 				else
@@ -2298,19 +2298,19 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 				else
 					MainFrame.CurrentTarget.Text = v.Name
 				end
-				if not getOrDefault(GameStats, "FirstPersonEnabled") then
+				if not getOrCreate(GameStats, "FirstPersonEnabled") then
 					lplr.Character.Humanoid.CameraOffset = Vector3.new(2,0,0)
 					uiservice.MouseBehavior = Enum.MouseBehavior.LockCenter
 				end
-				MainFrame.CurrentTarget.TextColor3 = getOrDefault(Theme, "Yes")
+				MainFrame.CurrentTarget.TextColor3 = getOrCreate(Theme, "Yes")
 				toggleTxt[MainFrame.CurrentTarget] = true
 			else
-				if not getOrDefault(GameStats, "FirstPersonEnabled") then
+				if not getOrCreate(GameStats, "FirstPersonEnabled") then
 					lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
 					uiservice.MouseBehavior = Enum.MouseBehavior.Default
 				end
 				MainFrame.CurrentTarget.Text = "none"
-				MainFrame.CurrentTarget.TextColor3 = getOrDefault(Theme, "No")
+				MainFrame.CurrentTarget.TextColor3 = getOrCreate(Theme, "No")
 				toggleTxt[MainFrame.CurrentTarget] = false
 			end
 		end)
@@ -2333,12 +2333,12 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 	
 		Changed(misc, "IsAimbotOn", function(v)
 			if v == false then
-				MainFrame.Status.TextColor3 = getOrDefault(Theme, "No")
+				MainFrame.Status.TextColor3 = getOrCreate(Theme, "No")
 				toggleTxt[MainFrame.Status] = false
 				MainFrame.Status.Text = "disabled"
 				deselect()
 			else
-				MainFrame.Status.TextColor3 = getOrDefault(Theme, "Yes")
+				MainFrame.Status.TextColor3 = getOrCreate(Theme, "Yes")
 				toggleTxt[MainFrame.Status] = true
 				MainFrame.Status.Text = "enabled"
 			end
@@ -2368,28 +2368,28 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 				end
 				toggleTxt[button] = false
 	
-				if getOrDefault(GameStats, "WhitelistFriends") and lplr:IsFriendsWith(ins.UserId) and Table == WhitelistedPlrs and not table.find(Table, ins) then
-					button.TextColor3 = getOrDefault(Theme, "Yes")
+				if getOrCreate(GameStats, "WhitelistFriends") and lplr:IsFriendsWith(ins.UserId) and Table == WhitelistedPlrs and not table.find(Table, ins) then
+					button.TextColor3 = getOrCreate(Theme, "Yes")
 					toggleTxt[button] = true
 					button.Text = "Yes"
 					table.insert(Table, ins)
 				end
 				if table.find(Table, ins) and Table == PrioritizedPlrs then
-					button.TextColor3 = getOrDefault(Theme, "Yes")
+					button.TextColor3 = getOrCreate(Theme, "Yes")
 					toggleTxt[button] = true
 					button.Text = "Yes"
 				end
 	
 				button.Activated:connect(function()
 					if button.Text == "No" then
-						button.TextColor3 = getOrDefault(Theme, "Yes")
+						button.TextColor3 = getOrCreate(Theme, "Yes")
 						toggleTxt[button] = true
 						button.Text = "Yes"
 						table.insert(Table,ins)
 	
 						if Table == PrioritizedPlrs and clone.WhitelistToggle.Text == "Yes" then
 							clone.WhitelistToggle.Text = "No"
-							clone.WhitelistToggle.TextColor3 = getOrDefault(Theme, "No")
+							clone.WhitelistToggle.TextColor3 = getOrCreate(Theme, "No")
 							toggleTxt[clone.WhitelistToggle] = false
 							local wlistplr = table.find(WhitelistedPlrs, ins)
 							table.remove(WhitelistedPlrs, wlistplr)
@@ -2397,14 +2397,14 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 	
 						if Table == WhitelistedPlrs and clone.PriorityToggle.Text == "Yes" then
 							clone.PriorityToggle.Text = "No"
-							clone.PriorityToggle.TextColor3 = getOrDefault(Theme, "No")
+							clone.PriorityToggle.TextColor3 = getOrCreate(Theme, "No")
 							toggleTxt[clone.PriorityToggle] = false
 							local prioplr = table.find(PrioritizedPlrs, ins)
 							table.remove(PrioritizedPlrs, prioplr)
 						end
 	
 					else
-						button.TextColor3 = getOrDefault(Theme, "No")
+						button.TextColor3 = getOrCreate(Theme, "No")
 						toggleTxt[button] = false
 						button.Text = "No"
 						local removeins = table.find(Table, ins)
@@ -2465,7 +2465,7 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 		end)
 	
 		targetingui.add.Activated:connect(function()
-			addGUICondition(#getOrDefault(GameStats, "CustomTargetConditions")+1)
+			addGUICondition(#getOrCreate(GameStats, "CustomTargetConditions")+1)
 		end)
 	
 		targetingui.back.Activated:connect(function()
@@ -2516,9 +2516,9 @@ local function QCNVO_fake_script() -- RedwiresAimbot.LocalScript
 			end)
 		end
 	else
-		sendNotif("R.U.A. Clone", "You've already executed this script. Deleting clone.")
+		sendNotif("Red's Universal Aimbot Clone", "You've already executed this script. Deleting clone.")
 		task.wait(0.2)
 		gui:Destroy()
 	end
 end
-coroutine.wrap(QCNVO_fake_script)()
+coroutine.wrap(KHOJW_fake_script)()
