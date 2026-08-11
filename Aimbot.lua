@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function KHOJW_fake_script() -- RedwiresAimbot.LocalScript 
+local function ZVCSV_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1353,44 +1353,38 @@ local function KHOJW_fake_script() -- RedwiresAimbot.LocalScript
 		}
 	
 		local function createGlobalStats()
+			local darkGreen = Color3.fromRGB(0, 170, 0)
 			local newGlobalStats = {
 				TeamAutofill = true,
-				MouseSensitivity = 0.25
-			}
-			newGlobalStats.Keybinds = {}
-			local binds = newGlobalStats.Keybinds
-			binds.AimbotToggle = {
-				Key1 = Enum.KeyCode.CapsLock,
-				Toggle = true
-			}
-			binds.TargetedPartToggle = {
-				Key1 = Enum.KeyCode.RightAlt,
-				Toggle = true
-			}
-			binds.GUIVisibilityToggle = {
-				Toggle = true
-			}
-			local function addKeybinds(tbl)
-				for name, value in pairs(tbl) do
-					if type(value) == "boolean" and table.find(boolsAllowed, name) then
-						binds[name] = {}
-						binds[name].Toggle = true
-					end
-				end
-			end
-			addKeybinds(createGameStats())
-			local themeYes = Color3.fromRGB(0, 170, 0)
-			newGlobalStats.Theme = {
-				Yes = themeYes,
+				MouseSensitivity = 0.25,
+				Keybinds = {
+					AimbotToggle = {
+						Key1 = Enum.KeyCode.CapsLock,
+						Toggle = true
+					},
+					TargetedPartToggle = {
+						Key1 = Enum.KeyCode.RightAlt,
+						Toggle = true
+					},
+					GUIVisibilityToggle = {
+						Toggle = true
+					}
+				},
+				Theme = {
+				Yes = darkGreen,
 				No = Color3.fromRGB(170, 0, 0),
-				Border = themeYes,
+				Border = darkGreen,
 				Background = Color3.fromRGB(0, 45, 0),
-				Text = themeYes,
+				Text = darkGreen,
 				TextStroke = Color3.fromRGB(0, 0, 0),
 				ButtonBackground = Color3.fromRGB(0, 0, 0),
 				PlaceholderText = Color3.fromRGB(0, 100, 0),
-				ScrollBar = themeYes
+				ScrollBar = darkGreen
+				}
 			}
+			for index, name in pairs(boolsAllowed) do
+				binds[name] = {Toggle = true}
+			end
 			return newGlobalStats
 		end
 	
@@ -2521,4 +2515,4 @@ local function KHOJW_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(KHOJW_fake_script)()
+coroutine.wrap(ZVCSV_fake_script)()
