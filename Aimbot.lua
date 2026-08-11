@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function ZVCSV_fake_script() -- RedwiresAimbot.LocalScript 
+local function KZFK_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1084,13 +1084,9 @@ local function ZVCSV_fake_script() -- RedwiresAimbot.LocalScript
 	end)
 	
 	local function sendNotif(title, text)
-		print(title..":", text)
+		print(("[%s]: %s"):format(title, text))
 		text = ("<font color = '#%s'>[%s]: %s</font>"):format(MainFrame.BorderColor3:ToHex(), title, text)
-		if tcservice.ChatVersion == Enum.ChatVersion.LegacyChatService then
-			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",({["Text"] = text}))
-		else
-			tcservice.TextChannels:FindFirstChildOfClass("TextChannel"):DisplaySystemMessage(text)
-		end
+		tcservice.TextChannels:FindFirstChildOfClass("TextChannel"):DisplaySystemMessage(text)
 	end
 	
 	local function changeNotes(...)
@@ -1098,10 +1094,8 @@ local function ZVCSV_fake_script() -- RedwiresAimbot.LocalScript
 	end
 	if not RedsAimbot then
 		getgenv().RedsAimbot = {}
-		sendNotif("Red's Universal Aimbot (8/8/26)", changeNotes(
-			"GameStats Target value will sync properly on keybind press",
-			"Keybind UI instances will properly set its values to saved data",
-			"Changed the Targeted Part toggle back to Head/Torso. This time, it'll be a per-player check if it should pick Torso or UpperTorso"
+		sendNotif("Red's Universal Aimbot (8/11/26)", changeNotes(
+			"Fixed UI keybind setting not working"
 		))
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
@@ -1312,10 +1306,11 @@ local function ZVCSV_fake_script() -- RedwiresAimbot.LocalScript
 		local PrioritizedPlrs = {}
 		local WhitelistedPlrsOld = {}
 		local PrioritizedPlrsOld = {}
-		local misc = {}
-		misc.IsAimbotOn = false
-		misc.TargetedCharacter = nil
-		misc.AimOffset = Vector3.new()
+		local misc = {
+			IsAimbotOn = false,
+			TargetedCharacter = nil,
+			AimOffset = Vector3.new()
+		}
 		local GlobalStats
 		local GameStats
 		local Keybinds
@@ -1761,20 +1756,20 @@ local function ZVCSV_fake_script() -- RedwiresAimbot.LocalScript
 				v.keybindtype.Text = "Keybind type: Toggle"
 			end)
 	
-			local function changeKeybind(index)
-				Keybinds[index]["Key"..index] = nil
-				v["value"..index].Text = "Press any key"
+			local function changeKeybind(keynum)
+				Keybinds[index]["Key"..keynum] = nil
+				v["value"..keynum].Text = "Press any key"
 				local key = uiservice.InputBegan:Wait()
 				task.wait()
 				if LeftClick then
-					Keybinds[index]["Key"..index] = "LeftClick"
-					v["value"..index].Text = "LeftClick"
+					Keybinds[index]["Key"..keynum] = "LeftClick"
+					v["value"..keynum].Text = "LeftClick"
 				elseif RightClick then
-					Keybinds[index]["Key"..index] = "RightClick"
-					v["value"..index].Text = "RightClick"
+					Keybinds[index]["Key"..keynum] = "RightClick"
+					v["value"..keynum].Text = "RightClick"
 				else
-					Keybinds[index]["Key"..index] = key.KeyCode
-					v["value"..index].Text = key.KeyCode.Name
+					Keybinds[index]["Key"..keynum] = key.KeyCode
+					v["value"..keynum].Text = key.KeyCode.Name
 				end
 				saveSettings()
 			end
@@ -2515,4 +2510,4 @@ local function ZVCSV_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(ZVCSV_fake_script)()
+coroutine.wrap(KZFK_fake_script)()
