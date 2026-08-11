@@ -1371,15 +1371,15 @@ local function ZVCSV_fake_script() -- RedwiresAimbot.LocalScript
 					}
 				},
 				Theme = {
-				Yes = darkGreen,
-				No = Color3.fromRGB(170, 0, 0),
-				Border = darkGreen,
-				Background = Color3.fromRGB(0, 45, 0),
-				Text = darkGreen,
-				TextStroke = Color3.fromRGB(0, 0, 0),
-				ButtonBackground = Color3.fromRGB(0, 0, 0),
-				PlaceholderText = Color3.fromRGB(0, 100, 0),
-				ScrollBar = darkGreen
+					Yes = darkGreen,
+					No = Color3.fromRGB(170, 0, 0),
+					Border = darkGreen,
+					Background = Color3.fromRGB(0, 45, 0),
+					Text = darkGreen,
+					TextStroke = Color3.fromRGB(0, 0, 0),
+					ButtonBackground = Color3.fromRGB(0, 0, 0),
+					PlaceholderText = Color3.fromRGB(0, 100, 0),
+					ScrollBar = darkGreen
 				}
 			}
 			for index, name in pairs(boolsAllowed) do
