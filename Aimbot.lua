@@ -1383,7 +1383,7 @@ local function ZVCSV_fake_script() -- RedwiresAimbot.LocalScript
 				}
 			}
 			for index, name in pairs(boolsAllowed) do
-				binds[name] = {Toggle = true}
+				newGlobalStats.Keybinds[name] = {Toggle = true}
 			end
 			return newGlobalStats
 		end
