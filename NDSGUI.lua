@@ -110,7 +110,7 @@ local function TRKQA_fake_script() -- RedWiresNDSGUI.LocalScript
 	local tcservice = game:GetService("TextChatService")
 	local txtchannel
 	local limitVelocity = false
-	local limiter = 50
+	local limiter = 40
 	for i,v in pairs(tcservice.TextChannels:GetChildren()) do
 		if v.Name:lower():find("general") then
 			txtchannel = v
