@@ -1,145 +1,166 @@
--- Farewell Infortality.
--- Version: 2.82
+-- Gui to Lua
+-- Version: 3.2
+
 -- Instances:
+
 local RedWiresNDSGUI = Instance.new("ScreenGui")
 local MainFrame = Instance.new("Frame")
-local Falldamageremove = Instance.new("TextButton")
+local FallDmgBypass = Instance.new("TextButton")
 local prewarn = Instance.new("TextButton")
 local Title = Instance.new("TextLabel")
 local ChatDisaster = Instance.new("TextButton")
 local Admin = Instance.new("TextButton")
 local lobbytp = Instance.new("TextButton")
+
 --Properties:
+
 RedWiresNDSGUI.Name = "RedWiresNDSGUI"
-RedWiresNDSGUI.Parent = game:GetService("CoreGui")
+RedWiresNDSGUI.Parent = game.CoreGui
 RedWiresNDSGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = RedWiresNDSGUI
 MainFrame.Active = true
-MainFrame.BackgroundColor3 = Color3.new(0, 0.333333, 0.498039)
-MainFrame.BorderColor3 = Color3.new(0, 1, 1)
+MainFrame.BackgroundColor3 = Color3.fromRGB(24, 24, 72)
+MainFrame.BorderColor3 = Color3.fromRGB(0, 255, 255)
 MainFrame.Position = UDim2.new(0.63411206, 0, 0.140000343, 0)
 MainFrame.Size = UDim2.new(0, 322, 0, 229)
 
-Falldamageremove.Name = "Falldamageremove"
-Falldamageremove.Parent = MainFrame
-Falldamageremove.BackgroundColor3 = Color3.new(0, 0.333333, 0.498039)
-Falldamageremove.BorderColor3 = Color3.new(0, 1, 1)
-Falldamageremove.Position = UDim2.new(0.188111112, 0, 0.791247904, 0)
-Falldamageremove.Size = UDim2.new(0, 197, 0, 40)
-Falldamageremove.Font = Enum.Font.SourceSansBold
-Falldamageremove.Text = "Remove Fall Damage"
-Falldamageremove.TextColor3 = Color3.new(0, 0.666667, 1)
-Falldamageremove.TextSize = 20
-Falldamageremove.TextWrapped = true
+FallDmgBypass.Name = "FallDmgBypass"
+FallDmgBypass.Parent = MainFrame
+FallDmgBypass.BackgroundColor3 = Color3.fromRGB(24, 24, 72)
+FallDmgBypass.BorderColor3 = Color3.fromRGB(0, 255, 255)
+FallDmgBypass.Position = UDim2.new(0.188111112, 0, 0.791247904, 0)
+FallDmgBypass.Size = UDim2.new(0, 197, 0, 40)
+FallDmgBypass.Font = Enum.Font.SourceSansBold
+FallDmgBypass.Text = "Bypass Fall Damage"
+FallDmgBypass.TextColor3 = Color3.fromRGB(0, 170, 255)
+FallDmgBypass.TextSize = 20.000
+FallDmgBypass.TextWrapped = true
 
 prewarn.Name = "prewarn"
 prewarn.Parent = MainFrame
-prewarn.BackgroundColor3 = Color3.new(0, 0.333333, 0.498039)
-prewarn.BorderColor3 = Color3.new(0, 1, 1)
+prewarn.BackgroundColor3 = Color3.fromRGB(24, 24, 72)
+prewarn.BorderColor3 = Color3.fromRGB(0, 255, 255)
 prewarn.Position = UDim2.new(0.0141980648, 0, 0.258445829, 0)
 prewarn.Size = UDim2.new(0, 157, 0, 41)
 prewarn.Font = Enum.Font.SourceSansBold
 prewarn.Text = "Pre-Warn Disaster"
-prewarn.TextColor3 = Color3.new(0, 0.666667, 1)
-prewarn.TextSize = 20
+prewarn.TextColor3 = Color3.fromRGB(0, 170, 255)
+prewarn.TextSize = 20.000
 prewarn.TextWrapped = true
 
 Title.Name = "Title"
 Title.Parent = MainFrame
-Title.BackgroundColor3 = Color3.new(0, 0.333333, 0.498039)
+Title.BackgroundColor3 = Color3.fromRGB(24, 24, 72)
 Title.BorderSizePixel = 0
 Title.Size = UDim2.new(0, 320, 0, 49)
 Title.Font = Enum.Font.SourceSansBold
 Title.Text = "RedWire's Natural Disaster Survival GUI"
-Title.TextColor3 = Color3.new(0.333333, 0.666667, 1)
+Title.TextColor3 = Color3.fromRGB(0, 170, 255)
 Title.TextScaled = true
-Title.TextSize = 16
-Title.TextStrokeColor3 = Color3.new(0, 0.333333, 1)
+Title.TextSize = 16.000
+Title.TextStrokeColor3 = Color3.fromRGB(0, 84, 255)
 Title.TextWrapped = true
 
 ChatDisaster.Name = "ChatDisaster"
 ChatDisaster.Parent = MainFrame
-ChatDisaster.BackgroundColor3 = Color3.new(0, 0.333333, 0.498039)
-ChatDisaster.BorderColor3 = Color3.new(0, 1, 1)
+ChatDisaster.BackgroundColor3 = Color3.fromRGB(24, 24, 72)
+ChatDisaster.BorderColor3 = Color3.fromRGB(0, 255, 255)
 ChatDisaster.Position = UDim2.new(0.501775742, 0, 0.258445859, 0)
 ChatDisaster.Size = UDim2.new(0, 157, 0, 41)
 ChatDisaster.Font = Enum.Font.SourceSansBold
 ChatDisaster.Text = "Post Disaster In chat"
-ChatDisaster.TextColor3 = Color3.new(0, 0.666667, 1)
-ChatDisaster.TextSize = 20
+ChatDisaster.TextColor3 = Color3.fromRGB(0, 170, 255)
+ChatDisaster.TextSize = 20.000
 ChatDisaster.TextWrapped = true
 
 Admin.Name = "Admin"
 Admin.Parent = MainFrame
-Admin.BackgroundColor3 = Color3.new(0, 0.333333, 0.498039)
-Admin.BorderColor3 = Color3.new(0, 1, 1)
+Admin.BackgroundColor3 = Color3.fromRGB(24, 24, 72)
+Admin.BorderColor3 = Color3.fromRGB(0, 255, 255)
 Admin.Position = UDim2.new(0.0141980667, 0, 0.515348732, 0)
 Admin.Size = UDim2.new(0, 157, 0, 41)
 Admin.Font = Enum.Font.SourceSansBold
 Admin.Text = "Infinite Yield"
-Admin.TextColor3 = Color3.new(0, 0.666667, 1)
-Admin.TextSize = 20
+Admin.TextColor3 = Color3.fromRGB(0, 170, 255)
+Admin.TextSize = 20.000
 Admin.TextWrapped = true
 
 lobbytp.Name = "lobbytp"
 lobbytp.Parent = MainFrame
-lobbytp.BackgroundColor3 = Color3.new(0, 0.333333, 0.498039)
-lobbytp.BorderColor3 = Color3.new(0, 1, 1)
+lobbytp.BackgroundColor3 = Color3.fromRGB(24, 24, 72)
+lobbytp.BorderColor3 = Color3.fromRGB(0, 255, 255)
 lobbytp.Position = UDim2.new(0.501666129, 0, 0.515348732, 0)
 lobbytp.Size = UDim2.new(0, 157, 0, 41)
 lobbytp.Font = Enum.Font.SourceSansBold
 lobbytp.Text = "TP to lobby"
-lobbytp.TextColor3 = Color3.new(0, 0.666667, 1)
-lobbytp.TextSize = 20
+lobbytp.TextColor3 = Color3.fromRGB(0, 170, 255)
+lobbytp.TextSize = 20.000
 lobbytp.TextWrapped = true
+
 -- Scripts:
-function SCRIPT_YBCO67_FAKESCRIPT() -- RedWiresNDSGUI.LocalScript 
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/getservice%20auto-converter.lua"))()
-	local script = Instance.new('LocalScript')
-	script.Parent = RedWiresNDSGUI
+
+local function RHFVGJ_fake_script() -- RedWiresNDSGUI.LocalScript 
+	local script = Instance.new('LocalScript', RedWiresNDSGUI)
+
 	local mframe = script.Parent.MainFrame
 	mframe.Draggable = true
 	local lplr = game:GetService("Players").LocalPlayer
+	local tcservice = game:GetService("TextChatService")
+	local txtchannel
+	local limitVelocity = false
+	local limiter = 50
+	for i,v in pairs(tcservice.TextChannels:GetChildren()) do
+		if v.Name:lower():find("general") then
+			txtchannel = v
+			break
+		end
+	end
 	
-	mframe.Admin.MouseButton1Click:connect(function()
+	function servermsg(text)
+		txtchannel:SendAsync(text)
+	end
+	
+	game:GetService("RunService").Heartbeat:connect(function()
+		if lplr.Character then
+			if lplr.Character:FindFirstChild("HumanoidRootPart") and limitVelocity then
+				local hrp = lplr.Character.HumanoidRootPart
+				local vel = hrp.Velocity
+				hrp.Velocity = Vector3.new(
+					math.clamp(vel.X, -limiter, limiter),
+					math.clamp(vel.Y, -limiter, limiter),
+					math.clamp(vel.Z, -limiter, limiter)
+				)
+			end
+		end
+	end)
+	
+	local function singleClick(button, func)
+		local connection
+		connection = button.Activated:connect(function()
+			connection:disconnect()
+			func()
+		end)
+	end
+	
+	singleClick(mframe.Admin, function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 	end)
 	
-	mframe.lobbytp.MouseButton1Click:connect(function()
-		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-290, 178, 379)
+	mframe.lobbytp.Activated:connect(function()
+		lplr.Character.HumanoidRootPart.CFrame = CFrame.new(-290, 178, 379)
 	end)
 	
-	mframe.ChatDisaster.MouseButton1Click:connect(function()
-		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("The disaster for this match is: ".. game.Players.LocalPlayer.Character.SurvivalTag.Value, "All")
+	mframe.ChatDisaster.Activated:connect(function()
+		servermsg("The disaster for this match is: ".. lplr.Character.SurvivalTag.Value)
 	end)
 	
-	mframe.Falldamageremove.MouseButton1Click:connect(function()
-		print("Fall damage is no more")
-		local falldmg = lplr.Character:FindFirstChild("FallDamageScript") or lplr.Character:FindFirstChild("CharacterScript")
-		if falldmg then
-			falldmg:Destroy()
-		end
-	
-		local function nofalldmg(chr)
-	
-			chr.ChildAdded:connect(function(c)
-				if c.Name == "FallDamageScript" or c.Name == "CharacterScript" then
-					task.wait(0.2)
-					c:Destroy()
-				end
-			end)
-	
-		end
-	
-		lplr.CharacterAdded:connect(function(chr)
-			nofalldmg(chr)
-		end)
-	
+	mframe.FallDmgBypass.Activated:connect(function()
+		limitVelocity = not limitVelocity
 	end)
 	
-	mframe.prewarn.MouseButton1Click:connect(function()
+	singleClick(mframe.prewarn, function()
 		local tag = lplr.Character:FindFirstChild("SurvivalTag")
 		if tag then
 			local hint = Instance.new("Message", workspace)
@@ -148,7 +169,7 @@ function SCRIPT_YBCO67_FAKESCRIPT() -- RedWiresNDSGUI.LocalScript
 			hint:Destroy()
 		end
 	
-		local function prewarn(chr)
+		local function preWarn(chr)
 			chr.ChildAdded:connect(function(c)
 				if c.Name == "SurvivalTag" then
 					local hint = Instance.new("Message", workspace)
@@ -159,13 +180,11 @@ function SCRIPT_YBCO67_FAKESCRIPT() -- RedWiresNDSGUI.LocalScript
 			end)
 		end
 	
-		prewarn(lplr.Character)
-	
-		lplr.CharacterAdded:connect(function(chr)
-			prewarn(chr)
-		end)
-	
+		if lplr.Character then
+			preWarn(lplr.Character)
+		end
+		
+		lplr.CharacterAdded:connect(preWarn)
 	end)
-
 end
-coroutine.resume(coroutine.create(SCRIPT_YBCO67_FAKESCRIPT))
+coroutine.wrap(RHFVGJ_fake_script)()
