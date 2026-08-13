@@ -33,7 +33,7 @@ FallDmgBypass.BorderColor3 = Color3.fromRGB(0, 255, 255)
 FallDmgBypass.Position = UDim2.new(0.188111112, 0, 0.791247904, 0)
 FallDmgBypass.Size = UDim2.new(0, 197, 0, 40)
 FallDmgBypass.Font = Enum.Font.SourceSansBold
-FallDmgBypass.Text = "Bypass Fall Damage"
+FallDmgBypass.Text = "Fall Damage Workaround"
 FallDmgBypass.TextColor3 = Color3.fromRGB(0, 170, 255)
 FallDmgBypass.TextSize = 20.000
 FallDmgBypass.TextWrapped = true
@@ -101,7 +101,7 @@ lobbytp.TextWrapped = true
 
 -- Scripts:
 
-local function RHFVGJ_fake_script() -- RedWiresNDSGUI.LocalScript 
+local function TRKQA_fake_script() -- RedWiresNDSGUI.LocalScript 
 	local script = Instance.new('LocalScript', RedWiresNDSGUI)
 
 	local mframe = script.Parent.MainFrame
@@ -156,8 +156,10 @@ local function RHFVGJ_fake_script() -- RedWiresNDSGUI.LocalScript
 		servermsg("The disaster for this match is: ".. lplr.Character.SurvivalTag.Value)
 	end)
 	
+	local falldmgtxt = mframe.FallDmgBypass.Text
 	mframe.FallDmgBypass.Activated:connect(function()
 		limitVelocity = not limitVelocity
+		mframe.FallDmgBypass.Text = ("%s (%s)"):format(falldmgtxt, if limitVelocity then "on" else "off")
 	end)
 	
 	singleClick(mframe.prewarn, function()
@@ -187,4 +189,4 @@ local function RHFVGJ_fake_script() -- RedWiresNDSGUI.LocalScript
 		lplr.CharacterAdded:connect(preWarn)
 	end)
 end
-coroutine.wrap(RHFVGJ_fake_script)()
+coroutine.wrap(TRKQA_fake_script)()
