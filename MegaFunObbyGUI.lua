@@ -15,7 +15,7 @@ local respawn = Instance.new("TextButton")
 --Properties:
 
 Megafunobby.Name = "Megafunobby"
-Megafunobby.Parent = game:GetService("CoreGui")
+Megafunobby.Parent = game.CoreGui
 Megafunobby.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
@@ -29,7 +29,6 @@ Title.Name = "Title"
 Title.Parent = MainFrame
 Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Title.BackgroundTransparency = 1.000
-Title.BorderColor3 = Color3.fromRGB(27, 42, 53)
 Title.Position = UDim2.new(0.0295752808, 0, -0.0011369288, 0)
 Title.Size = UDim2.new(0, 321, 0, 43)
 Title.Font = Enum.Font.Ubuntu
@@ -111,7 +110,7 @@ respawn.TextWrapped = true
 
 -- Scripts:
 
-local function HQESHLR_fake_script() -- Megafunobby.LocalScript 
+local function RYKSBB_fake_script() -- Megafunobby.LocalScript 
 	local script = Instance.new('LocalScript', Megafunobby)
 
 	local frame = script.Parent.MainFrame
@@ -122,14 +121,14 @@ local function HQESHLR_fake_script() -- Megafunobby.LocalScript
 	
 	if game.PlaceId == 12996397 then
 	
-			plrgui.Chat.Frame.Changed:connect(function()
-				if plrgui.Chat.Frame.Visible ~= true then
-					game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
-				end
-			end)
+		plrgui.Chat.Frame.Changed:connect(function()
+			if plrgui.Chat.Frame.Visible ~= true then
+				game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
+			end
+		end)
 	
-		local skip = plrgui.HUD.Groundbar.SKIPS
-		skip.RemainT.Text = "SKIPS LEFT : yes"
+		local skip = plrgui.HUD.Topbar.Products.Skip
+		skip.TextLabel.Text = "Skips: infinity"
 		local skipclone = skip:Clone()
 		skipclone.Parent = skip.Parent
 		skip:Destroy()
@@ -159,25 +158,25 @@ local function HQESHLR_fake_script() -- Megafunobby.LocalScript
 	
 	frame.delkill.Activated:connect(function()
 		for i, kill in ipairs(workspace.kill:GetChildren()) do
-			if kill:IsA("BasePart") and kill.Transparency ~= 1 then
+			if kill:IsA("BasePart") then
 				kill:Destroy()
 			end
-	end
+		end
 	end)
 	
-		local mps = game:GetService("MarketplaceService")
-		local success, gamename = pcall(mps.GetProductInfo, mps, game.PlaceId)
-		if success then
-			namestring = gamename.Name
-			namestring = namestring:gsub("Mega Fun Obby 2", "oof")
-			frame.Endstage.Text = string.match(namestring,"%d+")
-		end
+	local mps = game:GetService("MarketplaceService")
+	local success, gamename = pcall(mps.GetProductInfo, mps, game.PlaceId)
+	if success then
+		namestring = gamename.Name
+		namestring = namestring:gsub("Mega Fun Obby 2", "")
+		frame.Endstage.Text = string.match(namestring,"%d+")
+	end
 	
 	frame.stageskip.Activated:connect(function()
-	local start = tonumber(frame.Currentstage.Text)
-	local End = tonumber(frame.Endstage.Text)
+		local start = tonumber(frame.Currentstage.Text)
+		local End = tonumber(frame.Endstage.Text)
 		if start ~= End then
-		start = start + 1
+			start = start + 1
 			for i = start, End do
 				lplr.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").stages[i].CFrame
 				repeat task.wait() until lplr.leaderstats.Stage.Value == i
@@ -191,4 +190,4 @@ local function HQESHLR_fake_script() -- Megafunobby.LocalScript
 		frame.Currentstage.Text = tostring(stage.Value)
 	end)
 end
-coroutine.wrap(HQESHLR_fake_script)()
+coroutine.wrap(RYKSBB_fake_script)()
