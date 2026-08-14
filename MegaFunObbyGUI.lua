@@ -110,7 +110,7 @@ respawn.TextWrapped = true
 
 -- Scripts:
 
-local function RYKSBB_fake_script() -- Megafunobby.LocalScript 
+local function XRLCDB_fake_script() -- Megafunobby.LocalScript 
 	local script = Instance.new('LocalScript', Megafunobby)
 
 	local frame = script.Parent.MainFrame
@@ -133,7 +133,7 @@ local function RYKSBB_fake_script() -- Megafunobby.LocalScript
 		skipclone.Parent = skip.Parent
 		skip:Destroy()
 		skipclone.Activated:connect(function()
-			lplr.Character.HumanoidRootPart.CFrame = workspace.stages[lplr.leaderstats.Stage.Value + 1].CFrame
+			lplr.Character.HumanoidRootPart.CFrame = workspace.stages[lplr.leaderstats.Stage.Value + 1].Button.CFrame
 		end)
 	
 	elseif game.PlaceId == 982130670 then
@@ -153,7 +153,7 @@ local function RYKSBB_fake_script() -- Megafunobby.LocalScript
 		return
 	end
 	frame.respawn.Activated:connect(function()
-		game:GetService("Players").LocalPlayer.Character.Humanoid.Health = 0
+		lplr.Character.Humanoid.Health = 0
 	end)
 	
 	frame.delkill.Activated:connect(function()
@@ -164,7 +164,7 @@ local function RYKSBB_fake_script() -- Megafunobby.LocalScript
 		end
 	end)
 	
-	local mps = game:GetService("MarketplaceService")
+	local mps = game.MarketplaceService
 	local success, gamename = pcall(mps.GetProductInfo, mps, game.PlaceId)
 	if success then
 		namestring = gamename.Name
@@ -178,16 +178,16 @@ local function RYKSBB_fake_script() -- Megafunobby.LocalScript
 		if start ~= End then
 			start = start + 1
 			for i = start, End do
-				lplr.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").stages[i].CFrame
+				lplr.Character.HumanoidRootPart.CFrame = if game.PlaceId == 12996397 then workspace.stages[i].Button.CFrame else workspace.stages[i].CFrame
 				repeat task.wait() until lplr.leaderstats.Stage.Value == i
 			end
 		end
 	end)
 	
-	local stage = game:GetService("Players").LocalPlayer.leaderstats.Stage
+	local stage = lplr.leaderstats.Stage
 	frame.Currentstage.Text = tostring(stage.Value)
 	stage.Changed:connect(function()
 		frame.Currentstage.Text = tostring(stage.Value)
 	end)
 end
-coroutine.wrap(RYKSBB_fake_script)()
+coroutine.wrap(XRLCDB_fake_script)()
