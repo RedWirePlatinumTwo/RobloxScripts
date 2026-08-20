@@ -65,6 +65,7 @@ wsnumber.BorderSizePixel = 0
 wsnumber.Position = UDim2.new(0.612500012, 0, 0.149825767, 0)
 wsnumber.Size = UDim2.new(0, 117, 0, 37)
 wsnumber.Font = Enum.Font.Fantasy
+wsnumber.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
 wsnumber.PlaceholderText = "Walkspeed number"
 wsnumber.Text = "30"
 wsnumber.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -156,6 +157,7 @@ jumpnumber.BorderSizePixel = 0
 jumpnumber.Position = UDim2.new(0.609375, 0, 0.313492447, 0)
 jumpnumber.Size = UDim2.new(0, 117, 0, 37)
 jumpnumber.Font = Enum.Font.Fantasy
+jumpnumber.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
 jumpnumber.PlaceholderText = "JumpPower number"
 jumpnumber.Text = "50"
 jumpnumber.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -179,15 +181,15 @@ focusonchr.TextWrapped = true
 
 -- Scripts:
 
-local function RFEUB_fake_script() -- generalgamefucker.LocalScript 
+local function IPHZD_fake_script() -- generalgamefucker.LocalScript 
 	local script = Instance.new('LocalScript', generalgamefucker)
 
 	local mainframe = script.Parent.mainframe
-	local lplr = game:GetService("Players").LocalPlayer
+	local plrs = game:GetService("Players")
+	local lplr = plrs.LocalPlayer
 	mainframe.Draggable = true
 	local uiservice = game:GetService("UserInputService")
 	local runservice = game:GetService("RunService")
-	local plrs = game:GetService("Players")
 	local tcservice = game:GetService("TextChatService")
 	
 	local numbers = {}
@@ -331,7 +333,7 @@ local function RFEUB_fake_script() -- generalgamefucker.LocalScript
 	numbereditor(mainframe.wsnumber, "ws")
 	numbereditor(mainframe.jumpnumber, "jump")
 	
-	local function singleclick(button, func)
+	local function singleClick(button, func)
 		local con
 		con = button.Activated:Connect(function()
 			con:Disconnect()
@@ -339,73 +341,54 @@ local function RFEUB_fake_script() -- generalgamefucker.LocalScript
 		end)
 	end
 	
-	singleclick(mainframe.flyscript, function()
+	singleClick(mainframe.flyscript, function()
 		local flyspeed = 150
 		local flying = false
 		local cframefly = false
-		local uiservice = game:GetService("UserInputService")
-		local lplr = game:GetService("Players").LocalPlayer
 		local keytoggle = true
 		local updown = true
 		local pos = Vector3.new()
-	
-		local function GetVelocity(pos1,pos2,StudsPerSecond)
-			local distance = (pos2 - pos1)
-			local mag = distance.Magnitude
-			return (distance/mag)*StudsPerSecond
-		end
+		local up = Vector3.yAxis
 	
 		local function keyDown(keycode)
 			return uiservice:IsKeyDown(keycode) and not uiservice:GetFocusedTextBox()
 		end
 	
-		game:GetService("RunService").Heartbeat:connect(function(tick)
-			local maxdistance = flyspeed * 2
+		runservice.Heartbeat:connect(function(tick)
 			if lplr.Character and lplr.Character:FindFirstChild("Humanoid") and lplr.Character.Humanoid.RootPart then
 				local hrp = lplr.Character.Humanoid.SeatPart or lplr.Character.Humanoid.RootPart
-				local frontoffset = CFrame.new() + Vector3.new(0,0,-maxdistance)
-				local backoffset = CFrame.new() + Vector3.new(0,0,maxdistance)
-				local leftoffset = CFrame.new() + Vector3.new(-maxdistance,0,0)
-				local rightoffset = CFrame.new() + Vector3.new(maxdistance,0,0)
-				local upoffset = CFrame.new() + Vector3.new(0,maxdistance,0)
-				local downoffset = CFrame.new() + Vector3.new(0,-maxdistance,0)
 				local velocity = Vector3.new()
+				local cam = workspace.CurrentCamera.CFrame
+				local right = cam.RightVector
+				local forward = cam.LookVector
+				local function flyControls(key, vector, upDownCheck)
+					if keyDown(key)
+						and ((upDownCheck and updown)
+							or not upDownCheck) then
+						velocity += vector
+					end
+				end
 				if flying then
 					hrp.RotVelocity = Vector3.new()
-					if keyDown(Enum.KeyCode.W) then
-						velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position,flyspeed)
+					flyControls(Enum.KeyCode.E, up, true)
+					flyControls(Enum.KeyCode.Q, -up, true)
+					flyControls(Enum.KeyCode.D, right)
+					flyControls(Enum.KeyCode.A, -right)
+					flyControls(Enum.KeyCode.W, forward)
+					flyControls(Enum.KeyCode.S, -forward)
+					if velocity.Magnitude > 0 then -- prevent velocity becoming NaN
+						velocity = velocity.Unit * flyspeed
 					end
-	
-					if keyDown(Enum.KeyCode.S) then
-						velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position,flyspeed)
-					end
-	
-					if keyDown(Enum.KeyCode.A) then
-						velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position,flyspeed)
-					end
-	
-					if keyDown(Enum.KeyCode.D) then
-						velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position,flyspeed)
-					end
-	
-					if keyDown(Enum.KeyCode.E) and updown then
-						velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position,flyspeed)
-					end
-	
-					if keyDown(Enum.KeyCode.Q) and updown then
-						velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position,flyspeed)
-					end
-	
 					if not cframefly then
 						hrp.Velocity = velocity
 					else
 						hrp.Velocity = Vector3.new()
 						hrp.CFrame = hrp.CFrame + (velocity*tick)
 					end
-					hrp.CFrame = CFrame.new(hrp.Position, (workspace.CurrentCamera.CFrame*frontoffset).Position)
+					hrp.CFrame = CFrame.new(hrp.Position, hrp.Position + forward)
 				end
-				if flying and not keyDown(Enum.KeyCode.W) and not keyDown(Enum.KeyCode.A) and not keyDown(Enum.KeyCode.S) and not keyDown(Enum.KeyCode.D) and not keyDown(Enum.KeyCode.Q) and not keyDown(Enum.KeyCode.E) then
-					hrp.CFrame = CFrame.new(pos, (workspace.CurrentCamera.CFrame*frontoffset).Position)
+				if flying and velocity.Magnitude == 0 then
+					hrp.CFrame = CFrame.new(pos, pos + forward)
 					hrp.Velocity = Vector3.new()
 				else
 					pos = hrp.Position
@@ -415,7 +398,7 @@ local function RFEUB_fake_script() -- generalgamefucker.LocalScript
 	
 		uiservice.InputBegan:connect(function(key,processed)
 			if processed then return end
-			if key.KeyCode == Enum.KeyCode.F and game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then
+			if key.KeyCode == Enum.KeyCode.F and uiservice:IsKeyDown(Enum.KeyCode.LeftControl) then
 				flying = not flying
 				if flying then
 					uiservice.MouseBehavior = Enum.MouseBehavior.LockCenter
@@ -451,12 +434,12 @@ local function RFEUB_fake_script() -- generalgamefucker.LocalScript
 		end)
 	end)
 	
-	singleclick(mainframe.aimbot, function()
+	singleClick(mainframe.aimbot, function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/Aimbot.lua"))()
 	end)
 	
-	singleclick(mainframe.infjump, function()
-		game:GetService("UserInputService").InputBegan:connect(function(key,processed)
+	singleClick(mainframe.infjump, function()
+		uiservice.InputBegan:connect(function(key, processed)
 			if processed then return end
 			local hum = lplr.Character.Humanoid
 			local hrp = hum.RootPart
@@ -466,11 +449,11 @@ local function RFEUB_fake_script() -- generalgamefucker.LocalScript
 		end)
 	end)
 	
-	singleclick(mainframe.admin, function()
+	singleClick(mainframe.admin, function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 	end)
 	
-	singleclick(mainframe.ctrldestroy, function()
+	singleClick(mainframe.ctrldestroy, function()
 		local mouse = lplr:GetMouse()
 		local sbox = Instance.new("SelectionBox", workspace)
 		local function ctrlDown()
@@ -487,7 +470,7 @@ local function RFEUB_fake_script() -- generalgamefucker.LocalScript
 		end)
 	end)
 	
-	singleclick(mainframe.focusonchr, function()
+	singleClick(mainframe.focusonchr, function()
 		runservice.Heartbeat:connect(function()
 			pcall(function()
 				workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
@@ -496,4 +479,4 @@ local function RFEUB_fake_script() -- generalgamefucker.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(RFEUB_fake_script)()
+coroutine.wrap(IPHZD_fake_script)()
