@@ -110,7 +110,7 @@ local function OQQJ_fake_script() -- RedWiresNDSGUI.LocalScript
 	local tcservice = game:GetService("TextChatService")
 	local txtchannel
 	local limitVelocity = false
-	local limiter = 70
+	local limiter = 69 -- no joke this is actually the limit before you take fall damage
 	for i,v in pairs(tcservice.TextChannels:GetChildren()) do
 		if v.Name:lower():find("general") then
 			txtchannel = v
