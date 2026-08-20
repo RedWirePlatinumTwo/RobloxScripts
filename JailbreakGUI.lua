@@ -11,6 +11,7 @@ local replaceparachute = Instance.new("TextButton")
 local holdebypass = Instance.new("TextButton")
 local aimbot = Instance.new("TextButton")
 local CrateEsp = Instance.new("TextButton")
+local UIGridLayout = Instance.new("UIGridLayout")
 local modguns = Instance.new("TextButton")
 local GravToggle = Instance.new("TextButton")
 local forcedaytime = Instance.new("TextButton")
@@ -38,7 +39,6 @@ local aimpredictor = Instance.new("TextButton")
 local aimtriggerbot = Instance.new("TextButton")
 local wallhack = Instance.new("TextButton")
 local modshotgun = Instance.new("TextButton")
-local UIGridLayout = Instance.new("UIGridLayout")
 local AutosortFrame = Instance.new("Frame")
 local ScrollingFrame_2 = Instance.new("ScrollingFrame")
 local UIListLayout = Instance.new("UIListLayout")
@@ -147,6 +147,9 @@ CrateEsp.TextColor3 = Color3.fromRGB(85, 170, 255)
 CrateEsp.TextSize = 20.000
 CrateEsp.TextWrapped = true
 CrateEsp.TextXAlignment = Enum.TextXAlignment.Left
+
+UIGridLayout.Parent = ScrollingFrame
+UIGridLayout.CellSize = UDim2.new(0, 360, 0, 35)
 
 modguns.Name = "modguns"
 modguns.Parent = ScrollingFrame
@@ -525,9 +528,6 @@ modshotgun.TextSize = 20.000
 modshotgun.TextWrapped = true
 modshotgun.TextXAlignment = Enum.TextXAlignment.Left
 
-UIGridLayout.Parent = ScrollingFrame
-UIGridLayout.CellSize = UDim2.new(0, 360, 0, 35)
-
 AutosortFrame.Name = "AutosortFrame"
 AutosortFrame.Parent = JailbreakGUI
 AutosortFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 45)
@@ -610,6 +610,7 @@ itemname.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
 itemname.BorderColor3 = Color3.fromRGB(0, 170, 255)
 itemname.Size = UDim2.new(0, 171, 0, 25)
 itemname.Font = Enum.Font.Ubuntu
+itemname.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
 itemname.PlaceholderText = "Item Name"
 itemname.Text = ""
 itemname.TextColor3 = Color3.fromRGB(85, 170, 255)
@@ -624,6 +625,7 @@ slotnum.BorderColor3 = Color3.fromRGB(0, 170, 255)
 slotnum.Position = UDim2.new(0.5, 0, 0, 0)
 slotnum.Size = UDim2.new(0, 146, 0, 25)
 slotnum.Font = Enum.Font.Ubuntu
+slotnum.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
 slotnum.PlaceholderText = "Slot number"
 slotnum.Text = ""
 slotnum.TextColor3 = Color3.fromRGB(85, 170, 255)
@@ -685,6 +687,7 @@ team.BackgroundColor3 = Color3.fromRGB(0, 0, 70)
 team.BorderColor3 = Color3.fromRGB(0, 170, 255)
 team.Size = UDim2.new(0, 307, 0, 25)
 team.Font = Enum.Font.Ubuntu
+team.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
 team.PlaceholderText = "Leave blank for any team"
 team.Text = ""
 team.TextColor3 = Color3.fromRGB(85, 170, 255)
@@ -741,6 +744,7 @@ loadoutname.BorderColor3 = Color3.fromRGB(0, 170, 255)
 loadoutname.Position = UDim2.new(0.449489921, 0, 0.802994728, 0)
 loadoutname.Size = UDim2.new(0, 206, 0, 25)
 loadoutname.Font = Enum.Font.Ubuntu
+loadoutname.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
 loadoutname.PlaceholderText = "Loadout Name"
 loadoutname.Text = ""
 loadoutname.TextColor3 = Color3.fromRGB(85, 170, 255)
@@ -750,7 +754,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function CZMHX_fake_script() -- JailbreakGUI.LocalScript 
+local function PZJAO_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -1348,12 +1352,7 @@ local function CZMHX_fake_script() -- JailbreakGUI.LocalScript
 	
 	
 				Changed(stats, "walkspeed", function(num)
-					if num > 150 then
-						stats.walkspeed = 150
-					end
-					if num < 0 then
-						stats.walkspeed = 0
-					end
+					stats.walkspeed = math.clamp(num, 0, 150)
 					mainframe["1speedv2"].Text = tostring(stats.walkspeed)
 				end)
 	
@@ -1511,69 +1510,42 @@ local function CZMHX_fake_script() -- JailbreakGUI.LocalScript
 				local flying = false
 				local uiservice = game:GetService("UserInputService")
 				local pos = Vector3.new()
-	
-				local function GetVelocity(pos1,pos2,StudsPerSecond)
-					local distance = (pos2 - pos1)
-					local mag = distance.Magnitude
-					return (distance/mag)*StudsPerSecond
-				end
+				local up = Vector3.yAxis
 	
 				local function keyDown(keycode)
 					return uiservice:IsKeyDown(keycode) and not uiservice:GetFocusedTextBox()
 				end
 	
-				runservice.Heartbeat:connect(function()
-					local hrp
-					local flyspeed = stats.flyspeed
-					local maxdistance = flyspeed * 2
-					local invehicle = getmodel()
-					if invehicle and isdriver() then
-						hrp = invehicle.PrimaryPart
-					else
-						if lplr.Character and lplr.Character:FindFirstChild("Humanoid") and lplr.Character.Humanoid.RootPart then
-							hrp = lplr.Character.Humanoid.RootPart
-						end
-						if flyspeed > 150 then
-							flyspeed = 150
-						end
-					end
-					if hrp then
-						local frontoffset = CFrame.new() + Vector3.new(0,0,-maxdistance)
-						local backoffset = CFrame.new() + Vector3.new(0,0,maxdistance)
-						local leftoffset = CFrame.new() + Vector3.new(-maxdistance,0,0)
-						local rightoffset = CFrame.new() + Vector3.new(maxdistance,0,0)
-						local upoffset = CFrame.new() + Vector3.new(0,maxdistance,0)
-						local downoffset = CFrame.new() + Vector3.new(0,-maxdistance,0)
+				game:GetService("RunService").Heartbeat:connect(function(tick)
+					if lplr.Character and lplr.Character:FindFirstChild("Humanoid") and lplr.Character.Humanoid.RootPart then
+						local hrp = lplr.Character.Humanoid.SeatPart or lplr.Character.Humanoid.RootPart
 						local velocity = Vector3.new()
+						local cam = workspace.CurrentCamera.CFrame
+						local right = cam.RightVector
+						local forward = cam.LookVector
+						local function flyControls(key, vector, upDownCheck)
+							if keyDown(key)
+								and ((upDownCheck and stats.flyupdown)
+									or not upDownCheck) then
+								velocity += vector
+							end
+						end
 						if flying then
 							hrp.RotVelocity = Vector3.new()
-							if keyDown(Enum.KeyCode.W) then
-								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*frontoffset).Position,flyspeed)
-							end
-	
-							if keyDown(Enum.KeyCode.S) then
-								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*backoffset).Position,flyspeed)
-							end
-	
-							if keyDown(Enum.KeyCode.A) then
-								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*leftoffset).Position,flyspeed)
-							end
-	
-							if keyDown(Enum.KeyCode.D) then
-								velocity = velocity + GetVelocity(hrp.Position,(hrp.CFrame*rightoffset).Position,flyspeed)
-							end
-							if keyDown(Enum.KeyCode.E) and stats.flyupdown then
-								velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*upoffset).Position,flyspeed)
-							end
-	
-							if keyDown(Enum.KeyCode.Q) and stats.flyupdown then
-								velocity = velocity + GetVelocity(hrp.Position,(CFrame.new(hrp.Position)*downoffset).Position,flyspeed)
+							flyControls(Enum.KeyCode.E, up, true)
+							flyControls(Enum.KeyCode.Q, -up, true)
+							flyControls(Enum.KeyCode.D, right)
+							flyControls(Enum.KeyCode.A, -right)
+							flyControls(Enum.KeyCode.W, forward)
+							flyControls(Enum.KeyCode.S, -forward)
+							if velocity.Magnitude > 0 then -- prevent velocity becoming NaN
+								velocity = velocity.Unit * stats.flyspeed
 							end
 							hrp.Velocity = velocity
-							hrp.CFrame = CFrame.new(hrp.Position, (workspace.CurrentCamera.CFrame*frontoffset).Position)
+							hrp.CFrame = CFrame.new(hrp.Position, hrp.Position + forward)
 						end
-						if flying and not keyDown(Enum.KeyCode.W) and not keyDown(Enum.KeyCode.A) and not keyDown(Enum.KeyCode.S) and not keyDown(Enum.KeyCode.D) and not keyDown(Enum.KeyCode.Q) and not keyDown(Enum.KeyCode.E) then
-							hrp.CFrame = CFrame.new(pos, (workspace.CurrentCamera.CFrame*frontoffset).Position)
+						if flying and velocity.Magnitude == 0 then
+							hrp.CFrame = CFrame.new(pos, pos + forward)
 							hrp.Velocity = Vector3.new()
 						else
 							pos = hrp.Position
@@ -1595,12 +1567,7 @@ local function CZMHX_fake_script() -- JailbreakGUI.LocalScript
 				-- end of fly script
 	
 				Changed(stats, "flyspeed", function(num)
-					if num > 600 then
-						stats.flyspeed = 600
-					end
-					if num < 0 then
-						stats.flyspeed = 0
-					end
+					stats.flyspeed = math.clamp(num, 0, 600)
 					mainframe["1flyhackv2"].Text = tostring(stats.flyspeed)
 				end)
 	
@@ -2169,4 +2136,4 @@ local function CZMHX_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(CZMHX_fake_script)()
+coroutine.wrap(PZJAO_fake_script)()
