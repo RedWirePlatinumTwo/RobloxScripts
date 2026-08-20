@@ -101,7 +101,7 @@ lobbytp.TextWrapped = true
 
 -- Scripts:
 
-local function TRKQA_fake_script() -- RedWiresNDSGUI.LocalScript 
+local function OQQJ_fake_script() -- RedWiresNDSGUI.LocalScript 
 	local script = Instance.new('LocalScript', RedWiresNDSGUI)
 
 	local mframe = script.Parent.MainFrame
@@ -110,7 +110,7 @@ local function TRKQA_fake_script() -- RedWiresNDSGUI.LocalScript
 	local tcservice = game:GetService("TextChatService")
 	local txtchannel
 	local limitVelocity = false
-	local limiter = 40
+	local limiter = 50
 	for i,v in pairs(tcservice.TextChannels:GetChildren()) do
 		if v.Name:lower():find("general") then
 			txtchannel = v
@@ -127,11 +127,9 @@ local function TRKQA_fake_script() -- RedWiresNDSGUI.LocalScript
 			if lplr.Character:FindFirstChild("HumanoidRootPart") and limitVelocity then
 				local hrp = lplr.Character.HumanoidRootPart
 				local vel = hrp.Velocity
-				hrp.Velocity = Vector3.new(
-					math.clamp(vel.X, -limiter, limiter),
-					math.clamp(vel.Y, -limiter, limiter),
-					math.clamp(vel.Z, -limiter, limiter)
-				)
+				if vel.Magnitude > limiter then
+					hrp.Velocity = vel.Unit * limiter
+				end
 			end
 		end
 	end)
@@ -189,4 +187,4 @@ local function TRKQA_fake_script() -- RedWiresNDSGUI.LocalScript
 		lplr.CharacterAdded:connect(preWarn)
 	end)
 end
-coroutine.wrap(TRKQA_fake_script)()
+coroutine.wrap(OQQJ_fake_script)()
