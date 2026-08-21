@@ -181,7 +181,7 @@ focusonchr.TextWrapped = true
 
 -- Scripts:
 
-local function IPHZD_fake_script() -- generalgamefucker.LocalScript 
+local function QBJW_fake_script() -- generalgamefucker.LocalScript 
 	local script = Instance.new('LocalScript', generalgamefucker)
 
 	local mainframe = script.Parent.mainframe
@@ -422,7 +422,10 @@ local function IPHZD_fake_script() -- generalgamefucker.LocalScript
 		end)
 	
 		altmessage("flyspeed", function(msg)
-			flyspeed = msg:match("%d+")
+			local speed = tonumber(msg:match("%d+"))
+			if speed then
+				flyspeed = speed
+			end
 		end)
 	
 		altmessage("flykeybind", function()
@@ -479,4 +482,4 @@ local function IPHZD_fake_script() -- generalgamefucker.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(IPHZD_fake_script)()
+coroutine.wrap(QBJW_fake_script)()
