@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function KZFK_fake_script() -- RedwiresAimbot.LocalScript 
+local function OESFC_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1094,8 +1094,8 @@ local function KZFK_fake_script() -- RedwiresAimbot.LocalScript
 	end
 	if not RedsAimbot then
 		getgenv().RedsAimbot = {}
-		sendNotif("Red's Universal Aimbot (8/11/26)", changeNotes(
-			"Fixed UI keybind setting not working"
+		sendNotif("Red's Universal Aimbot (8/27/26)", changeNotes(
+			"Updated decimal rounding for sliders"
 		))
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
@@ -1483,10 +1483,21 @@ local function KZFK_fake_script() -- RedwiresAimbot.LocalScript
 			["TargetNPCs"] = "Target NPCs",
 			["GUIVisibilityToggle"] = "GUI Visibility Toggle"
 		}
-		local numLimits = {
-			["MouseSensitivity"] = {0.1, 1},
-			["MaxStuds"] = {50, 5000}
+		local numInfo = {
+			["MouseSensitivity"] = {
+				Limits = {0.1, 1},
+				decimalRound = 3
+			},
+			["MaxStuds"] = {
+				Limits = {50, 5000},
+				decimalRound = 0
+			}
 		}
+		
+		function decimalround(number, len)
+			len = math.clamp(math.floor(len), 0, 99)
+			return tonumber(("%."..len.."f"):format(number))
+		end
 		
 		local function createName(propName, keybindSuffix)
 			local function suffixCheck(txt)
@@ -1530,9 +1541,9 @@ local function KZFK_fake_script() -- RedwiresAimbot.LocalScript
 				end
 			elseif typeof(val) == "number" then
 				clone = txtBoxTemp:Clone()
-				local limits = numLimits[propName]
-				local min = limits[1]
-				local max = limits[2]
+				local info = numInfo[propName]
+				local min = info.Limits[1]
+				local max = info.Limits[2]
 				local multi = max - min
 				if propName == "MouseSensitivity" then
 					clone.slider.CanvasSize = UDim2.new(1.9, 0, 0, 0) -- remember to always add 1 to make the slider actually scrollable
@@ -1565,7 +1576,7 @@ local function KZFK_fake_script() -- RedwiresAimbot.LocalScript
 				
 				Changed(clone.slider, "CanvasPosition", function(pos)
 					if internalSet then return end
-					clone.value.Text =  ("%.3f"):format(((pos.X / scrollRange) * multi) + min)
+					clone.value.Text =  decimalround(((pos.X / scrollRange) * multi) + min, info.decimalRound)
 					sliderCooldown.reset()
 				end)
 			end
@@ -1709,8 +1720,8 @@ local function KZFK_fake_script() -- RedwiresAimbot.LocalScript
 	
 			clone.undo.Activated:connect(function()
 				clone:Destroy()
-				local tfind = table.find(getOrCreate(GameStats, "Teams"),ttable)
-				table.remove(getOrCreate(GameStats, "Teams"),tfind)
+				local teamsTable = getOrCreate(GameStats, "Teams")
+				table.remove(teamsTable, table.find(teamsTable, ttable))
 			end)
 	
 		end
@@ -2510,4 +2521,4 @@ local function KZFK_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(KZFK_fake_script)()
+coroutine.wrap(OESFC_fake_script)()
