@@ -17,7 +17,7 @@ end
 function clientmsg(text)
 	game:GetService("Chat"):Chat(chr.Head, text, "White")
 end
-tween(root.Position - (forward.Unit * 1))
+tween(root.Position - forward)
 wait(2)
 clientmsg("You know what?")
 wait(1)
@@ -26,7 +26,7 @@ wait(1)
 tween(root.Position + forward)
 wait(0.5)
 local walkToFront = game.RunService.RenderStepped:connect(function()
-    chr.Humanoid.WalkToPoint = rootPos + forward.Unit * 100000
+    chr.Humanoid.WalkToPoint = rootPos + forward * 100000
 end)
 wait(10)
 walkToFront:Disconnect()
