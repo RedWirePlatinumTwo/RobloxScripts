@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function OESFC_fake_script() -- RedwiresAimbot.LocalScript 
+local function JSURNBQ_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1474,23 +1474,23 @@ local function OESFC_fake_script() -- RedwiresAimbot.LocalScript
 		local txtButtonTemp = gameSettings.TextButtonTemplate
 		
 		local statDisplayNames = {
-			["TeamAutofill"] = "Auto-fill Team Names",
-			["Target"] = "Targeted Part",
-			["AutoTarget"] = "Auto-Targeting Enabled",
-			["MaxStuds"] = "Auto-Target Max Distance",
-			["TargetPrioOnly"] = "Target ONLY Prioritized Players",
-			["TargetOffScreen"] = "Allow Off-Screen Auto-Targeting",
-			["TargetNPCs"] = "Target NPCs",
-			["GUIVisibilityToggle"] = "GUI Visibility Toggle"
+			TeamAutofill = "Auto-fill Team Names",
+			Target = "Targeted Part",
+			AutoTarget = "Auto-Targeting Enabled",
+			MaxStuds = "Auto-Target Max Distance",
+			TargetPrioOnly = "Target ONLY Prioritized Players",
+			TargetOffScreen = "Allow Off-Screen Auto-Targeting",
+			TargetNPCs = "Target NPCs",
+			GUIVisibilityToggle = "GUI Visibility Toggle"
 		}
 		local numInfo = {
-			["MouseSensitivity"] = {
-				Limits = {0.1, 1},
-				decimalRound = 3
+			MouseSensitivity = {
+				limits = {0.1, 1},
+				decimalPlaces = 3
 			},
-			["MaxStuds"] = {
-				Limits = {50, 5000},
-				decimalRound = 0
+			MaxStuds = {
+				limits = {50, 5000},
+				decimalPlaces = 0
 			}
 		}
 		
@@ -1542,8 +1542,8 @@ local function OESFC_fake_script() -- RedwiresAimbot.LocalScript
 			elseif typeof(val) == "number" then
 				clone = txtBoxTemp:Clone()
 				local info = numInfo[propName]
-				local min = info.Limits[1]
-				local max = info.Limits[2]
+				local min = info.limits[1]
+				local max = info.limits[2]
 				local multi = max - min
 				if propName == "MouseSensitivity" then
 					clone.slider.CanvasSize = UDim2.new(1.9, 0, 0, 0) -- remember to always add 1 to make the slider actually scrollable
@@ -1576,7 +1576,7 @@ local function OESFC_fake_script() -- RedwiresAimbot.LocalScript
 				
 				Changed(clone.slider, "CanvasPosition", function(pos)
 					if internalSet then return end
-					clone.value.Text =  decimalround(((pos.X / scrollRange) * multi) + min, info.decimalRound)
+					clone.value.Text =  decimalround(((pos.X / scrollRange) * multi) + min, info.decimalPlaces)
 					sliderCooldown.reset()
 				end)
 			end
@@ -2521,4 +2521,4 @@ local function OESFC_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(OESFC_fake_script)()
+coroutine.wrap(JSURNBQ_fake_script)()
