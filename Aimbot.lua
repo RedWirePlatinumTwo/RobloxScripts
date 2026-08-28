@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function JSURNBQ_fake_script() -- RedwiresAimbot.LocalScript 
+local function ZIWYYHQ_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1486,11 +1486,13 @@ local function JSURNBQ_fake_script() -- RedwiresAimbot.LocalScript
 		local numInfo = {
 			MouseSensitivity = {
 				limits = {0.1, 1},
-				decimalPlaces = 3
+				decimalPlaces = 3,
+				sliderSize = 1.9
 			},
 			MaxStuds = {
 				limits = {50, 5000},
-				decimalPlaces = 0
+				decimalPlaces = 0,
+				sliderSize = 5.99
 			}
 		}
 		
@@ -1545,11 +1547,7 @@ local function JSURNBQ_fake_script() -- RedwiresAimbot.LocalScript
 				local min = info.limits[1]
 				local max = info.limits[2]
 				local multi = max - min
-				if propName == "MouseSensitivity" then
-					clone.slider.CanvasSize = UDim2.new(1.9, 0, 0, 0) -- remember to always add 1 to make the slider actually scrollable
-				else
-					clone.slider.CanvasSize = UDim2.new(5.99, 0, 0, 0)
-				end
+				clone.slider.CanvasSize = UDim2.new(info.sliderSize, 0, 0, 0)
 				local scrollRange = clone.slider.AbsoluteCanvasSize.X - clone.slider.Size.X.Offset
 				local internalSet = false
 				local function updateSlider(value)
@@ -2521,4 +2519,4 @@ local function JSURNBQ_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(JSURNBQ_fake_script)()
+coroutine.wrap(ZIWYYHQ_fake_script)()
