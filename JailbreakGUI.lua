@@ -754,7 +754,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function KCFW_fake_script() -- JailbreakGUI.LocalScript 
+local function TWPVJ_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -764,7 +764,18 @@ local function KCFW_fake_script() -- JailbreakGUI.LocalScript
 	autosortframe.UIListLayout.SortOrder = 0
 	local rstorage = game:GetService("ReplicatedStorage")
 	local runservice = game:GetService("RunService")
+	local uiservice = game:GetService("UserInputService")
 	local itemconfig = rstorage.Game.ItemConfig
+	local plrs = game:GetService("Players")
+	local lplr = plrs.LocalPlayer
+	local plrgui = lplr.PlayerGui
+	local mouse = lplr:GetMouse()
+	local jewel = workspace.Jewelrys:FindFirstChildOfClass("Model")
+	local bank = workspace.Banks:FindFirstChildOfClass("Model")
+	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
+	local vehicle = require(rstorage.Vehicle.VehicleUtils)
+	local getmodel = vehicle.GetLocalVehicleModel
+	local getseats = vehicle.getSeats
 	local oneclickbuttons = {
 		mainframe.RobberyNotifier,
 		mainframe.Tazermod,
@@ -915,15 +926,11 @@ local function KCFW_fake_script() -- JailbreakGUI.LocalScript
 	
 		local function notify(text)
 			text = "<font color= '#"..mainframe.BorderColor3:ToHex().."'>[Red's JB GUI] "..text.."</font>"
-			if tcservice.ChatVersion == Enum.ChatVersion.LegacyChatService then
-				game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",({["Text"] = text}))
-			else
-				tcservice.TextChannels.RBXGeneral:DisplaySystemMessage(text)
-			end
+			tcservice.TextChannels.RBXGeneral:DisplaySystemMessage(text)
 		end
 	
-		if not _G.RedsJBGUI then
-			_G.RedsJBGUI = true
+		if not getgenv().RedsJBGUI then
+			getgenv().RedsJBGUI = true
 			notify("Removed lock vehicle on exit button as its now part of the main game.")
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
@@ -959,13 +966,6 @@ local function KCFW_fake_script() -- JailbreakGUI.LocalScript
 				flyupdown = false
 			}
 			mainframe["1speedv2"].Text = tostring(stats.walkspeed)
-	
-			local plrs = game:GetService("Players")
-			local lplr = plrs.LocalPlayer
-			local mouse = lplr:GetMouse()
-			local jewel = workspace.Jewelrys:FindFirstChildOfClass("Model")
-			local bank = workspace.Banks:FindFirstChildOfClass("Model")
-			local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 			lplr.CameraMaxZoomDistance = 200
 	
 			thread(function()
@@ -1003,8 +1003,6 @@ local function KCFW_fake_script() -- JailbreakGUI.LocalScript
 					end)
 				end
 			end)
-	
-			local plrgui = lplr.PlayerGui
 	
 			runservice.RenderStepped:connect(function()
 				if lplr.Character and lplr.Character:FindFirstChild("Humanoid") then
@@ -1484,11 +1482,6 @@ local function KCFW_fake_script() -- JailbreakGUI.LocalScript
 				gunshoptp = not gunshoptp
 			end)
 	
-			local uiservice = game:GetService("UserInputService")
-			local vehicle = require(rstorage.Vehicle.VehicleUtils)
-			local getmodel = vehicle.GetLocalVehicleModel
-			local getseats = vehicle.getSeats
-	
 			local function isdriver()
 				local model = getmodel()
 				local driving = false
@@ -1511,7 +1504,6 @@ local function KCFW_fake_script() -- JailbreakGUI.LocalScript
 				mainframe["1flyupdown"].Visible = true
 				-- actual fly script
 				local flying = false
-				local uiservice = game:GetService("UserInputService")
 				local pos = Vector3.new()
 				local up = Vector3.yAxis
 	
@@ -2147,4 +2139,4 @@ local function KCFW_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(KCFW_fake_script)()
+coroutine.wrap(TWPVJ_fake_script)()
