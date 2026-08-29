@@ -181,7 +181,7 @@ focusonchr.TextWrapped = true
 
 -- Scripts:
 
-local function QBJW_fake_script() -- generalgamefucker.LocalScript 
+local function ICGEFN_fake_script() -- generalgamefucker.LocalScript 
 	local script = Instance.new('LocalScript', generalgamefucker)
 
 	local mainframe = script.Parent.mainframe
@@ -272,12 +272,17 @@ local function QBJW_fake_script() -- generalgamefucker.LocalScript
 	end
 	
 	local altmessage = function(message, func)
+		message = message:lower()
+		getgenv().altmessageFunctions = altmessageFunctions or {}
+		altmessageFunctions[message] = func
+	
 		return playerChatted(lplr, function(msg)
-			if msg:lower():sub(1,message:len()) == message:lower() then
+			if msg:lower():sub(1,message:len()) == message then
 				func(msg)
 			end
 		end)
 	end
+	
 	
 	
 	local function speedhack()
@@ -418,22 +423,25 @@ local function QBJW_fake_script() -- generalgamefucker.LocalScript
 	
 		altmessage("tfly", function()
 			cframefly = not cframefly
-			print("cframefly is now", cframefly)
+			print("set cframefly to", cframefly)
 		end)
 	
 		altmessage("flyspeed", function(msg)
 			local speed = tonumber(msg:match("%d+"))
 			if speed then
 				flyspeed = speed
+				print("set fly speed to", speed)
 			end
 		end)
 	
 		altmessage("flykeybind", function()
 			keytoggle = not keytoggle
+			print("set flykeybind to", keytoggle)
 		end)
 	
 		altmessage("flyupdown", function()
 			updown = not updown
+			print("set flyupdown to", flyupdown)
 		end)
 	end)
 	
@@ -482,4 +490,4 @@ local function QBJW_fake_script() -- generalgamefucker.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(QBJW_fake_script)()
+coroutine.wrap(ICGEFN_fake_script)()
