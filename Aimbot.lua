@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function OVBQZ_fake_script() -- RedwiresAimbot.LocalScript 
+local function GHKL_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1486,7 +1486,8 @@ local function OVBQZ_fake_script() -- RedwiresAimbot.LocalScript
 		}
 		local numInfo = {}
 		
-		local function addNumInfo(name, min, max, decimalPlaces, sliderScale)
+		local function addNumInfo(name, min, max, decimalPlaces)
+			local sliderScale = 10 ^ math.abs(decimalPlaces - 3)
 			numInfo[name] = {
 				limits = {min, max},
 				decimalPlaces = decimalPlaces,
@@ -1494,8 +1495,8 @@ local function OVBQZ_fake_script() -- RedwiresAimbot.LocalScript
 			}
 		end
 		
-		addNumInfo("MouseSensitivity", 0.1, 1, 3, 1)
-		addNumInfo("MaxStuds", 50, 5000, 0, 1000)
+		addNumInfo("MouseSensitivity", 0.1, 1, 3)
+		addNumInfo("MaxStuds", 50, 5000, 0)
 		
 		function decimalround(number, len)
 			len = math.clamp(math.floor(len), 0, 99)
@@ -2525,4 +2526,4 @@ local function OVBQZ_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(OVBQZ_fake_script)()
+coroutine.wrap(GHKL_fake_script)()
