@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function ZIWYYHQ_fake_script() -- RedwiresAimbot.LocalScript 
+local function OVBQZ_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1423,13 +1423,14 @@ local function ZIWYYHQ_fake_script() -- RedwiresAimbot.LocalScript
 	
 		local cond = targetingui.ScrollingFrame.Condition
 		local function addGUICondition(index)
-			local txt = getOrCreate(GameStats, "CustomTargetConditions")[index] or ""
+			local targetConditions = getOrCreate(GameStats, "CustomTargetConditions")
+			local txt = targetConditions[index] or ""
 			local clone = cond:Clone()
 			clone.Parent = cond.Parent
 			clone.Visible = true
 			clone.value.Text = txt
 			clone.value.FocusLost:connect(function()
-				getOrCreate(GameStats, "CustomTargetConditions")[index] = clone.value.Text
+				targetConditions[index] = clone.value.Text
 			end)
 		end
 	
@@ -1483,18 +1484,18 @@ local function ZIWYYHQ_fake_script() -- RedwiresAimbot.LocalScript
 			TargetNPCs = "Target NPCs",
 			GUIVisibilityToggle = "GUI Visibility Toggle"
 		}
-		local numInfo = {
-			MouseSensitivity = {
-				limits = {0.1, 1},
-				decimalPlaces = 3,
-				sliderSize = 1.9
-			},
-			MaxStuds = {
-				limits = {50, 5000},
-				decimalPlaces = 0,
-				sliderSize = 5.99
+		local numInfo = {}
+		
+		local function addNumInfo(name, min, max, decimalPlaces, sliderScale)
+			numInfo[name] = {
+				limits = {min, max},
+				decimalPlaces = decimalPlaces,
+				sliderSize = ((max - min) / sliderScale) + 1
 			}
-		}
+		end
+		
+		addNumInfo("MouseSensitivity", 0.1, 1, 3, 1)
+		addNumInfo("MaxStuds", 50, 5000, 0, 1000)
 		
 		function decimalround(number, len)
 			len = math.clamp(math.floor(len), 0, 99)
@@ -1728,8 +1729,9 @@ local function ZIWYYHQ_fake_script() -- RedwiresAimbot.LocalScript
 			addTeamFrame(v)
 		end
 		local function gameConditionCheck(id, condition)
-			if game.PlaceId == id and not table.find(getOrCreate(GameStats, "CustomTargetConditions"), condition) then
-				table.insert(getOrCreate(GameStats, "CustomTargetConditions"), condition)
+			local targetConditions = getOrCreate(GameStats, "CustomTargetConditions")
+			if game.PlaceId == id and not table.find(targetConditions, condition) then
+				table.insert(targetConditions, condition)
 				updateMsg(("Auto-added targeting condition for game ID %d:\n%s"):format(id, condition), "Custom Targeting")
 			end
 		end
@@ -1889,7 +1891,8 @@ local function ZIWYYHQ_fake_script() -- RedwiresAimbot.LocalScript
 		end
 	
 		local function selectChr(chr)
-			if misc.IsAimbotOn and not misc.TargetedCharacter and not getOrCreate(GameStats, "TargetCloserPlayers") or getOrCreate(GameStats, "TargetCloserPlayers") and misc.IsAimbotOn then
+			local targetCloserPlrs = getOrCreate(GameStats, "TargetCloserPlayers")
+			if misc.IsAimbotOn and not misc.TargetedCharacter and not targetCloserPlrs or targetCloserPlrs and misc.IsAimbotOn then
 				local isprio
 				local isprio2
 				local plrFromChr = plrs:GetPlayerFromCharacter(chr)
@@ -2016,8 +2019,9 @@ local function ZIWYYHQ_fake_script() -- RedwiresAimbot.LocalScript
 			local team2 = teamui.whitelistteam.Text
 			if teams:FindFirstChild(team1) and teams:FindFirstChild(team2) then
 				local canadd = true
+				local teamsTable = getOrCreate(GameStats, "Teams")
 	
-				for i, teamtable in pairs(getOrCreate(GameStats, "Teams")) do
+				for i, teamtable in pairs(teamsTable) do
 					if teamtable.team1 == team1 and teamtable.team2 == team2 then
 						canadd = false
 						break
@@ -2025,8 +2029,8 @@ local function ZIWYYHQ_fake_script() -- RedwiresAimbot.LocalScript
 				end
 	
 				if canadd then
-					local newtable = {["team1"] = team1 ,["team2"] = team2}
-					table.insert(getOrCreate(GameStats, "Teams"), newtable)
+					local newtable = {team1 = team1, team2 = team2}
+					table.insert(teamsTable, newtable)
 					addTeamFrame(newtable)
 				else
 					updatetxt("This already exists")
@@ -2142,13 +2146,14 @@ local function ZIWYYHQ_fake_script() -- RedwiresAimbot.LocalScript
 					local partpos = part.Position
 					local v, onscreen = camera:WorldToScreenPoint(partpos + misc.AimOffset)
 					local x,y = (v.X - m.X), (v.Y - m.Y)
+					local mouseSens = getOrCreate(GameStats, "MouseSensitivity")
 					if onscreen then
 						if misc.IsAimbotOn then
 							if getOrCreate(GameStats, "AimMethod") == "Camera" then
 								camera.CFrame = CFrame.new(camera.CFrame.Position, partpos + misc.AimOffset)
 								uiservice.MouseDeltaSensitivity = 0
 							else
-								mousemoverel((x + misc.AimOffset.X) * getOrCreate(GlobalStats, "MouseSensitivity"), (y + misc.AimOffset.Y) * getOrCreate(GlobalStats, "MouseSensitivity"))
+								mousemoverel((x + misc.AimOffset.X) * mouseSens, (y + misc.AimOffset.Y) * mouseSens)
 							end
 							if not getOrCreate(GameStats, "FirstPersonEnabled") then
 								lplr.Character.Humanoid.RootPart.CFrame = CFrame.lookAt(lplr.Character.Humanoid.RootPart.Position, (partpos * Vector3.new(1,0,1)) + Vector3.new(0, lplr.Character.Humanoid.RootPart.Position.Y, 0))
@@ -2216,7 +2221,8 @@ local function ZIWYYHQ_fake_script() -- RedwiresAimbot.LocalScript
 								rayparams.FilterDescendantsInstances = chrs
 								rayparams.IgnoreWater = true
 								local raycast = workspace:Raycast(lplr.Character.Head.Position, targpart.Position - lplr.Character.Head.Position, rayparams)
-								if (not raycast and getOrCreate(GameStats, "EnableRaycasting") or not getOrCreate(GameStats, "EnableRaycasting") and (onscreen or getOrCreate(GameStats, "TargetOffScreen")) and pos < getOrCreate(GameStats, "MaxStuds")) then
+								local raycasting = getOrCreate(GameStats, "EnableRaycasting")
+								if (not raycast and raycasting or not raycasting and (onscreen or getOrCreate(GameStats, "TargetOffScreen")) and pos < getOrCreate(GameStats, "MaxStuds")) then
 									table1[v] = pos
 									if table.find(PrioritizedPlrs, plrs:GetPlayerFromCharacter(v)) then
 										table.insert(PrioritizedPlrsOnScreen, v)
@@ -2519,4 +2525,4 @@ local function ZIWYYHQ_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(ZIWYYHQ_fake_script)()
+coroutine.wrap(OVBQZ_fake_script)()
