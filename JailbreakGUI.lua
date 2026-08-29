@@ -754,7 +754,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function PZJAO_fake_script() -- JailbreakGUI.LocalScript 
+local function KCFW_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -953,10 +953,11 @@ local function PZJAO_fake_script() -- JailbreakGUI.LocalScript
 			end
 	
 	
-			local stats = {}
-			stats.walkspeed = 30
-			stats.flyspeed = 300
-			stats.flyupdown = false
+			local stats = {
+				walkspeed = 30,
+				flyspeed = 300,
+				flyupdown = false
+			}
 			mainframe["1speedv2"].Text = tostring(stats.walkspeed)
 	
 			local plrs = game:GetService("Players")
@@ -1118,9 +1119,10 @@ local function PZJAO_fake_script() -- JailbreakGUI.LocalScript
 				end)
 			end)
 	
-			props = {}
-			props.guitext = false
-			props.pointers = false
+			props = {
+				guitext = false,
+				pointers = false
+			}
 			local lines = {}
 			local bbguis = {}
 	
@@ -1367,22 +1369,23 @@ local function PZJAO_fake_script() -- JailbreakGUI.LocalScript
 			local banktruck = true
 	
 			singleclick(mainframe.RobberyNotifier, function()
-				local IconIds = {}
-				IconIds["bank truck"] = "6133383545"
-				IconIds["gas station"] = "4643750797"
-				IconIds["donut shop"] = "4643750660"
-				IconIds["museum"] = "4643749917"
-				IconIds["tomb"] = "6896911415"
-				IconIds["casino"] = "9255252609"
-				IconIds["mansion"] = "11831534984"
-				IconIds["power plant"] = "4643749556"
-				IconIds["jewelry"] = "4643749718"
-				IconIds["bank"] = "4643749317"
-				IconIds["cargo train"] = "7301405189"
-				IconIds["cargo plane"]= "7301406769"
-				IconIds["cargo ship"] = "7301406299"
-				IconIds["passenger train"] = "7301405813"
-				IconIds["oil rig"] = "15617962600"
+				local IconIds = {
+					["bank truck"] = "6133383545",
+					["gas station"] = "4643750797",
+					["donut shop"] = "4643750660",
+					museum = "4643749917",
+					tomb = "6896911415",
+					casino = "9255252609",
+					mansion = "11831534984",
+					["power plant"] = "4643749556",
+					jewelry = "4643749718",
+					bank = "4643749317",
+					["cargo train"] = "7301405189",
+					["cargo plane"]= "7301406769",
+					["cargo ship"] = "7301406299",
+					["passenger train"] = "7301405813",
+					["oil rig"] = "15617962600"
+				}
 	
 				for i,v in pairs(plrgui.WorldMarkersGui:GetChildren()) do
 	
@@ -1517,8 +1520,15 @@ local function PZJAO_fake_script() -- JailbreakGUI.LocalScript
 				end
 	
 				game:GetService("RunService").Heartbeat:connect(function(tick)
-					if lplr.Character and lplr.Character:FindFirstChild("Humanoid") and lplr.Character.Humanoid.RootPart then
-						local hrp = lplr.Character.Humanoid.SeatPart or lplr.Character.Humanoid.RootPart
+					local chr = lplr.Character
+					if chr and chr:FindFirstChild("Humanoid") and chr.Humanoid.RootPart then
+						local hum = chr.Humanoid
+						local flyPart
+						if hum.SeatPart and not hum.SeatPart.Anchored then
+							flyPart = hum.SeatPart
+						else
+							flyPart = chr.HumanoidRootPart
+						end
 						local velocity = Vector3.new()
 						local cam = workspace.CurrentCamera.CFrame
 						local right = cam.RightVector
@@ -1531,7 +1541,7 @@ local function PZJAO_fake_script() -- JailbreakGUI.LocalScript
 							end
 						end
 						if flying then
-							hrp.RotVelocity = Vector3.new()
+							flyPart.RotVelocity = Vector3.new()
 							flyControls(Enum.KeyCode.E, up, true)
 							flyControls(Enum.KeyCode.Q, -up, true)
 							flyControls(Enum.KeyCode.D, right)
@@ -1541,21 +1551,26 @@ local function PZJAO_fake_script() -- JailbreakGUI.LocalScript
 							if velocity.Magnitude > 0 then -- prevent velocity becoming NaN
 								velocity = velocity.Unit * stats.flyspeed
 							end
-							hrp.Velocity = velocity
-							hrp.CFrame = CFrame.new(hrp.Position, hrp.Position + forward)
+							if not cframefly then
+								flyPart.Velocity = velocity
+							else
+								flyPart.Velocity = Vector3.new()
+								flyPart.CFrame = flyPart.CFrame + (velocity*tick)
+							end
+							flyPart.CFrame = CFrame.new(flyPart.Position, flyPart.Position + forward)
 						end
 						if flying and velocity.Magnitude == 0 then
-							hrp.CFrame = CFrame.new(pos, pos + forward)
-							hrp.Velocity = Vector3.new()
+							flyPart.CFrame = CFrame.new(pos, pos + forward)
+							flyPart.Velocity = Vector3.new()
 						else
-							pos = hrp.Position
+							pos = flyPart.Position
 						end
 					end
 				end)
 	
 				uiservice.InputBegan:connect(function(key,processed)
 					if processed then return end
-					if key.KeyCode == Enum.KeyCode.F and game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then
+					if key.KeyCode == Enum.KeyCode.F and uiservice:IsKeyDown(Enum.KeyCode.LeftControl) then
 						flying = not flying
 						if flying then
 							lplr.Character.Humanoid.CameraOffset = Vector3.new(2,0,0)
@@ -1783,11 +1798,12 @@ local function PZJAO_fake_script() -- JailbreakGUI.LocalScript
 	
 			local function addloadout(name)
 				if not loadouts[name] then
-					loadouts[name] = {}
-					loadouts[name].active = false
-					loadouts[name].items = {}
-					loadouts[name].teamname = ""
-					loadouts[name].NOT = false
+					loadouts[name] = {
+						active = false,
+						items = {},
+						teamname = "",
+						NOT = false
+					}
 				end
 				local loadout = loadouts[name]
 				if not loadout.teamname then
@@ -2136,4 +2152,4 @@ local function PZJAO_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(PZJAO_fake_script)()
+coroutine.wrap(KCFW_fake_script)()
