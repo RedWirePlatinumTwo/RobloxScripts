@@ -1551,12 +1551,7 @@ local function KCFW_fake_script() -- JailbreakGUI.LocalScript
 							if velocity.Magnitude > 0 then -- prevent velocity becoming NaN
 								velocity = velocity.Unit * stats.flyspeed
 							end
-							if not cframefly then
-								flyPart.Velocity = velocity
-							else
-								flyPart.Velocity = Vector3.new()
-								flyPart.CFrame = flyPart.CFrame + (velocity*tick)
-							end
+							flyPart.Velocity = velocity
 							flyPart.CFrame = CFrame.new(flyPart.Position, flyPart.Position + forward)
 						end
 						if flying and velocity.Magnitude == 0 then
