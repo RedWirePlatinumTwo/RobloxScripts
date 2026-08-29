@@ -181,7 +181,7 @@ focusonchr.TextWrapped = true
 
 -- Scripts:
 
-local function ICGEFN_fake_script() -- generalgamefucker.LocalScript 
+local function SPWJG_fake_script() -- generalgamefucker.LocalScript 
 	local script = Instance.new('LocalScript', generalgamefucker)
 
 	local mainframe = script.Parent.mainframe
@@ -360,8 +360,15 @@ local function ICGEFN_fake_script() -- generalgamefucker.LocalScript
 		end
 	
 		runservice.Heartbeat:connect(function(tick)
-			if lplr.Character and lplr.Character:FindFirstChild("Humanoid") and lplr.Character.Humanoid.RootPart then
-				local hrp = lplr.Character.Humanoid.SeatPart or lplr.Character.Humanoid.RootPart
+			local chr = lplr.Character
+			if chr and chr:FindFirstChild("Humanoid") and chr.Humanoid.RootPart then
+				local hum = chr.Humanoid
+				local flyPart
+				if hum.SeatPart and not hum.SeatPart.Anchored then
+					flyPart = hum.SeatPart
+				else
+					flyPart = chr.HumanoidRootPart
+				end
 				local velocity = Vector3.new()
 				local cam = workspace.CurrentCamera.CFrame
 				local right = cam.RightVector
@@ -374,7 +381,7 @@ local function ICGEFN_fake_script() -- generalgamefucker.LocalScript
 					end
 				end
 				if flying then
-					hrp.RotVelocity = Vector3.new()
+					flyPart.RotVelocity = Vector3.new()
 					flyControls(Enum.KeyCode.E, up, true)
 					flyControls(Enum.KeyCode.Q, -up, true)
 					flyControls(Enum.KeyCode.D, right)
@@ -385,18 +392,18 @@ local function ICGEFN_fake_script() -- generalgamefucker.LocalScript
 						velocity = velocity.Unit * flyspeed
 					end
 					if not cframefly then
-						hrp.Velocity = velocity
+						flyPart.Velocity = velocity
 					else
-						hrp.Velocity = Vector3.new()
-						hrp.CFrame = hrp.CFrame + (velocity*tick)
+						flyPart.Velocity = Vector3.new()
+						flyPart.CFrame = flyPart.CFrame + (velocity*tick)
 					end
-					hrp.CFrame = CFrame.new(hrp.Position, hrp.Position + forward)
+					flyPart.CFrame = CFrame.new(flyPart.Position, flyPart.Position + forward)
 				end
 				if flying and velocity.Magnitude == 0 then
-					hrp.CFrame = CFrame.new(pos, pos + forward)
-					hrp.Velocity = Vector3.new()
+					flyPart.CFrame = CFrame.new(pos, pos + forward)
+					flyPart.Velocity = Vector3.new()
 				else
-					pos = hrp.Position
+					pos = flyPart.Position
 				end
 			end
 		end)
@@ -490,4 +497,4 @@ local function ICGEFN_fake_script() -- generalgamefucker.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(ICGEFN_fake_script)()
+coroutine.wrap(SPWJG_fake_script)()
