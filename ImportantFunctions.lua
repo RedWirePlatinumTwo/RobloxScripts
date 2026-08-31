@@ -200,7 +200,7 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 		local customVals = args.customValues and args.customValues(Table) or {}
 		for i, v in pairs(Table) do
 			if type(v) ~= "table" then
-				if customvals[i] == nil then
+				if customVals[i] == nil then
 					s = s..writeValue(i, v)
 				end
 				contextCheck(Table, i, v)
