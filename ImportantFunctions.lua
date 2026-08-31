@@ -5,18 +5,19 @@ local totalTables = 0
 
 local rebuildString = function(s)
 	local reformattedString = ""
-	local backKeys = {}
-    backKeys["\0"] = "\\0"
-    backKeys["\a"] = "\\a"
-    backKeys["\b"] = "\\b"
-    backKeys["\f"] = "\\f"
-    backKeys["\n"] = "\\n"
-    backKeys["\r"] = "\\r"
-    backKeys["\t"] = "\\t"
-    backKeys["\v"] = "\\v"
-    backKeys["\'"] = "\\'"
-    backKeys["\""] = "\\\""
-	backKeys["\\"] = "\\\\"
+	local backKeys = {
+		["\0"] = "\\0",
+		["\a"] = "\\a",
+		["\b"] = "\\b",
+		["\f"] = "\\f",
+		["\n"] = "\\n",
+		["\r"] = "\\r",
+		["\t"] = "\\t",
+		["\v"] = "\\v",
+		["\'"] = "\\'",
+		["\""] = "\\\"",
+		["\\"] = "\\\\"
+	}
 	
 	for i = 1, s:len() do
 		local letter = s:sub(i,i)
