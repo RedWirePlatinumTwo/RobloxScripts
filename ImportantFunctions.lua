@@ -226,38 +226,38 @@ getgenv().tabletostring = TableToString
 getgenv().Format = function(var, ...)
 	local failedConversion = false
 	local st = ""
-        if typeof(var) == "EnumItem" or type(var) == "boolean" then
-            st = tostring(var)
-		elseif type(var) == "number" then
-			if var == math.huge then
-				st = "math.huge"
-			elseif var == -math.huge then
-				st = "-math.huge"
-			else
-				st = tostring(var)
-			end
-        elseif type(var) == "string" then
-            st = "\""..rebuildString(var).."\""
-        elseif type(var) == "table" then
-            if not table.find(catchRepeats, var) then
-				st = TableToString(var, ...)
-			else
-				failedConversion = true
-			end
-		elseif typeof(var) == "Instance" then
-			st = GetFullName(var)
-		elseif typeof(var) == "Vector3" or typeof(var) == "Vector2" or typeof(var) == "CFrame" or typeof(var) == "Color3" or typeof(var) == "UDim2" or typeof(var) == "NumberRange" then
-			st = ("%s.new(%s)"):format(typeof(var), tostring(var)):gsub("{", ""):gsub("}", "")
-		elseif typeof(var) == "BrickColor" then
-			st = ("%s.new(\"%s\")"):format(typeof(var), tostring(var))
-		elseif typeof(var) == "Enum" then
-		    st = "Enum."..tostring(var)
-		elseif typeof(var) == "Enums" then
-			st = "Enum"
+	if typeof(var) == "EnumItem" or type(var) == "boolean" then
+		st = tostring(var)
+	elseif type(var) == "number" then
+		if var == math.huge then
+			st = "math.huge"
+		elseif var == -math.huge then
+			st = "-math.huge"
 		else
-			failedConversion = true
 			st = tostring(var)
 		end
+	elseif type(var) == "string" then
+		st = "\""..rebuildString(var).."\""
+	elseif type(var) == "table" then
+		if not table.find(catchRepeats, var) then
+			st = TableToString(var, ...)
+		else
+			failedConversion = true
+		end
+	elseif typeof(var) == "Instance" then
+		st = GetFullName(var)
+	elseif typeof(var) == "Vector3" or typeof(var) == "Vector2" or typeof(var) == "CFrame" or typeof(var) == "Color3" or typeof(var) == "UDim2" or typeof(var) == "NumberRange" then
+		st = ("%s.new(%s)"):format(typeof(var), tostring(var)):gsub("{", ""):gsub("}", "")
+	elseif typeof(var) == "BrickColor" then
+		st = ("%s.new(\"%s\")"):format(typeof(var), tostring(var))
+	elseif typeof(var) == "Enum" then
+		st = "Enum."..tostring(var)
+	elseif typeof(var) == "Enums" then
+		st = "Enum"
+	else
+		failedConversion = true
+		st = tostring(var)
+	end
 	return st, failedConversion
 end
 
