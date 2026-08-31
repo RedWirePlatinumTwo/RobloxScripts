@@ -246,7 +246,7 @@ getgenv().Format = function(var, ...)
 		end
 	elseif typeof(var) == "Instance" then
 		st = GetFullName(var)
-	elseif typeof(var) == "Vector3" or typeof(var) == "Vector2" or typeof(var) == "CFrame" or typeof(var) == "Color3" or typeof(var) == "UDim2" or typeof(var) == "NumberRange" then
+	elseif typeof(var):find("Vector") or typeof(var) == "CFrame" or typeof(var) == "Color3" or typeof(var) == "UDim2" or typeof(var) == "NumberRange" then
 		st = ("%s.new(%s)"):format(typeof(var), tostring(var)):gsub("{", ""):gsub("}", "")
 	elseif typeof(var) == "BrickColor" then
 		st = ("%s.new(\"%s\")"):format(typeof(var), tostring(var))
