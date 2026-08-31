@@ -2,7 +2,8 @@ local catchRepeats = {}
 local indexReps = {}
 local indexes = {}
 local totalTables = 0
-local reformatString = function(s)
+
+local rebuildString = function(s)
 	local reformattedString = ""
 	local backKeys = {}
     backKeys["\0"] = "\\0"
@@ -37,7 +38,7 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 	local function setName(t, name)
 		if not args.simplify then
 		    
-    		local function checkreps()
+    		local function checkRepititions()
     			local amount = indexReps[name] or 0
 				indexReps[name] = amount + 1
     			if (amount + 1) > 1 then
@@ -57,10 +58,10 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 			end
 			if name:len() == 0 or name == "Table_nil" then
 				name = "Table"
-				checkreps()
+				checkRepititions()
 				return
 			end
-			checkreps()
+			checkRepititions()
 		else
 		    totalTables = totalTables + 1
 		    indexes[t] = "Table"..totalTables
@@ -85,7 +86,7 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 			local year = os.date("%Y", timeStamp)
 			local month = os.date("%m", timeStamp)
 			local day = os.date("%d", timeStamp)
-			local format = dateFormat or {"m","d","y"}
+			local format = dateFormat or {"m", "d", "y"}
 			local dateStamp = ""
 			for i,v in pairs(format) do
 				if v == "y" then
@@ -96,7 +97,7 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 					dateStamp = dateStamp..day.."/"
 				end
 			end
-			dateStamp = dateStamp:sub(1,dateStamp:len()-1)
+			dateStamp = dateStamp:sub(1, dateStamp:len() - 1)
 			return dateStamp
 		end
 
@@ -105,10 +106,10 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 	 
 		local function defineTables(f)
 
-			for i,v in pairs(f) do
+			for i, v in pairs(f) do
 		
 				local function isTable(x)
-				if type(x) == "table" and not table.find(reps,x) and not table.find(catchRepeats,x) then
+				if type(x) == "table" and not table.find(reps, x) and not table.find(catchRepeats, x) then
 					local tname
 					if x == i then
 						tname = v
@@ -134,28 +135,28 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 	end
 	local name = getName(Table)
 
-		local function stringmethod(i,v)
+		local function writeValue(index, value)
 		
-			local function isRecursive(x)
-				if table.find(catchRepeats,x) then
-					return getName(x)
+			local function isRecursive(tbl)
+				if table.find(catchRepeats, tbl) then
+					return getName(tbl)
 				else
-					return tostring(x)
+					return tostring(tbl)
 				end
 			end
 			
 			local part1 = ""
-			local part1formatted, failed1 = Format(i,v,args,true)
-			local part2, failed2 = Format(v,i,args,true)
+			local part1formatted, failed1 = Format(index, value, args, true)
+			local part2, failed2 = Format(value, index, args, true)
 			if failed2 then
-				part2 = isRecursive(v)
+				part2 = isRecursive(value)
 			end
-			if type(i) == "table" then
+			if type(index) == "table" then
 				local findwhitespace = part1formatted:find("\n")
 				local tname = ""
 				if findwhitespace then
-					tname = part1formatted:sub(1,part1formatted:find("\n")-1)
-					part2 = part2.."\n"..part1formatted:sub(tname:len()+2)
+					tname = part1formatted:sub(1, part1formatted:find("\n") - 1)
+					part2 = part2.."\n"..part1formatted:sub(tname:len() + 2)
 				else
 					tname = part1formatted
 				end
@@ -164,20 +165,20 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 				part1 = ("\n%s[%s]"):format(name, part1formatted)
 			end
 			if failed1 then
-				part1 = ("\n%s[%s]"):format(name, isRecursive(i))
+				part1 = ("\n%s[%s]"):format(name, isRecursive(index))
 			end
 			local failstring = ""
 			local failignore = {"function", "RBXScriptConnection", "RBXScriptSignal", "table"}
 			if failed1 or failed2 then
-				if args.ignoreunsupported then
+				if args.ignoreUnsupportedValues then
 					return ""
 				end
 				failstring = " --failed to convert types:"
-				if failed1 and not table.find(failignore, typeof(i)) then
-					failstring = failstring.." "..typeof(i)
+				if failed1 and not table.find(failignore, typeof(index)) then
+					failstring = failstring.." "..typeof(index)
 				end
-				if failed2 and not table.find(failignore, typeof(v)) then
-					failstring = failstring.." "..typeof(v)
+				if failed2 and not table.find(failignore, typeof(value)) then
+					failstring = failstring.." "..typeof(value)
 				end
 				if failstring == " --failed to convert types:" then
 					failstring = ""
@@ -189,29 +190,29 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 		
 		local extraTables = {}
 		local function contextCheck(v1, v2, v3)
-			local context = args.contextfunc and args.contextfunc(v1, v2, v3) or function() end
+			local context = args.additionalCtx and args.additionalCtx(v1, v2, v3) or function() end
 			if type(context) == "string" and context ~= "" then
 				s = s.." --"..context
 			end
 		end
 		
-		local customvals = args.customvalues and args.customvalues(Table) or {}
-		for i,v in pairs(Table) do
+		local customVals = args.customValues and args.customValues(Table) or {}
+		for i, v in pairs(Table) do
 			if type(v) ~= "table" then
 				if customvals[i] == nil then
-					s = s..stringmethod(i,v)
+					s = s..writeValue(i, v)
 				end
-				contextCheck(Table,i,v)
+				contextCheck(Table, i, v)
 			else
 				extraTables[i] = v
 			end
 		end
-		for index, val in pairs(customvals) do
-			s = s..("\n%s[%s] = %s"):format(name, Format(index), tostring(val))
+		for index, value in pairs(customVals) do
+			s = s..("\n%s[%s] = %s"):format(name, Format(index), tostring(value))
 		end
-		for i,v in pairs(extraTables) do
-			s = s.."\n"..stringmethod(i,v)
-			contextCheck(Table,i,v)
+		for i, v in pairs(extraTables) do
+			s = s.."\n"..writeValue(i, v)
+			contextCheck(Table, i, v)
 		end
 		if not isInternalTable then
 			s = s.."\n\nreturn "..name
@@ -235,7 +236,7 @@ getgenv().Format = function(var, ...)
 				st = tostring(var)
 			end
         elseif type(var) == "string" then
-            st = "\""..reformatString(var).."\""
+            st = "\""..rebuildString(var).."\""
         elseif type(var) == "table" then
             if not table.find(catchRepeats, var) then
 				st = TableToString(var, ...)
@@ -275,38 +276,36 @@ end
 
 getgenv().GetFullName = function(ins)
 	local Pathway = GetFamily(ins)
-	local function formatChild(s)
-		local s = reformatString(s)
-		if s:find("%A") then
-			return "[\""..s.."\"]"
+	
+	local function formatChild(name)
+		name = rebuildString(name)
+		if name:find("%A") then
+			return "[\""..name.."\"]"
 		else
-			return "."..s
+			return "."..name
 		end
 	end
-	local fns = ""
-	
-	local Services = {} Services[1] = 'Workspace' Services[2] = 'RunService' Services[3] = 'GuiService' Services[4] = 'Stats' Services[5] = 'TimerService' Services[6] = 'SoundService' Services[7] = 'VideoCaptureService' Services[8] = 'NonReplicatedCSGDictionaryService' Services[9] = 'CSGDictionaryService' Services[10] = 'LogService' Services[11] = 'ContentProvider' Services[12] = 'KeyframeSequenceProvider' Services[13] = 'AnimationClipProvider' Services[14] = 'Chat' Services[15] = 'MarketplaceService' Services[16] = 'Players' Services[17] = 'PointsService' Services[18] = 'AdService' Services[19] = 'HttpRbxApiService' Services[20] = 'NotificationService' Services[21] = 'ReplicatedFirst' Services[22] = 'TweenService' Services[23] = 'MaterialService' Services[24] = 'TextService' Services[25] = 'PlayerEmulatorService' Services[26] = 'CorePackages' Services[27] = 'StudioData' Services[28] = 'SharedTableRegistry' Services[29] = 'StarterPlayer' Services[30] = 'StarterPack' Services[31] = 'StarterGui' Services[32] = 'CoreGui' Services[33] = 'LocalizationService' Services[34] = 'CloudLocalizationTable' Services[35] = 'PolicyService' Services[36] = 'TeleportService' Services[37] = 'JointsService' Services[38] = 'CollectionService' Services[39] = 'PhysicsService' Services[40] = 'BadgeService' Services[41] = 'GeometryService' Services[42] = 'FriendService' Services[43] = 'InsertService' Services[44] = 'GamePassService' Services[45] = 'Debris' Services[46] = 'CookiesService' Services[47] = 'UserInputService' Services[48] = 'KeyboardService' Services[49] = 'MouseService' Services[50] = 'VRService' Services[51] = 'ContextActionService' Services[52] = 'ScriptService' Services[53] = 'AssetService' Services[54] = 'TouchInputService' Services[55] = 'BrowserService' Services[56] = 'AppStorageService' Services[57] = 'AnalyticsService' Services[58] = 'ScriptContext' Services[59] = 'RbxAnalyticsService' Services[60] = 'HttpService' Services[61] = 'Lighting' Services[62] = '' Services[63] = 'Selection' Services[64] = 'ScriptRegistrationService' Services[65] = 'RuntimeScriptService' Services[66] = 'RobloxReplicatedStorage' Services[67] = 'IXPService' Services[68] = 'MemStorageService' Services[69] = 'GamepadService' Services[70] = 'MeshContentProvider' Services[71] = 'SolidModelContentProvider' Services[72] = 'HSRDataContentProvider' Services[73] = 'LodDataService' Services[74] = '' Services[75] = '' Services[76] = '' Services[77] = '' Services[78] = 'TextBoxService' Services[79] = 'ControllerService' Services[80] = 'MessageBusService' Services[81] = 'NetworkClient' Services[82] = 'ChangeHistoryService' Services[83] = 'Visit' Services[84] = 'GuidRegistryService' Services[85] = 'PermissionsService' Services[86] = 'Teams' Services[87] = 'ReplicatedStorage' Services[88] = 'TestService' Services[89] = 'SocialService' Services[90] = 'TextChatService' Services[91] = 'SafetyService' Services[92] = 'ProximityPromptService' Services[93] = 'AvatarChatService' Services[94] = 'VoiceChatService' Services[95] = 'FacialAnimationStreamingServiceV2' Services[96] = 'RobloxServerStorage' Services[97] = 'EventIngestService' Services[98] = 'CaptureService' Services[99] = 'GroupService' Services[100] = 'FaceAnimatorService' Services[101] = 'SessionService' Services[102] = 'HapticService' Services[103] = 'ExperienceAuthService' Services[104] = 'AvatarEditorService' Services[105] = 'PlatformFriendsService' Services[106] = 'RtMessagingService' Services[107] = 'DataStoreService' Services[108] = 'ServerScriptService' Services[109] = 'ServerStorage' Services[110] = '' Services[111] = 'SpawnerService' Services[112] = 'PathfindingService' Services[113] = 'TemporaryCageMeshProvider'
-	
+	local fullName = ""
 	for i,v in pairs(Pathway) do
 		if i == 1 then
 			if v == game then
-				fns = "game"
+				fullName = "game"
 			else
-				fns = v.Name
+				fullName = v.Name
 			end
 		else
 			if i == 2 then
-				if table.find(Services, v.ClassName) then
-					fns = fns..(":GetService(\"%s\")"):format(v.ClassName)
+				if pcall(function() return game:GetService(v.ClassName) end) then
+					fullName = fullName..(":GetService(\"%s\")"):format(v.ClassName)
 				else
-					fns = fns..formatChild(v.Name)
+					fullName = fullName..formatChild(v.Name)
 				end
 			else
-				fns = fns..formatChild(v.Name)
+				fullName = fullName..formatChild(v.Name)
 			end
 		end
 	end
-	return fns
+	return fullName
 end
 
 getgenv().LogFunctions = true
