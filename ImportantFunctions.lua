@@ -231,7 +231,7 @@ getgenv().Format = function(var, ...)
 		elseif type(var) == "number" then
 			if var == math.huge then
 				st = "math.huge"
-			elseif var == math.huge * -1 then
+			elseif var == -math.huge then
 				st = "-math.huge"
 			else
 				st = tostring(var)
