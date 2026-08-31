@@ -287,7 +287,7 @@ getgenv().GetFullName = function(ins)
 		end
 	end
 	local fullName = ""
-	for i,v in pairs(Pathway) do
+	for i, v in ipairs(Pathway) do
 		if i == 1 then
 			if v == game then
 				fullName = "game"
@@ -296,7 +296,8 @@ getgenv().GetFullName = function(ins)
 			end
 		else
 			if i == 2 then
-				if pcall(function() return game:GetService(v.ClassName) end) then
+				local success, result = pcall(function() return game:GetService(v.ClassName) end)
+				if success and result == v then
 					fullName = fullName..(":GetService(\"%s\")"):format(v.ClassName)
 				else
 					fullName = fullName..formatChild(v.Name)
