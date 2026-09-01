@@ -312,57 +312,62 @@ LoggedFunctions = {}
 
 local excludedfunctions = {print, pairs, format, tabletostring, getcallingscript, warn, error}
 
-getgenv().FunctionLogger = function(funcparent, funcname, customfname)
-if not customfname then customfname = funcname end
-	if funcparent[funcname] == FunctionLogger or table.find(excludedfunctions, funcparent[funcname]) then error("No.") end
-		local oldfunc = funcparent[funcname]
-		if typeof(oldfunc) ~= "function" then error("function expected, got "..typeof(oldfunc)) end
+getgenv().FunctionLogger = function(funcParent, funcName, customLoggerName)
+	customLoggerName = customLoggerName or funcName
+	if funcParent[funcName] == FunctionLogger or table.find(excludedfunctions, funcParent[funcName]) then
+		error("Ignoring requested function to log to prevent recursions")
+	end
+	local toLog = funcParent[funcName]
+	if typeof(toLog) ~= "function" then
+		error("function expected, got "..typeof(toLog))
+	end
+	
+	local original
+	
+	local loggerFunction = function(...)
+		local args = {...}
+		local str = "Function "..customLoggerName.." was called!"
+		str = str.."\nCalling script: "..if getcallingscript() ~= nil then GetFullName(getcallingscript()) else "nil"
+		if #args == 0 then
+			str = str.."\nArguments: none!"
+		else
 		
-		local newfunc = function(...)
-			local args = {...}
-			local str = "Function "..customfname.." was called!"
-			str = str.."\nCalling script: "..if getcallingscript() ~= nil then GetFullName(getcallingscript()) else "nil"
-			if #args == 0 then
-				str = str.."\nArguments: none!"
-			else
-			
-			for i,v in pairs(args) do
-				str = str..("\nArgument %d: %s"):format(i, Format(v))
-			end
-			
-			end
-			local returnval = {oldfunc(...)}
-			if #returnval == 0 then
-				str = str.."\nReturn values: none!"
-			else
-				for i,v in pairs(returnval) do
-					str = str..("\nReturn value %d: %s"):format(i, Format(v))
-				end
-			end
-			if LogFunctions then
-				print(str)
-			end
-		    return unpack(returnval)
-	    end
-		local isFunctionLogged = false
-		for i,v in pairs(LoggedFunctions) do
-			if v.parent == funcparent and v.name == funcname then
-				isFunctionLogged = true
-				break
+		for i,v in pairs(args) do
+			str = str..("\nArgument %d: %s"):format(i, Format(v))
+		end
+		
+		end
+		local returnval = {original(...)}
+		if #returnval == 0 then
+			str = str.."\nReturn values: none!"
+		else
+			for i,v in pairs(returnval) do
+				str = str..("\nReturn value %d: %s"):format(i, Format(v))
 			end
 		end
+		if LogFunctions then
+			print(str)
+		end
+		return unpack(returnval)
+	end
+	local isFunctionLogged = false
+	for i,v in pairs(LoggedFunctions) do
+		if v.parent == funcParent and v.name == funcName then
+			isFunctionLogged = true
+			break
+		end
+	end
 	if isFunctionLogged then
 		error("This function has already been logged!")
 	else
-		local hook
-		hook = hookfunction(funcparent[funcname], function(self, ...)
-			if self == funcparent then
-				newfunc(self, ...)
+		original = hookfunction(funcParent[funcName], function(self, ...)
+			if self == funcParent then
+				return loggerFunction(self, ...)
 			end
-			return hook(self, ...)
+			return original(self, ...)
 		end)
-		table.insert(LoggedFunctions, {["parent"] = funcparent, ["name"] = funcname})
-		print("logging", customfname.."!")
-		return newfunc
+		table.insert(LoggedFunctions, {parent = funcParent, name = funcName})
+		print("logging", customLoggerName.."!")
+		return loggerFunction
 	end
 end
