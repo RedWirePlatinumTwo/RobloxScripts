@@ -106,29 +106,25 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 		local reps = {}
 	 
 		local function defineTables(f)
-
 			for i, v in pairs(f) do
-		
 				local function isTable(x)
-				if type(x) == "table" and not table.find(reps, x) and not table.find(catchRepeats, x) then
-					local tblName
-					if x == i then
-						tblName = v
-					else
-						tblName = i
+					if type(x) == "table" and not table.find(reps, x) and not table.find(catchRepeats, x) then
+						local tblName
+						if x == i then
+							tblName = v
+						else
+							tblName = i
+						end
+						setName(x, tblName)
+						output = output..("\n%s = {}"):format(getName(x))
+						table.insert(reps,x)
+						defineTables(x)
 					end
-					setName(x, tblName)
-					output = output..("\n%s = {}"):format(getName(x))
-					table.insert(reps,x)
-					defineTables(x)
 				end
-				end
-			
 				isTable(i)
 				isTable(v)
 			end
 		end
-
 		defineTables(Table)
 		output = output.."\n-- Properties:"
 	 else
