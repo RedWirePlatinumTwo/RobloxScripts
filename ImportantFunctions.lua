@@ -111,13 +111,13 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 		
 				local function isTable(x)
 				if type(x) == "table" and not table.find(reps, x) and not table.find(catchRepeats, x) then
-					local tname
+					local tblName
 					if x == i then
-						tname = v
+						tblName = v
 					else
-						tname = i
+						tblName = i
 					end
-					setName(x, tname)
+					setName(x, tblName)
 					s = s..("\n%s = {}"):format(getName(x))
 					table.insert(reps,x)
 					defineTables(x)
@@ -146,46 +146,46 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 				end
 			end
 			
-			local part1 = ""
-			local part1formatted, failed1 = Format(index, value, args, true)
-			local part2, failed2 = Format(value, index, args, true)
+			local serializedIndex = ""
+			local indexFormatted, failed1 = Format(index, value, args, true)
+			local valueFormatted, failed2 = Format(value, index, args, true)
 			if failed2 then
-				part2 = isRecursive(value)
+				valueFormatted = isRecursive(value)
 			end
 			if type(index) == "table" then
-				local findwhitespace = part1formatted:find("\n")
-				local tname = ""
+				local findNewLine = indexFormatted:find("\n")
+				local tblName = ""
 				if findwhitespace then
-					tname = part1formatted:sub(1, part1formatted:find("\n") - 1)
-					part2 = part2.."\n"..part1formatted:sub(tname:len() + 2)
+					tblName = indexFormatted:sub(1, findNewLine - 1)
+					valueFormatted = valueFormatted.."\n"..indexFormatted:sub(findNewLine + 1)
 				else
-					tname = part1formatted
+					tblName = indexFormatted
 				end
-				part1 = ("\n%s[%s]"):format(name, tname)
+				serializedIndex = ("\n%s[%s]"):format(name, tblName)
 			else
-				part1 = ("\n%s[%s]"):format(name, part1formatted)
+				serializedIndex = ("\n%s[%s]"):format(name, indexFormatted)
 			end
 			if failed1 then
-				part1 = ("\n%s[%s]"):format(name, isRecursive(index))
+				serializedIndex = ("\n%s[%s]"):format(name, isRecursive(index))
 			end
-			local failstring = ""
-			local failignore = {"function", "RBXScriptConnection", "RBXScriptSignal", "table"}
+			local failString = ""
+			local failIgnore = {"function", "RBXScriptConnection", "RBXScriptSignal", "table"}
 			if failed1 or failed2 then
 				if args.ignoreUnsupportedValues then
 					return ""
 				end
-				failstring = " --failed to convert types:"
-				if failed1 and not table.find(failignore, typeof(index)) then
-					failstring = failstring.." "..typeof(index)
+				failString = " --failed to convert types:"
+				if failed1 and not table.find(failIgnore, typeof(index)) then
+					failString = failString.." "..typeof(index)
 				end
-				if failed2 and not table.find(failignore, typeof(value)) then
-					failstring = failstring.." "..typeof(value)
+				if failed2 and not table.find(failIgnore, typeof(value)) then
+					failString = failString.." "..typeof(value)
 				end
-				if failstring == " --failed to convert types:" then
-					failstring = ""
+				if failString == " --failed to convert types:" then
+					failString = ""
 				end
 			end
-			return part1.." = "..part2..failstring
+			return serializedIndex.." = "..valueFormatted..failString
 			
 		end
 		
