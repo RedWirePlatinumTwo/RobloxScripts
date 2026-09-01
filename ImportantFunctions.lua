@@ -174,14 +174,15 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 				if args.ignoreUnsupportedValues then
 					return ""
 				end
-				failString = " --failed to convert types:"
+				local failPrefix = " --failed to convert types:"
+				failString = failPrefix
 				if failed1 and not table.find(failIgnore, typeof(index)) then
 					failString = failString.." "..typeof(index)
 				end
 				if failed2 and not table.find(failIgnore, typeof(value)) then
 					failString = failString.." "..typeof(value)
 				end
-				if failString == " --failed to convert types:" then
+				if failString == failPrefix then
 					failString = ""
 				end
 			end
