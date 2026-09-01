@@ -155,7 +155,7 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 			if type(index) == "table" then
 				local findNewLine = indexFormatted:find("\n")
 				local tblName = ""
-				if findwhitespace then
+				if findNewLine then
 					tblName = indexFormatted:sub(1, findNewLine - 1)
 					valueFormatted = valueFormatted.."\n"..indexFormatted:sub(findNewLine + 1)
 				else
