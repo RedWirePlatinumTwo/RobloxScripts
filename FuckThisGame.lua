@@ -448,7 +448,7 @@ local function SPWJG_fake_script() -- generalgamefucker.LocalScript
 	
 		altmessage("flyupdown", function()
 			updown = not updown
-			print("set flyupdown to", flyupdown)
+			print("set flyupdown to", updown)
 		end)
 	end)
 	
