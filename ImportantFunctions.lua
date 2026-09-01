@@ -314,12 +314,12 @@ local excludedfunctions = {print, pairs, format, tabletostring, getcallingscript
 
 getgenv().FunctionLogger = function(funcParent, funcName, customLoggerName)
 	customLoggerName = customLoggerName or funcName
-	if funcParent[funcName] == FunctionLogger or table.find(excludedfunctions, funcParent[funcName]) then
-		error("Ignoring requested function to log to prevent recursions")
-	end
 	local toLog = funcParent[funcName]
 	if typeof(toLog) ~= "function" then
 		error("function expected, got "..typeof(toLog))
+	end
+	if toLog == FunctionLogger or table.find(excludedfunctions, toLog) then
+		error("Ignoring requested function to log to prevent recursions")
 	end
 	
 	local original
@@ -360,7 +360,7 @@ getgenv().FunctionLogger = function(funcParent, funcName, customLoggerName)
 	if isFunctionLogged then
 		error("This function has already been logged!")
 	else
-		original = hookfunction(funcParent[funcName], function(self, ...)
+		original = hookfunction(toLog, function(self, ...)
 			if self == funcParent then
 				return loggerFunction(self, ...)
 			end
