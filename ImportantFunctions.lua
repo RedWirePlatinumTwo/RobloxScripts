@@ -3,7 +3,7 @@ local indexReps = {}
 local indexes = {}
 local totalTables = 0
 
-local rebuildString = function(s)
+local rebuildString = function(str)
 	local reformattedString = ""
 	local backKeys = {
 		["\0"] = "\\0",
@@ -19,8 +19,8 @@ local rebuildString = function(s)
 		["\\"] = "\\\\"
 	}
 	
-	for i = 1, s:len() do
-		local letter = s:sub(i,i)
+	for i = 1, str:len() do
+		local letter = str:sub(i,i)
 		local keyCheck = backKeys[letter]
 		if keyCheck then
 		    reformattedString = reformattedString..keyCheck
@@ -33,7 +33,7 @@ local rebuildString = function(s)
 end
 
 getgenv().TableToString = function(Table, TableName, args, isInternalTable)
-	local s = ""
+	local output = ""
 	args = args or {}
 
 	local function setName(t, name)
@@ -102,7 +102,7 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 			return dateStamp
 		end
 
-		s = ("-- Created on %s\n-- Table names:\n%s = {}"):format(getDate(args.dateFormat), getName(Table))
+		output = ("-- Created on %s\n-- Table names:\n%s = {}"):format(getDate(args.dateFormat), getName(Table))
 		local reps = {}
 	 
 		local function defineTables(f)
@@ -118,7 +118,7 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 						tblName = i
 					end
 					setName(x, tblName)
-					s = s..("\n%s = {}"):format(getName(x))
+					output = output..("\n%s = {}"):format(getName(x))
 					table.insert(reps,x)
 					defineTables(x)
 				end
@@ -130,9 +130,9 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 		end
 
 		defineTables(Table)
-		s = s.."\n-- Properties:"
+		output = output.."\n-- Properties:"
 	 else
-		s = getName(Table)
+		output = getName(Table)
 	end
 	local name = getName(Table)
 
@@ -193,7 +193,7 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 		local function contextCheck(v1, v2, v3)
 			local context = args.additionalCtx and args.additionalCtx(v1, v2, v3) or function() end
 			if type(context) == "string" and context ~= "" then
-				s = s.." --"..context
+				output = output.." --"..context
 			end
 		end
 		
@@ -201,7 +201,7 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 		for i, v in pairs(Table) do
 			if type(v) ~= "table" then
 				if customVals[i] == nil then
-					s = s..writeValue(i, v)
+					output = output..writeValue(i, v)
 				end
 				contextCheck(Table, i, v)
 			else
@@ -209,56 +209,56 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 			end
 		end
 		for index, value in pairs(customVals) do
-			s = s..("\n%s[%s] = %s"):format(name, Format(index), tostring(value))
+			output = output..("\n%s[%s] = %s"):format(name, Format(index), tostring(value))
 		end
 		for i, v in pairs(extraTables) do
-			s = s.."\n"..writeValue(i, v)
+			output = output.."\n"..writeValue(i, v)
 			contextCheck(Table, i, v)
 		end
 		if not isInternalTable then
-			s = s.."\n\nreturn "..name
+			output = output.."\n\nreturn "..name
 		end
-		return s
+		return output
 end
 
 getgenv().tabletostring = TableToString
 
 getgenv().Format = function(var, ...)
 	local failedConversion = false
-	local st = ""
+	local output = ""
 	if typeof(var) == "EnumItem" or type(var) == "boolean" then
-		st = tostring(var)
+		output = tostring(var)
 	elseif type(var) == "number" then
 		if var == math.huge then
-			st = "math.huge"
+			output = "math.huge"
 		elseif var == -math.huge then
-			st = "-math.huge"
+			output = "-math.huge"
 		else
-			st = tostring(var)
+			output = tostring(var)
 		end
 	elseif type(var) == "string" then
-		st = "\""..rebuildString(var).."\""
+		output = "\""..rebuildString(var).."\""
 	elseif type(var) == "table" then
 		if not table.find(catchRepeats, var) then
-			st = TableToString(var, ...)
+			output = TableToString(var, ...)
 		else
 			failedConversion = true
 		end
 	elseif typeof(var) == "Instance" then
-		st = GetFullName(var)
+		output = GetFullName(var)
 	elseif typeof(var):find("Vector") or typeof(var) == "CFrame" or typeof(var) == "Color3" or typeof(var) == "UDim2" or typeof(var) == "NumberRange" then
-		st = ("%s.new(%s)"):format(typeof(var), tostring(var)):gsub("{", ""):gsub("}", "")
+		output = ("%s.new(%s)"):format(typeof(var), tostring(var)):gsub("{", ""):gsub("}", "")
 	elseif typeof(var) == "BrickColor" then
-		st = ("%s.new(\"%s\")"):format(typeof(var), tostring(var))
+		output = ("%s.new(\"%s\")"):format(typeof(var), tostring(var))
 	elseif typeof(var) == "Enum" then
-		st = "Enum."..tostring(var)
+		output = "Enum."..tostring(var)
 	elseif typeof(var) == "Enums" then
-		st = "Enum"
+		output = "Enum"
 	else
 		failedConversion = true
-		st = tostring(var)
+		output = tostring(var)
 	end
-	return st, failedConversion
+	return output, failedConversion
 end
 
 getgenv().GetFamily = function(ins, reverseOrder)
