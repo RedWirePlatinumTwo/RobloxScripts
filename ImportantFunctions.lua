@@ -312,9 +312,8 @@ LoggedFunctions = {}
 
 local excludedfunctions = {print, pairs, format, tabletostring, getcallingscript, warn, error}
 
-getgenv().FunctionLogger = function(funcParent, funcName, customLoggerName)
-	customLoggerName = customLoggerName or funcName
-	local toLog = funcParent[funcName]
+getgenv().FunctionLogger = function(toLog, customLoggerName)
+	customLoggerName = customLoggerName or "Function"..#LoggedFunctions
 	if typeof(toLog) ~= "function" then
 		error("function expected, got "..typeof(toLog))
 	end
@@ -350,23 +349,13 @@ getgenv().FunctionLogger = function(funcParent, funcName, customLoggerName)
 		end
 		return unpack(returnval)
 	end
-	local isFunctionLogged = false
-	for i,v in pairs(LoggedFunctions) do
-		if v.parent == funcParent and v.name == funcName then
-			isFunctionLogged = true
-			break
-		end
-	end
-	if isFunctionLogged then
+	if table.find(LoggedFunctions, toLog) then
 		error("This function has already been logged!")
 	else
 		original = hookfunction(toLog, function(self, ...)
-			if self == funcParent then
-				return loggerFunction(self, ...)
-			end
-			return original(self, ...)
+			return loggerFunction(self, ...)
 		end)
-		table.insert(LoggedFunctions, {parent = funcParent, name = funcName})
+		table.insert(LoggedFunctions, toLog)
 		print("logging", customLoggerName.."!")
 		return loggerFunction
 	end
