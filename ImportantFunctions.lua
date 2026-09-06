@@ -352,8 +352,8 @@ getgenv().FunctionLogger = function(toLog, customLoggerName)
 	if table.find(LoggedFunctions, toLog) then
 		error("This function has already been logged!")
 	else
-		original = hookfunction(toLog, function(self, ...)
-			return loggerFunction(self, ...)
+		original = hookfunction(toLog, function(...)
+			return loggerFunction(...)
 		end)
 		table.insert(LoggedFunctions, toLog)
 		print("logging", customLoggerName.."!")
