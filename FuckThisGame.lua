@@ -181,7 +181,7 @@ focusonchr.TextWrapped = true
 
 -- Scripts:
 
-local function SPWJG_fake_script() -- generalgamefucker.LocalScript 
+local function FJRQA_fake_script() -- generalgamefucker.LocalScript 
 	local script = Instance.new('LocalScript', generalgamefucker)
 
 	local mainframe = script.Parent.mainframe
@@ -286,23 +286,18 @@ local function SPWJG_fake_script() -- generalgamefucker.LocalScript
 	
 	
 	local function speedhack()
-	
-		lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(function()
-			if lplr.Character.Humanoid.WalkSpeed ~= numbers.ws then
-				lplr.Character.Humanoid.WalkSpeed = numbers.ws
+		local hum = lplr.Character.Humanoid
+		local function updateHumanoid()
+			if hum.WalkSpeed ~= numbers.ws then
+				hum.WalkSpeed = numbers.ws
 			end
-		end)
-	
-		lplr.Character.Humanoid:GetPropertyChangedSignal("JumpPower"):connect(function()
-			if lplr.Character.Humanoid.JumpPower ~= numbers.jump then
-				lplr.Character.Humanoid.JumpPower = numbers.jump
+			if hum.JumpPower ~= numbers.jump then
+				hum.JumpPower = numbers.jump
 			end
-		end)
-	
-		lplr.Character.Humanoid.Running:connect(function()
-			lplr.Character.Humanoid.WalkSpeed = numbers.ws
-		end)
-	
+		end
+		hum:GetPropertyChangedSignal("WalkSpeed"):connect(updateHumanoid)
+		hum:GetPropertyChangedSignal("JumpPower"):connect(updateHumanoid)
+		updateHumanoid()
 	end
 	
 	speedhack()
@@ -497,4 +492,4 @@ local function SPWJG_fake_script() -- generalgamefucker.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(SPWJG_fake_script)()
+coroutine.wrap(FJRQA_fake_script)()
