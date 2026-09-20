@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function NSGG_fake_script() -- RedwiresAimbot.LocalScript 
+local function HSSDEW_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1856,6 +1856,38 @@ local function NSGG_fake_script() -- RedwiresAimbot.LocalScript
 			end
 		end
 	
+		local function isActiveNPC(npc)
+			thread(function()
+				local changed
+				local active = false
+				local timeout = 0
+				changed = Changed(npc.Humanoid.RootPart, "CFrame", function()
+					active = true
+					changed.Stop()
+				end)
+				repeat timeout += task.wait() until active or timeout > 30
+				if active then
+					table.insert(npcs, npc)
+				end
+			end)
+		end
+		
+		for i,v in pairs(workspace:GetDescendants()) do
+			if v.ClassName == "Humanoid" and v.RootPart and not plrs:GetPlayerFromCharacter(v.Parent) and not table.find(npcs, v.Parent) and v.Health > 0 then
+				isActiveNPC(v.Parent)
+			end
+		end
+		
+		workspace.DescendantAdded:connect(function(v)
+			if v.ClassName == "Humanoid" then
+				if not v.RootPart then repeat task.wait() until v.RootPart end
+				if not plrs:GetPlayerFromCharacter(v.Parent) and not table.find(npcs, v.Parent) and v.Health > 0 then
+					isActiveNPC(v.Parent)
+				end
+			end
+		end)
+		
+		
 		local function IsNotWhitelisted(plr)
 	
 			local function isteamwhitelisted()
@@ -2506,4 +2538,4 @@ local function NSGG_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(NSGG_fake_script)()
+coroutine.wrap(HSSDEW_fake_script)()
