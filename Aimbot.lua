@@ -2243,7 +2243,7 @@ local function HSSDEW_fake_script() -- RedwiresAimbot.LocalScript
 								if raycasting then
 									raycast = recursiveCast(origin, targetPart, table.clone(chrs)) --do raycast only when it matters
 								end
-								if ((raycast and raycasting) or not raycasting and (onscreen or getOrCreate(GameStats, "TargetOffScreen")) and pos < getOrCreate(GameStats, "MaxStuds")) then
+								if (raycast or not raycasting and (onscreen or getOrCreate(GameStats, "TargetOffScreen")) and pos < getOrCreate(GameStats, "MaxStuds")) then
 									table1[chr] = pos
 									if table.find(PrioritizedPlrs, plrs:GetPlayerFromCharacter(chr)) then
 										table.insert(PrioritizedPlrsOnScreen, chr)
