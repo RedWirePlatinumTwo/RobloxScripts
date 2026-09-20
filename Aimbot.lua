@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function GHKL_fake_script() -- RedwiresAimbot.LocalScript 
+local function NSGG_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1069,6 +1069,20 @@ local function GHKL_fake_script() -- RedwiresAimbot.LocalScript
 	local m = lplr:GetMouse()
 	local RightClick = false
 	local LeftClick = false
+	local teams = game:GetService("Teams")
+	local WhitelistedPlrs = {}
+	local PrioritizedPlrs = {}
+	local WhitelistedPlrsOld = {}
+	local PrioritizedPlrsOld = {}
+	local misc = {
+		IsAimbotOn = false,
+		TargetedCharacter = nil,
+		AimOffset = Vector3.new()
+	}
+	local GlobalStats
+	local GameStats
+	local Keybinds
+	local Theme
 	
 	m.Button1Down:connect(function()
 		LeftClick = true
@@ -1094,8 +1108,9 @@ local function GHKL_fake_script() -- RedwiresAimbot.LocalScript
 	end
 	if not RedsAimbot then
 		getgenv().RedsAimbot = {}
-		sendNotif("Red's Universal Aimbot (8/27/26)", changeNotes(
-			"Updated decimal rounding for sliders"
+		sendNotif("Red's Universal Aimbot (9/20/26)", changeNotes(
+			"Updated raycasting system to remove canQuery changes",
+			"Added RaycastOrigin in game settings"
 		))
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
@@ -1119,6 +1134,22 @@ local function GHKL_fake_script() -- RedwiresAimbot.LocalScript
 				warn(err)
 			end
 			return co
+		end
+		
+		local function addIfAbsent(tbl, value)
+			local found = table.find(tbl, value)
+			if not found then
+				table.insert(tbl, value)
+			end
+			return found == nil
+		end
+		
+		local function removeIfPresent(tbl, value)
+			local found = table.find(tbl, value)
+			if found then
+				table.remove(tbl, found)
+			end
+			return found ~= nil
 		end
 		
 		local function Changed(part, PropertyName, func)
@@ -1206,8 +1237,7 @@ local function GHKL_fake_script() -- RedwiresAimbot.LocalScript
 					thread(function()
 						f(t, index, value, nil, unpack(args))
 					end)
-					if typeof(value) == "table" and not table.find(reps, value) then
-						table.insert(reps, value)
+					if typeof(value) == "table" and addIfAbsent(reps, value) then
 						tblChanged(value)
 					end
 					local subchanged = Changed(t, index, function(...)
@@ -1221,12 +1251,10 @@ local function GHKL_fake_script() -- RedwiresAimbot.LocalScript
 			tblChanged(Table)
 			if dosubtables then
 				for i,v in pairs(Table) do
-					if type(i) == "table" and not table.find(reps, i) then
-						table.insert(reps, i)
+					if type(i) == "table" and addIfAbsent(reps, i) then
 						tblChanged(i)
 					end
-					if type(v) == "table" and not table.find(reps, v) then
-						table.insert(reps, v)
+					if type(v) == "table" and addIfAbsent(reps, v) then
 						tblChanged(v)
 					end
 				end
@@ -1301,21 +1329,6 @@ local function GHKL_fake_script() -- RedwiresAimbot.LocalScript
 			return t
 		end
 	
-		local teams = game:GetService("Teams")
-		local WhitelistedPlrs = {}
-		local PrioritizedPlrs = {}
-		local WhitelistedPlrsOld = {}
-		local PrioritizedPlrsOld = {}
-		local misc = {
-			IsAimbotOn = false,
-			TargetedCharacter = nil,
-			AimOffset = Vector3.new()
-		}
-		local GlobalStats
-		local GameStats
-		local Keybinds
-		local Theme
-	
 		local function createGameStats()
 			return {
 				Target = "Head",
@@ -1333,7 +1346,8 @@ local function GHKL_fake_script() -- RedwiresAimbot.LocalScript
 				CustomTargetConditions = {},
 				TargetOffScreen = false,
 				EnableRaycasting = true,
-				GUIPositions = {}
+				GUIPositions = {},
+				RaycastOrigin = "Head"
 			}
 		end
 		
@@ -1721,7 +1735,7 @@ local function GHKL_fake_script() -- RedwiresAimbot.LocalScript
 			clone.undo.Activated:connect(function()
 				clone:Destroy()
 				local teamsTable = getOrCreate(GameStats, "Teams")
-				table.remove(teamsTable, table.find(teamsTable, ttable))
+				removeIfPresent(teamsTable, ttable)
 			end)
 	
 		end
@@ -1731,8 +1745,7 @@ local function GHKL_fake_script() -- RedwiresAimbot.LocalScript
 		end
 		local function gameConditionCheck(id, condition)
 			local targetConditions = getOrCreate(GameStats, "CustomTargetConditions")
-			if game.PlaceId == id and not table.find(targetConditions, condition) then
-				table.insert(targetConditions, condition)
+			if game.PlaceId == id and addIfAbsent(targetConditions, condition) then
 				updateMsg(("Auto-added targeting condition for game ID %d:\n%s"):format(id, condition), "Custom Targeting")
 			end
 		end
@@ -1850,7 +1863,7 @@ local function GHKL_fake_script() -- RedwiresAimbot.LocalScript
 	
 				for i,ttable in pairs(getOrCreate(GameStats, "Teams")) do
 					if teams:FindFirstChild(ttable.team1) and teams:FindFirstChild(ttable.team2) then
-						if lplr.Team.Name == ttable.team1 and plr.Team.Name == ttable.team2 then
+						if lplr.Team.Name == t1team1 and plr.Team.Name == ttable.team2 then
 							wl = true
 							break
 						end
@@ -1939,14 +1952,18 @@ local function GHKL_fake_script() -- RedwiresAimbot.LocalScript
 			return keyDown(bindInfo.Key1) and keyDown(bindInfo.Key2) and ((bindInfo.Toggle and shouldToggle) or (not bindInfo.Toggle and not shouldToggle))
 		end
 	
+		local function targetPartToggle()
+			if getOrCreate(GameStats, "Target") == "Head" then
+				GameStats.Target = "Torso"
+			else
+				GameStats.Target = "Head"
+			end
+		end
+		
 		uiservice.InputBegan:connect(function(key,processed)
 			if processed then return end
 			if isKeyActivated(getOrCreate(Keybinds, "TargetedPartToggle"), true) then
-				if getOrCreate(GameStats, "Target") == "Head" then
-					GameStats.Target = "Torso"
-				else
-					GameStats.Target = "Head"
-				end
+				targetPartToggle()
 			end
 			if isKeyActivated(getOrCreate(Keybinds, "AimbotToggle"), true) then
 				misc.IsAimbotOn = not misc.IsAimbotOn
@@ -1968,38 +1985,45 @@ local function GHKL_fake_script() -- RedwiresAimbot.LocalScript
 			gameSettings.Target.value.Text = txt
 		end)
 	
-		gameSettings.Target.value.Activated:connect(function()
-			if getOrCreate(GameStats, "Target") == "Head" then
-				GameStats.Target = "Torso"
+		gameSettings.Target.value.Activated:connect(targetPartToggle)
+		
+		Changed(GameStats, "RaycastOrigin", function(txt)
+			gameSettings.RaycastOrigin.value.Text = txt
+		end)
+		
+		gameSettings.RaycastOrigin.value.Activated:connect(function()
+			if getOrCreate(GameStats, "RaycastOrigin") == "Head" then
+				GameStats.RaycastOrigin = "Camera"
 			else
-				GameStats.Target = "Head"
+				GameStats.RaycastOrigin = "Head"
 			end
 		end)
 	
 		gameSettings.AimMethod.value.Activated:connect(function()
 			local method = gameSettings.AimMethod
-			if method.value.Text == "Camera" then
-				method.value.Text = "Mouse"
+			local value = method.value
+			if value.Text == "Camera" then
+				value.Text = "Mouse"
 			else
-				method.value.Text = "Camera"
+				value.Text = "Camera"
 			end
-			GameStats.AimMethod = method.value.Text
+			GameStats.AimMethod = value.Text
 		end)
 	
 		for i,v in pairs(teamui:GetChildren()) do
 			if v.ClassName == "TextBox" then
 				Changed(v, "Text", function(txt)
 					if getOrCreate(GlobalStats, "TeamAutofill") then
-						local tnames = {}
+						local teamNames = {}
 	
 						for i,v in pairs(teams:GetTeams()) do
-							if v.Name:lower():sub(1,txt:len()) == txt:lower() and not table.find(tnames,v.Name) then
-								table.insert(tnames,v.Name)
+							if v.Name:lower():sub(1,txt:len()) == txt:lower() then
+								addIfAbsent(teamNames, v.Name)
 							end
 						end
 	
-						if #tnames == 1 then
-							v.Text = tnames[1]
+						if #teamNames == 1 then
+							v.Text = teamNames[1]
 							v:ReleaseFocus()
 						end
 					end
@@ -2050,63 +2074,6 @@ local function GHKL_fake_script() -- RedwiresAimbot.LocalScript
 			end)
 		end)
 	
-		local function checkpart(v)
-			return not v.CanCollide or v.Transparency == 1
-		end
-	
-		local function isActiveNPC(npc)
-			thread(function()
-				local changed
-				local active = false
-				changed = Changed(npc.Humanoid.RootPart, "CFrame", function()
-					active = true
-					changed.Stop()
-				end)
-				repeat task.wait() until active
-				table.insert(npcs, npc)
-			end)
-		end
-		local queryindex
-		local querynewindex
-		local queriedParts = {}
-		queryindex = hookmetamethod(game, "__index", function(self, name)
-			if name == "CanQuery" and self:IsA("BasePart") and not checkcaller() and queriedParts[self] ~= nil then
-				return queriedParts[self]
-			else
-				return queryindex(self, name)
-			end
-		end)
-		querynewindex = hookmetamethod(game, "__newindex", function(self, val, newval)
-			if val == "CanQuery" and self:IsA("BasePart") and not checkcaller() and queriedParts[self] ~= nil and type(newval) == "boolean" then
-				queriedParts[self] = newval
-			else
-				return querynewindex(self, val, newval)
-			end
-		end)
-	
-		local function setQueryChecker(part)
-			if part:IsA("BasePart") and not part.CanCollide and not part.Parent:FindFirstChildOfClass("ClickDetector") and not part:FindFirstChildOfClass("ClickDetector") then
-				queriedParts[part] = true
-				part.CanQuery = false
-			end
-		end
-		for i,v in pairs(workspace:GetDescendants()) do
-			if v.ClassName == "Humanoid" and v.RootPart and not plrs:GetPlayerFromCharacter(v.Parent) and not table.find(npcs, v.Parent) and v.Health > 0 then
-				isActiveNPC(v.Parent)
-			end
-			setQueryChecker(v)
-		end
-	
-		workspace.DescendantAdded:connect(function(v)
-			if v.ClassName == "Humanoid" then
-				if not v.RootPart then repeat task.wait() until v.RootPart end
-				if not plrs:GetPlayerFromCharacter(v.Parent) and not table.find(npcs, v.Parent) and v.Health > 0 then
-					isActiveNPC(v.Parent)
-				end
-			end
-			setQueryChecker(v)
-		end)
-	
 		workspace.DescendantRemoving:connect(function(v)
 			local npcfind = table.find(npcs, v)
 			if npcfind and GetFamily(v)[1] ~= game then
@@ -2122,10 +2089,7 @@ local function GHKL_fake_script() -- RedwiresAimbot.LocalScript
 				table.insert(chrs, chr)
 			end)
 			plr.CharacterRemoving:connect(function(chr)
-				local chrfind = table.find(chrs, chr)
-				if chrfind then
-					table.remove(chrs, chrfind)
-				end
+				removeIfPresent(chrs, chr)
 			end)
 		end
 	
@@ -2202,31 +2166,55 @@ local function GHKL_fake_script() -- RedwiresAimbot.LocalScript
 					end
 				end
 			end
+			
+			local function recursiveCast(origin, destinationPart, exclusions)
+				table.insert(exclusions, destinationPart)
+				local params = RaycastParams.new()
+				params.FilterDescendantsInstances = exclusions
+				params.IgnoreWater = true
+				local ray = workspace:Raycast(origin, destinationPart.Position - origin, params)
+				if ray then
+					local ins = ray.Instance
+					if not ins.CanCollide and math.min(ins.Transparency, 1) == 1 then
+						table.insert(exclusions, ins)
+						return recursiveCast(origin, destinationPart, exclusions)
+					else
+						return false
+					end
+				else
+					return true
+				end
+			end
 	
 			if getOrCreate(GameStats, "AutoTarget") then
 				local table1 = {}
 				local PrioritizedPlrsOnScreen = {}
 	
-				local function addChr(v)
-					local player = plrs:GetPlayerFromCharacter(v)
-					if player and IsNotWhitelisted(player) or not player then
-						if v:FindFirstChildOfClass("Humanoid")
+				local function addChr(chr)
+					local player = plrs:GetPlayerFromCharacter(chr)
+					if (player and IsNotWhitelisted(player)) or not player then
+						if chr:FindFirstChildOfClass("Humanoid") and chr:FindFirstChild("HumanoidRootPart")
 							and lplr.Character and lplr.Character:FindFirstChild("Head")
-							and v:FindFirstChildOfClass("Humanoid").Health > 0
-							and meetsConditions(v) then
-							local targpart = getTargetPart(v)
-							if targpart then
-								local pos = math.floor(lplr:DistanceFromCharacter(targpart.Position))
-								local _, onscreen = camera:WorldToScreenPoint(targpart.Position)
-								local rayparams = RaycastParams.new()
-								rayparams.FilterDescendantsInstances = chrs
-								rayparams.IgnoreWater = true
-								local raycast = workspace:Raycast(lplr.Character.Head.Position, targpart.Position - lplr.Character.Head.Position, rayparams)
+							and chr.Humanoid.Health > 0 and meetsConditions(chr) then
+							local targetPart = getTargetPart(chr)
+							if targetPart then
+								local pos = math.floor(lplr:DistanceFromCharacter(targetPart.Position))
+								local _, onscreen = camera:WorldToScreenPoint(targetPart.Position)
+								local origin
+								if getOrCreate(GameStats, "RaycastOrigin") == "Head" then 
+									origin = lplr.Character.Head.Position
+								else
+									origin = camera.CFrame.Position
+								end
+								local raycast
 								local raycasting = getOrCreate(GameStats, "EnableRaycasting")
-								if (not raycast and raycasting or not raycasting and (onscreen or getOrCreate(GameStats, "TargetOffScreen")) and pos < getOrCreate(GameStats, "MaxStuds")) then
-									table1[v] = pos
-									if table.find(PrioritizedPlrs, plrs:GetPlayerFromCharacter(v)) then
-										table.insert(PrioritizedPlrsOnScreen, v)
+								if raycasting then
+									raycast = recursiveCast(origin, targetPart, table.clone(chrs)) --do raycast only when it matters
+								end
+								if ((raycast and raycasting) or not raycasting and (onscreen or getOrCreate(GameStats, "TargetOffScreen")) and pos < getOrCreate(GameStats, "MaxStuds")) then
+									table1[chr] = pos
+									if table.find(PrioritizedPlrs, plrs:GetPlayerFromCharacter(chr)) then
+										table.insert(PrioritizedPlrsOnScreen, chr)
 									end
 								end
 							end
@@ -2283,14 +2271,10 @@ local function GHKL_fake_script() -- RedwiresAimbot.LocalScript
 			if plr.Character and plr.Character == misc.TargetedCharacter then
 				deselect()
 			end
-			local wasPrior = table.find(PrioritizedPlrs, plr)
-			local wasWL = table.find(WhitelistedPlrs, plr)
-			if wasPrior then
-				table.remove(PrioritizedPlrs, wasPrior)
+			if removeIfPresent(PrioritizedPlrs, plr) then
 				table.insert(PrioritizedPlrsOld, plr.Name)
 			end
-			if wasWL then
-				table.remove(WhitelistedPlrs, wasWL)
+			if removeIfPresent(WhitelistedPlrs, plr) then
 				table.insert(WhitelistedPlrsOld, plr.Name)
 			end
 		end)
@@ -2456,14 +2440,10 @@ local function GHKL_fake_script() -- RedwiresAimbot.LocalScript
 		end)
 	
 		plrs.PlayerAdded:connect(function(plr)
-			local oldWL = table.find(WhitelistedPlrsOld, plr.Name)
-			local oldPrior = table.find(PrioritizedPlrsOld, plr.Name)
-			if oldWL then
-				table.remove(WhitelistedPlrsOld, oldWL)
+			if removeIfPresent(WhitelistedPlrsOld, plr.Name) then
 				table.insert(WhitelistedPlrs, plr)
 			end
-			if oldPrior then
-				table.remove(PrioritizedPlrsOld, oldPrior)
+			if removeIfPresent(PrioritizedPlrsOld, plr.Name) then
 				table.insert(PrioritizedPlrs, plr)
 			end
 			AddtoList(plr)
@@ -2526,4 +2506,4 @@ local function GHKL_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(GHKL_fake_script)()
+coroutine.wrap(NSGG_fake_script)()
