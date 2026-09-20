@@ -1858,17 +1858,17 @@ local function HSSDEW_fake_script() -- RedwiresAimbot.LocalScript
 	
 		local function isActiveNPC(npc)
 			thread(function()
-				local changed
 				local active = false
 				local timeout = 0
-				changed = Changed(npc.Humanoid.RootPart, "CFrame", function()
+				local changed; changed = Changed(npc.Humanoid.RootPart, "CFrame", function()
 					active = true
-					changed.Stop()
+					changed:Stop()
 				end)
 				repeat timeout += task.wait() until active or timeout > 30
 				if active then
 					table.insert(npcs, npc)
 				end
+				changed:Stop()
 			end)
 		end
 		
