@@ -1863,7 +1863,7 @@ local function NSGG_fake_script() -- RedwiresAimbot.LocalScript
 	
 				for i,ttable in pairs(getOrCreate(GameStats, "Teams")) do
 					if teams:FindFirstChild(ttable.team1) and teams:FindFirstChild(ttable.team2) then
-						if lplr.Team.Name == t1team1 and plr.Team.Name == ttable.team2 then
+						if lplr.Team.Name == ttable.team1 and plr.Team.Name == ttable.team2 then
 							wl = true
 							break
 						end
