@@ -243,8 +243,13 @@ getgenv().Format = function(var, ...)
 		end
 	elseif typeof(var) == "Instance" then
 		output = GetFullName(var)
-	elseif typeof(var):find("Vector") or typeof(var) == "CFrame" or typeof(var) == "Color3" or typeof(var) == "UDim2" or typeof(var) == "NumberRange" then
+	elseif typeof(var):find("Vector") or typeof(var) == "CFrame" or typeof(var) == "UDim2" or typeof(var) == "NumberRange" then
 		output = ("%s.new(%s)"):format(typeof(var), tostring(var)):gsub("{", ""):gsub("}", "")
+	elseif typeof(var) == "Color3" then
+		local function toRGB(num)
+			return math.clamp(math.floor(num * 255), 0, 255)
+		end
+		output = ("Color3.fromRGB(%d, %d, %d)"):format(toRGB(var.R), toRGB(var.G), toRGB(var.B))
 	elseif typeof(var) == "BrickColor" then
 		output = ("%s.new(\"%s\")"):format(typeof(var), tostring(var))
 	elseif typeof(var) == "Enum" then
