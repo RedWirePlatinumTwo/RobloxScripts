@@ -3,7 +3,7 @@
 
 -- Instances:
 
-local generalgamefucker = Instance.new("ScreenGui")
+local FuckThisGame = Instance.new("ScreenGui")
 local mainframe = Instance.new("Frame")
 local title = Instance.new("TextLabel")
 local wstitle = Instance.new("TextLabel")
@@ -19,12 +19,12 @@ local focusonchr = Instance.new("TextButton")
 
 --Properties:
 
-generalgamefucker.Name = "generalgamefucker"
-generalgamefucker.Parent = game.CoreGui
-generalgamefucker.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+FuckThisGame.Name = "FuckThisGame"
+FuckThisGame.Parent = game.CoreGui
+FuckThisGame.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 mainframe.Name = "mainframe"
-mainframe.Parent = generalgamefucker
+mainframe.Parent = FuckThisGame
 mainframe.Active = true
 mainframe.BackgroundColor3 = Color3.fromRGB(0, 85, 127)
 mainframe.BorderColor3 = Color3.fromRGB(0, 0, 127)
@@ -181,8 +181,8 @@ focusonchr.TextWrapped = true
 
 -- Scripts:
 
-local function THMVVJQ_fake_script() -- generalgamefucker.LocalScript 
-	local script = Instance.new('LocalScript', generalgamefucker)
+local function POBDF_fake_script() -- FuckThisGame.LocalScript 
+	local script = Instance.new('LocalScript', FuckThisGame)
 
 	local mainframe = script.Parent.mainframe
 	local plrs = game:GetService("Players")
@@ -284,12 +284,8 @@ local function THMVVJQ_fake_script() -- generalgamefucker.LocalScript
 	end
 	
 	local function updateHumanoid(hum)
-		if hum.WalkSpeed ~= numbers.ws then
-			hum.WalkSpeed = numbers.ws
-		end
-		if hum.JumpPower ~= numbers.jump then
-			hum.JumpPower = numbers.jump
-		end
+		hum.WalkSpeed = numbers.ws
+		hum.JumpPower = numbers.jump
 	end
 	
 	local function speedhack()
@@ -302,7 +298,14 @@ local function THMVVJQ_fake_script() -- generalgamefucker.LocalScript
 		update()
 	end
 	
-	speedhack()
+	local function hasHumanoid(func)
+		local humanoid = lplr.Character and lplr.Character:FindFirstChild("Humanoid")
+		if humanoid then
+			func(humanoid)
+		end
+	end
+	
+	hasHumanoid(speedhack)
 	
 	lplr.CharacterAdded:connect(function(chr)
 		chr:WaitForChild("Humanoid")
@@ -317,17 +320,20 @@ local function THMVVJQ_fake_script() -- generalgamefucker.LocalScript
 				numbers[tableprop] = num
 			end
 		end)
+		
+		local function applyChanges()
+			hasHumanoid(updateHumanoid)
+			textbox.Text = tostring(numbers[tableprop])
+		end
 	
 		textbox.MouseWheelForward:connect(function()
 			numbers[tableprop] = numbers[tableprop] + 10
-			updateHumanoid(lplr.Character.Humanoid)
-			textbox.Text = tostring(numbers[tableprop])
+			applyChanges()
 		end)
 	
 		textbox.MouseWheelBackward:connect(function()
 			numbers[tableprop] = math.max(numbers[tableprop] - 10, 0)
-			updateHumanoid(lplr.Character.Humanoid)
-			textbox.Text = tostring(numbers[tableprop])
+			applyChanges()
 		end)
 	end
 	
@@ -493,4 +499,4 @@ local function THMVVJQ_fake_script() -- generalgamefucker.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(THMVVJQ_fake_script)()
+coroutine.wrap(POBDF_fake_script)()
