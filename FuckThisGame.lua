@@ -325,7 +325,7 @@ local function THMVVJQ_fake_script() -- generalgamefucker.LocalScript
 		end)
 	
 		textbox.MouseWheelBackward:connect(function()
-			numbers[tableprop] = math.min(numbers[tableprop] - 10, 0)
+			numbers[tableprop] = math.max(numbers[tableprop] - 10, 0)
 			updateHumanoid(lplr.Character.Humanoid)
 			textbox.Text = tostring(numbers[tableprop])
 		end)
