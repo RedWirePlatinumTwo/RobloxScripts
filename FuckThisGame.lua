@@ -181,7 +181,7 @@ focusonchr.TextWrapped = true
 
 -- Scripts:
 
-local function FJRQA_fake_script() -- generalgamefucker.LocalScript 
+local function THMVVJQ_fake_script() -- generalgamefucker.LocalScript 
 	local script = Instance.new('LocalScript', generalgamefucker)
 
 	local mainframe = script.Parent.mainframe
@@ -283,21 +283,23 @@ local function FJRQA_fake_script() -- generalgamefucker.LocalScript
 		end)
 	end
 	
-	
+	local function updateHumanoid(hum)
+		if hum.WalkSpeed ~= numbers.ws then
+			hum.WalkSpeed = numbers.ws
+		end
+		if hum.JumpPower ~= numbers.jump then
+			hum.JumpPower = numbers.jump
+		end
+	end
 	
 	local function speedhack()
 		local hum = lplr.Character.Humanoid
-		local function updateHumanoid()
-			if hum.WalkSpeed ~= numbers.ws then
-				hum.WalkSpeed = numbers.ws
-			end
-			if hum.JumpPower ~= numbers.jump then
-				hum.JumpPower = numbers.jump
-			end
+		local function update()
+			updateHumanoid(hum)
 		end
-		hum:GetPropertyChangedSignal("WalkSpeed"):connect(updateHumanoid)
-		hum:GetPropertyChangedSignal("JumpPower"):connect(updateHumanoid)
-		updateHumanoid()
+		hum:GetPropertyChangedSignal("WalkSpeed"):connect(update)
+		hum:GetPropertyChangedSignal("JumpPower"):connect(update)
+		update()
 	end
 	
 	speedhack()
@@ -307,7 +309,8 @@ local function FJRQA_fake_script() -- generalgamefucker.LocalScript
 		speedhack()
 	end)
 	
-	local function numbereditor(textbox, tableprop)
+	local function numberEditor(textbox, tableprop)
+		
 		Changed(textbox, "Text", function(txt)
 			local num = tonumber(txt)
 			if num then
@@ -317,21 +320,19 @@ local function FJRQA_fake_script() -- generalgamefucker.LocalScript
 	
 		textbox.MouseWheelForward:connect(function()
 			numbers[tableprop] = numbers[tableprop] + 10
+			updateHumanoid(lplr.Character.Humanoid)
 			textbox.Text = tostring(numbers[tableprop])
 		end)
 	
 		textbox.MouseWheelBackward:connect(function()
-			if numbers[tableprop] > 0 then
-				numbers[tableprop] = numbers[tableprop] - 10
-			else
-				numbers[tableprop] = 0
-			end
+			numbers[tableprop] = math.min(numbers[tableprop] - 10, 0)
+			updateHumanoid(lplr.Character.Humanoid)
 			textbox.Text = tostring(numbers[tableprop])
 		end)
 	end
 	
-	numbereditor(mainframe.wsnumber, "ws")
-	numbereditor(mainframe.jumpnumber, "jump")
+	numberEditor(mainframe.wsnumber, "ws")
+	numberEditor(mainframe.jumpnumber, "jump")
 	
 	local function singleClick(button, func)
 		local con
@@ -492,4 +493,4 @@ local function FJRQA_fake_script() -- generalgamefucker.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(FJRQA_fake_script)()
+coroutine.wrap(THMVVJQ_fake_script)()
