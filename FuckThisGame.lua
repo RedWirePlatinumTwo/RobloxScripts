@@ -318,6 +318,7 @@ local function POBDF_fake_script() -- FuckThisGame.LocalScript
 			local num = tonumber(txt)
 			if num then
 				numbers[tableprop] = num
+				hasHumanoid(updateHumanoid)
 			end
 		end)
 		
