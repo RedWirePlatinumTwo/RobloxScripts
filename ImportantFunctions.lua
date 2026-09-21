@@ -247,7 +247,7 @@ getgenv().Format = function(var, ...)
 		output = ("%s.new(%s)"):format(typeof(var), tostring(var)):gsub("{", ""):gsub("}", "")
 	elseif typeof(var) == "Color3" then
 		local function toRGB(num)
-			return math.clamp(math.floor(num * 255), 0, 255)
+			return math.clamp(math.round(num * 255), 0, 255)
 		end
 		output = ("Color3.fromRGB(%d, %d, %d)"):format(toRGB(var.R), toRGB(var.G), toRGB(var.B))
 	elseif typeof(var) == "BrickColor" then
