@@ -329,18 +329,18 @@ local function createLoggedFunction(original, customLoggerName)
 		end
 		
 		end
-		local returnval = table.pack(original(...))
-		if returnval.n == 0 then
+		local retVal = table.pack(original(...))
+		if retVal.n == 0 then
 			str = str.."\nReturn value: none!"
 		else
-			for i= 1, returnval.n do
-				str = str..("\nReturn value %d: %s"):format(i, Format(returnval[i]))
+			for i= 1, retVal.n do
+				str = str..("\nReturn value %d: %s"):format(i, Format(retVal[i]))
 			end
 		end
 		if LogFunctions then
 			print(str)
 		end
-		return unpack(returnval)
+		return unpack(retVal, 1, retVal.n)
 	end
 end
 local LoggedFunctions = {}
