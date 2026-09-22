@@ -394,12 +394,12 @@ local logHook; logHook = hookmetamethod(game, "__namecall", function(self, ...)
 	local logData = rLoggedFunctions[self]
 	local any = rLoggedFunctions.Any
 	local callMethod = getnamecallmethod()
-	local insIgnored = table.find(ignoredInstances, self)
-	if logData and logData[callMethod] and not insIgnored then
-		return logData[callMethod](self, ...)
-	elseif any[callMethod] and not insIgnored then
-		return any[callMethod](self, ...)
-	else 
-		return logHook(self, ...)
+	if not table.find(ignoredInstances, self) then
+		if logData and logData[callMethod] then
+			return logData[callMethod](self, ...)
+		elseif any[callMethod] then
+			return any[callMethod](self, ...)
+		end 
 	end
+	return logHook(self, ...)
 end)
