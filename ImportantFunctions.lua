@@ -369,8 +369,8 @@ getgenv().FunctionLogger = function(toLog, customLoggerName)
 	end
 end
 
-local rLoggedFunctions = {Any = {}}
-getgenv().ignoredInstances = {}
+local rLoggedFunctions = rLoggedFunctions or {Any = {}}
+getgenv().ignoredInstances = ignoredInstances or {}
 getgenv().RobloxFunctionLogger = function(funcParent, funcName, logAny)
     local result = funcParent[funcName]
 	if typeof(funcParent) ~= "Instance" or typeof(result) ~= "function" then
@@ -390,7 +390,7 @@ getgenv().RobloxFunctionLogger = function(funcParent, funcName, logAny)
 	end
 end
 
-getgenv().customNameCalls = {
+getgenv().customNameCalls = customNameCalls or {
 	GetFamily = GetFamily,
 	GetFullPath = GetFullName,
 	LogFunction = RobloxFunctionLogger
