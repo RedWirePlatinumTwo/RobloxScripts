@@ -369,7 +369,7 @@ getgenv().FunctionLogger = function(toLog, customLoggerName)
 	end
 end
 
-local rLoggedFunctions = rLoggedFunctions or {Any = {}}
+getgenv().rLoggedFunctions = rLoggedFunctions or {Any = {}}
 getgenv().ignoredInstances = ignoredInstances or {}
 getgenv().RobloxFunctionLogger = function(funcParent, funcName, logAny)
     local result = funcParent[funcName]
@@ -396,22 +396,25 @@ getgenv().customNameCalls = customNameCalls or {
 	LogFunction = RobloxFunctionLogger
 }
 
-local logHook; logHook = hookmetamethod(game, "__namecall", function(self, ...)
-	local callMethod = getnamecallmethod()
-	local logData = rLoggedFunctions[self]
-	local any = rLoggedFunctions.Any[callMethod]
-	
-	if not table.find(ignoredInstances, self) then --rblx hook function logic
-		if logData and logData[callMethod] then
-			return logData[callMethod](self, ...)
-		elseif any then
-			return any(self, ...)
-		end 
-	end
-	
-	local customCall = customNameCalls[callMethod] --custom namecall logic
-	if checkcaller() and customCall then
-		return customCall(self, ...)
-	end
-	return logHook(self, ...)
-end)
+if not ImportantFuncs_initNameCallHook then
+	getgenv().ImportantFuncs_initNameCallHook = true
+	local logHook; logHook = hookmetamethod(game, "__namecall", function(self, ...)
+		local callMethod = getnamecallmethod()
+		
+		local logData = rLoggedFunctions[self] --rblx function logger logic
+		local any = rLoggedFunctions.Any[callMethod]
+		if not table.find(ignoredInstances, self) then
+			if logData and logData[callMethod] then
+				return logData[callMethod](self, ...)
+			elseif any then
+				return any(self, ...)
+			end 
+		end
+		
+		local customCall = customNameCalls[callMethod] --custom namecall logic
+		if checkcaller() and customCall then
+			return customCall(self, ...)
+		end
+		return logHook(self, ...)
+	end)
+end
