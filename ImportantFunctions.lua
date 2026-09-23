@@ -397,15 +397,15 @@ getgenv().customNameCalls = {
 }
 
 local logHook; logHook = hookmetamethod(game, "__namecall", function(self, ...)
-	local logData = rLoggedFunctions[self]
-	local any = rLoggedFunctions.Any
 	local callMethod = getnamecallmethod()
+	local logData = rLoggedFunctions[self]
+	local any = rLoggedFunctions.Any[callMethod]
 	
 	if not table.find(ignoredInstances, self) then --rblx hook function logic
 		if logData and logData[callMethod] then
 			return logData[callMethod](self, ...)
-		elseif any[callMethod] then
-			return any[callMethod](self, ...)
+		elseif any then
+			return any(self, ...)
 		end 
 	end
 	
