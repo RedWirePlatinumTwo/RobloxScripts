@@ -314,7 +314,7 @@ end
 
 getgenv().LogFunctions = true
 
-local function createLoggedFunction(original, customLoggerName)
+local function createLoggedFunction(original, customLoggerName, unhookedFunc)
 	return function(...)
 		local args = table.pack(...)
 		local str = "Function "..customLoggerName.." was called!"
@@ -337,17 +337,18 @@ local function createLoggedFunction(original, customLoggerName)
 				str = str..("\nReturn value %d: %s"):format(i, Format(retVal[i]))
 			end
 		end
-		if LogFunctions then
+		if LogFunctions and (unhookedFunc and not table.find(ignoredFunctions, unhookedFunc) or not unhookedFunc) then
 			print(str)
 		end
 		return unpack(retVal, 1, retVal.n)
 	end
 end
-local LoggedFunctions = {}
+local loggedFunctions = {}
+getgenv().ignoredFunctions = ignoredFunctions or {}
 local excludedfunctions = {print, pairs, format, tabletostring, getcallingscript, warn, error}
 
 getgenv().FunctionLogger = function(toLog, customLoggerName)
-	customLoggerName = customLoggerName or "Function"..#LoggedFunctions
+	customLoggerName = customLoggerName or "Function"..(#loggedFunctions + 1)
 	if typeof(toLog) ~= "function" then
 		error("function expected, got "..typeof(toLog))
 	end
@@ -355,15 +356,15 @@ getgenv().FunctionLogger = function(toLog, customLoggerName)
 		error("Ignoring requested function to log to prevent recursions")
 	end
 
-	if table.find(LoggedFunctions, toLog) then
+	if table.find(loggedFunctions, toLog) then
 		error("This function has already been logged!")
 	else
 		local loggerFunction
-		local orig = hookfunction(toLog, function(...)
+		local funcHook = hookfunction(toLog, function(...)
 			return loggerFunction(...)
 		end)
-		loggerFunction = createLoggedFunction(orig, customLoggerName)
-		table.insert(LoggedFunctions, toLog)
+		loggerFunction = createLoggedFunction(funcHook, customLoggerName, toLog)
+		table.insert(loggedFunctions, toLog)
 		print("logging", customLoggerName.."!")
 		return loggerFunction
 	end
@@ -376,7 +377,9 @@ getgenv().RobloxFunctionLogger = function(funcParent, funcName, logAny)
 	if typeof(funcParent) ~= "Instance" or typeof(result) ~= "function" then
 		error("Not a roblox function")
 	end
-	rLoggedFunctions[funcParent] = rLoggedFunctions[funcParent] or {}
+	if not logAny then
+		rLoggedFunctions[funcParent] = rLoggedFunctions[funcParent] or {}
+	end
     local data = if logAny then rLoggedFunctions.Any else rLoggedFunctions[funcParent]
 	if data[funcName] then
 		error("This roblox function is already logged")
