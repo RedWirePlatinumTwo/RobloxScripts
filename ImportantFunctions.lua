@@ -337,7 +337,7 @@ local function createLoggedFunction(original, customLoggerName, unhookedFunc)
 				str = str..("\nReturn value %d: %s"):format(i, Format(retVal[i]))
 			end
 		end
-		if LogFunctions and (unhookedFunc and not table.find(ignoredFunctions, unhookedFunc) or not unhookedFunc) then
+		if LogFunctions and not table.find(ignoredFunctions, unhookedFunc) then
 			print(str)
 		end
 		return unpack(retVal, 1, retVal.n)
