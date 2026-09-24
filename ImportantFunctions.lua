@@ -1,8 +1,3 @@
-local catchRepeats = {}
-local indexReps = {}
-local indexes = {}
-local totalTables = 0
-
 local rebuildString = function(str)
 	local reformattedString = ""
 	local backKeys = {
@@ -81,29 +76,25 @@ getgenv().GetFullName = function(ins)
 	return fullName
 end
 
+local catchRepeats = {}
+local indexReps = {}
+local indexes = {}
+local totalTables = 0
+
 getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 	local output = ""
 	args = args or {}
+	TableName = TableName or "Table"
 
 	local function setName(t, name)
 		if not args.simplify then
-		    
     		local function checkRepititions()
-    			local amount = indexReps[name] or 0
-				indexReps[name] = amount + 1
-    			if (amount + 1) > 1 then
-    				indexes[t] = name.."_"..(amount + 1)
-    			else
-    				indexes[t] = name
-    			end
+    			local amount = (indexReps[name] or 0) + 1
+				indexReps[name] = amount
+				indexes[t] = if amount > 1 then name.."_"..amount else name
     		end
 			name = tostring(name):gsub("%W", "")
-			
-			local success = pcall(function()
-				return loadstring("local "..name)()
-			end)
-			
-			if not success then
+			if not loadstring("local "..name) then
 				name = "Table_"..name
 			end
 			if name:len() == 0 or name == "Table_nil" then
@@ -116,7 +107,6 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 		    totalTables = totalTables + 1
 		    indexes[t] = "Table"..totalTables
 		end
-		
 	end
 
 	local function getName(t)
@@ -273,6 +263,7 @@ local formatters = {}
 
 local function addFormat(toStr, ...)
 	local args = {...}
+	assert(#args ~= 0, "There's no fucking types to assign to!!!!!!!!!!!!!!!!!!!!!!")
 	for _, type in pairs(args) do
 		formatters[type] = toStr
 	end
@@ -381,11 +372,11 @@ local function createLoggedFunction(original, customLoggerName, unhookedFunc)
 				str = str..("\n%ss: none!"):format(title)
 			else
 				for i = 1, tbl.n do
-					str = str..("\n%s %d: %s"):format(title, i, Format(tbl[i]))
+					local formatted = Format(tbl[i])
+					str = str..("\n%s %d: %s"):format(title, i, formatted)
 				end
 			end
 		end
-		
 		listData(args, "Argument")
 		listData(retVal, "Return value")
 		
