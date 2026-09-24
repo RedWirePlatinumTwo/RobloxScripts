@@ -27,7 +27,13 @@ local rebuildString = function(str)
 	return reformattedString
 end
 
+local function typeCheck(var, type, arg)
+	local varType = typeof(var)
+	assert(varType == type, ("bad argument #%d (expected %s, got %s)"):format(arg, type, varType))
+end
+
 getgenv().GetFamily = function(ins, reverseOrder)
+	typeCheck(ins, "Instance", 1)
 	local Pathway = {ins}
 	local par = ins.Parent
 	while par ~= nil do
@@ -61,7 +67,7 @@ getgenv().GetFullName = function(ins)
 				fullName = v.Name
 			end
 		else
-			if i == 2 then
+			if i == 2 and Pathway[1] == game then
 				local success, result = pcall(function() return game:GetService(v.ClassName) end)
 				if success and result == v then
 					fullName = fullName..(":GetService(\"%s\")"):format(v.ClassName)
@@ -82,6 +88,7 @@ local indexes = {}
 local totalTables = 0
 
 getgenv().TableToString = function(Table, TableName, args, isInternalTable)
+	typeCheck(Table, "table", 1)
 	local output = ""
 	args = args or {}
 	TableName = TableName or "Table"
@@ -148,12 +155,7 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 			for i, v in pairs(f) do
 				local function isTable(x)
 					if type(x) == "table" and not table.find(reps, x) and not table.find(catchRepeats, x) then
-						local tblName
-						if x == i then
-							tblName = v
-						else
-							tblName = i
-						end
+						local tblName = if x == i then v else i
 						setName(x, tblName)
 						output = output..("\n%s = {}"):format(getName(x))
 						table.insert(reps,x)
@@ -174,11 +176,7 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 		local function writeValue(index, value)
 		
 			local function isRecursive(tbl)
-				if table.find(catchRepeats, tbl) then
-					return getName(tbl)
-				else
-					return tostring(tbl)
-				end
+				return if table.find(catchRepeats, tbl) then getName(tbl) else tostring(tbl)
 			end
 			
 			local serializedIndex = ""
@@ -397,8 +395,7 @@ end
 
 getgenv().FunctionLogger = function(toLog, customLoggerName, fromScript)
 	customLoggerName = customLoggerName or "Function"..(#loggedFunctions + 1)
-	local logType = typeof(toLog)
-	assert(logType == "function", "function expected at arg #1, got "..logType)
+	typeCheck(toLog, "function", 1)
 	assert(toLog ~= FunctionLogger and not table.find(excludedFunctions, toLog), "Ignoring requested function to log to prevent recursions")
 	scriptAssert(fromScript, 3)
 
@@ -429,16 +426,13 @@ getgenv().RobloxFunctionLogger = function(funcParent, funcName, logAny, fromScri
 	end
     local data = if logAny then rLoggedFunctions.Any else rLoggedFunctions[funcParent]
 	local key = if logAny then funcName..funcParent.ClassName else funcName
-	if data[key] then
-		error("This roblox function is already logged")
+	assert(data[key] == nil, "This roblox function is already logged")
+	data[key] = createLoggedFunction(result, funcName, result)
+	loggerSettings.scriptCheck[result] = fromScript
+	if logAny then
+		print("Logged all roblox calls for", funcName)
 	else
-		data[key] = createLoggedFunction(result, funcName, result)
-		loggerSettings.scriptCheck[result] = fromScript
-		if logAny then
-			print("Logged all roblox calls for", funcName)
-		else
-			print("Logged roblox calls for", funcName, "for Instance", GetFullName(funcParent))
-		end
+		print("Logged roblox calls for", funcName, "for Instance", GetFullName(funcParent))
 	end
 end
 
