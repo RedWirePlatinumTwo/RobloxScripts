@@ -312,48 +312,55 @@ getgenv().GetFullName = function(ins)
 	return fullName
 end
 
-getgenv().LogFunctions = true
+local loggedFunctions = {}
+getgenv().loggerSettings = loggerSettings or {
+	enabled = true,
+	ignored = {},
+	ignoreExecutorCalls = false
+}
 
-local function createLoggedFunction(original, customLoggerName, unhookedFunc)
+local function ifExecutorCall()
+	local ignoreExecutor = loggerSettings.ignoreExecutorCalls
+	return (not checkcaller() and ignoreExecutor) or not ignoreExecutor
+end
+local excludedFunctions = {print, pairs, format, tabletostring, getcallingscript, warn, error}
+
+local function createLoggedFunction(original, customLoggerName, unhookedFunc, fromScript)
 	return function(...)
 		local args = table.pack(...)
+		local retVal = table.pack(original(...))
 		local str = "Function "..customLoggerName.." was called!"
 		local callingScript = getcallingscript()
 		str = str.."\nCalling script: "..if callingScript ~= nil then GetFullName(callingScript) else "nil"
-		if args.n == 0 then
-			str = str.."\nArguments: none!"
-		else
 		
-		for i = 1, args.n do
-			str = str..("\nArgument %d: %s"):format(i, Format(args[i]))
-		end
-		
-		end
-		local retVal = table.pack(original(...))
-		if retVal.n == 0 then
-			str = str.."\nReturn value: none!"
-		else
-			for i= 1, retVal.n do
-				str = str..("\nReturn value %d: %s"):format(i, Format(retVal[i]))
+		local function listData(tbl, title)
+			if tbl.n == 0 then
+				str = str..("\n%ss: none!"):format(title)
+			else
+				for i = 1, tbl.n do
+					str = str..("\n%s %d: %s\n"):format(title, i, Format(tbl[i]))
+				end
 			end
 		end
-		if LogFunctions and not table.find(ignoredFunctions, unhookedFunc) then
+		
+		listData(args, "Argument")
+		listData(retVal, "Return value")
+		
+		if loggerSettings.enabled and not table.find(loggerSettings.ignored, unhookedFunc)
+		and ifExecutorCall() and (fromScript == callingScript or fromScript == nil) then
 			print(str)
 		end
 		return unpack(retVal, 1, retVal.n)
 	end
 end
-local loggedFunctions = {}
-getgenv().ignoredFunctions = ignoredFunctions or {}
-local excludedfunctions = {print, pairs, format, tabletostring, getcallingscript, warn, error}
 
-getgenv().FunctionLogger = function(toLog, customLoggerName)
+getgenv().FunctionLogger = function(toLog, customLoggerName, fromScript)
 	customLoggerName = customLoggerName or "Function"..(#loggedFunctions + 1)
-	if typeof(toLog) ~= "function" then
-		error("function expected, got "..typeof(toLog))
-	end
-	if toLog == FunctionLogger or table.find(excludedfunctions, toLog) then
-		error("Ignoring requested function to log to prevent recursions")
+	local logType = typeof(toLog)
+	assert(logType == "function", "function expected at arg #1, got "..logType)
+	assert(toLog ~= FunctionLogger and not table.find(excludedFunctions, toLog), "Ignoring requested function to log to prevent recursions")
+	if fromScript then
+		assert(typeof(fromScript) == "Instance" and fromScript:IsA("Script"), "Expected script source for arg #3")
 	end
 
 	if table.find(loggedFunctions, toLog) then
@@ -363,7 +370,7 @@ getgenv().FunctionLogger = function(toLog, customLoggerName)
 		local funcHook = hookfunction(toLog, function(...)
 			return loggerFunction(...)
 		end)
-		loggerFunction = createLoggedFunction(funcHook, customLoggerName, toLog)
+		loggerFunction = createLoggedFunction(funcHook, customLoggerName, toLog, fromScript)
 		table.insert(loggedFunctions, toLog)
 		print("logging", customLoggerName.."!")
 		return loggerFunction
@@ -372,19 +379,19 @@ end
 
 getgenv().rLoggedFunctions = rLoggedFunctions or {Any = {}}
 getgenv().ignoredInstances = ignoredInstances or {}
-getgenv().RobloxFunctionLogger = function(funcParent, funcName, logAny)
+
+getgenv().RobloxFunctionLogger = function(funcParent, funcName, logAny, fromScript)
     local result = funcParent[funcName]
-	if typeof(funcParent) ~= "Instance" or typeof(result) ~= "function" then
-		error("Not a roblox function")
-	end
+	assert(typeof(funcParent) == "Instance" and typeof(result) == "function", "Not a roblox function")
 	if not logAny then
 		rLoggedFunctions[funcParent] = rLoggedFunctions[funcParent] or {}
 	end
     local data = if logAny then rLoggedFunctions.Any else rLoggedFunctions[funcParent]
-	if data[funcName] then
+	local key = if logAny then funcName..funcParent.ClassName else funcName
+	if data[key] then
 		error("This roblox function is already logged")
 	else
-		data[funcName] = createLoggedFunction(result, funcName)
+		data[key] = createLoggedFunction(result, funcName, result, fromScript)
 		if logAny then
 			print("Logged all roblox calls for", funcName)
 		else
@@ -405,7 +412,7 @@ if not ImportantFuncs_initNameCallHook then
 		local callMethod = getnamecallmethod()
 		
 		local logData = rLoggedFunctions[self] --rblx function logger logic
-		local any = rLoggedFunctions.Any[callMethod]
+		local any = rLoggedFunctions.Any[callMethod..self.ClassName]
 		if not table.find(ignoredInstances, self) then
 			if logData and logData[callMethod] then
 				return logData[callMethod](self, ...)
