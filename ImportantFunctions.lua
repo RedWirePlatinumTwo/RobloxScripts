@@ -354,9 +354,9 @@ local function createLoggedFunction(original, customLoggerName, unhookedFunc, fr
 	end
 end
 
-local function scriptAssert(scr)
+local function scriptAssert(scr, arg)
 	if scr then
-		assert(typeof(scr) == "Instance" and scr:IsA("Script"), "Expected script source for arg #3")
+		assert(typeof(scr) == "Instance" and scr:IsA("Script"), "Expected script source for arg #"..arg)
 	end
 end
 
@@ -365,7 +365,7 @@ getgenv().FunctionLogger = function(toLog, customLoggerName, fromScript)
 	local logType = typeof(toLog)
 	assert(logType == "function", "function expected at arg #1, got "..logType)
 	assert(toLog ~= FunctionLogger and not table.find(excludedFunctions, toLog), "Ignoring requested function to log to prevent recursions")
-	scriptAssert(fromScript)
+	scriptAssert(fromScript, 3)
 
 	if table.find(loggedFunctions, toLog) then
 		error("This function has already been logged!")
@@ -387,7 +387,7 @@ getgenv().ignoredInstances = ignoredInstances or {}
 getgenv().RobloxFunctionLogger = function(funcParent, funcName, logAny, fromScript)
     local result = funcParent[funcName]
 	assert(typeof(funcParent) == "Instance" and typeof(result) == "function", "Not a roblox function")
-	scriptAssert(fromScript)
+	scriptAssert(fromScript, 4)
 	if not logAny then
 		rLoggedFunctions[funcParent] = rLoggedFunctions[funcParent] or {}
 	end
