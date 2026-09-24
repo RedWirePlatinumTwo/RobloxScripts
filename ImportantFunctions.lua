@@ -320,9 +320,9 @@ getgenv().loggerSettings = loggerSettings or {
 	scriptCheck = {}
 }
 
-local function ifExecutorCall()
+local function ifExecutorCall(caller)
 	local ignoreExecutor = loggerSettings.ignoreExecutorCalls
-	return (not checkcaller() and ignoreExecutor) or not ignoreExecutor
+	return (not caller and ignoreExecutor) or not ignoreExecutor
 end
 local excludedFunctions = {print, pairs, format, tabletostring, getcallingscript, warn, error}
 
@@ -332,7 +332,9 @@ local function createLoggedFunction(original, customLoggerName, unhookedFunc)
 		local retVal = table.pack(original(...))
 		local str = "Function "..customLoggerName.." was called!"
 		local callingScript = getcallingscript()
+		local caller = checkcaller()
 		str = str.."\nCalling script: "..if callingScript ~= nil then GetFullName(callingScript) else "nil"
+		str = str.."\nCaller type: "..if caller then "Executor" else "Game"
 		
 		local function listData(tbl, title)
 			if tbl.n == 0 then
@@ -349,7 +351,7 @@ local function createLoggedFunction(original, customLoggerName, unhookedFunc)
 		
 		local scriptSource = loggerSettings.scriptCheck[unhookedFunc]
 		if loggerSettings.enabled and not table.find(loggerSettings.ignored, unhookedFunc)
-		and ifExecutorCall() and (scriptSource == callingScript or scriptSource == nil) then
+		and ifExecutorCall(caller) and (scriptSource == callingScript or scriptSource == nil) then
 			print(str)
 		end
 		return unpack(retVal, 1, retVal.n)
