@@ -316,7 +316,8 @@ local loggedFunctions = {}
 getgenv().loggerSettings = loggerSettings or {
 	enabled = true,
 	ignored = {},
-	ignoreExecutorCalls = false
+	ignoreExecutorCalls = false,
+	scriptCheck = {}
 }
 
 local function ifExecutorCall()
@@ -325,7 +326,7 @@ local function ifExecutorCall()
 end
 local excludedFunctions = {print, pairs, format, tabletostring, getcallingscript, warn, error}
 
-local function createLoggedFunction(original, customLoggerName, unhookedFunc, fromScript)
+local function createLoggedFunction(original, customLoggerName, unhookedFunc)
 	return function(...)
 		local args = table.pack(...)
 		local retVal = table.pack(original(...))
@@ -346,8 +347,9 @@ local function createLoggedFunction(original, customLoggerName, unhookedFunc, fr
 		listData(args, "Argument")
 		listData(retVal, "Return value")
 		
+		local scriptSource = loggerSettings.scriptCheck[unhookedFunc]
 		if loggerSettings.enabled and not table.find(loggerSettings.ignored, unhookedFunc)
-		and ifExecutorCall() and (fromScript == callingScript or fromScript == nil) then
+		and ifExecutorCall() and (scriptSource == callingScript or scriptSource == nil) then
 			print(str)
 		end
 		return unpack(retVal, 1, retVal.n)
@@ -374,8 +376,9 @@ getgenv().FunctionLogger = function(toLog, customLoggerName, fromScript)
 		local funcHook = hookfunction(toLog, function(...)
 			return loggerFunction(...)
 		end)
-		loggerFunction = createLoggedFunction(funcHook, customLoggerName, toLog, fromScript)
+		loggerFunction = createLoggedFunction(funcHook, customLoggerName, toLog)
 		table.insert(loggedFunctions, toLog)
+		loggerSettings.scriptCheck[toLog] = fromScript
 		print("logging", customLoggerName.."!")
 		return loggerFunction
 	end
@@ -396,7 +399,8 @@ getgenv().RobloxFunctionLogger = function(funcParent, funcName, logAny, fromScri
 	if data[key] then
 		error("This roblox function is already logged")
 	else
-		data[key] = createLoggedFunction(result, funcName, result, fromScript)
+		data[key] = createLoggedFunction(result, funcName, result)
+		loggerSettings.scriptCheck[result] = fromScript
 		if logAny then
 			print("Logged all roblox calls for", funcName)
 		else
