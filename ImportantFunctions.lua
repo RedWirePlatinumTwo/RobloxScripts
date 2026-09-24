@@ -430,9 +430,9 @@ getgenv().RobloxFunctionLogger = function(funcParent, funcName, logAny, fromScri
 	data[key] = createLoggedFunction(result, funcName, result)
 	loggerSettings.scriptCheck[result] = fromScript
 	if logAny then
-		print("Logging all roblox calls for", funcName, scrLine)
+		print("Logging all roblox calls (under the same ClassName) for", funcName, scrLine)
 	else
-		print("Logging roblox calls (under the same ClassName) for", funcName, "for Instance", GetFullName(funcParent), scrLine)
+		print("Logging roblox calls for", funcName, "for Instance", GetFullName(funcParent), scrLine)
 	end
 end
 
