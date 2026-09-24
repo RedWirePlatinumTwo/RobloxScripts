@@ -28,12 +28,13 @@ local rebuildString = function(str)
 end
 
 local function typeCheck(var, type, arg)
+	arg = arg or 1
 	local varType = typeof(var)
 	assert(varType == type, ("bad argument #%d (expected %s, got %s)"):format(arg, type, varType))
 end
 
 getgenv().GetFamily = function(ins, reverseOrder)
-	typeCheck(ins, "Instance", 1)
+	typeCheck(ins, "Instance")
 	local Pathway = {ins}
 	local par = ins.Parent
 	while par ~= nil do
@@ -88,7 +89,7 @@ local indexes = {}
 local totalTables = 0
 
 getgenv().TableToString = function(Table, TableName, args, isInternalTable)
-	typeCheck(Table, "table", 1)
+	typeCheck(Table, "table")
 	local output = ""
 	args = args or {}
 	TableName = TableName or "Table"
@@ -173,86 +174,85 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 	end
 	local name = getName(Table)
 
-		local function writeValue(index, value)
+	local function writeValue(index, value)
+	
+		local function isRecursive(tbl)
+			return if table.find(catchRepeats, tbl) then getName(tbl) else tostring(tbl)
+		end
 		
-			local function isRecursive(tbl)
-				return if table.find(catchRepeats, tbl) then getName(tbl) else tostring(tbl)
-			end
-			
-			local serializedIndex = ""
-			local indexFormatted, failed1 = Format(index, value, args, true)
-			local valueFormatted, failed2 = Format(value, index, args, true)
-			if failed2 then
-				valueFormatted = isRecursive(value)
-			end
-			if type(index) == "table" then
-				local findNewLine = indexFormatted:find("\n")
-				local tblName = ""
-				if findNewLine then
-					tblName = indexFormatted:sub(1, findNewLine - 1)
-					valueFormatted = valueFormatted.."\n"..indexFormatted:sub(findNewLine + 1)
-				else
-					tblName = indexFormatted
-				end
-				serializedIndex = ("\n%s[%s]"):format(name, tblName)
+		local serializedIndex = ""
+		local indexFormatted, failed1 = Format(index, value, args, true)
+		local valueFormatted, failed2 = Format(value, index, args, true)
+		if failed2 then
+			valueFormatted = isRecursive(value)
+		end
+		if type(index) == "table" then
+			local findNewLine = indexFormatted:find("\n")
+			local tblName = ""
+			if findNewLine then
+				tblName = indexFormatted:sub(1, findNewLine - 1)
+				valueFormatted = valueFormatted.."\n"..indexFormatted:sub(findNewLine + 1)
 			else
-				serializedIndex = ("\n%s[%s]"):format(name, indexFormatted)
+				tblName = indexFormatted
 			end
-			if failed1 then
-				serializedIndex = ("\n%s[%s]"):format(name, isRecursive(index))
-			end
-			local failString = ""
-			local failIgnore = {"function", "RBXScriptConnection", "RBXScriptSignal", "table"}
-			if failed1 or failed2 then
-				if args.ignoreUnsupportedValues then
-					return ""
-				end
-				local failPrefix = " --failed to convert types:"
-				failString = failPrefix
-				if failed1 and not table.find(failIgnore, typeof(index)) then
-					failString = failString.." "..typeof(index)
-				end
-				if failed2 and not table.find(failIgnore, typeof(value)) then
-					failString = failString.." "..typeof(value)
-				end
-				if failString == failPrefix then
-					failString = ""
-				end
-			end
-			return serializedIndex.." = "..valueFormatted..failString
-			
+			serializedIndex = ("\n%s[%s]"):format(name, tblName)
+		else
+			serializedIndex = ("\n%s[%s]"):format(name, indexFormatted)
 		end
-		
-		local extraTables = {}
-		local function contextCheck(v1, v2, v3)
-			local context = args.additionalCtx and args.additionalCtx(v1, v2, v3) or function() end
-			if type(context) == "string" and context ~= "" then
-				output = output.." --"..context
+		if failed1 then
+			serializedIndex = ("\n%s[%s]"):format(name, isRecursive(index))
+		end
+		local failString = ""
+		local failIgnore = {"function", "RBXScriptConnection", "RBXScriptSignal", "table"}
+		if failed1 or failed2 then
+			if args.ignoreUnsupportedValues then
+				return ""
+			end
+			local failPrefix = " --failed to format type(s):"
+			failString = failPrefix
+			if failed1 and not table.find(failIgnore, typeof(index)) then
+				failString = failString.." "..typeof(index)
+			end
+			if failed2 and not table.find(failIgnore, typeof(value)) then
+				failString = failString.." "..typeof(value)
+			end
+			if failString == failPrefix then
+				failString = ""
 			end
 		end
-		
-		local customVals = args.customValues and args.customValues(Table) or {}
-		for i, v in pairs(Table) do
-			if type(v) ~= "table" then
-				if customVals[i] == nil then
-					output = output..writeValue(i, v)
-				end
-				contextCheck(Table, i, v)
-			else
-				extraTables[i] = v
+		return serializedIndex.." = "..valueFormatted..failString
+	end
+	
+	local extraTables = {}
+	local function contextCheck(tbl, index, value)
+		local context = args.additionalCtx and args.additionalCtx(tbl, index, value)
+		if type(context) == "string" and context ~= "" then
+			output = output.." --"..context
+		end
+	end
+	
+	local customVals = args.customValues and args.customValues(Table) or {}
+	for i, v in pairs(Table) do
+		if type(v) ~= "table" then
+			if customVals[i] == nil then
+				output = output..writeValue(i, v)
 			end
-		end
-		for index, value in pairs(customVals) do
-			output = output..("\n%s[%s] = %s"):format(name, Format(index), tostring(value))
-		end
-		for i, v in pairs(extraTables) do
-			output = output.."\n"..writeValue(i, v)
 			contextCheck(Table, i, v)
+		else
+			extraTables[i] = v
 		end
-		if not isInternalTable then
-			output = output.."\n\nreturn "..name
-		end
-		return output
+	end
+	for index, value in pairs(customVals) do
+		output = output..("\n%s[%s] = %s"):format(name, Format(index), tostring(value))
+	end
+	for i, v in pairs(extraTables) do
+		output = output.."\n"..writeValue(i, v)
+		contextCheck(Table, i, v)
+	end
+	if not isInternalTable then
+		output = output.."\n\nreturn "..name
+	end
+	return output
 end
 
 getgenv().tabletostring = TableToString
@@ -388,30 +388,30 @@ local function createLoggedFunction(original, customLoggerName, unhookedFunc)
 end
 
 local function scriptAssert(scr, arg)
+	local str = ""
 	if scr then
 		assert(typeof(scr) == "Instance" and scr:IsA("Script"), "Expected script source for arg #"..arg)
+		str = "from script source: "..GetFullName(scr)
 	end
+	return str
 end
 
 getgenv().FunctionLogger = function(toLog, customLoggerName, fromScript)
 	customLoggerName = customLoggerName or "Function"..(#loggedFunctions + 1)
-	typeCheck(toLog, "function", 1)
+	typeCheck(toLog, "function")
 	assert(toLog ~= FunctionLogger and not table.find(excludedFunctions, toLog), "Ignoring requested function to log to prevent recursions")
-	scriptAssert(fromScript, 3)
-
-	if table.find(loggedFunctions, toLog) then
-		error("This function has already been logged!")
-	else
-		local loggerFunction
-		local funcHook = hookfunction(toLog, function(...)
-			return loggerFunction(...)
-		end)
-		loggerFunction = createLoggedFunction(funcHook, customLoggerName, toLog)
-		table.insert(loggedFunctions, toLog)
-		loggerSettings.scriptCheck[toLog] = fromScript
-		print("logging", customLoggerName.."!")
-		return loggerFunction
-	end
+	local scrLine = scriptAssert(fromScript, 3)
+	assert(table.find(loggedFunctions, toLog) == nil, "This function has already been logged!")
+	
+	local loggerFunction
+	local funcHook = hookfunction(toLog, function(...)
+		return loggerFunction(...)
+	end)
+	loggerFunction = createLoggedFunction(funcHook, customLoggerName, toLog)
+	table.insert(loggedFunctions, toLog)
+	loggerSettings.scriptCheck[toLog] = fromScript
+	print("Logging function", customLoggerName, scrLine)
+	return loggerFunction
 end
 
 getgenv().rLoggedFunctions = rLoggedFunctions or {Any = {}}
@@ -420,19 +420,19 @@ getgenv().ignoredInstances = ignoredInstances or {}
 getgenv().RobloxFunctionLogger = function(funcParent, funcName, logAny, fromScript)
     local result = funcParent[funcName]
 	assert(typeof(funcParent) == "Instance" and typeof(result) == "function", "Not a roblox function")
-	scriptAssert(fromScript, 4)
+	local scrLine = scriptAssert(fromScript, 4)
 	if not logAny then
 		rLoggedFunctions[funcParent] = rLoggedFunctions[funcParent] or {}
 	end
     local data = if logAny then rLoggedFunctions.Any else rLoggedFunctions[funcParent]
 	local key = if logAny then funcName..funcParent.ClassName else funcName
-	assert(data[key] == nil, "This roblox function is already logged")
+	assert(data[key] == nil, "This roblox function is already logged!")
 	data[key] = createLoggedFunction(result, funcName, result)
 	loggerSettings.scriptCheck[result] = fromScript
 	if logAny then
-		print("Logged all roblox calls for", funcName)
+		print("Logging all roblox calls for", funcName, scrLine)
 	else
-		print("Logged roblox calls for", funcName, "for Instance", GetFullName(funcParent))
+		print("Logging roblox calls (under the same ClassName) for", funcName, "for Instance", GetFullName(funcParent), scrLine)
 	end
 end
 
