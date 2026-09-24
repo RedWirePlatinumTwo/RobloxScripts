@@ -32,6 +32,55 @@ local rebuildString = function(str)
 	return reformattedString
 end
 
+getgenv().GetFamily = function(ins, reverseOrder)
+	local Pathway = {ins}
+	local par = ins.Parent
+	while par ~= nil do
+		if reverseOrder then
+			table.insert(Pathway, par)
+		else
+			table.insert(Pathway, 1, par)
+		end
+		par = par.Parent
+	end
+	return Pathway
+end
+
+getgenv().GetFullName = function(ins)
+	local Pathway = GetFamily(ins)
+	
+	local function formatChild(name)
+		name = rebuildString(name)
+		if name:find("%A") then
+			return "[\""..name.."\"]"
+		else
+			return "."..name
+		end
+	end
+	local fullName = ""
+	for i, v in ipairs(Pathway) do
+		if i == 1 then
+			if v == game then
+				fullName = "game"
+			else
+				fullName = v.Name
+			end
+		else
+			if i == 2 then
+				local success, result = pcall(function() return game:GetService(v.ClassName) end)
+				if success and result == v then
+					fullName = fullName..(":GetService(\"%s\")"):format(v.ClassName)
+				else
+					fullName = fullName..formatChild(v.Name)
+				end
+			else
+				fullName = fullName..formatChild(v.Name)
+			end
+		end
+	end
+	return fullName
+end
+
 getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 	local output = ""
 	args = args or {}
@@ -220,96 +269,87 @@ end
 
 getgenv().tabletostring = TableToString
 
+local formatters = {}
+
+local function addFormat(toStr, ...)
+	local args = {...}
+	for _, type in pairs(args) do
+		formatters[type] = toStr
+	end
+end
+
+--start of formatters registry
+addFormat(function(var)
+	return "\""..rebuildString(var).."\""
+end, "string")
+
+addFormat(function(var)
+	return tostring(var)
+end, "EnumItem", "boolean")
+
+addFormat(function(var)
+	if var == math.huge then
+		return "math.huge"
+	elseif var == -math.huge then
+		return "-math.huge"
+	else
+		return tostring(var)
+	end
+end, "number")
+
+addFormat(function(var, ...)
+	if not table.find(catchRepeats, var) then
+		return TableToString(var, ...)
+	end
+end, "table")
+
+addFormat(GetFullName, "Instance")
+
+addFormat(function(var)
+	return ("%s.new(%s)"):format(typeof(var), tostring(var)):gsub("{", ""):gsub("}", "")
+end, "Vector2", "Vector3", "CFrame", "UDim2", "NumberRange")
+
+addFormat(function(var)
+	local function toRGB(num)
+		return math.clamp(math.round(num * 255), 0, 255)
+	end
+	return ("Color3.fromRGB(%d, %d, %d)"):format(toRGB(var.R), toRGB(var.G), toRGB(var.B))
+end, "Color3")
+
+addFormat(function(var)
+	return ("%s.new(\"%s\")"):format(typeof(var), tostring(var))
+end, "BrickColor")
+
+addFormat(function() return "Enum" end, "Enums")
+
+addFormat(function(var)
+	return "Enum."..tostring(var)
+end, "Enum")
+
+addFormat(function(var)
+	local number = formatters.number
+	return ("TweenInfo.new(%s, %s, %s, %s, %s, %s)"):format(
+		number(var.Time),
+		tostring(var.EasingStyle),
+		tostring(var.EasingDirection),
+		number(var.RepeatCount),
+		tostring(var.Reverses),
+		number(var.DelayTime)
+	)
+end, "TweenInfo")
+--end of formatters registry
+
 getgenv().Format = function(var, ...)
 	local failedConversion = false
-	local output = ""
-	if typeof(var) == "EnumItem" or type(var) == "boolean" then
-		output = tostring(var)
-	elseif type(var) == "number" then
-		if var == math.huge then
-			output = "math.huge"
-		elseif var == -math.huge then
-			output = "-math.huge"
-		else
-			output = tostring(var)
-		end
-	elseif type(var) == "string" then
-		output = "\""..rebuildString(var).."\""
-	elseif type(var) == "table" then
-		if not table.find(catchRepeats, var) then
-			output = TableToString(var, ...)
-		else
-			failedConversion = true
-		end
-	elseif typeof(var) == "Instance" then
-		output = GetFullName(var)
-	elseif typeof(var):find("Vector") or typeof(var) == "CFrame" or typeof(var) == "UDim2" or typeof(var) == "NumberRange" then
-		output = ("%s.new(%s)"):format(typeof(var), tostring(var)):gsub("{", ""):gsub("}", "")
-	elseif typeof(var) == "Color3" then
-		local function toRGB(num)
-			return math.clamp(math.round(num * 255), 0, 255)
-		end
-		output = ("Color3.fromRGB(%d, %d, %d)"):format(toRGB(var.R), toRGB(var.G), toRGB(var.B))
-	elseif typeof(var) == "BrickColor" then
-		output = ("%s.new(\"%s\")"):format(typeof(var), tostring(var))
-	elseif typeof(var) == "Enum" then
-		output = "Enum."..tostring(var)
-	elseif typeof(var) == "Enums" then
-		output = "Enum"
+	local result = tostring(var)
+	local formatter = formatters[typeof(var)]
+	if formatter then
+		result = formatter(var, ...)
+		failedConversion = result == nil
 	else
 		failedConversion = true
-		output = tostring(var)
 	end
-	return output, failedConversion
-end
-
-getgenv().GetFamily = function(ins, reverseOrder)
-	local Pathway = {ins}
-	local par = ins.Parent
-	while par ~= nil do
-		if reverseOrder then
-			table.insert(Pathway, par)
-		else
-			table.insert(Pathway, 1, par)
-		end
-		par = par.Parent
-	end
-	return Pathway
-end
-
-getgenv().GetFullName = function(ins)
-	local Pathway = GetFamily(ins)
-	
-	local function formatChild(name)
-		name = rebuildString(name)
-		if name:find("%A") then
-			return "[\""..name.."\"]"
-		else
-			return "."..name
-		end
-	end
-	local fullName = ""
-	for i, v in ipairs(Pathway) do
-		if i == 1 then
-			if v == game then
-				fullName = "game"
-			else
-				fullName = v.Name
-			end
-		else
-			if i == 2 then
-				local success, result = pcall(function() return game:GetService(v.ClassName) end)
-				if success and result == v then
-					fullName = fullName..(":GetService(\"%s\")"):format(v.ClassName)
-				else
-					fullName = fullName..formatChild(v.Name)
-				end
-			else
-				fullName = fullName..formatChild(v.Name)
-			end
-		end
-	end
-	return fullName
+	return result, failedConversion
 end
 
 local loggedFunctions = {}
