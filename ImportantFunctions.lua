@@ -27,6 +27,14 @@ local rebuildString = function(str)
 	return reformattedString
 end
 
+getgenv().thread = function(f, ignoreWarn, ...) --Potassium (the executor) currently fucks up xpcall and pcall in hookmetamethod, so this has become a necessity
+	local success, result = coroutine.resume(coroutine.create(f), ...)
+	if not success and not ignoreWarn then
+		warn(result)
+	end
+	return success, result
+end
+
 local function typeCheck(var, type, arg)
 	arg = arg or 1
 	local varType = typeof(var)
@@ -69,7 +77,7 @@ getgenv().GetFullName = function(ins)
 			end
 		else
 			if i == 2 and Pathway[1] == game then
-				local success, result = pcall(function() return game:GetService(v.ClassName) end)
+				local success, result = thread(function() return game:GetService(v.ClassName) end, true)
 				if success and result == v then
 					fullName = fullName..(":GetService(\"%s\")"):format(v.ClassName)
 				else
@@ -355,10 +363,10 @@ local function ifExecutorCall(caller)
 end
 local excludedFunctions = {print, pairs, format, tabletostring, getcallingscript, warn, error}
 
-local function createLoggedFunction(original, customLoggerName, unhookedFunc)
+local function createLoggedFunction(toHook, customLoggerName, funcIdentity)
 	return function(...)
 		local args = table.pack(...)
-		local retVal = table.pack(original(...))
+		local retVal = table.pack(toHook(...))
 		local str = "Function "..customLoggerName.." was called!"
 		local callingScript = getcallingscript()
 		local caller = checkcaller()
@@ -378,8 +386,8 @@ local function createLoggedFunction(original, customLoggerName, unhookedFunc)
 		listData(args, "Argument")
 		listData(retVal, "Return value")
 		
-		local scriptSource = loggerSettings.scriptCheck[unhookedFunc]
-		if loggerSettings.enabled and not table.find(loggerSettings.ignored, unhookedFunc)
+		local scriptSource = loggerSettings.scriptCheck[funcIdentity]
+		if loggerSettings.enabled and not table.find(loggerSettings.ignored, funcIdentity)
 		and ifExecutorCall(caller) and (scriptSource == callingScript or scriptSource == nil) then
 			print(str)
 		end
@@ -425,14 +433,13 @@ getgenv().RobloxFunctionLogger = function(funcParent, funcName, logAny, fromScri
 		rLoggedFunctions[funcParent] = rLoggedFunctions[funcParent] or {}
 	end
     local data = if logAny then rLoggedFunctions.Any else rLoggedFunctions[funcParent]
-	local key = if logAny then funcName..funcParent.ClassName else funcName
-	assert(data[key] == nil, "This roblox function is already logged!")
-	data[key] = createLoggedFunction(result, funcName, result)
+	assert(data[result] == nil, "This roblox function is already logged!")
+	data[result] = createLoggedFunction(result, funcName, result)
 	loggerSettings.scriptCheck[result] = fromScript
 	if logAny then
-		print("Logging all roblox calls (under the same ClassName) for", funcName, scrLine)
+		print("Logging all roblox calls for", funcName, scrLine)
 	else
-		print("Logging roblox calls for", funcName, "for Instance", GetFullName(funcParent), scrLine)
+		print("Logging roblox calls for", funcName, "from Instance", GetFullName(funcParent), scrLine)
 	end
 end
 
@@ -446,12 +453,14 @@ if not ImportantFuncs_initNameCallHook then
 	getgenv().ImportantFuncs_initNameCallHook = true
 	local logHook; logHook = hookmetamethod(game, "__namecall", function(self, ...)
 		local callMethod = getnamecallmethod()
-		
-		local logData = rLoggedFunctions[self] --rblx function logger logic
-		local any = rLoggedFunctions.Any[callMethod..self.ClassName]
-		if not table.find(ignoredInstances, self) then
-			if logData and logData[callMethod] then
-				return logData[callMethod](self, ...)
+		local success, result = thread(function()
+			return self[callMethod]
+		end, true)
+		if not table.find(ignoredInstances, self) and success and typeof(result) == "function" then
+			local logData = rLoggedFunctions[self]
+			local any = rLoggedFunctions.Any[result]
+			if logData and logData[result] then
+				return logData[result](self, ...)
 			elseif any then
 				return any(self, ...)
 			end 
