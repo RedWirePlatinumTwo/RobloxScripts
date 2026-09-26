@@ -96,10 +96,10 @@ local indexReps = {}
 local indexes = {}
 local totalTables = 0
 --[[ list of contents that args can include:
-	simplify (boolean): makes table-naming more straightforward with (presumably) less function work
+	simplify (boolean): if true, makes table-naming more straightforward with (presumably) less function work
 	dateFormat (table): custom date format, default is {"m", "d", "y"} for MM/DD/YYYY
 	additionalCtx (function: string): a function with the arguments: (table, index, value). allows one to provide additional comments when the value is written
-	ignoreUnsupportedValues (boolean): any values that Format cannot serialize will be ommitted from the table output
+	ignoreUnsupportedValues (boolean): if true, any values that Format cannot serialize will be omitted from the table output
 	customValues (function: table): values within this table will simply be emitted as a string, ignoring writeValue checks
 ]]
 getgenv().TableToString = function(Table, TableName, args, isInternalTable)
