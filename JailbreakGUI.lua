@@ -754,7 +754,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function TWPVJ_fake_script() -- JailbreakGUI.LocalScript 
+local function RPIEI_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -801,6 +801,7 @@ local function TWPVJ_fake_script() -- JailbreakGUI.LocalScript
 		mainframe.modshotgun,
 		mainframe["1flyupdown"]
 	}
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
 	local function singleclick(button, func)
 		local con
@@ -816,15 +817,6 @@ local function TWPVJ_fake_script() -- JailbreakGUI.LocalScript
 			n = n + 1
 		end
 		return n
-	end
-	
-	local thread = function(f, ...)
-		local co = coroutine.create(f)
-		local ok, err = coroutine.resume(co, ...)
-		if not ok then
-			warn(err)
-		end
-		return co
 	end
 	
 	local TableAdded = function(Table, func)
@@ -932,7 +924,6 @@ local function TWPVJ_fake_script() -- JailbreakGUI.LocalScript
 		if not getgenv().RedsJBGUI then
 			getgenv().RedsJBGUI = true
 			notify("Removed lock vehicle on exit button as its now part of the main game.")
-			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
 			local Changed = function(part, PropertyName, func)
 				local current = part[PropertyName]
@@ -2139,4 +2130,4 @@ local function TWPVJ_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(TWPVJ_fake_script)()
+coroutine.wrap(RPIEI_fake_script)()
