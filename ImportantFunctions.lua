@@ -77,7 +77,7 @@ getgenv().GetFullName = function(ins)
 			end
 		else
 			if i == 2 and Pathway[1] == game then
-				local success, result = thread(function() return game:GetService(v.ClassName) end, true)
+				local success, result = thread(game.GetService, true, game, v.ClassName)
 				if success and result == v then
 					fullName = fullName..(":GetService(\"%s\")"):format(v.ClassName)
 				else
