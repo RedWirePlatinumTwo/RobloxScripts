@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function SZGJ_fake_script() -- RedwiresAimbot.LocalScript 
+local function FTGA_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -2366,27 +2366,24 @@ local function SZGJ_fake_script() -- RedwiresAimbot.LocalScript
 	
 		local wlframe = wlui.WhitelistedInstances.whitelistframe
 	
-		local function AddtoList(ins)
+		local function addToList(plr)
 			local clone = wlframe:Clone()
 			clone.Visible = true
 			clone.Parent = wlframe.Parent
+			clone.TextLabel.Text = CheckDN(plr)
+			clone.TextLabel.TextColor3 = getOrCreate(Theme, "No")
 	
 			local function togglefunc(Table)
-				local button
-				if Table == PrioritizedPlrs then
-					button = clone.PriorityToggle
-				else
-					button = clone.WhitelistToggle
-				end
+				local button = if Table == PrioritizedPlrs then clone.PriorityToggle else clone.WhitelistToggle
 				toggleTxt[button] = false
 	
-				if getOrCreate(GameStats, "WhitelistFriends") and lplr:IsFriendsWith(ins.UserId) and Table == WhitelistedPlrs and not table.find(Table, ins) then
+				if getOrCreate(GameStats, "WhitelistFriends") and lplr:IsFriendsWith(plr.UserId) and Table == WhitelistedPlrs and not table.find(Table, plr) then
 					button.TextColor3 = getOrCreate(Theme, "Yes")
 					toggleTxt[button] = true
 					button.Text = "Yes"
-					table.insert(Table, ins)
+					table.insert(Table, plr)
 				end
-				if table.find(Table, ins) and Table == PrioritizedPlrs then
+				if table.find(Table, plr) and Table == PrioritizedPlrs then
 					button.TextColor3 = getOrCreate(Theme, "Yes")
 					toggleTxt[button] = true
 					button.Text = "Yes"
@@ -2397,13 +2394,13 @@ local function SZGJ_fake_script() -- RedwiresAimbot.LocalScript
 						button.TextColor3 = getOrCreate(Theme, "Yes")
 						toggleTxt[button] = true
 						button.Text = "Yes"
-						table.insert(Table,ins)
+						table.insert(Table,plr)
 	
 						if Table == PrioritizedPlrs and clone.WhitelistToggle.Text == "Yes" then
 							clone.WhitelistToggle.Text = "No"
 							clone.WhitelistToggle.TextColor3 = getOrCreate(Theme, "No")
 							toggleTxt[clone.WhitelistToggle] = false
-							local wlistplr = table.find(WhitelistedPlrs, ins)
+							local wlistplr = table.find(WhitelistedPlrs, plr)
 							table.remove(WhitelistedPlrs, wlistplr)
 						end
 	
@@ -2411,7 +2408,7 @@ local function SZGJ_fake_script() -- RedwiresAimbot.LocalScript
 							clone.PriorityToggle.Text = "No"
 							clone.PriorityToggle.TextColor3 = getOrCreate(Theme, "No")
 							toggleTxt[clone.PriorityToggle] = false
-							local prioplr = table.find(PrioritizedPlrs, ins)
+							local prioplr = table.find(PrioritizedPlrs, plr)
 							table.remove(PrioritizedPlrs, prioplr)
 						end
 	
@@ -2419,18 +2416,17 @@ local function SZGJ_fake_script() -- RedwiresAimbot.LocalScript
 						button.TextColor3 = getOrCreate(Theme, "No")
 						toggleTxt[button] = false
 						button.Text = "No"
-						local removeins = table.find(Table, ins)
+						local removeins = table.find(Table, plr)
 						table.remove(Table,removeins)
 					end
 				end)
 	
 			end
-			clone.TextLabel.Text = CheckDN(ins)
 			togglefunc(WhitelistedPlrs)
 			togglefunc(PrioritizedPlrs)
 	
 			thread(function()
-				repeat task.wait() until not game:GetService("Players"):FindFirstChild(ins.Name)
+				repeat task.wait() until not game:GetService("Players"):FindFirstChild(plr.Name)
 				clone:Destroy()
 			end)
 	
@@ -2438,7 +2434,7 @@ local function SZGJ_fake_script() -- RedwiresAimbot.LocalScript
 	
 		for i,plr in pairs(plrs:GetPlayers()) do
 			if plr ~= lplr then
-				AddtoList(plr)
+				addToList(plr)
 			end
 		end
 	
@@ -2469,7 +2465,7 @@ local function SZGJ_fake_script() -- RedwiresAimbot.LocalScript
 			if removeIfPresent(PrioritizedPlrsOld, plr.Name) then
 				table.insert(PrioritizedPlrs, plr)
 			end
-			AddtoList(plr)
+			addToList(plr)
 		end)
 	
 		targetingui.add.Activated:connect(function()
@@ -2529,4 +2525,4 @@ local function SZGJ_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(SZGJ_fake_script)()
+coroutine.wrap(FTGA_fake_script)()
