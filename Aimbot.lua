@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function FTGA_fake_script() -- RedwiresAimbot.LocalScript 
+local function LOTY_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -2371,10 +2371,10 @@ local function FTGA_fake_script() -- RedwiresAimbot.LocalScript
 			clone.Visible = true
 			clone.Parent = wlframe.Parent
 			clone.TextLabel.Text = CheckDN(plr)
-			clone.TextLabel.TextColor3 = getOrCreate(Theme, "No")
 	
 			local function togglefunc(Table)
 				local button = if Table == PrioritizedPlrs then clone.PriorityToggle else clone.WhitelistToggle
+				button.TextColor3 = getOrCreate(Theme, "No")
 				toggleTxt[button] = false
 	
 				if getOrCreate(GameStats, "WhitelistFriends") and lplr:IsFriendsWith(plr.UserId) and Table == WhitelistedPlrs and not table.find(Table, plr) then
@@ -2525,4 +2525,4 @@ local function FTGA_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(FTGA_fake_script)()
+coroutine.wrap(LOTY_fake_script)()
