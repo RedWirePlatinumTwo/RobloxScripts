@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function KQDGB_fake_script() -- RedwiresAimbot.LocalScript 
+local function SZGJ_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -2134,7 +2134,7 @@ local function KQDGB_fake_script() -- RedwiresAimbot.LocalScript
 					local partpos = part.Position
 					local v, onscreen = camera:WorldToScreenPoint(partpos + misc.AimOffset)
 					local x,y = (v.X - m.X), (v.Y - m.Y)
-					local mouseSens = getOrCreate(GameStats, "MouseSensitivity")
+					local mouseSens = getOrCreate(GlobalStats, "MouseSensitivity")
 					if onscreen then
 						if misc.IsAimbotOn then
 							if getOrCreate(GameStats, "AimMethod") == "Camera" then
@@ -2529,4 +2529,4 @@ local function KQDGB_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(KQDGB_fake_script)()
+coroutine.wrap(SZGJ_fake_script)()
