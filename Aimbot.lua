@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function HSSDEW_fake_script() -- RedwiresAimbot.LocalScript 
+local function KQDGB_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1107,10 +1107,10 @@ local function HSSDEW_fake_script() -- RedwiresAimbot.LocalScript
 		return table.concat({"", ...}, "\n - ")
 	end
 	if not RedsAimbot then
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 		getgenv().RedsAimbot = {}
-		sendNotif("Red's Universal Aimbot (9/20/26)", changeNotes(
-			"Updated raycasting system to remove canQuery changes",
-			"Added RaycastOrigin in game settings"
+		sendNotif("Red's Universal Aimbot (9/25/26)", changeNotes(
+			"Included the fucking loadstring responsible for making this aimbot work"
 		))
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
@@ -1125,15 +1125,6 @@ local function HSSDEW_fake_script() -- RedwiresAimbot.LocalScript
 					v.Parent.Visible = false
 				end)
 			end
-		end
-	
-		local function thread(f, ...)
-			local co = coroutine.create(f)
-			local ok, err = coroutine.resume(co, ...)
-			if not ok then
-				warn(err)
-			end
-			return co
 		end
 		
 		local function addIfAbsent(tbl, value)
@@ -2538,4 +2529,4 @@ local function HSSDEW_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(HSSDEW_fake_script)()
+coroutine.wrap(KQDGB_fake_script)()
