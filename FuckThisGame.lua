@@ -181,7 +181,7 @@ focusonchr.TextWrapped = true
 
 -- Scripts:
 
-local function POBDF_fake_script() -- FuckThisGame.LocalScript 
+local function ESDBZ_fake_script() -- FuckThisGame.LocalScript 
 	local script = Instance.new('LocalScript', FuckThisGame)
 
 	local mainframe = script.Parent.mainframe
@@ -191,19 +191,12 @@ local function POBDF_fake_script() -- FuckThisGame.LocalScript
 	local uiservice = game:GetService("UserInputService")
 	local runservice = game:GetService("RunService")
 	local tcservice = game:GetService("TextChatService")
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	
-	local numbers = {}
-	numbers.ws = 30
-	numbers.jump = 50
-	
-	local thread = function(f, ...)
-		local co = coroutine.create(f)
-		local ok, err = coroutine.resume(co, ...)
-		if not ok then
-			warn(err)
-		end
-		return co
-	end
+	local numbers = {
+		ws = 30,
+		jump = 50
+	}
 	
 	local Changed = function(part, PropertyName, func)
 		local current = part[PropertyName]
@@ -230,23 +223,7 @@ local function POBDF_fake_script() -- FuckThisGame.LocalScript
 		return t
 	end
 	
-	local GetFamily = function(ins, reverseorder)
-		local Pathway = {ins}
-		local par = ins.Parent
-	
-		while par ~= nil do
-			if reverseorder then
-				table.insert(Pathway, par)
-			else
-				table.insert(Pathway, 1, par)
-			end
-			par = par.Parent
-		end
-	
-		return Pathway
-	end
-	
-	local ischaracter = function(ins)
+	local getcharacter = function(ins)
 		if ins == nil then return end
 		for i,v in pairs(GetFamily(ins)) do
 			local plr = plrs:GetPlayerFromCharacter(v)
@@ -485,7 +462,7 @@ local function POBDF_fake_script() -- FuckThisGame.LocalScript
 		end)
 		mouse.Button1Down:connect(function()
 			local target = mouse.Target
-			if target and ctrlDown() and not ischaracter(target) then
+			if target and ctrlDown() and not getcharacter(target) then
 				target:Destroy()
 			end
 		end)
@@ -500,4 +477,4 @@ local function POBDF_fake_script() -- FuckThisGame.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(POBDF_fake_script)()
+coroutine.wrap(ESDBZ_fake_script)()
