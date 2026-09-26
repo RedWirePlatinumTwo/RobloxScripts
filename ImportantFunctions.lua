@@ -95,7 +95,13 @@ local catchRepeats = {}
 local indexReps = {}
 local indexes = {}
 local totalTables = 0
-
+--[[ list of contents that args can include:
+	simplify (boolean): makes table-naming more straightforward with (presumably) less function work
+	dateFormat (table): custom date format, default is {"m", "d", "y"} for MM/DD/YYYY
+	additionalCtx (function): a function with the arguments: (table, index, value). allows one to provide additional comments when the value is written
+	ignoreUnsupportedValues (boolean): any values that Format cannot serialize will be ommitted from the table output
+	customValues (table): values within this table will simply be emitted as a string, ignoring writeValue checks
+]]
 getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 	typeCheck(Table, "table")
 	local output = ""
@@ -211,21 +217,21 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 			serializedIndex = ("\n%s[%s]"):format(name, isRecursive(index))
 		end
 		local failString = ""
-		local failIgnore = {"function", "RBXScriptConnection", "RBXScriptSignal", "table"}
 		if failed1 or failed2 then
-			if args.ignoreUnsupportedValues then
-				return ""
-			end
 			local failPrefix = " --failed to format type(s):"
 			failString = failPrefix
-			if failed1 and not table.find(failIgnore, typeof(index)) then
+			if failed1 and typeof(index) ~= "table" then
 				failString = failString.." "..typeof(index)
 			end
-			if failed2 and not table.find(failIgnore, typeof(value)) then
+			if failed2 and typeof(value) ~= "table" then
 				failString = failString.." "..typeof(value)
 			end
 			if failString == failPrefix then
 				failString = ""
+			else
+				if args.ignoreUnsupportedValues then
+					return ""
+				end
 			end
 		end
 		return serializedIndex.." = "..valueFormatted..failString
