@@ -181,7 +181,7 @@ focusonchr.TextWrapped = true
 
 -- Scripts:
 
-local function ESDBZ_fake_script() -- FuckThisGame.LocalScript 
+local function CSBZWHC_fake_script() -- FuckThisGame.LocalScript 
 	local script = Instance.new('LocalScript', FuckThisGame)
 
 	local mainframe = script.Parent.mainframe
@@ -191,7 +191,9 @@ local function ESDBZ_fake_script() -- FuckThisGame.LocalScript
 	local uiservice = game:GetService("UserInputService")
 	local runservice = game:GetService("RunService")
 	local tcservice = game:GetService("TextChatService")
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
+	if not getgenv().ImportantFuncs_initNameCallHook then
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
+	end
 	
 	local numbers = {
 		ws = 30,
@@ -477,4 +479,4 @@ local function ESDBZ_fake_script() -- FuckThisGame.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(ESDBZ_fake_script)()
+coroutine.wrap(CSBZWHC_fake_script)()
