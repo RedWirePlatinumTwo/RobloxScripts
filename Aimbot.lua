@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function LOTY_fake_script() -- RedwiresAimbot.LocalScript 
+local function JRPKX_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1107,10 +1107,12 @@ local function LOTY_fake_script() -- RedwiresAimbot.LocalScript
 		return table.concat({"", ...}, "\n - ")
 	end
 	if not RedsAimbot then
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
+		if not getgenv().ImportantFuncs_initNameCallHook then
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
+		end
 		getgenv().RedsAimbot = {}
-		sendNotif("Red's Universal Aimbot (9/25/26)", changeNotes(
-			"Included the fucking loadstring responsible for making this aimbot work"
+		sendNotif("Red's Universal Aimbot (9/26/26)", changeNotes(
+			"The load-bearing loadstring will only execute if an init flag hasn't been set to true"
 		))
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
@@ -2525,4 +2527,4 @@ local function LOTY_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(LOTY_fake_script)()
+coroutine.wrap(JRPKX_fake_script)()
