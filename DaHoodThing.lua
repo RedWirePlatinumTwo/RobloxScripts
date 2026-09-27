@@ -84,7 +84,7 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function GVOMP_fake_script() -- DaShop.LocalScript 
+local function LUDIWI_fake_script() -- DaShop.LocalScript 
 	local script = Instance.new('LocalScript', DaShop)
 
 	local mainframe = script.Parent.MainFrame
@@ -95,14 +95,8 @@ local function GVOMP_fake_script() -- DaShop.LocalScript
 	local rstorage = game:GetService("ReplicatedStorage")
 	local lplr = game:GetService("Players").LocalPlayer
 	local runservice = game:GetService("RunService")
-	
-	local thread = function(f, ...)
-		local co = coroutine.create(f)
-		local ok, err = coroutine.resume(co, ...)
-		if not ok then
-			warn(err)
-		end
-		return co
+	if not getgenv().ImportantFuncs_initNameCallHook then
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 	end
 	
 	local function Changed(part, PropertyName, func)
@@ -217,4 +211,4 @@ local function GVOMP_fake_script() -- DaShop.LocalScript
 		end
 	end)
 end
-coroutine.wrap(GVOMP_fake_script)()
+coroutine.wrap(LUDIWI_fake_script)()
