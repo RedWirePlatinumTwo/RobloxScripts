@@ -181,7 +181,7 @@ focusonchr.TextWrapped = true
 
 -- Scripts:
 
-local function CSBZWHC_fake_script() -- FuckThisGame.LocalScript 
+local function EFTKS_fake_script() -- FuckThisGame.LocalScript 
 	local script = Instance.new('LocalScript', FuckThisGame)
 
 	local mainframe = script.Parent.mainframe
@@ -328,6 +328,10 @@ local function CSBZWHC_fake_script() -- FuckThisGame.LocalScript
 		end)
 	end
 	
+	local function keyDown(keycode)
+		return uiservice:IsKeyDown(keycode) and not uiservice:GetFocusedTextBox()
+	end
+	
 	singleClick(mainframe.flyscript, function()
 		local flyspeed = 150
 		local flying = false
@@ -336,10 +340,6 @@ local function CSBZWHC_fake_script() -- FuckThisGame.LocalScript
 		local updown = true
 		local pos = Vector3.new()
 		local up = Vector3.yAxis
-	
-		local function keyDown(keycode)
-			return uiservice:IsKeyDown(keycode) and not uiservice:GetFocusedTextBox()
-		end
 	
 		runservice.Heartbeat:connect(function(tick)
 			local chr = lplr.Character
@@ -439,12 +439,20 @@ local function CSBZWHC_fake_script() -- FuckThisGame.LocalScript
 	end)
 	
 	singleClick(mainframe.infjump, function()
-		uiservice.InputBegan:connect(function(key, processed)
-			if processed then return end
-			local hum = lplr.Character.Humanoid
-			local hrp = hum.RootPart
-			if key.KeyCode == Enum.KeyCode.Space then
-				hrp.Velocity = Vector3.new(hrp.Velocity.X, hum.JumpPower, hrp.Velocity.Z)
+		local cooldown = true
+	
+		runservice.Heartbeat:connect(function()
+			local hum = lplr.Character and lplr.Character:FindFirstChild("Humanoid")
+			if hum and hum.RootPart then
+				local hrp = hum.RootPart
+				if keyDown(Enum.KeyCode.Space) and cooldown then
+					cooldown = false
+					delay(0.2, function()
+						cooldown = true
+					end)
+					local vel = hrp.Velocity
+					hrp.Velocity = Vector3.new(vel.X, math.max(hum.JumpPower, 50), vel.Z)
+				end
 			end
 		end)
 	end)
@@ -479,4 +487,4 @@ local function CSBZWHC_fake_script() -- FuckThisGame.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(CSBZWHC_fake_script)()
+coroutine.wrap(EFTKS_fake_script)()
