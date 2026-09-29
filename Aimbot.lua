@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function JRPKX_fake_script() -- RedwiresAimbot.LocalScript 
+local function XJZX_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -2200,7 +2200,7 @@ local function JRPKX_fake_script() -- RedwiresAimbot.LocalScript
 				local ray = workspace:Raycast(origin, destinationPart.Position - origin, params)
 				if ray then
 					local ins = ray.Instance
-					if not ins.CanCollide and math.min(ins.Transparency, 1) == 1 then
+					if not ins:CanCollideWith(lplr.Character.Head) and math.min(ins.Transparency, 1) == 1 then
 						table.insert(exclusions, ins)
 						return recursiveCast(origin, destinationPart, exclusions)
 					else
@@ -2527,4 +2527,4 @@ local function JRPKX_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(JRPKX_fake_script)()
+coroutine.wrap(XJZX_fake_script)()
