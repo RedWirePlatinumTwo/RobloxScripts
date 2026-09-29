@@ -68,11 +68,11 @@ getgenv().GetFamily = function(ins, reverseOrder)
 	return Pathway
 end
 
-getgenv().GetFullName = function(ins)
-	local Pathway = GetFamily(ins)
+getgenv().GetFullName = function(instance)
+	local Pathway = GetFamily(instance)
 	
-	local function formatChild(name)
-		name = rebuildString(name)
+	local function formatChild(ins)
+		local name = rebuildString(ins.Name)
 		if name:find("%A") then
 			return "[\""..name.."\"]"
 		else
@@ -80,23 +80,19 @@ getgenv().GetFullName = function(ins)
 		end
 	end
 	local fullName = ""
-	for i, v in ipairs(Pathway) do
+	for i, ins in ipairs(Pathway) do
 		if i == 1 then
-			if v == game then
-				fullName = "game"
-			else
-				fullName = v.Name
-			end
+			fullName = if ins == game then "game" else ins.Name
 		else
 			if i == 2 and Pathway[1] == game then
-				local success, result = thread(game.GetService, true, game, v.ClassName)
-				if success and result == v then
-					fullName = fullName..(":GetService(\"%s\")"):format(v.ClassName)
+				local success, result = thread(game.GetService, true, game, ins.ClassName)
+				if success and result == ins then
+					fullName = if result ~= workspace then ("game:GetService(\"%s\")"):format(ins.ClassName) else "workspace"
 				else
-					fullName = fullName..formatChild(v.Name)
+					fullName = fullName..formatChild(ins)
 				end
 			else
-				fullName = fullName..formatChild(v.Name)
+				fullName = fullName..formatChild(ins)
 			end
 		end
 	end
