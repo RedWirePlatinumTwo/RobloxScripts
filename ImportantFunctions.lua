@@ -28,17 +28,29 @@ local rebuildString = function(str)
 end
 
 getgenv().thread = function(f, ignoreWarn, ...) --Potassium (the executor) currently fucks up xpcall and pcall in hookmetamethod, so this has become a necessity
-	local success, result = coroutine.resume(coroutine.create(f), ...)
-	if not success and not ignoreWarn then
-		warn(result)
+	local results = table.pack(coroutine.resume(coroutine.create(f), ...))
+	if not results[1] and not ignoreWarn then
+		warn(results[2])
 	end
-	return success, result
+	return unpack(results, 1, results.n)
+end
+
+getgenv().xthread = function(func, errFunc, ...) --a thread version of xpcall, just because
+	local results = table.pack(thread(func, true, ...))
+	if not results[1] then
+		local errResults = table.pack(thread(errFunc, true, results[2]))
+		if not errResults[1] then
+			return false, "error in error handling"
+		end
+		return false, unpack(errResults, 2, errResults.n)
+	end
+	return unpack(results, 1, results.n)
 end
 
 local function typeCheck(var, type, arg)
 	arg = arg or 1
 	local varType = typeof(var)
-	assert(varType == type, ("bad argument #%d (expected %s, got %s)"):format(arg, type, varType))
+	assert(varType == type, ("invalid argument #%d (expected %s, got %s)"):format(arg, type, varType))
 end
 
 getgenv().GetFamily = function(ins, reverseOrder)
