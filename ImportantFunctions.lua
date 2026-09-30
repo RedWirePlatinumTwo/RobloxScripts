@@ -460,7 +460,10 @@ end
 getgenv().customNameCalls = customNameCalls or {
 	GetFamily = GetFamily,
 	GetFullPath = GetFullName,
-	LogFunction = RobloxFunctionLogger
+	LogFunction = RobloxFunctionLogger,
+	IsDestroyed = function(ins)
+		return GetFamily(ins)[1] ~= game
+	end
 }
 
 if not ImportantFuncs_initNameCallHook then
