@@ -35,10 +35,14 @@ getgenv().thread = function(f, ignoreWarn, ...) --Potassium (the executor) curre
 	return unpack(results, 1, results.n)
 end
 
-getgenv().xthread = function(func, errFunc, ...) --a thread version of xpcall, just because
-	local results = table.pack(thread(func, true, ...))
+getgenv().pthread = function(f, ...) --thread, but with warn automatically suppressed
+	return thread(f, true, ...)
+end
+
+getgenv().xpthread = function(func, errFunc, ...) --a thread version of xpcall, just because
+	local results = table.pack(pthread(func, ...))
 	if not results[1] then
-		local errResults = table.pack(thread(errFunc, true, results[2]))
+		local errResults = table.pack(pthread(errFunc, results[2]))
 		if not errResults[1] then
 			return false, "error in error handling"
 		end
@@ -85,7 +89,7 @@ getgenv().GetFullName = function(instance)
 			fullName = if ins == game then "game" else ins.Name
 		else
 			if i == 2 and Pathway[1] == game then
-				local success, result = thread(game.GetService, true, game, ins.ClassName)
+				local success, result = pthread(game.GetService, game, ins.ClassName)
 				if success and result == ins then
 					fullName = if result ~= workspace then ("game:GetService(\"%s\")"):format(ins.ClassName) else "workspace"
 				else
@@ -490,9 +494,9 @@ if not ImportantFuncs_initNameCallHook then
 
 	local logHook; logHook = hookmetamethod(game, "__namecall", function(self, ...)
 		local callMethod = getnamecallmethod()
-		local success, result = thread(function()
+		local success, result = pthread(function()
 			return self[callMethod]
-		end, true)
+		end)
 		if not table.find(ignoredInstances, self) and success and typeof(result) == "function" then
 			local logData = rLoggedFunctions[self]
 			local any = rLoggedFunctions.Any[result]
