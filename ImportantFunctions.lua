@@ -472,29 +472,11 @@ getgenv().customNameCalls = customNameCalls or {
 
 if not ImportantFuncs_initNameCallHook then
 	getgenv().ImportantFuncs_initNameCallHook = true
-	local timeout = 0
-	repeat task.wait() until game:IsLoaded()
-	repeat timeout += task.wait() until getrenv()._G.Adonis or timeout > 5
-	if timeout <= 5 then
-		print(":: Adonis :: F O U N D   Y O U .")
-		assert(getgc, "getgc not supported")
-		assert(hookfunction, "hookfunction not supported")
-		assert(setthreadidentity, "setthreadidentity not supported")
-		for _, obj in getgc(true) do
-			if type(obj) == "table" then
-				local detected = rawget(obj, "Detected")
-				if type(detected) == "function" then
-					hookfunction(detected, function(action, message, noCrash)
-						return true
-					end)
-				end
-			end
-		end
-	else
-		print("Doing ImportantFunctions™ stuff")
-	end
 
 	local logHook; logHook = hookmetamethod(game, "__namecall", function(self, ...)
+		if typeof(self) ~= "Instance" then
+			return logHook(self, ...)
+		end
 		local callMethod = getnamecallmethod()
 		local success, result = pthread(function()
 			return self[callMethod]
