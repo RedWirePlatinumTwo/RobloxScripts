@@ -427,6 +427,10 @@ local function createLoggedFunction(toHook, customLoggerName, funcIdentity, isRb
 			end, function(err)
 				if err:find("stack overflow") then
 					stkOverflow = true
+					if not overflowWarn then
+						overflowWarn = true
+						warn("Stack overflow occurred! blocking logs for "..customLoggerName)
+					end
 				else
 					warn("Error occurred during logging that shouldnt: "..err)
 				end
@@ -440,10 +444,6 @@ local function createLoggedFunction(toHook, customLoggerName, funcIdentity, isRb
 		logSuccess = logSuccess and listData(args, "Argument")
 		logSuccess = logSuccess and listData(retVal, "Return value")
 		if not logSuccess then
-			if not overflowWarn then
-				overflowWarn = true
-				warn("Stack overflow occurred! blocking logs for "..customLoggerName)
-			end
 			return unpack(retVal, 1, retVal.n)
 		end
 		
