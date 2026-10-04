@@ -1,5 +1,5 @@
 local rebuildString = function(str)
-	local reformattedString = ""
+	local serializedString = ""
 	local backKeys = {
 		["\0"] = "\\0",
 		["\a"] = "\\a",
@@ -17,14 +17,10 @@ local rebuildString = function(str)
 	for i = 1, str:len() do
 		local letter = str:sub(i,i)
 		local keyCheck = backKeys[letter]
-		if keyCheck then
-		    reformattedString = reformattedString..keyCheck
-		else
-		    reformattedString = reformattedString..letter
-		end
+		serializedString = serializedString..(if keyCheck then keyCheck else letter)
 	end
 	
-	return reformattedString
+	return serializedString
 end
 
 getgenv().thread = function(f, ignoreWarn, ...) --Potassium (the executor) currently fucks up xpcall and pcall in hookmetamethod, so this has become a necessity
@@ -75,7 +71,7 @@ end
 getgenv().GetFullName = function(instance)
 	local Pathway = GetFamily(instance)
 	
-	local function formatChild(ins)
+	local function serializeChild(ins)
 		local name = rebuildString(ins.Name)
 		if name:find("%A") then
 			return "[\""..name.."\"]"
@@ -93,10 +89,10 @@ getgenv().GetFullName = function(instance)
 				if success and result == ins then
 					fullName = if result ~= workspace then ("game:GetService(\"%s\")"):format(ins.ClassName) else "workspace"
 				else
-					fullName = fullName..formatChild(ins)
+					fullName = fullName..serializeChild(ins)
 				end
 			else
-				fullName = fullName..formatChild(ins)
+				fullName = fullName..serializeChild(ins)
 			end
 		end
 	end
@@ -111,7 +107,7 @@ local totalTables = 0
 	simplify (boolean): if true, makes table-naming more straightforward with (presumably) less function work
 	dateFormat (table): custom date format, default is {"m", "d", "y"} for MM/DD/YYYY
 	additionalCtx (function: string): a function with the arguments: (table, index, value). allows one to provide additional comments when the value is written
-	ignoreUnsupportedValues (boolean): if true, any values that Format cannot serialize will be omitted from the table output
+	ignoreUnsupportedValues (boolean): if true, any values that Serialize fails at will be omitted from the table output
 	customValues (function: table): a function that passes the current Table to supply values for it. values within the table will simply be emitted as a string, ignoring writeValue checks
 ]]
 getgenv().TableToString = function(Table, TableName, args, isInternalTable)
@@ -206,31 +202,31 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 			return if table.find(catchRepeats, tbl) then getName(tbl) else tostring(tbl)
 		end
 		
-		local serializedIndex = ""
-		local indexFormatted, failed1 = Format(index, value, args, true)
-		local valueFormatted, failed2 = Format(value, index, args, true)
+		local completeIndex = ""
+		local serializedIndex, failed1 = Serialize(index, value, args, true)
+		local serializedValue, failed2 = Serialize(value, index, args, true)
 		if failed2 then
-			valueFormatted = isRecursive(value)
+			serializedValue = isRecursive(value)
 		end
 		if type(index) == "table" then
-			local findNewLine = indexFormatted:find("\n")
+			local findNewLine = serializedIndex:find("\n")
 			local tblName = ""
 			if findNewLine then
-				tblName = indexFormatted:sub(1, findNewLine - 1)
-				valueFormatted = valueFormatted.."\n"..indexFormatted:sub(findNewLine + 1)
+				tblName = serializedIndex:sub(1, findNewLine - 1)
+				serializedValue = serializedValue.."\n"..serializedIndex:sub(findNewLine + 1)
 			else
-				tblName = indexFormatted
+				tblName = serializedIndex
 			end
-			serializedIndex = ("\n%s[%s]"):format(name, tblName)
+			completeIndex = ("\n%s[%s]"):format(name, tblName)
 		else
-			serializedIndex = ("\n%s[%s]"):format(name, indexFormatted)
+			completeIndex = ("\n%s[%s]"):format(name, serializedIndex)
 		end
 		if failed1 then
-			serializedIndex = ("\n%s[%s]"):format(name, isRecursive(index))
+			completeIndex = ("\n%s[%s]"):format(name, isRecursive(index))
 		end
 		local failString = ""
 		if failed1 or failed2 then
-			local failPrefix = " --failed to format type(s):"
+			local failPrefix = " --failed to serialize type(s):"
 			failString = failPrefix
 			if failed1 and typeof(index) ~= "table" then
 				failString = failString.." "..typeof(index)
@@ -246,7 +242,7 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 				end
 			end
 		end
-		return serializedIndex.." = "..valueFormatted..failString
+		return completeIndex.." = "..serializedValue..failString
 	end
 	
 	local extraTables = {}
@@ -269,7 +265,7 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 		end
 	end
 	for index, value in pairs(customVals) do
-		output = output..("\n%s[%s] = %s"):format(name, Format(index), tostring(value))
+		output = output..("\n%s[%s] = %s"):format(name, Serialize(index), tostring(value))
 	end
 	for i, v in pairs(extraTables) do
 		output = output.."\n"..writeValue(i, v)
@@ -283,26 +279,26 @@ end
 
 getgenv().tabletostring = TableToString
 
-local formatters = {}
+local serializers = {}
 
-local function addFormat(toStr, ...)
+local function addSerializer(toStr, ...)
 	local args = {...}
 	assert(#args ~= 0, "There's no fucking types to assign to!!!!!!!!!!!!!!!!!!!!!!")
 	for _, type in pairs(args) do
-		formatters[type] = toStr
+		serializers[type] = toStr
 	end
 end
 
---start of formatters registry
-addFormat(function(var)
+--start of serializers registry
+addSerializer(function(var)
 	return "\""..rebuildString(var).."\""
 end, "string")
 
-addFormat(function(var)
+addSerializer(function(var)
 	return tostring(var)
 end, "EnumItem", "boolean")
 
-addFormat(function(var)
+addSerializer(function(var)
 	if var == math.huge then
 		return "math.huge"
 	elseif var == -math.huge then
@@ -312,37 +308,38 @@ addFormat(function(var)
 	end
 end, "number")
 
-addFormat(function(var, ...)
+addSerializer(function(var, ...)
 	if not table.find(catchRepeats, var) then
 		return TableToString(var, ...)
 	end
 end, "table")
 
-addFormat(GetFullName, "Instance")
+addSerializer(GetFullName, "Instance")
 
-addFormat(function(var)
+addSerializer(function(var)
 	return ("%s.new(%s)"):format(typeof(var), tostring(var)):gsub("{", ""):gsub("}", "")
 end, "Vector2", "Vector3", "CFrame", "UDim2", "NumberRange")
 
-addFormat(function(var)
+addSerializer(function(var)
 	local function toRGB(num)
 		return math.clamp(math.round(num * 255), 0, 255)
 	end
 	return ("Color3.fromRGB(%d, %d, %d)"):format(toRGB(var.R), toRGB(var.G), toRGB(var.B))
 end, "Color3")
 
-addFormat(function(var)
+addSerializer(function(var)
 	return ("%s.new(\"%s\")"):format(typeof(var), tostring(var))
 end, "BrickColor")
 
-addFormat(function() return "Enum" end, "Enums")
+addSerializer(function() return "Enum" end, "Enums")
+addSerializer(function() return "nil" end, "nil") --i don't think this one will ever apply to anything, but eh
 
-addFormat(function(var)
+addSerializer(function(var)
 	return "Enum."..tostring(var)
 end, "Enum")
 
-addFormat(function(var)
-	local number = formatters.number
+addSerializer(function(var)
+	local number = serializers.number
 	return ("TweenInfo.new(%s, %s, %s, %s, %s, %s)"):format(
 		number(var.Time),
 		tostring(var.EasingStyle),
@@ -352,12 +349,12 @@ addFormat(function(var)
 		number(var.DelayTime)
 	)
 end, "TweenInfo")
---end of formatters registry
+--end of serializers registry
 
-getgenv().Format = function(var, ...)
+getgenv().Serialize = function(var, ...)
 	local failedConversion = false
 	local result = tostring(var)
-	local formatter = formatters[typeof(var)]
+	local formatter = serializers[typeof(var)]
 	if formatter then
 		result = formatter(var, ...)
 		failedConversion = result == nil
@@ -366,6 +363,8 @@ getgenv().Format = function(var, ...)
 	end
 	return result, failedConversion
 end
+
+getgenv().serialize = Serialize
 
 local loggedFunctions = {}
 getgenv().loggerSettings = loggerSettings or {
@@ -379,7 +378,7 @@ local function ifExecutorCall(caller)
 	local ignoreExecutor = loggerSettings.ignoreExecutorCalls
 	return (not caller and ignoreExecutor) or not ignoreExecutor
 end
-local excludedFunctions = {print, pairs, format, tabletostring, getcallingscript, warn, error}
+local excludedFunctions = {print, pairs, serialize, tabletostring, getcallingscript, warn, error}
 
 local function createLoggedFunction(toHook, customLoggerName, funcIdentity, isRblxFunction)
 	return function(...)
@@ -397,8 +396,8 @@ local function createLoggedFunction(toHook, customLoggerName, funcIdentity, isRb
 				str = str..("\n%ss: none!"):format(title)
 			else
 				for i = 1, tbl.n do
-					local formatted = Format(tbl[i])
-					str = str..("\n%s %d: %s"):format(title, i, formatted)
+					local serialized = Serialize(tbl[i])
+					str = str..("\n%s %d: %s"):format(title, i, serialized)
 				end
 			end
 		end
