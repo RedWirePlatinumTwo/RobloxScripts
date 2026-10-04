@@ -381,7 +381,7 @@ local function ifExecutorCall(caller)
 end
 local excludedFunctions = {print, pairs, format, tabletostring, getcallingscript, warn, error}
 
-local function createLoggedFunction(toHook, customLoggerName, funcIdentity)
+local function createLoggedFunction(toHook, customLoggerName, funcIdentity, isRblxFunction)
 	return function(...)
 		local args = table.pack(...)
 		local retVal = table.pack(toHook(...))
@@ -392,6 +392,7 @@ local function createLoggedFunction(toHook, customLoggerName, funcIdentity)
 		str = str.."\nCaller type: "..if caller then "Executor" else "Game"
 		
 		local function listData(tbl, title)
+			tbl.n = tbl.n or #tbl
 			if tbl.n == 0 then
 				str = str..("\n%ss: none!"):format(title)
 			else
@@ -400,6 +401,9 @@ local function createLoggedFunction(toHook, customLoggerName, funcIdentity)
 					str = str..("\n%s %d: %s"):format(title, i, formatted)
 				end
 			end
+		end
+		if not isRblxFunction then
+			listData(getupvalues(toHook), "Upvalue")
 		end
 		listData(args, "Argument")
 		listData(retVal, "Return value")
@@ -452,7 +456,7 @@ getgenv().RobloxFunctionLogger = function(funcParent, funcName, logAny, fromScri
 	end
     local data = if logAny then rLoggedFunctions.Any else rLoggedFunctions[funcParent]
 	assert(data[result] == nil, "This roblox function is already logged!")
-	data[result] = createLoggedFunction(result, funcName, result)
+	data[result] = createLoggedFunction(result, funcName, result, true)
 	loggerSettings.scriptCheck[result] = fromScript
 	if logAny then
 		print("Logging all roblox calls for", funcName, scrLine)
