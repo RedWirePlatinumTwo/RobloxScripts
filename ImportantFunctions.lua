@@ -208,7 +208,9 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 		if failed2 then
 			serializedValue = isRecursive(value)
 		end
-		if type(index) == "table" then
+		if failed1 then
+			completeIndex = ("\n%s[%s]"):format(name, isRecursive(index))
+		elseif type(index) == "table" then
 			local findNewLine = serializedIndex:find("\n")
 			local tblName = ""
 			if findNewLine then
@@ -220,9 +222,6 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 			completeIndex = ("\n%s[%s]"):format(name, tblName)
 		else
 			completeIndex = ("\n%s[%s]"):format(name, serializedIndex)
-		end
-		if failed1 then
-			completeIndex = ("\n%s[%s]"):format(name, isRecursive(index))
 		end
 		local failString = ""
 		if failed1 or failed2 then
@@ -378,12 +377,33 @@ local function ifExecutorCall(caller)
 	local ignoreExecutor = loggerSettings.ignoreExecutorCalls
 	return (not caller and ignoreExecutor) or not ignoreExecutor
 end
-local excludedFunctions = {print, pairs, serialize, tabletostring, getcallingscript, warn, error}
+local excludedFunctions = {
+	pairs;
+	ipairs;
+	serialize;
+	tabletostring;
+	getcallingscript;
+	checkcaller;
+	print;
+	warn;
+	error;
+	table.find;
+	table.pack;
+	unpack;
+	table.unpack;
+	pcall;
+	xpcall;
+}
 
 local function createLoggedFunction(toHook, customLoggerName, funcIdentity, isRblxFunction)
+	local stkOverflow = false
+	local overflowWarn = false
 	return function(...)
 		local args = table.pack(...)
 		local retVal = table.pack(toHook(...))
+		if stkOverflow then
+			return unpack(retVal, 1, retVal.n)
+		end
 		local str = "Function "..customLoggerName.." was called!"
 		local callingScript = getcallingscript()
 		local caller = checkcaller()
@@ -391,21 +411,41 @@ local function createLoggedFunction(toHook, customLoggerName, funcIdentity, isRb
 		str = str.."\nCaller type: "..if caller then "Executor" else "Game"
 		
 		local function listData(tbl, title)
-			tbl.n = tbl.n or #tbl
-			if tbl.n == 0 then
-				str = str..("\n%ss: none!"):format(title)
-			else
-				for i = 1, tbl.n do
-					local serialized = Serialize(tbl[i])
-					str = str..("\n%s %d: %s"):format(title, i, serialized)
-				end
+			if stkOverflow then
+				return false
 			end
+			local success = xpcall(function()
+				tbl.n = tbl.n or #tbl
+				if tbl.n == 0 then
+					str = str..("\n%ss: none!"):format(title)
+				else
+					for i = 1, tbl.n do
+						local serialized = Serialize(tbl[i])
+						str = str..("\n%s %d: %s"):format(title, i, tostring(serialized))
+					end
+				end
+			end, function(err)
+				if err:find("stack overflow") then
+					stkOverflow = true
+				else
+					warn("Error occurred during logging that shouldnt: "..err)
+				end
+			end)
+			return success
 		end
+		local logSuccess = true
 		if not isRblxFunction then
-			listData(getupvalues(toHook), "Upvalue")
+			logSuccess = logSuccess and listData(getupvalues(toHook), "Upvalue")
 		end
-		listData(args, "Argument")
-		listData(retVal, "Return value")
+		logSuccess = logSuccess and listData(args, "Argument")
+		logSuccess = logSuccess and listData(retVal, "Return value")
+		if not logSuccess then
+			if not overflowWarn then
+				overflowWarn = true
+				warn("Stack overflow occurred! blocking logs for "..customLoggerName)
+			end
+			return unpack(retVal, 1, retVal.n)
+		end
 		
 		local scriptSource = loggerSettings.scriptCheck[funcIdentity]
 		if loggerSettings.enabled and not table.find(loggerSettings.ignored, funcIdentity)
