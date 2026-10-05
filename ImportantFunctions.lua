@@ -117,30 +117,35 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 	TableName = TableName or "Table"
 
 	local function setName(t, name)
+		local existingName = indexes[t]
+		if existingName then
+			return existingName
+		end
 		if not args.simplify then
-    		local function checkRepititions()
+    		local function checkRepetitions()
     			local amount = (indexReps[name] or 0) + 1
 				indexReps[name] = amount
 				indexes[t] = if amount > 1 then name.."_"..amount else name
+				return indexes[t]
     		end
 			name = tostring(name):gsub("%W", "")
 			if not loadstring("local "..name) then
 				name = "Table_"..name
 			end
-			if name:len() == 0 or name == "Table_nil" then
+			if name == "Table_nil" then
 				name = "Table"
-				checkRepititions()
-				return
+				return checkRepetitions()
 			end
-			checkRepititions()
+			return checkRepetitions()
 		else
 		    totalTables = totalTables + 1
 		    indexes[t] = "Table"..totalTables
+			return indexes[t]
 		end
 	end
 
 	local function getName(t)
-		return indexes[t]
+		return indexes[t] or setName(t, "Table")
 	end
 
 	table.insert(catchRepeats, Table)
@@ -177,12 +182,14 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 		local function defineTables(f)
 			for i, v in pairs(f) do
 				local function isTable(x)
-					if type(x) == "table" and not table.find(reps, x) and not table.find(catchRepeats, x) then
-						local tblName = if x == i then v else i
+					local tblName = if x == i then v else i
+					if type(x) == "table" and not table.find(reps, x) then
+						table.insert(reps, x)
 						setName(x, tblName)
-						output = output..("\n%s = {}"):format(getName(x))
-						table.insert(reps,x)
-						defineTables(x)
+						if not table.find(catchRepeats, x) then
+							output = output..("\n%s = {}"):format(getName(x))
+							defineTables(x)
+						end
 					end
 				end
 				isTable(i)
@@ -432,7 +439,7 @@ local function createLoggedFunction(toHook, customLoggerName, funcIdentity, isRb
 						warn("Stack overflow occurred! blocking logs for "..customLoggerName)
 					end
 				else
-					warn("Error occurred during logging that shouldnt: "..err)
+					warn("Unexpected logger error: "..err)
 				end
 			end)
 			return success
@@ -517,7 +524,7 @@ if not ImportantFuncs_initNameCallHook then
 	getgenv().ImportantFuncs_initNameCallHook = true
 
 	local logHook; logHook = hookmetamethod(game, "__namecall", function(self, ...)
-		if typeof(self) ~= "Instance" then
+		if typeof(self) ~= "Instance" then --prevent anticheats from using non-Instances to trip detection
 			return logHook(self, ...)
 		end
 		local callMethod = getnamecallmethod()
