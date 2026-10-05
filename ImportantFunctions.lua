@@ -98,11 +98,6 @@ getgenv().GetFullName = function(instance)
 	end
 	return fullName
 end
-
-local catchRepeats = {}
-local indexReps = {}
-local indexes = {}
-local totalTables = 0
 --[[ list of contents that args can include:
 	simplify (boolean): if true, makes table-naming more straightforward with (presumably) less function work
 	dateFormat (table): custom date format, default is {"m", "d", "y"} for MM/DD/YYYY
@@ -110,23 +105,27 @@ local totalTables = 0
 	ignoreUnsupportedValues (boolean): if true, any values that Serialize fails at will be omitted from the table output
 	customValues (function: table): a function that passes the current Table to supply values for it. values within the table will simply be emitted as a string, ignoring writeValue checks
 ]]
-getgenv().TableToString = function(Table, TableName, args, isInternalTable)
+getgenv().TableToString = function(Table, TableName, args, state) --the state param should basically never actually be manually created, but idk how to prevent that
 	typeCheck(Table, "table")
 	local output = ""
 	args = args or {}
 	TableName = TableName or "Table"
+	state = state or {
+		visitedTables = {};
+		nameOccurrences = {};
+		tableNames = {};
+		totalTables = 0;
+		initialized = false;
+	}
+	local visitedTables, nameOccurrences, tableNames = state.visitedTables, state.nameOccurrences, state.tableNames
 
 	local function setName(t, name)
-		local existingName = indexes[t]
-		if existingName then
-			return existingName
-		end
+		if tableNames[t] then return end
 		if not args.simplify then
     		local function checkRepetitions()
-    			local amount = (indexReps[name] or 0) + 1
-				indexReps[name] = amount
-				indexes[t] = if amount > 1 then name.."_"..amount else name
-				return indexes[t]
+    			local amount = (nameOccurrences[name] or 0) + 1
+				nameOccurrences[name] = amount
+				tableNames[t] = if amount > 1 then name.."_"..amount else name
     		end
 			name = tostring(name):gsub("%W", "")
 			if not loadstring("local "..name) then
@@ -138,22 +137,19 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 			end
 			return checkRepetitions()
 		else
-		    totalTables = totalTables + 1
-		    indexes[t] = "Table"..totalTables
-			return indexes[t]
+		    state.totalTables += 1
+		    tableNames[t] = "Table"..(state.totalTables)
 		end
 	end
 
 	local function getName(t)
-		return indexes[t] or setName(t, "Table")
+		return tableNames[t] or error("[TableToString] missed table-naming during initialization")
 	end
 
-	table.insert(catchRepeats, Table)
-	if not isInternalTable then
-		catchRepeats = {Table}
-		indexReps = {}
-		indexes = {}
-		totalTables = 0
+	table.insert(visitedTables, Table)
+	local wasInitialized = state.initialized --this is just so "return [table]" can be supplied at the end
+	if not wasInitialized then
+		state.initialized = true
 		setName(Table, TableName)
 		
 		local function getDate(dateFormat)
@@ -186,7 +182,7 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 					if type(x) == "table" and not table.find(reps, x) then
 						table.insert(reps, x)
 						setName(x, tblName)
-						if not table.find(catchRepeats, x) then
+						if not table.find(visitedTables, x) then
 							output = output..("\n%s = {}"):format(getName(x))
 							defineTables(x)
 						end
@@ -206,12 +202,12 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 	local function writeValue(index, value)
 	
 		local function isRecursive(tbl)
-			return if table.find(catchRepeats, tbl) then getName(tbl) else tostring(tbl)
+			return if table.find(visitedTables, tbl) then getName(tbl) else tostring(tbl)
 		end
 		
 		local completeIndex = ""
-		local serializedIndex, failed1 = Serialize(index, value, args, true)
-		local serializedValue, failed2 = Serialize(value, index, args, true)
+		local serializedIndex, failed1 = Serialize(index, value, args, state)
+		local serializedValue, failed2 = Serialize(value, index, args, state)
 		if failed2 then
 			serializedValue = isRecursive(value)
 		end
@@ -277,7 +273,7 @@ getgenv().TableToString = function(Table, TableName, args, isInternalTable)
 		output = output.."\n"..writeValue(i, v)
 		contextCheck(Table, i, v)
 	end
-	if not isInternalTable then
+	if not wasInitialized then
 		output = output.."\n\nreturn "..name
 	end
 	return output
@@ -314,9 +310,9 @@ addSerializer(function(var)
 	end
 end, "number")
 
-addSerializer(function(var, ...)
-	if not table.find(catchRepeats, var) then
-		return TableToString(var, ...)
+addSerializer(function(var, name, args, state)
+	if state == nil or not table.find(state.visitedTables, var) then
+		return TableToString(var, name, args, state)
 	end
 end, "table")
 
