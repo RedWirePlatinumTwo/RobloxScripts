@@ -146,7 +146,7 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 		return tableNames[t] or error("[TableToString] missed table-naming during initialization")
 	end
 
-	table.insert(visitedTables, Table)
+	visitedTables[Table] = true
 	local isRoot = not state.initialized --this is just so "return [table]" can be supplied at the end
 	if isRoot then
 		state.initialized = true
@@ -179,10 +179,10 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 			for i, v in pairs(f) do
 				local function isTable(x)
 					local tblName = if x == i then v else i
-					if type(x) == "table" and not table.find(reps, x) then
-						table.insert(reps, x)
+					if type(x) == "table" and not reps[x] then
+						reps[x] = true
 						setName(x, tblName)
-						if not table.find(visitedTables, x) then
+						if not visitedTables[x] then
 							output = output..("\n%s = {}"):format(getName(x))
 							defineTables(x)
 						end
@@ -202,7 +202,7 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 	local function writeValue(index, value)
 	
 		local function isRecursive(tbl)
-			return if table.find(visitedTables, tbl) then getName(tbl) else tostring(tbl)
+			return if visitedTables[tbl] then getName(tbl) else tostring(tbl)
 		end
 		
 		local completeIndex = ""
@@ -311,7 +311,7 @@ addSerializer(function(var)
 end, "number")
 
 addSerializer(function(var, name, args, state)
-	if state == nil or not table.find(state.visitedTables, var) then
+	if state == nil or not state.visitedTables[var] then
 		return TableToString(var, name, args, state)
 	end
 end, "table")
@@ -370,46 +370,65 @@ getgenv().serialize = Serialize
 
 local loggedFunctions = {}
 getgenv().loggerSettings = loggerSettings or {
-	enabled = true,
-	ignored = {},
-	ignoreExecutorCalls = false,
-	scriptCheck = {}
+	enabled = true;
+	ignored = {};
+	ignoreExecutorCalls = false;
+	scriptCheck = {};
+	rblx = {
+		logged = {Any = {}};
+		ignoredInstances = ignoredInstances or {};
+	};
+}
+
+local excludedFunctions = {
+	[pairs] = true;
+	[ipairs] = true;
+	[GetFamily] = true;
+	[GetFullName] = true;
+	[serialize] = true;
+	[tabletostring] = true;
+	[getcallingscript] = true;
+	[checkcaller] = true;
+	[print] = true;
+	[warn] = true;
+	[error] = true;
+	[table.find] = true;
+	[table.pack] = true;
+	[unpack] = true;
+	[table.unpack] = true;
+	[pcall] = true;
+	[xpcall] = true;
 }
 
 local function ifExecutorCall(caller)
 	local ignoreExecutor = loggerSettings.ignoreExecutorCalls
 	return (not caller and ignoreExecutor) or not ignoreExecutor
 end
-local excludedFunctions = {
-	pairs;
-	ipairs;
-	serialize;
-	tabletostring;
-	getcallingscript;
-	checkcaller;
-	print;
-	warn;
-	error;
-	table.find;
-	table.pack;
-	unpack;
-	table.unpack;
-	pcall;
-	xpcall;
-}
 
 local function createLoggedFunction(toHook, customLoggerName, funcIdentity, isRblxFunction)
 	local stkOverflow = false
 	local overflowWarn = false
 	return function(...)
 		local args = table.pack(...)
-		local retVal = table.pack(toHook(...))
-		if stkOverflow then
-			return unpack(retVal, 1, retVal.n)
-		end
-		local str = "Function "..customLoggerName.." was called!"
+		local returnVals = table.pack(toHook(...))
+		local scriptSource = loggerSettings.scriptCheck[funcIdentity]
 		local callingScript = getcallingscript()
 		local caller = checkcaller()
+		
+		local function isIgnored()
+			return loggerSettings.ignored[funcIdentity] or table.find(loggerSettings.ignored, funcIdentity)
+		end
+		
+		local function unpackReturn()
+			return unpack(returnVals, 1, returnVals.n)
+		end
+		
+		if stkOverflow or isIgnored() or not loggerSettings.enabled or not ifExecutorCall(caller)
+		or not (scriptSource == callingScript or scriptSource == nil) then
+			return unpackReturn()
+		end
+		
+		local str = "Function "..customLoggerName.." was called!"
 		str = str.."\nCalling script: "..if callingScript ~= nil then GetFullName(callingScript) else "nil"
 		str = str.."\nCaller type: "..if caller then "Executor" else "Game"
 		
@@ -444,18 +463,10 @@ local function createLoggedFunction(toHook, customLoggerName, funcIdentity, isRb
 		if not isRblxFunction then
 			logSuccess = logSuccess and listData(getupvalues(toHook), "Upvalue")
 		end
-		logSuccess = logSuccess and listData(args, "Argument")
-		logSuccess = logSuccess and listData(retVal, "Return value")
-		if not logSuccess then
-			return unpack(retVal, 1, retVal.n)
-		end
-		
-		local scriptSource = loggerSettings.scriptCheck[funcIdentity]
-		if loggerSettings.enabled and not table.find(loggerSettings.ignored, funcIdentity)
-		and ifExecutorCall(caller) and (scriptSource == callingScript or scriptSource == nil) then
-			print(str)
-		end
-		return unpack(retVal, 1, retVal.n)
+		logSuccess = logSuccess and listData(args, "Argument") and listData(returnVals, "Return value")
+		if not logSuccess then return unpackReturn() end
+		print(str)
+		return unpackReturn()
 	end
 end
 
@@ -471,23 +482,23 @@ end
 getgenv().LogFunction = function(toLog, customLoggerName, fromScript)
 	customLoggerName = customLoggerName or "Function"..(#loggedFunctions + 1)
 	typeCheck(toLog, "function")
-	assert(toLog ~= LogFunction and not table.find(excludedFunctions, toLog), "Ignoring requested function to log to prevent recursions")
+	assert(toLog ~= LogFunction and not excludedFunctions[toLog], "Ignoring requested function to log to prevent recursions")
 	local scrLine = scriptAssert(fromScript, 3)
-	assert(table.find(loggedFunctions, toLog) == nil, "This function has already been logged!")
+	assert(loggedFunctions[toLog] == nil, "This function has already been logged!")
 	
 	local loggerFunction
 	local funcHook = hookfunction(toLog, function(...)
 		return loggerFunction(...)
 	end)
 	loggerFunction = createLoggedFunction(funcHook, customLoggerName, toLog)
-	table.insert(loggedFunctions, toLog)
+	loggedFunctions[toLog] = true
 	loggerSettings.scriptCheck[toLog] = fromScript
 	print("Logging function", customLoggerName, scrLine)
 	return loggerFunction
 end
 
-getgenv().rLoggedFunctions = rLoggedFunctions or {Any = {}}
-getgenv().ignoredInstances = ignoredInstances or {}
+local rLoggedFunctions = loggerSettings.rblx.logged
+local ignoredInstances = loggerSettings.rblx.ignoredInstances
 
 getgenv().LogRobloxFunction = function(funcParent, funcName, logAny, fromScript)
     local result = funcParent[funcName]
@@ -508,12 +519,12 @@ getgenv().LogRobloxFunction = function(funcParent, funcName, logAny, fromScript)
 end
 
 getgenv().customNameCalls = customNameCalls or {
-	GetFamily = GetFamily,
-	GetFullPath = GetFullName,
-	LogFunction = LogRobloxFunction,
+	GetFamily = GetFamily;
+	GetFullPath = GetFullName;
+	LogFunction = LogRobloxFunction;
 	IsDestroyed = function(ins)
 		return GetFamily(ins)[1] ~= game
-	end
+	end;
 }
 
 if not ImportantFuncs_initNameCallHook then
@@ -527,7 +538,7 @@ if not ImportantFuncs_initNameCallHook then
 		local success, result = pthread(function()
 			return self[callMethod]
 		end)
-		if not table.find(ignoredInstances, self) and success and typeof(result) == "function" then
+		if not (ignoredInstances[self] or table.find(ignoredInstances, self)) and success and typeof(result) == "function" then
 			local logData = rLoggedFunctions[self]
 			local any = rLoggedFunctions.Any[result]
 			if logData and logData[result] then
