@@ -415,16 +415,12 @@ local function createLoggedFunction(toHook, customLoggerName, funcIdentity, isRb
 		local callingScript = getcallingscript()
 		local caller = checkcaller()
 		
-		local function isIgnored()
-			return loggerSettings.ignored[funcIdentity] or table.find(loggerSettings.ignored, funcIdentity)
-		end
-		
 		local function unpackReturn()
 			return unpack(returnVals, 1, returnVals.n)
 		end
 		
-		if stkOverflow or isIgnored() or not loggerSettings.enabled or not ifExecutorCall(caller)
-		or not (scriptSource == callingScript or scriptSource == nil) then
+		if stkOverflow or loggerSettings.ignored[funcIdentity] or not loggerSettings.enabled
+		or not ifExecutorCall(caller) or not (scriptSource == callingScript or scriptSource == nil) then
 			return unpackReturn()
 		end
 		
@@ -538,7 +534,7 @@ if not ImportantFuncs_initNameCallHook then
 		local success, result = pthread(function()
 			return self[callMethod]
 		end)
-		if not (ignoredInstances[self] or table.find(ignoredInstances, self)) and success and typeof(result) == "function" then
+		if not ignoredInstances[self] and success and typeof(result) == "function" then
 			local logData = rLoggedFunctions[self]
 			local any = rLoggedFunctions.Any[result]
 			if logData and logData[result] then
