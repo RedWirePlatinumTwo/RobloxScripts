@@ -147,8 +147,8 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 	end
 
 	table.insert(visitedTables, Table)
-	local isRoot = state.initialized --this is just so "return [table]" can be supplied at the end
-	if not isRoot then
+	local isRoot = not state.initialized --this is just so "return [table]" can be supplied at the end
+	if isRoot then
 		state.initialized = true
 		setName(Table, TableName)
 		
@@ -273,7 +273,7 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 		output = output.."\n"..writeValue(i, v)
 		contextCheck(Table, i, v)
 	end
-	if not isRoot then
+	if isRoot then
 		output = output.."\n\nreturn "..name
 	end
 	return output
