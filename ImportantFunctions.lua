@@ -147,8 +147,8 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 	end
 
 	table.insert(visitedTables, Table)
-	local wasInitialized = state.initialized --this is just so "return [table]" can be supplied at the end
-	if not wasInitialized then
+	local isRoot = state.initialized --this is just so "return [table]" can be supplied at the end
+	if not isRoot then
 		state.initialized = true
 		setName(Table, TableName)
 		
@@ -273,7 +273,7 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 		output = output.."\n"..writeValue(i, v)
 		contextCheck(Table, i, v)
 	end
-	if not wasInitialized then
+	if not isRoot then
 		output = output.."\n\nreturn "..name
 	end
 	return output
@@ -468,10 +468,10 @@ local function scriptAssert(scr, arg)
 	return str
 end
 
-getgenv().FunctionLogger = function(toLog, customLoggerName, fromScript)
+getgenv().LogFunction = function(toLog, customLoggerName, fromScript)
 	customLoggerName = customLoggerName or "Function"..(#loggedFunctions + 1)
 	typeCheck(toLog, "function")
-	assert(toLog ~= FunctionLogger and not table.find(excludedFunctions, toLog), "Ignoring requested function to log to prevent recursions")
+	assert(toLog ~= LogFunction and not table.find(excludedFunctions, toLog), "Ignoring requested function to log to prevent recursions")
 	local scrLine = scriptAssert(fromScript, 3)
 	assert(table.find(loggedFunctions, toLog) == nil, "This function has already been logged!")
 	
@@ -489,7 +489,7 @@ end
 getgenv().rLoggedFunctions = rLoggedFunctions or {Any = {}}
 getgenv().ignoredInstances = ignoredInstances or {}
 
-getgenv().RobloxFunctionLogger = function(funcParent, funcName, logAny, fromScript)
+getgenv().LogRobloxFunction = function(funcParent, funcName, logAny, fromScript)
     local result = funcParent[funcName]
 	assert(typeof(funcParent) == "Instance" and typeof(result) == "function", "Not a roblox function")
 	local scrLine = scriptAssert(fromScript, 4)
@@ -510,7 +510,7 @@ end
 getgenv().customNameCalls = customNameCalls or {
 	GetFamily = GetFamily,
 	GetFullPath = GetFullName,
-	LogFunction = RobloxFunctionLogger,
+	LogFunction = LogRobloxFunction,
 	IsDestroyed = function(ins)
 		return GetFamily(ins)[1] ~= game
 	end
