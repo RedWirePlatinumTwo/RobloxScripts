@@ -236,12 +236,19 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 	
 		local function serializeValue(val, name)
 			local serialized, failed = Serialize(val, name, args, state)
-			serialized = if type(val) == "table" then getName(val) else serialized
-			return serialized, failed
+			local innerTblContents = ""
+			if type(val) == "table" then
+				local newline = serialized and serialized:find("\n")
+				if newline then --note to self: this is so the output can actually contain the contents of inner tables
+					innerTblContents = serialized:sub(newline)
+				end
+				serialized = getName(val)
+			end
+			return serialized, failed, innerTblContents
 		end
 		
-		local serializedIndex, failed1 = serializeValue(index, value)
-		local serializedValue, failed2 = serializeValue(value, index)
+		local serializedIndex, failed1, inner1 = serializeValue(index, value)
+		local serializedValue, failed2, inner2 = serializeValue(value, index)
 		local completeIndex = ("\n%s[%s]"):format(name, serializedIndex)
 		local failString = ""
 		if failed1 or failed2 then
@@ -261,11 +268,13 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 				end
 			end
 		end
+		local ret
 		if not indexMayBeNil(index) then
-			return completeIndex.." = "..serializedValue..failString
+			ret = completeIndex.." = "..serializedValue
 		else
-			return ("\n_addNonNilIndex(%s, %s, %s)"):format(name, serializedIndex, serializedValue)..failString
+			ret = ("\n_addNonNilIndex(%s, %s, %s)"):format(name, serializedIndex, serializedValue)
 		end
+		return ret..failString..inner1..inner2
 	end
 	
 	local extraTables = {}
