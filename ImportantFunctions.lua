@@ -111,7 +111,7 @@ local function _readInstance(fullName)
 	local success, result = pthread(function()
 		return loadstring("return "..fullName)()
 	end)
-	return if success then result else nil
+	return if typeof(result) == "Instance" then result else nil
 end]]
 local nonNilIndexFunction = [[
 
@@ -240,10 +240,9 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 			return serialized, failed
 		end
 		
-		local completeIndex = ""
 		local serializedIndex, failed1 = serializeValue(index, value)
 		local serializedValue, failed2 = serializeValue(value, index)
-		completeIndex = ("\n%s[%s]"):format(name, serializedIndex)
+		local completeIndex = ("\n%s[%s]"):format(name, serializedIndex)
 		local failString = ""
 		if failed1 or failed2 then
 			local failPrefix = " --failed to serialize type(s):"
