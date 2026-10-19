@@ -10,7 +10,7 @@ local rebuildString = function(str)
 		["\t"] = "\\t",
 		["\v"] = "\\v",
 		["\'"] = "\\'",
-		["\""] = "\\\"",
+		['"'] = "\\\"",
 		["\\"] = "\\\\"
 	}
 	
@@ -105,6 +105,22 @@ end
 	ignoreUnsupportedValues (boolean): if true, any values that Serialize fails at will be omitted from the table output
 	customValues (function: table): a function that passes the current Table to supply values for it. values within the table will simply be emitted as a string, ignoring writeValue checks
 ]]
+local readInsFunction = [[
+
+local function _readInstance(fullName)
+	local success, result = pthread(function()
+		return loadstring("return "..fullName)()
+	end)
+	return if success then result else nil
+end]]
+local nonNilIndexFunction = [[
+
+local function _addNonNilIndex(tbl, index, value)
+	if index ~= nil then
+		tbl[index] = value
+	end
+end]]
+
 getgenv().TableToString = function(Table, TableName, args, state) --the state param should basically never actually be manually created, but idk how to prevent that
 	typeCheck(Table, "table")
 	local output = ""
@@ -145,6 +161,10 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 	local function getName(t)
 		return tableNames[t] or error("[TableToString] missed table-naming during initialization")
 	end
+	
+	local function indexMayBeNil(index)
+		return typeof(index) == "Instance"
+	end
 
 	visitedTables[Table] = true
 	local isRoot = not state.initialized --this is just so "return [table]" can be supplied at the end
@@ -174,9 +194,16 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 
 		output = ("-- Created on %s\n-- Table names:\n%s = {}"):format(getDate(args.dateFormat), getName(Table))
 		local reps = {}
-	 
+		local needsInstanceDependency = false
+		local needsNonNilIndexDependency = false
 		local function defineTables(f)
 			for i, v in pairs(f) do
+				if indexMayBeNil(i) then
+					needsNonNilIndexDependency = true
+				end
+				if typeof(i) == "Instance" or typeof(v) == "Instance" then
+					needsInstanceDependency = true
+				end
 				local function isTable(x)
 					local tblName = if x == i then v else i
 					if type(x) == "table" and not reps[x] then
@@ -193,6 +220,12 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 			end
 		end
 		defineTables(Table)
+		if needsInstanceDependency then
+			output = output..readInsFunction
+		end
+		if needsNonNilIndexDependency then
+			output = output..nonNilIndexFunction
+		end
 		output = output.."\n-- Properties:"
 	 else
 		output = getName(Table)
@@ -201,31 +234,16 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 
 	local function writeValue(index, value)
 	
-		local function isRecursive(tbl)
-			return if visitedTables[tbl] then getName(tbl) else tostring(tbl)
+		local function serializeValue(val, name)
+			local serialized, failed = Serialize(val, name, args, state)
+			serialized = if type(val) == "table" then getName(val) else serialized
+			return serialized, failed
 		end
 		
 		local completeIndex = ""
-		local serializedIndex, failed1 = Serialize(index, value, args, state)
-		local serializedValue, failed2 = Serialize(value, index, args, state)
-		if failed2 then
-			serializedValue = isRecursive(value)
-		end
-		if failed1 then
-			completeIndex = ("\n%s[%s]"):format(name, isRecursive(index))
-		elseif type(index) == "table" then
-			local findNewLine = serializedIndex:find("\n")
-			local tblName = ""
-			if findNewLine then
-				tblName = serializedIndex:sub(1, findNewLine - 1)
-				serializedValue = serializedValue.."\n"..serializedIndex:sub(findNewLine + 1)
-			else
-				tblName = serializedIndex
-			end
-			completeIndex = ("\n%s[%s]"):format(name, tblName)
-		else
-			completeIndex = ("\n%s[%s]"):format(name, serializedIndex)
-		end
+		local serializedIndex, failed1 = serializeValue(index, value)
+		local serializedValue, failed2 = serializeValue(value, index)
+		completeIndex = ("\n%s[%s]"):format(name, serializedIndex)
 		local failString = ""
 		if failed1 or failed2 then
 			local failPrefix = " --failed to serialize type(s):"
@@ -244,7 +262,11 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 				end
 			end
 		end
-		return completeIndex.." = "..serializedValue..failString
+		if not indexMayBeNil(index) then
+			return completeIndex.." = "..serializedValue..failString
+		else
+			return ("\n_addNonNilIndex(%s, %s, %s)"):format(name, serializedIndex, serializedValue)..failString
+		end
 	end
 	
 	local extraTables = {}
@@ -293,7 +315,7 @@ end
 
 --start of serializers registry
 addSerializer(function(var)
-	return "\""..rebuildString(var).."\""
+	return '"'..rebuildString(var)..'"'
 end, "string")
 
 addSerializer(function(var)
@@ -316,7 +338,14 @@ addSerializer(function(var, name, args, state)
 	end
 end, "table")
 
-addSerializer(GetFullName, "Instance")
+addSerializer(function(var, _, _, state)
+	local output = GetFullName(var)
+	if not state then
+		return output
+	else
+		return ("_readInstance(%s)"):format(serializers.string(output))
+	end
+end, "Instance")
 
 addSerializer(function(var)
 	return ("%s.new(%s)"):format(typeof(var), tostring(var)):gsub("{", ""):gsub("}", "")
