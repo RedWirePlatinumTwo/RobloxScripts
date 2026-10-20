@@ -100,7 +100,6 @@ getgenv().GetFullName = function(instance)
 end
 --[[ list of contents that args can include:
 	simplify (boolean): if true, makes table-naming more straightforward with (presumably) less function work
-	dateFormat (table): custom date format, default is {"m", "d", "y"} for MM/DD/YYYY
 	additionalCtx (function: string): a function with the arguments: (table, index, value). allows one to provide additional comments when the value is written
 	ignoreUnsupportedValues (boolean): if true, any values that Serialize fails at will be omitted from the table output
 	customValues (function: table): a function that passes the current Table to supply values for it. values within the table will simply be emitted as a string, ignoring writeValue checks
@@ -171,52 +170,28 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 	if isRoot then
 		state.initialized = true
 		setName(Table, TableName)
-		
-		local function getDate(dateFormat)
-			local timeStamp = os.time()
-			local year = os.date("%Y", timeStamp)
-			local month = os.date("%m", timeStamp)
-			local day = os.date("%d", timeStamp)
-			local format = dateFormat or {"m", "d", "y"}
-			local dateStamp = ""
-			for i,v in pairs(format) do
-				if v == "y" then
-					dateStamp = dateStamp..year.."/"
-				elseif v == "m" then
-					dateStamp = dateStamp..month.."/"
-				else
-					dateStamp = dateStamp..day.."/"
-				end
-			end
-			dateStamp = dateStamp:sub(1, dateStamp:len() - 1)
-			return dateStamp
-		end
-
-		output = ("-- Created on %s\n-- Table names:\n%s = {}"):format(getDate(args.dateFormat), getName(Table))
-		local reps = {}
+		output = ("-- Table names:\n%s = {}"):format(getName(Table))
 		local needsInstanceDependency = false
 		local needsNonNilIndexDependency = false
-		local function defineTables(f)
-			for i, v in pairs(f) do
-				if indexMayBeNil(i) then
+		local function defineTables(tbl)
+			for index, value in pairs(tbl) do
+				if indexMayBeNil(index) then
 					needsNonNilIndexDependency = true
 				end
-				if typeof(i) == "Instance" or typeof(v) == "Instance" then
+				if typeof(index) == "Instance" or typeof(value) == "Instance" then
 					needsInstanceDependency = true
 				end
-				local function isTable(x)
-					local tblName = if x == i then v else i
-					if type(x) == "table" and not reps[x] then
-						reps[x] = true
-						setName(x, tblName)
-						if not visitedTables[x] then
-							output = output..("\n%s = {}"):format(getName(x))
-							defineTables(x)
+				local function defineName(_tbl)
+					if type(_tbl) == "table" and not tableNames[_tbl] then
+						setName(_tbl, if _tbl == index then value else index)
+						if not visitedTables[_tbl] then
+							output = output..("\n%s = {}"):format(getName(_tbl))
+							defineTables(_tbl)
 						end
 					end
 				end
-				isTable(i)
-				isTable(v)
+				defineName(index)
+				defineName(value)
 			end
 		end
 		defineTables(Table)
@@ -227,10 +202,9 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 			output = output..nonNilIndexFunction
 		end
 		output = output.."\n-- Properties:"
-	 else
-		output = getName(Table)
 	end
 	local name = getName(Table)
+	local standardIndexTemplate = "\n%s[%s] = %s"
 
 	local function writeValue(index, value)
 	
@@ -238,10 +212,9 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 			local serialized, failed = Serialize(val, name, args, state)
 			local innerTblContents = ""
 			if type(val) == "table" then
-				local newline = serialized and serialized:find("\n")
-				if newline then --note to self: this is so the output can actually contain the contents of inner tables
-					innerTblContents = serialized:sub(newline)
-				end
+				innerTblContents = serialized or ""
+				--[[note to self: this is so the output can actually contain the contents of inner tables
+				(Serialize also returns nil for tables already listed)]]
 				serialized = getName(val)
 			end
 			return serialized, failed, innerTblContents
@@ -249,7 +222,6 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 		
 		local serializedIndex, failed1, inner1 = serializeValue(index, value)
 		local serializedValue, failed2, inner2 = serializeValue(value, index)
-		local completeIndex = ("\n%s[%s]"):format(name, serializedIndex)
 		local failString = ""
 		if failed1 or failed2 then
 			local failPrefix = " --failed to serialize type(s):"
@@ -270,7 +242,7 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 		end
 		local ret
 		if not indexMayBeNil(index) then
-			ret = completeIndex.." = "..serializedValue
+			ret = standardIndexTemplate:format(name, serializedIndex, serializedValue)
 		else
 			ret = ("\n_addNonNilIndex(%s, %s, %s)"):format(name, serializedIndex, serializedValue)
 		end
@@ -297,7 +269,7 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 		end
 	end
 	for index, value in pairs(customVals) do
-		output = output..("\n%s[%s] = %s"):format(name, Serialize(index), tostring(value))
+		output = output..standardIndexTemplate:format(name, Serialize(index), tostring(value))
 	end
 	for i, v in pairs(extraTables) do
 		output = output.."\n"..writeValue(i, v)
