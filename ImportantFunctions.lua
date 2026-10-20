@@ -184,10 +184,8 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 				local function defineName(_tbl)
 					if type(_tbl) == "table" and not tableNames[_tbl] then
 						setName(_tbl, if _tbl == index then value else index)
-						if not visitedTables[_tbl] then
-							output = output..("\n%s = {}"):format(getName(_tbl))
-							defineTables(_tbl)
-						end
+						output = output..("\n%s = {}"):format(getName(_tbl))
+						defineTables(_tbl)
 					end
 				end
 				defineName(index)
