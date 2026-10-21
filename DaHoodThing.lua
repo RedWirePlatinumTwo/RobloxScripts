@@ -84,7 +84,7 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function LUDIWI_fake_script() -- DaShop.LocalScript 
+local function YOHS_fake_script() -- DaShop.LocalScript 
 	local script = Instance.new('LocalScript', DaShop)
 
 	local mainframe = script.Parent.MainFrame
@@ -93,7 +93,8 @@ local function LUDIWI_fake_script() -- DaShop.LocalScript
 	mainframe.Draggable = true
 	local uiservice = game:GetService("UserInputService")
 	local rstorage = game:GetService("ReplicatedStorage")
-	local lplr = game:GetService("Players").LocalPlayer
+	local plrs = game:GetService("Players")
+	local lplr = plrs.LocalPlayer
 	local runservice = game:GetService("RunService")
 	if not getgenv().ImportantFuncs_initNameCallHook then
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
@@ -170,11 +171,20 @@ local function LUDIWI_fake_script() -- DaShop.LocalScript
 				end
 			end
 			if index:find("Ammo") then
-				if not table.find(toolNames, index:gsub(" Ammo", "")) then return end --do nothing if u dont got gun
+				if not table.find(toolNames, index:gsub(" Ammo", "")) then
+					warn("[DaShop] unable to buy ammo without gun")
+					return
+				end
 			else
-				if table.find(toolNames, index) then return end --do nothing if u already have the item
+				if table.find(toolNames, index) then
+					warn("[DaShop] item is already owned")
+					return
+				end
 			end
-			if tonumber((lplr.PlayerGui.MainScreenGui.MoneyText.Text:gsub("%D", ""))) < data.Price then return end --do nothing if u dont have enough money
+			if tonumber((lplr.PlayerGui.MainScreenGui.MoneyText.Text:gsub("%D", ""))) < data.Price then
+				warn("[DaShop] unable to buy item due to insufficient funds")
+				return
+			end
 			if canClick then
 				canClick = false
 				local hrp = lplr.Character.Humanoid.RootPart
@@ -207,8 +217,39 @@ local function LUDIWI_fake_script() -- DaShop.LocalScript
 	
 	runservice.RenderStepped:connect(function()
 		if keyDown(Enum.KeyCode.E) then
-			rstorage.MainEvent:FireServer("Stomp")
+			local lchr = lplr.Character
+			local hrp = lchr and lchr:FindFirstChild("HumanoidRootPart")
+			if not hrp then return end
+			local closestChr
+			local closestDist = 6
+			for _, plr in pairs(plrs:GetPlayers()) do
+				if plr ~= lplr and plr.Character then
+					local chr = plr.Character
+					if chr:FindFirstChild("UpperTorso") and chr.BodyEffects["K.O"].Value then
+						local torso = chr.UpperTorso
+						local dist = (hrp.Position - torso.Position).Magnitude
+						if dist < closestDist then
+							closestDist = dist
+							closestChr = chr
+						end
+					end
+				end
+			end
+			if closestChr then
+				hrp.CFrame = closestChr.UpperTorso.CFrame + Vector3.new(0, 2.5, 0)
+				rstorage.MainEvent:FireServer("Stomp")
+			end
+		end
+	end)
+	
+	uiservice.InputBegan:connect(function(input, processed)
+		if processed then return end
+		if input.KeyCode == Enum.KeyCode.R then
+			local chr = lplr.Character
+			if chr and chr:FindFirstChild("BodyEffects") and chr.BodyEffects["K.O"].Value then
+				chr.Humanoid.Health = 0
+			end
 		end
 	end)
 end
-coroutine.wrap(LUDIWI_fake_script)()
+coroutine.wrap(YOHS_fake_script)()
