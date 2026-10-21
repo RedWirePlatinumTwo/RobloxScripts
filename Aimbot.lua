@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function LJOVFIM_fake_script() -- RedwiresAimbot.LocalScript 
+local function JDSA_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1389,7 +1389,7 @@ local function LJOVFIM_fake_script() -- RedwiresAimbot.LocalScript
 			if tbl[value] == nil then
 				local ref, tblName = getDefaultReference(tbl)
 				local result = assert(ref[value] ~= nil, ("Supplied table (%s) does not have entry %s"):format(tblName, value))
-				tbl[value] = result
+				tbl[value] = ref[value]
 				return result
 			else
 				return tbl[value]
@@ -2194,7 +2194,7 @@ local function LJOVFIM_fake_script() -- RedwiresAimbot.LocalScript
 				local closestChr
 				local dist = getOrCreate(GameStats, "MaxStuds")
 	
-				local function addChr(chr)
+				local function determineClosestChr(chr)
 					local player = plrs:GetPlayerFromCharacter(chr)
 					if (player and IsNotWhitelisted(player)) or not player then
 						if chr:FindFirstChildOfClass("Humanoid") and chr:FindFirstChild("HumanoidRootPart")
@@ -2216,8 +2216,7 @@ local function LJOVFIM_fake_script() -- RedwiresAimbot.LocalScript
 									raycast = recursiveCast(origin, targetPart, table.clone(chrs)) --do raycast only when it matters
 								end
 								if (raycast or not raycasting and (onscreen or getOrCreate(GameStats, "TargetOffScreen")) and pos < dist) then
-									local isPrioritized = player and table.find(PrioritizedPlrs, player.UserId)
-									if isPrioritized or #PrioritizedPlrs == 0 then
+									if (player and priorityCheck(player)) or not player then
 										dist = pos
 										closestChr = chr
 									end
@@ -2229,23 +2228,23 @@ local function LJOVFIM_fake_script() -- RedwiresAimbot.LocalScript
 				
 				if getOrCreate(GameStats, "TargetNPCs") and (not getOrCreate(GameStats, "TargetPrioOnly") or #PrioritizedPlrs == 0) then
 					for i, npc in pairs(npcs) do
-						addChr(npc)
+						determineClosestChr(npc)
 					end
 				end
 	
 				if not getOrCreate(GameStats, "IgnorePlayers") then
 					for i,v in pairs(plrs:GetPlayers()) do
 						if v ~= lplr and v.Character then
-							addChr(v.Character)
+							determineClosestChr(v.Character)
 						end
 					end
 				end
 	
 				if closestChr then
 					local plr = plrs:GetPlayerFromCharacter(closestChr)
-					if plr and priorityCheck(plr) then
+					if plr then
 						targetPlr(plr)
-					elseif not plr then
+					else
 						selectChr(closestChr)
 					end
 				end
@@ -2482,4 +2481,4 @@ local function LJOVFIM_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(LJOVFIM_fake_script)()
+coroutine.wrap(JDSA_fake_script)()
