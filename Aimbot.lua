@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function JDSA_fake_script() -- RedwiresAimbot.LocalScript 
+local function KAZVQ_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1388,8 +1388,9 @@ local function JDSA_fake_script() -- RedwiresAimbot.LocalScript
 		local function getOrCreate(tbl, value)
 			if tbl[value] == nil then
 				local ref, tblName = getDefaultReference(tbl)
-				local result = assert(ref[value] ~= nil, ("Supplied table (%s) does not have entry %s"):format(tblName, value))
-				tbl[value] = ref[value]
+				local result = ref[value]
+				assert(result ~= nil, ("Supplied table (%s) does not have entry %s"):format(tblName, value))
+				tbl[value] = result
 				return result
 			else
 				return tbl[value]
@@ -2481,4 +2482,4 @@ local function JDSA_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(JDSA_fake_script)()
+coroutine.wrap(KAZVQ_fake_script)()
