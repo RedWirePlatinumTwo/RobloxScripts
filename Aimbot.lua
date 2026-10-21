@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function XJZX_fake_script() -- RedwiresAimbot.LocalScript 
+local function LJOVFIM_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1072,8 +1072,6 @@ local function XJZX_fake_script() -- RedwiresAimbot.LocalScript
 	local teams = game:GetService("Teams")
 	local WhitelistedPlrs = {}
 	local PrioritizedPlrs = {}
-	local WhitelistedPlrsOld = {}
-	local PrioritizedPlrsOld = {}
 	local misc = {
 		IsAimbotOn = false,
 		TargetedCharacter = nil,
@@ -1111,8 +1109,9 @@ local function XJZX_fake_script() -- RedwiresAimbot.LocalScript
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 		end
 		getgenv().RedsAimbot = {}
-		sendNotif("Red's Universal Aimbot (9/26/26)", changeNotes(
-			"The load-bearing loadstring will only execute if an init flag hasn't been set to true"
+		sendNotif("Red's Universal Aimbot (10/21/26)", changeNotes(
+			"Slightly re-worked whitelisting + prioritiziting internally",
+			"Improved auto-targeting logic"
 		))
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
@@ -1270,24 +1269,6 @@ local function XJZX_fake_script() -- RedwiresAimbot.LocalScript
 			end
 	
 		end
-	
-		local function valuesort(t, func)
-			local revert = {}
-			local vals = {}
-	
-			for i,v in pairs(t) do
-				revert[v] = i
-				table.insert(vals,v)
-			end
-	
-			table.sort(vals)
-			for i,v in pairs(vals) do
-				local retVal = func(revert[v], v)
-				if retVal ~= nil then
-					break
-				end
-			end
-		end
 		
 		local function has(ins, propName)
 			return pcall(function() return ins[propName] end)
@@ -1324,64 +1305,64 @@ local function XJZX_fake_script() -- RedwiresAimbot.LocalScript
 	
 		local function createGameStats()
 			return {
-				Target = "Head",
-				TargetNPCs = false,
-				AutoTarget = true,
-				WhitelistFriends = false,
-				MaxStuds = 500,
-				OwnTeamWhitelisted = true,
-				TargetCloserPlayers = true,
-				Teams = {},
-				IgnorePlayers = false,
-				TargetPrioOnly = false,
-				FirstPersonEnabled = true,
-				AimMethod = "Mouse",
-				CustomTargetConditions = {},
-				TargetOffScreen = false,
-				EnableRaycasting = true,
-				GUIPositions = {},
-				RaycastOrigin = "Head"
+				Target = "Head";
+				TargetNPCs = false;
+				AutoTarget = true;
+				WhitelistFriends = false;
+				MaxStuds = 500;
+				OwnTeamWhitelisted = true;
+				TargetCloserPlayers = true;
+				Teams = {};
+				IgnorePlayers = false;
+				TargetPrioOnly = false;
+				FirstPersonEnabled = true;
+				AimMethod = "Mouse";
+				CustomTargetConditions = {};
+				TargetOffScreen = false;
+				EnableRaycasting = true;
+				GUIPositions = {};
+				RaycastOrigin = "Head";
 			}
 		end
 		
 		local boolsAllowed = {
-			"TargetNPCs",
-			"AutoTarget",
-			"TargetCloserPlayers",
-			"TargetPrioOnly",
-			"FirstPersonEnabled",
-			"TargetOffScreen",
-			"EnableRaycasting"
+			"TargetNPCs";
+			"AutoTarget";
+			"TargetCloserPlayers";
+			"TargetPrioOnly";
+			"FirstPersonEnabled";
+			"TargetOffScreen";
+			"EnableRaycasting";
 		}
 	
 		local function createGlobalStats()
 			local darkGreen = Color3.fromRGB(0, 170, 0)
 			local newGlobalStats = {
-				TeamAutofill = true,
-				MouseSensitivity = 0.25,
+				TeamAutofill = true;
+				MouseSensitivity = 0.25;
 				Keybinds = {
 					AimbotToggle = {
-						Key1 = Enum.KeyCode.CapsLock,
-						Toggle = true
-					},
+						Key1 = Enum.KeyCode.CapsLock;
+						Toggle = true;
+					};
 					TargetedPartToggle = {
-						Key1 = Enum.KeyCode.RightAlt,
-						Toggle = true
-					},
+						Key1 = Enum.KeyCode.RightAlt;
+						Toggle = true;
+					};
 					GUIVisibilityToggle = {
-						Toggle = true
+						Toggle = true;
 					}
-				},
+				};
 				Theme = {
-					Yes = darkGreen,
-					No = Color3.fromRGB(170, 0, 0),
-					Border = darkGreen,
-					Background = Color3.fromRGB(0, 45, 0),
-					Text = darkGreen,
-					TextStroke = Color3.fromRGB(0, 0, 0),
-					ButtonBackground = Color3.fromRGB(0, 0, 0),
-					PlaceholderText = Color3.fromRGB(0, 100, 0),
-					ScrollBar = darkGreen
+					Yes = darkGreen;
+					No = Color3.fromRGB(170, 0, 0);
+					Border = darkGreen;
+					Background = Color3.fromRGB(0, 45, 0);
+					Text = darkGreen;
+					TextStroke = Color3.fromRGB(0, 0, 0);
+					ButtonBackground = Color3.fromRGB(0, 0, 0);
+					PlaceholderText = Color3.fromRGB(0, 100, 0);
+					ScrollBar = darkGreen;
 				}
 			}
 			for index, name in pairs(boolsAllowed) do
@@ -1390,42 +1371,49 @@ local function XJZX_fake_script() -- RedwiresAimbot.LocalScript
 			return newGlobalStats
 		end
 	
+		local function getDefaultReference(tbl)
+			if tbl == GameStats then
+				return createGameStats(), "GameStats"
+			elseif tbl == GlobalStats then
+				return createGlobalStats(), "GlobalStats"
+			elseif tbl == Keybinds then
+				return createGlobalStats().Keybinds, "GlobalStats.Keybinds"
+			elseif tbl == Theme then
+				return createGlobalStats().Theme, "GlobalStats.Theme"
+			else
+				error("Incorrect table value supplied")
+			end
+		end
+	
 		local function getOrCreate(tbl, value)
 			if tbl[value] == nil then
-				if tbl == GameStats then
-					tbl[value] = createGameStats()[value]
-				elseif tbl == GlobalStats then
-					tbl[value] = createGlobalStats()[value]
-				elseif tbl == Keybinds then
-					tbl[value] = createGlobalStats().Keybinds[value]
-				elseif tbl == Theme then
-					tbl[value] = createGlobalStats().Theme[value]
-				end
-				return tbl[value]
+				local ref, tblName = getDefaultReference(tbl)
+				local result = assert(ref[value] ~= nil, ("Supplied table (%s) does not have entry %s"):format(tblName, value))
+				tbl[value] = result
+				return result
 			else
 				return tbl[value]
 			end
 		end
 	
 		local function clearOldValues(t)
-			local tableref
-			if t == GameStats then
-				tableref = createGameStats()
-			elseif t == GlobalStats then
-				tableref = createGlobalStats()
-			else
-				tableref = createGlobalStats().Keybinds
-			end
+			local tableref = getDefaultReference(t)
 			for i,v in pairs(t) do
 				if tableref[i] == nil then
 					t[i] = nil
 				end
 			end
 		end
+		
+		local function boolOrFalse(tbl, value, condition)
+			local bool = getOrCreate(tbl, value)
+			return (bool and condition()) or not bool
+		end
 	
 		local function priorityCheck(plr)
-			local priorOnly = getOrCreate(GameStats, "TargetPrioOnly")
-			return (table.find(PrioritizedPlrs, plr) and priorOnly) or not priorOnly or #PrioritizedPlrs == 0
+			return boolOrFalse(GameStats, "TargetPrioOnly", function()
+				return table.find(PrioritizedPlrs, plr.UserId)
+			end) or #PrioritizedPlrs == 0
 		end
 	
 		local cond = targetingui.ScrollingFrame.Condition
@@ -1883,29 +1871,24 @@ local function XJZX_fake_script() -- RedwiresAimbot.LocalScript
 		
 		local function IsNotWhitelisted(plr)
 	
-			local function isteamwhitelisted()
+			local function isTeamWhitelisted()
 				local wl = false
-	
 				for i,ttable in pairs(getOrCreate(GameStats, "Teams")) do
 					if teams:FindFirstChild(ttable.team1) and teams:FindFirstChild(ttable.team2) then
-						if lplr.Team.Name == ttable.team1 and plr.Team.Name == ttable.team2 then
-							wl = true
-							break
-						end
+						wl = lplr.Team.Name == ttable.team1 and plr.Team.Name == ttable.team2
+						if wl then return wl end
 					end
 				end
-	
-				return wl
 			end
 	
 			if lplr.Team then
 				if getOrCreate(GameStats, "OwnTeamWhitelisted") then
-					return plr.Team ~= lplr.Team and not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
+					return plr.Team ~= lplr.Team and not table.find(WhitelistedPlrs, plr.UserId) and not isTeamWhitelisted()
 				else
-					return not table.find(WhitelistedPlrs, plr) and not isteamwhitelisted()
+					return not table.find(WhitelistedPlrs, plr.UserId) and not isTeamWhitelisted()
 				end
 			else
-				return not table.find(WhitelistedPlrs, plr)
+				return not table.find(WhitelistedPlrs, plr.UserId)
 			end
 		end
 	
@@ -1930,16 +1913,12 @@ local function XJZX_fake_script() -- RedwiresAimbot.LocalScript
 		end
 	
 		local function selectChr(chr)
-			local targetCloserPlrs = getOrCreate(GameStats, "TargetCloserPlayers")
-			if misc.IsAimbotOn and not misc.TargetedCharacter and not targetCloserPlrs or targetCloserPlrs and misc.IsAimbotOn then
-				local isprio
-				local isprio2
+			if misc.IsAimbotOn and (not misc.TargetedCharacter or getOrCreate(GameStats, "TargetCloserPlayers")) then
 				local plrFromChr = plrs:GetPlayerFromCharacter(chr)
-				if misc.TargetedCharacter then
-					isprio = table.find(PrioritizedPlrs, plrs:GetPlayerFromCharacter(misc.TargetedCharacter)) ~= nil
-					isprio2 = table.find(PrioritizedPlrs, plrFromChr) ~= nil
-				end
-				if not isprio or isprio2 then	
+				local targetPlr = misc.TargetedCharacter and plrs:GetPlayerFromCharacter(misc.TargetedCharacter)
+				local isTargetPrioritized = table.find(PrioritizedPlrs, targetPlr and targetPlr.UserId)
+				local isRequestedPrioritized = table.find(PrioritizedPlrs, plrFromChr and plrFromChr.UserId)
+				if not isTargetPrioritized or isRequestedPrioritized then	
 					misc.TargetedCharacter = chr
 				end
 			end
@@ -2212,8 +2191,8 @@ local function XJZX_fake_script() -- RedwiresAimbot.LocalScript
 			end
 	
 			if getOrCreate(GameStats, "AutoTarget") then
-				local table1 = {}
-				local PrioritizedPlrsOnScreen = {}
+				local closestChr
+				local dist = getOrCreate(GameStats, "MaxStuds")
 	
 				local function addChr(chr)
 					local player = plrs:GetPlayerFromCharacter(chr)
@@ -2223,7 +2202,7 @@ local function XJZX_fake_script() -- RedwiresAimbot.LocalScript
 							and chr.Humanoid.Health > 0 and meetsConditions(chr) then
 							local targetPart = getTargetPart(chr)
 							if targetPart then
-								local pos = math.floor(lplr:DistanceFromCharacter(targetPart.Position))
+								local pos = lplr:DistanceFromCharacter(targetPart.Position)
 								local _, onscreen = camera:WorldToScreenPoint(targetPart.Position)
 								local origin
 								if getOrCreate(GameStats, "RaycastOrigin") == "Head" then 
@@ -2236,17 +2215,18 @@ local function XJZX_fake_script() -- RedwiresAimbot.LocalScript
 								if raycasting then
 									raycast = recursiveCast(origin, targetPart, table.clone(chrs)) --do raycast only when it matters
 								end
-								if (raycast or not raycasting and (onscreen or getOrCreate(GameStats, "TargetOffScreen")) and pos < getOrCreate(GameStats, "MaxStuds")) then
-									table1[chr] = pos
-									if table.find(PrioritizedPlrs, plrs:GetPlayerFromCharacter(chr)) then
-										table.insert(PrioritizedPlrsOnScreen, chr)
+								if (raycast or not raycasting and (onscreen or getOrCreate(GameStats, "TargetOffScreen")) and pos < dist) then
+									local isPrioritized = player and table.find(PrioritizedPlrs, player.UserId)
+									if isPrioritized or #PrioritizedPlrs == 0 then
+										dist = pos
+										closestChr = chr
 									end
 								end
 							end
 						end
 					end
 				end
-	
+				
 				if getOrCreate(GameStats, "TargetNPCs") and (not getOrCreate(GameStats, "TargetPrioOnly") or #PrioritizedPlrs == 0) then
 					for i, npc in pairs(npcs) do
 						addChr(npc)
@@ -2261,34 +2241,25 @@ local function XJZX_fake_script() -- RedwiresAimbot.LocalScript
 					end
 				end
 	
-				if #PrioritizedPlrsOnScreen ~= 0 or (#PrioritizedPlrs ~= 0 and getOrCreate(GameStats, "TargetPrioOnly")) then
-	
-					for chr, pos in pairs(table1) do
-						if not table.find(PrioritizedPlrsOnScreen, chr) then
-							table1[chr] = nil
-						end
-					end
-	
-				end
-	
-				valuesort(table1, function(Char, position)
-					local plr = plrs:GetPlayerFromCharacter(Char)
+				if closestChr then
+					local plr = plrs:GetPlayerFromCharacter(closestChr)
 					if plr and priorityCheck(plr) then
 						targetPlr(plr)
 					elseif not plr then
-						selectChr(Char)
+						selectChr(closestChr)
 					end
-					return 1
-				end)
+				end
 			end
-			if getOrCreate(GameStats, "FirstPersonEnabled") then
-				if misc.TargetedCharacter and misc.IsAimbotOn and camera.CameraType ~= Enum.CameraType.Scriptable then
-					plrs.LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
+			if camera.CameraType ~= Enum.CameraType.Scriptable then
+				if getOrCreate(GameStats, "FirstPersonEnabled") then
+					if misc.TargetedCharacter and misc.IsAimbotOn then
+						plrs.LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
+					else
+						plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
+					end
 				else
 					plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
 				end
-			else
-				plrs.LocalPlayer.CameraMode = Enum.CameraMode.Classic
 			end
 		end)
 	
@@ -2296,30 +2267,25 @@ local function XJZX_fake_script() -- RedwiresAimbot.LocalScript
 			if plr.Character and plr.Character == misc.TargetedCharacter then
 				deselect()
 			end
-			if removeIfPresent(PrioritizedPlrs, plr) then
-				table.insert(PrioritizedPlrsOld, plr.Name)
-			end
-			if removeIfPresent(WhitelistedPlrs, plr) then
-				table.insert(WhitelistedPlrsOld, plr.Name)
-			end
 		end)
 	
-		Changed(misc, "TargetedCharacter", function(v)
-			if v then
-				local player = game:GetService("Players"):GetPlayerFromCharacter(v)
+		Changed(misc, "TargetedCharacter", function(chr)
+			local firstPerson = getOrCreate(GameStats, "FirstPersonEnabled")
+			if chr then
+				local player = game:GetService("Players"):GetPlayerFromCharacter(chr)
 				if player then
 					MainFrame.CurrentTarget.Text = CheckDN(player)
 				else
-					MainFrame.CurrentTarget.Text = v.Name
+					MainFrame.CurrentTarget.Text = chr.Name
 				end
-				if not getOrCreate(GameStats, "FirstPersonEnabled") then
+				if not firstPerson then
 					lplr.Character.Humanoid.CameraOffset = Vector3.new(2,0,0)
 					uiservice.MouseBehavior = Enum.MouseBehavior.LockCenter
 				end
 				MainFrame.CurrentTarget.TextColor3 = getOrCreate(Theme, "Yes")
 				toggleTxt[MainFrame.CurrentTarget] = true
 			else
-				if not getOrCreate(GameStats, "FirstPersonEnabled") then
+				if not firstPerson then
 					lplr.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
 					uiservice.MouseBehavior = Enum.MouseBehavior.Default
 				end
@@ -2379,13 +2345,13 @@ local function XJZX_fake_script() -- RedwiresAimbot.LocalScript
 				button.TextColor3 = getOrCreate(Theme, "No")
 				toggleTxt[button] = false
 	
-				if getOrCreate(GameStats, "WhitelistFriends") and lplr:IsFriendsWith(plr.UserId) and Table == WhitelistedPlrs and not table.find(Table, plr) then
+				if getOrCreate(GameStats, "WhitelistFriends") and lplr:IsFriendsWith(plr.UserId) and Table == WhitelistedPlrs and not table.find(Table, plr.UserId) then
 					button.TextColor3 = getOrCreate(Theme, "Yes")
 					toggleTxt[button] = true
 					button.Text = "Yes"
-					table.insert(Table, plr)
+					table.insert(Table, plr.UserId)
 				end
-				if table.find(Table, plr) and Table == PrioritizedPlrs then
+				if table.find(Table, plr.UserId) and Table == PrioritizedPlrs then
 					button.TextColor3 = getOrCreate(Theme, "Yes")
 					toggleTxt[button] = true
 					button.Text = "Yes"
@@ -2396,30 +2362,27 @@ local function XJZX_fake_script() -- RedwiresAimbot.LocalScript
 						button.TextColor3 = getOrCreate(Theme, "Yes")
 						toggleTxt[button] = true
 						button.Text = "Yes"
-						table.insert(Table,plr)
+						table.insert(Table, plr.UserId)
 	
 						if Table == PrioritizedPlrs and clone.WhitelistToggle.Text == "Yes" then
 							clone.WhitelistToggle.Text = "No"
 							clone.WhitelistToggle.TextColor3 = getOrCreate(Theme, "No")
 							toggleTxt[clone.WhitelistToggle] = false
-							local wlistplr = table.find(WhitelistedPlrs, plr)
-							table.remove(WhitelistedPlrs, wlistplr)
+							removeIfPresent(WhitelistedPlrs, plr.UserId)
 						end
 	
 						if Table == WhitelistedPlrs and clone.PriorityToggle.Text == "Yes" then
 							clone.PriorityToggle.Text = "No"
 							clone.PriorityToggle.TextColor3 = getOrCreate(Theme, "No")
 							toggleTxt[clone.PriorityToggle] = false
-							local prioplr = table.find(PrioritizedPlrs, plr)
-							table.remove(PrioritizedPlrs, prioplr)
+							removeIfPresent(PrioritizedPlrs, plr.UserId)
 						end
 	
 					else
 						button.TextColor3 = getOrCreate(Theme, "No")
 						toggleTxt[button] = false
 						button.Text = "No"
-						local removeins = table.find(Table, plr)
-						table.remove(Table,removeins)
+						removeIfPresent(Table, plr.UserId)
 					end
 				end)
 	
@@ -2460,15 +2423,7 @@ local function XJZX_fake_script() -- RedwiresAimbot.LocalScript
 			globals.Visible = true
 		end)
 	
-		plrs.PlayerAdded:connect(function(plr)
-			if removeIfPresent(WhitelistedPlrsOld, plr.Name) then
-				table.insert(WhitelistedPlrs, plr)
-			end
-			if removeIfPresent(PrioritizedPlrsOld, plr.Name) then
-				table.insert(PrioritizedPlrs, plr)
-			end
-			addToList(plr)
-		end)
+		plrs.PlayerAdded:connect(addToList)
 	
 		targetingui.add.Activated:connect(function()
 			addGUICondition(#getOrCreate(GameStats, "CustomTargetConditions")+1)
@@ -2527,4 +2482,4 @@ local function XJZX_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(XJZX_fake_script)()
+coroutine.wrap(LJOVFIM_fake_script)()
