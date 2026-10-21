@@ -84,7 +84,7 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function YOHS_fake_script() -- DaShop.LocalScript 
+local function CHYZ_fake_script() -- DaShop.LocalScript 
 	local script = Instance.new('LocalScript', DaShop)
 
 	local mainframe = script.Parent.MainFrame
@@ -236,7 +236,7 @@ local function YOHS_fake_script() -- DaShop.LocalScript
 				end
 			end
 			if closestChr then
-				hrp.CFrame = closestChr.UpperTorso.CFrame + Vector3.new(0, 2.5, 0)
+				hrp.CFrame = CFrame.new(closestChr.UpperTorso.Position) + Vector3.new(0, 2.5, 0)
 				rstorage.MainEvent:FireServer("Stomp")
 			end
 		end
@@ -252,4 +252,4 @@ local function YOHS_fake_script() -- DaShop.LocalScript
 		end
 	end)
 end
-coroutine.wrap(YOHS_fake_script)()
+coroutine.wrap(CHYZ_fake_script)()
