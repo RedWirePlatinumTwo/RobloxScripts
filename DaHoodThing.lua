@@ -84,7 +84,7 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function UUFE_fake_script() -- DaShop.LocalScript 
+local function OEBYBOO_fake_script() -- DaShop.LocalScript 
 	local script = Instance.new('LocalScript', DaShop)
 
 	local mainframe = script.Parent.MainFrame
@@ -206,12 +206,20 @@ local function UUFE_fake_script() -- DaShop.LocalScript
 	
 	Changed(mainframe.Filter, "Text", function(txt)
 		txt = txt:lower():gsub(" ", "")
+		local filteredButtons = {}
 		local contents = txt:split(",")
 		contents = if #contents == 0 then {txt} else contents
-		for _, itemName in pairs(contents) do
-			for _, shopButton in pairs(mainframe.ShopScroll:GetChildren()) do
-				if shopButton:IsA("TextButton") and shopButton ~= basebutton then
-					shopButton.Visible = shopButton.Text:lower():match(itemName) ~= nil
+		for _, shopButton in pairs(mainframe.ShopScroll:GetChildren()) do
+			if shopButton:IsA("TextButton") and shopButton ~= basebutton then
+				for _, itemName in pairs(contents) do
+					if not filteredButtons[shopButton] then
+						if shopButton.Text:lower():match(itemName) ~= nil then 
+							filteredButtons[shopButton] = true
+							shopButton.Visible = true
+						else
+							shopButton.Visible = false
+						end
+					end
 				end
 			end
 		end
@@ -258,4 +266,4 @@ local function UUFE_fake_script() -- DaShop.LocalScript
 		end
 	end)
 end
-coroutine.wrap(UUFE_fake_script)()
+coroutine.wrap(OEBYBOO_fake_script)()
