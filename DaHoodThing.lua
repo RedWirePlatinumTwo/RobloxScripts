@@ -84,7 +84,7 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function OEBYBOO_fake_script() -- DaShop.LocalScript 
+local function WAPA_fake_script() -- DaShop.LocalScript 
 	local script = Instance.new('LocalScript', DaShop)
 
 	local mainframe = script.Parent.MainFrame
@@ -127,7 +127,7 @@ local function OEBYBOO_fake_script() -- DaShop.LocalScript
 	
 	local function trimName(txt)
 		txt = txt:sub(txt:find("%[") + 1, txt:find("%]") - 1)
-		return txt:gsub(" ", "")
+		return (txt:gsub(" ", ""))
 	end
 	
 	local shopItems = {}
@@ -266,4 +266,4 @@ local function OEBYBOO_fake_script() -- DaShop.LocalScript
 		end
 	end)
 end
-coroutine.wrap(OEBYBOO_fake_script)()
+coroutine.wrap(WAPA_fake_script)()
