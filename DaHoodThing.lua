@@ -84,7 +84,7 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function CHYZ_fake_script() -- DaShop.LocalScript 
+local function UUFE_fake_script() -- DaShop.LocalScript 
 	local script = Instance.new('LocalScript', DaShop)
 
 	local mainframe = script.Parent.MainFrame
@@ -126,7 +126,8 @@ local function CHYZ_fake_script() -- DaShop.LocalScript
 	end
 	
 	local function trimName(txt)
-		return txt:sub(txt:find("%[")+1, txt:find("%]")-1)
+		txt = txt:sub(txt:find("%[") + 1, txt:find("%]") - 1)
+		return txt:gsub(" ", "")
 	end
 	
 	local shopItems = {}
@@ -204,9 +205,14 @@ local function CHYZ_fake_script() -- DaShop.LocalScript
 	end
 	
 	Changed(mainframe.Filter, "Text", function(txt)
-		for i,v in pairs(mainframe.ShopScroll:GetChildren()) do
-			if v.ClassName == "TextButton" and v ~= basebutton then
-				v.Visible = v.Text:lower():match(txt:lower()) ~= nil
+		txt = txt:lower():gsub(" ", "")
+		local contents = txt:split(",")
+		contents = if #contents == 0 then {txt} else contents
+		for _, itemName in pairs(contents) do
+			for _, shopButton in pairs(mainframe.ShopScroll:GetChildren()) do
+				if shopButton:IsA("TextButton") and shopButton ~= basebutton then
+					shopButton.Visible = shopButton.Text:lower():match(itemName) ~= nil
+				end
 			end
 		end
 	end)
@@ -252,4 +258,4 @@ local function CHYZ_fake_script() -- DaShop.LocalScript
 		end
 	end)
 end
-coroutine.wrap(CHYZ_fake_script)()
+coroutine.wrap(UUFE_fake_script)()
