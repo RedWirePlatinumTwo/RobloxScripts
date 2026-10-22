@@ -172,7 +172,7 @@ local function OEBYBOO_fake_script() -- DaShop.LocalScript
 				end
 			end
 			if index:find("Ammo") then
-				if not table.find(toolNames, index:gsub(" Ammo", "")) then
+				if not table.find(toolNames, index:gsub("Ammo", "")) then
 					warn("[DaShop] unable to buy ammo without gun")
 					return
 				end
