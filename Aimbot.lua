@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function BHFCVSW_fake_script() -- RedwiresAimbot.LocalScript 
+local function JMSQ_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1112,7 +1112,8 @@ local function BHFCVSW_fake_script() -- RedwiresAimbot.LocalScript
 		sendNotif("Red's Universal Aimbot (10/21/26)", changeNotes(
 			"Slightly re-worked whitelisting + prioritiziting internally",
 			"Improved auto-targeting logic",
-			"recursiveCast *should* no longer accept casts "
+			"Fixed auto-targeting logic regarding successful raycasts ignoring all previous checks",
+			"Raycasting (if enabled) only occurs when actually necessary"
 		))
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
@@ -2173,7 +2174,7 @@ local function BHFCVSW_fake_script() -- RedwiresAimbot.LocalScript
 				end
 			end
 			
-			local function recursiveCast(origin, destinationPart, exclusions) --returns true when the raycast passes all
+			local function recursiveCast(origin, destinationPart, exclusions) --returns true when the raycast passes all (if any) invalid parts
 				table.insert(exclusions, destinationPart)
 				local params = RaycastParams.new()
 				params.FilterDescendantsInstances = exclusions
@@ -2483,4 +2484,4 @@ local function BHFCVSW_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(BHFCVSW_fake_script)()
+coroutine.wrap(JMSQ_fake_script)()
