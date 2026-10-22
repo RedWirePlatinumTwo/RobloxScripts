@@ -127,7 +127,7 @@ local function WAPA_fake_script() -- DaShop.LocalScript
 	
 	local function trimName(txt)
 		txt = txt:sub(txt:find("%[") + 1, txt:find("%]") - 1)
-		return (txt:gsub(" ", ""))
+		return (txt:gsub(" ", "")) --note to self: wrap multiple-value functions in parentheses if you only care about the first return
 	end
 	
 	local shopItems = {}
