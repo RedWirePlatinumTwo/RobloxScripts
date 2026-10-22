@@ -72,6 +72,7 @@ Filter.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
 Filter.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Filter.Position = UDim2.new(0.0488599353, 0, 0.139682546, 0)
 Filter.Size = UDim2.new(0, 277, 0, 38)
+Filter.ClearTextOnFocus = false
 Filter.Font = Enum.Font.SourceSans
 Filter.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
 Filter.PlaceholderText = "Filter text"
@@ -84,7 +85,7 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function WAPA_fake_script() -- DaShop.LocalScript 
+local function IBMC_fake_script() -- DaShop.LocalScript 
 	local script = Instance.new('LocalScript', DaShop)
 
 	local mainframe = script.Parent.MainFrame
@@ -266,4 +267,4 @@ local function WAPA_fake_script() -- DaShop.LocalScript
 		end
 	end)
 end
-coroutine.wrap(WAPA_fake_script)()
+coroutine.wrap(IBMC_fake_script)()
