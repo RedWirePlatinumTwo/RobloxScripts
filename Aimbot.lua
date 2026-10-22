@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function SIQKGQ_fake_script() -- RedwiresAimbot.LocalScript 
+local function ACMQCMN_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -2214,11 +2214,12 @@ local function SIQKGQ_fake_script() -- RedwiresAimbot.LocalScript
 								end
 								local raycast
 								local raycasting = getOrCreate(GameStats, "EnableRaycasting")
-								if raycasting then
-									raycast = recursiveCast(origin, targetPart, table.clone(chrs)) --do raycast only when it matters
-								end
-								if pos < dist and (raycast or not raycasting) and (onscreen or getOrCreate(GameStats, "TargetOffScreen")) then
-									if (player and priorityCheck(player)) or not player then
+								if pos < dist then
+									if raycasting then
+										raycast = recursiveCast(origin, targetPart, table.clone(chrs)) --do raycast only when it matters
+									end
+									if (raycast or not raycasting) and (onscreen or getOrCreate(GameStats, "TargetOffScreen"))
+									and ((player and priorityCheck(player)) or not player) then
 										dist = pos
 										closestChr = chr
 									end
@@ -2483,4 +2484,4 @@ local function SIQKGQ_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(SIQKGQ_fake_script)()
+coroutine.wrap(ACMQCMN_fake_script)()
