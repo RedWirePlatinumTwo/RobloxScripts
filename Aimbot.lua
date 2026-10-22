@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function KAZVQ_fake_script() -- RedwiresAimbot.LocalScript 
+local function SIQKGQ_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1111,7 +1111,8 @@ local function KAZVQ_fake_script() -- RedwiresAimbot.LocalScript
 		getgenv().RedsAimbot = {}
 		sendNotif("Red's Universal Aimbot (10/21/26)", changeNotes(
 			"Slightly re-worked whitelisting + prioritiziting internally",
-			"Improved auto-targeting logic"
+			"Improved auto-targeting logic",
+			"recursiveCast *should* no longer accept casts "
 		))
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
@@ -2172,7 +2173,7 @@ local function KAZVQ_fake_script() -- RedwiresAimbot.LocalScript
 				end
 			end
 			
-			local function recursiveCast(origin, destinationPart, exclusions)
+			local function recursiveCast(origin, destinationPart, exclusions) --returns true when the raycast passes all
 				table.insert(exclusions, destinationPart)
 				local params = RaycastParams.new()
 				params.FilterDescendantsInstances = exclusions
@@ -2216,7 +2217,7 @@ local function KAZVQ_fake_script() -- RedwiresAimbot.LocalScript
 								if raycasting then
 									raycast = recursiveCast(origin, targetPart, table.clone(chrs)) --do raycast only when it matters
 								end
-								if (raycast or not raycasting and (onscreen or getOrCreate(GameStats, "TargetOffScreen")) and pos < dist) then
+								if pos < dist and (raycast or not raycasting) and (onscreen or getOrCreate(GameStats, "TargetOffScreen")) then
 									if (player and priorityCheck(player)) or not player then
 										dist = pos
 										closestChr = chr
@@ -2482,4 +2483,4 @@ local function KAZVQ_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(KAZVQ_fake_script)()
+coroutine.wrap(SIQKGQ_fake_script)()
