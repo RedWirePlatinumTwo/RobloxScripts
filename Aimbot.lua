@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function FVRIFKS_fake_script() -- RedwiresAimbot.LocalScript 
+local function LRZBMM_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1867,13 +1867,19 @@ local function FVRIFKS_fake_script() -- RedwiresAimbot.LocalScript
 		end)
 	
 		local function isPlayerTargetable(plr)
+			local function checkPriority()
+				return boolOrFalse(GameStats, "TargetPrioOnly", function()
+					return table.find(PrioritizedPlrs, plr.UserId)
+				end) or #PrioritizedPlrs == 0
+			end
+			
 			if table.find(WhitelistedPlrs, plr.UserId) then
 				return false
 			end
 	
 			local localTeam = lplr.Team
 			if not localTeam then
-				return true
+				return checkPriority()
 			end
 	
 			if getOrCreate(GameStats, "OwnTeamWhitelisted") and plr.Team == localTeam then
@@ -1888,9 +1894,7 @@ local function FVRIFKS_fake_script() -- RedwiresAimbot.LocalScript
 				end
 			end
 			
-			return boolOrFalse(GameStats, "TargetPrioOnly", function()
-				return table.find(PrioritizedPlrs, plr.UserId)
-			end) or #PrioritizedPlrs == 0
+			return checkPriority()
 		end
 	
 		local function meetsConditions(chr)
@@ -2468,4 +2472,4 @@ local function FVRIFKS_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(FVRIFKS_fake_script)()
+coroutine.wrap(LRZBMM_fake_script)()
