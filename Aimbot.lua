@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function LRZBMM_fake_script() -- RedwiresAimbot.LocalScript 
+local function ROKMRZU_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1072,6 +1072,7 @@ local function LRZBMM_fake_script() -- RedwiresAimbot.LocalScript
 	local teams = game:GetService("Teams")
 	local WhitelistedPlrs = {}
 	local PrioritizedPlrs = {}
+	local PrioritizedPlrsLeft = {}
 	local misc = {
 		IsAimbotOn = false,
 		TargetedCharacter = nil,
@@ -1109,8 +1110,9 @@ local function LRZBMM_fake_script() -- RedwiresAimbot.LocalScript
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 		end
 		getgenv().RedsAimbot = {}
-		sendNotif("Red's Universal Aimbot (10/22/26)", changeNotes(
-			"Some more code cleanup here and there",
+		sendNotif("Red's Universal Aimbot (10/23/26)", changeNotes(
+			"Fixed priority targeting in games without teams + re-added prioritized player handling when leaving",
+			"(10/22) Some more code cleanup here and there",
 			"(10/21) Slightly re-worked whitelisting + prioritiziting internally",
 			"(10/21) Improved auto-targeting logic",
 			"(10/21) Fixed auto-targeting logic regarding successful raycasts ignoring all previous checks",
@@ -2360,6 +2362,10 @@ local function LRZBMM_fake_script() -- RedwiresAimbot.LocalScript
 					end
 				end
 	
+				if removeIfPresent(PrioritizedPlrsLeft, plr.UserId) then
+					table.insert(PrioritizedPlrs, plr.UserId)
+				end
+				
 				if table.find(Table, plr.UserId) or
 					(Table == WhitelistedPlrs and getOrCreate(GameStats, "WhitelistFriends") and
 					lplr:IsFriendsWith(plr.UserId) and not table.find(PrioritizedPlrs, plr.UserId)) then
@@ -2382,6 +2388,9 @@ local function LRZBMM_fake_script() -- RedwiresAimbot.LocalScript
 				if p == plr then
 					clone:Destroy()
 					removing:Disconnect()
+					if removeIfPresent(PrioritizedPlrs, plr.UserId) then --this is so #PrioritizedPlrs can equal 0 if said player isn't in the game anymore
+						table.insert(PrioritizedPlrsLeft, plr.UserId)
+					end
 				end
 			end)
 	
@@ -2472,4 +2481,4 @@ local function LRZBMM_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(LRZBMM_fake_script)()
+coroutine.wrap(ROKMRZU_fake_script)()
