@@ -85,7 +85,7 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function EGZH_fake_script() -- DaShop.LocalScript 
+local function JQEH_fake_script() -- DaShop.LocalScript 
 	local script = Instance.new('LocalScript', DaShop)
 
 	local mainframe = script.Parent.MainFrame
@@ -127,8 +127,7 @@ local function EGZH_fake_script() -- DaShop.LocalScript
 	end
 	
 	local function trimName(txt)
-		txt = txt:sub(txt:find("%[") + 1, txt:find("%]") - 1)
-		return (txt:gsub(" ", "")) --note to self: wrap multiple-value functions in parentheses if you only care about the first return
+		return (txt:match("%[(.-)%]"):gsub(" ", "")) --note to self: wrap multiple-value functions in parentheses if you only care about the first return
 	end
 	
 	local shopItems = {}
@@ -137,10 +136,9 @@ local function EGZH_fake_script() -- DaShop.LocalScript
 			local name = shopitem.Name
 			local index = trimName(name)
 			local storedPrice = (shopItems[index] and shopItems[index].Price) or 0
-			local instancePrice = name:find("$%d+")
-			instancePrice = tonumber(name:sub(instancePrice + 1))
-			local _, quantity = name:find("%d+ %[")
-			quantity = if quantity then name:sub(1, quantity - 1) else ""
+			local instancePrice = tonumber(name:match("%$(%d+)"))
+			local quantity = name:match("(%d+) %[")
+			quantity = if quantity then " x "..quantity else ""
 			if (instancePrice < storedPrice or storedPrice == 0) and shopitem:FindFirstChild("Head") and shopitem:FindFirstChild("ClickDetector") then
 				shopItems[index] = {
 					Price = instancePrice;
@@ -158,7 +156,7 @@ local function EGZH_fake_script() -- DaShop.LocalScript
 		clone.Visible = true
 		clone.Name = index
 		local shopItem = data.Instance
-		clone.Text = ("%s[%s] - $%d"):format(data.QuantityString, index, data.Price)
+		clone.Text = ("[%s%s] - $%d"):format(index, data.QuantityString, data.Price)
 		local canClick = true
 		clone.Activated:connect(function()
 			local toolNames = {}
@@ -273,4 +271,4 @@ local function EGZH_fake_script() -- DaShop.LocalScript
 		end
 	end)
 end
-coroutine.wrap(EGZH_fake_script)()
+coroutine.wrap(JQEH_fake_script)()
