@@ -85,7 +85,7 @@ Filter.TextWrapped = true
 
 -- Scripts:
 
-local function IBMC_fake_script() -- DaShop.LocalScript 
+local function EGZH_fake_script() -- DaShop.LocalScript 
 	local script = Instance.new('LocalScript', DaShop)
 
 	local mainframe = script.Parent.MainFrame
@@ -134,13 +134,18 @@ local function IBMC_fake_script() -- DaShop.LocalScript
 	local shopItems = {}
 	for i, shopitem in pairs(workspace.Ignored.Shop:GetChildren()) do
 		pcall(function()
-			local name = trimName(shopitem.Name)
-			local price = (shopItems[name] and shopItems[name].Price) or 0
-			local price2 = tonumber(shopitem.Name:match("%d+"))
-			if price2 < price or price == 0 and shopitem:FindFirstChild("Head") and shopitem:FindFirstChild("ClickDetector") then
-				shopItems[name] = {
-					Price = price2,
-					Instance = shopitem
+			local name = shopitem.Name
+			local index = trimName(name)
+			local storedPrice = (shopItems[index] and shopItems[index].Price) or 0
+			local instancePrice = name:find("$%d+")
+			instancePrice = tonumber(name:sub(instancePrice + 1))
+			local _, quantity = name:find("%d+ %[")
+			quantity = if quantity then name:sub(1, quantity - 1) else ""
+			if (instancePrice < storedPrice or storedPrice == 0) and shopitem:FindFirstChild("Head") and shopitem:FindFirstChild("ClickDetector") then
+				shopItems[index] = {
+					Price = instancePrice;
+					Instance = shopitem;
+					QuantityString = quantity;
 				}
 			end
 		end)
@@ -151,8 +156,9 @@ local function IBMC_fake_script() -- DaShop.LocalScript
 		local clone = basebutton:Clone()
 		clone.Parent = basebutton.Parent
 		clone.Visible = true
+		clone.Name = index
 		local shopItem = data.Instance
-		clone.Text = shopItem.Name
+		clone.Text = ("%s[%s] - $%d"):format(data.QuantityString, index, data.Price)
 		local canClick = true
 		clone.Activated:connect(function()
 			local toolNames = {}
@@ -214,7 +220,7 @@ local function IBMC_fake_script() -- DaShop.LocalScript
 			if shopButton:IsA("TextButton") and shopButton ~= basebutton then
 				for _, itemName in pairs(contents) do
 					if not filteredButtons[shopButton] then
-						if shopButton.Text:lower():match(itemName) ~= nil then 
+						if shopButton.Name:lower():match(itemName) ~= nil then 
 							filteredButtons[shopButton] = true
 							shopButton.Visible = true
 						else
@@ -267,4 +273,4 @@ local function IBMC_fake_script() -- DaShop.LocalScript
 		end
 	end)
 end
-coroutine.wrap(IBMC_fake_script)()
+coroutine.wrap(EGZH_fake_script)()
