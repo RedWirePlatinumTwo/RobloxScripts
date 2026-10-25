@@ -255,7 +255,7 @@ local function JQEH_fake_script() -- DaShop.LocalScript
 				end
 			end
 			if closestChr then
-				hrp.CFrame = CFrame.new(closestChr.UpperTorso.Position) + Vector3.new(0, 2.5, 0)
+				hrp.CFrame = CFrame.new(closestChr.UpperTorso.Position) + Vector3.new(0, 3, 0)
 				rstorage.MainEvent:FireServer("Stomp")
 			end
 		end
