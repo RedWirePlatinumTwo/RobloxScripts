@@ -754,7 +754,7 @@ loadoutname.TextWrapped = true
 
 -- Scripts:
 
-local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript 
+local function ULZWOS_fake_script() -- JailbreakGUI.LocalScript 
 	local script = Instance.new('LocalScript', JailbreakGUI)
 
 	local mainframe = script.Parent.MainFrame.ScrollingFrame
@@ -770,12 +770,10 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 	local lplr = plrs.LocalPlayer
 	local plrgui = lplr.PlayerGui
 	local mouse = lplr:GetMouse()
-	local jewel = workspace.Jewelrys:FindFirstChildOfClass("Model")
-	local bank = workspace.Banks:FindFirstChildOfClass("Model")
-	local minimap = lplr.PlayerGui.AppUI.Buttons.Minimap.Map.Container.Points
 	local vehicle = require(rstorage.Vehicle.VehicleUtils)
 	local getmodel = vehicle.GetLocalVehicleModel
 	local getseats = vehicle.getSeats
+	local gunmodule = require(rstorage.Game.Item.Gun)
 	local oneclickbuttons = {
 		mainframe.RobberyNotifier,
 		mainframe.Tazermod,
@@ -806,8 +804,7 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 	end
 	
 	local function singleclick(button, func)
-		local con
-		con = button.Activated:connect(function(...)
+		local con; con = button.Activated:connect(function(...)
 			con:Disconnect()
 			func(...)
 		end)
@@ -856,8 +853,10 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 	end
 	
 	local equippeditems = {}
-	local hook
-	hook = hookmetamethod(game, "__namecall", function(self, ...)
+	local hook; hook = hookmetamethod(game, "__namecall", function(self, ...)
+		if typeof(self) ~= "Instance" then
+			return hook(self, ...)
+		end
 		if self.Name == "InventoryEquipRemote" and getnamecallmethod() == "FireServer" and self.Parent.Parent == lplr.Folder then
 			local equipped = {...}
 			equipped = equipped[1]
@@ -962,38 +961,18 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 			lplr.CameraMaxZoomDistance = 200
 	
 			thread(function()
+				local minimap
+				repeat
+					pcall(function()
+						minimap = plrgui.AppUI.Buttons.SidebarMinimap.Column.MapSlot.MapShell.Map.Map.Container.Points
+					end)
+					task.wait()
+				until minimap
 				while true do
 					for i, plr in pairs(minimap:GetChildren()) do
 						plr.Visible = true
 					end
 					task.wait()
-				end
-			end)
-	
-			lplr.PlayerGui.AppUI.ChildAdded:connect(function(c)
-				if c.Name == "Minimap" then
-					c:WaitForChild("Map"):WaitForChild("Container"):WaitForChild("Points")
-					local minimap2 = c.Map.Container.Points
-					local destroyed = false
-	
-					thread(function()
-						while not destroyed do
-							for i,v in pairs(minimap2:GetChildren()) do
-								if v.ClassName == "ImageLabel" then
-									v.Visible = true
-								end
-							end
-							task.wait()
-						end
-					end)
-	
-					local removed
-					removed = lplr.PlayerGui.AppUI.ChildRemoved:connect(function(c2)
-						if c == c2 then
-							removed:Disconnect()
-							destroyed = true
-						end
-					end)
 				end
 			end)
 	
@@ -1087,9 +1066,8 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 	
 				Changed(misc, "TargetedCharacter", function(chr)
 					if chr then
-						local change
-						change = Changed(chr.Humanoid.RootPart, "CFrame", function(new,old)
-							vel2 = (old-new).Position
+						local change; change = Changed(chr.Humanoid.RootPart, "CFrame", function(new,old)
+							vel2 = old.Position - new.Position
 							if misc.TargetedCharacter ~= chr then
 								change.Stop()
 								vel2 = Vector3.new()
@@ -1253,15 +1231,15 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 	
 			singleclick(mainframe.modguns, function()
 				local m = require(rstorage.Inventory.InventoryItemSystem)
-				for i,v in pairs(m._equipConditions) do
-					m._equipConditions[i] = function(...)
+				for _, func in pairs(m._equipConditions) do
+					hookfunction(func, function(...)
 						return true
-					end
+					end)
 				end
-				for i,v in pairs(m._unequipConditions) do
-					m._unequipConditions[i] = function(...)
+				for _, func in pairs(m._unequipConditions) do
+					hookfunction(func, function(...)
 						return true
-					end
+					end)
 				end
 			end)
 	
@@ -1287,7 +1265,8 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 	
 			singleclick(mainframe.holdebypass, function()
 				local moduleui = require(rstorage.Module.UI)
-				local nameavoid = {"grab documents",
+				local nameavoid = {
+					"grab documents",
 					"grab computer",
 					"grab briefcase",
 					"grab phone",
@@ -1301,14 +1280,10 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 	
 				game:GetService("RunService").Heartbeat:connect(function()
 					for i,a in pairs(moduleui.CircleAction.Specs) do
-						local function name()
-							if a.Name then
-								return a.Name:lower()
-							else
-								return ""
-							end
+						local function getName()
+							return if a.Name then a.Name:lower() else ""
 						end
-						if a.Duration and not table.find(nameavoid, name()) then
+						if a.Duration and not table.find(nameavoid, getName()) then
 							a.Timed = false
 						end
 					end
@@ -1509,10 +1484,17 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 					if chr and chr:FindFirstChild("Humanoid") and chr.Humanoid.RootPart then
 						local hum = chr.Humanoid
 						local flyPart
-						if hum.SeatPart and not hum.SeatPart.Anchored then
-							flyPart = hum.SeatPart
+						local flyspeed = stats.flyspeed
+						local invehicle = getmodel()
+						if invehicle and isdriver() then
+							flyPart = invehicle.PrimaryPart
 						else
-							flyPart = chr.HumanoidRootPart
+							if hum.SeatPart and not hum.SeatPart.Anchored then
+								flyPart = hum.SeatPart
+							else
+								flyPart = chr.HumanoidRootPart
+							end
+							flyspeed = math.min(flyspeed, 150)
 						end
 						local velocity = Vector3.new()
 						local cam = workspace.CurrentCamera.CFrame
@@ -1534,7 +1516,7 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 							flyControls(Enum.KeyCode.W, forward)
 							flyControls(Enum.KeyCode.S, -forward)
 							if velocity.Magnitude > 0 then -- prevent velocity becoming NaN
-								velocity = velocity.Unit * stats.flyspeed
+								velocity = velocity.Unit * flyspeed
 							end
 							flyPart.Velocity = velocity
 							flyPart.CFrame = CFrame.new(flyPart.Position, flyPart.Position + forward)
@@ -1567,11 +1549,11 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 				end)
 	
 				mainframe["1flyhackv2"].MouseWheelForward:connect(function()
-					stats.flyspeed = stats.flyspeed + 20
+					stats.flyspeed = math.min(stats.flyspeed + 20, 600)
 				end)
 	
 				mainframe["1flyhackv2"].MouseWheelBackward:connect(function()
-					stats.flyspeed = stats.flyspeed - 20
+					stats.flyspeed = math.max(stats.flyspeed - 20, 0)
 					mainframe.ScrollingEnabled = false
 					delay(0.2, function()
 						mainframe.ScrollingEnabled = true
@@ -1589,9 +1571,9 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 	
 	
 			singleclick(mainframe.keybypass, function()
-				require(rstorage.Game.PlayerUtils).hasKey = function()
+				hookfunction(require(rstorage.Game.PlayerUtils).hasKey, function()
 					return true
-				end
+				end)
 			end)
 	
 			local ctxt = mainframe.AAAAA.Text
@@ -1667,19 +1649,14 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 			end)
 	
 			singleclick(mainframe.Tazermod, function()
-				local function hasval(t, child)
-					local success, prop = pcall(function()
-						return t[child]
-					end)
-					return success and prop ~= nil
+				local function hasValue(table, child)
+					local success, result = pcall(rawget, table, child)
+					return success and result ~= nil
 				end
-	
 				for i,v in pairs(getreg()) do
 					if type(v) == "table" then
-						if isreadonly and setreadonly and isreadonly(v) then
-							setreadonly(v, false)
-						end
-						if hasval(v, "ReloadTime") and hasval(v, "ReloadTimeHit") and type(v.ReloadTime) == "number" and type(v.ReloadTimeHit) == "number" then
+						if hasValue(v, "ReloadTime") and hasValue(v, "ReloadTimeHit")
+							and type(v.ReloadTime) == "number" and type(v.ReloadTimeHit) == "number" then
 							v.ReloadTime = 0
 							v.ReloadTimeHit = 0
 						end
@@ -1695,8 +1672,8 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 				ropefollow = not ropefollow
 				if not ropefollow then
 					ropepart = nil
-					local model = vehicle.GetLocalVehicleModel()
-					if model:FindFirstChild("Winch") and model.Winch:FindFirstChild("RopeConstraint") then
+					local model = getmodel()
+					if model and model:FindFirstChild("Winch") and model.Winch:FindFirstChild("RopeConstraint") then
 						model.Winch.RopeConstraint.Length = 30
 					end
 				end
@@ -1706,9 +1683,9 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 				end
 			end)
 	
-			runservice.Heartbeat:connect(function()
+			runservice.Heartbeat:connect(function(tick)
 				pcall(function()
-					local model = vehicle.GetLocalVehicleModel()
+					local model = getmodel()
 					if model and ropefollow and ropepart and ropepart ~= model then
 						if model:FindFirstChild("Preset") and model.Preset:FindFirstChild("RopePull") then
 							local modelrope = model.Winch.RopeConstraint
@@ -1716,14 +1693,14 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 							if ropepart.Parent == workspace.Vehicles then
 	
 								if ropepull.AttachedTo.Value then
-									modelrope.Length = math.max(modelrope.Length-(task.wait()*100),30)
+									modelrope.Length = math.max(modelrope.Length-(tick * 100),30)
 								else
 									modelrope.Length = (model.PrimaryPart.Position - ropepart.PrimaryPart.Position).Magnitude
 									ropepull.CFrame = ropepart.PrimaryPart.CFrame
 								end
 							else
 								if ropepull.AttachedTo.Value then
-									modelrope.Length = math.max(modelrope.Length-(task.wait()*100),30)
+									modelrope.Length = math.max(modelrope.Length-(tick * 100),30)
 								else
 									modelrope.Length = (model.PrimaryPart.Position - ropepart.MeshPart.Position).Magnitude
 									ropepull.CFrame = ropepart.MeshPart.CFrame
@@ -1740,7 +1717,7 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 					local gf = GetFamily(t)
 					if gf[3] == workspace.Vehicles then
 						ropepart = gf[4]
-					elseif gf[3].Name == "CargoShip" and gf[4].Name == "Crates" then
+					elseif gf[3] and gf[3].Name == "CargoShip" and gf[4] and gf[4].Name == "Crates" then
 						ropepart = gf[5]
 					end
 				end
@@ -1748,12 +1725,8 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 	
 			local loadouts
 			local file = "JBLoadouts.lua"
-			if isfile and loadfile then
-				if isfile(file) then
-					loadouts = loadfile(file)()
-				else
-					loadouts = {}
-				end
+			if isfile(file) then
+				loadouts = loadfile(file)()
 			else
 				loadouts = {}
 			end
@@ -1771,9 +1744,7 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 			end
 	
 			local function saveloadouts()
-				if writefile then
-					writefile(file, TableToString(loadouts, "Loadouts"))
-				end
+				writefile(file, TableToString(loadouts, "Loadouts"))
 			end
 	
 			local function addloadout(name)
@@ -2025,17 +1996,15 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 			mainframe.replaceparachute.Activated:connect(function()
 				replacechute = not replacechute
 			end)
-			local gunmodule = require(rstorage.Game.Item.Gun)
-			singleclick(mainframe.DisableNPCGuns, function()
-				local shoot = gunmodule.Shoot
 	
-				gunmodule.Shoot = function(...)
+			singleclick(mainframe.DisableNPCGuns, function()
+				local shoot; shoot = hookfunction(gunmodule.Shoot, function(...)
 					local t = {...}
 					t = t[1]
-					if plrs:FindFirstChild(t.Humanoid.Parent.Name) then
+					if plrs:GetPlayerFromCharacter(t.Humanoid.Parent) then
 						return shoot(...)
 					end
-				end
+				end)
 				notify("NPCs may still shoot if another player is nearby you (server-sided shid)")
 			end)
 	
@@ -2097,9 +2066,7 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 					end
 				end
 	
-				local shoot = gunmodule.Shoot
-	
-				gunmodule.Shoot = function(...)
+				local shoot; shoot = hookfunction(gunmodule.Shoot, function(...)
 					local args = {...}
 					local main = args[1]
 					if getEquippedItem() ~= "PlasmaPistol" and getEquippedItem() ~= "PlasmaShotgun" then
@@ -2110,7 +2077,7 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 						end
 					end
 					return shoot(...)
-				end
+				end)
 				notify("The plasma pistol (and plasma shotgun) will just not hit enemies at all if shooting through walls, so the wallhack will not work with those guns specifically")
 			end)
 			
@@ -2132,4 +2099,4 @@ local function CQNUWUZ_fake_script() -- JailbreakGUI.LocalScript
 		script.Parent:Destroy()
 	end
 end
-coroutine.wrap(CQNUWUZ_fake_script)()
+coroutine.wrap(ULZWOS_fake_script)()
