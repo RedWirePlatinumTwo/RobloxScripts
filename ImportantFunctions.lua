@@ -122,25 +122,31 @@ end]]
 
 getgenv().TableToString = function(Table, TableName, args, state) --the state param should basically never actually be manually created, but idk how to prevent that
 	typeCheck(Table, "table")
-	local output = ""
+	local properties = ""
+	local standardIndexTemplate = "%s[%s] = %s"
 	args = args or {}
-	TableName = TableName or "Table"
+	TableName = TableName or "Root"
 	state = state or {
-		visitedTables = {};
 		nameOccurrences = {};
 		tableNames = {};
 		totalTables = 0;
 		initialized = false;
+		dependencyCheck = {};
+		namesString = "";
+		dependenciesString = "";
 	}
-	local visitedTables, nameOccurrences, tableNames = state.visitedTables, state.nameOccurrences, state.tableNames
+	local nameOccurrences, tableNames, dependencies = state.nameOccurrences, state.tableNames, state.dependencyCheck
 
 	local function setName(t, name)
-		if tableNames[t] then return end
+		local function writeName()
+			state.namesString = state.namesString.."\n"..tableNames[t].." = {}"
+		end
 		if not args.simplify then
     		local function checkRepetitions()
     			local amount = (nameOccurrences[name] or 0) + 1
 				nameOccurrences[name] = amount
 				tableNames[t] = if amount > 1 then name.."_"..amount else name
+				writeName()
     		end
 			name = tostring(name):gsub("%W", "")
 			if not loadstring("local "..name) then
@@ -154,129 +160,101 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 		else
 		    state.totalTables += 1
 		    tableNames[t] = "Table"..(state.totalTables)
+			writeName()
 		end
 	end
 
 	local function getName(t)
-		return tableNames[t] or error("[TableToString] missed table-naming during initialization")
+		return tableNames[t]
 	end
 	
 	local function indexMayBeNil(index)
 		return typeof(index) == "Instance"
 	end
 
-	visitedTables[Table] = true
 	local isRoot = not state.initialized --this is just so "return [table]" can be supplied at the end
 	if isRoot then
 		state.initialized = true
-		setName(Table, TableName)
-		output = ("-- Table names:\n%s = {}"):format(getName(Table))
-		local needsInstanceDependency = false
-		local needsNonNilIndexDependency = false
-		local function defineTables(tbl)
-			for index, value in pairs(tbl) do
-				if indexMayBeNil(index) then
-					needsNonNilIndexDependency = true
-				end
-				if typeof(index) == "Instance" or typeof(value) == "Instance" then
-					needsInstanceDependency = true
-				end
-				local function defineName(_tbl)
-					if type(_tbl) == "table" and not tableNames[_tbl] then
-						setName(_tbl, if _tbl == index then value else index)
-						output = output..("\n%s = {}"):format(getName(_tbl))
-						defineTables(_tbl)
-					end
-				end
-				defineName(index)
-				defineName(value)
-			end
-		end
-		defineTables(Table)
-		if needsInstanceDependency then
-			output = output..readInsFunction
-		end
-		if needsNonNilIndexDependency then
-			output = output..nonNilIndexFunction
-		end
-		output = output.."\n-- Properties:"
 	end
+	setName(Table, TableName)
 	local name = getName(Table)
-	local standardIndexTemplate = "\n%s[%s] = %s"
 
 	local function writeValue(index, value)
 	
 		local function serializeValue(val, name)
 			local serialized, failed = Serialize(val, name, args, state)
-			local innerTblContents = ""
 			if type(val) == "table" then
-				innerTblContents = serialized or ""
+				properties = properties..(serialized or "")
 				--[[note to self: this is so the output can actually contain the contents of inner tables
 				(Serialize also returns nil for tables already listed)]]
-				serialized = getName(val)
+				return getName(val), false
 			end
-			return serialized, failed, innerTblContents
+			return serialized, failed
 		end
 		
-		local serializedIndex, failed1, inner1 = serializeValue(index, value)
-		local serializedValue, failed2, inner2 = serializeValue(value, index)
+		local serializedIndex, failed1 = serializeValue(index, value)
+		local serializedValue, failed2 = serializeValue(value, index)
 		local failString = ""
+		local isFailure = false
 		if failed1 or failed2 then
-			local failPrefix = " --failed to serialize type(s):"
-			failString = failPrefix
-			if failed1 and typeof(index) ~= "table" then
+			isFailure = true
+			if args.ignoreUnsupportedValues then
+				return
+			end
+			failString = " --failed to serialize type(s):"
+			if failed1 then
 				failString = failString.." "..typeof(index)
 			end
-			if failed2 and typeof(value) ~= "table" then
+			if failed2 then
 				failString = failString.." "..typeof(value)
 			end
-			if failString == failPrefix then
-				failString = ""
-			else
-				if args.ignoreUnsupportedValues then
-					return ""
-				end
-			end
 		end
-		local ret
-		if not indexMayBeNil(index) then
-			ret = standardIndexTemplate:format(name, serializedIndex, serializedValue)
-		else
-			ret = ("\n_addNonNilIndex(%s, %s, %s)"):format(name, serializedIndex, serializedValue)
-		end
-		return ret..failString..inner1..inner2
+		local ret = (if indexMayBeNil(index) then "_addNonNilIndex(%s, %s, %s)" else standardIndexTemplate):format(name, serializedIndex, serializedValue)
+		properties = properties.."\n"..(if isFailure then "--"..ret else ret)..failString
 	end
 	
 	local extraTables = {}
 	local function contextCheck(tbl, index, value)
 		local context = args.additionalCtx and args.additionalCtx(tbl, index, value)
 		if type(context) == "string" and context ~= "" then
-			output = output.." --"..context
+			properties = properties.." --"..context
 		end
 	end
 	
 	local customVals = args.customValues and args.customValues(Table) or {}
-	for i, v in pairs(Table) do
-		if type(v) ~= "table" then
-			if customVals[i] == nil then
-				output = output..writeValue(i, v)
+	for index, value in pairs(Table) do
+		if (typeof(index) == "Instance" or typeof(value) == "Instance") and not dependencies.instance then
+			dependencies.instance = true
+			state.dependenciesString = state.dependenciesString..readInsFunction
+		end
+		if indexMayBeNil(index) and not dependencies.nilIndex then
+			dependencies.nilIndex = true
+			state.dependenciesString = state.dependenciesString..nonNilIndexFunction
+		end
+		if type(value) ~= "table" then
+			if customVals[index] == nil then
+				writeValue(index, value)
 			end
-			contextCheck(Table, i, v)
+			contextCheck(Table, index, value)
 		else
-			extraTables[i] = v
+			extraTables[index] = value
 		end
 	end
+	
 	for index, value in pairs(customVals) do
-		output = output..standardIndexTemplate:format(name, Serialize(index), tostring(value))
+		properties = properties.."\n"..standardIndexTemplate:format(name, Serialize(index), tostring(value))
 	end
-	for i, v in pairs(extraTables) do
-		output = output.."\n"..writeValue(i, v)
-		contextCheck(Table, i, v)
+	
+	for index, nestedTbl in pairs(extraTables) do
+		properties = properties.."\n"
+		writeValue(index, nestedTbl)
+		contextCheck(Table, index, nestedTbl)
 	end
+	
 	if isRoot then
-		output = output.."\n\nreturn "..name
+		return ("--Table names:%s%s\n--Properties:%s\n\nreturn %s"):format(state.namesString, state.dependenciesString, properties, name)
 	end
-	return output
+	return properties
 end
 
 getgenv().tabletostring = TableToString
@@ -311,7 +289,7 @@ addSerializer(function(var)
 end, "number")
 
 addSerializer(function(var, name, args, state)
-	if state == nil or not state.visitedTables[var] then
+	if state == nil or not state.tableNames[var] then
 		return TableToString(var, name, args, state)
 	end
 end, "table")
