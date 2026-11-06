@@ -122,7 +122,7 @@ local function _addNonNilIndex(tbl, index, value)
 	end
 end]]
 
-getgenv().TableToString = function(Table, TableName, args, state) --the state param should basically never actually be manually created, but idk how to prevent that
+local function tableToStringInternal(Table, TableName, args, state)
 	typeCheck(Table, "table")
 	local properties = {}
 	local standardIndexTemplate = "%s[%s] = %s"
@@ -138,7 +138,12 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 		dependenciesString = "";
 	}
 	local nameOccurrences, tableNames, dependencies, iTableNames = state.nameOccurrences, state.tableNames, state.dependencies, state.iTableNames
-
+	local isRoot = not state.initialized --this is just so "return [table]" can be supplied at the end
+	if tableNames[Table] then return end
+	if isRoot then
+		state.initialized = true
+	end
+	
 	local function setName(t, name)
 		local function addName()
 			table.insert(iTableNames, "\n"..tableNames[t].." = {}")
@@ -174,12 +179,9 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 		return typeof(index) == "Instance"
 	end
 
-	local isRoot = not state.initialized --this is just so "return [table]" can be supplied at the end
-	if isRoot then
-		state.initialized = true
-	end
 	setName(Table, TableName)
 	local name = getName(Table)
+	
 	local customs
 	if type(args.customValues) == "function" then
 		local customValsSuccess, customValues = thread(args.customValues, false, Table)
@@ -191,12 +193,12 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 	local function addEntry(index, value, doubleNewline)
 		local newlines = if doubleNewline then 2 else 1
 		local function serializeValue(val, name)
-			local nestedContents
-			local serialized, failed = Serialize(val, name, args, state) --this needs to run first so nested tables get named + listed properties
 			if type(val) == "table" then
-				return getName(val), false, serialized
+				local nestedContents = tableToStringInternal(val, name, args, state) --this needs to run first so nested tables get named + listed properties
+				return getName(val), false, nestedContents
+			else
+				return Serialize(val, true)
 			end
-			return serialized, failed
 		end
 		local serializedIndex, failed1, nested1 = serializeValue(index, value)
 		local serializedValue, failed2, nested2 = serializeValue(value, index)
@@ -274,6 +276,10 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 	return propsString
 end
 
+getgenv().TableToString = function(Table, TableName, args)
+	return tableToStringInternal(Table, TableName, args)
+end
+
 getgenv().tabletostring = TableToString
 
 local serializers = {}
@@ -305,15 +311,13 @@ addSerializer(function(var)
 	end
 end, "number")
 
-addSerializer(function(var, name, args, state)
-	if state == nil or not state.tableNames[var] then
-		return TableToString(var, name, args, state)
-	end
+addSerializer(function(var)
+	return tableToStringInternal(var)
 end, "table")
 
-addSerializer(function(var, _, _, state)
+addSerializer(function(var, forTable)
 	local output = GetFullName(var)
-	if not state then
+	if not forTable then
 		return output
 	else
 		return ("_readInstance(%s)"):format(serializers.string(output))
@@ -332,7 +336,7 @@ addSerializer(function(var)
 end, "Color3")
 
 addSerializer(function(var)
-	return ("%s.new(\"%s\")"):format(typeof(var), tostring(var))
+	return ("BrickColor.new(\"%s\")"):format(tostring(var))
 end, "BrickColor")
 
 addSerializer(function() return "Enum" end, "Enums")
