@@ -136,10 +136,8 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 		initialized = false;
 		dependencies = {};
 		dependenciesString = "";
-		totalProperties = {};
 	}
-	local nameOccurrences, tableNames, dependencies, iTableNames, totalProperties =
-		state.nameOccurrences, state.tableNames, state.dependencies, state.iTableNames, state.totalProperties
+	local nameOccurrences, tableNames, dependencies, iTableNames = state.nameOccurrences, state.tableNames, state.dependencies, state.iTableNames
 
 	local function setName(t, name)
 		local function addName()
@@ -266,11 +264,10 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 	end
 	local propsString = table.concat(properties)
 	if isRoot then
-		table.insert(totalProperties, propsString)
 		return ("--Table names:%s%s\n--Properties:%s\n\nreturn %s"):format(
 			table.concat(iTableNames),
 			state.dependenciesString,
-			table.concat(totalProperties),
+			propsString,
 			name
 		)
 	end
