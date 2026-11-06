@@ -102,6 +102,7 @@ end
 	simplify (boolean): if true, makes table-naming more straightforward with (presumably) less function work
 	additionalCtx (function: string): a function with the arguments: (table, index, value). allows one to provide additional comments when the value is written
 		- context will not show up to any index/value line that cannot be serialized
+		- it also won't show up in customValues (you'd have to manually include it as part of the value)
 	ignoreUnsupportedValues (boolean): if true, any values that Serialize fails at will be omitted from the table output
 	customValues (function: table): a function that passes the current Table to supply values for it. values within the table will simply be emitted as a string, ignoring writeValue checks
 ]]
@@ -135,10 +136,10 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 		initialized = false;
 		dependencies = {};
 		dependenciesString = "";
-		iProperties = {};
+		totalProperties = {};
 	}
-	local nameOccurrences, tableNames, dependencies, iTableNames, iProperties =
-		state.nameOccurrences, state.tableNames, state.dependencies, state.iTableNames, state.iProperties
+	local nameOccurrences, tableNames, dependencies, iTableNames, totalProperties =
+		state.nameOccurrences, state.tableNames, state.dependencies, state.iTableNames, state.totalProperties
 
 	local function setName(t, name)
 		local function addName()
@@ -181,6 +182,13 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 	end
 	setName(Table, TableName)
 	local name = getName(Table)
+	local customs
+	if type(args.customValues) == "function" then
+		local customValsSuccess, customValues = thread(args.customValues, false, Table)
+		if customValsSuccess and type(customValues) == "table" then
+			customs = customValues
+		end
+	end
 
 	local function writeValue(index, value)
 		local function serializeValue(val, name)
@@ -221,13 +229,6 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 	end
 	
 	local extraTables = {}
-	local customs
-	if type(args.customValues) == "function" then
-		local customValsSuccess, customValues = thread(args.customValues, false, Table)
-		if customValsSuccess and type(customValues) == "table" then
-			customs = customValues
-		end
-	end
 	for index, value in pairs(Table) do
 		if (typeof(index) == "Instance" or typeof(value) == "Instance") and not dependencies.instance then
 			dependencies.instance = true
@@ -238,7 +239,7 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 			state.dependenciesString = state.dependenciesString..nonNilIndexFunction
 		end
 		if type(value) ~= "table" then
-			if not customVals or customVals[index] == nil then
+			if not customs or customs[index] == nil then
 				writeValue(index, value)
 			end
 		else
@@ -255,16 +256,17 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 	for index, nestedTbl in pairs(extraTables) do
 		writeValue(index, nestedTbl)
 	end
-	table.insert(iProperties, table.concat(properties))
+	local propsString = table.concat(properties)
+	table.insert(totalProperties, propsString)
 	if isRoot then
 		return ("--Table names:%s%s\n--Properties:%s\n\nreturn %s"):format(
 			table.concat(iTableNames),
 			state.dependenciesString,
-			table.concat(iProperties),
+			table.concat(totalProperties),
 			name
 		)
 	end
-	return properties
+	return propsString
 end
 
 getgenv().tabletostring = TableToString
