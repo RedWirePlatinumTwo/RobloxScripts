@@ -101,6 +101,7 @@ end
 --[[ list of contents that args can include:
 	simplify (boolean): if true, makes table-naming more straightforward with (presumably) less function work
 	additionalCtx (function: string): a function with the arguments: (table, index, value). allows one to provide additional comments when the value is written
+		- context will not show up to any index/value line that cannot be serialized
 	ignoreUnsupportedValues (boolean): if true, any values that Serialize fails at will be omitted from the table output
 	customValues (function: table): a function that passes the current Table to supply values for it. values within the table will simply be emitted as a string, ignoring writeValue checks
 ]]
@@ -122,7 +123,7 @@ end]]
 
 getgenv().TableToString = function(Table, TableName, args, state) --the state param should basically never actually be manually created, but idk how to prevent that
 	typeCheck(Table, "table")
-	local properties = ""
+	local properties = {}
 	local standardIndexTemplate = "%s[%s] = %s"
 	args = args or {}
 	TableName = TableName or "Root"
@@ -191,34 +192,42 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 		end
 		local serializedIndex, failed1 = serializeValue(index, value)
 		local serializedValue, failed2 = serializeValue(value, index)
-		local failString = ""
+		local contextString = ""
 		local isFailure = false
+		
+		if type(args.additionalCtx) == "function" then
+			local ctxSuccess, context = thread(args.additionalCtx, false, Table, index, value)
+			if ctxSuccess and type(context) == "string" then
+				contextString = " --"..context
+			end
+		end
+		
 		if failed1 or failed2 then
 			isFailure = true
 			if args.ignoreUnsupportedValues then
 				return
 			end
-			failString = " --failed to serialize type(s):"
+			contextString = " (failed to serialize"
 			if failed1 then
-				failString = failString.." "..typeof(index)
+				contextString = contextString.." [index]:"..typeof(index)
 			end
 			if failed2 then
-				failString = failString.." "..typeof(value)
+				contextString = contextString.." [value]:"..typeof(value)
 			end
+			contextString = contextString..")"
 		end
 		local ret = (if indexMayBeNil(index) then "_addNonNilIndex(%s, %s, %s)" else standardIndexTemplate):format(name, serializedIndex, serializedValue)
-		properties = properties.."\n"..(if isFailure then "--"..ret else ret)..failString
+		table.insert(properties, "\n"..(if isFailure then "--"..ret else ret)..contextString)
 	end
 	
 	local extraTables = {}
-	local function contextCheck(tbl, index, value)
-		local context = args.additionalCtx and args.additionalCtx(tbl, index, value)
-		if type(context) == "string" and context ~= "" then
-			properties = properties.." --"..context
+	local customs
+	if type(args.customValues) == "function" then
+		local customValsSuccess, customValues = thread(args.customValues, false, Table)
+		if customValsSuccess and type(customValues) == "table" then
+			customs = customValues
 		end
 	end
-	
-	local customVals = args.customValues and args.customValues(Table) or {}
 	for index, value in pairs(Table) do
 		if (typeof(index) == "Instance" or typeof(value) == "Instance") and not dependencies.instance then
 			dependencies.instance = true
@@ -229,25 +238,24 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 			state.dependenciesString = state.dependenciesString..nonNilIndexFunction
 		end
 		if type(value) ~= "table" then
-			if customVals[index] == nil then
+			if not customVals or customVals[index] == nil then
 				writeValue(index, value)
 			end
-			contextCheck(Table, index, value)
 		else
 			extraTables[index] = value
 		end
 	end
 	
-	for index, value in pairs(customVals) do
-		properties = properties.."\n"..standardIndexTemplate:format(name, Serialize(index), tostring(value))
+	if customs then
+		for index, value in pairs(customs) do
+			table.insert(properties, "\n"..standardIndexTemplate:format(name, Serialize(index), tostring(value)))
+		end
 	end
 	
 	for index, nestedTbl in pairs(extraTables) do
-		properties = properties.."\n"
 		writeValue(index, nestedTbl)
-		contextCheck(Table, index, nestedTbl)
 	end
-	table.insert(iProperties, properties)
+	table.insert(iProperties, table.concat(properties))
 	if isRoot then
 		return ("--Table names:%s%s\n--Properties:%s\n\nreturn %s"):format(
 			table.concat(iTableNames),
