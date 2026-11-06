@@ -129,24 +129,27 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 	state = state or {
 		nameOccurrences = {};
 		tableNames = {};
+		iTableNames = {};
 		totalTables = 0;
 		initialized = false;
-		dependencyCheck = {};
-		namesString = "";
+		dependencies = {};
 		dependenciesString = "";
+		iProperties = {};
 	}
-	local nameOccurrences, tableNames, dependencies = state.nameOccurrences, state.tableNames, state.dependencyCheck
+	local nameOccurrences, tableNames, dependencies, iTableNames, iProperties =
+		state.nameOccurrences, state.tableNames, state.dependencies, state.iTableNames, state.iProperties
 
 	local function setName(t, name)
-		local function writeName()
-			state.namesString = state.namesString.."\n"..tableNames[t].." = {}"
+		local function addName()
+			table.insert(iTableNames, "\n"..tableNames[t].." = {}")
 		end
+		state.totalTables += 1
 		if not args.simplify then
     		local function checkRepetitions()
     			local amount = (nameOccurrences[name] or 0) + 1
 				nameOccurrences[name] = amount
 				tableNames[t] = if amount > 1 then name.."_"..amount else name
-				writeName()
+				addName()
     		end
 			name = tostring(name):gsub("%W", "")
 			if not loadstring("local "..name) then
@@ -158,9 +161,8 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 			end
 			return checkRepetitions()
 		else
-		    state.totalTables += 1
 		    tableNames[t] = "Table"..(state.totalTables)
-			writeName()
+			addName()
 		end
 	end
 
@@ -180,18 +182,13 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 	local name = getName(Table)
 
 	local function writeValue(index, value)
-	
 		local function serializeValue(val, name)
-			local serialized, failed = Serialize(val, name, args, state)
+			local serialized, failed = Serialize(val, name, args, state) --this needs to run first so nested tables get named + listed properties
 			if type(val) == "table" then
-				properties = properties..(serialized or "")
-				--[[note to self: this is so the output can actually contain the contents of inner tables
-				(Serialize also returns nil for tables already listed)]]
 				return getName(val), false
 			end
 			return serialized, failed
 		end
-		
 		local serializedIndex, failed1 = serializeValue(index, value)
 		local serializedValue, failed2 = serializeValue(value, index)
 		local failString = ""
@@ -250,9 +247,14 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 		writeValue(index, nestedTbl)
 		contextCheck(Table, index, nestedTbl)
 	end
-	
+	table.insert(iProperties, properties)
 	if isRoot then
-		return ("--Table names:%s%s\n--Properties:%s\n\nreturn %s"):format(state.namesString, state.dependenciesString, properties, name)
+		return ("--Table names:%s%s\n--Properties:%s\n\nreturn %s"):format(
+			table.concat(iTableNames),
+			state.dependenciesString,
+			table.concat(iProperties),
+			name
+		)
 	end
 	return properties
 end
