@@ -190,16 +190,18 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 		end
 	end
 
-	local function writeValue(index, value)
+	local function addEntry(index, value, doubleNewline)
+		local newlines = if doubleNewline then 2 else 1
 		local function serializeValue(val, name)
+			local nestedContents
 			local serialized, failed = Serialize(val, name, args, state) --this needs to run first so nested tables get named + listed properties
 			if type(val) == "table" then
-				return getName(val), false
+				return getName(val), false, serialized
 			end
 			return serialized, failed
 		end
-		local serializedIndex, failed1 = serializeValue(index, value)
-		local serializedValue, failed2 = serializeValue(value, index)
+		local serializedIndex, failed1, nested1 = serializeValue(index, value)
+		local serializedValue, failed2, nested2 = serializeValue(value, index)
 		local contextString = ""
 		local isFailure = false
 		
@@ -225,7 +227,13 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 			contextString = contextString..")"
 		end
 		local ret = (if indexMayBeNil(index) then "_addNonNilIndex(%s, %s, %s)" else standardIndexTemplate):format(name, serializedIndex, serializedValue)
-		table.insert(properties, "\n"..(if isFailure then "--"..ret else ret)..contextString)
+		table.insert(properties, ("\n"):rep(newlines)..(if isFailure then "--"..ret else ret)..contextString)
+		if nested1 then
+			table.insert(properties, nested1)
+		end
+		if nested2 then
+			table.insert(properties, nested2)
+		end
 	end
 	
 	local extraTables = {}
@@ -238,9 +246,9 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 			dependencies.nilIndex = true
 			state.dependenciesString = state.dependenciesString..nonNilIndexFunction
 		end
-		if type(value) ~= "table" then
+		if type(index) ~= "table" and type(value) ~= "table" then
 			if not customs or customs[index] == nil then
-				writeValue(index, value)
+				addEntry(index, value)
 			end
 		else
 			extraTables[index] = value
@@ -254,11 +262,11 @@ getgenv().TableToString = function(Table, TableName, args, state) --the state pa
 	end
 	
 	for index, nestedTbl in pairs(extraTables) do
-		writeValue(index, nestedTbl)
+		addEntry(index, nestedTbl, true)
 	end
 	local propsString = table.concat(properties)
-	table.insert(totalProperties, propsString)
 	if isRoot then
+		table.insert(totalProperties, propsString)
 		return ("--Table names:%s%s\n--Properties:%s\n\nreturn %s"):format(
 			table.concat(iTableNames),
 			state.dependenciesString,
