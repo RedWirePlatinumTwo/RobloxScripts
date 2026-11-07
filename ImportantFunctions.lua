@@ -137,6 +137,7 @@ local function tableToStringInternal(Table, TableName, args, state)
 		initialized = false;
 		dependencies = {};
 		dependenciesString = "";
+		containsEntryFailure = false;
 		failedEntries = {};
 	}
 	local nameOccurrences, tableNames, dependencies, iTableNames, failedEntries = state.nameOccurrences, state.tableNames, state.dependencies, state.iTableNames, state.failedEntries
@@ -215,6 +216,7 @@ local function tableToStringInternal(Table, TableName, args, state)
 		
 		if failed1 or failed2 then
 			isFailure = true
+			state.containsEntryFailure = true
 			if args.ignoreUnsupportedEntries then
 				return
 			end
