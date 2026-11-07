@@ -137,7 +137,6 @@ local function tableToStringInternal(Table, TableName, args, state)
 		initialized = false;
 		dependencies = {};
 		dependenciesString = "";
-		containsEntryFailure = false;
 		failedEntries = {};
 	}
 	local nameOccurrences, tableNames, dependencies, iTableNames, failedEntries = state.nameOccurrences, state.tableNames, state.dependencies, state.iTableNames, state.failedEntries
@@ -216,10 +215,6 @@ local function tableToStringInternal(Table, TableName, args, state)
 		
 		if failed1 or failed2 then
 			isFailure = true
-			state.containsEntryFailure = true
-			if args.ignoreUnsupportedEntries then
-				return
-			end
 			contextString = " (failed to serialize"
 			if failed1 then
 				local indexType = typeof(index)
@@ -235,7 +230,9 @@ local function tableToStringInternal(Table, TableName, args, state)
 		end
 		local newlines = if nested1 or nested2 then 2 else 1
 		local ret = (if indexMayBeNil(index) then "_addNonNilIndex(%s, %s, %s)" else standardIndexTemplate):format(name, serializedIndex, serializedValue)
-		table.insert(properties, ("\n"):rep(newlines)..(if isFailure then "--"..ret else ret)..contextString)
+		if (args.ignoreUnsupportedEntries and not isFailure) or not args.ignoreUnsupportedEntries then
+			table.insert(properties, ("\n"):rep(newlines)..(if isFailure then "--"..ret else ret)..contextString)
+		end
 		if nested1 then
 			table.insert(properties, nested1)
 		end
@@ -275,11 +272,12 @@ local function tableToStringInternal(Table, TableName, args, state)
 	local propsString = table.concat(properties)
 	if isRoot then
 		local fails = ""
-		if state.containsEntryFailure and not args.ignoreUnsupportedEntries then
-			fails = "\n-- total failed entries:"
+		if next(failedEntries) and not args.ignoreUnsupportedEntries then
+			fails = {"\n-- failed type(of) totals:"}
 			for type, count in pairs(failedEntries) do
-				fails = fails..("\n-- %s: %d"):format(type, count)
+				table.insert(fails, ("\n-- %s: %d"):format(type, count))
 			end
+			fails = table.concat(fails)
 		end
 		return ("-- Table names:%s%s\n-- Properties:%s\n\nreturn %s%s"):format(
 			table.concat(iTableNames),
