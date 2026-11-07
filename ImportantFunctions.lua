@@ -99,11 +99,11 @@ getgenv().GetFullName = function(instance)
 	return fullName
 end
 --[[ list of contents that args can include:
-	simplify (boolean): if true, makes table-naming more straightforward with (presumably) less function work
+	simplifyNames (boolean): if true, makes table-naming more straightforward, resulting in ~15% faster serialization for large tables
 	additionalCtx (function: string): a function with the arguments: (table, index, value). allows one to provide additional comments when the value is written
 		- context will not show up to any index/value line that cannot be serialized
 		- it also won't show up in customValues (you'd have to manually include it as part of the value)
-	ignoreUnsupportedValues (boolean): if true, any values that Serialize fails at will be omitted from the table output
+	ignoreUnsupportedEntries (boolean): if true, any values that Serialize fails at will be omitted from the table output
 	customValues (function: table): a function that passes the current Table to supply values for it. values within the table will simply be emitted as a string, ignoring writeValue checks
 ]]
 local readInsFunction = [[
@@ -127,6 +127,7 @@ local function tableToStringInternal(Table, TableName, args, state)
 	local properties = {}
 	local standardIndexTemplate = "%s[%s] = %s"
 	args = args or {}
+	typeCheck(args, "table", 3)
 	TableName = TableName or "Root"
 	state = state or {
 		nameOccurrences = {};
@@ -136,8 +137,10 @@ local function tableToStringInternal(Table, TableName, args, state)
 		initialized = false;
 		dependencies = {};
 		dependenciesString = "";
+		containsEntryFailure = false;
+		failedEntries = {};
 	}
-	local nameOccurrences, tableNames, dependencies, iTableNames = state.nameOccurrences, state.tableNames, state.dependencies, state.iTableNames
+	local nameOccurrences, tableNames, dependencies, iTableNames, failedEntries = state.nameOccurrences, state.tableNames, state.dependencies, state.iTableNames, state.failedEntries
 	local isRoot = not state.initialized --this is just so "return [table]" can be supplied at the end
 	if tableNames[Table] then return end
 	if isRoot then
@@ -149,7 +152,7 @@ local function tableToStringInternal(Table, TableName, args, state)
 			table.insert(iTableNames, "\n"..tableNames[t].." = {}")
 		end
 		state.totalTables += 1
-		if not args.simplify then
+		if not args.simplifyNames then
     		local function checkRepetitions()
     			local amount = (nameOccurrences[name] or 0) + 1
 				nameOccurrences[name] = amount
@@ -190,8 +193,7 @@ local function tableToStringInternal(Table, TableName, args, state)
 		end
 	end
 
-	local function addEntry(index, value, doubleNewline)
-		local newlines = if doubleNewline then 2 else 1
+	local function addEntry(index, value)
 		local function serializeValue(val, name)
 			if type(val) == "table" then
 				local nestedContents = tableToStringInternal(val, name, args, state) --this needs to run first so nested tables get named + listed properties
@@ -214,18 +216,24 @@ local function tableToStringInternal(Table, TableName, args, state)
 		
 		if failed1 or failed2 then
 			isFailure = true
-			if args.ignoreUnsupportedValues then
+			state.containsEntryFailure = true
+			if args.ignoreUnsupportedEntries then
 				return
 			end
 			contextString = " (failed to serialize"
 			if failed1 then
-				contextString = contextString.." [index]:"..typeof(index)
+				local indexType = typeof(index)
+				contextString = contextString.." [index]:"..indexType
+				failedEntries[indexType] = (failedEntries[indexType] or 0) + 1
 			end
 			if failed2 then
-				contextString = contextString.." [value]:"..typeof(value)
+				local valueType = typeof(value)
+				contextString = contextString.." [value]:"..valueType
+				failedEntries[valueType] = (failedEntries[valueType] or 0) + 1
 			end
 			contextString = contextString..")"
 		end
+		local newlines = if nested1 or nested2 then 2 else 1
 		local ret = (if indexMayBeNil(index) then "_addNonNilIndex(%s, %s, %s)" else standardIndexTemplate):format(name, serializedIndex, serializedValue)
 		table.insert(properties, ("\n"):rep(newlines)..(if isFailure then "--"..ret else ret)..contextString)
 		if nested1 then
@@ -262,15 +270,23 @@ local function tableToStringInternal(Table, TableName, args, state)
 	end
 	
 	for index, nestedTbl in pairs(extraTables) do
-		addEntry(index, nestedTbl, true)
+		addEntry(index, nestedTbl)
 	end
 	local propsString = table.concat(properties)
 	if isRoot then
-		return ("--Table names:%s%s\n--Properties:%s\n\nreturn %s"):format(
+		local fails = ""
+		if state.containsEntryFailure and not args.ignoreUnsupportedEntries then
+			fails = "\n-- total failed entries:"
+			for type, count in pairs(failedEntries) do
+				fails = fails..(" %s:%d"):format(type, count)
+			end
+		end
+		return ("--Table names:%s%s\n--Properties:%s\n\nreturn %s%s"):format(
 			table.concat(iTableNames),
 			state.dependenciesString,
 			propsString,
-			name
+			name,
+			fails
 		)
 	end
 	return propsString
