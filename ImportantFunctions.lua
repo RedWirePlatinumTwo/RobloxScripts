@@ -137,7 +137,6 @@ local function tableToStringInternal(Table, TableName, args, state)
 		initialized = false;
 		dependencies = {};
 		dependenciesString = "";
-		containsEntryFailure = false;
 		failedEntries = {};
 	}
 	local nameOccurrences, tableNames, dependencies, iTableNames, failedEntries = state.nameOccurrences, state.tableNames, state.dependencies, state.iTableNames, state.failedEntries
@@ -216,7 +215,6 @@ local function tableToStringInternal(Table, TableName, args, state)
 		
 		if failed1 or failed2 then
 			isFailure = true
-			state.containsEntryFailure = true
 			if args.ignoreUnsupportedEntries then
 				return
 			end
@@ -275,13 +273,13 @@ local function tableToStringInternal(Table, TableName, args, state)
 	local propsString = table.concat(properties)
 	if isRoot then
 		local fails = ""
-		if state.containsEntryFailure and not args.ignoreUnsupportedEntries then
+		if not args.ignoreUnsupportedEntries then
 			fails = "\n-- total failed entries:"
 			for type, count in pairs(failedEntries) do
-				fails = fails..(" %s:%d"):format(type, count)
+				fails = fails..("\n-- %s: %d"):format(type, count)
 			end
 		end
-		return ("--Table names:%s%s\n--Properties:%s\n\nreturn %s%s"):format(
+		return ("-- Table names:%s%s\n-- Properties:%s\n\nreturn %s%s"):format(
 			table.concat(iTableNames),
 			state.dependenciesString,
 			propsString,
