@@ -275,7 +275,7 @@ local function tableToStringInternal(Table, TableName, args, state)
 	local propsString = table.concat(properties)
 	if isRoot then
 		local fails = ""
-		if not args.ignoreUnsupportedEntries then
+		if state.containsEntryFailure not args.ignoreUnsupportedEntries then
 			fails = "\n-- total failed entries:"
 			for type, count in pairs(failedEntries) do
 				fails = fails..("\n-- %s: %d"):format(type, count)
