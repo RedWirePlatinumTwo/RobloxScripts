@@ -118,7 +118,7 @@ end
 			(for this example, we will say Table = {Value1 = 100, Value2 = 1000, Value3 = 10000})
 			local args = {
 				[Table] = {
-					indexOrder = {"Value1, "Value2", Value3"} --makes stringified result appear as ordered
+					indexOrder = {"Value1, "Value2", "Value3"} --makes stringified result appear as ordered
 				}
 			}
 		
@@ -142,7 +142,6 @@ end]]
 local function tableToStringInternal(Table, TableName, args, state)
 	typeCheck(Table, "table")
 	local properties = {}
-	local standardIndexTemplate = "%s[%s] = %s"
 	args = args or {}
 	typeCheck(args, "table", 3)
 	local tableArgs = args[Table]
@@ -254,7 +253,7 @@ local function tableToStringInternal(Table, TableName, args, state)
 			contextString = contextString..")"
 		end
 		local newlines = if nested1 or nested2 then 2 else 1
-		local ret = (if indexMayBeNil(index) then "_addNonNilIndex(%s, %s, %s)" else standardIndexTemplate):format(name, serializedIndex, serializedValue)
+		local ret = (if indexMayBeNil(index) then "_addNonNilIndex(%s, %s, %s)" else "%s[%s] = %s"):format(name, serializedIndex, serializedValue)
 		if (args.ignoreUnsupportedEntries and not isFailure) or not args.ignoreUnsupportedEntries then
 			table.insert(properties, ("\n"):rep(newlines)..(if isFailure then "--"..ret else ret)..contextString)
 		end
@@ -276,10 +275,16 @@ local function tableToStringInternal(Table, TableName, args, state)
 	local extraTables = {}
 	local processed = {}
 	
-	for _, index in ipairs(tableArgs and tableArgs.indexOrder or {}) do
-		if Table[index] and not processed[index] then --prevent index from calling addEntry if listed more than once
+	local function process(index, value)
+		if not processed[index] then
 			processed[index] = true
-			addEntry(index, Table[index])
+			addEntry(index, value)
+		end
+	end
+	
+	for _, index in ipairs(tableArgs and tableArgs.indexOrder or {}) do
+		if Table[index] ~= nil then
+			process(index, Table[index])
 		end
 	end
 	
@@ -287,20 +292,14 @@ local function tableToStringInternal(Table, TableName, args, state)
 		dependencyCheck(typeof(index) == "Instance" or typeof(value) == "Instance", "readInstance", readInsFunction)
 		dependencyCheck(indexMayBeNil(index), "nilIndex", nonNilIndexFunction)
 		if type(index) ~= "table" and type(value) ~= "table" then
-			if not functionEntries[index] and not processed[index] then
-				addEntry(index, value)
-			end
+			process(index, value)
 		else
 			extraTables[index] = value
 		end
 	end
 	
-	table.foreach(extraTables, addEntry)
-	table.foreach(functionEntries, function(index, value)
-		if not processed[index] then
-			addEntry(index, value)
-		end
-	end)
+	table.foreach(extraTables, process)
+	table.foreach(functionEntries, process)
 	
 	local propsString = table.concat(properties)
 	if isRoot then
