@@ -1,19 +1,19 @@
+local backKeys = {
+	["\0"] = "\\0",
+	["\a"] = "\\a",
+	["\b"] = "\\b",
+	["\f"] = "\\f",
+	["\n"] = "\\n",
+	["\r"] = "\\r",
+	["\t"] = "\\t",
+	["\v"] = "\\v",
+	["\'"] = "\\'",
+	['"'] = "\\\"",
+	["\\"] = "\\\\"
+}
+
 local rebuildString = function(str)
-	local backKeys = {
-		["\0"] = "\\0",
-		["\a"] = "\\a",
-		["\b"] = "\\b",
-		["\f"] = "\\f",
-		["\n"] = "\\n",
-		["\r"] = "\\r",
-		["\t"] = "\\t",
-		["\v"] = "\\v",
-		["\'"] = "\\'",
-		['"'] = "\\\"",
-		["\\"] = "\\\\"
-	}
 	local serializedString = {}
-	
 	for i = 1, str:len() do
 		local letter = str:sub(i,i)
 		serializedString[i] = backKeys[letter] or letter
@@ -201,6 +201,8 @@ local function tableToStringInternal(Table, TableName, args, state)
 	setName(Table, TableName)
 	local name = getName(Table)
 	local functionEntries = args.functionEntries and args.functionEntries[Table] or {}
+	local processed = {}
+	local extraTables = {}
 	
 	local function serializeValue(val, name)
 		if type(val) == "table" then
@@ -212,6 +214,8 @@ local function tableToStringInternal(Table, TableName, args, state)
 	end
 
 	local function addEntry(index, value)
+		if processed[index] then return end
+		processed[index] = true
 		local serializedIndex, failed1, nested1 = serializeValue(index, value)
 		local serializedValue, failed2, nested2
 		if functionEntries[index] then
@@ -272,19 +276,9 @@ local function tableToStringInternal(Table, TableName, args, state)
 		end
 	end
 	
-	local extraTables = {}
-	local processed = {}
-	
-	local function process(index, value)
-		if not processed[index] then
-			processed[index] = true
-			addEntry(index, value)
-		end
-	end
-	
 	for _, index in ipairs(tableArgs and tableArgs.indexOrder or {}) do
 		if Table[index] ~= nil then
-			process(index, Table[index])
+			addEntry(index, Table[index])
 		end
 	end
 	
@@ -292,14 +286,14 @@ local function tableToStringInternal(Table, TableName, args, state)
 		dependencyCheck(typeof(index) == "Instance" or typeof(value) == "Instance", "readInstance", readInsFunction)
 		dependencyCheck(indexMayBeNil(index), "nilIndex", nonNilIndexFunction)
 		if type(index) ~= "table" and type(value) ~= "table" then
-			process(index, value)
+			addEntry(index, value)
 		else
 			extraTables[index] = value
 		end
 	end
 	
-	table.foreach(extraTables, process)
-	table.foreach(functionEntries, process)
+	table.foreach(extraTables, addEntry)
+	table.foreach(functionEntries, addEntry)
 	
 	local propsString = table.concat(properties)
 	if isRoot then
