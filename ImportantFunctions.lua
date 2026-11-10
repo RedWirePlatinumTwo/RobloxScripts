@@ -1,5 +1,4 @@
 local rebuildString = function(str)
-	local serializedString = ""
 	local backKeys = {
 		["\0"] = "\\0",
 		["\a"] = "\\a",
@@ -13,14 +12,14 @@ local rebuildString = function(str)
 		['"'] = "\\\"",
 		["\\"] = "\\\\"
 	}
+	local serializedString = {}
 	
 	for i = 1, str:len() do
 		local letter = str:sub(i,i)
-		local keyCheck = backKeys[letter]
-		serializedString = serializedString..(if keyCheck then keyCheck else letter)
+		serializedString[i] = backKeys[letter] or letter
 	end
 	
-	return serializedString
+	return table.concat(serializedString)
 end
 
 getgenv().thread = function(f, ignoreWarn, ...) --Potassium (the executor) currently fucks up xpcall and pcall in hookmetamethod, so this has become a necessity
@@ -99,12 +98,30 @@ getgenv().GetFullName = function(instance)
 	return fullName
 end
 --[[ list of contents that args can include:
-	simplifyNames (boolean): if true, makes table-naming more straightforward, resulting in ~15% faster serialization for large tables
+	simplifyNames (boolean): if true, makes table-naming more straightforward, which can speed up serialization depending on the amount of nested tables
 	additionalCtx (function: string): a function with the arguments: (table, index, value). allows one to provide additional comments when the value is written
 		- context will not show up to any index/value line that cannot be serialized
-		- it also won't show up in customValues (you'd have to manually include it as part of the value)
 	ignoreUnsupportedEntries (boolean): if true, any values that Serialize fails at will be omitted from the table output
-	customValues (function: table): a function that passes the current Table to supply values for it. values within the table will simply be emitted as a string, ignoring writeValue checks
+	functionEntries (table): A table containing (manually) stringified functions for tables to include.
+		- The general layout should be as such, starting from the root of args:
+		local args = {
+			functionEntries = {
+				[Table] = {
+					functionOne = "function() print(\"hello world\") end";
+				}
+			}
+		}
+		
+	If you pass a table *as* an index, you may also pass the following as a nested table:
+		indexOrder (table): a plain integer-index table that allows you to set a custom ordering style
+			- An example of how this should look, starting from the root of args:
+			(for this example, we will say Table = {Value1 = 100, Value2 = 1000, Value3 = 10000})
+			local args = {
+				[Table] = {
+					indexOrder = {"Value1, "Value2", Value3"} --makes stringified result appear as ordered
+				}
+			}
+		
 ]]
 local readInsFunction = [[
 
@@ -128,6 +145,7 @@ local function tableToStringInternal(Table, TableName, args, state)
 	local standardIndexTemplate = "%s[%s] = %s"
 	args = args or {}
 	typeCheck(args, "table", 3)
+	local tableArgs = args[Table]
 	TableName = TableName or "Root"
 	state = state or {
 		nameOccurrences = {};
@@ -183,26 +201,29 @@ local function tableToStringInternal(Table, TableName, args, state)
 
 	setName(Table, TableName)
 	local name = getName(Table)
+	local functionEntries = args.functionEntries and args.functionEntries[Table] or {}
 	
-	local customs
-	if type(args.customValues) == "function" then
-		local customValsSuccess, customValues = thread(args.customValues, false, Table)
-		if customValsSuccess and type(customValues) == "table" then
-			customs = customValues
+	local function serializeValue(val, name)
+		if type(val) == "table" then
+			local nestedContents = tableToStringInternal(val, name, args, state) --this needs to run first so nested tables get named + listed properties
+			return getName(val), false, nestedContents
+		else
+			return Serialize(val, true)
 		end
 	end
 
 	local function addEntry(index, value)
-		local function serializeValue(val, name)
-			if type(val) == "table" then
-				local nestedContents = tableToStringInternal(val, name, args, state) --this needs to run first so nested tables get named + listed properties
-				return getName(val), false, nestedContents
-			else
-				return Serialize(val, true)
-			end
-		end
 		local serializedIndex, failed1, nested1 = serializeValue(index, value)
-		local serializedValue, failed2, nested2 = serializeValue(value, index)
+		local serializedValue, failed2, nested2
+		if functionEntries[index] then
+			local funcEntry = tostring(functionEntries[index])
+			local func = loadstring("return "..funcEntry)
+			func = func and func()
+			failed2 = type(func) ~= "function"
+			serializedValue = if not failed2 then funcEntry else funcEntry:gsub("\n", "")
+		else
+			serializedValue, failed2, nested2 = serializeValue(value, index)
+		end
 		local contextString = ""
 		local isFailure = false
 		
@@ -215,16 +236,20 @@ local function tableToStringInternal(Table, TableName, args, state)
 		
 		if failed1 or failed2 then
 			isFailure = true
-			contextString = " (failed to serialize"
+			contextString = " (entry failure"
 			if failed1 then
 				local indexType = typeof(index)
-				contextString = contextString.." [index]:"..indexType
+				contextString = contextString..(" (unserializable index: %s)"):format(indexType)
 				failedEntries[indexType] = (failedEntries[indexType] or 0) + 1
 			end
 			if failed2 then
-				local valueType = typeof(value)
-				contextString = contextString.." [value]:"..valueType
-				failedEntries[valueType] = (failedEntries[valueType] or 0) + 1
+				if not functionEntries[index] then
+					local valueType = typeof(value)
+					contextString = contextString..(" (unserializable value: %s)"):format(valueType)
+					failedEntries[valueType] = (failedEntries[valueType] or 0) + 1
+				else
+					contextString = contextString.. " (failed to add function entry)"
+				end
 			end
 			contextString = contextString..")"
 		end
@@ -241,18 +266,28 @@ local function tableToStringInternal(Table, TableName, args, state)
 		end
 	end
 	
+	local function dependencyCheck(condition, property, funcString)
+		if condition and not dependencies[property] then
+			dependencies[property] = true
+			state.dependenciesString = state.dependenciesString..funcString
+		end
+	end
+	
 	local extraTables = {}
+	local processed = {}
+	
+	for _, index in ipairs(tableArgs and tableArgs.indexOrder or {}) do
+		if Table[index] and not processed[index] then --prevent index from calling addEntry if listed more than once
+			processed[index] = true
+			addEntry(index, Table[index])
+		end
+	end
+	
 	for index, value in pairs(Table) do
-		if (typeof(index) == "Instance" or typeof(value) == "Instance") and not dependencies.instance then
-			dependencies.instance = true
-			state.dependenciesString = state.dependenciesString..readInsFunction
-		end
-		if indexMayBeNil(index) and not dependencies.nilIndex then
-			dependencies.nilIndex = true
-			state.dependenciesString = state.dependenciesString..nonNilIndexFunction
-		end
+		dependencyCheck(typeof(index) == "Instance" or typeof(value) == "Instance", "readInstance", readInsFunction)
+		dependencyCheck(indexMayBeNil(index), "nilIndex", nonNilIndexFunction)
 		if type(index) ~= "table" and type(value) ~= "table" then
-			if not customs or customs[index] == nil then
+			if not functionEntries[index] and not processed[index] then
 				addEntry(index, value)
 			end
 		else
@@ -260,15 +295,13 @@ local function tableToStringInternal(Table, TableName, args, state)
 		end
 	end
 	
-	if customs then
-		for index, value in pairs(customs) do
-			table.insert(properties, "\n"..standardIndexTemplate:format(name, Serialize(index), tostring(value)))
+	table.foreach(extraTables, addEntry)
+	table.foreach(functionEntries, function(index, value)
+		if not processed[index] then
+			addEntry(index, value)
 		end
-	end
+	end)
 	
-	for index, nestedTbl in pairs(extraTables) do
-		addEntry(index, nestedTbl)
-	end
 	local propsString = table.concat(properties)
 	if isRoot then
 		local fails = ""
