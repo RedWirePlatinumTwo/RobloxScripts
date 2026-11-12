@@ -111,9 +111,10 @@ end
 				}
 			}
 		}
+	indexOrder (function: table): A function with only 1 argument for the table itself; allows you to set a custom ordering style with an integer-index table
 		
 	If you pass a table *as* an index, you may also pass the following as a nested table:
-		indexOrder (table): a plain integer-index table that allows you to set a custom ordering style
+		indexOrder (table): Generally same thing as the other indexOrder, except you directly pass a table order. Note that this takes higher priority than the function
 			- An example of how this should look, starting from the root of args:
 			(for this example, we will say Table = {Value1 = 100, Value2 = 1000, Value3 = 10000})
 			local args = {
@@ -218,12 +219,22 @@ local function tableToStringInternal(Table, TableName, args, state)
 		processed[index] = true
 		local serializedIndex, failed1, nested1 = serializeValue(index, value)
 		local serializedValue, failed2, nested2
+		local functionFailReason
 		if functionEntries[index] then
 			local funcEntry = tostring(functionEntries[index])
-			local func = loadstring("return "..funcEntry)
+			local func, err = loadstring("return "..funcEntry)
 			func = func and func()
+			if not func then
+				functionFailReason = err
+			end
 			failed2 = type(func) ~= "function"
-			serializedValue = if not failed2 then funcEntry else funcEntry:gsub("\n", "")
+			if failed2 then
+				funcEntry = funcEntry:gsub("\n", "")
+				if func then
+					functionFailReason = "expected parsed string to return a function, got "..type(func)
+				end
+			end
+			serializedValue = funcEntry
 		else
 			serializedValue, failed2, nested2 = serializeValue(value, index)
 		end
@@ -251,7 +262,7 @@ local function tableToStringInternal(Table, TableName, args, state)
 					contextString = contextString..(" (unserializable value: %s)"):format(valueType)
 					failedEntries[valueType] = (failedEntries[valueType] or 0) + 1
 				else
-					contextString = contextString.. " (failed to add function entry)"
+					contextString = contextString.. (" (failed to add function entry (%s))"):format(functionFailReason)
 				end
 			end
 			contextString = contextString..")"
@@ -276,7 +287,14 @@ local function tableToStringInternal(Table, TableName, args, state)
 		end
 	end
 	
-	for _, index in ipairs(tableArgs and tableArgs.indexOrder or {}) do
+	local indexOrder = tableArgs and tableArgs.indexOrder
+	if args.indexOrder and not indexOrder then
+		local success, result = thread(args.indexOrder, false, Table)
+		if success and type(result) == "table" then
+			indexOrder = result
+		end
+	end
+	for _, index in ipairs(indexOrder or {}) do
 		if Table[index] ~= nil then
 			addEntry(index, Table[index])
 		end
