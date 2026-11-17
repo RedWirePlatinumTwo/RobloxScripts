@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function ROKMRZU_fake_script() -- RedwiresAimbot.LocalScript 
+local function FFOPA_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1110,13 +1110,8 @@ local function ROKMRZU_fake_script() -- RedwiresAimbot.LocalScript
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 		end
 		getgenv().RedsAimbot = {}
-		sendNotif("Red's Universal Aimbot (10/23/26)", changeNotes(
-			"Fixed priority targeting in games without teams + re-added prioritized player handling when leaving",
-			"(10/22) Some more code cleanup here and there",
-			"(10/21) Slightly re-worked whitelisting + prioritiziting internally",
-			"(10/21) Improved auto-targeting logic",
-			"(10/21) Fixed auto-targeting logic regarding successful raycasts ignoring all previous checks",
-			"(10/21) Raycasting (if enabled) only occurs when actually necessary"
+		sendNotif("Red's Universal Aimbot (11/16/26)", changeNotes(
+			"Added some consistent index-formatting when writing tables to files"
 		))
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
@@ -1429,13 +1424,14 @@ local function ROKMRZU_fake_script() -- RedwiresAimbot.LocalScript
 			end)
 		end
 	
+		local gameFileName = ("RedsAimbot/Games/%d.lua"):format(game.PlaceId)
 		if isfile("RedsAimbot/GlobalStats.lua") then
 	
 			GlobalStats = loadfile("RedsAimbot/GlobalStats.lua")()
-			if not isfile(("RedsAimbot/Games/%d.lua"):format(game.PlaceId)) then
+			if not isfile(gameFileName) then
 				GameStats = createGameStats()
 			else
-				GameStats = loadfile(("RedsAimbot/Games/%d.lua"):format(game.PlaceId))()
+				GameStats = loadfile(gameFileName)()
 			end
 	
 		elseif isfile("RedsAimbotStats.lua") then -- replace old save file
@@ -1449,7 +1445,7 @@ local function ROKMRZU_fake_script() -- RedwiresAimbot.LocalScript
 			end
 			writefile("RedsAimbot/GlobalStats.lua", TableToString(globalclone, "GlobalStats"))
 			for placeId, gameData in pairs(gamestats) do --write contents of game save data into new file
-				writefile(("RedsAimbot/Games/%d.lua"):format(placeId), TableToString(gameData, "GameStats")) -- store file as PlaceId.lua
+				writefile(gameFileName, TableToString(gameData, "GameStats")) -- store file as PlaceId.lua
 			end
 			delfile("RedsAimbotStats.lua") --rip bozo
 			GlobalStats = globalclone
@@ -1698,10 +1694,42 @@ local function ROKMRZU_fake_script() -- RedwiresAimbot.LocalScript
 				end)
 			end
 		end
+		
+		local function createIndexOrder(tbl)
+			local order = {}
+			local nested = {}
+			for index, value in pairs(tbl) do
+				table.insert(if type(value) == "table" then nested else order, index)
+			end
+			table.sort(order)
+			table.sort(nested)
+			for _, nestedIndex in ipairs(nested) do
+				table.insert(order, nestedIndex) --leave nested tables for last for serialization style purposes
+			end
+			return order
+		end
+		
+		local gameStatsOrder = createIndexOrder(createGameStats())
+		local defaultGlobalStats = createGlobalStats()
+		local globalStatsOrder = createIndexOrder(defaultGlobalStats)
+		local themeOrder = createIndexOrder(defaultGlobalStats.Theme)
 	
 		local function saveSettings()
-			writefile("RedsAimbot/GlobalStats.lua", TableToString(GlobalStats, "GlobalStats"))
-			writefile(("RedsAimbot/Games/%d.lua"):format(game.PlaceId), TableToString(GameStats, "GameStats"))
+			local args = {
+				indexOrder = function(tbl)
+					if tbl.Toggle ~= nil then
+						return {"Key1", "Key2", "Toggle"}
+					end
+					if tbl.team1 ~= nil then
+						return {"team1", "team2"}
+					end
+				end;
+				[GameStats] = {indexOrder = gameStatsOrder};
+				[GlobalStats] = {indexOrder = globalStatsOrder};
+				[Theme] = {indexOrder = themeOrder};
+			}
+			writefile("RedsAimbot/GlobalStats.lua", TableToString(GlobalStats, "GlobalStats", args))
+			writefile(gameFileName, TableToString(GameStats, "GameStats", args))
 		end
 	
 		TableChanged(GlobalStats, saveSettings, true)
@@ -2481,4 +2509,4 @@ local function ROKMRZU_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(ROKMRZU_fake_script)()
+coroutine.wrap(FFOPA_fake_script)()
