@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function FFOPA_fake_script() -- RedwiresAimbot.LocalScript 
+local function JFVJKJ_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1712,6 +1712,7 @@ local function FFOPA_fake_script() -- RedwiresAimbot.LocalScript
 		local gameStatsOrder = createIndexOrder(createGameStats())
 		local defaultGlobalStats = createGlobalStats()
 		local globalStatsOrder = createIndexOrder(defaultGlobalStats)
+		local keybindsOrder = createIndexOrder(defaultGlobalStats.Keybinds)
 		local themeOrder = createIndexOrder(defaultGlobalStats.Theme)
 	
 		local function saveSettings()
@@ -1726,6 +1727,7 @@ local function FFOPA_fake_script() -- RedwiresAimbot.LocalScript
 				end;
 				[GameStats] = {indexOrder = gameStatsOrder};
 				[GlobalStats] = {indexOrder = globalStatsOrder};
+				[Keybinds] = {indexOrder = keybindsOrder};
 				[Theme] = {indexOrder = themeOrder};
 			}
 			writefile("RedsAimbot/GlobalStats.lua", TableToString(GlobalStats, "GlobalStats", args))
@@ -2509,4 +2511,4 @@ local function FFOPA_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(FFOPA_fake_script)()
+coroutine.wrap(JFVJKJ_fake_script)()
