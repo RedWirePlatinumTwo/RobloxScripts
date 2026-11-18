@@ -112,6 +112,7 @@ end
 			}
 		}
 	indexOrder (function: table): A function with only 1 argument for the table itself; allows you to set a custom ordering style with an integer-index table
+	alphabeticalOrder (boolean): if true, each table will be traveled through twice to sort tables with all string indexes
 		
 	If you pass a table *as* an index, you may also pass the following as a nested table:
 		indexOrder (table): Generally same thing as the other indexOrder, except you directly pass a table order. Note that this takes higher priority than the function
@@ -287,11 +288,31 @@ local function tableToStringInternal(Table, TableName, args, state)
 		end
 	end
 	
-	local indexOrder = tableArgs and tableArgs.indexOrder
-	if args.indexOrder and not indexOrder then
+	local indexOrder = tableArgs and tableArgs.indexOrder --first attempt to get indexOrder directly from indexed table
+	if args.indexOrder and not indexOrder then --if not, try to get result from args.indexOrder
 		local success, result = thread(args.indexOrder, false, Table)
 		if success and type(result) == "table" then
 			indexOrder = result
+		end
+	end
+	if not indexOrder and args.alphabeticalOrder then --lastly, do alphabetical ordering if enabled and both previous lookups turn up nil
+		local order = {}
+		local nested = {}
+		local containsNonString = false
+		for index, value in pairs(Table) do
+			if type(index) ~= "string" then
+				containsNonString = true
+				break
+			end
+			table.insert(if type(value) == "table" then nested else order, index)
+		end
+		if not containsNonString then
+			table.sort(order)
+			table.sort(nested)
+			for _, index in ipairs(nested) do
+				table.insert(order, index)
+			end
+			indexOrder = order
 		end
 	end
 	for _, index in ipairs(indexOrder or {}) do
