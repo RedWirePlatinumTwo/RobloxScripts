@@ -1041,7 +1041,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function JFVJKJ_fake_script() -- RedwiresAimbot.LocalScript 
+local function KBNF_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1110,8 +1110,9 @@ local function JFVJKJ_fake_script() -- RedwiresAimbot.LocalScript
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 		end
 		getgenv().RedsAimbot = {}
-		sendNotif("Red's Universal Aimbot (11/16/26)", changeNotes(
-			"Added some consistent index-formatting when writing tables to files"
+		sendNotif("Red's Universal Aimbot (11/18/26)", changeNotes(
+			"Did the same thing as 11/16, but far more simpler",
+			"(11/16/26) Added some consistent index-formatting when writing tables to files"
 		))
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
@@ -1694,44 +1695,10 @@ local function JFVJKJ_fake_script() -- RedwiresAimbot.LocalScript
 				end)
 			end
 		end
-		
-		local function createIndexOrder(tbl)
-			local order = {}
-			local nested = {}
-			for index, value in pairs(tbl) do
-				table.insert(if type(value) == "table" then nested else order, index)
-			end
-			table.sort(order)
-			table.sort(nested)
-			for _, nestedIndex in ipairs(nested) do
-				table.insert(order, nestedIndex) --leave nested tables for last for serialization style purposes
-			end
-			return order
-		end
-		
-		local gameStatsOrder = createIndexOrder(createGameStats())
-		local defaultGlobalStats = createGlobalStats()
-		local globalStatsOrder = createIndexOrder(defaultGlobalStats)
-		local keybindsOrder = createIndexOrder(defaultGlobalStats.Keybinds)
-		local themeOrder = createIndexOrder(defaultGlobalStats.Theme)
 	
 		local function saveSettings()
-			local args = {
-				indexOrder = function(tbl)
-					if tbl.Toggle ~= nil then
-						return {"Key1", "Key2", "Toggle"}
-					end
-					if tbl.team1 ~= nil then
-						return {"team1", "team2"}
-					end
-				end;
-				[GameStats] = {indexOrder = gameStatsOrder};
-				[GlobalStats] = {indexOrder = globalStatsOrder};
-				[Keybinds] = {indexOrder = keybindsOrder};
-				[Theme] = {indexOrder = themeOrder};
-			}
-			writefile("RedsAimbot/GlobalStats.lua", TableToString(GlobalStats, "GlobalStats", args))
-			writefile(gameFileName, TableToString(GameStats, "GameStats", args))
+			writefile("RedsAimbot/GlobalStats.lua", TableToString(GlobalStats, "GlobalStats", {alphabeticalOrder = true}))
+			writefile(gameFileName, TableToString(GameStats, "GameStats", {alphabeticalOrder = true}))
 		end
 	
 		TableChanged(GlobalStats, saveSettings, true)
@@ -2511,4 +2478,4 @@ local function JFVJKJ_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(JFVJKJ_fake_script)()
+coroutine.wrap(KBNF_fake_script)()
