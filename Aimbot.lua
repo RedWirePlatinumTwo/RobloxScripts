@@ -80,11 +80,14 @@ local back = Instance.new("TextButton")
 local ScrollingFrame_4 = Instance.new("ScrollingFrame")
 local UIListLayout_6 = Instance.new("UIListLayout")
 local Condition = Instance.new("TextLabel")
+local X_5 = Instance.new("TextButton")
+local ScrollingFrame_5 = Instance.new("ScrollingFrame")
+local UIListLayout_7 = Instance.new("UIListLayout")
 local value_4 = Instance.new("TextBox")
 local about_3 = Instance.new("TextButton")
 local Message = Instance.new("Frame")
 local Title_8 = Instance.new("TextLabel")
-local X_5 = Instance.new("TextButton")
+local X_6 = Instance.new("TextButton")
 local Contents = Instance.new("TextLabel")
 
 --Properties:
@@ -949,7 +952,7 @@ Condition.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Condition.BackgroundTransparency = 1.000
 Condition.BorderColor3 = Color3.fromRGB(0, 170, 0)
 Condition.BorderSizePixel = 0
-Condition.Size = UDim2.new(0, 338, 0, 73)
+Condition.Size = UDim2.new(0, 338, 0, 148)
 Condition.Visible = false
 Condition.Font = Enum.Font.TitilliumWeb
 Condition.Text = "Condition:"
@@ -959,22 +962,45 @@ Condition.TextStrokeTransparency = 0.000
 Condition.TextXAlignment = Enum.TextXAlignment.Left
 Condition.TextYAlignment = Enum.TextYAlignment.Top
 
+X_5.Name = "X"
+X_5.Parent = Condition
+X_5.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+X_5.BorderColor3 = Color3.fromRGB(0, 170, 0)
+X_5.Position = UDim2.new(0.860947132, 0, 0, 0)
+X_5.Size = UDim2.new(0, 32, 0, 30)
+X_5.Font = Enum.Font.TitilliumWeb
+X_5.Text = "X"
+X_5.TextColor3 = Color3.fromRGB(170, 0, 0)
+X_5.TextSize = 28.000
+X_5.TextStrokeTransparency = 0.000
+X_5.TextWrapped = true
+
+ScrollingFrame_5.Parent = Condition
+ScrollingFrame_5.Active = true
+ScrollingFrame_5.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
+ScrollingFrame_5.BorderColor3 = Color3.fromRGB(0, 170, 0)
+ScrollingFrame_5.Position = UDim2.new(0, 0, 0.201681599, 0)
+ScrollingFrame_5.Size = UDim2.new(0, 338, 0, 120)
+ScrollingFrame_5.CanvasSize = UDim2.new(0, 0, 0, 28)
+
+UIListLayout_7.Parent = ScrollingFrame_5
+
 value_4.Name = "value"
-value_4.Parent = Condition
+value_4.Parent = ScrollingFrame_5
 value_4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 value_4.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_4.Position = UDim2.new(-0.00595760904, 0, 0.364886552, 0)
-value_4.Size = UDim2.new(0, 326, 0, 46)
+value_4.Position = UDim2.new(-0.00295857992, 0, 0, 0)
+value_4.Size = UDim2.new(0, 324, 0, 120)
 value_4.ClearTextOnFocus = false
 value_4.Font = Enum.Font.TitilliumWeb
+value_4.MultiLine = true
 value_4.PlaceholderColor3 = Color3.fromRGB(0, 100, 0)
 value_4.PlaceholderText = "TargetCharacter.Humanoid.Health < 10"
 value_4.Text = ""
 value_4.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_4.TextScaled = true
-value_4.TextSize = 28.000
+value_4.TextSize = 20.000
 value_4.TextStrokeTransparency = 0.000
-value_4.TextWrapped = true
+value_4.TextXAlignment = Enum.TextXAlignment.Left
 value_4.TextYAlignment = Enum.TextYAlignment.Top
 
 about_3.Name = "about"
@@ -1011,18 +1037,18 @@ Title_8.TextSize = 32.000
 Title_8.TextStrokeTransparency = 0.000
 Title_8.TextWrapped = true
 
-X_5.Name = "X"
-X_5.Parent = Message
-X_5.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-X_5.BorderColor3 = Color3.fromRGB(0, 170, 0)
-X_5.Position = UDim2.new(0.342899114, 0, 0.884247303, 0)
-X_5.Size = UDim2.new(0, 106, 0, 31)
-X_5.Font = Enum.Font.TitilliumWeb
-X_5.Text = "Close"
-X_5.TextColor3 = Color3.fromRGB(170, 0, 0)
-X_5.TextSize = 28.000
-X_5.TextStrokeTransparency = 0.000
-X_5.TextWrapped = true
+X_6.Name = "X"
+X_6.Parent = Message
+X_6.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+X_6.BorderColor3 = Color3.fromRGB(0, 170, 0)
+X_6.Position = UDim2.new(0.342899114, 0, 0.884247303, 0)
+X_6.Size = UDim2.new(0, 106, 0, 31)
+X_6.Font = Enum.Font.TitilliumWeb
+X_6.Text = "Close"
+X_6.TextColor3 = Color3.fromRGB(170, 0, 0)
+X_6.TextSize = 28.000
+X_6.TextStrokeTransparency = 0.000
+X_6.TextWrapped = true
 
 Contents.Name = "Contents"
 Contents.Parent = Message
@@ -1041,7 +1067,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function KBNF_fake_script() -- RedwiresAimbot.LocalScript 
+local function GWQV_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1061,8 +1087,8 @@ local function KBNF_fake_script() -- RedwiresAimbot.LocalScript
 	local uiservice = game:GetService("UserInputService")
 	local chrs = {}
 	local toggleTxt = {
-		[MainFrame.CurrentTarget] = false,
-		[MainFrame.Status] = false
+		[MainFrame.CurrentTarget] = false;
+		[MainFrame.Status] = false;
 	}
 	local plrs = game:GetService("Players")
 	local lplr = plrs.LocalPlayer
@@ -1074,9 +1100,9 @@ local function KBNF_fake_script() -- RedwiresAimbot.LocalScript
 	local PrioritizedPlrs = {}
 	local PrioritizedPlrsLeft = {}
 	local misc = {
-		IsAimbotOn = false,
-		TargetedCharacter = nil,
-		AimOffset = Vector3.new()
+		IsAimbotOn = false;
+		TargetedCharacter = nil;
+		AimOffset = Vector3.new();
 	}
 	local GlobalStats
 	local GameStats
@@ -1102,18 +1128,14 @@ local function KBNF_fake_script() -- RedwiresAimbot.LocalScript
 		tcservice.TextChannels:FindFirstChildOfClass("TextChannel"):DisplaySystemMessage(text)
 	end
 	
-	local function changeNotes(...)
-		return table.concat({"", ...}, "\n - ")
-	end
 	if not RedsAimbot then
 		if not getgenv().ImportantFuncs_initNameCallHook then
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 		end
 		getgenv().RedsAimbot = {}
-		sendNotif("Red's Universal Aimbot (11/18/26)", changeNotes(
-			"Did the same thing as 11/16, but far more simpler",
-			"(11/16/26) Added some consistent index-formatting when writing tables to files"
-		))
+		sendNotif("Red's Universal Aimbot (11/19/26)", table.concat({"";
+			"Improved condition instances to include removal and multi-lines (which require a manual return)";
+		}, "\n - "))
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
 				v.Draggable = true
@@ -1413,15 +1435,29 @@ local function KBNF_fake_script() -- RedwiresAimbot.LocalScript
 		end
 	
 		local cond = targetingui.ScrollingFrame.Condition
-		local function addGUICondition(index)
+		local function addGUICondition(index, value)
 			local targetConditions = getOrCreate(GameStats, "CustomTargetConditions")
-			local txt = targetConditions[index] or ""
 			local clone = cond:Clone()
+			local valueTxtbox = clone.ScrollingFrame.value
+			local valueSize = valueTxtbox.Size
+			local fontSize = valueTxtbox.TextSize
 			clone.Parent = cond.Parent
 			clone.Visible = true
-			clone.value.Text = txt
-			clone.value.FocusLost:connect(function()
-				targetConditions[index] = clone.value.Text
+			valueTxtbox.Text = value or ""
+			
+			valueTxtbox.FocusLost:connect(function()
+				targetConditions[index] = valueTxtbox.Text
+			end)
+			local txtChanged = Changed(valueTxtbox, "Text", function(txt)
+				local _, count = txt:gsub("\n", "")
+				local size = fontSize * (count + 1)
+				clone.ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, size)
+				valueTxtbox.Size = UDim2.new(0, valueSize.X.Offset, 0, math.max(size, fontSize * 6))
+			end)
+			clone.X.Activated:connect(function()
+				txtChanged:stop()
+				table.remove(targetConditions, index)
+				clone:Destroy()
 			end)
 		end
 	
@@ -1721,16 +1757,28 @@ local function KBNF_fake_script() -- RedwiresAimbot.LocalScript
 		for i,v in pairs(getOrCreate(GameStats, "Teams")) do
 			addTeamFrame(v)
 		end
-		local function gameConditionCheck(id, condition)
+		local function gameConditionCheck(id, ...)
 			local targetConditions = getOrCreate(GameStats, "CustomTargetConditions")
-			if game.PlaceId == id and addIfAbsent(targetConditions, condition) then
-				updateMsg(("Auto-added targeting condition for game ID %d:\n%s"):format(id, condition), "Custom Targeting")
+			if game.PlaceId == id then
+				for _, condition in ipairs({...}) do
+					if addIfAbsent(targetConditions, condition) then
+						print(("Auto-added targeting condition for game ID %d:\n%s"):format(id, condition))
+					end
+				end
 			end
 		end
-		gameConditionCheck(286090429, "not TargetCharacter:FindFirstChild(\"Cam\")")
-		gameConditionCheck(2788229376, "not TargetCharacter.BodyEffects[\"K.O\"].Value")
-		for i,v in pairs(getOrCreate(GameStats, "CustomTargetConditions")) do
-			addGUICondition(i)
+		gameConditionCheck(286090429, "not TargetCharacter:FindFirstChild(\"Cam\")") --Arsenal
+		gameConditionCheck(2788229376, "not TargetCharacter.BodyEffects[\"K.O\"].Value", table.concat({
+			"for _, plr in ipairs(game.Players:GetPlayers()) do";
+				"if plr.Character and plr.Character:FindFirstChild(\"BodyEffects\") and plr.Character.BodyEffects.Grabbed.Value == TargetCharacter then";
+					"return false";
+				"end";
+			"end";
+			"return true";
+			}, "\n")) --Da hood
+		
+		for index, value in ipairs(getOrCreate(GameStats, "CustomTargetConditions")) do
+			addGUICondition(index, value)
 		end
 		
 		for index, defaultValue in pairs(createGlobalStats().Keybinds) do 
@@ -1899,12 +1947,15 @@ local function KBNF_fake_script() -- RedwiresAimbot.LocalScript
 		local function meetsConditions(chr)
 			local conditionsmet = true
 			local plrFromChr = plrs:GetPlayerFromCharacter(chr)
-			for i, condition in pairs(getOrCreate(GameStats, "CustomTargetConditions")) do
+			for i, condition in ipairs(getOrCreate(GameStats, "CustomTargetConditions")) do
+				local _, newlineCount = condition:gsub("\n", "")
 				local scriptSuccess, conditionMet = pcall(function()
 					if condition:find("TargetPlayer") and not plrFromChr or condition == "" then
 						return true
 					else
-						local conditionFunction = loadstring("return function(TargetCharacter, TargetPlayer) return "..condition.." end")()
+						local conditionFunction = loadstring(("return function(TargetCharacter, TargetPlayer)%s %s end"):format(
+							if newlineCount == 0 then " return" else "", condition
+						))()
 						return conditionFunction(chr, plrFromChr)
 					end
 				end)
@@ -2422,7 +2473,7 @@ local function KBNF_fake_script() -- RedwiresAimbot.LocalScript
 		plrs.PlayerAdded:connect(addToList)
 	
 		targetingui.add.Activated:connect(function()
-			addGUICondition(#getOrCreate(GameStats, "CustomTargetConditions")+1)
+			addGUICondition(#getOrCreate(GameStats, "CustomTargetConditions") + 1)
 		end)
 	
 		targetingui.back.Activated:connect(function()
@@ -2478,4 +2529,4 @@ local function KBNF_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(KBNF_fake_script)()
+coroutine.wrap(GWQV_fake_script)()
