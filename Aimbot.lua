@@ -1067,7 +1067,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function GWQV_fake_script() -- RedwiresAimbot.LocalScript 
+local function LGJG_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1434,16 +1434,20 @@ local function GWQV_fake_script() -- RedwiresAimbot.LocalScript
 			return (bool and condition()) or not bool
 		end
 	
-		local cond = targetingui.ScrollingFrame.Condition
+		local conditionTemplate = targetingui.ScrollingFrame.Condition
+		local conditionInstances = {}
 		local function addGUICondition(index, value)
 			local targetConditions = getOrCreate(GameStats, "CustomTargetConditions")
-			local clone = cond:Clone()
+			local clone = conditionTemplate:Clone()
+			table.insert(conditionInstances, function(newIndex)
+				index = newIndex
+			end)
 			local valueTxtbox = clone.ScrollingFrame.value
 			local valueSize = valueTxtbox.Size
 			local fontSize = valueTxtbox.TextSize
-			clone.Parent = cond.Parent
+			clone.Parent = conditionTemplate.Parent
 			clone.Visible = true
-			valueTxtbox.Text = value or ""
+			valueTxtbox.Text = value
 			
 			valueTxtbox.FocusLost:connect(function()
 				targetConditions[index] = valueTxtbox.Text
@@ -1457,7 +1461,11 @@ local function GWQV_fake_script() -- RedwiresAimbot.LocalScript
 			clone.X.Activated:connect(function()
 				txtChanged:stop()
 				table.remove(targetConditions, index)
+				table.remove(conditionInstances, index)
 				clone:Destroy()
+				for i = index, #conditionInstances do
+					conditionInstances[i](i)
+				end
 			end)
 		end
 	
@@ -1948,20 +1956,22 @@ local function GWQV_fake_script() -- RedwiresAimbot.LocalScript
 			local conditionsmet = true
 			local plrFromChr = plrs:GetPlayerFromCharacter(chr)
 			for i, condition in ipairs(getOrCreate(GameStats, "CustomTargetConditions")) do
-				local _, newlineCount = condition:gsub("\n", "")
-				local scriptSuccess, conditionMet = pcall(function()
-					if condition:find("TargetPlayer") and not plrFromChr or condition == "" then
-						return true
-					else
-						local conditionFunction = loadstring(("return function(TargetCharacter, TargetPlayer)%s %s end"):format(
-							if newlineCount == 0 then " return" else "", condition
-						))()
-						return conditionFunction(chr, plrFromChr)
+				if condition ~= "" then
+					local _, newlineCount = condition:gsub("\n", "")
+					local scriptSuccess, conditionMet = pcall(function()
+						if condition:find("TargetPlayer") and not plrFromChr then
+							return true
+						else
+							local conditionFunction = loadstring(("return function(TargetCharacter, TargetPlayer)%s %s end"):format(
+								if newlineCount == 0 then " return" else "", condition
+							))()
+							return conditionFunction(chr, plrFromChr)
+						end
+					end)
+					conditionsmet = conditionsmet and scriptSuccess and conditionMet
+					if not conditionsmet then
+						break
 					end
-				end)
-				conditionsmet = conditionsmet and scriptSuccess and conditionMet
-				if not conditionsmet then
-					break
 				end
 			end
 			return conditionsmet
@@ -2473,7 +2483,10 @@ local function GWQV_fake_script() -- RedwiresAimbot.LocalScript
 		plrs.PlayerAdded:connect(addToList)
 	
 		targetingui.add.Activated:connect(function()
-			addGUICondition(#getOrCreate(GameStats, "CustomTargetConditions") + 1)
+			local targetCons = getOrCreate(GameStats, "CustomTargetConditions")
+			local index = #targetCons + 1
+			targetCons[index] = ""
+			addGUICondition(index)
 		end)
 	
 		targetingui.back.Activated:connect(function()
@@ -2529,4 +2542,4 @@ local function GWQV_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(GWQV_fake_script)()
+coroutine.wrap(LGJG_fake_script)()
