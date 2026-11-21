@@ -952,7 +952,7 @@ Condition.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Condition.BackgroundTransparency = 1.000
 Condition.BorderColor3 = Color3.fromRGB(0, 170, 0)
 Condition.BorderSizePixel = 0
-Condition.Size = UDim2.new(0, 338, 0, 148)
+Condition.Size = UDim2.new(0, 338, 0, 150)
 Condition.Visible = false
 Condition.Font = Enum.Font.TitilliumWeb
 Condition.Text = "Condition:"
@@ -966,7 +966,7 @@ X_5.Name = "X"
 X_5.Parent = Condition
 X_5.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 X_5.BorderColor3 = Color3.fromRGB(0, 170, 0)
-X_5.Position = UDim2.new(0.860947132, 0, 0, 0)
+X_5.Position = UDim2.new(0.862999976, 0, 0, 0)
 X_5.Size = UDim2.new(0, 32, 0, 30)
 X_5.Font = Enum.Font.TitilliumWeb
 X_5.Text = "X"
@@ -1067,7 +1067,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function LGJG_fake_script() -- RedwiresAimbot.LocalScript 
+local function ZEVED_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1436,7 +1436,7 @@ local function LGJG_fake_script() -- RedwiresAimbot.LocalScript
 	
 		local conditionTemplate = targetingui.ScrollingFrame.Condition
 		local conditionInstances = {}
-		local function addGUICondition(index, value)
+		local function addGUICondition(index)
 			local targetConditions = getOrCreate(GameStats, "CustomTargetConditions")
 			local clone = conditionTemplate:Clone()
 			table.insert(conditionInstances, function(newIndex)
@@ -1447,7 +1447,7 @@ local function LGJG_fake_script() -- RedwiresAimbot.LocalScript
 			local fontSize = valueTxtbox.TextSize
 			clone.Parent = conditionTemplate.Parent
 			clone.Visible = true
-			valueTxtbox.Text = value
+			valueTxtbox.Text = targetConditions[index]
 			
 			valueTxtbox.FocusLost:connect(function()
 				targetConditions[index] = valueTxtbox.Text
@@ -1786,7 +1786,7 @@ local function LGJG_fake_script() -- RedwiresAimbot.LocalScript
 			}, "\n")) --Da hood
 		
 		for index, value in ipairs(getOrCreate(GameStats, "CustomTargetConditions")) do
-			addGUICondition(index, value)
+			addGUICondition(index)
 		end
 		
 		for index, defaultValue in pairs(createGlobalStats().Keybinds) do 
@@ -2542,4 +2542,4 @@ local function LGJG_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(LGJG_fake_script)()
+coroutine.wrap(ZEVED_fake_script)()
