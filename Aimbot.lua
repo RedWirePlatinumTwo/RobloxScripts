@@ -894,7 +894,7 @@ CustomTargetingUI.Name = "CustomTargetingUI"
 CustomTargetingUI.Parent = RedwiresAimbot
 CustomTargetingUI.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
 CustomTargetingUI.BorderColor3 = Color3.fromRGB(0, 170, 0)
-CustomTargetingUI.Position = UDim2.new(0.58417803, 0, 0.280467957, 0)
+CustomTargetingUI.Position = UDim2.new(0.59199053, 0, 0.247174233, 0)
 CustomTargetingUI.Size = UDim2.new(0, 338, 0, 342)
 CustomTargetingUI.Visible = false
 
@@ -952,7 +952,7 @@ Condition.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Condition.BackgroundTransparency = 1.000
 Condition.BorderColor3 = Color3.fromRGB(0, 170, 0)
 Condition.BorderSizePixel = 0
-Condition.Size = UDim2.new(0, 338, 0, 151)
+Condition.Size = UDim2.new(0, 338, 0, 175)
 Condition.Visible = false
 Condition.Font = Enum.Font.TitilliumWeb
 Condition.Text = "Condition:"
@@ -979,8 +979,8 @@ ScrollingFrame_5.Parent = Condition
 ScrollingFrame_5.Active = true
 ScrollingFrame_5.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
 ScrollingFrame_5.BorderColor3 = Color3.fromRGB(0, 170, 0)
-ScrollingFrame_5.Position = UDim2.new(0, 0, 0.201681599, 0)
-ScrollingFrame_5.Size = UDim2.new(0, 338, 0, 120)
+ScrollingFrame_5.Position = UDim2.new(0, 0, 0.158900321, 0)
+ScrollingFrame_5.Size = UDim2.new(0, 338, 0, 144)
 ScrollingFrame_5.CanvasSize = UDim2.new(0, 0, 0, 28)
 
 UIListLayout_7.Parent = ScrollingFrame_5
@@ -989,8 +989,7 @@ value_4.Name = "value"
 value_4.Parent = ScrollingFrame_5
 value_4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 value_4.BorderColor3 = Color3.fromRGB(0, 170, 0)
-value_4.Position = UDim2.new(-0.00295857992, 0, 0, 0)
-value_4.Size = UDim2.new(0, 324, 0, 120)
+value_4.Size = UDim2.new(0, 324, 0, 144)
 value_4.ClearTextOnFocus = false
 value_4.Font = Enum.Font.TitilliumWeb
 value_4.MultiLine = true
@@ -998,7 +997,7 @@ value_4.PlaceholderColor3 = Color3.fromRGB(0, 100, 0)
 value_4.PlaceholderText = "TargetCharacter.Humanoid.Health < 10"
 value_4.Text = ""
 value_4.TextColor3 = Color3.fromRGB(0, 170, 0)
-value_4.TextSize = 20.000
+value_4.TextSize = 24.000
 value_4.TextStrokeTransparency = 0.000
 value_4.TextXAlignment = Enum.TextXAlignment.Left
 value_4.TextYAlignment = Enum.TextYAlignment.Top
@@ -1067,7 +1066,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function ZEVED_fake_script() -- RedwiresAimbot.LocalScript 
+local function BCSV_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1133,8 +1132,10 @@ local function ZEVED_fake_script() -- RedwiresAimbot.LocalScript
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 		end
 		getgenv().RedsAimbot = {}
-		sendNotif("Red's Universal Aimbot (11/19/26)", table.concat({"";
-			"Improved condition instances to include removal and multi-lines (which require a manual return)";
+		sendNotif("Red's Universal Aimbot (11/22/26)", table.concat({"";
+			"Added horizontal scrolling to condition instances + increased font size 20 -> 24";
+			"   - (Note: I previously decreased size from 28 to 20 when adding multiline dynamic resizing)";
+			"(11/22) Improved condition instances to include removal and multi-lines (which require a manual return)";
 		}, "\n - "))
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
@@ -1447,16 +1448,18 @@ local function ZEVED_fake_script() -- RedwiresAimbot.LocalScript
 			local fontSize = valueTxtbox.TextSize
 			clone.Parent = conditionTemplate.Parent
 			clone.Visible = true
-			valueTxtbox.Text = targetConditions[index]
+			
+			local txtChanged = Changed(valueTxtbox, "Text", function(txt)
+				local _, count = txt:gsub("\n", "")
+				local lineSize = fontSize * (count + 1)
+				local textSize = game.TextService:GetTextSize(txt, fontSize, valueTxtbox.Font, Vector2.new(math.huge, math.huge))
+				clone.ScrollingFrame.CanvasSize = UDim2.new(0, textSize.X, 0, lineSize)
+				valueTxtbox.Size = UDim2.new(0, math.max(textSize.X, valueSize.X.Offset), 0, math.max(lineSize, valueSize.Y.Offset))
+			end)
+			valueTxtbox.Text = targetConditions[index] --apply text *after* the Changed function so size modification applies
 			
 			valueTxtbox.FocusLost:connect(function()
 				targetConditions[index] = valueTxtbox.Text
-			end)
-			local txtChanged = Changed(valueTxtbox, "Text", function(txt)
-				local _, count = txt:gsub("\n", "")
-				local size = fontSize * (count + 1)
-				clone.ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, size)
-				valueTxtbox.Size = UDim2.new(0, valueSize.X.Offset, 0, math.max(size, fontSize * 6))
 			end)
 			clone.X.Activated:connect(function()
 				txtChanged:stop()
@@ -2542,4 +2545,4 @@ local function ZEVED_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(ZEVED_fake_script)()
+coroutine.wrap(BCSV_fake_script)()
