@@ -292,7 +292,6 @@ PriorityToggle.TextSize = 22.000
 PriorityToggle.TextWrapped = true
 
 UIListLayout.Parent = WhitelistedInstances
-UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
 hide.Name = "hide"
 hide.Parent = ManagerUI
@@ -519,7 +518,6 @@ undo.TextSize = 26.000
 undo.TextWrapped = true
 
 UIListLayout_3.Parent = WhitelistedTeams
-UIListLayout_3.SortOrder = Enum.SortOrder.LayoutOrder
 
 WLTeam.Name = "WLTeam"
 WLTeam.Parent = TeamUI
@@ -1066,7 +1064,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function GYWZQ_fake_script() -- RedwiresAimbot.LocalScript 
+local function PWSGW_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -2542,4 +2540,4 @@ local function GYWZQ_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(GYWZQ_fake_script)()
+coroutine.wrap(PWSGW_fake_script)()
