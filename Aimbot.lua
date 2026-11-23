@@ -1135,7 +1135,7 @@ local function BCSV_fake_script() -- RedwiresAimbot.LocalScript
 		sendNotif("Red's Universal Aimbot (11/22/26)", table.concat({"";
 			"Added horizontal scrolling to condition instances + increased font size 20 -> 24";
 			"   - (Note: I previously decreased size from 28 to 20 when adding multiline dynamic resizing)";
-			"(11/22) Improved condition instances to include removal and multi-lines (which require a manual return)";
+			"(11/19) Improved condition instances to include removal and multi-lines (which require a manual return)";
 		}, "\n - "))
 		for i,v in pairs(gui:GetDescendants()) do
 			if v.ClassName == "Frame" and v.Parent.ClassName ~= "ScrollingFrame" then
