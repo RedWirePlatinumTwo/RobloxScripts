@@ -1066,7 +1066,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function BCSV_fake_script() -- RedwiresAimbot.LocalScript 
+local function GYWZQ_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1886,11 +1886,7 @@ local function BCSV_fake_script() -- RedwiresAimbot.LocalScript
 		plrs.PlayerAdded:connect(Died)
 	
 		local function CheckDN(plr)
-			if plr.DisplayName == plr.Name then
-				return plr.Name
-			else
-				return ("%s (%s)"):format(plr.DisplayName, plr.Name)
-			end
+			return if plr.DisplayName == plr.Name then plr.Name else ("%s (user: %s)"):format(plr.DisplayName, plr.Name)
 		end
 	
 		local function isActiveNPC(npc)
@@ -2395,6 +2391,7 @@ local function BCSV_fake_script() -- RedwiresAimbot.LocalScript
 			local clone = wlframe:Clone()
 			clone.Visible = true
 			clone.Parent = wlframe.Parent
+			clone.Name = CheckDN(plr)
 			clone.TextLabel.Text = CheckDN(plr)
 	
 			local function addButtonToggle(Table)
@@ -2545,4 +2542,4 @@ local function BCSV_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(BCSV_fake_script)()
+coroutine.wrap(GYWZQ_fake_script)()
