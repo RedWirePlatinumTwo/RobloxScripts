@@ -1064,12 +1064,12 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function EHOBVCG_fake_script() -- RedwiresAimbot.LocalScript 
+local function ZXWIN_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
 	local MainFrame = gui.MFrame
-	local wlui = gui.ManagerUI
+	local managerui = gui.ManagerUI
 	local gameSettings = gui.GameSettingsUI.ScrollingFrame
 	local globalSettings = gui.GlobalSettingsUI.ScrollingFrame
 	local keybindSettings = gui.KeybindsUI.ScrollingFrame
@@ -1131,7 +1131,7 @@ local function EHOBVCG_fake_script() -- RedwiresAimbot.LocalScript
 		end
 		getgenv().RedsAimbot = {}
 		sendNotif("Red's Universal Aimbot (11/23/26)", table.concat({"";
-			"Manually added an extra 2 pixels to horizontal text size (to make clicking the end easier)";
+			"Manually added an extra 8 pixels to horizontal text size (to make clicking the end easier)";
 			"(11/22) Added horizontal scrolling to condition instances + increased font size 20 -> 24";
 			"   - (Note: I previously decreased size from 28 to 20 when adding multiline dynamic resizing)";
 			"(11/19) Improved condition instances to include removal and multi-lines (which require a manual return)";
@@ -1452,7 +1452,7 @@ local function EHOBVCG_fake_script() -- RedwiresAimbot.LocalScript
 				local _, count = txt:gsub("\n", "")
 				local lineSize = fontSize * (count + 1)
 				local textSize = game.TextService:GetTextSize(txt, fontSize, valueTxtbox.Font, Vector2.new(math.huge, math.huge))
-				textSize = textSize.X + 2
+				textSize = textSize.X + 8
 				clone.ScrollingFrame.CanvasSize = UDim2.new(0, textSize, 0, lineSize)
 				valueTxtbox.Size = UDim2.new(0, math.max(textSize, valueSize.X.Offset), 0, math.max(lineSize, valueSize.Y.Offset))
 			end)
@@ -2349,7 +2349,7 @@ local function EHOBVCG_fake_script() -- RedwiresAimbot.LocalScript
 		end)
 	
 		MainFrame.Manager.Activated:connect(function()
-			wlui.Visible = true
+			managerui.Visible = true
 		end)
 	
 		MainFrame.EditGameSettings.Activated:connect(function()
@@ -2377,20 +2377,20 @@ local function EHOBVCG_fake_script() -- RedwiresAimbot.LocalScript
 			end
 		end)
 	
-		wlui.hide.Activated:connect(function()
-			wlui.Visible = false
+		managerui.hide.Activated:connect(function()
+			managerui.Visible = false
 		end)
 	
 		MainFrame.Status.Activated:connect(function()
 			misc.IsAimbotOn = not misc.IsAimbotOn
 		end)
 	
-		local wlframe = wlui.PlayerInstances.playerframe
+		local plrframe = managerui.PlayerInstances.playerframe
 	
 		local function addPlayerFrame(plr)
-			local clone = wlframe:Clone()
+			local clone = plrframe:Clone()
 			clone.Visible = true
-			clone.Parent = wlframe.Parent
+			clone.Parent = plrframe.Parent
 			clone.Name = CheckDN(plr) --allows alphabetical sorting for UIListLayout
 			clone.TextLabel.Text = CheckDN(plr)
 	
@@ -2460,10 +2460,10 @@ local function EHOBVCG_fake_script() -- RedwiresAimbot.LocalScript
 			end
 		end
 	
-		Changed(wlui.searchbar, "Text", function(txt)
+		Changed(managerui.searchbar, "Text", function(txt)
 	
-			for i,v in pairs(wlui.PlayerInstances:GetChildren()) do
-				if v.ClassName == "Frame" and v ~= wlframe then
+			for i,v in pairs(managerui.PlayerInstances:GetChildren()) do
+				if v.ClassName == "Frame" and v ~= plrframe then
 					v.Visible = v.TextLabel.Text:lower():match(txt:lower()) ~= nil
 				end
 			end
@@ -2542,4 +2542,4 @@ local function EHOBVCG_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(EHOBVCG_fake_script)()
+coroutine.wrap(ZXWIN_fake_script)()
