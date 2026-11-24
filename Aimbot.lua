@@ -15,8 +15,8 @@ local Status = Instance.new("TextButton")
 local EditGlobalSettings = Instance.new("TextButton")
 local SwitchToTeam = Instance.new("TextButton")
 local ManagerUI = Instance.new("Frame")
-local WhitelistedInstances = Instance.new("ScrollingFrame")
-local whitelistframe = Instance.new("Frame")
+local PlayerInstances = Instance.new("ScrollingFrame")
+local playerframe = Instance.new("Frame")
 local TextLabel = Instance.new("TextLabel")
 local WhitelistToggle = Instance.new("TextButton")
 local PriorityToggle = Instance.new("TextButton")
@@ -38,7 +38,7 @@ local value = Instance.new("TextBox")
 local keybinds = Instance.new("TextButton")
 local TeamUI = Instance.new("Frame")
 local WhitelistedTeams = Instance.new("ScrollingFrame")
-local whitelistframe_2 = Instance.new("Frame")
+local whitelistframe = Instance.new("Frame")
 local TextLabel_2 = Instance.new("TextLabel")
 local undo = Instance.new("TextButton")
 local UIListLayout_3 = Instance.new("UIListLayout")
@@ -238,24 +238,24 @@ ManagerUI.Position = UDim2.new(0.381608725, 0, 0.207899302, 0)
 ManagerUI.Size = UDim2.new(0, 481, 0, 269)
 ManagerUI.Visible = false
 
-WhitelistedInstances.Name = "WhitelistedInstances"
-WhitelistedInstances.Parent = ManagerUI
-WhitelistedInstances.Active = true
-WhitelistedInstances.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
-WhitelistedInstances.BorderColor3 = Color3.fromRGB(0, 170, 0)
-WhitelistedInstances.Position = UDim2.new(0, 0, 0.359999865, 0)
-WhitelistedInstances.Size = UDim2.new(0, 481, 0, 211)
-WhitelistedInstances.CanvasSize = UDim2.new(0, 0, 0, 0)
+PlayerInstances.Name = "PlayerInstances"
+PlayerInstances.Parent = ManagerUI
+PlayerInstances.Active = true
+PlayerInstances.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
+PlayerInstances.BorderColor3 = Color3.fromRGB(0, 170, 0)
+PlayerInstances.Position = UDim2.new(0, 0, 0.359999865, 0)
+PlayerInstances.Size = UDim2.new(0, 481, 0, 211)
+PlayerInstances.CanvasSize = UDim2.new(0, 0, 0, 0)
 
-whitelistframe.Name = "whitelistframe"
-whitelistframe.Parent = WhitelistedInstances
-whitelistframe.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-whitelistframe.BackgroundTransparency = 1.000
-whitelistframe.BorderColor3 = Color3.fromRGB(0, 170, 0)
-whitelistframe.Size = UDim2.new(0, 445, 0, 42)
-whitelistframe.Visible = false
+playerframe.Name = "playerframe"
+playerframe.Parent = PlayerInstances
+playerframe.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+playerframe.BackgroundTransparency = 1.000
+playerframe.BorderColor3 = Color3.fromRGB(0, 170, 0)
+playerframe.Size = UDim2.new(0, 445, 0, 42)
+playerframe.Visible = false
 
-TextLabel.Parent = whitelistframe
+TextLabel.Parent = playerframe
 TextLabel.BackgroundColor3 = Color3.fromRGB(0, 45, 0)
 TextLabel.BorderColor3 = Color3.fromRGB(0, 170, 0)
 TextLabel.Position = UDim2.new(-6.85788279e-08, 0, 0, 0)
@@ -268,7 +268,7 @@ TextLabel.TextStrokeTransparency = 0.000
 TextLabel.TextWrapped = true
 
 WhitelistToggle.Name = "WhitelistToggle"
-WhitelistToggle.Parent = whitelistframe
+WhitelistToggle.Parent = playerframe
 WhitelistToggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 WhitelistToggle.BorderColor3 = Color3.fromRGB(0, 170, 0)
 WhitelistToggle.Position = UDim2.new(0.82610631, 0, 0, 0)
@@ -280,7 +280,7 @@ WhitelistToggle.TextSize = 22.000
 WhitelistToggle.TextWrapped = true
 
 PriorityToggle.Name = "PriorityToggle"
-PriorityToggle.Parent = whitelistframe
+PriorityToggle.Parent = playerframe
 PriorityToggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 PriorityToggle.BorderColor3 = Color3.fromRGB(0, 170, 0)
 PriorityToggle.Position = UDim2.new(0.575280905, 0, 0, 0)
@@ -291,7 +291,7 @@ PriorityToggle.TextColor3 = Color3.fromRGB(170, 0, 0)
 PriorityToggle.TextSize = 22.000
 PriorityToggle.TextWrapped = true
 
-UIListLayout.Parent = WhitelistedInstances
+UIListLayout.Parent = PlayerInstances
 
 hide.Name = "hide"
 hide.Parent = ManagerUI
@@ -488,14 +488,14 @@ WhitelistedTeams.Size = UDim2.new(0, 370, 0, 136)
 WhitelistedTeams.ZIndex = 2
 WhitelistedTeams.CanvasSize = UDim2.new(0, 0, 0, 0)
 
-whitelistframe_2.Name = "whitelistframe"
-whitelistframe_2.Parent = WhitelistedTeams
-whitelistframe_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-whitelistframe_2.BorderColor3 = Color3.fromRGB(0, 170, 0)
-whitelistframe_2.Size = UDim2.new(0, 336, 0, 45)
-whitelistframe_2.Visible = false
+whitelistframe.Name = "whitelistframe"
+whitelistframe.Parent = WhitelistedTeams
+whitelistframe.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+whitelistframe.BorderColor3 = Color3.fromRGB(0, 170, 0)
+whitelistframe.Size = UDim2.new(0, 336, 0, 45)
+whitelistframe.Visible = false
 
-TextLabel_2.Parent = whitelistframe_2
+TextLabel_2.Parent = whitelistframe
 TextLabel_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 TextLabel_2.BorderColor3 = Color3.fromRGB(0, 170, 0)
 TextLabel_2.Size = UDim2.new(0, 258, 0, 45)
@@ -506,7 +506,7 @@ TextLabel_2.TextSize = 22.000
 TextLabel_2.TextWrapped = true
 
 undo.Name = "undo"
-undo.Parent = whitelistframe_2
+undo.Parent = whitelistframe
 undo.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 undo.BorderColor3 = Color3.fromRGB(0, 170, 0)
 undo.Position = UDim2.new(0.767874956, 0, 0, 0)
@@ -1064,7 +1064,7 @@ Contents.TextWrapped = true
 
 -- Scripts:
 
-local function PWSGW_fake_script() -- RedwiresAimbot.LocalScript 
+local function EHOBVCG_fake_script() -- RedwiresAimbot.LocalScript 
 	local script = Instance.new('LocalScript', RedwiresAimbot)
 
 	local gui = script.Parent
@@ -1130,8 +1130,9 @@ local function PWSGW_fake_script() -- RedwiresAimbot.LocalScript
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/RedWirePlatinumTwo/RobloxScripts/main/ImportantFunctions.lua"))()
 		end
 		getgenv().RedsAimbot = {}
-		sendNotif("Red's Universal Aimbot (11/22/26)", table.concat({"";
-			"Added horizontal scrolling to condition instances + increased font size 20 -> 24";
+		sendNotif("Red's Universal Aimbot (11/23/26)", table.concat({"";
+			"Manually added an extra 2 pixels to horizontal text size (to make clicking the end easier)";
+			"(11/22) Added horizontal scrolling to condition instances + increased font size 20 -> 24";
 			"   - (Note: I previously decreased size from 28 to 20 when adding multiline dynamic resizing)";
 			"(11/19) Improved condition instances to include removal and multi-lines (which require a manual return)";
 		}, "\n - "))
@@ -1451,8 +1452,9 @@ local function PWSGW_fake_script() -- RedwiresAimbot.LocalScript
 				local _, count = txt:gsub("\n", "")
 				local lineSize = fontSize * (count + 1)
 				local textSize = game.TextService:GetTextSize(txt, fontSize, valueTxtbox.Font, Vector2.new(math.huge, math.huge))
-				clone.ScrollingFrame.CanvasSize = UDim2.new(0, textSize.X, 0, lineSize)
-				valueTxtbox.Size = UDim2.new(0, math.max(textSize.X, valueSize.X.Offset), 0, math.max(lineSize, valueSize.Y.Offset))
+				textSize = textSize.X + 2
+				clone.ScrollingFrame.CanvasSize = UDim2.new(0, textSize, 0, lineSize)
+				valueTxtbox.Size = UDim2.new(0, math.max(textSize, valueSize.X.Offset), 0, math.max(lineSize, valueSize.Y.Offset))
 			end)
 			valueTxtbox.Text = targetConditions[index] --apply text *after* the Changed function so size modification applies
 			
@@ -2383,13 +2385,13 @@ local function PWSGW_fake_script() -- RedwiresAimbot.LocalScript
 			misc.IsAimbotOn = not misc.IsAimbotOn
 		end)
 	
-		local wlframe = wlui.WhitelistedInstances.whitelistframe
+		local wlframe = wlui.PlayerInstances.playerframe
 	
-		local function addToList(plr)
+		local function addPlayerFrame(plr)
 			local clone = wlframe:Clone()
 			clone.Visible = true
 			clone.Parent = wlframe.Parent
-			clone.Name = CheckDN(plr)
+			clone.Name = CheckDN(plr) --allows alphabetical sorting for UIListLayout
 			clone.TextLabel.Text = CheckDN(plr)
 	
 			local function addButtonToggle(Table)
@@ -2454,13 +2456,13 @@ local function PWSGW_fake_script() -- RedwiresAimbot.LocalScript
 	
 		for i,plr in pairs(plrs:GetPlayers()) do
 			if plr ~= lplr then
-				addToList(plr)
+				addPlayerFrame(plr)
 			end
 		end
 	
 		Changed(wlui.searchbar, "Text", function(txt)
 	
-			for i,v in pairs(wlui.WhitelistedInstances:GetChildren()) do
+			for i,v in pairs(wlui.PlayerInstances:GetChildren()) do
 				if v.ClassName == "Frame" and v ~= wlframe then
 					v.Visible = v.TextLabel.Text:lower():match(txt:lower()) ~= nil
 				end
@@ -2478,7 +2480,7 @@ local function PWSGW_fake_script() -- RedwiresAimbot.LocalScript
 			globals.Visible = true
 		end)
 	
-		plrs.PlayerAdded:connect(addToList)
+		plrs.PlayerAdded:connect(addPlayerFrame)
 	
 		targetingui.add.Activated:connect(function()
 			local targetCons = getOrCreate(GameStats, "CustomTargetConditions")
@@ -2540,4 +2542,4 @@ local function PWSGW_fake_script() -- RedwiresAimbot.LocalScript
 		gui:Destroy()
 	end
 end
-coroutine.wrap(PWSGW_fake_script)()
+coroutine.wrap(EHOBVCG_fake_script)()
